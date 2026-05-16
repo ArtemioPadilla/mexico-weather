@@ -1,5 +1,42 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const cities = [
+  { name: "Ciudad de México", emoji: "🌆", lat: 19.43, lng: -99.13, tz: "America/Mexico_City" },
+  { name: "Oaxaca",           emoji: "🏔️", lat: 17.07, lng: -96.72, tz: "America/Mexico_City" },
+  { name: "Puerto Vallarta",  emoji: "🌊", lat: 20.65, lng: -105.25, tz: "America/Mexico_City" },
+  { name: "Monterrey",        emoji: "🏙️", lat: 25.67, lng: -100.31, tz: "America/Mexico_City" },
+  { name: "Guadalajara",      emoji: "🌺", lat: 20.66, lng: -103.35, tz: "America/Mexico_City" },
+];
+
+const WMO: Record<number, string> = {
+  0: "Despejado ☀️", 1: "Despejado ☀️", 2: "Parcialmente nublado ⛅", 3: "Nublado ☁️",
+  45: "Niebla 🌫️", 48: "Niebla 🌫️",
+  51: "Llovizna 🌦️", 53: "Llovizna 🌦️", 55: "Llovizna 🌦️",
+  61: "Lluvia 🌧️", 63: "Lluvia 🌧️", 65: "Lluvia intensa 🌧️",
+  71: "Nieve 🌨️", 73: "Nieve 🌨️", 75: "Nieve intensa 🌨️",
+  80: "Chubascos 🌩️", 81: "Chubascos 🌩️", 82: "Tormenta ⛈️", 95: "Tormenta ⛈️",
+  96: "Tormenta con granizo ⛈️", 99: "Tormenta con granizo ⛈️",
+};
+
+const weatherData = await Promise.all(cities.map(async (city) => {
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=${city.tz}&forecast_days=1&models=best_match`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const d = data.daily;
+    return {
+      ...city,
+      tmax: d.temperature_2m_max[0],
+      tmin: d.temperature_2m_min[0],
+      rain: d.precipitation_probability_max[0],
+      condition: WMO[d.weathercode[0]] ?? "—",
+      error: false,
+    };
+  } catch {
+    return { ...city, tmax: null, tmin: null, rain: null, condition: "—", error: true };
+  }
+}));
 ---
 
 <BaseLayout title="Clima México 🇲🇽" description="Alertas y pronósticos meteorológicos para México" lang="es">
@@ -29,7 +66,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           Consulta el feed RSS del Servicio Meteorológico Nacional para alertas en tiempo real:
         </p>
         <a
-          href="https://ArtemioPadilla.github.io/mexico-weather/rss.xml"
+          href="https://artemiop.com/mexico-weather/rss.xml"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-2 text-sm font-medium text-yellow-300 hover:bg-yellow-500/20 transition-colors"
@@ -46,100 +83,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2 class="text-xl font-semibold text-gray-200">Pronóstico por Ciudad</h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
-          <!-- CDMX -->
-          <div class="rounded-xl border border-gray-800 bg-gray-900 p-5 space-y-3 hover:border-blue-500/40 transition-colors">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-2xl">🌆</div>
-                <h3 class="font-semibold text-white mt-1">Ciudad de México</h3>
-                <p class="text-xs text-gray-500">19.43°N, 99.13°W</p>
+          {weatherData.map((city) => (
+            <div class="rounded-xl border border-gray-800 bg-gray-900 p-5 space-y-3 hover:border-blue-500/40 transition-colors">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-2xl">{city.emoji}</div>
+                  <h3 class="font-semibold text-white mt-1">{city.name}</h3>
+                  <p class="text-xs text-gray-500">{city.lat}°N, {Math.abs(city.lng)}°W</p>
+                </div>
               </div>
+              {city.error ? (
+                <p class="text-sm text-red-400">Error cargando datos</p>
+              ) : (
+                <div class="space-y-1">
+                  <p class="text-2xl font-bold text-white">{city.tmax}° / {city.tmin}°C</p>
+                  <p class="text-sm text-gray-400">{city.condition}</p>
+                  <p class="text-sm text-blue-400">💧 {city.rain}% lluvia</p>
+                </div>
+              )}
+              <a
+                href={`https://open-meteo.com/en/docs?latitude=${city.lat}&longitude=${city.lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=America/Mexico_City`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                Ver en Open-Meteo →
+              </a>
             </div>
-            <a
-              href="https://open-meteo.com/en/docs?latitude=19.43&longitude=-99.13&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=America/Mexico_City"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              Ver en Open-Meteo →
-            </a>
-          </div>
-
-          <!-- Oaxaca -->
-          <div class="rounded-xl border border-gray-800 bg-gray-900 p-5 space-y-3 hover:border-blue-500/40 transition-colors">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-2xl">🏔️</div>
-                <h3 class="font-semibold text-white mt-1">Oaxaca</h3>
-                <p class="text-xs text-gray-500">17.07°N, 96.72°W</p>
-              </div>
-            </div>
-            <a
-              href="https://open-meteo.com/en/docs?latitude=17.07&longitude=-96.72&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=America/Mexico_City"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              Ver en Open-Meteo →
-            </a>
-          </div>
-
-          <!-- Puerto Vallarta -->
-          <div class="rounded-xl border border-gray-800 bg-gray-900 p-5 space-y-3 hover:border-blue-500/40 transition-colors">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-2xl">🌊</div>
-                <h3 class="font-semibold text-white mt-1">Puerto Vallarta</h3>
-                <p class="text-xs text-gray-500">20.65°N, 105.25°W</p>
-              </div>
-            </div>
-            <a
-              href="https://open-meteo.com/en/docs?latitude=20.65&longitude=-105.25&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=America/Mexico_City"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              Ver en Open-Meteo →
-            </a>
-          </div>
-
-          <!-- Monterrey -->
-          <div class="rounded-xl border border-gray-800 bg-gray-900 p-5 space-y-3 hover:border-blue-500/40 transition-colors">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-2xl">🏙️</div>
-                <h3 class="font-semibold text-white mt-1">Monterrey</h3>
-                <p class="text-xs text-gray-500">25.67°N, 100.31°W</p>
-              </div>
-            </div>
-            <a
-              href="https://open-meteo.com/en/docs?latitude=25.67&longitude=-100.31&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=America/Mexico_City"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              Ver en Open-Meteo →
-            </a>
-          </div>
-
-          <!-- Guadalajara -->
-          <div class="rounded-xl border border-gray-800 bg-gray-900 p-5 space-y-3 hover:border-blue-500/40 transition-colors">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-2xl">🌺</div>
-                <h3 class="font-semibold text-white mt-1">Guadalajara</h3>
-                <p class="text-xs text-gray-500">20.66°N, 103.35°W</p>
-              </div>
-            </div>
-            <a
-              href="https://open-meteo.com/en/docs?latitude=20.66&longitude=-103.35&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=America/Mexico_City"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              Ver en Open-Meteo →
-            </a>
-          </div>
+          ))}
 
           <!-- Más ciudades pronto -->
           <div class="rounded-xl border border-dashed border-gray-700 bg-gray-900/50 p-5 space-y-3 flex items-center justify-center">
