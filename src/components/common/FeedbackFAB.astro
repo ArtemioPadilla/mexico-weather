@@ -486,15 +486,9 @@ const tr = {
         if (navigator.clipboard && window.isSecureContext) {
           navigator.clipboard.writeText(text).then(onCopied);
         } else {
-          // Fallback for HTTP / older browsers
-          var ta = document.createElement('textarea');
-          ta.value = text;
-          ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
-          document.body.appendChild(ta);
-          ta.focus();
-          ta.select();
-          try { document.execCommand('copy'); onCopied(); } catch(e) {}
-          document.body.removeChild(ta);
+          // Fallback for HTTP / older browsers: show manual copy dialog.
+          window.prompt('Copy diagnostics:', text);
+          onCopied();
         }
       });
     }

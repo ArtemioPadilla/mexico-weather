@@ -8,35 +8,6 @@ const cities = [
   { name: "Monterrey",        emoji: "🏙️", lat: 25.67, lng: -100.31, tz: "America/Mexico_City" },
   { name: "Guadalajara",      emoji: "🌺", lat: 20.66, lng: -103.35, tz: "America/Mexico_City" },
 ];
-
-const WMO: Record<number, string> = {
-  0: "Despejado ☀️", 1: "Despejado ☀️", 2: "Parcialmente nublado ⛅", 3: "Nublado ☁️",
-  45: "Niebla 🌫️", 48: "Niebla 🌫️",
-  51: "Llovizna 🌦️", 53: "Llovizna 🌦️", 55: "Llovizna 🌦️",
-  61: "Lluvia 🌧️", 63: "Lluvia 🌧️", 65: "Lluvia intensa 🌧️",
-  71: "Nieve 🌨️", 73: "Nieve 🌨️", 75: "Nieve intensa 🌨️",
-  80: "Chubascos 🌩️", 81: "Chubascos 🌩️", 82: "Tormenta ⛈️", 95: "Tormenta ⛈️",
-  96: "Tormenta con granizo ⛈️", 99: "Tormenta con granizo ⛈️",
-};
-
-const weatherData = await Promise.all(cities.map(async (city) => {
-  try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=${city.tz}&forecast_days=1&models=best_match`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const d = data.daily;
-    return {
-      ...city,
-      tmax: d.temperature_2m_max[0],
-      tmin: d.temperature_2m_min[0],
-      rain: d.precipitation_probability_max[0],
-      condition: WMO[d.weathercode[0]] ?? "—",
-      error: false,
-    };
-  } catch {
-    return { ...city, tmax: null, tmin: null, rain: null, condition: "—", error: true };
-  }
-}));
 ---
 
 <BaseLayout title="Clima México 🇲🇽" description="Alertas y pronósticos meteorológicos para México" lang="es">
@@ -46,7 +17,7 @@ const weatherData = await Promise.all(cities.map(async (city) => {
       <div class="text-center space-y-4">
         <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm font-medium text-blue-400">
           <span class="h-2 w-2 rounded-full bg-blue-400 animate-pulse"></span>
-          Actualizado en tiempo real
+          Actualizado cada 10 minutos
         </div>
         <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">
           Clima México 🇲🇽
@@ -54,6 +25,7 @@ const weatherData = await Promise.all(cities.map(async (city) => {
         <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
           Pronósticos y alertas meteorológicas del SMN + Open-Meteo para las principales ciudades de México.
         </p>
+        <p id="js-updated-at" class="text-xs text-gray-500" aria-live="polite">Cargando datos más recientes...</p>
       </div>
 
       <!-- Alertas activas -->
@@ -83,8 +55,14 @@ const weatherData = await Promise.all(cities.map(async (city) => {
         <h2 class="text-xl font-semibold text-gray-200">Pronóstico por Ciudad</h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
-          {weatherData.map((city) => (
-            <div class="rounded-xl border border-gray-800 bg-gray-900 p-5 space-y-3 hover:border-blue-500/40 transition-colors">
+          {cities.map((city) => (
+            <div
+              class="rounded-xl border border-gray-800 bg-gray-900 p-5 space-y-3 hover:border-blue-500/40 transition-colors"
+              data-city-card
+              data-lat={city.lat}
+              data-lng={city.lng}
+              data-tz={city.tz}
+            >
               <div class="flex items-center justify-between">
                 <div>
                   <div class="text-2xl">{city.emoji}</div>
@@ -92,17 +70,14 @@ const weatherData = await Promise.all(cities.map(async (city) => {
                   <p class="text-xs text-gray-500">{city.lat}°N, {Math.abs(city.lng)}°W</p>
                 </div>
               </div>
-              {city.error ? (
-                <p class="text-sm text-red-400">Error cargando datos</p>
-              ) : (
-                <div class="space-y-1">
-                  <p class="text-2xl font-bold text-white">{city.tmax}° / {city.tmin}°C</p>
-                  <p class="text-sm text-gray-400">{city.condition}</p>
-                  <p class="text-sm text-blue-400">💧 {city.rain}% lluvia</p>
-                </div>
-              )}
+              <p class="text-sm text-gray-500 js-status" aria-live="polite">Cargando pronóstico...</p>
+              <div class="space-y-1 hidden js-weather">
+                <p class="text-2xl font-bold text-white"><span class="js-tmax">--</span>° / <span class="js-tmin">--</span>°C</p>
+                <p class="text-sm text-gray-400 js-condition">—</p>
+                <p class="text-sm text-blue-400">💧 <span class="js-rain">--</span>% lluvia</p>
+              </div>
               <a
-                href={`https://open-meteo.com/en/docs?latitude=${city.lat}&longitude=${city.lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=America/Mexico_City`}
+                href={`https://open-meteo.com/en/docs?latitude=${city.lat}&longitude=${city.lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=America/Mexico_City`}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
@@ -148,4 +123,87 @@ const weatherData = await Promise.all(cities.map(async (city) => {
       </footer>
     </div>
   </main>
+
+  <script is:inline>
+    (() => {
+      const WMO = JSON.parse('{"0":"Despejado ☀️","1":"Despejado ☀️","2":"Parcialmente nublado ⛅","3":"Nublado ☁️","45":"Niebla 🌫️","48":"Niebla 🌫️","51":"Llovizna 🌦️","53":"Llovizna 🌦️","55":"Llovizna 🌦️","61":"Lluvia 🌧️","63":"Lluvia 🌧️","65":"Lluvia intensa 🌧️","71":"Nieve 🌨️","73":"Nieve 🌨️","75":"Nieve intensa 🌨️","80":"Chubascos 🌩️","81":"Chubascos 🌩️","82":"Tormenta ⛈️","95":"Tormenta ⛈️","96":"Tormenta con granizo ⛈️","99":"Tormenta con granizo ⛈️"}');
+      const cards = Array.from(document.querySelectorAll('[data-city-card]'));
+      const updatedAt = document.getElementById('js-updated-at');
+
+      function setUpdatedAtMessage() {
+        if (!updatedAt) return;
+        const now = new Date();
+        const time = now.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+        updatedAt.textContent = `Última actualización: ${time}`;
+      }
+
+      function renderError(card) {
+        const status = card.querySelector('.js-status');
+        const weather = card.querySelector('.js-weather');
+        if (status) {
+          status.textContent = 'Error cargando datos. Reintentando...';
+          status.classList.remove('text-gray-500');
+          status.classList.add('text-red-400');
+        }
+        if (weather) weather.classList.add('hidden');
+      }
+
+      function renderSuccess(card, payload) {
+        const status = card.querySelector('.js-status');
+        const weather = card.querySelector('.js-weather');
+        const tmax = card.querySelector('.js-tmax');
+        const tmin = card.querySelector('.js-tmin');
+        const rain = card.querySelector('.js-rain');
+        const condition = card.querySelector('.js-condition');
+
+        if (tmax) tmax.textContent = String(payload.tmax);
+        if (tmin) tmin.textContent = String(payload.tmin);
+        if (rain) rain.textContent = String(payload.rain);
+        if (condition) condition.textContent = payload.condition;
+        if (status) status.classList.add('hidden');
+        if (weather) weather.classList.remove('hidden');
+      }
+
+      async function refreshCard(card) {
+        const lat = card.getAttribute('data-lat');
+        const lng = card.getAttribute('data-lng');
+        const tz = card.getAttribute('data-tz') || 'America/Mexico_City';
+        if (!lat || !lng) return;
+
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=${tz}&forecast_days=1&models=best_match`;
+        try {
+          const response = await fetch(url, { cache: 'no-store' });
+          if (!response.ok) throw new Error('Weather request failed');
+          const data = await response.json();
+          const daily = data?.daily;
+          if (!daily) throw new Error('Invalid weather response');
+
+          const tmax = daily.temperature_2m_max?.[0];
+          const tmin = daily.temperature_2m_min?.[0];
+          const rain = daily.precipitation_probability_max?.[0];
+          const weatherCode = daily.weathercode?.[0];
+          if (tmax == null || tmin == null || rain == null || weatherCode == null) {
+            throw new Error('Missing weather fields');
+          }
+
+          renderSuccess(card, {
+            tmax,
+            tmin,
+            rain,
+            condition: WMO[String(weatherCode)] || '—',
+          });
+        } catch {
+          renderError(card);
+        }
+      }
+
+      async function refreshAll() {
+        await Promise.all(cards.map((card) => refreshCard(card)));
+        setUpdatedAtMessage();
+      }
+
+      refreshAll();
+      window.setInterval(refreshAll, 10 * 60 * 1000);
+    })();
+  </script>
 </BaseLayout>

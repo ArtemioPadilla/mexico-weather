@@ -1,79 +1,60 @@
-# Setup Guide
+# Setup guide
 
-## 1. Use this template
+This document describes how to run and deploy this repository.
+
+## Local setup
+
+1. Clone the repository.
+2. Install dependencies.
+3. Start the development server.
 
 ```bash
-gh repo create my-project --template ArtemioPadilla/issue-driven-web-template --public
-cd my-project
+git clone https://github.com/ArtemioPadilla/mexico-weather-site.git
+cd mexico-weather-site
 npm install
+npm run dev
 ```
 
-## 2. Configure GitHub Secrets
+## Optional local environment variables
 
-Go to your repo → Settings → Secrets and variables → Actions:
-
-| Secret | Where to get it |
-|--------|----------------|
-| `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com) → API Keys |
-
-That's the only required secret for the AI triage to work.
-
-## 3. Configure deployment
-
-Edit `.github/workflows/cd.yml` and replace the deploy step with your provider:
-
-**Firebase Hosting:**
-```yaml
-- uses: FirebaseExtended/action-hosting-deploy@v0
-  with:
-    repoToken: ${{ secrets.GITHUB_TOKEN }}
-    firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-    projectId: your-project-id
-```
-
-**Vercel:**
-```yaml
-- uses: amondnet/vercel-action@v25
-  with:
-    vercel-token: ${{ secrets.VERCEL_TOKEN }}
-    vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-    vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-```
-
-**Netlify:**
-```yaml
-- uses: nwtgck/actions-netlify@v3
-  with:
-    publish-dir: './dist'
-    production-branch: main
-    github-token: ${{ secrets.GITHUB_TOKEN }}
-    deploy-message: "Deploy from GitHub Actions"
-  env:
-    NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-    NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-```
-
-## 4. Update FeedbackFAB repo slug
-
-In `src/components/common/FeedbackFAB.astro`, confirm the `repoSlug` matches your repo:
-
-```typescript
-const repoSlug = 'your-username/your-repo';
-```
-
-## 5. Customize the Hello World page
-
-Edit `src/pages/index.astro` and `src/layouts/BaseLayout.astro` to match your project.
-
-## 6. Open your first real issue
-
-With everything set up, open an issue in GitHub. Claude will triage it automatically within ~30 seconds.
-
-## Environment variables
-
-Add these to `.env` for local development:
+You can define build metadata in a `.env` file for local runs.
 
 ```env
 PUBLIC_BUILD_SHA=local
 PUBLIC_VERSION=dev
 ```
+
+These values are displayed in diagnostics captured by the feedback modal.
+
+## GitHub Pages deployment
+
+Deployment is configured in `.github/workflows/cd.yml` and runs automatically
+on pushes to `main`.
+
+Before first deployment, make sure GitHub Pages is enabled:
+
+1. Open repository settings.
+2. Go to **Pages**.
+3. Set source to **GitHub Actions**.
+
+The Astro site uses `base: '/mexico-weather-site'`, which must match the
+repository name for Pages path routing.
+
+## Feedback issue reporting
+
+The floating feedback button opens prefilled GitHub issues.
+
+Verify this value in `src/components/common/FeedbackFAB.astro`:
+
+```ts
+const repoSlug = 'ArtemioPadilla/mexico-weather-site';
+```
+
+## CI checks
+
+The CI workflow runs these validations:
+
+- `npm run check`
+- `npm run build`
+
+Run both locally before pushing changes.
