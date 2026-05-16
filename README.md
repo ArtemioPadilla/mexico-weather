@@ -9,7 +9,7 @@ with a built-in feedback button that opens pre-filled GitHub issues.
 
 - Forecast cards for key Mexican cities.
 - Client-side weather refresh every 10 minutes.
-- Link to SMN RSS alerts.
+- Build-time generated RSS 2.0 feed of SMN weather alerts at `/rss.xml`.
 - Floating feedback modal with diagnostics capture.
 - Static deployment to GitHub Pages.
 
