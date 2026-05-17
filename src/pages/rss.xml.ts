@@ -20,9 +20,23 @@ export const prerender = true;
  *      decompressed with the standard Web `DecompressionStream` API (no
  *      Node-only modules, so no extra dependencies / type packages).
  *
- * Note: SMN serves an incomplete TLS certificate chain, so Node's `fetch`
- * may reject it in some environments. That simply triggers the fallback
- * below — the build never fails and the feed is always valid.
+ * TLS note (important)
+ * --------------------
+ * `smn.conagua.gob.mx` serves an INCOMPLETE certificate chain: only the leaf
+ * (`*.conagua.gob.mx`) is sent, the `GeoTrust TLS RSA CA G1` intermediate is
+ * omitted. curl/browsers recover via AIA fetching, but Node's fetch/undici
+ * does not and rejects with `UNABLE_TO_VERIFY_LEAF_SIGNATURE`. We do NOT
+ * weaken TLS. Instead the genuine intermediate (issued by the Node-trusted
+ * `DigiCert Global Root G2`) is committed at `src/data/smn-ca.pem` and the
+ * build/CI workflows export `NODE_EXTRA_CA_CERTS=src/data/smn-ca.pem`, which
+ * COMPLETES the chain with verification fully enabled. Without that env var
+ * (e.g. a plain local `npm run build`) the fetch still fails cleanly and the
+ * fallback below is used — the build never breaks.
+ *
+ * Encoding note: the SMN web service returns a gzip-compressed body but
+ * advertises neither `Content-Encoding: gzip` nor a JSON content type
+ * (`application/octet-stream`). We therefore detect gzip by its magic bytes
+ * (0x1f 0x8b) rather than trusting the response header.
  *
  * We consume that official SMN data and derive build-time "avisos" from the
  * municipalities whose forecast for today indicates significant weather
@@ -99,13 +113,15 @@ async function fetchSmnForecast(): Promise<SmnForecast[]> {
     if (!response.ok || !response.body) {
       throw new Error(`SMN responded with HTTP ${response.status}`);
     }
-    // SMN normally gzip-compresses the payload; only decompress when the
-    // server actually advertises gzip, otherwise read the body directly.
-    const encoding = response.headers.get('Content-Encoding');
-    const stream =
-      encoding === 'gzip'
-        ? response.body.pipeThrough(new DecompressionStream('gzip'))
-        : response.body;
+    // SMN gzip-compresses the payload but does NOT set `Content-Encoding`
+    // (and serves it as `application/octet-stream`), so the header cannot be
+    // trusted. Buffer the body and detect gzip by its magic bytes
+    // (0x1f 0x8b); decompress only then, otherwise treat it as plain text.
+    const buffer = new Uint8Array(await response.arrayBuffer());
+    const isGzip = buffer.length > 1 && buffer[0] === 0x1f && buffer[1] === 0x8b;
+    const stream = isGzip
+      ? new Response(buffer).body!.pipeThrough(new DecompressionStream('gzip'))
+      : new Response(buffer).body!;
     const json = await new Response(stream).text();
     const data = JSON.parse(json) as SmnForecast[];
     if (!Array.isArray(data)) {
@@ -216,9 +232,21 @@ export const GET: APIRoute = async () => {
     }
   } catch (error) {
     // Never let an upstream failure break the build: emit a valid feed.
+    const message = error instanceof Error ? error.message : String(error);
+    // `fetch failed` hides the real reason; surface the underlying cause
+    // (notably TLS `UNABLE_TO_VERIFY_LEAF_SIGNATURE` when the SMN CA chain
+    // is incomplete and NODE_EXTRA_CA_CERTS was not supplied).
+    const cause =
+      error instanceof Error && error.cause
+        ? ((error.cause as { code?: string; message?: string }).code ??
+          (error.cause as { message?: string }).message ??
+          String(error.cause))
+        : undefined;
     console.warn(
-      '[rss.xml] SMN source unavailable, using fallback item:',
-      error instanceof Error ? error.message : error,
+      `[rss.xml] WARNING: SMN source unavailable, RSS feed will contain ` +
+        `only the informational fallback item (NOT real avisos). Reason: ` +
+        `${message}${cause ? ` (cause: ${cause})` : ''}. If this is a ` +
+        `TLS error, ensure NODE_EXTRA_CA_CERTS points at src/data/smn-ca.pem.`,
     );
     items = [fallbackItem()];
   }
