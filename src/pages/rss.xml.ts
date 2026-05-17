@@ -65,10 +65,12 @@ const SMN_AVISOS_URL =
 const FETCH_TIMEOUT_MS = 12_000;
 const MAX_ITEMS = 60;
 // A municipality is "noteworthy" if heavy rain is likely or wind gusts are strong.
-const MIN_PRECIP_PROBABILITY = 80;
-const MIN_WIND_GUST_KMH = 50;
+// Exported (read-only) so the threshold logic can be unit-tested against the
+// real constants without duplicating their values.
+export const MIN_PRECIP_PROBABILITY = 80;
+export const MIN_WIND_GUST_KMH = 50;
 
-interface SmnForecast {
+export interface SmnForecast {
   nes: string; // estado
   nmun: string; // municipio
   ndia: string; // forecast day index ("0" = today)
@@ -80,7 +82,7 @@ interface SmnForecast {
   tmin: string;
 }
 
-interface FeedItem {
+export interface FeedItem {
   title: string;
   description: string;
   link: string;
@@ -88,7 +90,7 @@ interface FeedItem {
   pubDate: string;
 }
 
-function escapeXml(value: string): string {
+export function escapeXml(value: string): string {
   return value
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -97,7 +99,7 @@ function escapeXml(value: string): string {
     .replace(/'/g, '&apos;');
 }
 
-function toNumber(value: string | undefined): number {
+export function toNumber(value: string | undefined): number {
   const n = Number(value);
   return Number.isFinite(n) ? n : 0;
 }
@@ -133,7 +135,7 @@ async function fetchSmnForecast(): Promise<SmnForecast[]> {
   }
 }
 
-function buildAvisoItems(forecasts: SmnForecast[]): FeedItem[] {
+export function buildAvisoItems(forecasts: SmnForecast[]): FeedItem[] {
   const pubDate = new Date().toUTCString();
   return forecasts
     .filter((f) => f && f.ndia === '0')
@@ -167,7 +169,7 @@ function buildAvisoItems(forecasts: SmnForecast[]): FeedItem[] {
     });
 }
 
-function fallbackItem(): FeedItem {
+export function fallbackItem(): FeedItem {
   return {
     title: 'Avisos meteorológicos del SMN',
     description:
@@ -180,7 +182,7 @@ function fallbackItem(): FeedItem {
   };
 }
 
-function renderFeed(items: FeedItem[]): string {
+export function renderFeed(items: FeedItem[]): string {
   const lastBuildDate = new Date().toUTCString();
   const itemsXml = items
     .map(
