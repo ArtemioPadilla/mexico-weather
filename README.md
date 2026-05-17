@@ -42,6 +42,10 @@ Then open the local URL shown in your terminal.
 - `npm run preview`: Preview the production build.
 - `npm test`: Run tests with Vitest.
 
+## Code style
+
+ESLint and Prettier are configured for this project (`npm run lint`, `npm run format`). A Husky pre-commit hook runs ESLint --fix on staged JS/TS/Astro files and Prettier on staged JSON/CSS config files. The repository is not yet fully Prettier-formatted, so `format:check` and a full `npm run format` are intentionally not enforced in CI — running them would produce a large diff unrelated to feature work.
+
 ## Deployment
 
 The repository deploys automatically to GitHub Pages from `main`.
