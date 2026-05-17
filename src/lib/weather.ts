@@ -55,14 +55,6 @@ export interface RetryOptions {
   maxDelayMs?: number;
 }
 
-export interface FetchWeatherDeps {
-  fetch: typeof fetch;
-  /** Sleep function (injectable for deterministic tests). */
-  sleep?: (ms: number) => Promise<void>;
-  /** Random source in [0, 1) for jitter (injectable for tests). */
-  random?: () => number;
-}
-
 /**
  * Injectable dependencies for the generic retrying JSON requester. Shared by
  * the weather, geocode and forecast SDKs so the retry/backoff logic lives in
@@ -168,12 +160,15 @@ export function parseRetryAfter(
  *  - !res.ok: last attempt -> throw 'Request failed (HTTP <status>)', else
  *    sleep `backoffDelay(...)` and continue.
  *  - thrown fetch error: last attempt -> rethrow, else sleep backoff.
- *  - success -> `return res.json() as T`.
+ *  - success -> `return parse(res.json()) as T` (or `res.json() as T` when no
+ *    `parse` callback is supplied). A throw from `parse` is caught by the same
+ *    retry loop as any other error, so payload validation stays inside it.
  */
 export async function requestJsonWithRetry<T = unknown>(
   url: string,
   deps: RequestDeps,
   retry: RetryOptions = DEFAULT_RETRY,
+  parse?: (raw: unknown) => T,
 ): Promise<T> {
   const opts: Required<RetryOptions> = { ...DEFAULT_RETRY, ...retry };
   const sleep = deps.sleep ?? defaultSleep;
@@ -194,7 +189,8 @@ export async function requestJsonWithRetry<T = unknown>(
         throw new Error(`Request failed (HTTP ${response.status})`);
       }
 
-      return (await response.json()) as T;
+      const raw = await response.json();
+      return parse ? parse(raw) : (raw as T);
     } catch (err) {
       lastError = err;
       const isLastAttempt = attempt === opts.attempts - 1;
@@ -220,28 +216,15 @@ export async function requestJsonWithRetry<T = unknown>(
  */
 export async function fetchWeather(
   loc: WeatherLocation,
-  deps: FetchWeatherDeps,
+  deps: RequestDeps,
   retryOptions: RetryOptions = {},
 ): Promise<Weather> {
-  // Wrap fetch so that parse validation happens *inside* the retry loop
-  // (preserving the original behavior where an invalid payload is retried).
-  const parsingDeps: RequestDeps = {
-    ...deps,
-    fetch: (async (input, init) => {
-      const response = await deps.fetch(input, init);
-      if (response.status === 429 || !response.ok) return response;
-      const data = await response.json();
-      const parsed = parseForecast(data);
-      return {
-        ok: true,
-        status: 200,
-        headers: { get: () => null },
-        json: async () => parsed,
-      } as unknown as Response;
-    }) as typeof fetch,
-  };
-  return requestJsonWithRetry<Weather>(buildForecastUrl(loc), parsingDeps, {
-    ...DEFAULT_RETRY,
-    ...retryOptions,
-  });
+  // parseForecast runs inside the retry loop (via the parse callback), so an
+  // invalid payload is retried exactly like any other error.
+  return requestJsonWithRetry<Weather>(
+    buildForecastUrl(loc),
+    deps,
+    { ...DEFAULT_RETRY, ...retryOptions },
+    parseForecast,
+  );
 }

@@ -16,9 +16,9 @@ export interface ForecastLocation {
 }
 
 export interface CurrentWx {
-  temperature: number;
-  feelsLike: number;
-  weatherCode: number;
+  temperature: number | null;
+  feelsLike: number | null;
+  weatherCode: number | null;
   condition: string;
   precipProbability: number;
   windSpeed: number;
@@ -27,14 +27,14 @@ export interface CurrentWx {
   uvIndex: number;
   cloudCover: number;
   humidity: number;
-  pressure: number;
+  pressure: number | null;
   visibilityKm: number;
 }
 
 export interface HourWx {
   time: string;
-  temperature: number;
-  weatherCode: number;
+  temperature: number | null;
+  weatherCode: number | null;
   condition: string;
   precipProbability: number;
   windSpeed: number;
@@ -42,15 +42,15 @@ export interface HourWx {
 
 export interface DayWx {
   date: string;
-  weatherCode: number;
+  weatherCode: number | null;
   condition: string;
-  tmax: number;
-  tmin: number;
+  tmax: number | null;
+  tmin: number | null;
   precipProbabilityMax: number;
   uvMax: number;
   windMax: number;
-  sunrise: string;
-  sunset: string;
+  sunrise: string | null;
+  sunset: string | null;
 }
 
 export interface Forecast {
@@ -112,6 +112,11 @@ export function buildRichForecastUrl(loc: ForecastLocation): string {
 const num = (v: unknown): number =>
   typeof v === 'number' && Number.isFinite(v) ? v : 0;
 
+// For ambiguous readings where 0 is a plausible real value (temperature,
+// pressure): a missing/non-finite value becomes null rather than 0.
+const numOrNull = (v: unknown): number | null =>
+  typeof v === 'number' && Number.isFinite(v) ? v : null;
+
 const str = (v: unknown): string => (typeof v === 'string' ? v : '');
 
 /**
@@ -135,11 +140,12 @@ export async function getForecast(
   }
 
   const c = data.current;
+  const cWc = numOrNull(c.weather_code);
   const current: CurrentWx = {
-    temperature: num(c.temperature_2m),
-    feelsLike: num(c.apparent_temperature),
-    weatherCode: num(c.weather_code),
-    condition: describeWeatherCode(num(c.weather_code)),
+    temperature: numOrNull(c.temperature_2m),
+    feelsLike: numOrNull(c.apparent_temperature),
+    weatherCode: cWc,
+    condition: cWc === null ? '—' : describeWeatherCode(cWc),
     precipProbability: num(c.precipitation_probability),
     windSpeed: num(c.wind_speed_10m),
     windGusts: num(c.wind_gusts_10m),
@@ -147,7 +153,8 @@ export async function getForecast(
     uvIndex: num(c.uv_index),
     cloudCover: num(c.cloud_cover),
     humidity: num(c.relative_humidity_2m),
-    pressure: num(c.surface_pressure),
+    pressure: numOrNull(c.surface_pressure),
+    // Open-Meteo visibility is in metres; show km with 1 decimal.
     visibilityKm: Math.round(num(c.visibility) / 100) / 10,
   };
 
@@ -156,12 +163,12 @@ export async function getForecast(
   const hourly: HourWx[] = hTimes
     .slice(0, HOURLY_LIMIT)
     .map((_, i): HourWx => {
-      const code = num(h.weather_code?.[i]);
+      const code = numOrNull(h.weather_code?.[i]);
       return {
         time: str(h.time?.[i]),
-        temperature: num(h.temperature_2m?.[i]),
+        temperature: numOrNull(h.temperature_2m?.[i]),
         weatherCode: code,
-        condition: describeWeatherCode(code),
+        condition: code === null ? '—' : describeWeatherCode(code),
         precipProbability: num(h.precipitation_probability?.[i]),
         windSpeed: num(h.wind_speed_10m?.[i]),
       };
@@ -170,18 +177,20 @@ export async function getForecast(
   const d = data.daily ?? {};
   const dDates: unknown[] = Array.isArray(d.time) ? d.time : [];
   const daily: DayWx[] = dDates.map((_, i): DayWx => {
-    const code = num(d.weather_code?.[i]);
+    const code = numOrNull(d.weather_code?.[i]);
+    const sunrise = d.sunrise?.[i];
+    const sunset = d.sunset?.[i];
     return {
       date: str(d.time?.[i]),
       weatherCode: code,
-      condition: describeWeatherCode(code),
-      tmax: num(d.temperature_2m_max?.[i]),
-      tmin: num(d.temperature_2m_min?.[i]),
+      condition: code === null ? '—' : describeWeatherCode(code),
+      tmax: numOrNull(d.temperature_2m_max?.[i]),
+      tmin: numOrNull(d.temperature_2m_min?.[i]),
       precipProbabilityMax: num(d.precipitation_probability_max?.[i]),
       uvMax: num(d.uv_index_max?.[i]),
       windMax: num(d.wind_speed_10m_max?.[i]),
-      sunrise: str(d.sunrise?.[i]),
-      sunset: str(d.sunset?.[i]),
+      sunrise: typeof sunrise === 'string' ? sunrise : null,
+      sunset: typeof sunset === 'string' ? sunset : null,
     };
   });
 

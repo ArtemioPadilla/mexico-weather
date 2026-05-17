@@ -200,6 +200,78 @@ describe('getForecast', () => {
       }),
     ).rejects.toThrow('Invalid forecast response: missing current');
   });
+
+  it('retries once after a 503 then resolves with parsed data', async () => {
+    const serverError = {
+      ok: false,
+      status: 503,
+      headers: { get: () => null },
+      json: async () => ({}),
+    } as unknown as Response;
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(serverError)
+      .mockResolvedValueOnce(jsonResponse(fullPayload(2)));
+    const delays: number[] = [];
+    const sleep = (ms: number) => {
+      delays.push(ms);
+      return Promise.resolve();
+    };
+
+    const fc = await getForecast(loc, {
+      fetch: fetchMock as unknown as typeof fetch,
+      sleep,
+      random: () => 1,
+    });
+
+    expect(fc.current.temperature).toBe(24.6);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(delays.length).toBe(1); // one backoff delay between the 2 attempts
+  });
+
+  it('yields null for missing ambiguous numeric fields and weather code', async () => {
+    const payload = fullPayload(2) as Record<string, unknown>;
+    const current = payload.current as Record<string, unknown>;
+    delete current.temperature_2m;
+    delete current.surface_pressure;
+    delete current.weather_code;
+
+    const fetchMock = vi.fn(async () => jsonResponse(payload));
+    const fc = await getForecast(loc, {
+      fetch: fetchMock as unknown as typeof fetch,
+      sleep: async () => {},
+    });
+
+    expect(fc.current.temperature).toBeNull();
+    expect(fc.current.pressure).toBeNull();
+    expect(fc.current.weatherCode).toBeNull();
+    expect(fc.current.condition).toBe('—');
+    // Fields where 0 is a real reading stay numeric.
+    expect(fc.current.windSpeed).toBe(12.4);
+  });
+
+  it('yields null daily tmax/tmin and sunrise/sunset when absent', async () => {
+    const payload = fullPayload(2) as Record<string, unknown>;
+    const daily = payload.daily as Record<string, unknown>;
+    daily.temperature_2m_max = [null, null];
+    daily.temperature_2m_min = [null, null];
+    daily.sunrise = [null, null];
+    daily.sunset = [null, null];
+    daily.weather_code = [null, null];
+
+    const fetchMock = vi.fn(async () => jsonResponse(payload));
+    const fc = await getForecast(loc, {
+      fetch: fetchMock as unknown as typeof fetch,
+      sleep: async () => {},
+    });
+
+    expect(fc.daily[0].tmax).toBeNull();
+    expect(fc.daily[0].tmin).toBeNull();
+    expect(fc.daily[0].sunrise).toBeNull();
+    expect(fc.daily[0].sunset).toBeNull();
+    expect(fc.daily[0].weatherCode).toBeNull();
+    expect(fc.daily[0].condition).toBe('—');
+  });
 });
 
 describe('uvLabel', () => {
