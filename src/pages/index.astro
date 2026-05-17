@@ -28,10 +28,10 @@ import { cities } from '../data/cities';
           <h2 class="text-lg font-semibold text-yellow-300">Alertas Activas — SMN</h2>
         </div>
         <p class="text-sm text-gray-400">
-          Consulta el feed RSS del Servicio Meteorológico Nacional para alertas en tiempo real:
+          Consulta nuestro feed RSS con avisos meteorológicos derivados de los datos oficiales del SMN:
         </p>
         <a
-          href="https://artemiop.com/mexico-weather/rss.xml"
+          href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/rss.xml`}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-2 text-sm font-medium text-yellow-300 hover:bg-yellow-500/20 transition-colors"
