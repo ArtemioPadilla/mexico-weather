@@ -63,7 +63,20 @@ export interface FetchWeatherDeps {
   random?: () => number;
 }
 
-const DEFAULT_RETRY: Required<RetryOptions> = {
+/**
+ * Injectable dependencies for the generic retrying JSON requester. Shared by
+ * the weather, geocode and forecast SDKs so the retry/backoff logic lives in
+ * exactly one place.
+ */
+export interface RequestDeps {
+  fetch: typeof fetch;
+  /** Sleep function (injectable for deterministic tests). */
+  sleep?: (ms: number) => Promise<void>;
+  /** Random source in [0, 1) for jitter (injectable for tests). */
+  random?: () => number;
+}
+
+export const DEFAULT_RETRY: Required<RetryOptions> = {
   attempts: 3,
   baseDelayMs: 500,
   factor: 2,
@@ -146,18 +159,25 @@ export function parseRetryAfter(
 }
 
 /**
- * Fetch + parse a city's weather with retry, exponential backoff + full
- * jitter, and graceful HTTP 429 handling. Throws after exhausting attempts.
+ * Generic fetch-with-retry helper: retry with exponential backoff + full
+ * jitter and graceful HTTP 429 handling, returning the parsed JSON body.
+ *
+ * Retry semantics (identical to the original inline fetchWeather loop):
+ *  - status 429: last attempt -> throw 'Rate limited (HTTP 429)', else sleep
+ *    `parseRetryAfter(header, Date.now()) ?? backoffDelay(...)` and continue.
+ *  - !res.ok: last attempt -> throw 'Request failed (HTTP <status>)', else
+ *    sleep `backoffDelay(...)` and continue.
+ *  - thrown fetch error: last attempt -> rethrow, else sleep backoff.
+ *  - success -> `return res.json() as T`.
  */
-export async function fetchWeather(
-  loc: WeatherLocation,
-  deps: FetchWeatherDeps,
-  retryOptions: RetryOptions = {},
-): Promise<Weather> {
-  const opts: Required<RetryOptions> = { ...DEFAULT_RETRY, ...retryOptions };
+export async function requestJsonWithRetry<T = unknown>(
+  url: string,
+  deps: RequestDeps,
+  retry: RetryOptions = DEFAULT_RETRY,
+): Promise<T> {
+  const opts: Required<RetryOptions> = { ...DEFAULT_RETRY, ...retry };
   const sleep = deps.sleep ?? defaultSleep;
   const random = deps.random ?? Math.random;
-  const url = buildForecastUrl(loc);
 
   let lastError: unknown;
 
@@ -171,11 +191,10 @@ export async function fetchWeather(
         throw new Error('Rate limited (HTTP 429)');
       }
       if (!response.ok) {
-        throw new Error(`Weather request failed (HTTP ${response.status})`);
+        throw new Error(`Request failed (HTTP ${response.status})`);
       }
 
-      const data = await response.json();
-      return parseForecast(data);
+      return (await response.json()) as T;
     } catch (err) {
       lastError = err;
       const isLastAttempt = attempt === opts.attempts - 1;
@@ -192,5 +211,37 @@ export async function fetchWeather(
 
   throw lastError instanceof Error
     ? lastError
-    : new Error('Weather fetch failed');
+    : new Error('Request failed');
+}
+
+/**
+ * Fetch + parse a city's weather with retry, exponential backoff + full
+ * jitter, and graceful HTTP 429 handling. Throws after exhausting attempts.
+ */
+export async function fetchWeather(
+  loc: WeatherLocation,
+  deps: FetchWeatherDeps,
+  retryOptions: RetryOptions = {},
+): Promise<Weather> {
+  // Wrap fetch so that parse validation happens *inside* the retry loop
+  // (preserving the original behavior where an invalid payload is retried).
+  const parsingDeps: RequestDeps = {
+    ...deps,
+    fetch: (async (input, init) => {
+      const response = await deps.fetch(input, init);
+      if (response.status === 429 || !response.ok) return response;
+      const data = await response.json();
+      const parsed = parseForecast(data);
+      return {
+        ok: true,
+        status: 200,
+        headers: { get: () => null },
+        json: async () => parsed,
+      } as unknown as Response;
+    }) as typeof fetch,
+  };
+  return requestJsonWithRetry<Weather>(buildForecastUrl(loc), parsingDeps, {
+    ...DEFAULT_RETRY,
+    ...retryOptions,
+  });
 }
