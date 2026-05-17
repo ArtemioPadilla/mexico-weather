@@ -20,6 +20,14 @@ const t = ui.es;
         <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
           Pronósticos y alertas meteorológicas del SMN + Open-Meteo para las principales ciudades de México.
         </p>
+        <div class="max-w-xl mx-auto mt-6">
+          <div class="flex gap-2">
+            <input id="q" type="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-autocomplete="list" placeholder={t.search_placeholder} class="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-sm text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <button id="geo" type="button" class="bg-gray-900 border border-gray-700 rounded-lg px-3 text-sm text-blue-300 hover:bg-gray-800 motion-reduce:transition-none">📍 {t.use_my_location}</button>
+          </div>
+          <ul id="ac" role="listbox" class="hidden mt-1 bg-gray-900 border border-gray-700 rounded-lg overflow-hidden"></ul>
+          <p id="qmsg" class="hidden mt-1 text-xs text-gray-500" aria-live="polite"></p>
+        </div>
         <p id="js-updated-at" class="text-xs text-gray-500" aria-live="polite">Cargando datos más recientes...</p>
       </div>
 
@@ -117,6 +125,7 @@ const t = ui.es;
   <script>
     // Bundled module script (NOT is:inline) so the import is processed by Astro/Vite.
     import { getForecast, uvLabel, windDir } from '../lib/forecast';
+    import { geocode } from '../lib/geocode';
     import { ui } from '../i18n/ui';
 
     const t = ui.es;
@@ -125,6 +134,12 @@ const t = ui.es;
 
     const cards = Array.from(document.querySelectorAll('[data-city-card]'));
     const updatedAt = document.getElementById('js-updated-at');
+
+    // Injected request deps shared by forecast + geocode SDK calls.
+    const deps = {
+      fetch: window.fetch.bind(window),
+      sleep: (ms: number) => new Promise<void>((r) => window.setTimeout(r, ms)),
+    };
 
     // Strip a trailing slash from the configured base path so we can safely
     // concatenate route paths.
@@ -308,6 +323,149 @@ const t = ui.es;
         setUpdateFailedMessage();
       }
     }
+
+    // ---- Geocoding autocomplete combobox ----
+    const qInput = document.getElementById('q') as HTMLInputElement | null;
+    const acList = document.getElementById('ac') as HTMLUListElement | null;
+    const qMsg = document.getElementById('qmsg') as HTMLParagraphElement | null;
+
+    type GeoItem = {
+      name: string;
+      admin1?: string;
+      country?: string;
+      lat: number;
+      lng: number;
+      tz: string;
+    };
+
+    let results: GeoItem[] = [];
+    let active = -1;
+    let debounceId = 0;
+
+    function showMsg(text: string) {
+      if (!qMsg) return;
+      qMsg.textContent = text;
+      qMsg.classList.remove('hidden');
+    }
+
+    function hideMsg() {
+      if (!qMsg) return;
+      qMsg.textContent = '';
+      qMsg.classList.add('hidden');
+    }
+
+    function closeList() {
+      if (!acList || !qInput) return;
+      acList.classList.add('hidden');
+      acList.textContent = '';
+      qInput.setAttribute('aria-expanded', 'false');
+      qInput.removeAttribute('aria-activedescendant');
+      results = [];
+      active = -1;
+    }
+
+    function highlight() {
+      if (!acList || !qInput) return;
+      Array.from(acList.children).forEach((li, i) => {
+        if (i === active) {
+          li.classList.add('bg-gray-800');
+          qInput.setAttribute('aria-activedescendant', li.id);
+        } else {
+          li.classList.remove('bg-gray-800');
+        }
+      });
+      if (active < 0) qInput.removeAttribute('aria-activedescendant');
+    }
+
+    function go(r: GeoItem) {
+      location.href = fullHref(String(r.lat), String(r.lng), r.tz, r.name);
+    }
+
+    function renderList() {
+      if (!acList || !qInput) return;
+      acList.textContent = '';
+      results.forEach((r, i) => {
+        const li = document.createElement('li');
+        li.id = 'ac-' + i;
+        li.setAttribute('role', 'option');
+        li.className =
+          'px-3 py-2 text-sm text-gray-200 cursor-pointer hover:bg-gray-800';
+        li.textContent = [r.name, r.admin1, r.country]
+          .filter(Boolean)
+          .join(', ');
+        li.addEventListener('click', () => go(r));
+        acList.appendChild(li);
+      });
+      acList.classList.remove('hidden');
+      qInput.setAttribute('aria-expanded', 'true');
+      active = -1;
+    }
+
+    async function runSearch(term: string) {
+      try {
+        const res = await geocode(term, deps);
+        if (!res.length) {
+          closeList();
+          showMsg(`${t.no_results} «${term}»`);
+          return;
+        }
+        results = res;
+        hideMsg();
+        renderList();
+      } catch {
+        closeList();
+        showMsg(`${t.no_results} «${term}»`);
+      }
+    }
+
+    if (qInput) {
+      qInput.addEventListener('input', () => {
+        const term = qInput.value.trim();
+        window.clearTimeout(debounceId);
+        if (term === '') {
+          hideMsg();
+          closeList();
+          return;
+        }
+        debounceId = window.setTimeout(() => runSearch(term), 300);
+      });
+
+      qInput.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (results.length === 0) {
+          if (e.key === 'Escape') closeList();
+          return;
+        }
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          active = (active + 1) % results.length;
+          highlight();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          active = (active - 1 + results.length) % results.length;
+          highlight();
+        } else if (e.key === 'Enter') {
+          if (active >= 0 && active < results.length) {
+            e.preventDefault();
+            go(results[active]);
+          }
+        } else if (e.key === 'Escape') {
+          closeList();
+        }
+      });
+    }
+
+    // Click-outside closes the suggestion list.
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node;
+      if (
+        qInput &&
+        acList &&
+        !qInput.contains(target) &&
+        !acList.contains(target)
+      ) {
+        closeList();
+      }
+    });
 
     refreshAll();
     window.setInterval(refreshAll, REFRESH_INTERVAL_MS);
