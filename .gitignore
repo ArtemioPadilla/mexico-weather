@@ -6,3 +6,9 @@ dist/
 *.log
 .claude/settings.local.json
 .superpowers/
+
+# Playwright
+/playwright-report/
+/test-results/
+/blob-report/
+/playwright/.cache/
