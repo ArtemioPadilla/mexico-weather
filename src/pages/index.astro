@@ -2,7 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { cities } from '../data/cities';
 import { ui } from '../i18n/ui';
+import { siteBase } from '../utils/paths';
+
 const t = ui.es;
+const base = siteBase();
 ---
 
 <BaseLayout title="Clima México 🇲🇽" description="Alertas y pronósticos meteorológicos para México" lang="es">
@@ -118,6 +121,12 @@ const t = ui.es;
         <p class="text-xs text-gray-700 mt-2">
           Datos libres • Sin cookies • Sin rastreo
         </p>
+        <a
+          href={`${base}privacidad/`}
+          class="inline-block text-xs text-gray-500 hover:text-gray-300 transition-colors mt-1"
+        >
+          Privacidad
+        </a>
       </footer>
     </div>
   </main>
