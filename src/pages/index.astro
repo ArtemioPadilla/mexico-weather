@@ -22,8 +22,8 @@ const t = ui.es;
         </p>
         <div class="max-w-xl mx-auto mt-6">
           <div class="flex gap-2">
-            <input id="q" type="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-autocomplete="list" placeholder={t.search_placeholder} class="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-sm text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <button id="geo" type="button" class="bg-gray-900 border border-gray-700 rounded-lg px-3 text-sm text-blue-300 hover:bg-gray-800 motion-reduce:transition-none">📍 {t.use_my_location}</button>
+            <input id="q" type="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-autocomplete="list" aria-label={t.search_placeholder} placeholder={t.search_placeholder} class="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-3 py-2.5 text-sm text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <button id="geo" type="button" class="bg-gray-900 border border-gray-700 rounded-lg px-3 text-sm text-blue-300 hover:bg-gray-800 motion-reduce:transition-none"><span aria-hidden="true">📍</span> {t.use_my_location}</button>
           </div>
           <ul id="ac" role="listbox" class="hidden mt-1 bg-gray-900 border border-gray-700 rounded-lg overflow-hidden"></ul>
           <p id="qmsg" class="hidden mt-1 text-xs text-gray-500" aria-live="polite"></p>
@@ -342,6 +342,7 @@ const t = ui.es;
     let results: GeoItem[] = [];
     let active = -1;
     let debounceId = 0;
+    let searchGen = 0;
 
     function showMsg(text: string) {
       if (!qMsg) return;
@@ -370,9 +371,11 @@ const t = ui.es;
       Array.from(acList.children).forEach((li, i) => {
         if (i === active) {
           li.classList.add('bg-gray-800');
+          li.setAttribute('aria-selected', 'true');
           qInput.setAttribute('aria-activedescendant', li.id);
         } else {
           li.classList.remove('bg-gray-800');
+          li.setAttribute('aria-selected', 'false');
         }
       });
       if (active < 0) qInput.removeAttribute('aria-activedescendant');
@@ -389,6 +392,7 @@ const t = ui.es;
         const li = document.createElement('li');
         li.id = 'ac-' + i;
         li.setAttribute('role', 'option');
+        li.setAttribute('aria-selected', 'false');
         li.className =
           'px-3 py-2 text-sm text-gray-200 cursor-pointer hover:bg-gray-800';
         li.textContent = [r.name, r.admin1, r.country]
@@ -403,8 +407,10 @@ const t = ui.es;
     }
 
     async function runSearch(term: string) {
+      const gen = ++searchGen;
       try {
         const res = await geocode(term, deps);
+        if (gen !== searchGen) return;
         if (!res.length) {
           closeList();
           showMsg(`${t.no_results} «${term}»`);
@@ -414,6 +420,7 @@ const t = ui.es;
         hideMsg();
         renderList();
       } catch {
+        if (gen !== searchGen) return;
         closeList();
         showMsg(`${t.no_results} «${term}»`);
       }
@@ -442,7 +449,7 @@ const t = ui.es;
           highlight();
         } else if (e.key === 'ArrowUp') {
           e.preventDefault();
-          active = (active - 1 + results.length) % results.length;
+          active = active <= 0 ? results.length - 1 : active - 1;
           highlight();
         } else if (e.key === 'Enter') {
           if (active >= 0 && active < results.length) {
