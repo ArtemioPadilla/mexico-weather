@@ -12,7 +12,14 @@ interface Props {
 }
 
 const base = siteBase();
-const defaultImage = new URL(`${base}favicon.svg`, Astro.site).href;
+// Raster OG image (1200x630 PNG) — social crawlers reject SVG, so this must be
+// an absolute URL to a real PNG. Resolves to
+// https://artemiop.com/mexico-weather-site/og-image.png
+const defaultImage = new URL(`${base}og-image.png`, Astro.site).href;
+
+// Error-monitoring is opt-in: completely inert unless PUBLIC_SENTRY_DSN is set
+// at build time. With no DSN (the default) nothing is rendered.
+const sentryDsn = import.meta.env.PUBLIC_SENTRY_DSN;
 
 const {
   title = 'Clima México',
@@ -65,9 +72,12 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
     <meta property="og:site_name" content="Clima México" />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
@@ -76,5 +86,31 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
     <ThemeToggle lang={lang} />
     <slot />
     <FeedbackFAB lang={lang} />
+    {
+      /*
+       * Opt-in error monitoring. This block renders NOTHING unless
+       * PUBLIC_SENTRY_DSN is provided at build time, so there is zero runtime
+       * behavior and no network activity by default. When a DSN is set, the
+       * Sentry browser CDN bundle is lazy-loaded and initialized.
+       */
+    }
+    {
+      sentryDsn && (
+        <Fragment>
+          <script
+            is:inline
+            src="https://browser.sentry-cdn.com/8.40.0/bundle.min.js"
+            crossorigin="anonymous"
+          />
+          <script is:inline define:vars={{ sentryDsn }}>
+            window.addEventListener('load', function () {
+              if (window.Sentry) {
+                window.Sentry.init({ dsn: sentryDsn });
+              }
+            });
+          </script>
+        </Fragment>
+      )
+    }
   </body>
 </html>
