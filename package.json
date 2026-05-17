@@ -16,7 +16,7 @@
   },
   "lint-staged": {
     "*.{js,ts,astro}": "eslint --fix",
-    "*.{js,ts,astro,json,css,md}": "prettier --write"
+    "*.{json,css}": "prettier --write"
   },
   "dependencies": {
     "astro": "^4.16.0"
@@ -31,7 +31,7 @@
     "eslint-plugin-astro": "^1.7.0",
     "globals": "^17.6.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.5",
+    "lint-staged": "^16.0.0",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^3.4.0",

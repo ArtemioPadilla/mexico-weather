@@ -36,23 +36,14 @@ export default [
       'prefer-rest-params': 'off',
       // env.d.ts uses the standard Astro-generated triple-slash reference.
       '@typescript-eslint/triple-slash-reference': 'off',
-      'no-unused-expressions': 'off',
-      '@typescript-eslint/no-unused-expressions': 'off',
+      'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+      '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
       '@typescript-eslint/no-explicit-any': 'warn',
       'no-empty': ['warn', { allowEmptyCatch: true }],
       '@typescript-eslint/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
-    },
-  },
-  {
-    // Astro inline scripts run in the browser; allow browser globals there.
-    files: ['**/*.astro/*.js', '**/*.astro/*.ts'],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-      },
     },
   },
   prettier,
