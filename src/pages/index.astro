@@ -11,37 +11,37 @@ const cities = [
 ---
 
 <BaseLayout title="Clima México 🇲🇽" description="Alertas y pronósticos meteorológicos para México" lang="es">
-  <main class="min-h-screen bg-gray-950 text-gray-100">
+  <main class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
     <!-- Hero -->
     <div class="max-w-5xl mx-auto px-4 py-12 space-y-10">
       <div class="text-center space-y-4">
-        <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm font-medium text-blue-400">
-          <span class="h-2 w-2 rounded-full bg-blue-400 animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/40 bg-blue-500/10 px-4 py-1.5 text-sm font-medium text-blue-600 dark:border-blue-500/30 dark:text-blue-400">
+          <span class="h-2 w-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-pulse"></span>
           Actualizado cada 10 minutos
         </div>
         <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">
           Clima México 🇲🇽
         </h1>
-        <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
           Pronósticos y alertas meteorológicas del SMN + Open-Meteo para las principales ciudades de México.
         </p>
-        <p id="js-updated-at" class="text-xs text-gray-500" aria-live="polite">Cargando datos más recientes...</p>
+        <p id="js-updated-at" class="text-xs text-gray-500 dark:text-gray-500" aria-live="polite">Cargando datos más recientes...</p>
       </div>
 
       <!-- Alertas activas -->
-      <div class="rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-5 space-y-3">
+      <div class="rounded-xl border border-yellow-500/40 bg-yellow-500/10 p-5 space-y-3 dark:border-yellow-500/30">
         <div class="flex items-center gap-2">
           <span class="text-2xl">⚠️</span>
-          <h2 class="text-lg font-semibold text-yellow-300">Alertas Activas — SMN</h2>
+          <h2 class="text-lg font-semibold text-yellow-700 dark:text-yellow-300">Alertas Activas — SMN</h2>
         </div>
-        <p class="text-sm text-gray-400">
+        <p class="text-sm text-gray-600 dark:text-gray-400">
           Consulta el feed RSS del Servicio Meteorológico Nacional para alertas en tiempo real:
         </p>
         <a
           href="https://artemiop.com/mexico-weather/rss.xml"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-2 text-sm font-medium text-yellow-300 hover:bg-yellow-500/20 transition-colors"
+          class="inline-flex items-center gap-2 rounded-lg border border-yellow-500/40 bg-yellow-500/10 px-4 py-2 text-sm font-medium text-yellow-700 hover:bg-yellow-500/20 transition-colors dark:border-yellow-500/30 dark:text-yellow-300"
         >
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
@@ -52,12 +52,12 @@ const cities = [
 
       <!-- Ciudades -->
       <div class="space-y-4">
-        <h2 class="text-xl font-semibold text-gray-200">Pronóstico por Ciudad</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Pronóstico por Ciudad</h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
           {cities.map((city) => (
             <div
-              class="rounded-xl border border-gray-800 bg-gray-900 p-5 space-y-3 hover:border-blue-500/40 transition-colors"
+              class="rounded-xl border border-gray-200 bg-white p-5 space-y-3 hover:border-blue-500/40 transition-colors dark:border-gray-800 dark:bg-gray-900"
               data-city-card
               data-lat={city.lat}
               data-lng={city.lng}
@@ -66,21 +66,21 @@ const cities = [
               <div class="flex items-center justify-between">
                 <div>
                   <div class="text-2xl">{city.emoji}</div>
-                  <h3 class="font-semibold text-white mt-1">{city.name}</h3>
-                  <p class="text-xs text-gray-500">{city.lat}°N, {Math.abs(city.lng)}°W</p>
+                  <h3 class="font-semibold text-gray-900 mt-1 dark:text-white">{city.name}</h3>
+                  <p class="text-xs text-gray-500 dark:text-gray-500">{city.lat}°N, {Math.abs(city.lng)}°W</p>
                 </div>
               </div>
-              <p class="text-sm text-gray-500 js-status" aria-live="polite">Cargando pronóstico...</p>
+              <p class="text-sm text-gray-600 js-status dark:text-gray-500" aria-live="polite">Cargando pronóstico...</p>
               <div class="space-y-1 hidden js-weather">
-                <p class="text-2xl font-bold text-white"><span class="js-tmax">--</span>° / <span class="js-tmin">--</span>°C</p>
-                <p class="text-sm text-gray-400 js-condition">—</p>
-                <p class="text-sm text-blue-400">💧 <span class="js-rain">--</span>% lluvia</p>
+                <p class="text-2xl font-bold text-gray-900 dark:text-white"><span class="js-tmax">--</span>° / <span class="js-tmin">--</span>°C</p>
+                <p class="text-sm text-gray-600 js-condition dark:text-gray-400">—</p>
+                <p class="text-sm text-blue-600 dark:text-blue-400">💧 <span class="js-rain">--</span>% lluvia</p>
               </div>
               <a
                 href={`https://open-meteo.com/en/docs?latitude=${city.lat}&longitude=${city.lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=America/Mexico_City`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                class="text-xs text-blue-600 hover:text-blue-700 transition-colors dark:text-blue-400 dark:hover:text-blue-300"
               >
                 Ver en Open-Meteo →
               </a>
@@ -88,15 +88,15 @@ const cities = [
           ))}
 
           <!-- Más ciudades pronto -->
-          <div class="rounded-xl border border-dashed border-gray-700 bg-gray-900/50 p-5 space-y-3 flex items-center justify-center">
+          <div class="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-5 space-y-3 flex items-center justify-center dark:border-gray-700 dark:bg-gray-900/50">
             <div class="text-center space-y-2">
               <div class="text-2xl">➕</div>
-              <p class="text-sm text-gray-500">Más ciudades próximamente</p>
+              <p class="text-sm text-gray-600 dark:text-gray-500">Más ciudades próximamente</p>
               <a
                 href="https://github.com/ArtemioPadilla/mexico-weather-site/issues/new?template=feature_request.yml"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                class="text-xs text-blue-600 hover:text-blue-700 transition-colors dark:text-blue-400 dark:hover:text-blue-300"
               >
                 Sugerir ciudad →
               </a>
@@ -106,18 +106,18 @@ const cities = [
       </div>
 
       <!-- Footer -->
-      <footer class="border-t border-gray-800 pt-6 text-center space-y-2">
-        <p class="text-xs text-gray-500">Fuentes de datos:</p>
-        <div class="flex flex-wrap justify-center gap-4 text-xs text-gray-500">
-          <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors">
+      <footer class="border-t border-gray-200 pt-6 text-center space-y-2 dark:border-gray-800">
+        <p class="text-xs text-gray-600 dark:text-gray-500">Fuentes de datos:</p>
+        <div class="flex flex-wrap justify-center gap-4 text-xs text-gray-600 dark:text-gray-500">
+          <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900 transition-colors dark:hover:text-gray-300">
             Open-Meteo (ECMWF/DWD/GFS)
           </a>
           <span>•</span>
-          <a href="https://smn.conagua.gob.mx" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors">
+          <a href="https://smn.conagua.gob.mx" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900 transition-colors dark:hover:text-gray-300">
             SMN / CONAGUA
           </a>
         </div>
-        <p class="text-xs text-gray-700 mt-2">
+        <p class="text-xs text-gray-400 mt-2 dark:text-gray-700">
           Datos libres • Sin cookies • Sin rastreo
         </p>
       </footer>
@@ -142,8 +142,8 @@ const cities = [
         const weather = card.querySelector('.js-weather');
         if (status) {
           status.textContent = 'Error cargando datos. Reintentando...';
-          status.classList.remove('text-gray-500');
-          status.classList.add('text-red-400');
+          status.classList.remove('text-gray-600', 'dark:text-gray-500');
+          status.classList.add('text-red-600', 'dark:text-red-400');
         }
         if (weather) weather.classList.add('hidden');
       }
