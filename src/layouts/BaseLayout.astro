@@ -8,20 +8,23 @@ interface Props {
   image?: string;
 }
 
-const {
-  title = 'My App',
-  description = 'Built with issue-driven-web-template',
-  lang = 'en',
-} = Astro.props;
-
 const rawBase = import.meta.env.BASE_URL;
 // Normalize the base to always have a single trailing slash for clean joins.
 const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
 const defaultImage = new URL(`${base}favicon.svg`, Astro.site).href;
-const image = Astro.props.image ?? defaultImage;
+
+const {
+  title = 'My App',
+  description = 'Built with issue-driven-web-template',
+  lang = 'en',
+  image = defaultImage,
+} = Astro.props;
 
 // Absolute canonical URL for the current page (Astro.site + current pathname).
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+// Ensure a trailing slash on the path to match sitemap <loc> directory-style URLs.
+const rawPathname = Astro.url.pathname;
+const normalizedPathname = rawPathname.endsWith('/') ? rawPathname : `${rawPathname}/`;
+const canonical = new URL(normalizedPathname, Astro.site).href;
 const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
 ---
 

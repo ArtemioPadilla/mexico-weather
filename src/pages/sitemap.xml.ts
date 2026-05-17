@@ -9,7 +9,7 @@ export const GET: APIRoute = ({ site }) => {
   // Ensure base ends with a single trailing slash for clean joins.
   const basePath = base.endsWith('/') ? base : `${base}/`;
 
-  const pages = ['', 'privacidad'];
+  const pages = ['', 'privacidad/'];
   const urls = pages
     .map((page) => new URL(`${basePath}${page}`, site).href)
     .map((loc) => `  <url>\n    <loc>${loc}</loc>\n  </url>`)
