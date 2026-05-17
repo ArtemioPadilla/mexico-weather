@@ -1,13 +1,12 @@
 import type { APIRoute } from 'astro';
+import { siteBase } from '../utils/paths';
 
 /**
  * Hand-built sitemap (no @astrojs/sitemap dependency — follows the
  * project's pattern of hand-rolled XML endpoints).
  */
 export const GET: APIRoute = ({ site }) => {
-  const base = import.meta.env.BASE_URL;
-  // Ensure base ends with a single trailing slash for clean joins.
-  const basePath = base.endsWith('/') ? base : `${base}/`;
+  const basePath = siteBase();
 
   const pages = ['', 'privacidad/'];
   const urls = pages

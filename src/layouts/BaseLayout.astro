@@ -1,16 +1,16 @@
 ---
 import FeedbackFAB from '../components/common/FeedbackFAB.astro';
+import { siteBase } from '../utils/paths';
 
 interface Props {
   title?: string;
   description?: string;
   lang?: 'es' | 'en';
   image?: string;
+  robots?: string;
 }
 
-const rawBase = import.meta.env.BASE_URL;
-// Normalize the base to always have a single trailing slash for clean joins.
-const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+const base = siteBase();
 const defaultImage = new URL(`${base}favicon.svg`, Astro.site).href;
 
 const {
@@ -18,6 +18,7 @@ const {
   description = 'Built with issue-driven-web-template',
   lang = 'en',
   image = defaultImage,
+  robots = 'index,follow',
 } = Astro.props;
 
 // Absolute canonical URL for the current page (Astro.site + current pathname).
@@ -34,7 +35,7 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content={robots} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="canonical" href={canonical} />
