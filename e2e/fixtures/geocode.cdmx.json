@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "id": 3530597,
+      "name": "Ciudad de México",
+      "latitude": 19.42847,
+      "longitude": -99.12766,
+      "elevation": 2240,
+      "feature_code": "PPLC",
+      "country_code": "MX",
+      "admin1": "Ciudad de México",
+      "timezone": "America/Mexico_City",
+      "country": "México",
+      "country_id": 3996063
+    },
+    {
+      "id": 3514663,
+      "name": "Mexicali",
+      "latitude": 32.62781,
+      "longitude": -115.45446,
+      "feature_code": "PPLA",
+      "country_code": "MX",
+      "admin1": "Baja California",
+      "timezone": "America/Tijuana",
+      "country": "México",
+      "country_id": 3996063
+    }
+  ],
+  "generationtime_ms": 0.7
+}
