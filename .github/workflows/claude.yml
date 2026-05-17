@@ -22,7 +22,7 @@ jobs:
        github.event.issue.pull_request == null &&
        contains(github.event.comment.body, '@claude'))
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 1
 
