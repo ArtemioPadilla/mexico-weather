@@ -30,7 +30,7 @@ jobs:
           PUBLIC_BUILD_SHA: ${{ github.sha }}
           PUBLIC_VERSION: ${{ github.ref_name }}
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
