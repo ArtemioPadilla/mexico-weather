@@ -26,6 +26,27 @@ PUBLIC_VERSION=dev
 
 These values are displayed in diagnostics captured by the feedback modal.
 
+## Error monitoring (optional, opt-in)
+
+Error monitoring with Sentry is scaffolded but **completely inert by
+default**. No script is rendered, and no network requests are made, unless a
+DSN is provided at build time.
+
+To enable it, set `PUBLIC_SENTRY_DSN` the same way as `PUBLIC_BUILD_SHA`:
+
+- Locally, add it to your `.env`:
+
+  ```env
+  PUBLIC_SENTRY_DSN=https://examplePublicKey@o0.ingest.sentry.io/0
+  ```
+
+- For deployments, add `PUBLIC_SENTRY_DSN` as a repository secret and expose
+  it as a build-time environment variable in `.github/workflows/cd.yml`
+  (mirroring how `PUBLIC_BUILD_SHA` is wired).
+
+When set, `BaseLayout.astro` lazy-loads the Sentry browser CDN bundle and
+calls `Sentry.init({ dsn })`. When unset, nothing is emitted into the HTML.
+
 ## GitHub Pages deployment
 
 Deployment is configured in `.github/workflows/cd.yml` and runs automatically

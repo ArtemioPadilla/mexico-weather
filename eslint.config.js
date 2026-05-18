@@ -14,6 +14,15 @@ export default [
       '.claude/**',
       '.superpowers/**',
       'package-lock.json',
+      // E2E lives outside the app tsconfig project (tsconfig includes only
+      // src/**). It is type-checked by Playwright's own tooling and run via
+      // `npm run test:e2e`, not the app lint/type-check, mirroring how the
+      // unit tests stay out of the build. Linting it here would require
+      // pulling Playwright globals into the typed-lint project for no gain.
+      'e2e/**',
+      'playwright.config.ts',
+      'playwright-report/**',
+      'test-results/**',
     ],
   },
   js.configs.recommended,
