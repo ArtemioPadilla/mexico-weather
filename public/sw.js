@@ -2,14 +2,14 @@
  * Isolation service worker for Clima México.
  *
  * Purpose: this site is a project page deployed under
- * https://artemiop.com/mexico-weather-site/ on the same origin as the parent
+ * https://artemiop.com/mexico-weather/ on the same origin as the parent
  * user site (ArtemioPadilla.github.io), whose PWA service worker
  * (https://artemiop.com/sw.js) has scope "/" and therefore would otherwise
  * control these weather pages. A stale parent SW broke the client-side
  * Open-Meteo fetches on first load. The browser always gives control of a
  * client to the most specifically-scoped registration, so by registering THIS
- * worker at https://artemiop.com/mexico-weather-site/sw.js (default scope
- * /mexico-weather-site/) the parent root SW can never control or intercept
+ * worker at https://artemiop.com/mexico-weather/sw.js (default scope
+ * /mexico-weather/) the parent root SW can never control or intercept
  * weather pages again.
  *
  * Caching: INTENTIONALLY NONE. This site does its own client-side weather
@@ -36,4 +36,4 @@ self.addEventListener('activate', (event) => {
 
 // No `fetch` listener by design — see the header comment. The mere existence
 // of this registration (more specific scope than the parent "/") wins control
-// of /mexico-weather-site/ clients while leaving all network traffic untouched.
+// of /mexico-weather/ clients while leaving all network traffic untouched.

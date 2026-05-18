@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://artemiop.com',
-  base: '/mexico-weather-site',
+  base: '/mexico-weather',
   output: 'static',
   vite: {
     plugins: [tailwindcss()],

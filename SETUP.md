@@ -58,7 +58,7 @@ Before first deployment, make sure GitHub Pages is enabled:
 2. Go to **Pages**.
 3. Set source to **GitHub Actions**.
 
-The Astro site uses `base: '/mexico-weather-site'`, which must match the
+The Astro site uses `base: '/mexico-weather'`, which must match the
 repository name for Pages path routing.
 
 ## Feedback issue reporting

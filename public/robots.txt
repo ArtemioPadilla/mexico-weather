@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://artemiop.com/mexico-weather-site/sitemap.xml
+Sitemap: https://artemiop.com/mexico-weather/sitemap.xml

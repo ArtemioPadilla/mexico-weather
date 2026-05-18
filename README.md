@@ -50,7 +50,7 @@ ESLint and Prettier are configured for this project (`npm run lint`, `npm run fo
 
 The repository deploys automatically to GitHub Pages from `main`.
 
-- Astro base path is configured as `/mexico-weather-site`.
+- Astro base path is configured as `/mexico-weather`.
 - Build output is uploaded from `dist`.
 
 See `SETUP.md` for environment and workflow details.
