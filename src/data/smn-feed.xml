@@ -6,7 +6,7 @@
     <description>Avisos meteorológicos para México del Servicio Meteorológico Nacional (SMN/CONAGUA). Este es el feed inicial; la GitHub Action programada lo reemplaza cada hora con los avisos reales scrapeados del SMN.</description>
     <language>es-MX</language>
     <lastBuildDate>Mon, 18 May 2026 04:09:10 +0000</lastBuildDate>
-    <generator>scripts/smn-rss/smn_rss.py (consolidado de mexico-weather)</generator>
+    <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>Avisos meteorológicos del SMN</title>
       <description>Feed inicial del sitio. Aún no se ha ejecutado el scraper programado del SMN. Consulta los avisos meteorológicos oficiales y vigentes directamente en el portal del SMN/CONAGUA.</description>

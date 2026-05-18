@@ -271,6 +271,12 @@ function readFreshScrapedFeed(): string | null {
     if (!xml || xml.trim().length === 0) {
       continue;
     }
+    // Require at least one <item> — reject valid-but-empty feeds so the
+    // chooser falls through to the CA fallback even if an itemless feed
+    // somehow gets committed (belt-and-suspenders after scraper + workflow guards).
+    if (!xml.includes('<item>')) {
+      continue;
+    }
     const now = Date.now();
     const match = xml.match(/<lastBuildDate>([^<]+)<\/lastBuildDate>/i);
     let referenceMs: number | null = null;

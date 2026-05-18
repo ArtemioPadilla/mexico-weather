@@ -42,6 +42,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          grep -q '<item>' src/data/smn-feed.xml || { echo "Feed has no items — skipping commit"; exit 0; }
           git diff --quiet -- src/data/smn-feed.xml || (
             git add src/data/smn-feed.xml
             git commit -m 'chore: refresh SMN RSS feed'

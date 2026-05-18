@@ -569,7 +569,8 @@ def main():
             browser.close()
 
     if not all_items:
-        print("⚠️  No se obtuvieron items. El feed estará vacío.", file=sys.stderr)
+        print("⚠️  No se obtuvieron items. Abortando sin sobrescribir el feed existente.", file=sys.stderr)
+        sys.exit(1)
 
     rss_xml = build_rss(all_items, feed_url=args.feed_url)
 
@@ -578,7 +579,7 @@ def main():
     else:
         # Default: <repo-root>/src/data/smn-feed.xml, resolved from this
         # file's location so it is independent of the current working dir.
-        # scripts/smn-rss/smn_rss.py -> repo root is two parents up.
+        # smn_rss.py -> smn-rss/ -> scripts/ -> repo root (three .parent calls).
         repo_root = Path(__file__).resolve().parent.parent.parent
         out_path = repo_root / "src" / "data" / "smn-feed.xml"
     out_path.parent.mkdir(parents=True, exist_ok=True)
