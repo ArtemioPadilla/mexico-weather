@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/tailwind": "^6.0.2",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "1.60.0",
     "astro-eslint-parser": "^1.4.0",
