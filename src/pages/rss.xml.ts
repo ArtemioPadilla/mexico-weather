@@ -1,3 +1,6 @@
+import { readFileSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, resolve } from 'node:path';
 import type { APIRoute } from 'astro';
 
 export const prerender = true;
@@ -5,8 +8,22 @@ export const prerender = true;
 /**
  * RSS 2.0 feed of meteorological alerts ("avisos meteorológicos") for Mexico.
  *
- * SMN source
- * ----------
+ * Source chooser (primary: scraped feed)
+ * --------------------------------------
+ * This endpoint is the single producer of `/rss.xml`. It first tries to serve
+ * the committed `src/data/smn-feed.xml`, which a scheduled GitHub Action
+ * (`.github/workflows/smn-rss.yml`) regenerates hourly by scraping the SMN
+ * site with Playwright (`scripts/smn-rss/smn_rss.py`). That file is read from
+ * disk at build time (it is in-repo, so a synchronous `readFileSync` is
+ * fine). It is served verbatim ONLY if it exists, is non-empty, and is fresh:
+ * its embedded `<lastBuildDate>` must be within ~3 hours of build time (if
+ * that date is missing/unparseable we fall back to the file's mtime). If the
+ * scraped feed is missing or stale, the endpoint falls back to the existing
+ * build-time CA Open-Meteo derivation described below. Any failure anywhere
+ * is caught and degrades to that same fallback, so the build never breaks.
+ *
+ * SMN source (fallback derivation)
+ * --------------------------------
  * The Servicio Meteorológico Nacional (SMN/CONAGUA) does NOT publish a
  * structured (CAP/RSS/JSON) feed of its "avisos meteorológicos" — those are
  * only available as HTML pages and PDFs. Its single stable, machine-readable
@@ -211,7 +228,105 @@ ${itemsXml}
 `;
 }
 
+// Max age of the committed scraped feed for it to be served verbatim.
+const SCRAPED_FEED_MAX_AGE_MS = 3 * 60 * 60 * 1000; // ~3 hours
+
+/**
+ * Resolve the on-disk path of the committed scraped feed. Under Astro's
+ * static build `process.cwd()` is the project root, so that is preferred;
+ * if for any reason that file is absent we also derive the path relative to
+ * this module via `import.meta.url` (src/pages -> src/data).
+ */
+function resolveScrapedFeedCandidates(): string[] {
+  const candidates: string[] = [];
+  try {
+    candidates.push(resolve(process.cwd(), 'src/data/smn-feed.xml'));
+  } catch {
+    /* process.cwd unavailable — ignore */
+  }
+  try {
+    const here = dirname(fileURLToPath(import.meta.url));
+    candidates.push(join(here, '..', 'data', 'smn-feed.xml'));
+  } catch {
+    /* import.meta.url unavailable — ignore */
+  }
+  return candidates;
+}
+
+/**
+ * Read the committed scraped SMN feed and return its XML verbatim when it is
+ * present, non-empty and fresh (embedded `<lastBuildDate>` within
+ * SCRAPED_FEED_MAX_AGE_MS of now, or — if that date is missing/unparseable —
+ * the file mtime within the same window). Returns null otherwise so the
+ * caller falls back to the build-time CA derivation.
+ */
+function readFreshScrapedFeed(): string | null {
+  for (const path of resolveScrapedFeedCandidates()) {
+    let xml: string;
+    try {
+      xml = readFileSync(path, 'utf-8');
+    } catch {
+      continue; // not at this candidate path
+    }
+    if (!xml || xml.trim().length === 0) {
+      continue;
+    }
+    // Require at least one <item> — reject valid-but-empty feeds so the
+    // chooser falls through to the CA fallback even if an itemless feed
+    // somehow gets committed (belt-and-suspenders after scraper + workflow guards).
+    if (!xml.includes('<item>')) {
+      continue;
+    }
+    const now = Date.now();
+    const match = xml.match(/<lastBuildDate>([^<]+)<\/lastBuildDate>/i);
+    let referenceMs: number | null = null;
+    if (match) {
+      const parsed = Date.parse(match[1].trim());
+      if (!Number.isNaN(parsed)) {
+        referenceMs = parsed;
+      }
+    }
+    if (referenceMs === null) {
+      // No parseable lastBuildDate: fall back to the file's mtime.
+      try {
+        referenceMs = statSync(path).mtimeMs;
+      } catch {
+        referenceMs = null;
+      }
+    }
+    if (referenceMs === null) {
+      continue;
+    }
+    const age = now - referenceMs;
+    // Accept if within the freshness window (and not absurdly future-dated).
+    if (age <= SCRAPED_FEED_MAX_AGE_MS && age >= -SCRAPED_FEED_MAX_AGE_MS) {
+      return xml;
+    }
+  }
+  return null;
+}
+
 export const GET: APIRoute = async () => {
+  // Primary source: the committed feed produced by the scheduled scraper.
+  // Wrapped so that ANY failure here degrades to the CA fallback below.
+  try {
+    const scraped = readFreshScrapedFeed();
+    if (scraped) {
+      return new Response(scraped, {
+        headers: {
+          'Content-Type': 'application/rss+xml; charset=utf-8',
+        },
+      });
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(
+      `[rss.xml] WARNING: could not use committed scraped feed ` +
+        `(src/data/smn-feed.xml); falling back to build-time SMN ` +
+        `derivation. Reason: ${message}.`,
+    );
+  }
+
   let items: FeedItem[];
   try {
     const forecasts = await fetchSmnForecast();
