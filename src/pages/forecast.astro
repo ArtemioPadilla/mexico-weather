@@ -40,6 +40,7 @@ const t = ui[lang];
 
   <script>
     import { getForecast, uvLabel, windDir } from '../lib/forecast';
+    import { has, toggle } from '../lib/favorites';
     import { ui } from '../i18n/ui';
 
     // keep in sync with the other lang declaration in this file
@@ -150,7 +151,10 @@ const t = ui[lang];
 
         const currentHtml = `
           <header class="space-y-1">
-            <h1 class="text-2xl font-bold">${esc(title)}</h1>
+            <div class="flex items-center">
+              <h1 class="text-2xl font-bold">${esc(title)}</h1>
+              <button type="button" id="fc-fav" class="text-2xl leading-none text-gray-400 hover:text-amber-400 dark:text-gray-500 focus-visible:ring-2 focus-visible:ring-amber-500 rounded ml-2" aria-pressed="false" aria-label="Agregar a favoritos" title="Agregar a favoritos">☆</button>
+            </div>
             <p class="text-xs text-gray-600 dark:text-gray-500">${subLine}</p>
             <div class="flex items-end gap-3 pt-2">
               <span class="text-6xl font-bold">${fmt(current.temperature)}°</span>
@@ -269,6 +273,35 @@ const t = ui[lang];
             contextHtml;
           statusEl?.classList.add('hidden');
           rootEl.classList.remove('hidden');
+
+          // Favorite star: build the Favorite from the parsed URL params.
+          const store = window.localStorage;
+          const fav = {
+            lat: loc.lat,
+            lng: loc.lng,
+            name: loc.name || `${loc.lat},${loc.lng}`,
+            admin: loc.admin,
+            tz: loc.tz,
+            addedAt: Date.now(),
+          };
+          const favBtn = document.getElementById('fc-fav');
+          function sync(): void {
+            if (!favBtn) return;
+            const on = has(store, loc.lat, loc.lng);
+            favBtn.textContent = on ? '★' : '☆';
+            favBtn.classList.toggle('text-amber-400', on);
+            favBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+            const label = on ? 'Quitar de favoritos' : 'Agregar a favoritos';
+            favBtn.setAttribute('aria-label', label);
+            favBtn.setAttribute('title', label);
+          }
+          if (favBtn) {
+            favBtn.addEventListener('click', () => {
+              toggle(store, { ...fav, addedAt: Date.now() });
+              sync();
+            });
+            sync();
+          }
         }
       } catch {
         if (statusEl) {
