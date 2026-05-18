@@ -56,37 +56,22 @@ const base = siteBase();
         </a>
       </div>
 
+      <script id="preset-data" type="application/json" is:inline set:html={JSON.stringify(cities)}></script>
+
+      <!-- Tus lugares (favoritos, llenado por el cliente) -->
+      <section id="fav-section" class="hidden mb-8" aria-label="Tus lugares">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2"><span aria-hidden="true">⭐</span> Tus lugares</h2>
+        <div id="fav-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+      </section>
+      <p id="fav-msg" class="sr-only" aria-live="polite"></p>
+
       <!-- Ciudades -->
       <div class="space-y-4">
         <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Pronóstico por Ciudad</h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
-          {cities.map((city) => (
-            <div
-              class="rounded-xl border border-gray-200 bg-white p-5 space-y-3 hover:border-blue-500/40 transition-colors dark:border-gray-800 dark:bg-gray-900"
-              data-city-card
-              data-lat={city.lat}
-              data-lng={city.lng}
-              data-tz={city.tz}
-            >
-              <div class="flex items-center justify-between">
-                <div>
-                  <div class="text-2xl">{city.emoji}</div>
-                  <h3 class="font-semibold text-gray-900 mt-1 dark:text-white">{city.name}</h3>
-                  <p class="text-xs text-gray-600 dark:text-gray-500">{city.lat}°N, {Math.abs(city.lng)}°W</p>
-                </div>
-              </div>
-              <p class="text-sm text-gray-600 js-status dark:text-gray-500" aria-live="polite">Cargando pronóstico...</p>
-              <div class="space-y-1 hidden js-weather">
-                <p class="text-2xl font-bold text-gray-900 dark:text-white"><span class="js-tmax">--</span>° / <span class="js-tmin">--</span>°C</p>
-                <p class="text-sm text-gray-600 js-condition dark:text-gray-400">—</p>
-                <p class="text-sm text-blue-600 dark:text-blue-400">💧 <span class="js-rain">--</span>% lluvia</p>
-              </div>
-              <button type="button" class="js-peek text-xs text-blue-600 hover:text-blue-700 mt-1 text-left dark:text-blue-400 dark:hover:text-blue-300">▾ {t.quick_peek}</button>
-              <div class="js-peekbox hidden mt-2 text-xs text-gray-700 space-y-1 dark:text-gray-300"></div>
-              <a class="js-full inline-block mt-2 text-xs text-blue-600 border border-blue-200 rounded px-2 py-1 dark:text-blue-400 dark:border-blue-900" href="#">{t.full_forecast} →</a>
-            </div>
-          ))}
+          <!-- Tarjetas preset insertadas por el script (mismo render que favoritos) -->
+          <div id="preset-grid" class="contents"></div>
 
           <!-- Más ciudades pronto -->
           <div class="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-5 space-y-3 flex items-center justify-center dark:border-gray-700 dark:bg-gray-900/50">
@@ -146,13 +131,13 @@ const base = siteBase();
     // Bundled module script (NOT is:inline) so the import is processed by Astro/Vite.
     import { getForecast, uvLabel, windDir } from '../lib/forecast';
     import { geocode } from '../lib/geocode';
+    import { list, has, toggle, type Favorite } from '../lib/favorites';
     import { ui } from '../i18n/ui';
 
     const t = ui.es;
 
     const REFRESH_INTERVAL_MS = 10 * 60 * 1000;
 
-    const cards = Array.from(document.querySelectorAll('[data-city-card]'));
     const updatedAt = document.getElementById('js-updated-at');
 
     // Injected request deps shared by forecast + geocode SDK calls.
@@ -288,35 +273,122 @@ const base = siteBase();
       box.appendChild(line);
     }
 
-    // Wire each card's peek toggle and full-forecast link.
-    cards.forEach((card) => {
-      const h3 = card.querySelector('h3');
-      const name = h3 ? (h3.textContent || '').trim() : '';
-      const lat = card.getAttribute('data-lat') || '';
-      const lng = card.getAttribute('data-lng') || '';
-      const tz = card.getAttribute('data-tz') || 'America/Mexico_City';
-      const full = card.querySelector('.js-full') as HTMLAnchorElement | null;
-      if (full) full.href = fullHref(lat, lng, tz, name);
+    // ---- Single source of truth for a city card -----------------------
+    // Both the preset grid and the favorites grid build their cards here so
+    // the markup/classes never diverge.
+    interface CardSpec {
+      lat: string;
+      lng: string;
+      name: string;
+      tz: string;
+      admin?: string;
+    }
 
-      const peekBtn = card.querySelector('.js-peek');
-      const box = card.querySelector('.js-peekbox');
-      if (peekBtn && box) {
-        peekBtn.addEventListener('click', () => {
-          const hidden = box.classList.toggle('hidden');
-          if (!hidden) fillPeek(card);
-        });
-      }
-    });
+    function buildCityCardElement(spec: CardSpec): HTMLElement {
+      const tz = spec.tz || 'America/Mexico_City';
+      const card = document.createElement('div');
+      card.className =
+        'relative rounded-xl border border-gray-200 bg-white p-5 space-y-3 hover:border-blue-500/40 transition-colors dark:border-gray-800 dark:bg-gray-900';
+      card.setAttribute('data-city-card', '');
+      card.dataset.lat = spec.lat;
+      card.dataset.lng = spec.lng;
+      card.dataset.tz = tz;
+      if (spec.admin) card.dataset.admin = spec.admin;
 
-    async function refreshCard(card: Element): Promise<boolean> {
-      const lat = card.getAttribute('data-lat');
-      const lng = card.getAttribute('data-lng');
-      const tz = card.getAttribute('data-tz') || 'America/Mexico_City';
-      if (!lat || !lng) return false;
+      // Star toggle (top-right, theme-aware, accessible).
+      const star = document.createElement('button');
+      star.type = 'button';
+      star.className =
+        'js-fav-star absolute top-2 right-2 text-lg leading-none text-gray-400 hover:text-amber-400 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded';
+      star.setAttribute('aria-pressed', 'false');
+      star.setAttribute('aria-label', 'Agregar a favoritos');
+      star.title = 'Agregar a favoritos';
+      star.textContent = '☆';
+      card.appendChild(star);
 
+      const head = document.createElement('div');
+      head.className = 'flex items-center justify-between';
+      const headInner = document.createElement('div');
+      const h3 = document.createElement('h3');
+      h3.className = 'font-semibold text-gray-900 mt-1 dark:text-white';
+      h3.textContent = spec.name;
+      const coords = document.createElement('p');
+      coords.className = 'text-xs text-gray-600 dark:text-gray-500';
+      const latN = Number(spec.lat);
+      const lngN = Number(spec.lng);
+      coords.textContent =
+        `${Number.isFinite(latN) ? latN : spec.lat}°N, ` +
+        `${Number.isFinite(lngN) ? Math.abs(lngN) : spec.lng}°W`;
+      headInner.appendChild(h3);
+      headInner.appendChild(coords);
+      head.appendChild(headInner);
+      card.appendChild(head);
+
+      const status = document.createElement('p');
+      status.className = 'text-sm text-gray-600 js-status dark:text-gray-500';
+      status.setAttribute('aria-live', 'polite');
+      status.textContent = 'Cargando pronóstico...';
+      card.appendChild(status);
+
+      const weather = document.createElement('div');
+      weather.className = 'space-y-1 hidden js-weather';
+      const temps = document.createElement('p');
+      temps.className = 'text-2xl font-bold text-gray-900 dark:text-white';
+      const tmax = document.createElement('span');
+      tmax.className = 'js-tmax';
+      tmax.textContent = '--';
+      const tmin = document.createElement('span');
+      tmin.className = 'js-tmin';
+      tmin.textContent = '--';
+      temps.append(tmax, document.createTextNode('° / '), tmin, document.createTextNode('°C'));
+      const cond = document.createElement('p');
+      cond.className = 'text-sm text-gray-600 js-condition dark:text-gray-400';
+      cond.textContent = '—';
+      const rainP = document.createElement('p');
+      rainP.className = 'text-sm text-blue-600 dark:text-blue-400';
+      const rainS = document.createElement('span');
+      rainS.className = 'js-rain';
+      rainS.textContent = '--';
+      rainP.append(document.createTextNode('💧 '), rainS, document.createTextNode('% lluvia'));
+      weather.append(temps, cond, rainP);
+      card.appendChild(weather);
+
+      const peekBtn = document.createElement('button');
+      peekBtn.type = 'button';
+      peekBtn.className =
+        'js-peek text-xs text-blue-600 hover:text-blue-700 mt-1 text-left dark:text-blue-400 dark:hover:text-blue-300';
+      peekBtn.textContent = `▾ ${t.quick_peek}`;
+      card.appendChild(peekBtn);
+
+      const peekBox = document.createElement('div');
+      peekBox.className =
+        'js-peekbox hidden mt-2 text-xs text-gray-700 space-y-1 dark:text-gray-300';
+      card.appendChild(peekBox);
+
+      const full = document.createElement('a');
+      full.className =
+        'js-full inline-block mt-2 text-xs text-blue-600 border border-blue-200 rounded px-2 py-1 dark:text-blue-400 dark:border-blue-900';
+      full.href = fullHref(spec.lat, spec.lng, tz, spec.name, spec.admin);
+      full.textContent = `${t.full_forecast} →`;
+      card.appendChild(full);
+
+      // Per-card peek toggle.
+      peekBtn.addEventListener('click', () => {
+        const hidden = peekBox.classList.toggle('hidden');
+        if (!hidden) fillPeek(card);
+      });
+
+      return card;
+    }
+
+    async function refreshCityCard(
+      card: Element,
+      loc: { lat: string; lng: string; tz: string },
+    ): Promise<boolean> {
+      if (!loc.lat || !loc.lng) return false;
       try {
         const f = await getForecast(
-          { lat: +lat, lng: +lng, tz },
+          { lat: +loc.lat, lng: +loc.lng, tz: loc.tz || 'America/Mexico_City' },
           {
             fetch: window.fetch.bind(window),
             // Show an accurate "retrying" message before each backoff wait.
@@ -349,8 +421,52 @@ const base = siteBase();
       }
     }
 
+    function cardLoc(card: Element): { lat: string; lng: string; tz: string } {
+      return {
+        lat: card.getAttribute('data-lat') || '',
+        lng: card.getAttribute('data-lng') || '',
+        tz: card.getAttribute('data-tz') || 'America/Mexico_City',
+      };
+    }
+
+    // ---- Presets: built from the same factory as favorites ------------
+    interface PresetCity {
+      name: string;
+      emoji: string;
+      lat: number;
+      lng: number;
+      tz: string;
+    }
+
+    function readPresetCities(): PresetCity[] {
+      try {
+        const el = document.getElementById('preset-data');
+        return el ? JSON.parse(el.textContent || '[]') : [];
+      } catch {
+        return [];
+      }
+    }
+    const presetCities: PresetCity[] = readPresetCities();
+
+    const presetGrid = document.getElementById('preset-grid');
+    const presetCards: HTMLElement[] = [];
+    if (presetGrid) {
+      presetCities.forEach((c) => {
+        const card = buildCityCardElement({
+          lat: String(c.lat),
+          lng: String(c.lng),
+          name: c.name,
+          tz: c.tz,
+        });
+        presetGrid.appendChild(card);
+        presetCards.push(card);
+      });
+    }
+
     async function refreshAll() {
-      const results = await Promise.all(cards.map((card) => refreshCard(card)));
+      const results = await Promise.all(
+        presetCards.map((card) => refreshCityCard(card, cardLoc(card))),
+      );
       // Only stamp a fresh timestamp when at least one card succeeded this
       // cycle; during a total outage show an accurate failure message instead.
       if (results.some((ok) => ok)) {
@@ -359,6 +475,126 @@ const base = siteBase();
         setUpdateFailedMessage();
       }
     }
+
+    // ---- Favorites: "Tus lugares" -------------------------------------
+    const store = window.localStorage;
+    const favSection = document.getElementById('fav-section');
+    const favGrid = document.getElementById('fav-grid');
+    const favMsg = document.getElementById('fav-msg');
+
+    function favFromCard(card: Element): Favorite {
+      const h3 = card.querySelector('h3');
+      const name = h3 ? (h3.textContent || '').trim() : '';
+      const lat = Number(card.getAttribute('data-lat'));
+      const lng = Number(card.getAttribute('data-lng'));
+      const admin = card.getAttribute('data-admin') || undefined;
+      const tz = card.getAttribute('data-tz') || undefined;
+      return {
+        lat,
+        lng,
+        name: name || `${lat},${lng}`,
+        admin,
+        tz,
+        addedAt: Date.now(),
+      };
+    }
+
+    function syncStar(btn: Element, lat: number, lng: number): void {
+      const on = has(store, lat, lng);
+      btn.textContent = on ? '★' : '☆';
+      btn.classList.toggle('text-amber-400', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      const label = on ? 'Quitar de favoritos' : 'Agregar a favoritos';
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+    }
+
+    function syncAllStars(): void {
+      document.querySelectorAll('.js-fav-star').forEach((btn) => {
+        const card = btn.closest('[data-lat]');
+        if (!card) return;
+        syncStar(
+          btn,
+          Number(card.getAttribute('data-lat')),
+          Number(card.getAttribute('data-lng')),
+        );
+      });
+    }
+
+    function wireStar(btn: Element): void {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('[data-lat]');
+        if (!card) return;
+        const fav = favFromCard(card);
+        const wasFav = has(store, fav.lat, fav.lng);
+        const nowOn = toggle(store, fav);
+        if (!wasFav && !nowOn) {
+          // Cap reached: surface a brief non-blocking note.
+          if (favMsg) favMsg.textContent = 'Máximo 12 lugares — quita uno';
+        } else if (favMsg) {
+          favMsg.textContent = '';
+        }
+        renderFavorites();
+        syncAllStars();
+      });
+    }
+
+    function renderFavorites(): void {
+      if (!favSection || !favGrid) return;
+      const favs = list(store);
+      favGrid.textContent = '';
+      if (favs.length === 0) {
+        favSection.classList.add('hidden');
+        return;
+      }
+      favSection.classList.remove('hidden');
+      favs.forEach((f) => {
+        const card = buildCityCardElement({
+          lat: String(f.lat),
+          lng: String(f.lng),
+          name: f.name,
+          tz: f.tz || 'America/Mexico_City',
+          admin: f.admin,
+        });
+        // Remove (✕) button: toggles the favorite off and re-renders.
+        const rm = document.createElement('button');
+        rm.type = 'button';
+        rm.className =
+          'absolute top-2 right-9 text-lg leading-none text-gray-400 hover:text-red-500 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded';
+        rm.setAttribute('aria-label', 'Quitar de favoritos');
+        rm.title = 'Quitar de favoritos';
+        rm.textContent = '✕';
+        rm.addEventListener('click', () => {
+          toggle(store, {
+            lat: f.lat,
+            lng: f.lng,
+            name: f.name,
+            admin: f.admin,
+            tz: f.tz,
+            addedAt: f.addedAt,
+          });
+          if (favMsg) favMsg.textContent = '';
+          renderFavorites();
+          syncAllStars();
+        });
+        card.appendChild(rm);
+
+        const star = card.querySelector('.js-fav-star');
+        if (star) wireStar(star);
+
+        favGrid.appendChild(card);
+        void refreshCityCard(card, cardLoc(card));
+      });
+      syncAllStars();
+    }
+
+    // Wire stars on the preset cards and do the initial favorites render.
+    presetCards.forEach((card) => {
+      const star = card.querySelector('.js-fav-star');
+      if (star) wireStar(star);
+    });
+    renderFavorites();
+    syncAllStars();
 
     // ---- Geocoding autocomplete combobox ----
     const qInput = document.getElementById('q') as HTMLInputElement | null;
