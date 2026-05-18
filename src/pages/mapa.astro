@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ui } from '../i18n/ui';
+
+const lang = 'es' as const;
+const t = ui[lang];
+---
+
+<BaseLayout title={`${t.map_title} — Clima México 🇲🇽`} description={t.map_teaser_heading} lang={lang}>
+  <main class="relative h-[100dvh] w-full bg-gray-100 dark:bg-gray-950">
+    <a
+      href={import.meta.env.BASE_URL}
+      class="absolute left-3 top-3 z-10 rounded-lg bg-white/90 px-3 py-1.5 text-sm text-blue-600 shadow hover:underline dark:bg-gray-900/90 dark:text-blue-400"
+      >← {t.back_home}</a
+    >
+    <div class="absolute right-3 top-3 z-10 flex gap-2">
+      <input
+        id="mapq"
+        type="text"
+        autocomplete="off"
+        aria-label={t.map_search_placeholder}
+        placeholder={t.map_search_placeholder}
+        class="w-56 rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/95 dark:text-gray-100"
+      />
+      <button
+        id="maploc"
+        type="button"
+        class="rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-blue-700 shadow hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900/95 dark:text-blue-300"
+        ><span aria-hidden="true">📍</span> {t.map_locate}</button
+      >
+    </div>
+    <p
+      id="mapmsg"
+      aria-live="polite"
+      class="absolute bottom-3 left-1/2 z-10 hidden -translate-x-1/2 rounded-lg bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow dark:bg-gray-900/95 dark:text-gray-300"
+    >
+    </p>
+    <div id="map" class="h-full w-full" role="application" aria-label={t.map_title}></div>
+  </main>
+
+  <script>
+    import maplibregl from 'maplibre-gl';
+    import 'maplibre-gl/dist/maplibre-gl.css';
+    import { parseMapHash, buildMapHash, type MapHashState } from '../lib/maphash';
+    import { presetPins, withUserPin, type MapPin } from '../lib/mappins';
+    import { cities } from '../data/cities';
+    import { geocode } from '../lib/geocode';
+    import { ui } from '../i18n/ui';
+    import { siteBase } from '../utils/paths';
+
+    const t = ui.es;
+    const base = siteBase();
+
+    const deps = {
+      fetch: window.fetch.bind(window),
+      sleep: (ms: number) => new Promise<void>((r) => window.setTimeout(r, ms)),
+    };
+
+    function esc(s: string): string {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function showMsg(text: string): void {
+      const el = document.getElementById('mapmsg');
+      if (!el) return;
+      el.textContent = text;
+      el.classList.remove('hidden');
+      window.setTimeout(() => el.classList.add('hidden'), 4000);
+    }
+
+    const initial = parseMapHash(location.hash);
+
+    const map = new maplibregl.Map({
+      container: 'map',
+      center: [initial.lng, initial.lat],
+      zoom: initial.zoom,
+      style: {
+        version: 8,
+        sources: {
+          osm: {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256,
+            attribution: '© OpenStreetMap',
+          },
+        },
+        layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
+      },
+    });
+    map.addControl(new maplibregl.NavigationControl({}), 'bottom-right');
+
+    let pins: MapPin[] = presetPins(cities);
+    const markers: maplibregl.Marker[] = [];
+
+    function popupHtml(p: MapPin): string {
+      const fc = `${base}forecast?lat=${p.lat}&lng=${p.lng}&name=${encodeURIComponent(p.name)}`;
+      return (
+        `<div class="text-sm"><strong>${esc(p.name)}</strong><br>` +
+        `<a href="${esc(fc)}" class="text-blue-600 underline">${esc(t.map_popup_full_forecast)} →</a></div>`
+      );
+    }
+
+    function renderPins(): void {
+      while (markers.length) markers.pop()!.remove();
+      for (const p of pins) {
+        const popup = new maplibregl.Popup({ offset: 24 }).setHTML(popupHtml(p));
+        const marker = new maplibregl.Marker({ color: p.kind === 'preset' ? '#2563eb' : '#dc2626' })
+          .setLngLat([p.lng, p.lat])
+          .setPopup(popup)
+          .addTo(map);
+        markers.push(marker);
+      }
+    }
+
+    function syncHash(): void {
+      const c = map.getCenter();
+      const state: MapHashState = {
+        lat: c.lat,
+        lng: c.lng,
+        zoom: map.getZoom(),
+        layer: 'base',
+        t: null,
+      };
+      history.replaceState(null, '', buildMapHash(state));
+    }
+
+    let hashTimer = 0;
+    map.on('moveend', () => {
+      window.clearTimeout(hashTimer);
+      hashTimer = window.setTimeout(syncHash, 250);
+    });
+
+    map.on('load', () => {
+      renderPins();
+    });
+
+    function setUserPin(name: string, lat: number, lng: number, kind: 'search' | 'geo'): void {
+      pins = withUserPin(pins, { name, lat, lng, kind });
+      renderPins();
+      map.flyTo({ center: [lng, lat], zoom: Math.max(map.getZoom(), 9) });
+    }
+
+    const q = document.getElementById('mapq') as HTMLInputElement | null;
+    let qTimer = 0;
+    q?.addEventListener('input', () => {
+      window.clearTimeout(qTimer);
+      const query = q.value.trim();
+      if (query.length < 2) return;
+      qTimer = window.setTimeout(async () => {
+        try {
+          const results = await geocode(query, deps);
+          if (!results.length) {
+            showMsg(`${t.no_results} «${query}»`);
+            return;
+          }
+          const r = results[0];
+          setUserPin(r.name, r.lat, r.lng, 'search');
+        } catch {
+          showMsg(t.load_error);
+        }
+      }, 350);
+    });
+
+    document.getElementById('maploc')?.addEventListener('click', () => {
+      if (!('geolocation' in navigator)) {
+        showMsg(t.geo_denied);
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setUserPin(t.map_locate, pos.coords.latitude, pos.coords.longitude, 'geo'),
+        () => showMsg(t.geo_denied),
+      );
+    });
+  </script>
+</BaseLayout>
