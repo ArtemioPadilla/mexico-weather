@@ -3,16 +3,16 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * E2E config for the Astro static site.
  *
- * The site is built with a `base` of `/mexico-weather-site` (see
+ * The site is built with a `base` of `/mexico-weather` (see
  * astro.config.mjs), and `astro preview` serves it *under* that base path on
  * http://localhost:4321. `baseURL` therefore includes the trailing base path
  * so specs can use root-relative navigation (`page.goto('/')`).
  */
 // astro preview serves the site under the configured `base`
-// (/mexico-weather-site). The trailing slash is required so that
+// (/mexico-weather). The trailing slash is required so that
 // page.goto('forecast') resolves *relative to the base path* rather than
 // replacing it.
-const BASE_PATH = '/mexico-weather-site/';
+const BASE_PATH = '/mexico-weather/';
 const PORT = 4321;
 const BASE_URL = `http://localhost:${PORT}${BASE_PATH}`;
 

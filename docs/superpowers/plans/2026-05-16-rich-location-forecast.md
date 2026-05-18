@@ -813,7 +813,7 @@ const t = ui[lang];
 - [ ] **Step 2: Build & manual check**
 
 Run: `npm run build && npx astro preview &` then open
-`http://localhost:4321/mexico-weather-site/forecast` (no params) → shows the
+`http://localhost:4321/mexico-weather/forecast` (no params) → shows the
 "busca una ubicación" empty state, no console errors. Stop preview.
 
 - [ ] **Step 3: Type-check & commit**
@@ -951,7 +951,7 @@ Then change the B2 valid-branch to call `render({ lat, lng, tz, name });`. Remov
 - [ ] **Step 2: Build & manual check**
 
 Run: `npm run build && npx astro preview &`, open
-`http://localhost:4321/mexico-weather-site/forecast?lat=25.67&lng=-100.31&name=Monterrey&tz=America/Monterrey`.
+`http://localhost:4321/mexico-weather/forecast?lat=25.67&lng=-100.31&name=Monterrey&tz=America/Monterrey`.
 Expected: current block, 48h strip + trend line, 7-day list, three detail
 panels render; `document.title` includes "Monterrey"; no console errors. Stop preview.
 
@@ -1003,7 +1003,7 @@ matches (nothing to guard). If any are added later, prefix with
 Run: `npm run check` (0 errors), `npm run build` (success),
 `npm test` (Group A tests still pass). Manual: reload the Monterrey URL,
 Tab to the hourly strip and arrow-scroll it, confirm RSS link points to
-`/mexico-weather-site/rss.xml`. Then:
+`/mexico-weather/rss.xml`. Then:
 
 ```bash
 git add src/pages/forecast.astro
@@ -1081,7 +1081,7 @@ copy, and the `js-*`/`data-*` contract. Use `textContent` (never
 Run: `npm run build && npx astro preview &`, open the homepage. Each card
 loads current temp/condition; "Ver vista rápida" toggles the extra-variable
 line; "Ver pronóstico completo →" links to
-`/mexico-weather-site/forecast?lat=…`. No console errors. Stop preview.
+`/mexico-weather/forecast?lat=…`. No console errors. Stop preview.
 
 - [ ] **Step 5: Check + commit**
 

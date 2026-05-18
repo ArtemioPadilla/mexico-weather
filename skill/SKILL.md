@@ -178,7 +178,7 @@ python3 scripts/smn-rss/smn_rss.py --municipios 20274,20530 --verbose
 python3 scripts/smn-rss/smn_rss.py --out src/data/smn-feed.xml --verbose
 
 # Con URL pública del feed (para el atom:link self)
-python3 scripts/smn-rss/smn_rss.py --feed-url https://artemiop.com/mexico-weather-site/rss.xml --verbose
+python3 scripts/smn-rss/smn_rss.py --feed-url https://artemiop.com/mexico-weather/rss.xml --verbose
 ```
 
 ### Contenido del feed
@@ -215,7 +215,7 @@ El feed se sirve desde el endpoint Astro `src/pages/rss.xml.ts`, que lee
 `src/data/smn-feed.xml` cuando está fresco (con fallback de derivación
 Open-Meteo en build).
 
-URL del feed (sitio en vivo): `https://artemiop.com/mexico-weather-site/rss.xml`
+URL del feed (sitio en vivo): `https://artemiop.com/mexico-weather/rss.xml`
 
 ### Instalar dependencias locales
 
