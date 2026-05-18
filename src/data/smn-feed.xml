@@ -1,18 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Clima México — Avisos del SMN</title>
-    <link>https://artemiop.com/mexico-weather-site</link>
-    <description>Avisos meteorológicos para México del Servicio Meteorológico Nacional (SMN/CONAGUA). Este es el feed inicial; la GitHub Action programada lo reemplaza cada hora con los avisos reales scrapeados del SMN.</description>
-    <language>es-MX</language>
-    <lastBuildDate>Mon, 18 May 2026 04:09:10 +0000</lastBuildDate>
+    <title>SMN — Alertas y Pronósticos México</title>
+    <link>https://smn.conagua.gob.mx/es/</link>
+    <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
+    <language>es-mx</language>
+    <lastBuildDate>Mon, 18 May 2026 04:50:08 +0000</lastBuildDate>
+    <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>Avisos meteorológicos del SMN</title>
-      <description>Feed inicial del sitio. Aún no se ha ejecutado el scraper programado del SMN. Consulta los avisos meteorológicos oficiales y vigentes directamente en el portal del SMN/CONAGUA.</description>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-ciclon-tropical-en-el-oceano-pacifico</link>
-      <guid isPermaLink="false">smn-feed-initial</guid>
-      <pubDate>Mon, 18 May 2026 04:09:10 +0000</pubDate>
+      <title>⚠️ Alerta SMN: Continuará la onda de calor en 18 estados del país</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Continuará la onda de calor en 18 estados del país]]></description>
+      <pubDate>Sun, 17 May 2026 22:50:01 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-17-da35</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 274 | 17 de Mayo del 2026 | Emisión 18:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN NUEVO LEÓN, TAMAULIPAS, PUEBLA, VERACRUZ Y OAXACA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 274
+Ciudad de México a 17 de Mayo del 2026.
+Emisión: 18:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES MUY FUERTES EN NUEVO LEÓN, TAMAULIPAS, PUEBLA, VERACRUZ Y OAXACA 
+
+Durante esta tarde-noche, una línea seca en el norte del país, en combinación con una vaguada en niveles altos de la atmósfera sobre el noroeste del territorio nacional y con la corriente en chorro subtropical, aunado a inestabilidad atmosférica; originarán vientos fuertes a muy fuertes con rachas de hasta 80 km/h y posibles tolvaneras en dichas regiones, así como lluvias muy fuertes en Nuevo León (centro y este) y Tamaulipas (noroeste), lluvias fuertes en San Luis Potosí (centro y sureste), chubascos en Coahuila y lluvias aisladas en Baja California, Durango y Zacatecas.…]]></description>
+      <pubDate>Sun, 17 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-05-17-274</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de mayo del 2026 | Emisión 21:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 17 de mayo del 2026
+Emisión: 21:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sun, 17 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-05-17-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 17 MAY 2026: Hoy se pronostican lluvias puntuales muy fuertes para regiones de Nuevo León, Tamaulipas, Puebla, Veracruz y Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_17.pdf</link>
+      <description><![CDATA[Hoy se pronostican lluvias puntuales muy fuertes para regiones de Nuevo León, Tamaulipas, Puebla, Veracruz y Oaxaca — Reporte Matutino del 17 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_17.pdf]]></description>
+      <pubDate>Sun, 17 May 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_17</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 16 MAY 2026: Hoy, la onda de calor se extenderá a regiones de 24 estados de la República Mexicana</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_16.pdf</link>
+      <description><![CDATA[Hoy, la onda de calor se extenderá a regiones de 24 estados de la República Mexicana — Reporte Matutino del 16 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_16.pdf]]></description>
+      <pubDate>Sat, 16 May 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_16</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 15 MAY 2026: Para este día se pronostican lluvias fuertes en zonas de Chiapas, Michoacán y Yucatán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_15.pdf</link>
+      <description><![CDATA[Para este día se pronostican lluvias fuertes en zonas de Chiapas, Michoacán y Yucatán — Reporte Vespertino del 15 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_15.pdf]]></description>
+      <pubDate>Fri, 15 May 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_15</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 15 MAY 2026: Se prevén lluvias fuertes en regiones de Jalisco, Michoacán y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_15.pdf</link>
+      <description><![CDATA[Se prevén lluvias fuertes en regiones de Jalisco, Michoacán y Chiapas — Reporte Matutino del 15 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_15.pdf]]></description>
+      <pubDate>Fri, 15 May 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_15</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 14 MAY 2026: Se pronostican lluvias de fuertes a muy fuertes en zonas del occidente y sureste de México, así como en la península ...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_14.pdf</link>
+      <description><![CDATA[Se pronostican lluvias de fuertes a muy fuertes en zonas del occidente y sureste de México, así como en la península ... — Reporte Vespertino del 14 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_14.pdf]]></description>
+      <pubDate>Thu, 14 May 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_14</guid>
+      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
