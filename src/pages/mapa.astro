@@ -142,18 +142,29 @@ const t = ui[lang];
     function setUserPin(name: string, lat: number, lng: number, kind: 'search' | 'geo'): void {
       pins = withUserPin(pins, { name, lat, lng, kind });
       renderPins();
-      map.flyTo({ center: [lng, lat], zoom: Math.max(map.getZoom(), 9) });
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      map.flyTo({ center: [lng, lat], zoom: Math.max(map.getZoom(), 9), animate: !reducedMotion });
+    }
+
+    function hideMsg(): void {
+      document.getElementById('mapmsg')?.classList.add('hidden');
     }
 
     const q = document.getElementById('mapq') as HTMLInputElement | null;
     let qTimer = 0;
+    let searchGen = 0;
     q?.addEventListener('input', () => {
       window.clearTimeout(qTimer);
       const query = q.value.trim();
-      if (query.length < 2) return;
+      if (query.length < 2) {
+        hideMsg();
+        return;
+      }
       qTimer = window.setTimeout(async () => {
+        const gen = ++searchGen;
         try {
           const results = await geocode(query, deps);
+          if (gen !== searchGen) return;
           if (!results.length) {
             showMsg(`${t.no_results} «${query}»`);
             return;
@@ -174,6 +185,7 @@ const t = ui[lang];
       navigator.geolocation.getCurrentPosition(
         (pos) => setUserPin(t.map_locate, pos.coords.latitude, pos.coords.longitude, 'geo'),
         () => showMsg(t.geo_denied),
+        { timeout: 10000 },
       );
     });
   </script>
