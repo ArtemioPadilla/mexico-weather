@@ -67,6 +67,14 @@ src/
 		FeedbackFAB.astro
 ```
 
+## Bundled agent skill & CLI
+
+This repo also bundles the consolidated Mexico-weather tooling:
+
+- A Claude agent skill at `skill/SKILL.md` (cities, rain-window algorithm, SMN/WMO interpretation).
+- A stdlib-only CLI at `scripts/weather_mx.py` — run `python3 scripts/weather_mx.py "CDMX"`.
+- The SMN RSS feed at `/rss.xml` is auto-generated hourly by `.github/workflows/smn-rss.yml` from `scripts/smn-rss/smn_rss.py`.
+
 ## License
 
 MIT
