@@ -4,9 +4,9 @@
       "startServerCommand": "npm run preview",
       "startServerReadyPattern": "ready in",
       "url": [
-        "http://localhost:4321/mexico-weather-site/",
-        "http://localhost:4321/mexico-weather-site/forecast/",
-        "http://localhost:4321/mexico-weather-site/privacidad/"
+        "http://localhost:4321/mexico-weather/",
+        "http://localhost:4321/mexico-weather/forecast/",
+        "http://localhost:4321/mexico-weather/privacidad/"
       ]
     },
     "assert": {
