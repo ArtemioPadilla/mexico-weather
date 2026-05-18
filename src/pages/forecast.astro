@@ -117,6 +117,7 @@ const t = ui[lang];
       lng: number;
       tz: string;
       name: string;
+      admin?: string;
     }
 
     async function render(loc: RenderLoc): Promise<void> {
@@ -137,10 +138,20 @@ const t = ui[lang];
 
         const d0 = daily[0];
 
+        // Subheading: prefer the state/admin1 (escaped) when present; fall
+        // back to raw coordinates otherwise.
+        const safeAdmin = (loc.admin || '')
+          .replace(/[\x00-\x1f\x7f]/g, '')
+          .trim()
+          .slice(0, 100);
+        const subLine = safeAdmin
+          ? esc(safeAdmin)
+          : esc(loc.lat + ', ' + loc.lng);
+
         const currentHtml = `
           <header class="space-y-1">
             <h1 class="text-2xl font-bold">${esc(title)}</h1>
-            <p class="text-xs text-gray-600 dark:text-gray-500">${esc(loc.lat + ', ' + loc.lng)}</p>
+            <p class="text-xs text-gray-600 dark:text-gray-500">${subLine}</p>
             <div class="flex items-end gap-3 pt-2">
               <span class="text-6xl font-bold">${fmt(current.temperature)}°</span>
               <span class="text-sm text-gray-600 dark:text-gray-400 pb-2">${esc(t.feels_like)} ${fmt(current.feelsLike)}°</span>
@@ -252,6 +263,7 @@ const t = ui[lang];
     const latRaw = params.get('lat');
     const lngRaw = params.get('lng');
     const name = params.get('name') || '';
+    const admin = params.get('admin') || '';
     const tz = params.get('tz') || 'auto';
 
     const lat = latRaw === null ? NaN : Number(latRaw);
@@ -270,7 +282,7 @@ const t = ui[lang];
     if (!valid) {
       showEmpty();
     } else {
-      void render({ lat, lng, tz, name });
+      void render({ lat, lng, tz, name, admin });
     }
   </script>
 </BaseLayout>

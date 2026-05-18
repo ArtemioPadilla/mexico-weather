@@ -165,8 +165,15 @@ const base = siteBase();
     // concatenate route paths.
     const base = (import.meta.env.BASE_URL as string).replace(/\/$/, '');
 
-    function fullHref(lat: string, lng: string, tz: string, name: string): string {
+    function fullHref(
+      lat: string,
+      lng: string,
+      tz: string,
+      name: string,
+      admin?: string,
+    ): string {
       const p = new URLSearchParams({ lat, lng, tz, name });
+      if (admin) p.set('admin', admin);
       return base + '/forecast?' + p.toString();
     }
 
@@ -366,6 +373,8 @@ const base = siteBase();
       lat: number;
       lng: number;
       tz: string;
+      population?: number;
+      featureCode?: string;
     };
 
     let results: GeoItem[] = [];
@@ -411,7 +420,13 @@ const base = siteBase();
     }
 
     function go(r: GeoItem) {
-      location.href = fullHref(String(r.lat), String(r.lng), r.tz, r.name);
+      location.href = fullHref(
+        String(r.lat),
+        String(r.lng),
+        r.tz,
+        r.name,
+        r.admin1,
+      );
     }
 
     function renderList() {
@@ -423,10 +438,36 @@ const base = siteBase();
         li.setAttribute('role', 'option');
         li.setAttribute('aria-selected', 'false');
         li.className =
-          'px-3 py-2 text-sm text-gray-800 cursor-pointer hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800';
-        li.textContent = [r.name, r.admin1, r.country]
-          .filter(Boolean)
-          .join(', ');
+          'px-3 py-2 text-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800';
+
+        // Primary line: city name in bold, optional "ciudad" marker for
+        // populous places so the real city stands out from tiny hamlets.
+        const primary = document.createElement('div');
+        primary.className = 'flex items-center gap-2';
+
+        const nameEl = document.createElement('span');
+        nameEl.className = 'font-semibold text-gray-900 dark:text-gray-100';
+        nameEl.textContent = r.name;
+        primary.appendChild(nameEl);
+
+        if (typeof r.population === 'number' && r.population >= 50000) {
+          const badge = document.createElement('span');
+          badge.className =
+            'rounded-full bg-blue-500/10 px-1.5 py-0.5 text-[10px] font-medium text-blue-600 dark:text-blue-400';
+          badge.textContent = 'ciudad';
+          primary.appendChild(badge);
+        }
+        li.appendChild(primary);
+
+        // Secondary line: "admin1 · country" muted.
+        const sub = [r.admin1, r.country].filter(Boolean).join(' · ');
+        if (sub) {
+          const subEl = document.createElement('div');
+          subEl.className = 'text-xs text-gray-500 dark:text-gray-400';
+          subEl.textContent = sub;
+          li.appendChild(subEl);
+        }
+
         li.addEventListener('click', () => go(r));
         acList.appendChild(li);
       });
