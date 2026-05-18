@@ -5,15 +5,36 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 18 May 2026 10:47:27 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2026 12:31:35 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de mayo del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 275 | 18 de Mayo del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE NUEVO LEÓN, TAMAULIPAS Y SAN LUIS POTOSÍ
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 275
+Ciudad de México a 18 de Mayo del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+PREVALECERÁ LA ONDA DE CALOR EN 18 ESTADOS DEL PAÍS.
+
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE NUEVO LEÓN, TAMAULIPAS Y SAN LUIS POTOSÍ.
+
+Para hoy, una circulación anticiclónica en niveles medios de la atmósfera sobre el golfo de México, mantendrá temperaturas calurosas a muy calurosas en la mayor parte del país; prevaleciendo la onda de calor en Sinaloa (centro y sur), Coahuila (centro y suroeste), Durango (oeste y noreste), Zacatecas (sur), Aguascalientes (suroeste), Nayarit (norte y sur), Jalisco (centro, sur y suroeste), Colima (norte y este), Michoacán (centro y suroeste), Hidalgo (centro), Puebla (suroeste), Morelos (sur), Guerrero (noroeste, centro, sur y sureste), Oaxaca (centro, sur y este), Chiapas (norte, centro y suroeste), Veracruz (centro y sur), Campeche (norte) y Yucatán (oeste); finalizando a partir de hoy en Nuevo León, San Luis Potosí, Guanajuato y Querétaro.…]]></description>
+      <pubDate>Mon, 18 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-05-18-275</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de mayo del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de mayo del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 18 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-18-12</guid>
@@ -23,30 +44,9 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Viento con rachas de 60 a 80 km/h en Baja California, Sonora, Chihuahua y Durango.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento con rachas de 60 a 80 km/h en Baja California, Sonora, Chihuahua y Durango.]]></description>
-      <pubDate>Mon, 18 May 2026 04:47:20 -0600</pubDate>
+      <pubDate>Mon, 18 May 2026 06:31:24 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-18-7649</guid>
       <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 274 | 17 de Mayo del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN NUEVO LEÓN, TAMAULIPAS, PUEBLA, VERACRUZ Y OAXACA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 274
-Ciudad de México a 17 de Mayo del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS PUNTUALES MUY FUERTES EN NUEVO LEÓN, TAMAULIPAS, PUEBLA, VERACRUZ Y OAXACA 
-
-Durante esta tarde-noche, una línea seca en el norte del país, en combinación con una vaguada en niveles altos de la atmósfera sobre el noroeste del territorio nacional y con la corriente en chorro subtropical, aunado a inestabilidad atmosférica; originarán vientos fuertes a muy fuertes con rachas de hasta 80 km/h y posibles tolvaneras en dichas regiones, así como lluvias muy fuertes en Nuevo León (centro y este) y Tamaulipas (noroeste), lluvias fuertes en San Luis Potosí (centro y sureste), chubascos en Coahuila y lluvias aisladas en Baja California, Durango y Zacatecas.…]]></description>
-      <pubDate>Sun, 17 May 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-05-17-274</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 17 MAY 2026: Hoy se pronostican lluvias puntuales muy fuertes para regiones de Nuevo León, Tamaulipas, Puebla, Veracruz y Oaxaca</title>
