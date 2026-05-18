@@ -1,0 +1,49 @@
+name: SMN RSS
+
+# Scrapes the SMN (Servicio Meteorológico Nacional) site with Playwright and
+# refreshes the committed feed at src/data/smn-feed.xml. The Astro endpoint
+# src/pages/rss.xml.ts serves this file verbatim when it is fresh, otherwise
+# it falls back to its build-time CA-based Open-Meteo derivation.
+
+on:
+  schedule:
+    # Hourly, at minute 17 (offset from other crons to avoid contention).
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: smn-rss
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh SMN RSS feed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/smn-rss/requirements.txt
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Scrape SMN and regenerate feed
+        run: python scripts/smn-rss/smn_rss.py
+
+      - name: Commit feed if changed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git diff --quiet -- src/data/smn-feed.xml || (
+            git add src/data/smn-feed.xml
+            git commit -m 'chore: refresh SMN RSS feed'
+            git push
+          )
