@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 18 May 2026 05:13:56 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2026 06:41:39 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Continuará la onda de calor en 18 estados del país</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de mayo del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 18 de mayo del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Mon, 18 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-05-18-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Viento con rachas de 60 a 80 km/h en Baja California, Sonora, Chihuahua y Durango.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Continuará la onda de calor en 18 estados del país]]></description>
-      <pubDate>Sun, 17 May 2026 23:13:46 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-17-da35</guid>
+      <description><![CDATA[Viento con rachas de 60 a 80 km/h en Baja California, Sonora, Chihuahua y Durango.]]></description>
+      <pubDate>Mon, 18 May 2026 00:41:05 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-18-7649</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -36,17 +47,6 @@ Durante esta tarde-noche, una línea seca en el norte del país, en combinaci�
       <pubDate>Sun, 17 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-05-17-274</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de mayo del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 17 de mayo del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Sun, 17 May 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-05-17-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 17 MAY 2026: Hoy se pronostican lluvias puntuales muy fuertes para regiones de Nuevo León, Tamaulipas, Puebla, Veracruz y Oaxaca</title>
