@@ -10,7 +10,7 @@ export interface LayerDef {
   /** Key into UiStrings for the rail button label. */
   labelKey: string;
   kind: 'base' | 'raster-tile' | 'field';
-  /** Initial raster opacity (0..1); 1 for the base map. */
+  /** Initial layer opacity (0..1); 1 for the base map. */
   defaultOpacity: number;
 }
 

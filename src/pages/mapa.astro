@@ -121,6 +121,15 @@ const t = ui[lang];
       frameOffsetMinutes,
       seekIndexForIso,
     } from '../lib/maptimeline';
+    import {
+      viewportGrid,
+      buildFieldUrl,
+      parseFieldResponse,
+      tempColor,
+      TEMP_LEGEND,
+      type FieldGrid,
+    } from '../lib/mapfields';
+    import type { FeatureCollection, Feature } from 'geojson';
     import { presetPins, withUserPin, type MapPin } from '../lib/mappins';
     import { cities } from '../data/cities';
     import { geocode } from '../lib/geocode';
@@ -214,6 +223,17 @@ const t = ui[lang];
       hashTimer = window.setTimeout(syncHash, 250);
     });
 
+    map.on('moveend', () => {
+      if (getLayerDef(activeLayer)?.kind !== 'field') return;
+      window.clearTimeout(fieldResampleTimer);
+      fieldResampleTimer = window.setTimeout(() => {
+        void (async () => {
+          const ok = await loadFieldGrid();
+          if (ok) applyFrame(frameIndex >= 0 ? frameIndex : 0);
+        })();
+      }, 500);
+    });
+
     map.on('load', () => {
       renderPins();
       void (async () => {
@@ -225,7 +245,7 @@ const t = ui[lang];
         }
         const wanted = initial.layer;
         if (wanted && wanted !== 'base' && getLayerDef(wanted)) {
-          setActiveLayer(wanted);
+          void setActiveLayer(wanted);
         }
       })();
     });
@@ -274,7 +294,11 @@ const t = ui[lang];
       if (idx < 0) return;
       frameIndex = idx;
       const fr = tlFrames[idx];
-      showWeatherFrame(activeLayer, fr);
+      if (getLayerDef(activeLayer)?.kind === 'field') {
+        renderFieldFrame(idx);
+      } else {
+        showWeatherFrame(activeLayer, fr);
+      }
       activeFrameIso = new Date(fr.time * 1000).toISOString();
       if (tlRange) {
         tlRange.max = String(tlFrames.length - 1);
@@ -287,6 +311,69 @@ const t = ui[lang];
     function showTimeline(show: boolean): void {
       tlEl?.classList.toggle('hidden', !show);
       tlEl?.classList.toggle('flex', show);
+    }
+
+    const FIELD_SOURCE = 'wx-field';
+    const FIELD_LAYER = 'wx-field-layer';
+    let fieldGrid: FieldGrid | null = null;
+    let fieldResampleTimer = 0;
+
+    function removeField(): void {
+      if (map.getLayer(FIELD_LAYER)) map.removeLayer(FIELD_LAYER);
+      if (map.getSource(FIELD_SOURCE)) map.removeSource(FIELD_SOURCE);
+    }
+
+    function fieldGeoJSON(hourIndex: number): FeatureCollection {
+      const feats: Feature[] = [];
+      if (fieldGrid) {
+        for (const p of fieldGrid.points) {
+          const v = p.values[hourIndex];
+          if (typeof v !== 'number' || !Number.isFinite(v)) continue;
+          feats.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
+            properties: { color: tempColor(v) },
+          });
+        }
+      }
+      return { type: 'FeatureCollection', features: feats };
+    }
+
+    function renderFieldFrame(hourIndex: number): void {
+      const data = fieldGeoJSON(hourIndex);
+      const existing = map.getSource(FIELD_SOURCE) as maplibregl.GeoJSONSource | undefined;
+      if (existing) {
+        existing.setData(data);
+        return;
+      }
+      map.addSource(FIELD_SOURCE, { type: 'geojson', data });
+      map.addLayer({
+        id: FIELD_LAYER,
+        type: 'circle',
+        source: FIELD_SOURCE,
+        paint: {
+          'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 14, 8, 40],
+          'circle-color': ['get', 'color'],
+          'circle-blur': 1,
+          'circle-opacity': rvOpacity,
+        },
+      });
+    }
+
+    async function loadFieldGrid(): Promise<boolean> {
+      const b = map.getBounds();
+      const grid = viewportGrid(
+        { west: b.getWest(), south: b.getSouth(), east: b.getEast(), north: b.getNorth() },
+        8,
+        6,
+      );
+      try {
+        const res = await deps.fetch(buildFieldUrl(grid, 'temperature_2m'));
+        fieldGrid = parseFieldResponse(await res.json(), grid, 'temperature_2m');
+      } catch {
+        fieldGrid = null;
+      }
+      return !!fieldGrid && fieldGrid.points.length > 0;
     }
 
     function removeWeatherRaster(): void {
@@ -315,20 +402,29 @@ const t = ui[lang];
       });
     }
 
-    function renderLegend(show: boolean): void {
+    function renderLegend(kind: 'radar' | 'temperature' | null): void {
       const el = document.getElementById('legend');
       if (!el) return;
-      if (!show) {
+      if (!kind) {
         el.classList.add('hidden');
         el.innerHTML = '';
         return;
       }
-      el.innerHTML = RADAR_LEGEND.map(
-        (s) =>
-          `<li class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded-sm" style="background:${esc(
-            s.color,
-          )}"></span>${esc(t[s.labelKey as keyof typeof t])}</li>`,
-      ).join('');
+      const rows =
+        kind === 'radar'
+          ? RADAR_LEGEND.map(
+              (s) =>
+                `<li class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded-sm" style="background:${esc(
+                  s.color,
+                )}"></span>${esc(t[s.labelKey as keyof typeof t])}</li>`,
+            )
+          : TEMP_LEGEND.map(
+              (s) =>
+                `<li class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded-sm" style="background:${esc(
+                  s.color,
+                )}"></span>${esc(s.label)}</li>`,
+            );
+      el.innerHTML = rows.join('');
       el.classList.remove('hidden');
     }
 
@@ -337,15 +433,47 @@ const t = ui[lang];
         const btn = document.getElementById(`layerbtn-${def.id}`);
         if (btn) btn.setAttribute('aria-pressed', String(def.id === activeLayer));
       }
+      const akind = getLayerDef(activeLayer)?.kind;
       document
         .getElementById('opacitywrap')
-        ?.classList.toggle('hidden', getLayerDef(activeLayer)?.kind !== 'raster-tile');
-      renderLegend(activeLayer === 'radar');
+        ?.classList.toggle('hidden', akind !== 'raster-tile' && akind !== 'field');
+      renderLegend(activeLayer === 'radar' ? 'radar' : akind === 'field' ? 'temperature' : null);
     }
 
-    function setActiveLayer(id: string): void {
+    async function setActiveLayer(id: string): Promise<void> {
       const def = getLayerDef(id);
       if (!def) return;
+      if (def.kind === 'field') {
+        rvOpacity = def.defaultOpacity;
+        if (opacityEl) opacityEl.value = String(Math.round(rvOpacity * 100));
+        tlStop();
+        removeWeatherRaster();
+        const ok = await loadFieldGrid();
+        if (!ok || !fieldGrid) {
+          showMsg(t.map_layer_unavailable);
+          activeLayer = 'base';
+          removeField();
+          tlFrames = [];
+          frameIndex = -1;
+          activeFrameIso = null;
+          showTimeline(false);
+          refreshLayerButtons();
+          syncHash();
+          return;
+        }
+        activeLayer = id;
+        tlFrames = fieldGrid.times.map((iso) => ({
+          time: Math.floor(Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000),
+          path: '',
+        }));
+        const now = Math.floor(Date.now() / 1000);
+        const idx = seekIndexForIso(tlFrames, pendingSeekIso, now);
+        pendingSeekIso = null;
+        showTimeline(true);
+        refreshLayerButtons();
+        applyFrame(idx >= 0 ? idx : defaultFrameIndex(tlFrames, now));
+        return;
+      }
       if (def.kind === 'raster-tile') {
         rvOpacity = def.defaultOpacity;
         if (opacityEl) opacityEl.value = String(Math.round(rvOpacity * 100));
@@ -355,6 +483,7 @@ const t = ui[lang];
           activeLayer = 'base';
           tlStop();
           removeWeatherRaster();
+          removeField();
           tlFrames = [];
           frameIndex = -1;
           activeFrameIso = null;
@@ -370,11 +499,13 @@ const t = ui[lang];
         pendingSeekIso = null;
         showTimeline(true);
         refreshLayerButtons();
+        removeField();
         applyFrame(idx >= 0 ? idx : defaultFrameIndex(frames, now));
         return;
       }
       tlStop();
       removeWeatherRaster();
+      removeField();
       activeLayer = id;
       tlFrames = [];
       frameIndex = -1;
@@ -395,7 +526,7 @@ const t = ui[lang];
         btn.className =
           'rounded px-2 py-1 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:bg-blue-400/10';
         btn.textContent = t[def.labelKey as keyof typeof t];
-        btn.addEventListener('click', () => setActiveLayer(def.id));
+        btn.addEventListener('click', () => void setActiveLayer(def.id));
         wrap.appendChild(btn);
       }
     }
