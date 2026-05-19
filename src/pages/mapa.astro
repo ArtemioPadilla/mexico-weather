@@ -60,7 +60,7 @@ const t = ui[lang];
     </p>
     <div
       id="timeline"
-      class="absolute bottom-3 left-1/2 z-10 hidden -translate-x-1/2 flex items-center gap-2 rounded-lg bg-white/95 px-3 py-2 text-sm shadow dark:bg-gray-900/95"
+      class="absolute bottom-3 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-2 rounded-lg bg-white/95 px-3 py-2 text-sm shadow dark:bg-gray-900/95"
       role="group"
       aria-label={t.timeline_label}
     >
@@ -76,6 +76,7 @@ const t = ui[lang];
         type="button"
         aria-label={t.timeline_play}
         aria-pressed="false"
+        disabled
         class="rounded px-2 py-1 hover:bg-blue-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:opacity-40 dark:hover:bg-blue-400/10"
         >▶</button
       >
@@ -95,7 +96,7 @@ const t = ui[lang];
         class="w-40 accent-blue-600"
         aria-label={t.timeline_label}
       />
-      <span id="tl-time" class="w-28 text-right tabular-nums text-gray-700 dark:text-gray-300"></span>
+      <span id="tl-time" aria-live="polite" aria-atomic="true" class="w-28 text-right tabular-nums text-gray-700 dark:text-gray-300"></span>
     </div>
     <div id="map" class="h-full w-full" role="application" aria-label={t.map_title}></div>
   </main>
@@ -285,6 +286,7 @@ const t = ui[lang];
 
     function showTimeline(show: boolean): void {
       tlEl?.classList.toggle('hidden', !show);
+      tlEl?.classList.toggle('flex', show);
     }
 
     function removeWeatherRaster(): void {
