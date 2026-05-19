@@ -5,27 +5,55 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 19 May 2026 11:29:54 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 19 May 2026 13:30:13 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 19 de mayo del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 277 | 19 de Mayo del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS MUY FUERTES EN ZONAS DEL NORESTE, CENTRO, ORIENTE Y SURESTE DEL PAÍS, CON POSIBLE FORMACIÓN DE TORBELLINOS O TORNADOS EN COAHUILA, NUEVO LEÓN Y TAMAULIPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 277
+Ciudad de México a 19 de Mayo del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+SE PRONOSTICAN LLUVIAS MUY FUERTES EN ZONAS DEL NORESTE, CENTRO, ORIENTE Y SURESTE DEL PAÍS, CON POSIBLE FORMACIÓN DE TORBELLINOS O TORNADOS EN COAHUILA, NUEVO LEÓN Y TAMAULIPAS
+
+Para este día, la circulación anticiclónica en niveles medios de la atmósfera sobre el golfo de México, mantendrá temperaturas calurosas a muy calurosas en la mayor parte de la República Mexicana, prevaleciendo la onda de calor en Coahuila (centro y suroeste), Zacatecas (sur), Durango (oeste), Sinaloa (centro y sur), Nayarit (norte y sur), Jalisco (centro, sur y suroeste), Colima (norte, sur y este), Michoacán (centro y suroeste), Guerrero (noroeste, centro, sur y sureste), Morelos (sur), Puebla (suroeste), Veracruz (centro y sur), Oaxaca (centro, sur y este), Chiapas (norte, centro y oeste), Campeche (norte) y Yucatán (oeste); finalizando a partir de este día en San Luis Potosí, Aguascalientes e Hidalgo.…]]></description>
+      <pubDate>Tue, 19 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-05-19-277</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 19 de mayo del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 19 de mayo del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 19 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-19-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Viento con rachas de 60 a 80 km/h y tolvaneras: Sonora y Chihuahua. Temperaturas mínimas de -5 a 0 °C con heladas: sierras de Baja California, Chihuahua y Durango.</title>
+      <title>⚠️ Alerta SMN: Viento de 30 a 40 km/h con rachas de 50 a 70 km/h con posible formación de torbellinos o tornados: Coah (norte), NL (norte) y Tamps (noroeste y norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Para mañana continuará la onda de calor en Coahuila, Zacatecas, Durango, Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero, Morelos, Puebla, Veracruz, Oaxac...]]></description>
-      <pubDate>Tue, 19 May 2026 05:29:30 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-19-0283</guid>
+      <description><![CDATA[Continuará la onda de calor en 16 entidades del país]]></description>
+      <pubDate>Tue, 19 May 2026 07:30:01 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-19-8032</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 19 MAY 2026: Se pronostican lluvias muy fuertes en zonas de Coahuila, Nuevo León, Tamaulipas, San Luis Potosí, Querétaro, Hidalgo ...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_19.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de Coahuila, Nuevo León, Tamaulipas, San Luis Potosí, Querétaro, Hidalgo ... — Reporte Matutino del 19 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_19.pdf]]></description>
+      <pubDate>Tue, 19 May 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_19</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 18 MAY 2026: Se pronostican lluvias de fuertes a muy fuertes en zonas del noroeste, oriente, centro y sureste de México</title>
@@ -34,26 +62,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 18 May 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_18</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 276 | 18 de Mayo del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS FUERTES A MUY FUERTES EN ZONAS DEL NORESTE, ORIENTE, CENTRO Y SURESTE DEL PAÍS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 276
-Ciudad de México a 18 de Mayo del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PRONOSTICAN LLUVIAS FUERTES A MUY FUERTES EN ZONAS DEL NORESTE, ORIENTE, CENTRO Y SURESTE DEL PAÍS
-
-Durante esta tarde-noche, una línea seca en el norte de México, una vaguada en niveles altos de la atmósfera en el noroeste del territorio nacional, inestabilidad atmosférica y la corriente en chorro subtropical, originarán vientos fuertes a muy fuertes con rachas de hasta 80 km/h y posibles tolvaneras en las regiones mencionadas, así como lluvias muy fuertes con descargas eléctricas y posible caída de granizo en Nuevo León (sur), Tamaulipas (suroeste) y San Luis Potosí (norte), e intervalos de chubascos en Coahuila.…]]></description>
-      <pubDate>Mon, 18 May 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-05-18-276</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 18 MAY 2026: Se prevén lluvias de fuertes a muy fuertes en regiones de 12 estados de México</title>
@@ -77,14 +85,6 @@ Durante esta tarde-noche, una línea seca en el norte de México, una vaguada en
       <description><![CDATA[Hoy, la onda de calor se extenderá a regiones de 24 estados de la República Mexicana — Reporte Matutino del 16 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_16.pdf]]></description>
       <pubDate>Sat, 16 May 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_16</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 15 MAY 2026: Para este día se pronostican lluvias fuertes en zonas de Chiapas, Michoacán y Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_15.pdf</link>
-      <description><![CDATA[Para este día se pronostican lluvias fuertes en zonas de Chiapas, Michoacán y Yucatán — Reporte Vespertino del 15 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_15.pdf]]></description>
-      <pubDate>Fri, 15 May 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_15</guid>
       <category>Comunicado</category>
     </item>
   </channel>
