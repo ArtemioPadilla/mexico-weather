@@ -102,7 +102,7 @@ test.describe('mapa page', () => {
     await page.goto('mapa/');
     await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
 
-    // Timeline is hidden until a raster layer is active.
+    // Hidden until a raster layer is active.
     await expect(page.locator('#timeline')).toBeHidden();
 
     await page.locator('#layerbtn-radar').click();
@@ -111,13 +111,21 @@ test.describe('mapa page', () => {
     const range = page.locator('#tl-range');
     // 4 radar frames (3 past + 1 nowcast) → max index 3.
     await expect(range).toHaveAttribute('max', '3');
-    const label = page.locator('#tl-time');
-    const before = await label.textContent();
 
-    // Step to the first (oldest) frame via the prev button.
+    const label = page.locator('#tl-time');
+    const v0 = Number(await range.inputValue());
+    const l0 = await label.textContent();
+
+    // Prev steps back exactly one frame (clamped, no wrap) and updates the label.
     await page.locator('#tl-prev').click();
-    await expect(range).toHaveValue('0');
-    await expect(label).not.toHaveText(before ?? '');
+    const v1 = Number(await range.inputValue());
+    expect(v1).toBe(Math.max(0, v0 - 1));
+    expect(v1).toBeLessThan(v0);
+    await expect(label).not.toHaveText(l0 ?? '');
+
+    // Next steps forward exactly one frame.
+    await page.locator('#tl-next').click();
+    expect(Number(await range.inputValue())).toBe(v1 + 1);
 
     // Switching back to Base hides the timeline.
     await page.locator('#layerbtn-base').click();
