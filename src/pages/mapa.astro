@@ -198,25 +198,30 @@ const t = ui[lang];
     let qTimer = 0;
     let searchGen = 0;
 
-    const RV_SOURCE = 'rv-radar';
-    const RV_LAYER = 'rv-radar-layer';
+    const RV_SOURCE = 'wx-raster';
+    const RV_LAYER = 'wx-raster-layer';
     let activeLayer: string = 'base';
     let rvData: RainviewerData | null = null;
     let rvOpacity = getLayerDef('radar')?.defaultOpacity ?? 0.8;
 
-    function removeRadar(): void {
+    function removeWeatherRaster(): void {
       if (map.getLayer(RV_LAYER)) map.removeLayer(RV_LAYER);
       if (map.getSource(RV_SOURCE)) map.removeSource(RV_SOURCE);
     }
 
-    function addRadar(): boolean {
+    function addWeatherRaster(layerId: string): boolean {
       if (!rvData) return false;
-      const frame = latestFrame(rvData.frames, Math.floor(Date.now() / 1000));
+      const isSatellite = layerId === 'satellite';
+      const frames = isSatellite ? rvData.satelliteFrames : rvData.frames;
+      const frame = latestFrame(frames, Math.floor(Date.now() / 1000));
       if (!frame) return false;
-      removeRadar();
+      const tileUrl = isSatellite
+        ? rainviewerTileUrl(rvData.host, frame, { color: 0, snow: false })
+        : rainviewerTileUrl(rvData.host, frame);
+      removeWeatherRaster();
       map.addSource(RV_SOURCE, {
         type: 'raster',
-        tiles: [rainviewerTileUrl(rvData.host, frame)],
+        tiles: [tileUrl],
         tileSize: 256,
         attribution: '© RainViewer',
       });
@@ -261,16 +266,18 @@ const t = ui[lang];
       const def = getLayerDef(id);
       if (!def) return;
       if (def.kind === 'raster-tile') {
-        if (!rvData || !addRadar()) {
+        rvOpacity = def.defaultOpacity;
+        if (opacityEl) opacityEl.value = String(Math.round(rvOpacity * 100));
+        if (!rvData || !addWeatherRaster(id)) {
           showMsg(t.map_layer_unavailable);
           activeLayer = 'base';
-          removeRadar();
+          removeWeatherRaster();
           refreshLayerButtons();
           syncHash();
           return;
         }
       } else {
-        removeRadar();
+        removeWeatherRaster();
       }
       activeLayer = id;
       refreshLayerButtons();
