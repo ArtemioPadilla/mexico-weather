@@ -37,6 +37,7 @@ export interface UiStrings {
   map_layer_unavailable: string;
   map_layers: string;
   map_layer_radar: string;
+  map_layer_satellite: string;
   map_opacity: string;
   legend_light: string;
   legend_moderate: string;
@@ -84,6 +85,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_layer_unavailable: 'Capa no disponible',
     map_layers: 'Capas',
     map_layer_radar: 'Radar',
+    map_layer_satellite: 'Satélite',
     map_opacity: 'Opacidad',
     legend_light: 'Ligera',
     legend_moderate: 'Moderada',
@@ -129,6 +131,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_layer_unavailable: 'Layer unavailable',
     map_layers: 'Layers',
     map_layer_radar: 'Radar',
+    map_layer_satellite: 'Satellite',
     map_opacity: 'Opacity',
     legend_light: 'Light',
     legend_moderate: 'Moderate',
