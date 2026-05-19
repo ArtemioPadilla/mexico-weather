@@ -22,6 +22,13 @@ const RAINVIEWER_MANIFEST = JSON.stringify({
   satellite: { infrared: [{ time: 1779130800, path: '/v2/satellite/test' }] },
 });
 
+/** Minimal Open-Meteo bulk response: 48 points (8x6 grid), 2 hourly steps. */
+const OPEN_METEO_FIELD = JSON.stringify(
+  Array.from({ length: 48 }, () => ({
+    hourly: { time: ['2026-05-19T00:00', '2026-05-19T01:00'], temperature_2m: [22, 23] },
+  })),
+);
+
 test.describe('mapa page', () => {
   test('mapa page loads with map container and search', async ({ page }) => {
     const res = await page.goto('mapa/');
@@ -129,6 +136,33 @@ test.describe('mapa page', () => {
 
     // Switching back to Base hides the timeline.
     await page.locator('#layerbtn-base').click();
+    await expect(page.locator('#timeline')).toBeHidden();
+  });
+
+  test('temperature field layer activates with a legend and timeline', async ({ page }) => {
+    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    );
+    await page.route('**/tilecache.rainviewer.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+    );
+    await page.route('**/api.open-meteo.com/v1/forecast**', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: OPEN_METEO_FIELD }),
+    );
+
+    await page.goto('mapa/');
+    await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+
+    await page.locator('#layerbtn-temperature').click();
+    await page.waitForResponse('**/api.open-meteo.com/v1/forecast**');
+
+    await expect(page.locator('#layerbtn-temperature')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('#legend')).toBeVisible();
+    await expect(page.locator('#timeline')).toBeVisible();
+    await expect(page.locator('#opacitywrap')).toBeVisible();
+
+    await page.locator('#layerbtn-base').click();
+    await expect(page.locator('#legend')).toBeHidden();
     await expect(page.locator('#timeline')).toBeHidden();
   });
 });
