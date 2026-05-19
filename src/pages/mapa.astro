@@ -538,6 +538,7 @@ const t = ui[lang];
       opacityEl.addEventListener('input', () => {
         rvOpacity = Number(opacityEl.value) / 100;
         if (map.getLayer(RV_LAYER)) map.setPaintProperty(RV_LAYER, 'raster-opacity', rvOpacity);
+        if (map.getLayer(FIELD_LAYER)) map.setPaintProperty(FIELD_LAYER, 'circle-opacity', rvOpacity);
       });
     }
 
