@@ -1,0 +1,127 @@
+// Pure, DOM-free Open-Meteo gridded-field helpers for /mapa field layers.
+
+export interface LngLat {
+  lat: number;
+  lng: number;
+}
+
+export interface FieldGrid {
+  /** ISO hourly timestamps (canonical, from the first result). */
+  times: string[];
+  /** One entry per input point, aligned by index; `values[h]` is the value at hour h. */
+  points: { lat: number; lng: number; values: number[] }[];
+}
+
+export interface LegendStop {
+  label: string;
+  color: string;
+}
+
+/** Bounding box in degrees. */
+export interface Bounds {
+  west: number;
+  south: number;
+  east: number;
+  north: number;
+}
+
+/** Evenly spaced sample points across `b`, edge-inclusive. Min 2x2. */
+export function viewportGrid(b: Bounds, cols: number, rows: number): LngLat[] {
+  const c = Math.max(2, Math.floor(cols));
+  const r = Math.max(2, Math.floor(rows));
+  const pts: LngLat[] = [];
+  for (let j = 0; j < r; j++) {
+    const lat = b.south + ((b.north - b.south) * j) / (r - 1);
+    for (let i = 0; i < c; i++) {
+      const lng = b.west + ((b.east - b.west) * i) / (c - 1);
+      pts.push({ lng: Number(lng.toFixed(4)), lat: Number(lat.toFixed(4)) });
+    }
+  }
+  return pts;
+}
+
+/** Keyless Open-Meteo bulk forecast URL for the given points + hourly variable. */
+export function buildFieldUrl(points: LngLat[], hourlyVar: string): string {
+  const lats = points.map((p) => p.lat).join(',');
+  const lngs = points.map((p) => p.lng).join(',');
+  return (
+    `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}` +
+    `&hourly=${hourlyVar}&forecast_days=2&timezone=UTC`
+  );
+}
+
+function isFiniteArray(a: unknown): a is number[] {
+  return Array.isArray(a) && a.every((n) => typeof n === 'number' && Number.isFinite(n));
+}
+
+/** Normalise an Open-Meteo response (array for many points, object for one) into a FieldGrid. */
+export function parseFieldResponse(
+  json: unknown,
+  points: LngLat[],
+  hourlyVar: string,
+): FieldGrid | null {
+  if (!json) return null;
+  const arr = Array.isArray(json) ? json : [json];
+  if (arr.length !== points.length) return null;
+  const first = arr[0] as { hourly?: { time?: unknown } } | undefined;
+  const times = first?.hourly?.time;
+  if (!Array.isArray(times) || times.length === 0) return null;
+  const out: FieldGrid['points'] = [];
+  for (let i = 0; i < arr.length; i++) {
+    const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)?.hourly;
+    const values = h?.[hourlyVar];
+    if (!isFiniteArray(values)) return null;
+    out.push({ lat: points[i].lat, lng: points[i].lng, values });
+  }
+  return { times: times as string[], points: out };
+}
+
+/** Parse an ISO string as UTC: bare strings (no Z / offset) are treated as UTC per Open-Meteo. */
+function parseUtcMs(s: string): number {
+  return /[Zz]|[+-]\d{2}:\d{2}$/.test(s) ? Date.parse(s) : Date.parse(s + 'Z');
+}
+
+/** Hourly index closest to `iso`; nearest to `nowMs` if iso null/invalid; -1 if empty. */
+export function fieldFrameIndex(times: string[], iso: string | null, nowMs: number): number {
+  if (times.length === 0) return -1;
+  const ms = iso ? parseUtcMs(iso) : NaN;
+  const target = Number.isFinite(ms) ? ms : nowMs;
+  let best = 0;
+  let bestDelta = Infinity;
+  for (let i = 0; i < times.length; i++) {
+    const d = Math.abs(parseUtcMs(times[i]) - target);
+    if (d < bestDelta) {
+      best = i;
+      bestDelta = d;
+    }
+  }
+  return best;
+}
+
+/** Temperature (°C) → hex colour on a clamped cold→warm ramp. */
+export function tempColor(c: number): string {
+  const stops: [number, string][] = [
+    [-10, '#3b4cc0'],
+    [0, '#5b8ff9'],
+    [10, '#7dd1c8'],
+    [18, '#7ad151'],
+    [25, '#f9d423'],
+    [32, '#f08a24'],
+    [45, '#d7191c'],
+  ];
+  if (c <= stops[0][0]) return stops[0][1];
+  if (c >= stops[stops.length - 1][0]) return stops[stops.length - 1][1];
+  for (let i = 0; i < stops.length - 1; i++) {
+    if (c >= stops[i][0] && c < stops[i + 1][0]) return stops[i][1];
+  }
+  return stops[stops.length - 1][1];
+}
+
+export const TEMP_LEGEND: LegendStop[] = [
+  { label: '≤0°', color: '#5b8ff9' },
+  { label: '10°', color: '#7dd1c8' },
+  { label: '18°', color: '#7ad151' },
+  { label: '25°', color: '#f9d423' },
+  { label: '32°', color: '#f08a24' },
+  { label: '≥45°', color: '#d7191c' },
+];
