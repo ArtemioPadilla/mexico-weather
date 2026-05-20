@@ -3,8 +3,8 @@ import { LAYERS, LAYER_IDS, getLayer, RADAR_LEGEND } from './maplayers';
 
 describe('layer registry', () => {
   it('exposes base, radar, and satellite layers with stable ids', () => {
-    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature']);
-    expect(LAYERS.map((l) => l.id)).toEqual(['base', 'radar', 'satellite', 'temperature']);
+    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure']);
+    expect(LAYERS.map((l) => l.id)).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure']);
   });
 
   it('base is kind "base", radar is a raster-tile with <1 default opacity', () => {
@@ -23,7 +23,7 @@ describe('layer registry', () => {
   });
 
   it('registers a satellite raster layer with full default opacity', () => {
-    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature']);
+    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure']);
     const sat = getLayer('satellite');
     expect(sat?.kind).toBe('raster-tile');
     expect(sat?.labelKey).toBe('map_layer_satellite');
@@ -31,12 +31,24 @@ describe('layer registry', () => {
   });
 
   it('registers a temperature field layer', () => {
-    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature']);
+    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure']);
     const temp = getLayer('temperature');
     expect(temp?.kind).toBe('field');
     expect(temp?.labelKey).toBe('map_layer_temperature');
     expect(temp?.defaultOpacity).toBeGreaterThan(0);
     expect(temp?.defaultOpacity).toBeLessThanOrEqual(1);
+  });
+
+  it('registers humidity and pressure field layers', () => {
+    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure']);
+    const hum = getLayer('humidity');
+    const pre = getLayer('pressure');
+    expect(hum?.kind).toBe('field');
+    expect(hum?.labelKey).toBe('map_layer_humidity');
+    expect(pre?.kind).toBe('field');
+    expect(pre?.labelKey).toBe('map_layer_pressure');
+    expect(hum?.defaultOpacity).toBeGreaterThan(0);
+    expect(pre?.defaultOpacity).toBeGreaterThan(0);
   });
 });
 
