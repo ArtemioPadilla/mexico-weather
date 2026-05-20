@@ -45,6 +45,8 @@ export interface UiStrings {
   timeline_next: string;
   timeline_now: string;
   map_layer_temperature: string;
+  map_layer_humidity: string;
+  map_layer_pressure: string;
   map_opacity: string;
   legend_light: string;
   legend_moderate: string;
@@ -100,6 +102,8 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     timeline_next: 'Cuadro siguiente',
     timeline_now: 'Ahora',
     map_layer_temperature: 'Temperatura',
+    map_layer_humidity: 'Humedad',
+    map_layer_pressure: 'Presión',
     map_opacity: 'Opacidad',
     legend_light: 'Ligera',
     legend_moderate: 'Moderada',
@@ -153,6 +157,8 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     timeline_next: 'Next frame',
     timeline_now: 'Now',
     map_layer_temperature: 'Temperature',
+    map_layer_humidity: 'Humidity',
+    map_layer_pressure: 'Pressure',
     map_opacity: 'Opacity',
     legend_light: 'Light',
     legend_moderate: 'Moderate',

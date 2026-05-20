@@ -22,10 +22,15 @@ const RAINVIEWER_MANIFEST = JSON.stringify({
   satellite: { infrared: [{ time: 1779130800, path: '/v2/satellite/test' }] },
 });
 
-/** Minimal Open-Meteo bulk response: 48 points (8x6 grid), 2 hourly steps. */
+/** Minimal Open-Meteo bulk response: 48 points (8x6 grid), 2 hourly steps, all field vars. */
 const OPEN_METEO_FIELD = JSON.stringify(
   Array.from({ length: 48 }, () => ({
-    hourly: { time: ['2026-05-19T00:00', '2026-05-19T01:00'], temperature_2m: [22, 23] },
+    hourly: {
+      time: ['2026-05-19T00:00', '2026-05-19T01:00'],
+      temperature_2m: [22, 23],
+      relative_humidity_2m: [60, 65],
+      pressure_msl: [1013, 1012],
+    },
   })),
 );
 
@@ -155,8 +160,9 @@ test.describe('mapa page', () => {
 
     const tempBtn = page.locator('#layerbtn-temperature');
     await expect(tempBtn).toBeEnabled();
+    const fieldResp = page.waitForResponse('**/api.open-meteo.com/v1/forecast**');
     await tempBtn.click();
-    await page.waitForResponse('**/api.open-meteo.com/v1/forecast**');
+    await fieldResp;
 
     await expect(page.locator('#layerbtn-temperature')).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('#legend')).toBeVisible();
@@ -167,4 +173,36 @@ test.describe('mapa page', () => {
     await expect(page.locator('#legend')).toBeHidden();
     await expect(page.locator('#timeline')).toBeHidden();
   });
+
+  for (const layer of ['humidity', 'pressure'] as const) {
+    test(`${layer} field layer activates with a legend and timeline`, async ({ page }) => {
+      await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
+        route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+      );
+      await page.route('**/tilecache.rainviewer.com/**', (route) =>
+        route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+      );
+      await page.route('**/api.open-meteo.com/v1/forecast**', (route) =>
+        route.fulfill({ status: 200, contentType: 'application/json', body: OPEN_METEO_FIELD }),
+      );
+
+      await page.goto('mapa/');
+      await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+
+      const btn = page.locator(`#layerbtn-${layer}`);
+      await expect(btn).toBeEnabled();
+      const fieldResp = page.waitForResponse('**/api.open-meteo.com/v1/forecast**');
+      await btn.click();
+      await fieldResp;
+
+      await expect(btn).toHaveAttribute('aria-pressed', 'true');
+      await expect(page.locator('#legend')).toBeVisible();
+      await expect(page.locator('#timeline')).toBeVisible();
+      await expect(page.locator('#opacitywrap')).toBeVisible();
+
+      await page.locator('#layerbtn-base').click();
+      await expect(page.locator('#legend')).toBeHidden();
+      await expect(page.locator('#timeline')).toBeHidden();
+    });
+  }
 });

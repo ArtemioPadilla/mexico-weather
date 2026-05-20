@@ -125,9 +125,15 @@ const t = ui[lang];
       viewportGrid,
       buildFieldUrl,
       parseFieldResponse,
+      fieldFrameIndex,
       tempColor,
+      humidityColor,
+      pressureColor,
       TEMP_LEGEND,
+      HUMIDITY_LEGEND,
+      PRESSURE_LEGEND,
       type FieldGrid,
+      type LegendStop,
     } from '../lib/mapfields';
     import type { FeatureCollection, Feature } from 'geojson';
     import { presetPins, withUserPin, type MapPin } from '../lib/mappins';
@@ -228,8 +234,14 @@ const t = ui[lang];
       window.clearTimeout(fieldResampleTimer);
       fieldResampleTimer = window.setTimeout(() => {
         void (async () => {
-          const ok = await loadFieldGrid();
-          if (ok) applyFrame(frameIndex >= 0 ? frameIndex : 0);
+          const ok = await loadFieldGrid(activeLayer);
+          if (!ok || !fieldGrid) return;
+          // Refresh timeline frames in case the Open-Meteo window rolled.
+          tlFrames = fieldGrid.times.map((iso) => ({
+            time: Math.floor(Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000),
+            path: '',
+          }));
+          applyFrame(frameIndex >= 0 ? frameIndex : 0);
         })();
       }, 500);
     });
@@ -318,6 +330,17 @@ const t = ui[lang];
     let fieldGrid: FieldGrid | null = null;
     let fieldResampleTimer = 0;
 
+    interface FieldConfig {
+      hourlyVar: string;
+      color: (v: number) => string;
+    }
+    const FIELD_CONFIGS: Record<string, FieldConfig> = {
+      temperature: { hourlyVar: 'temperature_2m', color: tempColor },
+      humidity: { hourlyVar: 'relative_humidity_2m', color: humidityColor },
+      pressure: { hourlyVar: 'pressure_msl', color: pressureColor },
+    };
+    let fieldAbort: AbortController | null = null;
+
     function removeField(): void {
       if (map.getLayer(FIELD_LAYER)) map.removeLayer(FIELD_LAYER);
       if (map.getSource(FIELD_SOURCE)) map.removeSource(FIELD_SOURCE);
@@ -325,14 +348,15 @@ const t = ui[lang];
 
     function fieldGeoJSON(hourIndex: number): FeatureCollection {
       const feats: Feature[] = [];
-      if (fieldGrid) {
+      const cfg = FIELD_CONFIGS[activeLayer];
+      if (fieldGrid && cfg) {
         for (const p of fieldGrid.points) {
           const v = p.values[hourIndex];
           if (typeof v !== 'number' || !Number.isFinite(v)) continue;
           feats.push({
             type: 'Feature',
             geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
-            properties: { color: tempColor(v) },
+            properties: { color: cfg.color(v) },
           });
         }
       }
@@ -360,18 +384,28 @@ const t = ui[lang];
       });
     }
 
-    async function loadFieldGrid(): Promise<boolean> {
+    async function loadFieldGrid(layerId: string): Promise<boolean> {
+      const cfg = FIELD_CONFIGS[layerId];
+      if (!cfg) return false;
       const b = map.getBounds();
       const grid = viewportGrid(
         { west: b.getWest(), south: b.getSouth(), east: b.getEast(), north: b.getNorth() },
         8,
         6,
       );
+      // Cancel any in-flight request before starting a new one.
+      fieldAbort?.abort();
+      const ac = new AbortController();
+      fieldAbort = ac;
       try {
-        const res = await deps.fetch(buildFieldUrl(grid, 'temperature_2m'));
-        fieldGrid = parseFieldResponse(await res.json(), grid, 'temperature_2m');
+        const res = await deps.fetch(buildFieldUrl(grid, cfg.hourlyVar), { signal: ac.signal });
+        if (ac.signal.aborted) return false;
+        fieldGrid = parseFieldResponse(await res.json(), grid, cfg.hourlyVar);
       } catch {
+        if (ac.signal.aborted) return false;
         fieldGrid = null;
+      } finally {
+        if (fieldAbort === ac) fieldAbort = null;
       }
       return !!fieldGrid && fieldGrid.points.length > 0;
     }
@@ -402,7 +436,7 @@ const t = ui[lang];
       });
     }
 
-    function renderLegend(kind: 'radar' | 'temperature' | null): void {
+    function renderLegend(kind: 'radar' | 'temperature' | 'humidity' | 'pressure' | null): void {
       const el = document.getElementById('legend');
       if (!el) return;
       if (!kind) {
@@ -410,21 +444,22 @@ const t = ui[lang];
         el.innerHTML = '';
         return;
       }
-      const rows =
+      const stops: LegendStop[] =
         kind === 'radar'
-          ? RADAR_LEGEND.map(
-              (s) =>
-                `<li class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded-sm" style="background:${esc(
-                  s.color,
-                )}"></span>${esc(t[s.labelKey as keyof typeof t])}</li>`,
-            )
-          : TEMP_LEGEND.map(
-              (s) =>
-                `<li class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded-sm" style="background:${esc(
-                  s.color,
-                )}"></span>${esc(s.label)}</li>`,
-            );
-      el.innerHTML = rows.join('');
+          ? RADAR_LEGEND.map((s) => ({ label: t[s.labelKey as keyof typeof t] as string, color: s.color }))
+          : kind === 'temperature'
+            ? TEMP_LEGEND
+            : kind === 'humidity'
+              ? HUMIDITY_LEGEND
+              : PRESSURE_LEGEND;
+      el.innerHTML = stops
+        .map(
+          (s) =>
+            `<li class="flex items-center gap-2"><span class="inline-block h-3 w-3 rounded-sm" style="background:${esc(
+              s.color,
+            )}"></span>${esc(s.label)}</li>`,
+        )
+        .join('');
       el.classList.remove('hidden');
     }
 
@@ -437,7 +472,13 @@ const t = ui[lang];
       document
         .getElementById('opacitywrap')
         ?.classList.toggle('hidden', akind !== 'raster-tile' && akind !== 'field');
-      renderLegend(activeLayer === 'radar' ? 'radar' : akind === 'field' ? 'temperature' : null);
+      const kindForLegend =
+        activeLayer === 'radar'
+          ? ('radar' as const)
+          : akind === 'field'
+            ? (activeLayer as 'temperature' | 'humidity' | 'pressure')
+            : null;
+      renderLegend(kindForLegend);
     }
 
     async function setActiveLayer(id: string): Promise<void> {
@@ -448,7 +489,7 @@ const t = ui[lang];
         if (opacityEl) opacityEl.value = String(Math.round(rvOpacity * 100));
         tlStop();
         removeWeatherRaster();
-        const ok = await loadFieldGrid();
+        const ok = await loadFieldGrid(id);
         if (!ok || !fieldGrid) {
           showMsg(t.map_layer_unavailable);
           activeLayer = 'base';
@@ -466,12 +507,11 @@ const t = ui[lang];
           time: Math.floor(Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000),
           path: '',
         }));
-        const now = Math.floor(Date.now() / 1000);
-        const idx = seekIndexForIso(tlFrames, pendingSeekIso, now);
+        const idx = fieldFrameIndex(fieldGrid.times, pendingSeekIso, Date.now());
         pendingSeekIso = null;
         showTimeline(true);
         refreshLayerButtons();
-        applyFrame(idx >= 0 ? idx : defaultFrameIndex(tlFrames, now));
+        applyFrame(idx >= 0 ? idx : 0);
         return;
       }
       if (def.kind === 'raster-tile') {

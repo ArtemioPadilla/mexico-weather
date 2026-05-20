@@ -1,9 +1,9 @@
 // Pure, DOM-free weather-map layer registry + legend data.
 // Single source of truth for valid layer ids (consumed by maphash.ts).
 
-export type LayerId = 'base' | 'radar' | 'satellite' | 'temperature';
+export type LayerId = 'base' | 'radar' | 'satellite' | 'temperature' | 'humidity' | 'pressure';
 
-export const LAYER_IDS = ['base', 'radar', 'satellite', 'temperature'] as const;
+export const LAYER_IDS = ['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure'] as const;
 
 export interface LayerDef {
   id: LayerId;
@@ -19,6 +19,8 @@ export const LAYERS: LayerDef[] = [
   { id: 'radar', labelKey: 'map_layer_radar', kind: 'raster-tile', defaultOpacity: 0.8 },
   { id: 'satellite', labelKey: 'map_layer_satellite', kind: 'raster-tile', defaultOpacity: 1 },
   { id: 'temperature', labelKey: 'map_layer_temperature', kind: 'field', defaultOpacity: 0.75 },
+  { id: 'humidity', labelKey: 'map_layer_humidity', kind: 'field', defaultOpacity: 0.65 },
+  { id: 'pressure', labelKey: 'map_layer_pressure', kind: 'field', defaultOpacity: 0.7 },
 ];
 
 export function getLayer(id: string): LayerDef | undefined {

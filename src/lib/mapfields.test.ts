@@ -98,3 +98,60 @@ describe('TEMP_LEGEND', () => {
     }
   });
 });
+
+import { humidityColor, pressureColor, HUMIDITY_LEGEND, PRESSURE_LEGEND } from './mapfields';
+
+describe('parseFieldResponse null tolerance', () => {
+  const pts = [
+    { lat: 10, lng: -100 },
+    { lat: 12, lng: -99 },
+  ];
+  it('keeps a result when its values array contains nulls (does not return null for the whole grid)', () => {
+    const resp = [
+      { hourly: { time: ['2026-05-19T00:00', '2026-05-19T01:00'], temperature_2m: [20, null] } },
+      { hourly: { time: ['2026-05-19T00:00', '2026-05-19T01:00'], temperature_2m: [null, 19] } },
+    ];
+    const g = parseFieldResponse(resp, pts, 'temperature_2m');
+    expect(g).not.toBeNull();
+    expect(g!.points[0].values).toEqual([20, null]);
+    expect(g!.points[1].values).toEqual([null, 19]);
+  });
+  it('still rejects when values is not an array at all', () => {
+    const bad = [{ hourly: { time: ['2026-05-19T00:00'], temperature_2m: 'oops' } }];
+    expect(parseFieldResponse(bad, [pts[0]], 'temperature_2m')).toBeNull();
+  });
+});
+
+describe('humidityColor', () => {
+  it('maps 0..100% to distinct hex colors and clamps the ends', () => {
+    expect(humidityColor(-10)).toBe(humidityColor(0));
+    expect(humidityColor(120)).toBe(humidityColor(100));
+    expect(humidityColor(20)).not.toBe(humidityColor(80));
+    for (const v of [0, 20, 40, 60, 80, 100]) {
+      expect(humidityColor(v)).toMatch(/^#[0-9a-f]{6}$/i);
+    }
+  });
+});
+
+describe('pressureColor', () => {
+  it('maps ~970..1040 hPa to distinct hex colors and clamps the ends', () => {
+    expect(pressureColor(950)).toBe(pressureColor(970));
+    expect(pressureColor(1100)).toBe(pressureColor(1040));
+    expect(pressureColor(990)).not.toBe(pressureColor(1030));
+    for (const v of [970, 990, 1010, 1020, 1040]) {
+      expect(pressureColor(v)).toMatch(/^#[0-9a-f]{6}$/i);
+    }
+  });
+});
+
+describe('HUMIDITY_LEGEND / PRESSURE_LEGEND', () => {
+  it('each is an ordered list of {label,color} stops with hex colors', () => {
+    for (const L of [HUMIDITY_LEGEND, PRESSURE_LEGEND]) {
+      expect(L.length).toBeGreaterThanOrEqual(4);
+      for (const s of L) {
+        expect(typeof s.label).toBe('string');
+        expect(s.color).toMatch(/^#[0-9a-f]{6}$/i);
+      }
+    }
+  });
+});
