@@ -333,12 +333,11 @@ const t = ui[lang];
     interface FieldConfig {
       hourlyVar: string;
       color: (v: number) => string;
-      legend: LegendStop[];
     }
     const FIELD_CONFIGS: Record<string, FieldConfig> = {
-      temperature: { hourlyVar: 'temperature_2m', color: tempColor, legend: TEMP_LEGEND },
-      humidity: { hourlyVar: 'relative_humidity_2m', color: humidityColor, legend: HUMIDITY_LEGEND },
-      pressure: { hourlyVar: 'pressure_msl', color: pressureColor, legend: PRESSURE_LEGEND },
+      temperature: { hourlyVar: 'temperature_2m', color: tempColor },
+      humidity: { hourlyVar: 'relative_humidity_2m', color: humidityColor },
+      pressure: { hourlyVar: 'pressure_msl', color: pressureColor },
     };
     let fieldAbort: AbortController | null = null;
 
