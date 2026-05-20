@@ -153,7 +153,9 @@ test.describe('mapa page', () => {
     await page.goto('mapa/');
     await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
 
-    await page.locator('#layerbtn-temperature').click();
+    const tempBtn = page.locator('#layerbtn-temperature');
+    await expect(tempBtn).toBeEnabled();
+    await tempBtn.click();
     await page.waitForResponse('**/api.open-meteo.com/v1/forecast**');
 
     await expect(page.locator('#layerbtn-temperature')).toHaveAttribute('aria-pressed', 'true');
