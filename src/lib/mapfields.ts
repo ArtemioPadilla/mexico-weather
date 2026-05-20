@@ -8,8 +8,8 @@ export interface LngLat {
 export interface FieldGrid {
   /** ISO hourly timestamps (canonical, from the first result). */
   times: string[];
-  /** One entry per input point, aligned by index; `values[h]` is the value at hour h. */
-  points: { lat: number; lng: number; values: number[] }[];
+  /** One entry per input point, aligned by index; `values[h]` is the value at hour h (null when Open-Meteo has no data for that cell). */
+  points: { lat: number; lng: number; values: (number | null)[] }[];
 }
 
 export interface LegendStop {
@@ -50,8 +50,11 @@ export function buildFieldUrl(points: LngLat[], hourlyVar: string): string {
   );
 }
 
-function isFiniteArray(a: unknown): a is number[] {
-  return Array.isArray(a) && a.every((n) => typeof n === 'number' && Number.isFinite(n));
+function isNumberOrNullArray(a: unknown): a is (number | null)[] {
+  return (
+    Array.isArray(a) &&
+    a.every((n) => n === null || (typeof n === 'number' && Number.isFinite(n)))
+  );
 }
 
 /** Normalise an Open-Meteo response (array for many points, object for one) into a FieldGrid. */
@@ -70,7 +73,7 @@ export function parseFieldResponse(
   for (let i = 0; i < arr.length; i++) {
     const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)?.hourly;
     const values = h?.[hourlyVar];
-    if (!isFiniteArray(values)) return null;
+    if (!isNumberOrNullArray(values)) return null;
     out.push({ lat: points[i].lat, lng: points[i].lng, values });
   }
   return { times: times as string[], points: out };
@@ -124,4 +127,58 @@ export const TEMP_LEGEND: LegendStop[] = [
   { label: '25°', color: '#f9d423' },
   { label: '32°', color: '#f08a24' },
   { label: '≥45°', color: '#d7191c' },
+];
+
+/** Relative humidity (%) → hex colour on a clamped dry→wet ramp. */
+export function humidityColor(h: number): string {
+  const stops: [number, string][] = [
+    [0, '#fde725'],
+    [20, '#a8db34'],
+    [40, '#5dc863'],
+    [60, '#21908d'],
+    [80, '#3b528b'],
+    [100, '#440154'],
+  ];
+  if (h <= stops[0][0]) return stops[0][1];
+  if (h >= stops[stops.length - 1][0]) return stops[stops.length - 1][1];
+  for (let i = 0; i < stops.length - 1; i++) {
+    if (h >= stops[i][0] && h < stops[i + 1][0]) return stops[i][1];
+  }
+  return stops[stops.length - 1][1];
+}
+
+/** Pressure (hPa, MSL) → hex colour on a clamped low→high ramp. */
+export function pressureColor(p: number): string {
+  const stops: [number, string][] = [
+    [970, '#542788'],
+    [990, '#998ec3'],
+    [1005, '#d8daeb'],
+    [1015, '#fee0b6'],
+    [1025, '#f1a340'],
+    [1040, '#b35806'],
+  ];
+  if (p <= stops[0][0]) return stops[0][1];
+  if (p >= stops[stops.length - 1][0]) return stops[stops.length - 1][1];
+  for (let i = 0; i < stops.length - 1; i++) {
+    if (p >= stops[i][0] && p < stops[i + 1][0]) return stops[i][1];
+  }
+  return stops[stops.length - 1][1];
+}
+
+export const HUMIDITY_LEGEND: LegendStop[] = [
+  { label: '≤0%', color: '#fde725' },
+  { label: '20%', color: '#a8db34' },
+  { label: '40%', color: '#5dc863' },
+  { label: '60%', color: '#21908d' },
+  { label: '80%', color: '#3b528b' },
+  { label: '≥100%', color: '#440154' },
+];
+
+export const PRESSURE_LEGEND: LegendStop[] = [
+  { label: '≤970', color: '#542788' },
+  { label: '990', color: '#998ec3' },
+  { label: '1005', color: '#d8daeb' },
+  { label: '1015', color: '#fee0b6' },
+  { label: '1025', color: '#f1a340' },
+  { label: '≥1040 hPa', color: '#b35806' },
 ];
