@@ -47,6 +47,11 @@ export interface UiStrings {
   map_layer_temperature: string;
   map_layer_humidity: string;
   map_layer_pressure: string;
+  map_layer_wind: string;
+  legend_wind_calm: string;
+  legend_wind_breeze: string;
+  legend_wind_strong: string;
+  legend_wind_gale: string;
   map_opacity: string;
   legend_light: string;
   legend_moderate: string;
@@ -104,6 +109,11 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_layer_temperature: 'Temperatura',
     map_layer_humidity: 'Humedad',
     map_layer_pressure: 'Presión',
+    map_layer_wind: 'Viento',
+    legend_wind_calm: 'Calmo',
+    legend_wind_breeze: 'Brisa',
+    legend_wind_strong: 'Fuerte',
+    legend_wind_gale: 'Tormenta',
     map_opacity: 'Opacidad',
     legend_light: 'Ligera',
     legend_moderate: 'Moderada',
@@ -159,6 +169,11 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_layer_temperature: 'Temperature',
     map_layer_humidity: 'Humidity',
     map_layer_pressure: 'Pressure',
+    map_layer_wind: 'Wind',
+    legend_wind_calm: 'Calm',
+    legend_wind_breeze: 'Breeze',
+    legend_wind_strong: 'Strong',
+    legend_wind_gale: 'Gale',
     map_opacity: 'Opacity',
     legend_light: 'Light',
     legend_moderate: 'Moderate',
