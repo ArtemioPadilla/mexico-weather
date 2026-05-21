@@ -13,21 +13,32 @@ const t = ui[lang];
       class="absolute left-3 top-3 z-10 rounded-lg bg-white/90 px-3 py-1.5 text-sm text-blue-600 shadow hover:underline dark:bg-gray-900/90 dark:text-blue-400"
       >← {t.back_home}</a
     >
-    <div class="absolute right-3 top-3 z-10 flex gap-2">
-      <input
-        id="mapq"
-        type="text"
-        autocomplete="off"
-        aria-label={t.map_search_placeholder}
-        placeholder={t.map_search_placeholder}
-        class="w-56 rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/95 dark:text-gray-100"
-      />
-      <button
-        id="maploc"
-        type="button"
-        class="rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-blue-700 shadow hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900/95 dark:text-blue-300"
-        ><span aria-hidden="true">📍</span> {t.map_locate}</button
-      >
+    <div class="absolute right-3 top-3 z-10 flex w-64 flex-col items-end gap-2">
+      <div class="flex w-full gap-2">
+        <input
+          id="mapq"
+          type="text"
+          autocomplete="off"
+          role="combobox"
+          aria-expanded="false"
+          aria-controls="mapac"
+          aria-autocomplete="list"
+          aria-label={t.map_search_placeholder}
+          placeholder={t.map_search_placeholder}
+          class="flex-1 rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/95 dark:text-gray-100"
+        />
+        <button
+          id="maploc"
+          type="button"
+          class="rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-blue-700 shadow hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900/95 dark:text-blue-300"
+          ><span aria-hidden="true">📍</span> {t.map_locate}</button
+        >
+      </div>
+      <ul
+        id="mapac"
+        role="listbox"
+        class="hidden w-full overflow-hidden rounded-lg border border-gray-300 bg-white/95 text-start shadow dark:border-gray-700 dark:bg-gray-900/95"
+      ></ul>
     </div>
     <div
       class="absolute left-3 top-14 z-10 w-44 space-y-2 rounded-lg bg-white/95 p-3 text-sm shadow dark:bg-gray-900/95"
@@ -403,8 +414,98 @@ const t = ui[lang];
     }
 
     const q = document.getElementById('mapq') as HTMLInputElement | null;
+    const acList = document.getElementById('mapac') as HTMLUListElement | null;
     let qTimer = 0;
     let searchGen = 0;
+
+    // Autocomplete state — mirrors the home page's `#ac` combobox.
+    type GeoItem = {
+      name: string;
+      admin1?: string;
+      country?: string;
+      lat: number;
+      lng: number;
+      tz: string;
+      population?: number;
+      featureCode?: string;
+    };
+    let acResults: GeoItem[] = [];
+    let acActive = -1;
+
+    function closeAcList(): void {
+      if (!acList || !q) return;
+      acList.classList.add('hidden');
+      acList.textContent = '';
+      q.setAttribute('aria-expanded', 'false');
+      q.removeAttribute('aria-activedescendant');
+      acResults = [];
+      acActive = -1;
+    }
+
+    function highlightAc(): void {
+      if (!acList || !q) return;
+      Array.from(acList.children).forEach((li, i) => {
+        if (i === acActive) {
+          li.classList.add('bg-gray-100', 'dark:bg-gray-800');
+          li.setAttribute('aria-selected', 'true');
+          q.setAttribute('aria-activedescendant', li.id);
+        } else {
+          li.classList.remove('bg-gray-100', 'dark:bg-gray-800');
+          li.setAttribute('aria-selected', 'false');
+        }
+      });
+      if (acActive < 0) q.removeAttribute('aria-activedescendant');
+    }
+
+    function selectAc(r: GeoItem): void {
+      hideMsg();
+      closeAcList();
+      setUserPin(r.name, r.lat, r.lng, 'search');
+    }
+
+    function renderAcList(): void {
+      if (!acList || !q) return;
+      acList.textContent = '';
+      acResults.forEach((r, i) => {
+        const li = document.createElement('li');
+        li.id = 'mapac-' + i;
+        li.setAttribute('role', 'option');
+        li.setAttribute('aria-selected', 'false');
+        li.className =
+          'px-3 py-2 text-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800';
+
+        const primary = document.createElement('div');
+        primary.className = 'flex items-center gap-2';
+
+        const nameEl = document.createElement('span');
+        nameEl.className = 'font-semibold text-gray-900 dark:text-gray-100';
+        nameEl.textContent = r.name;
+        primary.appendChild(nameEl);
+
+        if (typeof r.population === 'number' && r.population >= 50000) {
+          const badge = document.createElement('span');
+          badge.className =
+            'rounded-full bg-blue-500/10 px-1.5 py-0.5 text-[10px] font-medium text-blue-600 dark:text-blue-400';
+          badge.textContent = 'ciudad';
+          primary.appendChild(badge);
+        }
+        li.appendChild(primary);
+
+        const sub = [r.admin1, r.country].filter(Boolean).join(' · ');
+        if (sub) {
+          const subEl = document.createElement('div');
+          subEl.className = 'text-xs text-gray-500 dark:text-gray-400';
+          subEl.textContent = sub;
+          li.appendChild(subEl);
+        }
+
+        li.addEventListener('click', () => selectAc(r));
+        acList.appendChild(li);
+      });
+      acList.classList.remove('hidden');
+      q.setAttribute('aria-expanded', 'true');
+      acActive = -1;
+    }
 
     const RV_SOURCE = 'wx-raster';
     const RV_LAYER = 'wx-raster-layer';
@@ -1211,6 +1312,7 @@ const t = ui[lang];
       const query = q.value.trim();
       if (query.length < 2) {
         hideMsg();
+        closeAcList();
         return;
       }
       qTimer = window.setTimeout(async () => {
@@ -1219,15 +1321,50 @@ const t = ui[lang];
           const results = await geocode(query, deps);
           if (gen !== searchGen) return;
           if (!results.length) {
+            closeAcList();
             showMsg(`${t.no_results} «${query}»`);
             return;
           }
-          const r = results[0];
-          setUserPin(r.name, r.lat, r.lng, 'search');
+          acResults = results;
+          hideMsg();
+          renderAcList();
         } catch {
+          if (gen !== searchGen) return;
+          closeAcList();
           showMsg(t.load_error);
         }
       }, 350);
+    });
+
+    q?.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (acResults.length === 0) {
+        if (e.key === 'Escape') closeAcList();
+        return;
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        acActive = (acActive + 1) % acResults.length;
+        highlightAc();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        acActive = acActive <= 0 ? acResults.length - 1 : acActive - 1;
+        highlightAc();
+      } else if (e.key === 'Enter') {
+        if (acActive >= 0 && acActive < acResults.length) {
+          e.preventDefault();
+          selectAc(acResults[acActive]);
+        }
+      } else if (e.key === 'Escape') {
+        closeAcList();
+      }
+    });
+
+    // Click-outside closes the suggestion list.
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node;
+      if (q && acList && !q.contains(target) && !acList.contains(target)) {
+        closeAcList();
+      }
     });
 
     document.getElementById('maploc')?.addEventListener('click', () => {

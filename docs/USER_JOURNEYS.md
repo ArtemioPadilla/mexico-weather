@@ -76,7 +76,8 @@ Stable IDs you can rely on across all journeys:
 | ID | What it is |
 |---|---|
 | `#map` | The MapLibre map container (`role="application"`) |
-| `#mapq` | Map search input |
+| `#mapq` | Map search input (combobox role; `aria-controls="mapac"`) |
+| `#mapac` | Map autocomplete listbox (`role="listbox"`; up to 8 ranked candidates) |
 | `#maploc` | Map "Mi ubicación" button |
 | `#mapmsg` | Non-blocking status banner (`aria-live="polite"`) |
 | `#layerbtns` | Layer-rail button container |
