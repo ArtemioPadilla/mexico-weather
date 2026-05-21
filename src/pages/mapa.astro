@@ -363,6 +363,7 @@ const t = ui[lang];
     let windHourIndex = 0;
     const windReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let windRaf = 0;
+    let windTexDirty = true;
 
     function removeWind(): void {
       if (windRaf) {
@@ -397,6 +398,7 @@ const t = ui[lang];
     function showWindFrame(h: number): void {
       if (!windGrid) return;
       windHourIndex = h;
+      windTexDirty = true;
       if (windReducedMotion) {
         const data = windCircleGeoJSON(windGrid, h);
         const src = map.getSource(WIND_CIRCLE_SOURCE) as maplibregl.GeoJSONSource | undefined;
@@ -431,11 +433,24 @@ const t = ui[lang];
       let fbo: WebGLFramebuffer | null = null;
       let posBuf: WebGLBuffer | null = null;
       let quadBuf: WebGLBuffer | null = null;
+      let upd_aPos = -1;
+      let upd_uPos: WebGLUniformLocation | null = null;
+      let upd_uWind: WebGLUniformLocation | null = null;
+      let upd_uDt: WebGLUniformLocation | null = null;
+      let upd_uMax: WebGLUniformLocation | null = null;
+      let drw_aIdx = -1;
+      let drw_uPos: WebGLUniformLocation | null = null;
+      let drw_uWind: WebGLUniformLocation | null = null;
+      let drw_uSize: WebGLUniformLocation | null = null;
+      let drw_uMax: WebGLUniformLocation | null = null;
 
       function compile(gl: WebGLRenderingContext, type: number, src: string): WebGLShader {
         const sh = gl.createShader(type)!;
         gl.shaderSource(sh, src);
         gl.compileShader(sh);
+        if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+          console.error('[wind] shader compile failed:', gl.getShaderInfoLog(sh));
+        }
         return sh;
       }
       function link(gl: WebGLRenderingContext, vs: string, fs: string): WebGLProgram {
@@ -443,6 +458,9 @@ const t = ui[lang];
         gl.attachShader(p, compile(gl, gl.VERTEX_SHADER, vs));
         gl.attachShader(p, compile(gl, gl.FRAGMENT_SHADER, fs));
         gl.linkProgram(p);
+        if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+          console.error('[wind] program link failed:', gl.getProgramInfoLog(p));
+        }
         return p;
       }
 
@@ -470,8 +488,11 @@ const t = ui[lang];
           vec2 dp = vec2(uv.x, -uv.y) * u_dt * 0.000045;
           pos += dp * mask;
           float age = p.z + u_dt;
-          if (pos.x < 0.0 || pos.x > 1.0 || pos.y < 0.0 || pos.y > 1.0 || age > 4.0) {
-            pos = fract(vec2(sin(age * 12.9898) * 43758.5453, cos(age * 78.233) * 12345.678));
+          if (pos.x < 0.0 || pos.x > 1.0 || pos.y < 0.0 || pos.y > 1.0 || age > 0.95) {
+            pos = fract(vec2(
+              sin(dot(v_uv, vec2(12.9898, 78.233)) + age * 53.0) * 43758.5453,
+              cos(dot(v_uv, vec2(4.898, 7.23)) + age * 39.0) * 12345.678
+            ));
             age = 0.0;
           }
           gl_FragColor = vec4(pos, age, 0.0);
@@ -515,7 +536,7 @@ const t = ui[lang];
       `;
 
       function ensureWindTex(gl: WebGLRenderingContext): void {
-        if (!windGrid || !windTex) return;
+        if (!windGrid || !windTex || !windTexDirty) return;
         const pts = windPointsAtHour(windGrid, windHourIndex);
         const cols = 8;
         const rows = 6;
@@ -523,6 +544,7 @@ const t = ui[lang];
         const enc = encodeWindGrid(pts, cols, rows);
         gl.bindTexture(gl.TEXTURE_2D, windTex);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, cols, rows, 0, gl.RGBA, gl.UNSIGNED_BYTE, enc.data);
+        windTexDirty = false;
       }
 
       return {
@@ -532,6 +554,16 @@ const t = ui[lang];
         onAdd(_map, gl) {
           updateProg = link(gl, updateVs, updateFs);
           prog = link(gl, drawVs, drawFs);
+          upd_aPos = gl.getAttribLocation(updateProg, 'a_pos');
+          upd_uPos = gl.getUniformLocation(updateProg, 'u_pos');
+          upd_uWind = gl.getUniformLocation(updateProg, 'u_wind');
+          upd_uDt = gl.getUniformLocation(updateProg, 'u_dt');
+          upd_uMax = gl.getUniformLocation(updateProg, 'u_max');
+          drw_aIdx = gl.getAttribLocation(prog, 'a_index');
+          drw_uPos = gl.getUniformLocation(prog, 'u_pos');
+          drw_uWind = gl.getUniformLocation(prog, 'u_wind');
+          drw_uSize = gl.getUniformLocation(prog, 'u_size');
+          drw_uMax = gl.getUniformLocation(prog, 'u_max');
           const initial = initParticlePositions(PARTICLE_COUNT, 1234);
           const bytes = new Uint8Array(PARTICLE_COUNT * 4);
           for (let i = 0; i < PARTICLE_COUNT; i++) {
@@ -591,40 +623,41 @@ const t = ui[lang];
           gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, posTexB, 0);
           gl.viewport(0, 0, PARTICLE_TEX_SIZE, PARTICLE_TEX_SIZE);
           gl.useProgram(updateProg);
-          const aPos = gl.getAttribLocation(updateProg, 'a_pos');
           gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
-          gl.enableVertexAttribArray(aPos);
-          gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+          gl.enableVertexAttribArray(upd_aPos);
+          gl.vertexAttribPointer(upd_aPos, 2, gl.FLOAT, false, 0, 0);
           gl.activeTexture(gl.TEXTURE0);
           gl.bindTexture(gl.TEXTURE_2D, posTexA);
-          gl.uniform1i(gl.getUniformLocation(updateProg, 'u_pos'), 0);
+          gl.uniform1i(upd_uPos, 0);
           gl.activeTexture(gl.TEXTURE1);
           gl.bindTexture(gl.TEXTURE_2D, windTex);
-          gl.uniform1i(gl.getUniformLocation(updateProg, 'u_wind'), 1);
-          gl.uniform1f(gl.getUniformLocation(updateProg, 'u_dt'), 16.0);
-          gl.uniform1f(gl.getUniformLocation(updateProg, 'u_max'), MAX_WIND_MPS);
+          gl.uniform1i(upd_uWind, 1);
+          gl.uniform1f(upd_uDt, 0.016);
+          gl.uniform1f(upd_uMax, MAX_WIND_MPS);
           gl.drawArrays(gl.TRIANGLES, 0, 6);
+          gl.disableVertexAttribArray(upd_aPos);
           gl.bindFramebuffer(gl.FRAMEBUFFER, null);
           const tmp = posTexA; posTexA = posTexB; posTexB = tmp;
         },
         render(gl) {
           if (!prog || !posTexA || !windTex || !posBuf) return;
           gl.useProgram(prog);
-          const aIdx = gl.getAttribLocation(prog, 'a_index');
           gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
-          gl.enableVertexAttribArray(aIdx);
-          gl.vertexAttribPointer(aIdx, 1, gl.FLOAT, false, 0, 0);
+          gl.enableVertexAttribArray(drw_aIdx);
+          gl.vertexAttribPointer(drw_aIdx, 1, gl.FLOAT, false, 0, 0);
           gl.activeTexture(gl.TEXTURE0);
           gl.bindTexture(gl.TEXTURE_2D, posTexA);
-          gl.uniform1i(gl.getUniformLocation(prog, 'u_pos'), 0);
+          gl.uniform1i(drw_uPos, 0);
           gl.activeTexture(gl.TEXTURE1);
           gl.bindTexture(gl.TEXTURE_2D, windTex);
-          gl.uniform1i(gl.getUniformLocation(prog, 'u_wind'), 1);
-          gl.uniform1f(gl.getUniformLocation(prog, 'u_size'), PARTICLE_TEX_SIZE);
-          gl.uniform1f(gl.getUniformLocation(prog, 'u_max'), MAX_WIND_MPS);
+          gl.uniform1i(drw_uWind, 1);
+          gl.uniform1f(drw_uSize, PARTICLE_TEX_SIZE);
+          gl.uniform1f(drw_uMax, MAX_WIND_MPS);
           gl.enable(gl.BLEND);
           gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
           gl.drawArrays(gl.POINTS, 0, PARTICLE_COUNT);
+          gl.disableVertexAttribArray(drw_aIdx);
+          gl.disable(gl.BLEND);
         },
       };
     }
@@ -795,6 +828,7 @@ const t = ui[lang];
           const res = await deps.fetch(buildWindUrl(grid), { signal: ac.signal });
           if (ac.signal.aborted) { removeWind(); activeLayer = 'base'; refreshLayerButtons(); syncHash(); return; }
           windGrid = parseWindResponse(await res.json(), grid);
+          windTexDirty = true;
         } catch {
           if (!ac.signal.aborted) windGrid = null;
         } finally {
