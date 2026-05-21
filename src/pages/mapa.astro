@@ -145,6 +145,7 @@ const t = ui[lang];
       type WindPoint,
     } from '../lib/mapwind';
     import { buildWindUrl, parseWindResponse, type WindGrid } from '../lib/mapfields';
+    import { terminatorPolygon } from '../lib/mapsun';
     import type { FeatureCollection, Feature } from 'geojson';
     import { presetPins, withUserPin, type MapPin } from '../lib/mappins';
     import { cities } from '../data/cities';
@@ -364,6 +365,42 @@ const t = ui[lang];
     const windReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let windRaf = 0;
     let windTexDirty = true;
+
+    const SUN_SOURCE = 'wx-sun-src';
+    const SUN_LAYER = 'wx-sun-layer';
+    let sunTicker = 0;
+
+    function removeSun(): void {
+      if (sunTicker) {
+        window.clearInterval(sunTicker);
+        sunTicker = 0;
+      }
+      if (map.getLayer(SUN_LAYER)) map.removeLayer(SUN_LAYER);
+      if (map.getSource(SUN_SOURCE)) map.removeSource(SUN_SOURCE);
+    }
+
+    function refreshSun(): void {
+      const poly = terminatorPolygon(Date.now(), 180);
+      const fc: FeatureCollection = {
+        type: 'FeatureCollection',
+        features: [{ type: 'Feature', geometry: poly, properties: {} }],
+      };
+      const src = map.getSource(SUN_SOURCE) as maplibregl.GeoJSONSource | undefined;
+      if (src) {
+        src.setData(fc);
+        return;
+      }
+      map.addSource(SUN_SOURCE, { type: 'geojson', data: fc });
+      map.addLayer({
+        id: SUN_LAYER,
+        type: 'fill',
+        source: SUN_SOURCE,
+        paint: {
+          'fill-color': '#0b1320',
+          'fill-opacity': rvOpacity,
+        },
+      });
+    }
 
     function removeWind(): void {
       if (windRaf) {
@@ -794,7 +831,7 @@ const t = ui[lang];
       const akind = getLayerDef(activeLayer)?.kind;
       document
         .getElementById('opacitywrap')
-        ?.classList.toggle('hidden', akind !== 'raster-tile' && akind !== 'field' && akind !== 'particles');
+        ?.classList.toggle('hidden', akind !== 'raster-tile' && akind !== 'field' && akind !== 'particles' && akind !== 'overlay');
       const kindForLegend =
         activeLayer === 'radar'
           ? ('radar' as const)
@@ -826,7 +863,7 @@ const t = ui[lang];
         fieldAbort = ac;
         try {
           const res = await deps.fetch(buildWindUrl(grid), { signal: ac.signal });
-          if (ac.signal.aborted) { removeWind(); activeLayer = 'base'; refreshLayerButtons(); syncHash(); return; }
+          if (ac.signal.aborted) { removeWind(); removeSun(); activeLayer = 'base'; refreshLayerButtons(); syncHash(); return; }
           windGrid = parseWindResponse(await res.json(), grid);
           windTexDirty = true;
         } catch {
@@ -838,6 +875,7 @@ const t = ui[lang];
           showMsg(t.map_layer_unavailable);
           activeLayer = 'base';
           removeWind();
+          removeSun();
           tlFrames = [];
           frameIndex = -1;
           activeFrameIso = null;
@@ -858,11 +896,30 @@ const t = ui[lang];
         applyFrame(idx >= 0 ? idx : 0);
         return;
       }
+      if (def.kind === 'overlay') {
+        rvOpacity = def.defaultOpacity;
+        if (opacityEl) opacityEl.value = String(Math.round(rvOpacity * 100));
+        tlStop();
+        removeWeatherRaster();
+        removeField();
+        removeWind();
+        activeLayer = id;
+        tlFrames = [];
+        frameIndex = -1;
+        activeFrameIso = null;
+        showTimeline(false);
+        refreshLayerButtons();
+        refreshSun();
+        sunTicker = window.setInterval(refreshSun, 60_000);
+        syncHash();
+        return;
+      }
       if (def.kind === 'field') {
         rvOpacity = def.defaultOpacity;
         if (opacityEl) opacityEl.value = String(Math.round(rvOpacity * 100));
         tlStop();
         removeWind();
+        removeSun();
         removeWeatherRaster();
         const ok = await loadFieldGrid(id);
         if (!ok || !fieldGrid) {
@@ -900,6 +957,7 @@ const t = ui[lang];
           removeWeatherRaster();
           removeField();
           removeWind();
+          removeSun();
           tlFrames = [];
           frameIndex = -1;
           activeFrameIso = null;
@@ -917,6 +975,7 @@ const t = ui[lang];
         refreshLayerButtons();
         removeField();
         removeWind();
+        removeSun();
         applyFrame(idx >= 0 ? idx : defaultFrameIndex(frames, now));
         return;
       }
@@ -924,6 +983,7 @@ const t = ui[lang];
       removeWeatherRaster();
       removeField();
       removeWind();
+      removeSun();
       activeLayer = id;
       tlFrames = [];
       frameIndex = -1;
@@ -958,6 +1018,7 @@ const t = ui[lang];
         if (map.getLayer(RV_LAYER)) map.setPaintProperty(RV_LAYER, 'raster-opacity', rvOpacity);
         if (map.getLayer(FIELD_LAYER)) map.setPaintProperty(FIELD_LAYER, 'circle-opacity', rvOpacity);
         if (map.getLayer(WIND_CIRCLE_LAYER)) map.setPaintProperty(WIND_CIRCLE_LAYER, 'circle-opacity', rvOpacity);
+        if (map.getLayer(SUN_LAYER)) map.setPaintProperty(SUN_LAYER, 'fill-opacity', rvOpacity);
       });
     }
 
