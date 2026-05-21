@@ -770,13 +770,13 @@ Conventions:
 | `privacy-1` heading | ✅ `privacy.spec.ts` |
 | `privacy-2` no cookies / no tracking | ✅ `privacy.spec.ts` |
 | `privacy-3` source-attribution links | ✅ `privacy.spec.ts` |
-| `privacy-4` back-to-home link | ❌ |
-| `rss-1` /rss.xml 200 + XML | ❌ (unit-tested in `src/lib/rss.xml.test.ts`) |
-| `sitemap-1` /sitemap.xml 200 + XML | ❌ |
-| `cross-1` theme persists across routes | partial |
-| `cross-2` nav links present everywhere | ❌ |
-| `cross-3` feedback FAB everywhere | ❌ |
-| `cross-4` own-scoped service worker registered | ❌ |
+| `privacy-4` back-to-home link | ✅ `static.spec.ts` |
+| `rss-1` /rss.xml 200 + XML | ✅ `static.spec.ts` (also unit-tested in `src/lib/rss.xml.test.ts`) |
+| `sitemap-1` /sitemap.xml 200 + XML | ✅ `static.spec.ts` |
+| `cross-1` theme persists across routes | ✅ `cross.spec.ts` |
+| `cross-2` nav links present everywhere | ✅ `cross.spec.ts` |
+| `cross-3` feedback FAB everywhere | ✅ `cross.spec.ts` |
+| `cross-4` own-scoped service worker registered | ✅ `cross.spec.ts` (skips cleanly if SW API unavailable) |
 | `responsive-1` home grid reflows 1/2/3 columns | ❌ |
 | `responsive-2` no horizontal scroll at any width | ❌ |
 | `responsive-3` forecast hourly row scrolls, doesn't wrap | ❌ |
@@ -784,7 +784,7 @@ Conventions:
 | `responsive-5` FAB doesn't overlap critical content | ❌ |
 | `responsive-6` theme toggle clear of nav at all widths | ❌ |
 
-**Existing tests: 22.** **Documented journeys: ~51.** **Coverage gap: ~34 journeys** spanning denial paths, persistence-across-routes, the feedback modal, multiple `/mapa` layer activations (humidity/pressure), reduced-motion variants, layer-unavailable error path, URL hash restore, the RSS/sitemap endpoints, the MX-aware autocomplete behaviors (alias / population ranking / row formatting), the `&admin` subheading on `/forecast`, the own-scoped service-worker registration, and the new responsive-* journeys at 375 / 768 / 1024 / 1920.
+**Existing tests: 29.** **Documented journeys: ~51.** **Coverage gap: ~22 journeys** spanning denial paths, the feedback modal, reduced-motion variants, layer-unavailable error path, URL hash restore, the MX-aware autocomplete behaviors (alias / population ranking / row formatting), the `&admin` subheading on `/forecast`, and the responsive-* journeys at 375 / 768 / 1024 / 1920.
 
 # Recommended test-authoring order (highest value first)
 
