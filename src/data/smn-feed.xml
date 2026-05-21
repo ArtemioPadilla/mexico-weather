@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 21 May 2026 03:31:20 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2026 05:46:03 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Viento de 30 a 40 km/h con rachas de 50 a 70 km/h y con posible formación de torbellinos o tornados</title>
+      <title>⚠️ Alerta SMN: Viento de 30 a 40 km/h con rachas de 50 a 70 km/h, tolvaneras y con posible formación de torbellinos o tornados: Coahuila (norte), Nuevo León (norte) y Tamaulipas (noroeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Coahuila (norte), Chihuahua (este), Nuevo León (norte) y Tamaulipas (noroeste).]]></description>
-      <pubDate>Wed, 20 May 2026 21:31:08 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-20-be86</guid>
+      <description><![CDATA[Viento de 30 a 40 km/h con rachas de 50 a 70 km/h, tolvaneras y con posible formación de torbellinos o tornados: Coahuila (norte), Nuevo León (norte) y Tamaulipas (noroeste).]]></description>
+      <pubDate>Wed, 20 May 2026 23:45:54 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-20-3c6c</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 20 MAY 2026: Se pronostican lluvias intensas en zonas de Coahuila, Nuevo León y Tamaulipas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_20.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Coahuila, Nuevo León y Tamaulipas — Reporte Vespertino del 20 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_20.pdf]]></description>
+      <pubDate>Wed, 20 May 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_20</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 280 | 20 de Mayo del 2026 | Emisión 18:00h</title>
@@ -47,9 +55,9 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 20 MAY 2026: Se pronostican lluvias intensas en zonas de Coahuila, Nuevo León y Tamaulipas</title>
+      <title>📋 SMN Reporte Matutino 20 MAY 2026: Se prevén lluvias de fuertes a muy fuertes en regiones de 12 estados de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_20.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Coahuila, Nuevo León y Tamaulipas — Reporte Matutino del 20 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_20.pdf]]></description>
+      <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de 12 estados de México — Reporte Matutino del 20 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_20.pdf]]></description>
       <pubDate>Wed, 20 May 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_20</guid>
       <category>Comunicado</category>
