@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { mockOpenMeteo } from './helpers';
 
 /** Minimal 1×1 transparent PNG (base64) — satisfies MapLibre tile requests. */
 const TRANSPARENT_PNG = Buffer.from(
@@ -246,6 +247,48 @@ test.describe('mapa page', () => {
     await page.locator('#layerbtn-base').click();
     await expect(page.locator('#legend')).toBeHidden();
     await expect(page.locator('#timeline')).toBeHidden();
+  });
+
+  test('search input shows an autocomplete listbox with multiple options before fly', async ({
+    page,
+  }) => {
+    // Mocks: geocode (CDMX fixture has 2 results) + RainViewer + OSM tiles.
+    await mockOpenMeteo(page);
+    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    );
+    await page.route('**/tile.openstreetmap.org/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+    );
+
+    await page.goto('mapa/');
+
+    // Count markers before any search interaction — only preset pins should
+    // exist; no user pin yet (the dropdown is explicit-select, never silent).
+    const presetCount = await page.locator('.maplibregl-marker').count();
+
+    const mapq = page.locator('#mapq');
+    await expect(mapq).toHaveAttribute('aria-expanded', 'false');
+    await mapq.fill('Ciudad');
+
+    const listbox = page.locator('#mapac');
+    await expect(listbox).toBeVisible();
+    await expect(mapq).toHaveAttribute('aria-expanded', 'true');
+
+    // The CDMX fixture returns 2 distinct results (Ciudad de México +
+    // Mexicali). The combobox must show more than one option so the user
+    // can verify which match they want — issue #81's regression assertion.
+    const options = page.locator('#mapac > li');
+    await expect(options).toHaveCount(2);
+
+    // Marker count is unchanged: no auto-fly, no auto-pin happened.
+    expect(await page.locator('.maplibregl-marker').count()).toBe(presetCount);
+
+    // Clicking an option drops a user pin (+1 marker) and closes the list.
+    await options.first().click();
+    await expect(listbox).toBeHidden();
+    await expect(mapq).toHaveAttribute('aria-expanded', 'false');
+    expect(await page.locator('.maplibregl-marker').count()).toBe(presetCount + 1);
   });
 
   test('sunlight overlay activates without timeline or legend', async ({ page }) => {
