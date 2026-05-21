@@ -480,6 +480,22 @@ const base = siteBase();
     // renderFavorites(); never re-fetched there beyond the one-shot.
     let favCards: HTMLElement[] = [];
 
+    // Stagger card refreshes so we don't fire 5+ Open-Meteo requests in the
+    // same tick on mobile cold loads (closes #82). Bursting all 5 presets at
+    // once was producing 429-style rate limiting that surfaced as 3/5
+    // "Error al cargar" cards. 120 ms base spacing + up to 60 ms of random
+    // jitter spreads the burst across ~600 ms while keeping the page
+    // visually live (each card already shows "Cargando pronóstico…" until
+    // its fetch resolves).
+    const STAGGER_BASE_MS = 120;
+    const STAGGER_JITTER_MS = 60;
+
+    function staggerDelay(index: number): number {
+      return (
+        index * STAGGER_BASE_MS + Math.floor(Math.random() * STAGGER_JITTER_MS)
+      );
+    }
+
     // includeFavs=false on the very first call: favorites were already
     // fetched once by renderFavorites(), so skipping them here avoids a
     // double initial fetch. The interval passes true so favorite cards
@@ -489,7 +505,16 @@ const base = siteBase();
         ? presetCards.concat(favCards)
         : presetCards;
       const results = await Promise.all(
-        cards.map((card) => refreshCityCard(card, cardLoc(card))),
+        cards.map(
+          (card, i) =>
+            new Promise<boolean>((resolve) => {
+              window.setTimeout(() => {
+                refreshCityCard(card, cardLoc(card)).then(resolve, () =>
+                  resolve(false),
+                );
+              }, staggerDelay(i));
+            }),
+        ),
       );
       // Only stamp a fresh timestamp when at least one card succeeded this
       // cycle; during a total outage show an accurate failure message instead.
@@ -573,7 +598,7 @@ const base = siteBase();
         return;
       }
       favSection.classList.remove('hidden');
-      favs.forEach((f) => {
+      favs.forEach((f, i) => {
         const card = buildCityCardElement({
           lat: String(f.lat),
           lng: String(f.lng),
@@ -602,7 +627,12 @@ const base = siteBase();
 
         favGrid.appendChild(card);
         favCards.push(card);
-        void refreshCityCard(card, cardLoc(card));
+        // Stagger the initial favorite fetches (see refreshAll above): on
+        // cold loads with several favorites the parallel burst was hitting
+        // the same Open-Meteo rate limit as the presets.
+        window.setTimeout(() => {
+          void refreshCityCard(card, cardLoc(card));
+        }, staggerDelay(i));
       });
       syncAllStars();
     }
