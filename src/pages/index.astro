@@ -460,20 +460,30 @@ const base = siteBase();
     }
     const presetCities: PresetCity[] = readPresetCities();
 
-    const presetGrid = document.getElementById('preset-grid');
-    const presetCards: HTMLElement[] = [];
-    if (presetGrid) {
-      presetCities.forEach((c) => {
-        const card = buildCityCardElement({
-          lat: String(c.lat),
-          lng: String(c.lng),
-          name: c.name,
-          tz: c.tz,
-        });
-        presetGrid.appendChild(card);
-        presetCards.push(card);
-      });
+    // Dedupe tolerance (degrees) for matching a preset against a favorite.
+    // Favorites are stored from various sources (preset star, detail page,
+    // geocode, geolocation) so coordinates may drift slightly. 0.01° ≈ 1 km,
+    // which is wider than typical city-level rounding and still far below the
+    // spacing between any two preset cities.
+    const DEDUPE_TOL_DEG = 0.01;
+
+    function isFavoriteDuplicate(
+      lat: number,
+      lng: number,
+      favs: Favorite[],
+    ): boolean {
+      return favs.some(
+        (f) =>
+          Math.abs(f.lat - lat) <= DEDUPE_TOL_DEG &&
+          Math.abs(f.lng - lng) <= DEDUPE_TOL_DEG,
+      );
     }
+
+    const presetGrid = document.getElementById('preset-grid');
+    // Preset card elements currently in the DOM. Rebuilt by renderPresets()
+    // every time favorites change, so the refresh interval always iterates
+    // the live set.
+    let presetCards: HTMLElement[] = [];
 
     // Favorite card elements currently in the DOM. Kept parallel to
     // presetCards so the interval can refresh them too. Rebuilt by
@@ -584,8 +594,35 @@ const base = siteBase();
           favMsg.textContent = '';
         }
         renderFavorites();
+        // Favorites changed → re-render presets so the duplicate of a newly
+        // favorited preset disappears (or reappears when un-favorited).
+        renderPresets();
         syncAllStars();
       });
+    }
+
+    // Build (or rebuild) the preset grid, skipping any city that already
+    // matches an existing favorite within DEDUPE_TOL_DEG. Called once at
+    // startup and again every time favorites change.
+    function renderPresets(): void {
+      if (!presetGrid) return;
+      const favs = list(store);
+      presetGrid.textContent = '';
+      presetCards = [];
+      presetCities.forEach((c) => {
+        if (isFavoriteDuplicate(c.lat, c.lng, favs)) return;
+        const card = buildCityCardElement({
+          lat: String(c.lat),
+          lng: String(c.lng),
+          name: c.name,
+          tz: c.tz,
+        });
+        presetGrid.appendChild(card);
+        presetCards.push(card);
+        const star = card.querySelector('.js-fav-star');
+        if (star) wireStar(star);
+      });
+      syncAllStars();
     }
 
     function renderFavorites(): void {
@@ -618,6 +655,8 @@ const base = siteBase();
           remove(store, f.lat, f.lng);
           if (favMsg) favMsg.textContent = '';
           renderFavorites();
+          // Removing a favorite may restore a preset duplicate.
+          renderPresets();
           syncAllStars();
         });
         card.appendChild(rm);
@@ -637,11 +676,12 @@ const base = siteBase();
       syncAllStars();
     }
 
-    // Wire stars on the preset cards and do the initial favorites render.
-    presetCards.forEach((card) => {
-      const star = card.querySelector('.js-fav-star');
-      if (star) wireStar(star);
-    });
+    // Initial render: presets first (so they show immediately), then
+    // favorites (which may also re-call syncAllStars). renderPresets()
+    // intentionally runs BEFORE renderFavorites() so the dedupe filter sees
+    // the persisted favorites list — both functions read fresh state from
+    // localStorage each call, so order only matters for first-paint timing.
+    renderPresets();
     renderFavorites();
 
     // ---- Geocoding autocomplete combobox ----

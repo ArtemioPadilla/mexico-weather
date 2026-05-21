@@ -20,6 +20,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 1. Open `/` — preset Mexico cities are listed with current temperature, condition, hi/lo, rain probability, and wind.
 2. Click a card → expanded inline "quick peek" with the extra variables (UV, humidity, pressure, sunrise/sunset, etc.) plus a "Ver pronóstico completo →" link.
 3. The full-page detail is `/forecast?lat=<n>&lng=<n>&name=<text>&tz=<TZ>` — bookmarkable, shareable, and crawlable.
+4. If you've already starred a preset city, it appears once under **"Tus lugares"** and is automatically hidden from the **"Pronóstico por Ciudad"** preset grid below — no duplicate cards. Removing the favorite restores the preset tile. The "+ Más ciudades próximamente" placeholder always remains at the end of the preset grid.
 
 ### Find any place (search or "use my location")
 
@@ -76,7 +77,7 @@ The site is mobile-first and tested at four representative breakpoints. There ar
 
 | Breakpoint | Width | Reference device | Layout traits |
 |---|---|---|---|
-| **mobile** | 375–640 px | iPhone SE, modern Android phones in portrait | 1-column card grid; search input + "Mi ubicación" stack vertically on the narrowest widths; hero typography scales down (`text-5xl → text-4xl`); top nav stays in the upper-left corner as a thin link row; theme toggle floats top-right; feedback FAB floats bottom-right. |
+| **mobile** | 375–640 px | iPhone SE, modern Android phones in portrait | 1-column card grid; search input + "Mi ubicación" stack vertically on the narrowest widths; hero typography scales down (`text-5xl → text-4xl`); a slim 48 px sticky topbar (`aria-label="Principal"`) holds the brand, `Inicio` / `Mapa` nav and the theme toggle; feedback FAB floats bottom-right. |
 | **tablet** | 641–1023 px | iPad portrait, Surface Go | 2-column card grid; search + "Mi ubicación" share a single row; the `/mapa` layer rail remains a vertical sidebar but takes less horizontal share of the viewport; hourly cards on `/forecast` scroll horizontally with a visible scrollbar. |
 | **laptop** | 1024–1535 px | most laptops | 3-column card grid; map page uses the full viewport for the canvas with sidebar rail; forecast detail panels (Viento / Índice UV / Cielo y aire) align side-by-side. |
 | **desktop** | ≥ 1536 px | external monitors | Same as laptop with a wider content `max-width` cap on `/` and `/forecast` (centered with side gutters); `/mapa` continues to occupy the full width because the map IS the page. |
@@ -108,7 +109,6 @@ The site is mobile-first and tested at four representative breakpoints. There ar
 
 ### Known responsive gaps (not yet bugs but worth noting)
 
-- On viewports < 1024 px the top nav (`Inicio · Mapa`) is just a thin line of links in the upper-left corner; it does not act as a sticky topbar. Bookmark this if you intend to scroll deep on a long forecast — your only way back to the home page is the `← Volver al inicio` link at the very top of `/forecast` and `/privacidad`.
 - Below 480 px the search input's placeholder text (`Buscar cualquier ciudad o lugar…`) gets truncated with an ellipsis; functional but tight.
 
 ## Failure modes (non-blocking by design)
