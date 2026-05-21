@@ -34,6 +34,17 @@ const OPEN_METEO_FIELD = JSON.stringify(
   })),
 );
 
+/** Minimal Open-Meteo wind bulk response: 48 points (8x6 grid), 2 hourly steps. */
+const OPEN_METEO_WIND = JSON.stringify(
+  Array.from({ length: 48 }, () => ({
+    hourly: {
+      time: ['2026-05-19T00:00', '2026-05-19T01:00'],
+      wind_speed_10m: [5, 6],
+      wind_direction_10m: [180, 200],
+    },
+  })),
+);
+
 test.describe('mapa page', () => {
   test('mapa page loads with map container and search', async ({ page }) => {
     const res = await page.goto('mapa/');
@@ -205,4 +216,35 @@ test.describe('mapa page', () => {
       await expect(page.locator('#timeline')).toBeHidden();
     });
   }
+
+  test('wind layer activates with a legend and timeline', async ({ page }) => {
+    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    );
+    await page.route('**/tilecache.rainviewer.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+    );
+    // Wind bulk URL carries `hourly=wind_speed_10m,wind_direction_10m`; route by query.
+    await page.route(/api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/, (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: OPEN_METEO_WIND }),
+    );
+
+    await page.goto('mapa/');
+    await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+
+    const btn = page.locator('#layerbtn-wind');
+    await expect(btn).toBeEnabled();
+    const windResp = page.waitForResponse(/api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/);
+    await btn.click();
+    await windResp;
+
+    await expect(btn).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('#legend')).toBeVisible();
+    await expect(page.locator('#timeline')).toBeVisible();
+    await expect(page.locator('#opacitywrap')).toBeVisible();
+
+    await page.locator('#layerbtn-base').click();
+    await expect(page.locator('#legend')).toBeHidden();
+    await expect(page.locator('#timeline')).toBeHidden();
+  });
 });
