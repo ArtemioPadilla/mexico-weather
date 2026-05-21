@@ -502,6 +502,7 @@ const t = ui[lang];
       }
 
       const updateVs = `
+        precision highp float;
         attribute vec2 a_pos;
         varying vec2 v_uv;
         void main() {
@@ -510,7 +511,7 @@ const t = ui[lang];
         }
       `;
       const updateFs = `
-        precision mediump float;
+        precision highp float;
         uniform sampler2D u_pos;
         uniform sampler2D u_wind;
         uniform float u_dt;
@@ -536,6 +537,7 @@ const t = ui[lang];
         }
       `;
       const drawVs = `
+        precision highp float;
         attribute float a_index;
         uniform sampler2D u_pos;
         uniform float u_size;
@@ -556,7 +558,7 @@ const t = ui[lang];
         }
       `;
       const drawFs = `
-        precision mediump float;
+        precision highp float;
         varying float v_speed;
         uniform float u_max;
         void main() {
