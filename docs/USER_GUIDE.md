@@ -20,6 +20,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 1. Open `/` — preset Mexico cities are listed with current temperature, condition, hi/lo, rain probability, and wind.
 2. Click a card → expanded inline "quick peek" with the extra variables (UV, humidity, pressure, sunrise/sunset, etc.) plus a "Ver pronóstico completo →" link.
 3. The full-page detail is `/forecast?lat=<n>&lng=<n>&name=<text>&tz=<TZ>` — bookmarkable, shareable, and crawlable.
+4. If you've already starred a preset city, it appears once under **"Tus lugares"** and is automatically hidden from the **"Pronóstico por Ciudad"** preset grid below — no duplicate cards. Removing the favorite restores the preset tile. The "+ Más ciudades próximamente" placeholder always remains at the end of the preset grid.
 
 ### Find any place (search or "use my location")
 
