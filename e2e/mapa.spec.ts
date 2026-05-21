@@ -263,9 +263,10 @@ test.describe('mapa page', () => {
 
     await page.goto('mapa/');
 
-    // Count markers before any search interaction — only preset pins should
-    // exist; no user pin yet (the dropdown is explicit-select, never silent).
-    const presetCount = await page.locator('.maplibregl-marker').count();
+    // Wait for the map's preset pins (5 cities) to render before snapshotting
+    // the marker count — they're added by renderPins() on `map.on('load')`.
+    await expect(page.locator('.maplibregl-marker')).toHaveCount(5);
+    const presetCount = 5;
 
     const mapq = page.locator('#mapq');
     await expect(mapq).toHaveAttribute('aria-expanded', 'false');
@@ -282,13 +283,13 @@ test.describe('mapa page', () => {
     await expect(options).toHaveCount(2);
 
     // Marker count is unchanged: no auto-fly, no auto-pin happened.
-    expect(await page.locator('.maplibregl-marker').count()).toBe(presetCount);
+    await expect(page.locator('.maplibregl-marker')).toHaveCount(presetCount);
 
     // Clicking an option drops a user pin (+1 marker) and closes the list.
     await options.first().click();
     await expect(listbox).toBeHidden();
     await expect(mapq).toHaveAttribute('aria-expanded', 'false');
-    expect(await page.locator('.maplibregl-marker').count()).toBe(presetCount + 1);
+    await expect(page.locator('.maplibregl-marker')).toHaveCount(presetCount + 1);
   });
 
   test('sunlight overlay activates without timeline or legend', async ({ page }) => {
