@@ -1312,6 +1312,7 @@ const t = ui[lang];
       const query = q.value.trim();
       if (query.length < 2) {
         hideMsg();
+        closeAcList();
         return;
       }
       qTimer = window.setTimeout(async () => {
@@ -1320,15 +1321,50 @@ const t = ui[lang];
           const results = await geocode(query, deps);
           if (gen !== searchGen) return;
           if (!results.length) {
+            closeAcList();
             showMsg(`${t.no_results} «${query}»`);
             return;
           }
-          const r = results[0];
-          setUserPin(r.name, r.lat, r.lng, 'search');
+          acResults = results;
+          hideMsg();
+          renderAcList();
         } catch {
+          if (gen !== searchGen) return;
+          closeAcList();
           showMsg(t.load_error);
         }
       }, 350);
+    });
+
+    q?.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (acResults.length === 0) {
+        if (e.key === 'Escape') closeAcList();
+        return;
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        acActive = (acActive + 1) % acResults.length;
+        highlightAc();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        acActive = acActive <= 0 ? acResults.length - 1 : acActive - 1;
+        highlightAc();
+      } else if (e.key === 'Enter') {
+        if (acActive >= 0 && acActive < acResults.length) {
+          e.preventDefault();
+          selectAc(acResults[acActive]);
+        }
+      } else if (e.key === 'Escape') {
+        closeAcList();
+      }
+    });
+
+    // Click-outside closes the suggestion list.
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node;
+      if (q && acList && !q.contains(target) && !acList.contains(target)) {
+        closeAcList();
+      }
     });
 
     document.getElementById('maploc')?.addEventListener('click', () => {
