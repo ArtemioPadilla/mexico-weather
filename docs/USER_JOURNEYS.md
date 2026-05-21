@@ -148,6 +148,41 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
 - **Failure modes**: geocode network error → `#qmsg` shows; no results → "Sin resultados para…" in `#qmsg`.
 - **Covered by**: `e2e/search.spec.ts` (`typing in the combobox shows autocomplete options and selecting one navigates to /forecast`).
 
+### `home-2a` — MX alias resolution in autocomplete
+- **Goal**: typing a common MX alias (e.g. `CDMX`, `DF`, `Méx`, `Mexico City`) resolves to the canonical entry via `src/data/mx-places.ts` (`resolveMxAlias` + `normalizeMx`), which is then merged into the Open-Meteo result set.
+- **Preconditions**: `mockOpenMeteo(page)` returns the standard CDMX geocode fixture (or a fixture where the alias's canonical name appears in the results).
+- **Steps**:
+  1. `await page.goto('')`
+  2. `await page.locator('#q').fill('CDMX')` (or `'DF'`, `'cdmx'` — `normalizeMx` lowercases + diacritic-folds).
+  3. Wait for the debounce + fetch.
+  4. `await expect(page.locator('#ac > li').first()).toContainText(/Ciudad de M[ée]xico/i)`.
+- **Implementation note**: the alias resolution is in `src/lib/geocode.ts` — when `resolveMxAlias(query)` returns a canonical name that differs from the typed query, the SDK fetches both and merges before ranking/dedupe.
+- **NOT YET COVERED**.
+
+### `home-2b` — Population-based ranking + dedupe in autocomplete
+- **Goal**: when multiple results share a similar name, the SDK over-fetches (`count=20`), sorts by `population` descending (`byPopulationDesc`), then dedupes to `DISPLAY_COUNT` (8). The most-populous city appears first.
+- **Preconditions**: A geocode fixture returning multiple results for the same name, with `population` set on at least the principal entry.
+- **Steps**:
+  1. Fixture: `{"results": [{"name":"Querétaro","admin1":"Aguascalientes","population":1000,...}, {"name":"Querétaro","admin1":"Querétaro","population":900000,...}]}`.
+  2. `await page.goto('')`
+  3. Fill `#q` with `'Querétaro'`.
+  4. `await expect(page.locator('#ac > li').first()).toContainText(/Querétaro/)` AND read the first li's subtitle — assert it contains `Querétaro` (the state, i.e. the populous canonical entry is first).
+  5. `await expect(page.locator('#ac > li')).toHaveCount(...)` — exact count depends on dedupe but should be ≤ 8 (`DISPLAY_COUNT`).
+- **Notes**: `byPopulationDesc` is a stable sort; ties keep API order. `dedupe` keeps the first occurrence per `(normalizeMx(name), normalizeMx(admin1||''), normalizeMx(country||''))` key, so near-duplicates collapse.
+- **NOT YET COVERED**.
+
+### `home-2c` — Autocomplete result row rendering (bold name + admin1 subtitle + "ciudad" marker)
+- **Goal**: each `#ac > li` renders a primary line (bold city name + optional "ciudad" marker for `population ≥ 50000`) and a muted secondary line `admin1 · country` (when either is present).
+- **Steps**:
+  1. Fixture with `name="Monterrey", admin1="Nuevo León", country="México", population=1135500, feature_code="PPLA"`.
+  2. `await page.goto('')`, fill `#q`, wait for autocomplete.
+  3. `const li = page.locator('#ac > li').first()`.
+  4. `await expect(li.locator('strong, .font-semibold, .font-bold').first()).toHaveText(/Monterrey/)`.
+  5. `await expect(li).toContainText(/ciudad/i)` (marker visible because `population ≥ 50000`).
+  6. `await expect(li).toContainText(/Nuevo León/)` and `await expect(li).toContainText(/México/)`.
+  7. Click → URL contains `&admin=Nuevo+Le%C3%B3n` (URL-encoded) — see `forecast-6`.
+- **NOT YET COVERED**.
+
 ### `home-3` — "Sin resultados" path on a query with no matches
 - **Goal**: empty-search-result UX.
 - **Preconditions**: Override `mockOpenMeteo` (or add a more specific route) so the geocoding endpoint returns `{"results":[]}` for a specific query.
@@ -315,6 +350,21 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
   1. Goto `forecast/?lat=19.43&lng=-99.13&name=%3Cscript%3Ealert(1)%3C%2Fscript%3E`
   2. Expect no alert dialog (would be captured by Playwright's `page.on('dialog')`).
   3. Expect the rendered heading literally shows the escaped tag text, not interpreted.
+- **NOT YET COVERED**.
+
+### `forecast-6` — `&admin` query param renders an XSS-escaped subheading
+- **Goal**: `/forecast/?…&admin=<text>` renders `admin` as a muted subheading under the heading, escaped via `esc()` (forecast.astro: `safeAdmin`). When `admin` is absent or empty, the page falls back to showing the coordinates as the subheading.
+- **Steps (positive path)**:
+  1. `await page.goto('forecast/?lat=19.43&lng=-99.13&name=Quer%C3%A9taro&tz=America%2FMexico_City&admin=Quer%C3%A9taro')`
+  2. `await expect(page.locator('#fc-root p').first()).toContainText(/Querétaro/)` — admin1 shown as subline.
+- **Steps (XSS safety)**:
+  3. `await page.goto('forecast/?lat=19.43&lng=-99.13&name=Q&admin=%3Cscript%3Ealert(1)%3C%2Fscript%3E')`
+  4. Expect no alert dialog (Playwright `page.on('dialog')` should not fire).
+  5. Expect the literal escaped tag text appears in the subheading, not interpreted as HTML.
+- **Steps (fallback)**:
+  6. `await page.goto('forecast/?lat=19.43&lng=-99.13&name=X')` (no `admin`)
+  7. Expect the subheading shows coordinates (e.g. `19.43, -99.13`), not an empty line.
+- **Implementation**: `src/pages/forecast.astro` parses `params.get('admin')`; `safeAdmin` is the escaped value; subline = `safeAdmin ? esc(safeAdmin) : <coords>`.
 - **NOT YET COVERED**.
 
 ---
@@ -571,6 +621,15 @@ const OPEN_METEO_WIND = JSON.stringify(Array.from({ length: 48 }, () => ({ hourl
 - **Steps**: on each of `/`, `/mapa`, `/forecast`, `/privacidad`: expect `#secid-report-btn` visible; open + close modal.
 - **NOT YET COVERED**.
 
+### `cross-4` — Own-scoped service worker isolates from the parent root SW
+- **Goal**: the weather site registers its own service worker at `${base}sw.js` with scope `/mexico-weather/`. This isolates the site from the parent `artemiop.com/sw.js` (root-scoped) which could otherwise serve stale content. Shipped via PR #49.
+- **Steps**:
+  1. After `await page.goto('')`, optionally wait for `navigator.serviceWorker.ready`.
+  2. `const regs = await page.evaluate(() => navigator.serviceWorker.getRegistrations?.().then(rs => rs.map(r => ({ scope: r.scope }))))`.
+  3. Expect at least one registration with `scope` ending in `/mexico-weather/` (the site's own scoped SW).
+- **Notes**: The registration is wrapped in `try/catch` and deferred to `load` — every failure path is inert. In test environments where SW registration is disabled, this journey should be `test.skip` with the reason.
+- **NOT YET COVERED**.
+
 ---
 
 # Coverage matrix
@@ -579,6 +638,9 @@ const OPEN_METEO_WIND = JSON.stringify(Array.from({ length: 48 }, () => ({ hourl
 |---|---|
 | `home-1` loads + heading + 5 cards | ✅ `home.spec.ts` |
 | `home-2` search → /forecast | ✅ `search.spec.ts` |
+| `home-2a` MX alias resolution (CDMX/DF/Méx) | ❌ |
+| `home-2b` population ranking + dedupe | ❌ |
+| `home-2c` autocomplete row format (bold + admin1 subtitle + ciudad marker) | ❌ |
 | `home-3` "Sin resultados" empty search | ❌ |
 | `home-4` geolocate success → /forecast | ❌ |
 | `home-5` geolocate denied → message | ❌ |
@@ -596,6 +658,7 @@ const OPEN_METEO_WIND = JSON.stringify(Array.from({ length: 48 }, () => ({ hourl
 | `forecast-3` network error | ❌ |
 | `forecast-4` star toggles | ✅ (via favorites) |
 | `forecast-5` XSS-safe `name` | ❌ |
+| `forecast-6` `&admin` subheading + XSS safety + coords fallback | ❌ |
 | `mapa-1` map + search visible | ✅ `mapa.spec.ts` |
 | `mapa-2` radar layer + legend | ✅ `mapa.spec.ts` |
 | `mapa-3` satellite (no legend) | ✅ `mapa.spec.ts` |
@@ -624,8 +687,9 @@ const OPEN_METEO_WIND = JSON.stringify(Array.from({ length: 48 }, () => ({ hourl
 | `cross-1` theme persists across routes | partial |
 | `cross-2` nav links present everywhere | ❌ |
 | `cross-3` feedback FAB everywhere | ❌ |
+| `cross-4` own-scoped service worker registered | ❌ |
 
-**Existing tests: 20.** **Documented journeys: 40+.** **Coverage gap: ~25 journeys** spanning denial paths, persistence-across-routes, the feedback modal, multiple `/mapa` layer activations (humidity/pressure), reduced-motion variants, layer-unavailable error path, URL hash restore, and the RSS/sitemap endpoints.
+**Existing tests: 20.** **Documented journeys: ~45.** **Coverage gap: ~30 journeys** spanning denial paths, persistence-across-routes, the feedback modal, multiple `/mapa` layer activations (humidity/pressure), reduced-motion variants, layer-unavailable error path, URL hash restore, the RSS/sitemap endpoints, the MX-aware autocomplete behaviors (alias / population ranking / row formatting), the `&admin` subheading on `/forecast`, and the own-scoped service-worker registration.
 
 # Recommended test-authoring order (highest value first)
 
