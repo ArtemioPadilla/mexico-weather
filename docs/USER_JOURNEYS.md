@@ -91,13 +91,30 @@ Stable IDs you can rely on across all journeys:
 | `#tl-time` | Current frame timestamp label (`aria-live="polite"`, `aria-atomic="true"`) |
 
 ### Feedback FAB / Theme toggle (any page)
+
+Source of truth: [`src/components/common/FeedbackFAB.astro`](../src/components/common/FeedbackFAB.astro).
+
 | ID | What it is |
 |---|---|
 | `#secid-report-btn` | Floating "Reportar" button |
 | `#secid-report-badge` | Error-count badge (hidden when 0) |
 | `#secid-report-modal` | Modal dialog (carries i18n strings + diagnostics meta in `data-*`) |
-| `#secid-report-title` / `#secid-report-description` / `#secid-report-type` | Modal form fields |
-| `#secid-report-close` | Modal close button |
+| `#secid-report-title-heading` | Modal `<h2>` title (focus target when modal opens) |
+| `#secid-report-close` | Modal close button (top-right "X") |
+| `#secid-report-type` | Report-type `<select>` (bug / suggestion / other) |
+| `#secid-report-title` / `#secid-report-description` | Modal form fields (always visible) |
+| `#secid-report-bug-fields` | Wrapper revealed only when type = `bug` |
+| `#secid-report-steps` | Bug-only textarea — "steps to reproduce" |
+| `#secid-report-expected` | Bug-only textarea — "expected vs actual" |
+| `#secid-report-diagnostics` | `<details>` panel that expands diagnostics |
+| `#secid-report-diag-count` | Diagnostics summary count (errors + warnings) |
+| `#secid-report-env` | `<pre>` block — environment snapshot (UA, viewport, locale, theme) |
+| `#secid-report-console` | `<pre>` block — captured `console.error` / `warn` lines |
+| `#secid-report-network` | `<pre>` block — failed network requests |
+| `#secid-report-copy` | "Copy diagnostics" button |
+| `#secid-report-copy-label` | Inner `<span>` of the copy button (toggles to "Copied!" after click) |
+| `#secid-report-cancel` | Modal cancel/back button |
+| `#secid-report-submit` | Submit button — opens a prefilled GitHub issue in a new tab |
 | `#theme-toggle-btn` | Theme cycle button (Sistema → Claro → Oscuro) |
 
 # Existing test coverage at a glance
