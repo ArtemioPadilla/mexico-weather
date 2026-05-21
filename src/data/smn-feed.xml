@@ -5,27 +5,54 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 21 May 2026 11:30:39 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2026 13:29:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de mayo del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 281 | 21 de Mayo del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN NUEVO LEÓN, TAMAULIPAS, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 281
+Ciudad de México a 21 de Mayo del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+LLUVIAS PUNTUALES MUY FUERTES EN NUEVO LEÓN, TAMAULIPAS, OAXACA Y CHIAPAS
+
+Para este día, canales de baja presión en el interior del país, la onda tropical núm. 1 al sur de Oaxaca, la corriente en chorro subtropical e inestabilidad atmosférica, ocasionarán chubascos y lluvias puntuales fuertes en el oriente, centro, sur y sureste del país, con lluvias puntuales muy fuertes en zonas de Oaxaca (oeste y suroeste) y Chiapas (oeste y suroeste). Por otra parte, una línea seca en el noreste del país y una vaguada en niveles altos de la atmósfera sobre el noroeste del territorio nacional, ocasionarán rachas de viento de hasta 70 km/h y posibles tolvaneras sobre entidades del norte del territorio mexicano, además de chubascos en Chihuahua, lluvias puntuales fuertes en Coahuila (norte y este) y San Luis Potosí (norte y sur), y lluvias muy fuertes en Nuevo León (norte, centro y sur) y Tamaulipas (noroeste y suroeste); todas acompañadas con descargas eléctricas y posible caída de granizo.…]]></description>
+      <pubDate>Thu, 21 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-05-21-281</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de mayo del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 21 de mayo del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 21 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-21-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Viento de 30 a 40 km/h con rachas de 50 a 70 km/h, tolvaneras y con posible formación de torbellinos o tornados: Coahuila (norte), Nuevo León (norte) y Tamaulipas (noroeste).</title>
+      <title>⚠️ Alerta SMN: Temperaturas máximas de 40 a 45 °C: Son (sur), Sin, Nay (norte), Jal (suroeste), Mich (centro), Gro (noroeste), Oax (sureste), Chis (centro y oeste), Camp (norte) y Yuc (oeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 30 a 40 km/h con rachas de 50 a 70 km/h, tolvaneras y con posible formación de torbellinos o tornados: Coahuila (norte), Nuevo León (norte) y Tamaulipas (noroeste).]]></description>
-      <pubDate>Thu, 21 May 2026 05:30:30 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-21-3c6c</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Son (sur), Sin, Nay (norte), Jal (suroeste), Mich (centro), Gro (noroeste), Oax (sureste), Chis (centro y oeste), Camp (norte) y Yuc (oeste).]]></description>
+      <pubDate>Thu, 21 May 2026 07:29:19 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-21-a1ac</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 21 MAY 2026: Se pronostican lluvias muy fuertes en zonas de Nuevo León, Tamaulipas, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_21.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de Nuevo León, Tamaulipas, Oaxaca y Chiapas — Reporte Matutino del 21 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_21.pdf]]></description>
+      <pubDate>Thu, 21 May 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_21</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 20 MAY 2026: Se pronostican lluvias intensas en zonas de Coahuila, Nuevo León y Tamaulipas</title>
@@ -34,25 +61,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 20 May 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_20</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 280 | 20 de Mayo del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS INTENSAS EN COAHUILA, NUEVO LEÓN Y TAMAULIPAS
-POSIBLES TORBELLINOS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 280
-Ciudad de México a 20 de Mayo del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-LLUVIAS INTENSAS EN COAHUILA, NUEVO LEÓN Y TAMAULIPAS
-POSIBLES TORBELLINOS/TORNADOS EN COAHUILA (NORTE), CHIHUAHUA (ESTE), NUEVO LEÓN (NORTE Y CENTRO) Y TAMAULIPAS (NOROESTE)
-Durante esta noche y madrugada del jueves, un sistema frontal estacionado sobre la frontera norte de Coahuila en interacción con un canal de baja presión sobre el norte de México y una vaguada en altura sobre el noroeste del país, ocasionarán lluvias puntuales intensas en Coahuila (norte, noreste y este), Nuevo León (norte y centro) y Tamaulipas (noroeste y suroeste); lluvias puntuales fuertes en San Luis Potosí (norte), así como chubascos en Sonora, Chihuahua, Durango y Zacatecas; todas acompañadas con descargas eléctricas y posible caída de granizo, así como lluvias aisladas en Baja California Sur, Sinaloa y Aguascalientes; y rachas de viento de 50 a 70 km/h con posibles tolvaneras en el norte del territorio mexicano, con posibles torbellinos/tornados en Coahuila (norte), Chihuahua (este), Nuevo León (norte y …]]></description>
-      <pubDate>Wed, 20 May 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-05-20-280</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 20 MAY 2026: Se prevén lluvias de fuertes a muy fuertes en regiones de 12 estados de México</title>
@@ -76,14 +84,6 @@ Durante esta noche y madrugada del jueves, un sistema frontal estacionado sobre 
       <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de Coahuila, Nuevo León, Tamaulipas, San Luis Potosí, Querétaro, Hidalgo ... — Reporte Matutino del 19 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_19.pdf]]></description>
       <pubDate>Tue, 19 May 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_19</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 18 MAY 2026: Se pronostican lluvias de fuertes a muy fuertes en zonas del noroeste, oriente, centro y sureste de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_18.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de fuertes a muy fuertes en zonas del noroeste, oriente, centro y sureste de México — Reporte Vespertino del 18 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_18.pdf]]></description>
-      <pubDate>Mon, 18 May 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_18</guid>
       <category>Comunicado</category>
     </item>
   </channel>
