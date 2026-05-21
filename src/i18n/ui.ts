@@ -52,6 +52,7 @@ export interface UiStrings {
   legend_wind_breeze: string;
   legend_wind_strong: string;
   legend_wind_gale: string;
+  map_layer_sunlight: string;
   map_opacity: string;
   legend_light: string;
   legend_moderate: string;
@@ -114,6 +115,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     legend_wind_breeze: 'Brisa',
     legend_wind_strong: 'Fuerte',
     legend_wind_gale: 'Tormenta',
+    map_layer_sunlight: 'Sol',
     map_opacity: 'Opacidad',
     legend_light: 'Ligera',
     legend_moderate: 'Moderada',
@@ -174,6 +176,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     legend_wind_breeze: 'Breeze',
     legend_wind_strong: 'Strong',
     legend_wind_gale: 'Gale',
+    map_layer_sunlight: 'Sun',
     map_opacity: 'Opacity',
     legend_light: 'Light',
     legend_moderate: 'Moderate',
