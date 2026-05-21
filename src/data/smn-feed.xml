@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 21 May 2026 19:00:58 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2026 20:00:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Temperaturas máximas de 40 a 45 °C: Son (sur), Sin, Nay (norte), Jal (suroeste), Mich (centro), Gro (noroeste), Oax (sureste), Chis (centro y oeste), Camp (norte) y Yuc (oeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Son (sur), Sin, Nay (norte), Jal (suroeste), Mich (centro), Gro (noroeste), Oax (sureste), Chis (centro y oeste), Camp (norte) y Yuc (oeste).]]></description>
-      <pubDate>Thu, 21 May 2026 13:00:46 -0600</pubDate>
+      <pubDate>Thu, 21 May 2026 13:59:57 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-21-a1ac</guid>
       <category>Alerta</category>
     </item>
