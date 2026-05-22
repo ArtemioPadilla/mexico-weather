@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 22 May 2026 20:50:39 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2026 21:45:04 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Viento con rachas de 50 a 70 km/h y tolvaneras Son, Chih, Dgo, Zac, SLP; y torbellinos: Coah (norte)</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Sin, Mich, Gro, Oax, Chis, Camp y Yuc.]]></description>
-      <pubDate>Fri, 22 May 2026 14:50:29 -0600</pubDate>
+      <pubDate>Fri, 22 May 2026 15:44:52 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-22-ecc0</guid>
       <category>Alerta</category>
     </item>
@@ -37,11 +37,11 @@ Para hoy, persistirá el ambiente vespertino caluroso a muy caluroso en 14 estad
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de mayo del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de mayo del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 22 de mayo del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 22 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-22-12</guid>
