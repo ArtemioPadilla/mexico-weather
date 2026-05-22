@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 22 May 2026 09:30:53 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2026 11:21:16 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -23,7 +23,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Rachas de viento de 50 a 70 km/h con posible formación de torbellinos: Coahuila (norte) y con tolvaneras: Sonora, Chihuahua, Durango, Zacatecas y Aguascalientes; de 40 a 60 km/h con posible formación de torbellinos: Nuevo León (norte) y Tamaulipas (noroeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas mínimas de -5 a 0 °C con heladas: sierras de Durango y Chihuahua.]]></description>
-      <pubDate>Fri, 22 May 2026 03:30:44 -0600</pubDate>
+      <pubDate>Fri, 22 May 2026 05:21:07 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-22-9f62</guid>
       <category>Alerta</category>
     </item>
