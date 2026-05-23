@@ -30,7 +30,7 @@ Reusable fixtures in `e2e/fixtures/`: `geocode.cdmx.json`, `forecast.cdmx.json` 
 
 | Route | File | Description |
 |---|---|---|
-| `/` | `src/pages/index.astro` | Home — preset city cards, search, geolocate, favorites, map teaser, alerts, feedback FAB |
+| `/` | `src/pages/index.astro` | Home — preset city cards, search, geolocate, favorites, **embedded interactive map** (400 px, layer rail + timeline + preset pins), alerts, feedback FAB |
 | `/forecast/?lat=&lng=&name=&tz=` | `src/pages/forecast.astro` | Shareable forecast detail; client-rendered from URL params |
 | `/mapa/` | `src/pages/mapa.astro` | Interactive weather map (MapLibre + 8 layers + timeline) |
 | `/privacidad/` | `src/pages/privacidad.astro` | Privacy/legal page |
@@ -251,14 +251,15 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
   5. `await page.waitForURL(/\/forecast\/\?lat=.+&lng=.+&name=/)`.
 - **NOT YET COVERED** (the bare "5 cards present" test exists; the peek/expand flow does not).
 
-### `home-7` — Mapa teaser → navigate to `/mapa`
-- **Goal**: teaser block links to the map page.
+### `home-7` — Embedded map on home + deep-link to `/mapa`
+- **Goal**: home page embeds the full interactive map (~400 px) with the layer rail + timeline + preset pins; a small "Abrir mapa a pantalla completa →" link below deep-links to the full-screen `/mapa`.
 - **Steps**:
-  1. `await page.goto('')`
-  2. Locate the teaser: `page.getByRole('link', { name: /Ver mapa interactivo/ })` (text from `t.map_teaser_cta`).
-  3. Click it.
-  4. `await page.waitForURL(/\/mapa\/?(\?|#|$)/)`.
-  5. `await expect(page.locator('#map')).toBeVisible()`.
+  1. `await page.goto('')`.
+  2. Locate the embedded map container: `page.locator('#home-map')` (the home embed uses the `home-map` id; `/mapa` still uses `#map`).
+  3. Scroll it into view so the IntersectionObserver fires.
+  4. `await expect(page.locator('#home-map-root .maplibregl-canvas')).toBeVisible()` — MapLibre canvas mounted (lazy dynamic-import).
+  5. Layer rail buttons are present: `await expect(page.locator('#layerbtn-radar')).toBeVisible()` etc. (the home embed still uses the stable `layerbtn-*` IDs).
+  6. The "Abrir mapa a pantalla completa →" link below the embed navigates to `/mapa/`.
 - **NOT YET COVERED**.
 
 ### `home-8` — Favorites: add via `/forecast` → appears on home → persists across reload → remove hides section
@@ -370,19 +371,19 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
   3. Expect the rendered heading literally shows the escaped tag text, not interpreted.
 - **NOT YET COVERED**.
 
-### `forecast-7` — Embedded location map loads + click-through to `/mapa`
-- **Goal**: `/forecast?lat=…&lng=…` shows a small, static MapLibre map embedded in the hero with a single pin at the URL coords. The whole map is wrapped in an `<a>` that deep-links to `/mapa#view=<lat>,<lng>,9z`. MapLibre is dynamic-imported lazily (IntersectionObserver), so the height is reserved upfront to prevent CLS.
+### `forecast-7` — Embedded interactive map + deep-link to `/mapa`
+- **Goal**: `/forecast?lat=…&lng=…` shows an embedded **interactive** MapLibre map (~320–360 px tall) in the hero, centered on the URL coords with a blue marker + popup linking back to the canonical forecast URL. A "Abrir mapa a pantalla completa →" link below the embed (`#fc-map-link`) deep-links to `/mapa#view=<lat>,<lng>,9z`.
 - **Preconditions**: `mockOpenMeteo(page)` so the forecast renders; OSM / CartoDB tiles can be mocked to a transparent PNG to keep the test deterministic.
 - **Steps**:
   1. `await page.goto('forecast/?lat=19.43&lng=-99.13&tz=America%2FMexico_City&name=Ciudad%20de%20M%C3%A9xico')`
   2. `await expect(page.locator('#fc-root')).toBeVisible()` (forecast has rendered)
-  3. `await expect(page.locator('#fc-map-link')).toBeVisible()` — the anchor wrapping the map.
-  4. Assert the link target: `await expect(page.locator('#fc-map-link')).toHaveAttribute('href', /\/mapa\/#view=19\.43,-99\.13,9z$/)`
-  5. Scroll the link into view if needed (`await page.locator('#fc-map-link').scrollIntoViewIfNeeded()`) so the IntersectionObserver fires.
-  6. `await expect(page.locator('#fc-map .maplibregl-canvas')).toBeVisible()` — MapLibre canvas mounted (allow a few seconds; lazy import).
-  7. Click the link → URL contains `#view=19.43,-99.13,9z` and the path is `/mapa/`.
+  3. `await expect(page.locator('#fc-map .maplibregl-canvas')).toBeVisible()` — MapLibre canvas mounted.
+  4. `await expect(page.locator('#fc-map-link')).toBeVisible()` — the "Abrir mapa a pantalla completa →" link below the embed.
+  5. Assert the link target: `await expect(page.locator('#fc-map-link')).toHaveAttribute('href', /\/mapa\/#view=19\.43,-99\.13,9z$/)`
+  6. The map is interactive: hovering shows pan cursor; clicking the marker opens a popup with a "Ver pronóstico completo" link.
+  7. Click `#fc-map-link` → URL contains `#view=19.43,-99.13,9z` and the path is `/mapa/`.
 - **Reserved-height check (no CLS)**:
-  - Even before the IO triggers, `#fc-map-link` has the `fc-map-wrap` class and its bounding box height is ≥ 120 px (mobile) or ≥ 160 px (`width ≥ 640`).
+  - The `.fc-map-wrap` reserves height ≥ 320 px (mobile) or ≥ 360 px (`width ≥ 640`) before MapLibre mounts.
 - **Theme sync**:
   - With `html.dark` set, the map tiles request URLs match `basemaps.cartocdn.com/dark_all/`; with light, they match `tile.openstreetmap.org`.
 - **NOT YET COVERED**.
