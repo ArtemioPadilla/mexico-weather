@@ -57,6 +57,11 @@ import {
   type WindPoint,
 } from './mapwind';
 import { buildWindUrl, parseWindResponse, type WindGrid } from './mapfields';
+import {
+  renderFieldRaster,
+  type RasterBounds,
+  type ImageCorners,
+} from './mapraster';
 import { terminatorPolygon } from './mapsun';
 import { presetPins, withUserPin, type MapPin } from './mappins';
 import { cities } from '../data/cities';
@@ -639,7 +644,7 @@ export async function initInteractiveMap(
     if (getLayerDef(activeLayer)?.kind === 'particles') {
       showWindFrame(idx);
     } else if (getLayerDef(activeLayer)?.kind === 'field') {
-      renderFieldFrame(idx);
+      void renderFieldFrame(idx);
     } else {
       showWeatherFrame(activeLayer, fr);
     }
@@ -660,7 +665,22 @@ export async function initInteractiveMap(
 
   const FIELD_SOURCE = 'wx-field';
   const FIELD_LAYER = 'wx-field-layer';
+  // Field-raster pipeline. The grid layout (cols × rows) and the lat/lng
+  // bounds the grid covers are NOT carried inside FieldGrid itself, so we
+  // store them alongside the grid for the bilinear-raster rebuild on every
+  // frame change / pan resample. `fieldBlobUrl` is the URL backing the
+  // current MapLibre image source — revoked + replaced on each update.
+  const FIELD_GRID_COLS = 10;
+  const FIELD_GRID_ROWS = 7;
+  // Offscreen canvas size for the rendered raster. 400×280 keeps the
+  // per-frame cost under ~5ms on a mid laptop while still giving MapLibre
+  // a high-enough-resolution texture for its own linear resampling to look
+  // continuous across the country at any zoom.
+  const FIELD_RASTER_W = 400;
+  const FIELD_RASTER_H = 280;
   let fieldGrid: FieldGrid | null = null;
+  let fieldBounds: RasterBounds | null = null;
+  let fieldBlobUrl: string | null = null;
   let fieldResampleTimer = 0;
 
   interface FieldConfig {
@@ -709,6 +729,31 @@ export async function initInteractiveMap(
 
   function sunScale(): number {
     return rvOpacity / 0.45;
+  }
+
+  /**
+   * Build a `fill-opacity` paint expression that scales the base opacity
+   * down at low zooms. At world view (z ≤ 4) Mercator distortion stretches
+   * the day/night polygon into a rectangular-looking mass, so we fade it
+   * to 40% of the configured opacity; from z = 6 upward it fills in to
+   * full strength.
+   *
+   * Typed as a generic data expression — maplibre-gl's
+   * `setPaintProperty`/`addLayer` accept either a number or an expression
+   * array for fill-opacity.
+   */
+  function sunZoomOpacityExpr(base: number): unknown {
+    return [
+      'interpolate',
+      ['linear'],
+      ['zoom'],
+      0,
+      base * 0.4,
+      4,
+      base * 0.4,
+      6,
+      base,
+    ];
   }
 
   function removeSun(): void {
@@ -770,6 +815,15 @@ export async function initInteractiveMap(
         | undefined;
       if (src) {
         src.setData(tier.fc);
+        // Opacity may have changed (slider drag), so re-apply the
+        // zoom-attenuated expression on every refresh.
+        if (map.getLayer(tier.layerId)) {
+          map.setPaintProperty(
+            tier.layerId,
+            'fill-opacity',
+            sunZoomOpacityExpr(tier.opacity),
+          );
+        }
         continue;
       }
       map.addSource(tier.srcId, { type: 'geojson', data: tier.fc });
@@ -779,7 +833,9 @@ export async function initInteractiveMap(
         source: tier.srcId,
         paint: {
           'fill-color': '#0b1320',
-          'fill-opacity': tier.opacity,
+          'fill-opacity': sunZoomOpacityExpr(
+            tier.opacity,
+          ) as unknown as number,
         },
       });
     }
@@ -1144,85 +1200,110 @@ export async function initInteractiveMap(
     };
   }
 
+  function revokeFieldBlob(): void {
+    if (fieldBlobUrl) {
+      try {
+        URL.revokeObjectURL(fieldBlobUrl);
+      } catch {
+        /* some test envs lack URL.revokeObjectURL — ignore */
+      }
+      fieldBlobUrl = null;
+    }
+  }
+
   function removeField(): void {
     if (map.getLayer(FIELD_LAYER)) map.removeLayer(FIELD_LAYER);
+    // Legacy halo + circle layer cleanup (PR #119/#121 stacks). Kept
+    // defensive so older sessions / hot-reloads don't leak the layer.
     if (map.getLayer(FIELD_LAYER + '-halo'))
       map.removeLayer(FIELD_LAYER + '-halo');
     if (map.getSource(FIELD_SOURCE)) map.removeSource(FIELD_SOURCE);
+    revokeFieldBlob();
   }
 
-  function fieldGeoJSON(hourIndex: number): FeatureCollection {
-    const feats: Feature[] = [];
+  /**
+   * Render the field's bilinearly interpolated continuous-gradient raster
+   * for `hourIndex` and swap it into the FIELD_LAYER image source. First
+   * call adds the source + raster layer; subsequent calls re-use the same
+   * source via `updateImage`, revoking the previous Blob URL.
+   *
+   * In test environments where neither OffscreenCanvas nor a DOM canvas is
+   * available, renderFieldRaster returns null and we skip the swap — the
+   * layer is just absent (the e2e suite only asserts UI controls / opacity
+   * wrap visibility for field layers, not the GL texture pixels).
+   */
+  async function renderFieldFrame(hourIndex: number): Promise<void> {
     const cfg = FIELD_CONFIGS[activeLayer];
-    if (fieldGrid && cfg) {
-      for (const p of fieldGrid.points) {
-        const v = p.values[hourIndex];
-        if (typeof v !== 'number' || !Number.isFinite(v)) continue;
-        feats.push({
-          type: 'Feature',
-          geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
-          properties: { color: cfg.color(v) },
-        });
-      }
-    }
-    return { type: 'FeatureCollection', features: feats };
-  }
-
-  function renderFieldFrame(hourIndex: number): void {
-    const data = fieldGeoJSON(hourIndex);
-    const existing = map.getSource(FIELD_SOURCE) as
-      | maplibregl.GeoJSONSource
-      | undefined;
-    if (existing) {
-      existing.setData(data);
+    if (!fieldGrid || !fieldBounds || !cfg) return;
+    const render = await renderFieldRaster(
+      fieldGrid,
+      FIELD_GRID_ROWS,
+      FIELD_GRID_COLS,
+      fieldBounds,
+      hourIndex,
+      cfg.color,
+      { width: FIELD_RASTER_W, height: FIELD_RASTER_H },
+    );
+    if (!render) return;
+    // Activelayer may have flipped while the canvas blob was settling.
+    if (getLayerDef(activeLayer)?.kind !== 'field') {
+      URL.revokeObjectURL(render.blobUrl);
       return;
     }
-    map.addSource(FIELD_SOURCE, { type: 'geojson', data });
-    // Stack TWO circle layers so the field reads as a continuous cloud
-    // rather than dotted grid:
-    //   1. Bottom: huge heavily-blurred halos (radius 80→240 px, blur 1.4)
-    //      that overlap and blend, producing the continuous-field feel.
-    //   2. Top: smaller sharper circles so the underlying data points are
-    //      still identifiable as samples (radius 12→32 px, blur 0.5).
-    // The two layers share the same source and color expression.
-    map.addLayer({
-      id: FIELD_LAYER + '-halo',
-      type: 'circle',
-      source: FIELD_SOURCE,
-      paint: {
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 80, 8, 240],
-        'circle-color': ['get', 'color'],
-        'circle-blur': 1.4,
-        'circle-opacity': Math.min(rvOpacity * 0.65, 0.6),
-      },
+    const existing = map.getSource(FIELD_SOURCE) as
+      | (maplibregl.ImageSource & {
+          updateImage?: (opts: {
+            url: string;
+            coordinates?: ImageCorners;
+          }) => void;
+        })
+      | undefined;
+    if (existing && typeof existing.updateImage === 'function') {
+      existing.updateImage({ url: render.blobUrl, coordinates: render.coords });
+      revokeFieldBlob();
+      fieldBlobUrl = render.blobUrl;
+      return;
+    }
+    // Either no source yet, or the runtime stub lacks updateImage —
+    // (re)create both the source and the layer.
+    if (map.getLayer(FIELD_LAYER)) map.removeLayer(FIELD_LAYER);
+    if (map.getSource(FIELD_SOURCE)) map.removeSource(FIELD_SOURCE);
+    revokeFieldBlob();
+    map.addSource(FIELD_SOURCE, {
+      type: 'image',
+      url: render.blobUrl,
+      coordinates: render.coords,
     });
     map.addLayer({
       id: FIELD_LAYER,
-      type: 'circle',
+      type: 'raster',
       source: FIELD_SOURCE,
       paint: {
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 12, 8, 32],
-        'circle-color': ['get', 'color'],
-        'circle-blur': 0.5,
-        'circle-opacity': rvOpacity * 0.75,
+        'raster-opacity': rvOpacity,
+        'raster-fade-duration': 0,
+        // Linear resampling is the critical bit — MapLibre's GPU does a
+        // second bilinear pass on top of our 400×280 raster, smearing the
+        // already-interpolated texels into a continuous gradient at any
+        // zoom level. With nearest-neighbour the seams between texels
+        // would still be visible at high zoom.
+        'raster-resampling': 'linear',
       },
     });
+    fieldBlobUrl = render.blobUrl;
   }
 
   async function loadFieldGrid(layerId: string): Promise<boolean> {
     const cfg = FIELD_CONFIGS[layerId];
     if (!cfg) return false;
     const b = map.getBounds();
-    const grid = viewportGrid(
-      {
-        west: b.getWest(),
-        south: b.getSouth(),
-        east: b.getEast(),
-        north: b.getNorth(),
-      },
-      10,
-      7,
-    );
+    const bounds: RasterBounds = {
+      west: b.getWest(),
+      south: b.getSouth(),
+      east: b.getEast(),
+      north: b.getNorth(),
+    };
+    const grid = viewportGrid(bounds, FIELD_GRID_COLS, FIELD_GRID_ROWS);
+    fieldBounds = bounds;
     fieldAbort?.abort();
     const ac = new AbortController();
     fieldAbort = ac;
@@ -1521,13 +1602,7 @@ export async function initInteractiveMap(
       if (map.getLayer(RV_LAYER))
         map.setPaintProperty(RV_LAYER, 'raster-opacity', rvOpacity);
       if (map.getLayer(FIELD_LAYER))
-        map.setPaintProperty(FIELD_LAYER, 'circle-opacity', rvOpacity * 0.75);
-      if (map.getLayer(FIELD_LAYER + '-halo'))
-        map.setPaintProperty(
-          FIELD_LAYER + '-halo',
-          'circle-opacity',
-          Math.min(rvOpacity * 0.65, 0.6),
-        );
+        map.setPaintProperty(FIELD_LAYER, 'raster-opacity', rvOpacity);
       if (map.getLayer(WIND_CIRCLE_LAYER))
         map.setPaintProperty(WIND_CIRCLE_LAYER, 'circle-opacity', rvOpacity);
       const sunScaleNow = sunScale();
@@ -1535,13 +1610,13 @@ export async function initInteractiveMap(
         map.setPaintProperty(
           SUN_LAYER_OUTER,
           'fill-opacity',
-          SUN_OPACITY_OUTER * sunScaleNow,
+          sunZoomOpacityExpr(SUN_OPACITY_OUTER * sunScaleNow),
         );
       if (map.getLayer(SUN_LAYER))
         map.setPaintProperty(
           SUN_LAYER,
           'fill-opacity',
-          SUN_OPACITY_INNER * sunScaleNow,
+          sunZoomOpacityExpr(SUN_OPACITY_INNER * sunScaleNow),
         );
     });
   }
