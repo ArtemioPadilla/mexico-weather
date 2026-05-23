@@ -634,31 +634,40 @@ const t = ui[lang];
                     layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
                   },
                 });
+                const nudge = (): void => {
+                  try {
+                    map.resize();
+                    // jumpTo forces MapLibre to recompute the viewport AND
+                    // schedule a render, which is what finally makes the
+                    // tiles paint on the first impression (resize() alone
+                    // wasn't enough on some devices/timings).
+                    map.jumpTo({ center: [loc.lng, loc.lat], zoom: 9 });
+                    map.triggerRepaint();
+                  } catch {
+                    /* best-effort */
+                  }
+                };
                 map.on('load', () => {
                   new maplibregl.Marker({ color: '#2563eb' })
                     .setLngLat([loc.lng, loc.lat])
                     .addTo(map);
-                  // Multi-stage repaint: the wrapping <a> may resize after
-                  // the canvas is created (skeleton → real DOM swap, layout
-                  // shifts from sibling content loading). A single rAF +
-                  // resize() isn't enough on slower devices, so we also
-                  // schedule a delayed resize AND a ResizeObserver on the
-                  // container that keeps the GL buffer matching the CSS box.
-                  const nudge = (): void => {
-                    try {
-                      map.resize();
-                      map.triggerRepaint();
-                    } catch {
-                      /* best-effort */
-                    }
-                  };
+                  // First nudge synchronously on load, then a rAF, then a
+                  // delayed one for layout-shift settling.
+                  nudge();
                   window.requestAnimationFrame(nudge);
                   window.setTimeout(nudge, 250);
+                  // ResizeObserver catches any future container resize
+                  // (sibling content settling, responsive breakpoint hits).
                   if (typeof ResizeObserver === 'function') {
                     const ro = new ResizeObserver(() => nudge());
                     ro.observe(mapEl);
                   }
                 });
+                // Also nudge once the map reaches its first idle state —
+                // map.on('idle') fires after the first complete render pass,
+                // which is the most reliable signal that the GL canvas has
+                // finished its initial paint.
+                map.once('idle', () => nudge());
 
                 // Theme sync — mirror syncBasemapTheme() from /mapa.
                 let lastDark: boolean | null = startDark;
@@ -688,24 +697,16 @@ const t = ui[lang];
               }
             };
 
-            if (typeof IntersectionObserver === 'function') {
-              const io = new IntersectionObserver(
-                (entries) => {
-                  for (const e of entries) {
-                    if (e.isIntersecting) {
-                      io.disconnect();
-                      void initMap();
-                      break;
-                    }
-                  }
-                },
-                { rootMargin: '200px' },
-              );
-              io.observe(mapLink);
-            } else {
-              // No IO — just init.
+            // The embedded map sits in the forecast hero, always above the
+            // fold on a fresh /forecast load. Initialising on the next rAF
+            // (instead of waiting for an IntersectionObserver) makes the
+            // first paint reliable on cold loads — the previous IO-based
+            // gating produced an intermittent blank canvas because by the
+            // time IO fired, the wrapping <a> had already finished its
+            // layout shift and the first render frame was missed.
+            window.requestAnimationFrame(() => {
               void initMap();
-            }
+            });
           }
         }
       } catch {
