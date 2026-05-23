@@ -590,8 +590,12 @@ const t = ui[lang];
     const WIND_LAYER = 'wx-wind-layer';
     const WIND_CIRCLE_LAYER = 'wx-wind-circle';
     const WIND_CIRCLE_SOURCE = 'wx-wind-circle-src';
-    const PARTICLE_COUNT = 1024;
-    const PARTICLE_TEX_SIZE = 32;
+    // Particle count is PARTICLE_TEX_SIZE² (each particle = one texel in the
+    // square position texture). Doubling the side from 32 → 64 quadruples
+    // density from 1024 → 4096 — particles are cheap on the GPU and a denser
+    // field reads much better as wind flow.
+    const PARTICLE_TEX_SIZE = 64;
+    const PARTICLE_COUNT = PARTICLE_TEX_SIZE * PARTICLE_TEX_SIZE;
 
     let windGrid: WindGrid | null = null;
     let windHourIndex = 0;
@@ -599,25 +603,37 @@ const t = ui[lang];
     let windRaf = 0;
     let windTexDirty = true;
 
-    // The Sol overlay renders a soft 1.5°-feathered terminator gradient as
-    // three stacked polygons at angular distances 88.5° / 90° / 91.5° from
-    // the subsolar point, with opacity ramping from twilight (outermost) to
-    // deep night (innermost). Keeping SUN_LAYER as the innermost layer ID
-    // preserves any external references to the primary night fill.
+    // The Sol overlay renders a soft 4-tier terminator gradient as four
+    // stacked polygons at angular distances 85.5° / 87° / 90° / 93° from the
+    // subsolar point, with opacity ramping from soft outer twilight (0.05)
+    // through twilight (0.10) and the terminator band (0.30) to deep night
+    // (0.55). Stacking four tiers spread across ±4.5° gives a softer, more
+    // photoreal sunlight transition than the previous 3-tier ±1.5° gradient.
+    // Keeping SUN_LAYER as the innermost layer ID preserves any external
+    // references to the primary night fill.
+    const SUN_SOURCE_SOFT = 'wx-sun-src-soft';
     const SUN_SOURCE_OUTER = 'wx-sun-src-outer';
     const SUN_SOURCE_MID = 'wx-sun-src-mid';
     const SUN_SOURCE_INNER = 'wx-sun-src';
+    const SUN_LAYER_SOFT = 'wx-sun-layer-soft';
     const SUN_LAYER_OUTER = 'wx-sun-layer-outer';
     const SUN_LAYER_MID = 'wx-sun-layer-mid';
     const SUN_LAYER = 'wx-sun-layer';
-    // Per-layer base opacity tiers (outer twilight → deep night). Multiplied by
-    // rvOpacity / 0.45 so the user's opacity slider scales all three layers
-    // proportionally — 0.45 is the sunlight layer's defaultOpacity in
-    // src/lib/maplayers.ts.
-    const SUN_OPACITY_OUTER = 0.15;
+    // Per-layer base opacity tiers (soft outer twilight → deep night).
+    // Multiplied by rvOpacity / 0.45 (see sunScale) so the user's opacity
+    // slider scales all four layers proportionally — 0.45 is the sunlight
+    // layer's defaultOpacity in src/lib/maplayers.ts, so at the default
+    // slider position the scale is 1.0 and SUN_OPACITY_INNER 0.55 is the
+    // effective deep-night opacity.
+    const SUN_OPACITY_SOFT = 0.05;
+    const SUN_OPACITY_OUTER = 0.1;
     const SUN_OPACITY_MID = 0.3;
-    const SUN_OPACITY_INNER = 0.45;
-    const SUN_FEATHER_DEG = 1.5;
+    const SUN_OPACITY_INNER = 0.55;
+    // Tier angular offsets from the terminator (90°). Outer/inner are at ±3°
+    // (was ±1.5°) for a wider twilight band; an additional soft outer ring at
+    // 4.5° provides the extreme outer fade.
+    const SUN_FEATHER_DEG = 3.0;
+    const SUN_FEATHER_DEG_SOFT = 4.5;
     let sunTicker = 0;
 
     function sunScale(): number {
@@ -629,16 +645,24 @@ const t = ui[lang];
         window.clearInterval(sunTicker);
         sunTicker = 0;
       }
-      for (const id of [SUN_LAYER, SUN_LAYER_MID, SUN_LAYER_OUTER]) {
+      for (const id of [SUN_LAYER, SUN_LAYER_MID, SUN_LAYER_OUTER, SUN_LAYER_SOFT]) {
         if (map.getLayer(id)) map.removeLayer(id);
       }
-      for (const id of [SUN_SOURCE_INNER, SUN_SOURCE_MID, SUN_SOURCE_OUTER]) {
+      for (const id of [
+        SUN_SOURCE_INNER,
+        SUN_SOURCE_MID,
+        SUN_SOURCE_OUTER,
+        SUN_SOURCE_SOFT,
+      ]) {
         if (map.getSource(id)) map.removeSource(id);
       }
     }
 
     function refreshSun(): void {
       const now = Date.now();
+      // Polygons are added outermost-soft → innermost so deep night paints
+      // on top of the twilight bands.
+      const softPoly = terminatorPolygon(now, 180, 90 - SUN_FEATHER_DEG_SOFT);
       const outerPoly = terminatorPolygon(now, 180, 90 - SUN_FEATHER_DEG);
       const midPoly = terminatorPolygon(now, 180, 90);
       const innerPoly = terminatorPolygon(now, 180, 90 + SUN_FEATHER_DEG);
@@ -653,6 +677,12 @@ const t = ui[lang];
         fc: FeatureCollection;
         opacity: number;
       }> = [
+        {
+          srcId: SUN_SOURCE_SOFT,
+          layerId: SUN_LAYER_SOFT,
+          fc: toFc(softPoly),
+          opacity: SUN_OPACITY_SOFT * scale,
+        },
         {
           srcId: SUN_SOURCE_OUTER,
           layerId: SUN_LAYER_OUTER,
@@ -769,6 +799,7 @@ const t = ui[lang];
       let drw_uWind: WebGLUniformLocation | null = null;
       let drw_uSize: WebGLUniformLocation | null = null;
       let drw_uMax: WebGLUniformLocation | null = null;
+      let drw_uPointSize: WebGLUniformLocation | null = null;
 
       function compile(gl: WebGLRenderingContext, type: number, src: string): WebGLShader {
         const sh = gl.createShader(type)!;
@@ -830,6 +861,7 @@ const t = ui[lang];
         attribute float a_index;
         uniform sampler2D u_pos;
         uniform float u_size;
+        uniform float u_pointSize;
         varying float v_speed;
         uniform sampler2D u_wind;
         uniform float u_max;
@@ -843,7 +875,10 @@ const t = ui[lang];
           vec2 wind = (w.rg * 2.0 - 1.0) * u_max;
           v_speed = length(wind);
           gl_Position = vec4(p.x * 2.0 - 1.0, (1.0 - p.y) * 2.0 - 1.0, 0.0, 1.0);
-          gl_PointSize = 2.0;
+          // u_pointSize is set from JS to 3.5 × min(devicePixelRatio, 2) so
+          // retina screens get crisp ~7-px points and 1× screens get 3.5-px
+          // points. Was a hardcoded 2.0 — barely visible on the basemap.
+          gl_PointSize = u_pointSize;
         }
       `;
       const drawFs = `
@@ -892,6 +927,7 @@ const t = ui[lang];
           drw_uWind = gl.getUniformLocation(prog, 'u_wind');
           drw_uSize = gl.getUniformLocation(prog, 'u_size');
           drw_uMax = gl.getUniformLocation(prog, 'u_max');
+          drw_uPointSize = gl.getUniformLocation(prog, 'u_pointSize');
           const initial = initParticlePositions(PARTICLE_COUNT, 1234);
           const bytes = new Uint8Array(PARTICLE_COUNT * 4);
           for (let i = 0; i < PARTICLE_COUNT; i++) {
@@ -981,6 +1017,13 @@ const t = ui[lang];
           gl.uniform1i(drw_uWind, 1);
           gl.uniform1f(drw_uSize, PARTICLE_TEX_SIZE);
           gl.uniform1f(drw_uMax, MAX_WIND_MPS);
+          // 3.5-px base × DPR (capped at 2) keeps particles visible on
+          // standard screens and crisp on retina without blowing up on 3×
+          // displays where huge points would smear the field.
+          gl.uniform1f(
+            drw_uPointSize,
+            3.5 * Math.min(window.devicePixelRatio || 1, 2),
+          );
           gl.enable(gl.BLEND);
           gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
           gl.drawArrays(gl.POINTS, 0, PARTICLE_COUNT);
@@ -1025,9 +1068,15 @@ const t = ui[lang];
         type: 'circle',
         source: FIELD_SOURCE,
         paint: {
-          'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 14, 8, 40],
+          // +50% radius vs the previous [14 → 40] stops so the denser 14×10
+          // sample grid (was 8×6) overlaps into a continuous-field appearance
+          // instead of reading as discrete dots.
+          'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 21, 8, 60],
           'circle-color': ['get', 'color'],
-          'circle-blur': 1,
+          // 0.6 (was 1.0) keeps a defined coloured core while the outer 40%
+          // of each circle fades — overlapping circles blend into smooth
+          // gradients without losing chromatic intensity.
+          'circle-blur': 0.6,
           'circle-opacity': rvOpacity,
         },
       });
@@ -1037,10 +1086,14 @@ const t = ui[lang];
       const cfg = FIELD_CONFIGS[layerId];
       if (!cfg) return false;
       const b = map.getBounds();
+      // 14×10 = 140 sample points (was 8×6 = 48). Open-Meteo's bulk endpoint
+      // batches comma-separated lat/lng in a single HTTP request, so request
+      // count stays at 1 even as cell count nearly triples — the only real
+      // cost is a slightly larger response payload (still well under 1 MB).
       const grid = viewportGrid(
         { west: b.getWest(), south: b.getSouth(), east: b.getEast(), north: b.getNorth() },
-        8,
-        6,
+        14,
+        10,
       );
       // Cancel any in-flight request before starting a new one.
       fieldAbort?.abort();

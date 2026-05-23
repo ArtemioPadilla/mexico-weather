@@ -23,9 +23,12 @@ const RAINVIEWER_MANIFEST = JSON.stringify({
   satellite: { infrared: [{ time: 1779130800, path: '/v2/satellite/test' }] },
 });
 
-/** Minimal Open-Meteo bulk response: 48 points (8x6 grid), 2 hourly steps, all field vars. */
+/** Minimal Open-Meteo bulk response: 140 points (14x10 grid — denser field
+ *  sampling than the original 8x6 for visibly continuous gradients), 2 hourly
+ *  steps, all field vars. Length must match the production grid size so
+ *  parseFieldResponse accepts the mock. */
 const OPEN_METEO_FIELD = JSON.stringify(
-  Array.from({ length: 48 }, () => ({
+  Array.from({ length: 140 }, () => ({
     hourly: {
       time: ['2026-05-19T00:00', '2026-05-19T01:00'],
       temperature_2m: [22, 23],
