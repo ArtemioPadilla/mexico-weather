@@ -6,7 +6,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 
 | Route | What it is |
 |---|---|
-| `/` | **Home** — preset Mexican-city forecast cards, search box, "use my location", and a teaser linking to the interactive map. |
+| `/` | **Home** — preset Mexican-city forecast cards, search box, "use my location", and an **embedded interactive map** (full MapLibre instance, ~400 px tall, with the layer rail + timeline + preset pins; deep-link to the full-screen `/mapa` underneath). |
 | `/forecast` | **Forecast detail** — shareable, client-rendered detail page driven by URL query params. |
 | `/mapa` | **Interactive weather map** — MapLibre GL basemap, location pins, layer rail, opacity slider, legend, timeline scrubber + playback, shareable view state. |
 | `/privacidad` | **Privacy/legal**. |
@@ -88,12 +88,12 @@ The site is mobile-first and tested at four representative breakpoints. There ar
   - Card grid: `grid-cols-1` (mobile) → `grid-cols-2` (≥ `sm`) → `grid-cols-3` (≥ `lg`).
   - The 6th tile is always the "Más ciudades próximamente / Sugerir ciudad →" placeholder; it stays in flow at every breakpoint.
   - "Tus lugares" only renders when the user has favorites; on mobile it sits between the SMN alerts banner and the preset grid.
-  - The map teaser is full-width at every breakpoint; on wide viewports a soft 2xl border-radius and inset reads as a card on the dark canvas.
+  - The home now embeds the **full interactive map** (~400 px tall) instead of the old SVG teaser — same MapLibre stack as `/mapa`, with the layer rail, timeline scrubber, and preset city pins enabled. Search + "Mi ubicación" stay above (the page already has them next to the hero), and the back-link is hidden (we're already at home). A small "Abrir mapa a pantalla completa →" link below the embed deep-links to `/mapa`. MapLibre is lazy-loaded via `IntersectionObserver` so users who never scroll into the map don't pay the JS cost.
 - **`/forecast`**
   - 48-h hourly row is always `overflow-x: auto`; the row keeps a fixed card height and never wraps. The temperature sparkline lives **inside** the same scroll container as the cards, sized to the cards' total width — so hour N on a card and x position N on the sparkline scroll together (no more visual drift).
   - 7-day rows are full-width; the gradient temperature bar reflows to the full container width so it always reads at a glance. An axis row above the days shows `<minWeek>° / <midWeek>° / <maxWeek>°` with 25/50/75 % tick marks, and the "Hoy" row carries a small vertical "current temperature" marker positioned within the week's min/max range.
   - "Detalle" panels: stack vertically on mobile, then `grid-cols-3` from `md:` upward.
-  - An **embedded location map** (~120 px tall on mobile, ~160 px on desktop) sits in the hero between the sunrise/sunset line and the hourly cards. It uses the same OSM (light) / CartoDB Dark (dark) basemap as `/mapa`, drops a single blue pin at the URL's `lat,lng`, and is fully static — the whole map is a link that deep-links to `/mapa#view=<lat>,<lng>,9z`. MapLibre is **lazy-loaded** via dynamic `import()` inside an `IntersectionObserver`, so users who never scroll into the hero don't pay the JS cost; height is reserved before init to prevent CLS.
+  - An **embedded interactive map** (~320 px tall on mobile, ~360 px on desktop) sits in the hero between the sunrise/sunset line and the hourly cards. Same MapLibre stack as `/mapa`, configured here for a single location: full pan/zoom, a blue marker at the URL's `lat,lng` with a popup that links back to the canonical forecast URL, and theme-synced OSM/CartoDB Dark basemap. Layer rail, search, and timeline are off — users who want layers/timeline tap "Abrir mapa a pantalla completa →" below the embed, which deep-links to `/mapa#view=<lat>,<lng>,9z`. MapLibre is shared with the home map via the `src/lib/interactive-map.ts` factory; height is reserved before init to prevent CLS.
 - **`/mapa`**
   - The MapLibre canvas always fills 100 % of the viewport behind the absolute-positioned controls.
   - Layer rail keeps the same vertical layout from mobile to desktop; mobile users tap, desktop users hover-then-click. No collapse-to-burger.

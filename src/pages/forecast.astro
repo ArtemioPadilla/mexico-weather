@@ -85,10 +85,13 @@ const t = ui[lang];
   </main>
 
   <style is:global>
-    /* Issue #107 — reserve map height BEFORE MapLibre loads to prevent CLS. */
+    /* Issue #107 — reserve map height BEFORE MapLibre loads to prevent CLS.
+       Bumped to 320 px (sm: 360 px) so the embedded INTERACTIVE map (full
+       MapLibre instance with pan/zoom + popup; previously a 160-px static
+       click-through) has room to breathe. */
     .fc-map-wrap {
       position: relative;
-      height: 120px;
+      height: 320px;
       width: 100%;
       overflow: hidden;
       border-radius: 0.5rem;
@@ -99,12 +102,7 @@ const t = ui[lang];
       background: rgb(31 41 55); /* gray-800 */
     }
     @media (min-width: 640px) {
-      .fc-map-wrap { height: 160px; }
-    }
-    .fc-map-wrap .maplibregl-canvas-container,
-    .fc-map-wrap .maplibregl-canvas,
-    .fc-map-wrap canvas {
-      cursor: pointer !important;
+      .fc-map-wrap { height: 360px; }
     }
     /* Issue #109 — axis tick marks + today marker for 7-day temperature bars. */
     .fc-axis-track {
@@ -147,8 +145,7 @@ const t = ui[lang];
     import { getForecast, uvLabel, windDir } from '../lib/forecast';
     import { has, toggle } from '../lib/favorites';
     import { ui } from '../i18n/ui';
-    // Actual MapLibre code is lazy-loaded below via dynamic import inside
-    // an IntersectionObserver to keep the initial JS payload small (#107).
+    import { initInteractiveMap } from '../lib/interactive-map';
 
     // keep in sync with the other lang declaration in this file
     const lang: 'es' | 'en' = 'es';
@@ -326,9 +323,12 @@ const t = ui[lang];
             <p class="text-lg text-gray-800 dark:text-gray-200">${esc(current.condition)}</p>
             <p class="text-xs text-gray-600 dark:text-gray-500">${esc(t.sunrise)} ${esc(timeOnly(d0 ? d0.sunrise : null))} · ${esc(t.sunset)} ${esc(timeOnly(d0 ? d0.sunset : null))}</p>
             <p id="fc-updated" class="text-xs text-gray-500 dark:text-gray-500"></p>
-            <a id="fc-map-link" href="${esc(mapHref)}" class="fc-map-wrap mt-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Abrir en el mapa interactivo">
-              <div id="fc-map" class="h-full w-full" aria-hidden="true"></div>
-            </a>
+            <div class="fc-map-wrap mt-3" aria-label="Mapa interactivo">
+              <div id="fc-map" class="h-full w-full"></div>
+            </div>
+            <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
+              <a id="fc-map-link" href="${esc(mapHref)}" class="text-blue-600 hover:underline dark:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Abrir mapa a pantalla completa →</a>
+            </p>
           </header>`;
 
         // Issue #99 — compute 48-h min/max for the temperature tint bar at the
@@ -586,126 +586,60 @@ const t = ui[lang];
             updatedEl.textContent = `Última actualización: ${timeStr} · ${resolvedTz}`;
           }
 
-          // Issue #107 — lazy-load MapLibre for the embedded location map.
-          // Triggered via IntersectionObserver so users who never scroll past
-          // the hero don't pay the JS download. Static (no pan/zoom); a
-          // wrapping <a> handles the click-through to /mapa.
+          // Embedded INTERACTIVE map for the location.
+          //
+          // Was a 160-px static click-through; now a 320–360 px MapLibre
+          // instance (pan/zoom + marker popup) backed by the shared
+          // factory at src/lib/interactive-map.ts. Layer rail, search and
+          // timeline are off — for those, users tap "Abrir mapa a pantalla
+          // completa →" below the embed, which deep-links to /mapa with
+          // the current location preserved in the URL hash.
           const mapEl = document.getElementById('fc-map');
-          const mapLink = document.getElementById('fc-map-link');
-          if (mapEl && mapLink) {
-            const initMap = async (): Promise<void> => {
-              try {
-                // Use the module namespace directly — maplibre-gl exports
-                // Map/Marker as named exports (it has no default export per
-                // its .d.ts; the value default seen in static imports is
-                // synthetic interop and not present on dynamic-import
-                // namespaces under strict TS).
-                const maplibregl = await import('maplibre-gl');
-                await import('maplibre-gl/dist/maplibre-gl.css');
-                const OSM_TILES = [
-                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                ];
-                const CARTO_DARK_TILES = [
-                  'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-                  'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-                  'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-                  'https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-                ];
-                const startDark =
-                  document.documentElement.classList.contains('dark');
-                const map = new maplibregl.Map({
-                  container: mapEl,
-                  center: [loc.lng, loc.lat],
-                  zoom: 9,
-                  interactive: false,
-                  attributionControl: false,
-                  style: {
-                    version: 8,
-                    sources: {
-                      osm: {
-                        type: 'raster',
-                        tiles: startDark ? CARTO_DARK_TILES : OSM_TILES,
-                        tileSize: 256,
-                        attribution: startDark
-                          ? '© OpenStreetMap contributors © CARTO'
-                          : '© OpenStreetMap',
-                      },
-                    },
-                    layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
-                  },
-                });
-                const nudge = (): void => {
-                  try {
-                    map.resize();
-                    // jumpTo forces MapLibre to recompute the viewport AND
-                    // schedule a render, which is what finally makes the
-                    // tiles paint on the first impression (resize() alone
-                    // wasn't enough on some devices/timings).
-                    map.jumpTo({ center: [loc.lng, loc.lat], zoom: 9 });
-                    map.triggerRepaint();
-                  } catch {
-                    /* best-effort */
-                  }
-                };
-                map.on('load', () => {
-                  new maplibregl.Marker({ color: '#2563eb' })
-                    .setLngLat([loc.lng, loc.lat])
-                    .addTo(map);
-                  // First nudge synchronously on load, then a rAF, then a
-                  // delayed one for layout-shift settling.
-                  nudge();
-                  window.requestAnimationFrame(nudge);
-                  window.setTimeout(nudge, 250);
-                  // ResizeObserver catches any future container resize
-                  // (sibling content settling, responsive breakpoint hits).
-                  if (typeof ResizeObserver === 'function') {
-                    const ro = new ResizeObserver(() => nudge());
-                    ro.observe(mapEl);
-                  }
-                });
-                // Also nudge once the map reaches its first idle state —
-                // map.on('idle') fires after the first complete render pass,
-                // which is the most reliable signal that the GL canvas has
-                // finished its initial paint.
-                map.once('idle', () => nudge());
-
-                // Theme sync — mirror syncBasemapTheme() from /mapa.
-                let lastDark: boolean | null = startDark;
-                const syncTheme = (): void => {
-                  const dark =
-                    document.documentElement.classList.contains('dark');
-                  if (dark === lastDark) return;
-                  const rawSrc = map.getSource('osm');
-                  if (!rawSrc) return;
-                  const src = rawSrc as { setTiles?: (t: string[]) => void };
-                  if (typeof src.setTiles !== 'function') return;
-                  try {
-                    src.setTiles(dark ? CARTO_DARK_TILES : OSM_TILES);
-                    lastDark = dark;
-                  } catch {
-                    /* style not ready — try again on next mutation */
-                  }
-                };
-                const mo = new MutationObserver(() => syncTheme());
-                mo.observe(document.documentElement, {
-                  attributes: true,
-                  attributeFilter: ['class'],
-                });
-              } catch {
-                /* MapLibre failed to load (offline, blocked) — keep the
-                   placeholder block + click-through link. No throw. */
-              }
-            };
-
-            // The embedded map sits in the forecast hero, always above the
-            // fold on a fresh /forecast load. Initialising on the next rAF
-            // (instead of waiting for an IntersectionObserver) makes the
-            // first paint reliable on cold loads — the previous IO-based
-            // gating produced an intermittent blank canvas because by the
-            // time IO fired, the wrapping <a> had already finished its
-            // layout shift and the first render frame was missed.
+          if (mapEl) {
             window.requestAnimationFrame(() => {
-              void initMap();
+              void initInteractiveMap({
+                els: { container: mapEl },
+                features: {
+                  layerRail: false,
+                  timeline: false,
+                  search: false,
+                  locateButton: false,
+                  // We render our own marker below (location-specific
+                  // popup with full-forecast link); skip preset pins to
+                  // keep the embed focused.
+                  presetPins: false,
+                },
+                initialView: { lat: loc.lat, lng: loc.lng, zoom: 9 },
+                useHash: false,
+                exposeE2eHook: false,
+                interactive: true,
+                markerPopups: true,
+                lang,
+              })
+                .then((handle) => {
+                  // Add the user's marker once the map is loaded.
+                  handle.map.once('load', () => {
+                    void import('maplibre-gl').then((mod) => {
+                      const ml =
+                        (mod as { default?: typeof import('maplibre-gl') })
+                          .default ?? mod;
+                      const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+                      const fcUrl = `${baseUrl}/forecast?lat=${loc.lat}&lng=${loc.lng}&name=${encodeURIComponent(loc.name || '')}`;
+                      const popupHtml =
+                        `<div class="text-sm"><strong>${esc(loc.name || (loc.lat + ', ' + loc.lng))}</strong><br>` +
+                        `<a href="${esc(fcUrl)}" class="text-blue-600 underline">${esc(t.full_forecast)} →</a></div>`;
+                      const popup = new ml.Popup({ offset: 24 }).setHTML(popupHtml);
+                      new ml.Marker({ color: '#2563eb' })
+                        .setLngLat([loc.lng, loc.lat])
+                        .setPopup(popup)
+                        .addTo(handle.map);
+                    });
+                  });
+                })
+                .catch(() => {
+                  /* MapLibre failed to load (offline, blocked) — keep the
+                     placeholder block + click-through link. No throw. */
+                });
             });
           }
         }

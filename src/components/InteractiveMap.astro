@@ -1,0 +1,374 @@
+---
+/**
+ * InteractiveMap — Reusable wrapper around the full MapLibre experience
+ * (basemap, search, layer rail, opacity slider, legend, timeline,
+ * preset/user pins, dark-mode swap, terminator overlay, etc.).
+ *
+ * Used by:
+ *   /mapa      — full-screen (all features on)
+ *   /          — 400px embed (layer rail + timeline + preset pins)
+ *   /forecast  — 320px embed (basemap only; pin + popup)
+ *
+ * Each instance owns a uniquely-prefixed set of IDs (mapId="map" stays
+ * stable for /mapa to preserve e2e selectors and the ?e2e=1 affordance).
+ */
+import { ui } from '../i18n/ui';
+
+interface Features {
+  layerRail?: boolean;
+  timeline?: boolean;
+  search?: boolean;
+  locateButton?: boolean;
+  presetPins?: boolean;
+  backLink?: boolean;
+}
+
+interface Props {
+  /** Unique DOM id for the map container; the rest of the IDs are
+   *  derived from this so two instances on one page don't collide.
+   *  Use "map" for /mapa to preserve e2e selectors. */
+  mapId?: string;
+  /** Container height (CSS length, e.g. "100vh" or "400px"). */
+  height?: string;
+  initialView?: { lat: number; lng: number; zoom: number };
+  features?: Features;
+  /** When true, parses + writes location.hash. Only /mapa should set this. */
+  useHash?: boolean;
+  /** When true, exposes window.__map under ?e2e=1. Only /mapa should set this. */
+  exposeE2eHook?: boolean;
+  /** When false, the map is non-interactive. Defaults true. */
+  interactive?: boolean;
+  /** When false, no marker popup. Defaults true. */
+  markerPopups?: boolean;
+  /** When true, an IntersectionObserver defers the maplibre dynamic import
+   *  until the map is in viewport. Defaults true for embeds; off for /mapa. */
+  lazy?: boolean;
+  /** Tailwind classes for the outer wrapper. */
+  class?: string;
+  lang?: 'es' | 'en';
+}
+
+const {
+  mapId = 'map',
+  height = '100vh',
+  initialView = { lat: 23.6, lng: -102.5, zoom: 4.5 },
+  features = {
+    layerRail: true,
+    timeline: true,
+    search: true,
+    locateButton: true,
+    presetPins: true,
+    backLink: true,
+  },
+  useHash = false,
+  exposeE2eHook = false,
+  interactive = true,
+  markerPopups = true,
+  lazy = true,
+  class: className = '',
+  lang = 'es' as const,
+} = Astro.props;
+
+const t = ui[lang];
+const base = import.meta.env.BASE_URL;
+
+// Derived IDs — let two instances coexist on one page.
+const ids = {
+  root: `${mapId}-root`,
+  q: mapId === 'map' ? 'mapq' : `${mapId}-q`,
+  ac: mapId === 'map' ? 'mapac' : `${mapId}-ac`,
+  loc: mapId === 'map' ? 'maploc' : `${mapId}-loc`,
+  layerBtns: mapId === 'map' ? 'layerbtns' : `${mapId}-layerbtns`,
+  opacityWrap: mapId === 'map' ? 'opacitywrap' : `${mapId}-opacitywrap`,
+  opacity: mapId === 'map' ? 'opacity' : `${mapId}-opacity`,
+  legend: mapId === 'map' ? 'legend' : `${mapId}-legend`,
+  msg: mapId === 'map' ? 'mapmsg' : `${mapId}-msg`,
+  timeline: mapId === 'map' ? 'timeline' : `${mapId}-timeline`,
+  tlPrev: mapId === 'map' ? 'tl-prev' : `${mapId}-tl-prev`,
+  tlPlay: mapId === 'map' ? 'tl-play' : `${mapId}-tl-play`,
+  tlNext: mapId === 'map' ? 'tl-next' : `${mapId}-tl-next`,
+  tlRange: mapId === 'map' ? 'tl-range' : `${mapId}-tl-range`,
+  tlTime: mapId === 'map' ? 'tl-time' : `${mapId}-tl-time`,
+};
+
+// Serialise config for the inline bootstrap script.
+const cfg = JSON.stringify({
+  mapId,
+  ids,
+  initialView,
+  features,
+  useHash,
+  exposeE2eHook,
+  interactive,
+  markerPopups,
+  lazy,
+  lang,
+});
+---
+
+<div
+  id={ids.root}
+  class:list={[
+    'im-root relative w-full overflow-hidden bg-gray-100 dark:bg-gray-950',
+    className,
+  ]}
+  style={`height:${height};`}
+  data-im-config={cfg}
+>
+  {features.backLink && (
+    <a
+      href={base}
+      class="absolute left-3 top-3 z-10 rounded-lg bg-white/90 px-3 py-1.5 text-sm text-blue-600 shadow hover:underline dark:bg-gray-900/90 dark:text-blue-400"
+      >← {t.back_home}</a
+    >
+  )}
+
+  {features.search && (
+    <div class="absolute right-3 top-3 z-10 flex w-80 max-w-[calc(100vw-1.5rem)] flex-col items-end gap-2">
+      <div class="flex w-full gap-2">
+        <input
+          id={ids.q}
+          type="text"
+          autocomplete="off"
+          role="combobox"
+          aria-expanded="false"
+          aria-controls={ids.ac}
+          aria-autocomplete="list"
+          aria-label={t.map_search_placeholder}
+          placeholder={t.map_search_placeholder}
+          class="flex-1 rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/95 dark:text-gray-100"
+        />
+        {features.locateButton && (
+          <button
+            id={ids.loc}
+            type="button"
+            class="whitespace-nowrap rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-blue-700 shadow hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900/95 dark:text-blue-300"
+            ><span aria-hidden="true">📍</span> {t.map_locate}</button
+          >
+        )}
+      </div>
+      <ul
+        id={ids.ac}
+        role="listbox"
+        class="hidden w-full overflow-hidden rounded-lg border border-gray-300 bg-white/95 text-start shadow dark:border-gray-700 dark:bg-gray-900/95"
+      ></ul>
+    </div>
+  )}
+
+  {features.layerRail && (
+    <div
+      class="absolute left-3 top-14 z-10 w-44 space-y-2 rounded-lg bg-white/95 p-3 text-sm shadow dark:bg-gray-900/95"
+      aria-label={t.map_layers}
+      role="group"
+    >
+      <p class="font-semibold text-gray-700 dark:text-gray-200">{t.map_layers}</p>
+      <div id={ids.layerBtns} class="flex flex-col gap-1"></div>
+      <div id={ids.opacityWrap} class="hidden pt-1">
+        <label for={ids.opacity} class="block text-xs text-gray-600 dark:text-gray-400"
+          >{t.map_opacity}</label
+        >
+        <input
+          id={ids.opacity}
+          type="range"
+          min="0"
+          max="100"
+          value="80"
+          class="w-full accent-blue-600"
+        />
+      </div>
+      <ul id={ids.legend} class="hidden space-y-1 pt-1 text-xs text-gray-700 dark:text-gray-300"></ul>
+    </div>
+  )}
+
+  <p
+    id={ids.msg}
+    aria-live="polite"
+    class="absolute bottom-20 left-1/2 z-10 hidden -translate-x-1/2 rounded-lg bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow dark:bg-gray-900/95 dark:text-gray-300"
+  >
+  </p>
+
+  {features.timeline && (
+    <div
+      id={ids.timeline}
+      class="absolute bottom-3 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-2 rounded-lg bg-white/95 px-3 py-2 text-sm shadow dark:bg-gray-900/95"
+      role="group"
+      aria-label={t.timeline_label}
+    >
+      <button
+        id={ids.tlPrev}
+        type="button"
+        aria-label={t.timeline_prev}
+        class="rounded px-2 py-1 hover:bg-blue-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:bg-blue-400/10"
+        >‹</button
+      >
+      <button
+        id={ids.tlPlay}
+        type="button"
+        aria-label={t.timeline_play}
+        aria-pressed="false"
+        disabled
+        class="rounded px-2 py-1 hover:bg-blue-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:opacity-40 dark:hover:bg-blue-400/10"
+        >▶</button
+      >
+      <button
+        id={ids.tlNext}
+        type="button"
+        aria-label={t.timeline_next}
+        class="rounded px-2 py-1 hover:bg-blue-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:bg-blue-400/10"
+        >›</button
+      >
+      <input
+        id={ids.tlRange}
+        type="range"
+        min="0"
+        max="0"
+        value="0"
+        class="w-40 accent-blue-600"
+        aria-label={t.timeline_label}
+      />
+      <span id={ids.tlTime} aria-live="polite" aria-atomic="true" class="w-28 text-right tabular-nums text-gray-700 dark:text-gray-300"></span>
+    </div>
+  )}
+
+  <div id={mapId} class="h-full w-full" role="application" aria-label={t.map_title}></div>
+</div>
+
+{/*
+ * Popup contrast fix for dark mode (issue #71) — applied globally because
+ * MapLibre popups portal to <body>. Same selectors as before; declared
+ * here once and shared across all map instances on the page.
+ */}
+<style is:global>
+  html.dark .maplibregl-popup-content {
+    background: #111827;
+    color: #f3f4f6;
+  }
+  html.dark .maplibregl-popup-content a {
+    color: #93c5fd;
+  }
+  html.dark .maplibregl-popup-tip {
+    border-top-color: #111827;
+    border-bottom-color: #111827;
+  }
+  html.dark .maplibregl-popup-anchor-top .maplibregl-popup-tip,
+  html.dark .maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
+  html.dark .maplibregl-popup-anchor-top-right .maplibregl-popup-tip {
+    border-bottom-color: #111827;
+    border-top-color: transparent;
+  }
+  html.dark .maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+  html.dark .maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
+  html.dark .maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip {
+    border-top-color: #111827;
+    border-bottom-color: transparent;
+  }
+  html.dark .maplibregl-popup-anchor-left .maplibregl-popup-tip {
+    border-right-color: #111827;
+  }
+  html.dark .maplibregl-popup-anchor-right .maplibregl-popup-tip {
+    border-left-color: #111827;
+  }
+  html.dark .maplibregl-popup-close-button {
+    color: #d1d5db;
+  }
+</style>
+
+<script>
+  import { initInteractiveMap } from '../lib/interactive-map';
+
+  type ImCfg = {
+    mapId: string;
+    ids: Record<string, string>;
+    initialView: { lat: number; lng: number; zoom: number };
+    features: {
+      layerRail?: boolean;
+      timeline?: boolean;
+      search?: boolean;
+      locateButton?: boolean;
+      presetPins?: boolean;
+      backLink?: boolean;
+    };
+    useHash: boolean;
+    exposeE2eHook: boolean;
+    interactive: boolean;
+    markerPopups: boolean;
+    lazy: boolean;
+    lang: 'es' | 'en';
+  };
+
+  // Init every map root on the page. Each root carries its own config in a
+  // data-attribute so two embeds (e.g. /mapa overlay vs an embed) coexist.
+  function bootAll(): void {
+    const roots = document.querySelectorAll<HTMLElement>('.im-root[data-im-config]');
+    roots.forEach((root) => {
+      // Guard against double-init under HMR / view transitions.
+      if (root.dataset.imBooted === '1') return;
+      root.dataset.imBooted = '1';
+
+      let cfg: ImCfg;
+      try {
+        cfg = JSON.parse(root.dataset.imConfig || '{}') as ImCfg;
+      } catch {
+        return;
+      }
+
+      const container = document.getElementById(cfg.mapId);
+      if (!container) return;
+
+      const boot = (): void => {
+        const els = {
+          container,
+          search: document.getElementById(cfg.ids.q) as HTMLInputElement | null,
+          acList: document.getElementById(cfg.ids.ac) as HTMLUListElement | null,
+          locate: document.getElementById(cfg.ids.loc),
+          layerBtns: document.getElementById(cfg.ids.layerBtns),
+          opacityWrap: document.getElementById(cfg.ids.opacityWrap),
+          opacity: document.getElementById(cfg.ids.opacity) as HTMLInputElement | null,
+          legend: document.getElementById(cfg.ids.legend),
+          timeline: document.getElementById(cfg.ids.timeline),
+          tlPrev: document.getElementById(cfg.ids.tlPrev),
+          tlPlay: document.getElementById(cfg.ids.tlPlay) as HTMLButtonElement | null,
+          tlNext: document.getElementById(cfg.ids.tlNext),
+          tlRange: document.getElementById(cfg.ids.tlRange) as HTMLInputElement | null,
+          tlTime: document.getElementById(cfg.ids.tlTime),
+          msg: document.getElementById(cfg.ids.msg),
+        };
+        void initInteractiveMap({
+          els,
+          features: cfg.features,
+          initialView: cfg.initialView,
+          useHash: cfg.useHash,
+          exposeE2eHook: cfg.exposeE2eHook,
+          interactive: cfg.interactive,
+          markerPopups: cfg.markerPopups,
+          lang: cfg.lang,
+        });
+      };
+
+      if (cfg.lazy && typeof IntersectionObserver === 'function') {
+        const io = new IntersectionObserver(
+          (entries, obs) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                obs.disconnect();
+                boot();
+                return;
+              }
+            }
+          },
+          { rootMargin: '200px' },
+        );
+        io.observe(root);
+      } else {
+        // /mapa is non-lazy: the whole viewport IS the map, so boot now.
+        window.requestAnimationFrame(boot);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootAll);
+  } else {
+    bootAll();
+  }
+</script>
