@@ -596,14 +596,26 @@ const t = ui[lang];
                   new maplibregl.Marker({ color: '#2563eb' })
                     .setLngLat([loc.lng, loc.lat])
                     .addTo(map);
-                  window.requestAnimationFrame(() => {
+                  // Multi-stage repaint: the wrapping <a> may resize after
+                  // the canvas is created (skeleton → real DOM swap, layout
+                  // shifts from sibling content loading). A single rAF +
+                  // resize() isn't enough on slower devices, so we also
+                  // schedule a delayed resize AND a ResizeObserver on the
+                  // container that keeps the GL buffer matching the CSS box.
+                  const nudge = (): void => {
                     try {
                       map.resize();
                       map.triggerRepaint();
                     } catch {
-                      /* best-effort first-paint nudge */
+                      /* best-effort */
                     }
-                  });
+                  };
+                  window.requestAnimationFrame(nudge);
+                  window.setTimeout(nudge, 250);
+                  if (typeof ResizeObserver === 'function') {
+                    const ro = new ResizeObserver(() => nudge());
+                    ro.observe(mapEl);
+                  }
                 });
 
                 // Theme sync — mirror syncBasemapTheme() from /mapa.
