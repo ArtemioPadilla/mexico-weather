@@ -5,36 +5,36 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 23 May 2026 22:37:56 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 23 May 2026 23:40:19 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Viento de 30 a 40 km/h con rachas de 50 a 70 km/h y tolvaneras: Coah, NL, Tamps, SLP, Yuc y Q Roo; y con tolvaneras: Dgo, Nay, Jal, Ags y Zac.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Sin, Jal, Mich, Gro, Oax, Ver, Chis, Camp y Yuc.]]></description>
-      <pubDate>Sat, 23 May 2026 16:37:47 -0600</pubDate>
+      <pubDate>Sat, 23 May 2026 17:40:09 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-23-fd7c</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 285 | 23 de Mayo del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 286 | 23 de Mayo del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN NUEVO LEÓN, TAMAULIPAS, SAN LUIS POTOSÍ, VERACRUZ, PUEBLA Y OAXACA
+      <description><![CDATA[ESTA TARDE Y NOCHE SE PREVÉN LLUVIAS FUERTES A MUY FUERTES EN ESTADOS DEL NORESTE, ORIENTE, CENTRO Y SURESTE DE MÉXICO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 285
+No. Aviso: 286
 Ciudad de México a 23 de Mayo del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
 
-LLUVIAS PUNTUALES MUY FUERTES EN NUEVO LEÓN, TAMAULIPAS, SAN LUIS POTOSÍ, VERACRUZ, PUEBLA Y OAXACA
+ESTA TARDE Y NOCHE SE PREVÉN LLUVIAS FUERTES A MUY FUERTES EN ESTADOS DEL NORESTE, ORIENTE, CENTRO Y SURESTE DE MÉXICO
 
-Para este día, una vaguada en niveles altos de la atmósfera sobre el norte de México, una línea seca en el norte del país, un canal de baja presión en el oriente y sureste del territorio nacional, inestabilidad atmosférica y el ingreso de humedad del océano Pacífico y golfo de México, ocasionarán lluvias fuertes a muy fuertes acompañadas con descargas eléctricas y posible caída de granizo en las regiones mencionadas, además de viento con rachas de hasta 70 km/h con posibles tolvaneras en zonas de la Mesa del Norte y occidente del país. De igual manera, el ingreso de humedad del océano Pacífico, propiciará lluvias e intervalos de chubascos en el occidente del territorio mexicano.…]]></description>
+Durante esta noche y la madrugada del domingo, una vaguada en altura y una línea seca sobre el norte del territorio nacional, en interacción con un canal de baja presión en el oriente y sureste del país e inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en Nuevo León (norte, este y sur), Tamaulipas (norte, sur y suroeste), San Luis Potosí (este y noreste), Veracruz (norte y centro), Puebla (este y sureste) y Oaxaca (norte y centro); fuertes en Coahuila (noreste), Querétaro (norte), Estado de México (este y centro), Hidalgo (norte y este), Tlaxcala y Chiapas (centro y costa) e intervalos de chubascos en Sinaloa, Durango, Zacatecas, Guanajuato, Ciudad de México y Morelos; los cuales podrán estar acompañados con descargas eléctricas y posible caída de granizo; además de lluvias aisladas en Chihuahua, Aguascalientes y Tabasco.…]]></description>
       <pubDate>Sat, 23 May 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-05-23-285</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-05-23-286</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
