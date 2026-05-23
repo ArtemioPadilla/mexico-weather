@@ -325,23 +325,30 @@ const t = ui[lang];
       (window as unknown as { __map?: maplibregl.Map }).__map = map;
     }
 
+    // Multi-stage first-paint nudge. resize() + triggerRepaint() alone wasn't
+    // enough in cold cache-cleared loads — the canvas stayed blank until user
+    // interaction. Adding map.jumpTo() forces MapLibre to recompute the
+    // viewport AND schedule a render pass, which finally makes tiles paint.
+    const initialCenter = map.getCenter();
+    const initialZoom = map.getZoom();
+    const firstPaintNudge = (): void => {
+      try {
+        map.resize();
+        map.jumpTo({ center: initialCenter, zoom: initialZoom });
+        map.triggerRepaint();
+      } catch {
+        /* best-effort */
+      }
+    };
     map.on('load', () => {
       renderPins();
       // Issue #72 — force the first paint. MapLibre defers its initial render
       // until layout settles, and Tailwind v4's layout pass can delay that
       // first frame so the canvas looks blank for seconds. Schedule a resize +
-      // repaint on the next animation frame, AFTER renderPins() so any DOM
-      // layout effects are flushed first. Wrapped in a try/catch because in
-      // edge cases (no WebGL, container removed) the calls would throw and
-      // mask other errors; the user just sees the static fallback.
-      window.requestAnimationFrame(() => {
-        try {
-          map.resize();
-          map.triggerRepaint();
-        } catch {
-          /* first-paint nudge is best-effort */
-        }
-      });
+      // jumpTo + repaint on the next animation frame, AFTER renderPins() so any
+      // DOM layout effects are flushed first.
+      window.requestAnimationFrame(firstPaintNudge);
+      window.setTimeout(firstPaintNudge, 250);
       // Issue #78 — sync the basemap tile source to the current theme on
       // first load (theme may already be dark via the anti-FOUC bootstrap),
       // and observe future theme changes.
@@ -360,6 +367,10 @@ const t = ui[lang];
         }
       })();
     });
+    // map.once('idle') fires after the first complete render pass — the most
+    // reliable signal that the GL canvas has finished its initial paint. We
+    // nudge once more here to harden against the cold-load blank canvas.
+    map.once('idle', firstPaintNudge);
 
     // ------------------------------------------------------------------
     // Issue #78 — Dark basemap (CartoDB Dark Matter) when html.dark is set.
