@@ -415,7 +415,14 @@ export async function initInteractiveMap(
       // initialLayer is 'temperature').
       const wanted = hashed?.layer ?? opts.initialLayer ?? null;
       if (wanted && wanted !== 'base' && getLayerDef(wanted)) {
-        void setActiveLayer(wanted);
+        // Defer the layer activation by 700 ms so the basemap has time
+        // to complete its first render pass before we add the field /
+        // raster overlay layers. Without this, cold loads of the embed
+        // (forecast / home) sometimes leave the GL backing store stale
+        // because the overlay add competes with the first render frame.
+        window.setTimeout(() => {
+          void setActiveLayer(wanted);
+        }, 700);
       }
     })();
   });
