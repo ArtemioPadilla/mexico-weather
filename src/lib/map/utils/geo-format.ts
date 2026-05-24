@@ -39,14 +39,18 @@ function formatDM(deg: number, cardinal: string): string {
   const abs = Math.abs(deg);
   const d = Math.floor(abs);
   const m = Math.floor((abs - d) * 60);
-  return `${d}°${pad2(m)}′${cardinal}`;
+  // Plan P1.5: zoom.earth uses spaced cartographic form
+  //   "19° 25' N"  not  "19°25′N"
+  // Spacing improves readability and matches IGN convention for MX users.
+  return `${d}° ${pad2(m)}' ${cardinal}`;
 }
 
 /**
- * Format a (lat, lng) pair as zoom.earth does: "19°25′N 99°07′O".
+ * Format a (lat, lng) pair in degrees-minutes with cardinal letters,
+ * comma-separated: "19° 25' N, 99° 07' O" (zoom.earth-parity).
  */
 export function formatLatLngDM(lat: number, lng: number): string {
-  return `${formatLatDM(lat)} ${formatLngDM(lng)}`;
+  return `${formatLatDM(lat)}, ${formatLngDM(lng)}`;
 }
 
 /**
