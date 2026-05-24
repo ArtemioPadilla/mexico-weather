@@ -84,6 +84,7 @@ const ids = {
   ac: mapId === 'map' ? 'mapac' : `${mapId}-ac`,
   loc: mapId === 'map' ? 'maploc' : `${mapId}-loc`,
   layerBtns: mapId === 'map' ? 'layerbtns' : `${mapId}-layerbtns`,
+  overlayBtns: mapId === 'map' ? 'layerbtns-overlays' : `${mapId}-layerbtns-overlays`,
   opacityWrap: mapId === 'map' ? 'opacitywrap' : `${mapId}-opacitywrap`,
   opacity: mapId === 'map' ? 'opacity' : `${mapId}-opacity`,
   legend: mapId === 'map' ? 'legend' : `${mapId}-legend`,
@@ -185,6 +186,18 @@ const cfg = JSON.stringify({
         />
       </div>
       <ul id={ids.legend} class="hidden space-y-1 pt-1 text-xs text-gray-700 dark:text-gray-300"></ul>
+
+      {/*
+        Superposiciones (overlays) panel — zoom.earth-style checkboxes
+        for non-exclusive map decorations. Rendered as a <details>
+        accordion so the rail stays compact when not expanded.
+      */}
+      <details class="pt-2 text-xs">
+        <summary class="cursor-pointer select-none font-semibold text-gray-700 dark:text-gray-200">
+          Superposiciones
+        </summary>
+        <div id={`${ids.layerBtns}-overlays`} class="mt-2 flex flex-col gap-1"></div>
+      </details>
     </div>
   )}
 
@@ -373,6 +386,7 @@ const cfg = JSON.stringify({
           acList: document.getElementById(cfg.ids.ac) as HTMLUListElement | null,
           locate: document.getElementById(cfg.ids.loc),
           layerBtns: document.getElementById(cfg.ids.layerBtns),
+          overlayBtns: document.getElementById(cfg.ids.overlayBtns),
           opacityWrap: document.getElementById(cfg.ids.opacityWrap),
           opacity: document.getElementById(cfg.ids.opacity) as HTMLInputElement | null,
           legend: document.getElementById(cfg.ids.legend),

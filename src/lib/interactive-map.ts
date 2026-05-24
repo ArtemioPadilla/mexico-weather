@@ -89,6 +89,10 @@ export interface InteractiveMapElements {
   locate?: HTMLElement | null;
   /** Layer button wrapper, opacity slider, and legend (optional). */
   layerBtns?: HTMLElement | null;
+  /** Overlays (Superposiciones) checkbox container — zoom.earth-style
+   *  menu of toggleable map decorations. Optional; when null overlays
+   *  are reachable only via keyboard shortcuts. */
+  overlayBtns?: HTMLElement | null;
   opacityWrap?: HTMLElement | null;
   opacity?: HTMLInputElement | null;
   legend?: HTMLElement | null;
@@ -2311,6 +2315,85 @@ export async function initInteractiveMap(
   }
   buildLayerButtons();
 
+  // ----------------------------------------------------------------
+  // Overlays menu — zoom.earth's "Superposiciones" panel. Each entry
+  // declares its label + keyboard shortcut + toggle function so the
+  // UI checkboxes and the global keydown handler stay in sync via
+  // refreshOverlayCheckboxes().
+  // ----------------------------------------------------------------
+  interface OverlayDef {
+    id: 'graticule' | 'tropical';
+    label: string;
+    shortcut: string;
+    isEnabled: () => boolean;
+    setEnabled: (on: boolean) => void;
+  }
+  let tropicalEnabled = true;
+  const overlayDefs: OverlayDef[] = [
+    {
+      id: 'tropical',
+      label: 'Sistemas tropicales',
+      shortcut: 'T',
+      isEnabled: () => tropicalEnabled,
+      setEnabled: (on) => {
+        tropicalEnabled = on;
+        const set = (vis: 'visible' | 'none') => {
+          if (map.getLayer(STORMS_CIRCLE_LAYER))
+            map.setLayoutProperty(STORMS_CIRCLE_LAYER, 'visibility', vis);
+          if (map.getLayer(STORMS_LABEL_LAYER))
+            map.setLayoutProperty(STORMS_LABEL_LAYER, 'visibility', vis);
+        };
+        set(on ? 'visible' : 'none');
+      },
+    },
+    {
+      id: 'graticule',
+      label: 'Retícula',
+      shortcut: 'X',
+      isEnabled: () => !!map.getLayer(GRATICULE_LAYER),
+      setEnabled: (on) => setGraticuleEnabled(on),
+    },
+  ];
+
+  function buildOverlayCheckboxes(): void {
+    const wrap = opts.els.overlayBtns;
+    if (!wrap || !features.layerRail) return;
+    for (const def of overlayDefs) {
+      const id = `overlay-${def.id}`;
+      const row = document.createElement('label');
+      row.htmlFor = id;
+      row.className =
+        'flex cursor-pointer items-center gap-1.5 rounded px-1 py-0.5 hover:bg-blue-500/10';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.id = id;
+      cb.checked = def.isEnabled();
+      cb.className = 'accent-blue-600';
+      cb.addEventListener('change', () => def.setEnabled(cb.checked));
+      const lbl = document.createElement('span');
+      lbl.textContent = def.label;
+      lbl.className = 'flex-1';
+      const kbd = document.createElement('kbd');
+      kbd.textContent = def.shortcut;
+      kbd.className =
+        'rounded border border-gray-500/40 px-1 text-[10px] font-mono text-gray-400';
+      row.appendChild(cb);
+      row.appendChild(lbl);
+      row.appendChild(kbd);
+      wrap.appendChild(row);
+    }
+  }
+  buildOverlayCheckboxes();
+
+  function refreshOverlayCheckboxes(): void {
+    for (const def of overlayDefs) {
+      const cb = document.getElementById(
+        `overlay-${def.id}`,
+      ) as HTMLInputElement | null;
+      if (cb) cb.checked = def.isEnabled();
+    }
+  }
+
   // Keyboard shortcuts to activate layers (zoom.earth M/R/A/T/H/P/V/L parity).
   // Only bound when the layer rail is enabled (full /mapa page); embeds
   // don't hijack global key events. Ignores keys typed into inputs/textareas.
@@ -2337,10 +2420,11 @@ export async function initInteractiveMap(
         void setActiveLayer(match.id);
         return;
       }
-      // Overlay toggles (zoom.earth-compatible shortcuts).
-      if (key === 'X') {
+      const overlay = overlayDefs.find((o) => o.shortcut === key);
+      if (overlay) {
         e.preventDefault();
-        setGraticuleEnabled(!map.getLayer(GRATICULE_LAYER));
+        overlay.setEnabled(!overlay.isEnabled());
+        refreshOverlayCheckboxes();
       }
     });
   }
