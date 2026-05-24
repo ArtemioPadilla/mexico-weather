@@ -9,7 +9,18 @@ export interface MapHashState {
   zoom: number;
   layer: string;
   t: string | null;
+  /** Optional Open-Meteo NWP model id; null/undefined → 'best_match'. */
+  model?: string | null;
 }
+
+/** Valid Open-Meteo model ids accepted in the URL hash. */
+export const MODEL_IDS = [
+  'best_match',
+  'icon_seamless',
+  'gfs_seamless',
+  'ecmwf_ifs04',
+  'jma_seamless',
+] as const;
 
 /** Default view: centred on Mexico, country-level zoom. */
 export const DEFAULT_VIEW: MapHashState = {
@@ -18,6 +29,7 @@ export const DEFAULT_VIEW: MapHashState = {
   zoom: 4.5,
   layer: 'base',
   t: null,
+  model: null,
 };
 
 function inRange(n: number, min: number, max: number): boolean {
@@ -44,7 +56,19 @@ export function parseMapHash(hash: string): MapHashState {
   const layer = (LAYER_IDS as readonly string[]).includes(rawLayer) ? rawLayer : 'base';
 
   const t = params.get('t');
-  return { lat, lng, zoom, layer, t: t && t.length > 0 ? t : null };
+  const rawModel = params.get('model');
+  const model =
+    rawModel && (MODEL_IDS as readonly string[]).includes(rawModel)
+      ? rawModel
+      : null;
+  return {
+    lat,
+    lng,
+    zoom,
+    layer,
+    t: t && t.length > 0 ? t : null,
+    model,
+  };
 }
 
 export function buildMapHash(state: MapHashState): string {
@@ -53,5 +77,6 @@ export function buildMapHash(state: MapHashState): string {
   const zoom = Number(state.zoom.toFixed(2));
   let s = `#view=${lat},${lng},${zoom}z&layer=${state.layer}`;
   if (state.t) s += `&t=${state.t}`;
+  if (state.model && state.model !== 'best_match') s += `&model=${state.model}`;
   return s;
 }

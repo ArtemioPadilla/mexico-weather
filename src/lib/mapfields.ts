@@ -40,13 +40,22 @@ export function viewportGrid(b: Bounds, cols: number, rows: number): LngLat[] {
   return pts;
 }
 
-/** Keyless Open-Meteo bulk forecast URL for the given points + hourly variable. */
-export function buildFieldUrl(points: LngLat[], hourlyVar: string): string {
+/** Keyless Open-Meteo bulk forecast URL for the given points + hourly
+ *  variable. The optional `model` parameter routes the request to a
+ *  specific NWP (e.g. 'icon_seamless'); omit it for Open-Meteo's
+ *  default best_match selector. */
+export function buildFieldUrl(
+  points: LngLat[],
+  hourlyVar: string,
+  model?: string,
+): string {
   const lats = points.map((p) => p.lat).join(',');
   const lngs = points.map((p) => p.lng).join(',');
+  const modelParam =
+    model && model !== 'best_match' ? `&models=${model}` : '';
   return (
     `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}` +
-    `&hourly=${hourlyVar}&forecast_days=2&timezone=UTC`
+    `&hourly=${hourlyVar}&forecast_days=2&timezone=UTC${modelParam}`
   );
 }
 
@@ -57,7 +66,13 @@ function isNumberOrNullArray(a: unknown): a is (number | null)[] {
   );
 }
 
-/** Normalise an Open-Meteo response (array for many points, object for one) into a FieldGrid. */
+/** Normalise an Open-Meteo response (array for many points, object for one) into a FieldGrid.
+ *
+ *  When the request was made with `&models=X` the response variable name
+ *  is suffixed with the model id (e.g. `temperature_2m_icon_seamless`).
+ *  We fall back to a prefix match so the caller doesn't need to know
+ *  which model was used.
+ */
 export function parseFieldResponse(
   json: unknown,
   points: LngLat[],
@@ -69,10 +84,22 @@ export function parseFieldResponse(
   const first = arr[0] as { hourly?: { time?: unknown } } | undefined;
   const times = first?.hourly?.time;
   if (!Array.isArray(times) || times.length === 0) return null;
+  const pickValues = (
+    h: Record<string, unknown> | undefined,
+  ): unknown => {
+    if (!h) return undefined;
+    if (h[hourlyVar] !== undefined) return h[hourlyVar];
+    // Model-suffixed variant (e.g. temperature_2m_icon_seamless).
+    const prefix = `${hourlyVar}_`;
+    for (const k of Object.keys(h)) {
+      if (k.startsWith(prefix)) return h[k];
+    }
+    return undefined;
+  };
   const out: FieldGrid['points'] = [];
   for (let i = 0; i < arr.length; i++) {
     const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)?.hourly;
-    const values = h?.[hourlyVar];
+    const values = pickValues(h);
     if (!isNumberOrNullArray(values)) return null;
     out.push({ lat: points[i].lat, lng: points[i].lng, values });
   }
@@ -236,16 +263,20 @@ export interface WindGrid {
   points: { lat: number; lng: number; u: (number | null)[]; v: (number | null)[] }[];
 }
 
-/** Keyless Open-Meteo bulk URL fetching speed + direction together. */
+/** Keyless Open-Meteo bulk URL fetching speed + direction together.
+ *  Optional model routes the request to a specific NWP. */
 export function buildWindUrl(
   points: LngLat[],
   speedVar: 'wind_speed_10m' | 'wind_gusts_10m' = 'wind_speed_10m',
+  model?: string,
 ): string {
   const lats = points.map((p) => p.lat).join(',');
   const lngs = points.map((p) => p.lng).join(',');
+  const modelParam =
+    model && model !== 'best_match' ? `&models=${model}` : '';
   return (
     `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}` +
-    `&hourly=${speedVar},wind_direction_10m&forecast_days=2&timezone=UTC`
+    `&hourly=${speedVar},wind_direction_10m&forecast_days=2&timezone=UTC${modelParam}`
   );
 }
 
@@ -269,10 +300,22 @@ export function parseWindResponse(
   const times = first?.hourly?.time;
   if (!Array.isArray(times) || times.length === 0) return null;
   const out: WindGrid['points'] = [];
+  const pickPrefix = (
+    h: Record<string, unknown> | undefined,
+    prefix: string,
+  ): unknown => {
+    if (!h) return undefined;
+    if (h[prefix] !== undefined) return h[prefix];
+    const lead = `${prefix}_`;
+    for (const k of Object.keys(h)) {
+      if (k.startsWith(lead)) return h[k];
+    }
+    return undefined;
+  };
   for (let i = 0; i < arr.length; i++) {
     const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)?.hourly;
-    const sp = h?.[speedVar];
-    const dr = h?.wind_direction_10m;
+    const sp = pickPrefix(h, speedVar);
+    const dr = pickPrefix(h, 'wind_direction_10m');
     if (!isSpeedDirArray(sp) || !isSpeedDirArray(dr) || sp.length !== times.length || dr.length !== times.length) {
       return null;
     }

@@ -377,6 +377,7 @@ export async function initInteractiveMap(
       zoom: map.getZoom(),
       layer: activeLayer,
       t: activeLayer === 'base' ? null : activeFrameIso,
+      model: activeModel === 'best_match' ? null : activeModel,
     };
     history.replaceState(null, '', buildMapHash(state));
   }
@@ -776,6 +777,11 @@ export async function initInteractiveMap(
   const RV_SOURCE = 'wx-raster';
   const RV_LAYER = 'wx-raster-layer';
   let activeLayer: string = 'base';
+  // NWP model selector (plan P1.1). best_match is Open-Meteo's default;
+  // others route the request to a specific national model. State is
+  // sourced from the URL hash (?model=icon_seamless etc.) and synced
+  // back when the user clicks a different model pill.
+  let activeModel: string = hashed?.model || 'best_match';
   let rvData: RainviewerData | null = null;
   let rvOpacity = getLayerDef('radar')?.defaultOpacity ?? 0.8;
   let tlFrames: RadarFrame[] = [];
@@ -2996,9 +3002,10 @@ export async function initInteractiveMap(
     // resolves the URL-hash cold-load failure where ?layer=temperature
     // sometimes activated as base.
     async function attempt(): Promise<unknown> {
-      const res = await deps.fetch(buildFieldUrl(grid, cfg.hourlyVar), {
-        signal: ac.signal,
-      });
+      const res = await deps.fetch(
+        buildFieldUrl(grid, cfg.hourlyVar, activeModel),
+        { signal: ac.signal },
+      );
       if (!res.ok) throw new Error('non-2xx');
       return res.json();
     }
@@ -3573,9 +3580,10 @@ export async function initInteractiveMap(
         // sometimes hit TypeError: Failed to fetch on first try and fell
         // back to base. A single 500 ms retry resolves the transient.
         async function attempt(): Promise<Response> {
-          const r = await deps.fetch(buildWindUrl(grid, speedVar), {
-            signal: ac.signal,
-          });
+          const r = await deps.fetch(
+            buildWindUrl(grid, speedVar, activeModel),
+            { signal: ac.signal },
+          );
           if (!r.ok) throw new Error('non-2xx');
           return r;
         }
@@ -4567,6 +4575,43 @@ export async function initInteractiveMap(
   }
 
   // ----------------------------------------------------------------
+  // Model toggle (plan P1.1). The 5 pills at bottom-right let the user
+  // override Open-Meteo's default best_match selector with a specific
+  // NWP model. State is mirrored into the URL hash so #model=icon_seamless
+  // round-trips. Changing model invalidates the cached grids and forces
+  // a refetch via setActiveLayer.
+  if (features.layerRail) {
+    const modelWrap = document.getElementById('mw-model-toggle');
+    const modelBtns = modelWrap?.querySelectorAll<HTMLButtonElement>('button.mw-model-btn');
+    function refreshModelBtns(): void {
+      modelBtns?.forEach((b) => {
+        b.setAttribute(
+          'aria-pressed',
+          String((b.dataset.model || 'best_match') === activeModel),
+        );
+      });
+    }
+    refreshModelBtns();
+    modelBtns?.forEach((b) => {
+      b.addEventListener('click', () => {
+        const next = b.dataset.model || 'best_match';
+        if (next === activeModel) return;
+        activeModel = next;
+        refreshModelBtns();
+        // Invalidate cached grids + force re-fetch with new model.
+        fieldGrid = null;
+        lastTempGrid = null;
+        lastHumidityGrid = null;
+        lastPressureGrid = null;
+        windGrid = null;
+        if (activeLayer !== 'base' && activeLayer !== 'satellite' && activeLayer !== 'radar' && activeLayer !== 'sunlight') {
+          void setActiveLayer(activeLayer);
+        }
+        syncHash();
+      });
+    });
+  }
+
   // Snapshot compare (plan 3.3). Captures the WebGL canvas to an
   // <img> overlay so the user can scrub the timeline or switch
   // layers and visually diff "antes" vs "ahora". Doesn't require any

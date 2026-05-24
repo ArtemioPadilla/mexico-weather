@@ -376,10 +376,25 @@ const cfg = JSON.stringify({
   */}
   {features.layerRail && (
     <div
-      class="pointer-events-none absolute bottom-9 right-2 z-10 hidden rounded bg-gray-900/70 px-2 py-1 text-[10px] font-mono tabular-nums text-gray-300 backdrop-blur-sm sm:inline-block"
-      aria-hidden="true"
-      title="Modelo de pronóstico Open-Meteo (best match: ECMWF ~9 km en MX)"
-    >Open-Meteo · best match · ~9 km</div>
+      id="mw-model-toggle"
+      class="absolute bottom-9 right-2 z-10 hidden items-center gap-1 rounded-full bg-gray-900/80 px-1 py-0.5 text-[10px] font-mono tabular-nums text-gray-300 backdrop-blur-sm sm:inline-flex"
+      aria-label="Modelo de pronóstico Open-Meteo"
+    >
+      {[
+        { id: 'best_match', label: 'Auto' },
+        { id: 'icon_seamless', label: 'ICON' },
+        { id: 'gfs_seamless', label: 'GFS' },
+        { id: 'ecmwf_ifs04', label: 'ECMWF' },
+        { id: 'jma_seamless', label: 'JMA' },
+      ].map((m) => (
+        <button
+          type="button"
+          data-model={m.id}
+          aria-pressed={m.id === 'best_match' ? 'true' : 'false'}
+          class="mw-model-btn rounded-full px-1.5 py-0.5 hover:bg-white/10 aria-pressed:bg-blue-500/30 aria-pressed:text-white aria-pressed:font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        >{m.label}</button>
+      ))}
+    </div>
   )}
 
   {/*
