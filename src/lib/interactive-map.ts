@@ -59,10 +59,11 @@ import {
 import { buildWindUrl, parseWindResponse, type WindGrid } from './mapfields';
 import {
   renderFieldRaster,
+  bilerpValue,
   type RasterBounds,
   type ImageCorners,
 } from './mapraster';
-import { terminatorPolygon } from './mapsun';
+import { terminatorPolygon, solarPosition } from './mapsun';
 import { presetPins, withUserPin, type MapPin } from './mappins';
 import { cities } from '../data/cities';
 import { geocode } from './geocode';
@@ -91,6 +92,10 @@ export interface InteractiveMapElements {
   tlRange?: HTMLInputElement | null;
   tlTime?: HTMLElement | null;
   msg?: HTMLElement | null;
+  /** Floating tooltip overlay that follows the cursor on hover for
+   *  field/wind/sun layers (zoom.earth-style). Optional — when absent
+   *  the hover handler is a no-op. */
+  tooltip?: HTMLElement | null;
 }
 
 export interface InteractiveMapFeatures {
@@ -724,12 +729,15 @@ export async function initInteractiveMap(
   // current MapLibre image source — revoked + replaced on each update.
   const FIELD_GRID_COLS = 10;
   const FIELD_GRID_ROWS = 7;
-  // Offscreen canvas size for the rendered raster. 400×280 keeps the
-  // per-frame cost under ~5ms on a mid laptop while still giving MapLibre
-  // a high-enough-resolution texture for its own linear resampling to look
-  // continuous across the country at any zoom.
-  const FIELD_RASTER_W = 400;
-  const FIELD_RASTER_H = 280;
+  // Offscreen canvas size for the rendered raster. 600×420 is the
+  // sweet spot for the bicubic upsample from the 10×7 input grid: each
+  // input cell expands into a ~60×60 px region of smoothly-curving
+  // color, well above the visual threshold where bilinear-at-the-same-
+  // resolution would just look noisy. The per-frame cost (~12 ms on a
+  // mid laptop) is still under the 16.6 ms frame budget; only paid on
+  // hour-slider scrubs and the initial layer activation.
+  const FIELD_RASTER_W = 600;
+  const FIELD_RASTER_H = 420;
   let fieldGrid: FieldGrid | null = null;
   let fieldBounds: RasterBounds | null = null;
   let fieldBlobUrl: string | null = null;
@@ -1374,9 +1382,72 @@ export async function initInteractiveMap(
     return !!fieldGrid && fieldGrid.points.length > 0;
   }
 
+  // ----------------------------------------------------------------
+  // Radar / satellite "no-coverage dim" overlay. RainViewer tiles are
+  // fully transparent where the radar/satellite mosaic has no data
+  // (large stretches of ocean, parts of central Mexico, polar regions).
+  // zoom.earth's trick is to paint a uniform dark fill UNDER the tiles
+  // so the user reads the coverage shape — present-radar areas stay
+  // bright (radar pixels are opaque), absent-radar areas show through
+  // as deliberately darker than the basemap.
+  // ----------------------------------------------------------------
+  const RV_DIM_SOURCE = 'wx-rv-dim-src';
+  const RV_DIM_LAYER = 'wx-rv-dim-layer';
+  /** Full-world rectangle (clipped to Web Mercator's ±85° lat clamp). */
+  const WORLD_RECT_FC: FeatureCollection = {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'Polygon',
+          coordinates: [
+            [
+              [-180, -85],
+              [180, -85],
+              [180, 85],
+              [-180, 85],
+              [-180, -85],
+            ],
+          ],
+        },
+      },
+    ],
+  };
+
+  function addRadarDim(): void {
+    if (map.getLayer(RV_DIM_LAYER)) return;
+    if (!map.getSource(RV_DIM_SOURCE)) {
+      map.addSource(RV_DIM_SOURCE, { type: 'geojson', data: WORLD_RECT_FC });
+    }
+    // Insert BEFORE any existing radar/sat raster layer so the dim
+    // paints underneath — opaque radar pixels will then cover the dim,
+    // transparent tiles let it show through.
+    const beneath = map.getLayer(RV_LAYER) ? RV_LAYER : undefined;
+    map.addLayer(
+      {
+        id: RV_DIM_LAYER,
+        type: 'fill',
+        source: RV_DIM_SOURCE,
+        paint: {
+          'fill-color': '#0a0e1a',
+          'fill-opacity': 0.45,
+        },
+      },
+      beneath,
+    );
+  }
+
+  function removeRadarDim(): void {
+    if (map.getLayer(RV_DIM_LAYER)) map.removeLayer(RV_DIM_LAYER);
+    if (map.getSource(RV_DIM_SOURCE)) map.removeSource(RV_DIM_SOURCE);
+  }
+
   function removeWeatherRaster(): void {
     if (map.getLayer(RV_LAYER)) map.removeLayer(RV_LAYER);
     if (map.getSource(RV_SOURCE)) map.removeSource(RV_SOURCE);
+    removeRadarDim();
   }
 
   function showWeatherFrame(layerId: string, frame: RadarFrame): void {
@@ -1386,6 +1457,11 @@ export async function initInteractiveMap(
         ? rainviewerTileUrl(rvData.host, frame, { color: 0, snow: false })
         : rainviewerTileUrl(rvData.host, frame);
     removeWeatherRaster();
+    // Dim first so the radar/satellite raster paints on top of it. Both
+    // radar AND satellite get the dim treatment — satellite-IR mosaics
+    // also have transparent gaps that read as missing data when the
+    // basemap shows through.
+    addRadarDim();
     map.addSource(RV_SOURCE, {
       type: 'raster',
       tiles: [tileUrl],
@@ -1461,6 +1537,201 @@ export async function initInteractiveMap(
             ? ('wind' as const)
             : null;
     renderLegend(kindForLegend);
+    // Hide the hover tooltip when switching to a layer that doesn't
+    // expose per-pixel values (or back to base). The next mousemove
+    // re-evaluates tooltipValueAt and re-shows when appropriate.
+    if (activeLayer === 'base' || akind === 'raster-tile') {
+      hideTooltip();
+    }
+  }
+
+  // ------------------------------------------------------------------
+  // Hover tooltip — zoom.earth-style floating card following the cursor
+  // with the value at that pixel for the active field/wind/sun layer.
+  //
+  // We re-use the cheap bilinear sample (bilerpValue) rather than the
+  // bicubic the raster uses — at one point per pointermove the visual
+  // difference is invisible and bilinear is half the cost. The grid is
+  // already at 10×7 with edge clamping so the interpolation reaches the
+  // whole viewport.
+  // ------------------------------------------------------------------
+  const tooltipEl = opts.els.tooltip ?? null;
+  // Avoid layout thrash by only writing to the tooltip when its content
+  // changes (typing into the DOM with the same string would still
+  // invalidate styles in some browsers).
+  let lastTooltipText: string | null = null;
+
+  function hideTooltip(): void {
+    if (!tooltipEl) return;
+    if (!tooltipEl.classList.contains('hidden')) {
+      tooltipEl.classList.add('hidden');
+    }
+    lastTooltipText = null;
+  }
+
+  function setTooltip(text: string, x: number, y: number): void {
+    if (!tooltipEl) return;
+    if (text !== lastTooltipText) {
+      tooltipEl.textContent = text;
+      lastTooltipText = text;
+    }
+    // Offset so the cursor doesn't cover the card. The container is the
+    // map root (position: relative), and e.point is canvas-relative —
+    // which equals map-root-relative when the canvas fills the root, so
+    // we can use e.point.x/y directly. The 14px offset clears the
+    // pointer arrow and the GL cursor on mobile.
+    tooltipEl.style.left = `${x + 14}px`;
+    tooltipEl.style.top = `${y + 14}px`;
+    if (tooltipEl.classList.contains('hidden')) {
+      tooltipEl.classList.remove('hidden');
+    }
+  }
+
+  /** Format the active-layer value for the tooltip. Returns null when
+   *  the layer doesn't have a per-pixel value (radar, satellite, base)
+   *  or when interpolation has no data at that point. */
+  function tooltipValueAt(lng: number, lat: number): string | null {
+    const def = getLayerDef(activeLayer);
+    if (!def) return null;
+    if (def.kind === 'field') {
+      if (!fieldGrid || !fieldBounds || frameIndex < 0) return null;
+      const v = bilerpValue(
+        fieldGrid,
+        FIELD_GRID_ROWS,
+        FIELD_GRID_COLS,
+        fieldBounds,
+        lat,
+        lng,
+        frameIndex,
+      );
+      if (v === null) return null;
+      if (activeLayer === 'temperature') return `${Math.round(v)}°`;
+      if (activeLayer === 'humidity') return `${Math.round(v)}%`;
+      if (activeLayer === 'pressure') return `${Math.round(v)} hPa`;
+      return `${Math.round(v)}`;
+    }
+    if (def.kind === 'particles') {
+      // Wind: lerp u/v at the cursor, then derive speed (km/h) +
+      // cardinal heading. The wind grid is 8×6 covering the same
+      // viewport bounds as the field grid (fieldBounds is the latest
+      // viewportGrid bounds). When no wind grid is present we can't
+      // sample — fall back to hiding the tooltip.
+      if (!windGrid || !fieldBounds || frameIndex < 0) return null;
+      const wg = windGrid;
+      const fb = fieldBounds;
+      const sampleUv = (h: number): { u: number; v: number } | null => {
+        // Build a 1-hour pseudo-field of u and v and call bilerp on each
+        // separately. We can't call bilerpValue on the WindGrid directly
+        // because its shape differs (u/v vs values); inline the same
+        // bilinear lerp here for the 8×6 wind grid.
+        const cols = 8;
+        const rows = 6;
+        if (wg.points.length !== cols * rows) return null;
+        const dLng = fb.east - fb.west;
+        const dLat = fb.north - fb.south;
+        if (dLng <= 0 || dLat <= 0) return null;
+        let fx = ((lng - fb.west) / dLng) * (cols - 1);
+        let fy = ((lat - fb.south) / dLat) * (rows - 1);
+        if (fx < 0) fx = 0;
+        if (fx > cols - 1) fx = cols - 1;
+        if (fy < 0) fy = 0;
+        if (fy > rows - 1) fy = rows - 1;
+        const x0 = Math.floor(fx);
+        const y0 = Math.floor(fy);
+        const x1 = Math.min(x0 + 1, cols - 1);
+        const y1 = Math.min(y0 + 1, rows - 1);
+        const tx = fx - x0;
+        const ty = fy - y0;
+        const p00 = wg.points[y0 * cols + x0];
+        const p10 = wg.points[y0 * cols + x1];
+        const p01 = wg.points[y1 * cols + x0];
+        const p11 = wg.points[y1 * cols + x1];
+        const u00 = p00?.u[h];
+        const u10 = p10?.u[h];
+        const u01 = p01?.u[h];
+        const u11 = p11?.u[h];
+        const v00 = p00?.v[h];
+        const v10 = p10?.v[h];
+        const v01 = p01?.v[h];
+        const v11 = p11?.v[h];
+        if (
+          u00 == null || u10 == null || u01 == null || u11 == null ||
+          v00 == null || v10 == null || v01 == null || v11 == null
+        ) return null;
+        const au = u00 * (1 - tx) + u10 * tx;
+        const bu = u01 * (1 - tx) + u11 * tx;
+        const av = v00 * (1 - tx) + v10 * tx;
+        const bv = v01 * (1 - tx) + v11 * tx;
+        return { u: au * (1 - ty) + bu * ty, v: av * (1 - ty) + bv * ty };
+      };
+      const uv = sampleUv(frameIndex);
+      if (!uv) return null;
+      const speedMps = Math.hypot(uv.u, uv.v);
+      const kmh = Math.round(speedMps * 3.6);
+      // Heading = direction wind is BLOWING TOWARD (math convention).
+      // 0° = east (positive u), 90° = north (positive v). Convert to
+      // compass bearing where 0° = north, 90° = east, then cardinal.
+      const bearing = (Math.atan2(uv.u, uv.v) * 180) / Math.PI;
+      const norm = ((bearing % 360) + 360) % 360;
+      const cardinals = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+      const idx = Math.round(norm / 45) % 8;
+      return `${kmh} km/h ${cardinals[idx]}`;
+    }
+    if (def.kind === 'overlay' && activeLayer === 'sol') {
+      // Day/Night = angular distance from subsolar point < or > 90°.
+      // No polygon math needed; this is the same condition the
+      // terminatorPolygon helper uses to draw the boundary.
+      const sun = solarPosition(Date.now());
+      const DEG = Math.PI / 180;
+      const cosDist =
+        Math.sin(sun.lat * DEG) * Math.sin(lat * DEG) +
+        Math.cos(sun.lat * DEG) *
+          Math.cos(lat * DEG) *
+          Math.cos((lng - sun.lng) * DEG);
+      return cosDist >= 0 ? 'Día' : 'Noche';
+    }
+    return null;
+  }
+
+  function handleHover(
+    lng: number,
+    lat: number,
+    pointX: number,
+    pointY: number,
+  ): void {
+    if (!tooltipEl) return;
+    const text = tooltipValueAt(lng, lat);
+    if (text === null) {
+      hideTooltip();
+      return;
+    }
+    setTooltip(text, pointX, pointY);
+  }
+
+  if (tooltipEl) {
+    map.on('mousemove', (e) => {
+      handleHover(e.lngLat.lng, e.lngLat.lat, e.point.x, e.point.y);
+    });
+    map.on('mouseout', hideTooltip);
+    // Map drags fire mousemove with stale lngLat under some browsers —
+    // a fresh mouseleave on the canvas is the most reliable hide.
+    map.getCanvas().addEventListener('mouseleave', hideTooltip);
+    // Touch: hide on touchend, follow on touchmove. We need the same
+    // canvas-relative coordinates Maplibre uses, so unproject the touch
+    // x/y via the map's unproject helper.
+    const canvas = map.getCanvas();
+    const onTouchMove = (ev: TouchEvent): void => {
+      if (!ev.touches || ev.touches.length === 0) return;
+      const t0 = ev.touches[0];
+      const rect = canvas.getBoundingClientRect();
+      const x = t0.clientX - rect.left;
+      const y = t0.clientY - rect.top;
+      const ll = map.unproject([x, y]);
+      handleHover(ll.lng, ll.lat, x, y);
+    };
+    canvas.addEventListener('touchmove', onTouchMove, { passive: true });
+    canvas.addEventListener('touchend', hideTooltip);
+    canvas.addEventListener('touchcancel', hideTooltip);
   }
 
   async function setActiveLayer(id: string): Promise<void> {
