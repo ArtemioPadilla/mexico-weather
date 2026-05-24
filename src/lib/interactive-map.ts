@@ -1938,12 +1938,30 @@ export async function initInteractiveMap(
     fieldAbort?.abort();
     const ac = new AbortController();
     fieldAbort = ac;
-    try {
+    // Cold-load resilience: the first Open-Meteo fetch occasionally
+    // fails (network race on page init, transient DNS, etc.). Retry
+    // once after 500 ms before falling back to base layer — empirically
+    // resolves the URL-hash cold-load failure where ?layer=temperature
+    // sometimes activated as base.
+    async function attempt(): Promise<unknown> {
       const res = await deps.fetch(buildFieldUrl(grid, cfg.hourlyVar), {
         signal: ac.signal,
       });
+      if (!res.ok) throw new Error('non-2xx');
+      return res.json();
+    }
+    try {
+      let json: unknown;
+      try {
+        json = await attempt();
+      } catch {
+        if (ac.signal.aborted) return false;
+        await new Promise((r) => setTimeout(r, 500));
+        if (ac.signal.aborted) return false;
+        json = await attempt();
+      }
       if (ac.signal.aborted) return false;
-      fieldGrid = parseFieldResponse(await res.json(), grid, cfg.hourlyVar);
+      fieldGrid = parseFieldResponse(json, grid, cfg.hourlyVar);
     } catch {
       if (ac.signal.aborted) return false;
       fieldGrid = null;
