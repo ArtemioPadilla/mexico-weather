@@ -2,11 +2,19 @@
 //
 // Replaces the dotted-circle stack used in PRs #119/#121 with a
 // Zoom.Earth-style smooth color band. The input grid is 10×7 lat/lng
-// samples from Open-Meteo; we bilinearly interpolate the value at every
-// pixel of an N×M offscreen canvas and paint it with the field's color
-// ramp, then hand the resulting PNG to MapLibre as an `image` source.
-// MapLibre's `raster-resampling: linear` does a second bilinear pass at
-// render time so the resulting overlay stays continuous at any zoom.
+// samples from Open-Meteo; we bicubically (Catmull-Rom) interpolate the
+// value at every pixel of an N×M offscreen canvas and paint it with the
+// field's color ramp, then hand the resulting PNG to MapLibre as an
+// `image` source. MapLibre's `raster-resampling: linear` does a second
+// bilinear pass at render time so the resulting overlay stays continuous
+// at any zoom.
+//
+// Bicubic preserves gradient curvature (peaks/troughs stay round), which
+// at 600×420 from a 10×7 grid is the visual difference between zoom.earth
+// and the dotted-grid look of bilinear-at-large-upsample. `bilerpValue`
+// is still exported for callers that need a cheaper sample (e.g. the
+// hover tooltip, which calls per pointermove and only cares about a
+// single point, not a 252k-pixel field).
 //
 // Pure helpers — no DOM, no MapLibre. The caller (interactive-map.ts)
 // is responsible for picking the canvas factory (OffscreenCanvas /
@@ -107,7 +115,97 @@ export function bilerpValue(
   return a * (1 - ty) + b * ty;
 }
 
-/** Fill an ImageData buffer with the bilinearly interpolated field. */
+/**
+ * Catmull-Rom cubic interpolation across 4 collinear samples.
+ * `t ∈ [0, 1]` is the position between b (sample 2) and c (sample 3).
+ * Derived as a standard polynomial — same shape used by image editors
+ * for high-quality bicubic upsampling.
+ */
+function cubic(t: number, a: number, b: number, c: number, d: number): number {
+  const a0 = d - c - a + b;
+  const a1 = a - b - a0;
+  const a2 = c - a;
+  const a3 = b;
+  return ((a0 * t + a1) * t + a2) * t + a3;
+}
+
+/**
+ * Sample the value at grid index (gx, gy) at hour `hourIdx`, clamping to
+ * the grid edges. Returns null if the clamped sample is missing data so
+ * callers can short-circuit. (gx,gy) may be any integer; out-of-range
+ * values pull the nearest in-range sample.
+ */
+function sampleGrid(
+  grid: FieldGrid,
+  rows: number,
+  cols: number,
+  gx: number,
+  gy: number,
+  hourIdx: number,
+): number | null {
+  let x = gx;
+  let y = gy;
+  if (x < 0) x = 0;
+  if (x > cols - 1) x = cols - 1;
+  if (y < 0) y = 0;
+  if (y > rows - 1) y = rows - 1;
+  const v = grid.points[y * cols + x]?.values[hourIdx];
+  if (v == null || !Number.isFinite(v)) return null;
+  return v;
+}
+
+/**
+ * Bicubic (Catmull-Rom) interpolation of the field value at (lat, lng).
+ * Uses a 4×4 neighbourhood around the target cell; edges are handled by
+ * clamping neighbour indices into [0, cols-1] / [0, rows-1] so the
+ * function is well-defined for points anywhere inside `bounds`. Returns
+ * null if any of the 16 neighbours is missing data for `hourIdx`.
+ *
+ * Visually: produces smoother gradients than bilerp at the same input
+ * grid density because the cubic kernel preserves curvature — the
+ * piecewise-linear bumps you get from bilerp around peaks (e.g. a heat
+ * island, a low-pressure centre) are replaced by a continuous curve.
+ */
+export function bicubicValue(
+  grid: FieldGrid,
+  rows: number,
+  cols: number,
+  bounds: RasterBounds,
+  lat: number,
+  lng: number,
+  hourIdx: number,
+): number | null {
+  if (rows < 2 || cols < 2) return null;
+  if (grid.points.length !== rows * cols) return null;
+  const dLng = bounds.east - bounds.west;
+  const dLat = bounds.north - bounds.south;
+  if (dLng <= 0 || dLat <= 0) return null;
+  let fx = ((lng - bounds.west) / dLng) * (cols - 1);
+  let fy = ((lat - bounds.south) / dLat) * (rows - 1);
+  if (fx < 0) fx = 0;
+  if (fx > cols - 1) fx = cols - 1;
+  if (fy < 0) fy = 0;
+  if (fy > rows - 1) fy = rows - 1;
+  const ix = Math.floor(fx);
+  const iy = Math.floor(fy);
+  const tx = fx - ix;
+  const ty = fy - iy;
+  // 4 cubic interpolations across rows (one per row in the 4-row stencil)
+  // then a final cubic across the 4 row-results down the column.
+  const rowResults: number[] = new Array(4);
+  for (let dy = -1; dy <= 2; dy++) {
+    const y = iy + dy;
+    const s0 = sampleGrid(grid, rows, cols, ix - 1, y, hourIdx);
+    const s1 = sampleGrid(grid, rows, cols, ix, y, hourIdx);
+    const s2 = sampleGrid(grid, rows, cols, ix + 1, y, hourIdx);
+    const s3 = sampleGrid(grid, rows, cols, ix + 2, y, hourIdx);
+    if (s0 === null || s1 === null || s2 === null || s3 === null) return null;
+    rowResults[dy + 1] = cubic(tx, s0, s1, s2, s3);
+  }
+  return cubic(ty, rowResults[0], rowResults[1], rowResults[2], rowResults[3]);
+}
+
+/** Fill an ImageData buffer with the bicubic-interpolated field. */
 export function fillFieldImageData(
   img: { data: Uint8ClampedArray; width: number; height: number },
   grid: FieldGrid,
@@ -140,7 +238,7 @@ export function fillFieldImageData(
     const lat = bounds.north - (py / (H - 1)) * dLat;
     for (let px = 0; px < W; px++) {
       const lng = bounds.west + (px / (W - 1)) * dLng;
-      const v = bilerpValue(grid, rows, cols, bounds, lat, lng, hourIdx);
+      const v = bicubicValue(grid, rows, cols, bounds, lat, lng, hourIdx);
       const i = (py * W + px) * 4;
       if (v === null) {
         img.data[i + 3] = 0;

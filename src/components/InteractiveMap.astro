@@ -88,6 +88,7 @@ const ids = {
   opacity: mapId === 'map' ? 'opacity' : `${mapId}-opacity`,
   legend: mapId === 'map' ? 'legend' : `${mapId}-legend`,
   msg: mapId === 'map' ? 'mapmsg' : `${mapId}-msg`,
+  tooltip: mapId === 'map' ? 'mapTooltip' : `${mapId}-tooltip`,
   timeline: mapId === 'map' ? 'timeline' : `${mapId}-timeline`,
   tlPrev: mapId === 'map' ? 'tl-prev' : `${mapId}-tl-prev`,
   tlPlay: mapId === 'map' ? 'tl-play' : `${mapId}-tl-play`,
@@ -237,6 +238,22 @@ const cfg = JSON.stringify({
   )}
 
   <div id={mapId} class="h-full w-full" role="application" aria-label={t.map_title}></div>
+
+  {/*
+    Floating tooltip that follows the cursor when a field/wind/sun layer
+    is active. Hidden by default; interactive-map.ts toggles it on
+    mousemove/touchmove and updates left/top + textContent in one frame.
+    `pointer-events-none` so it never eats map drags; `z-50` so it sits
+    above the layer rail and the timeline.
+  */}
+  <div
+    id={ids.tooltip}
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    class="im-tooltip pointer-events-none absolute left-0 top-0 z-50 hidden whitespace-nowrap rounded bg-gray-900/85 px-2 py-1 text-sm font-medium text-white shadow-lg backdrop-blur-sm dark:bg-gray-950/90"
+    style="will-change: transform, left, top;"
+  ></div>
 </div>
 
 {/*
@@ -339,6 +356,7 @@ const cfg = JSON.stringify({
           tlRange: document.getElementById(cfg.ids.tlRange) as HTMLInputElement | null,
           tlTime: document.getElementById(cfg.ids.tlTime),
           msg: document.getElementById(cfg.ids.msg),
+          tooltip: document.getElementById(cfg.ids.tooltip),
         };
         void initInteractiveMap({
           els,
