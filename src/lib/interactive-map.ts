@@ -825,8 +825,10 @@ export async function initInteractiveMap(
    *  will follow the same pattern. */
   type TempSubOption = 'actual' | 'aparente';
   type HumiditySubOption = 'relativa' | 'rocio';
+  type PressureSubOption = 'msl' | 'surface';
   let tempSubOption: TempSubOption = 'actual';
   let humiditySubOption: HumiditySubOption = 'relativa';
+  let pressureSubOption: PressureSubOption = 'msl';
   function tempHourlyVar(): string {
     return tempSubOption === 'aparente'
       ? 'apparent_temperature'
@@ -837,10 +839,13 @@ export async function initInteractiveMap(
       ? 'dew_point_2m'
       : 'relative_humidity_2m';
   }
+  function pressureHourlyVar(): string {
+    return pressureSubOption === 'surface' ? 'surface_pressure' : 'pressure_msl';
+  }
   const FIELD_CONFIGS: Record<string, FieldConfig> = {
     temperature: { get hourlyVar() { return tempHourlyVar(); }, color: tempColor },
     humidity: { get hourlyVar() { return humidityHourlyVar(); }, color: humidityColor },
-    pressure: { hourlyVar: 'pressure_msl', color: pressureColor },
+    pressure: { get hourlyVar() { return pressureHourlyVar(); }, color: pressureColor },
   } as unknown as Record<string, FieldConfig>;
   let fieldAbort: AbortController | null = null;
 
@@ -1953,6 +1958,7 @@ export async function initInteractiveMap(
     }
     refreshTempSubOptions();
     refreshHumiditySubOptions();
+    refreshPressureSubOptions();
     const akind = getLayerDef(activeLayer)?.kind;
     opts.els.opacityWrap?.classList.toggle(
       'hidden',
@@ -2466,6 +2472,52 @@ export async function initInteractiveMap(
   }
   buildHumiditySubOptions();
   refreshHumiditySubOptions();
+
+  function buildPressureSubOptions(): void {
+    const wrap = opts.els.layerBtns;
+    if (!wrap || !features.layerRail) return;
+    const container = document.createElement('div');
+    container.id = 'pressure-sub-options';
+    container.className =
+      'mt-1 ml-4 hidden flex-col gap-0.5 text-xs text-gray-600 dark:text-gray-400';
+    const mkBtn = (
+      id: PressureSubOption,
+      label: string,
+    ): HTMLButtonElement => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.dataset.sub = id;
+      btn.textContent = label;
+      btn.className =
+        'rounded px-2 py-0.5 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold aria-pressed:text-gray-800 dark:aria-pressed:text-gray-100';
+      btn.setAttribute('aria-pressed', String(pressureSubOption === id));
+      btn.addEventListener('click', () => {
+        if (pressureSubOption === id) return;
+        pressureSubOption = id;
+        refreshPressureSubOptions();
+        void setActiveLayer('pressure');
+      });
+      return btn;
+    };
+    container.appendChild(mkBtn('msl', 'Nivel del mar'));
+    container.appendChild(mkBtn('surface', 'Superficie'));
+    wrap.appendChild(container);
+  }
+  function refreshPressureSubOptions(): void {
+    const container = document.getElementById('pressure-sub-options');
+    if (!container) return;
+    const show = activeLayer === 'pressure';
+    container.classList.toggle('hidden', !show);
+    container.classList.toggle('flex', show);
+    container.querySelectorAll('button').forEach((b) => {
+      b.setAttribute(
+        'aria-pressed',
+        String((b as HTMLButtonElement).dataset.sub === pressureSubOption),
+      );
+    });
+  }
+  buildPressureSubOptions();
+  refreshPressureSubOptions();
 
   // ----------------------------------------------------------------
   // Overlays menu — zoom.earth's "Superposiciones" panel. Each entry
