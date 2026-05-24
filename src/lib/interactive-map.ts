@@ -107,80 +107,11 @@ export interface InteractiveMapFeatures {
 }
 
 // ---------------------------------------------------------------------------
-// Module-scoped shared cache + request coalescing for Open-Meteo / RainViewer.
-// Shared across all map instances on the same page so the home embed, the
-// /mapa overlay, and the forecast embed don't fire duplicate requests.
-// Keyed by URL only (no method/body discrimination because all our requests
-// are GETs).
-// ---------------------------------------------------------------------------
-const FETCH_CACHE_TTL_MS = 10 * 60 * 1000;
-interface CacheEntry {
-  ts: number;
-  body: string;
-  headers: Record<string, string>;
-  status: number;
-}
-const fetchCache = new Map<string, CacheEntry>();
-const inFlight = new Map<string, Promise<Response>>();
-
-function cachedFetch(
-  input: RequestInfo | URL,
-  init?: RequestInit,
-): Promise<Response> {
-  const url = typeof input === 'string' ? input : input.toString();
-  const method = (init?.method ?? 'GET').toUpperCase();
-  // Don't cache non-GET (we don't have any, but be safe).
-  if (method !== 'GET') return window.fetch(input as RequestInfo, init);
-
-  const cached = fetchCache.get(url);
-  if (cached && Date.now() - cached.ts < FETCH_CACHE_TTL_MS) {
-    return Promise.resolve(
-      new Response(cached.body, {
-        status: cached.status,
-        headers: cached.headers,
-      }),
-    );
-  }
-
-  // Coalesce concurrent identical requests.
-  const existing = inFlight.get(url);
-  if (existing) {
-    // Each caller needs its own Response (body can only be read once),
-    // so clone before handing back.
-    return existing.then((r) => r.clone());
-  }
-
-  const p = window.fetch(input as RequestInfo, init).then(async (res) => {
-    // Only cache 2xx so we re-try on 429 / 5xx next call instead of pinning
-    // the failure for 10 minutes.
-    if (res.ok) {
-      try {
-        const clone = res.clone();
-        const body = await clone.text();
-        const headers: Record<string, string> = {};
-        clone.headers.forEach((v, k) => {
-          headers[k] = v;
-        });
-        fetchCache.set(url, {
-          ts: Date.now(),
-          body,
-          headers,
-          status: res.status,
-        });
-      } catch {
-        /* ignore — fall through and return the original */
-      }
-    }
-    return res;
-  });
-  inFlight.set(url, p);
-  // Always remove from in-flight on settle so future calls don't get a stale
-  // Promise after the cache also expires.
-  p.finally(() => {
-    if (inFlight.get(url) === p) inFlight.delete(url);
-  });
-  return p.then((r) => r.clone());
-}
+// Shared fetch cache + request coalescing lives in src/lib/map/utils/fetch.ts
+// (extracted in F2 of the architecture migration — see docs/ARCHITECTURE.md).
+// Re-imported here so existing call sites in this monolith keep working
+// unchanged.
+import { cachedFetch } from './map/utils';
 
 export interface InteractiveMapOptions {
   els: InteractiveMapElements;
