@@ -824,15 +824,22 @@ export async function initInteractiveMap(
    *  Actual/Aparente; we wire Actual + Aparente here. Other layers
    *  will follow the same pattern. */
   type TempSubOption = 'actual' | 'aparente';
+  type HumiditySubOption = 'relativa' | 'rocio';
   let tempSubOption: TempSubOption = 'actual';
+  let humiditySubOption: HumiditySubOption = 'relativa';
   function tempHourlyVar(): string {
     return tempSubOption === 'aparente'
       ? 'apparent_temperature'
       : 'temperature_2m';
   }
+  function humidityHourlyVar(): string {
+    return humiditySubOption === 'rocio'
+      ? 'dew_point_2m'
+      : 'relative_humidity_2m';
+  }
   const FIELD_CONFIGS: Record<string, FieldConfig> = {
     temperature: { get hourlyVar() { return tempHourlyVar(); }, color: tempColor },
-    humidity: { hourlyVar: 'relative_humidity_2m', color: humidityColor },
+    humidity: { get hourlyVar() { return humidityHourlyVar(); }, color: humidityColor },
     pressure: { hourlyVar: 'pressure_msl', color: pressureColor },
   } as unknown as Record<string, FieldConfig>;
   let fieldAbort: AbortController | null = null;
@@ -1945,6 +1952,7 @@ export async function initInteractiveMap(
       if (btn) btn.setAttribute('aria-pressed', String(def.id === activeLayer));
     }
     refreshTempSubOptions();
+    refreshHumiditySubOptions();
     const akind = getLayerDef(activeLayer)?.kind;
     opts.els.opacityWrap?.classList.toggle(
       'hidden',
@@ -2412,6 +2420,52 @@ export async function initInteractiveMap(
   }
   buildTempSubOptions();
   refreshTempSubOptions();
+
+  function buildHumiditySubOptions(): void {
+    const wrap = opts.els.layerBtns;
+    if (!wrap || !features.layerRail) return;
+    const container = document.createElement('div');
+    container.id = 'humidity-sub-options';
+    container.className =
+      'mt-1 ml-4 hidden flex-col gap-0.5 text-xs text-gray-600 dark:text-gray-400';
+    const mkBtn = (
+      id: HumiditySubOption,
+      label: string,
+    ): HTMLButtonElement => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.dataset.sub = id;
+      btn.textContent = label;
+      btn.className =
+        'rounded px-2 py-0.5 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold aria-pressed:text-gray-800 dark:aria-pressed:text-gray-100';
+      btn.setAttribute('aria-pressed', String(humiditySubOption === id));
+      btn.addEventListener('click', () => {
+        if (humiditySubOption === id) return;
+        humiditySubOption = id;
+        refreshHumiditySubOptions();
+        void setActiveLayer('humidity');
+      });
+      return btn;
+    };
+    container.appendChild(mkBtn('relativa', 'Relativa'));
+    container.appendChild(mkBtn('rocio', 'Punto de rocío'));
+    wrap.appendChild(container);
+  }
+  function refreshHumiditySubOptions(): void {
+    const container = document.getElementById('humidity-sub-options');
+    if (!container) return;
+    const show = activeLayer === 'humidity';
+    container.classList.toggle('hidden', !show);
+    container.classList.toggle('flex', show);
+    container.querySelectorAll('button').forEach((b) => {
+      b.setAttribute(
+        'aria-pressed',
+        String((b as HTMLButtonElement).dataset.sub === humiditySubOption),
+      );
+    });
+  }
+  buildHumiditySubOptions();
+  refreshHumiditySubOptions();
 
   // ----------------------------------------------------------------
   // Overlays menu — zoom.earth's "Superposiciones" panel. Each entry
