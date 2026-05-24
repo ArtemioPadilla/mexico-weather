@@ -463,10 +463,39 @@ export async function initInteractiveMap(
       /* synthetic-event dispatch is best-effort */
     }
   };
+  // Source-data hook: whenever ANY source finishes loading (basemap tile
+  // batch, raster, geojson), trigger a repaint. This is the final answer
+  // to #124 — instead of guessing when tiles arrive, listen for the
+  // sourcedata event that fires exactly when tiles finish decoding, then
+  // schedule a paint. Cheap (the event also fires during normal panning,
+  // which already triggers paints anyway, so this is a no-op there).
+  map.on('sourcedata', (e: { isSourceLoaded?: boolean; sourceId?: string }) => {
+    if (!e.isSourceLoaded) return;
+    try {
+      map.triggerRepaint();
+    } catch {
+      /* best-effort */
+    }
+  });
   map.on('load', () => {
     renderPins();
     window.requestAnimationFrame(firstPaintNudge);
     aggressiveNudge();
+    // Belt-and-suspenders interval: poll triggerRepaint every 200 ms for
+    // the first 5 seconds. Each call is essentially free if a frame is
+    // already scheduled; covers the worst-case race where neither the
+    // load event, sourcedata events, nor the deferred timers happen to
+    // align with the moment tiles actually arrive.
+    let ticks = 0;
+    const intervalId = window.setInterval(() => {
+      try {
+        map.triggerRepaint();
+      } catch {
+        /* best-effort */
+      }
+      ticks += 1;
+      if (ticks >= 25) window.clearInterval(intervalId);
+    }, 200);
     // Replay the click/pointer trigger that resolves the cold-load blank
     // canvas (#124) when the user clicks the map. We can't tell what
     // pointer-event MapLibre uses to schedule the first frame in the
