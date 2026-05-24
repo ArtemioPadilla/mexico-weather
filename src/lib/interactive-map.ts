@@ -1390,6 +1390,58 @@ export async function initInteractiveMap(
     if (map.getSource(ISOBAR_SOURCE)) map.removeSource(ISOBAR_SOURCE);
   }
 
+  // ----------------------------------------------------------------
+  // Graticule overlay (zoom.earth "Retícula X") — lat/lng grid at 10°
+  // intervals. Toggle via keyboard shortcut 'X'.
+  // ----------------------------------------------------------------
+  const GRATICULE_SOURCE = 'wx-graticule-src';
+  const GRATICULE_LAYER = 'wx-graticule-line';
+
+  function buildGraticule(): FeatureCollection {
+    const features: Feature[] = [];
+    for (let lng = -180; lng <= 180; lng += 10) {
+      features.push({
+        type: 'Feature',
+        properties: { kind: 'meridian', value: lng },
+        geometry: {
+          type: 'LineString',
+          coordinates: [[lng, -85], [lng, 85]],
+        },
+      });
+    }
+    for (let lat = -80; lat <= 80; lat += 10) {
+      const coords: [number, number][] = [];
+      for (let lng = -180; lng <= 180; lng += 5) coords.push([lng, lat]);
+      features.push({
+        type: 'Feature',
+        properties: { kind: 'parallel', value: lat },
+        geometry: { type: 'LineString', coordinates: coords },
+      });
+    }
+    return { type: 'FeatureCollection', features };
+  }
+
+  function setGraticuleEnabled(on: boolean): void {
+    if (!on) {
+      if (map.getLayer(GRATICULE_LAYER)) map.removeLayer(GRATICULE_LAYER);
+      if (map.getSource(GRATICULE_SOURCE)) map.removeSource(GRATICULE_SOURCE);
+      return;
+    }
+    if (map.getSource(GRATICULE_SOURCE)) return;
+    map.addSource(GRATICULE_SOURCE, { type: 'geojson', data: buildGraticule() });
+    map.addLayer({
+      id: GRATICULE_LAYER,
+      type: 'line',
+      source: GRATICULE_SOURCE,
+      paint: {
+        'line-color': '#ffffff',
+        'line-width': 0.6,
+        'line-opacity': 0.25,
+        'line-dasharray': [2, 2],
+      },
+    });
+  }
+
   function refreshIsobars(): void {
     if (activeLayer !== 'pressure' || !fieldGrid || !fieldBounds) {
       removeIsobars();
@@ -2138,6 +2190,12 @@ export async function initInteractiveMap(
       if (match) {
         e.preventDefault();
         void setActiveLayer(match.id);
+        return;
+      }
+      // Overlay toggles (zoom.earth-compatible shortcuts).
+      if (key === 'X') {
+        e.preventDefault();
+        setGraticuleEnabled(!map.getLayer(GRATICULE_LAYER));
       }
     });
   }
