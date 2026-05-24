@@ -285,6 +285,42 @@ const cfg = JSON.stringify({
   )}
 
   {/*
+    Settings panel (zoom.earth-style ⚙️). Timezone + hour format
+    persisted in localStorage. Plain HTML <details> with inline
+    onclick handlers so no extra bundle.
+  */}
+  {features.layerRail && (
+    <details
+      id="mw-settings"
+      class="absolute right-3 top-12 z-10 max-w-xs rounded-lg bg-white/95 text-xs shadow dark:bg-gray-900/95"
+    >
+      <summary
+        class="cursor-pointer select-none rounded-lg px-2 py-1.5 font-semibold text-gray-700 hover:bg-blue-500/10 dark:text-gray-200"
+        aria-label="Configuración"
+      >⚙️ Configuración</summary>
+      <div class="space-y-3 border-t border-gray-200 px-3 py-2 text-gray-600 dark:border-gray-700 dark:text-gray-300">
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Zona horaria</p>
+          <div class="flex gap-1" data-mw-tz>
+            <button data-val="local" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Local</button>
+            <button data-val="UTC" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">UTC</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Formato de hora</p>
+          <div class="flex gap-1" data-mw-hour>
+            <button data-val="12" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">12 h</button>
+            <button data-val="24" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">24 h</button>
+          </div>
+        </div>
+        <p class="text-[10px] italic text-gray-500 dark:text-gray-400">
+          Aplica al reloj del timeline. Persistido localmente.
+        </p>
+      </div>
+    </details>
+  )}
+
+  {/*
     Info panel (zoom.earth-style ℹ️). Lists data sources and credits.
     Pure HTML via <details> — no JS needed.
   */}

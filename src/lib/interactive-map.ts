@@ -745,13 +745,45 @@ export async function initInteractiveMap(
 
   function frameLabel(frame: RadarFrame): string {
     const off = frameOffsetMinutes(frame, Math.floor(Date.now() / 1000));
-    const clock = new Date(frame.time * 1000).toLocaleTimeString('es-MX', {
+    const s = readSettings();
+    const opts: Intl.DateTimeFormatOptions = {
       hour: '2-digit',
       minute: '2-digit',
-    });
+      hour12: s.hourFormat === '12',
+    };
+    if (s.tz === 'UTC') opts.timeZone = 'UTC';
+    const clock = new Date(frame.time * 1000).toLocaleTimeString('es-MX', opts);
     const rel =
       off === 0 ? t.timeline_now : off < 0 ? `${off} min` : `+${off} min`;
-    return `${clock} · ${rel}`;
+    return `${clock}${s.tz === 'UTC' ? ' UTC' : ''} · ${rel}`;
+  }
+
+  // Settings persistence — zoom.earth-parity gear-icon panel writes here.
+  interface MapSettings {
+    tz: 'local' | 'UTC';
+    hourFormat: '12' | '24';
+  }
+  function readSettings(): MapSettings {
+    try {
+      const raw = window.localStorage.getItem('mw:settings');
+      if (raw) {
+        const parsed = JSON.parse(raw) as Partial<MapSettings>;
+        return {
+          tz: parsed.tz === 'UTC' ? 'UTC' : 'local',
+          hourFormat: parsed.hourFormat === '12' ? '12' : '24',
+        };
+      }
+    } catch {
+      /* default below */
+    }
+    return { tz: 'local', hourFormat: '24' };
+  }
+  function writeSettings(s: MapSettings): void {
+    try {
+      window.localStorage.setItem('mw:settings', JSON.stringify(s));
+    } catch {
+      /* private mode — ignore */
+    }
   }
 
   function applyFrame(i: number): void {
@@ -2558,6 +2590,63 @@ export async function initInteractiveMap(
     }
   }
   buildLayerButtons();
+
+  // ----------------------------------------------------------------
+  // Settings panel wiring — pressed-state + click handlers for
+  // the timezone (local/UTC) and hour format (12/24) toggle groups.
+  // Pure DOM; settings persist via writeSettings(). On change the
+  // timeline label re-renders so the user sees their preference take
+  // effect immediately.
+  // ----------------------------------------------------------------
+  function refreshSettingsButtons(): void {
+    if (!features.layerRail) return;
+    const cur = readSettings();
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-mw-tz] button')
+      .forEach((b) => {
+        b.setAttribute('aria-pressed', String(b.dataset.val === cur.tz));
+      });
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-mw-hour] button')
+      .forEach((b) => {
+        b.setAttribute(
+          'aria-pressed',
+          String(b.dataset.val === cur.hourFormat),
+        );
+      });
+  }
+  function bindSettingsButtons(): void {
+    if (!features.layerRail) return;
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-mw-tz] button')
+      .forEach((b) => {
+        b.addEventListener('click', () => {
+          const val = b.dataset.val === 'UTC' ? 'UTC' : 'local';
+          writeSettings({ ...readSettings(), tz: val });
+          refreshSettingsButtons();
+          // Re-render timeline label so the new tz takes effect.
+          if (frameIndex >= 0 && tlFrames[frameIndex]) {
+            const tt = opts.els.tlTime;
+            if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
+          }
+        });
+      });
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-mw-hour] button')
+      .forEach((b) => {
+        b.addEventListener('click', () => {
+          const val = b.dataset.val === '12' ? '12' : '24';
+          writeSettings({ ...readSettings(), hourFormat: val });
+          refreshSettingsButtons();
+          if (frameIndex >= 0 && tlFrames[frameIndex]) {
+            const tt = opts.els.tlTime;
+            if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
+          }
+        });
+      });
+  }
+  bindSettingsButtons();
+  refreshSettingsButtons();
 
   // ----------------------------------------------------------------
   // Sub-options (zoom.earth's per-layer variants). Only Temperature
