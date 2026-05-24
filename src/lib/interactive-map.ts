@@ -923,6 +923,7 @@ export async function initInteractiveMap(
     if (map.getLayer(WIND_LAYER)) map.removeLayer(WIND_LAYER);
     if (map.getLayer(WIND_CIRCLE_LAYER)) map.removeLayer(WIND_CIRCLE_LAYER);
     if (map.getSource(WIND_CIRCLE_SOURCE)) map.removeSource(WIND_CIRCLE_SOURCE);
+    removeCityValues();
   }
 
   function windPointsAtHour(g: WindGrid, h: number): WindPoint[] {
@@ -974,6 +975,8 @@ export async function initInteractiveMap(
     if (!map.getLayer(WIND_LAYER)) {
       map.addLayer(makeWindLayer());
     }
+    // City value pills for wind (e.g. "12 km/h ↑").
+    refreshCityValues();
   }
 
   function makeWindLayer(): maplibregl.CustomLayerInterface {
@@ -1294,6 +1297,77 @@ export async function initInteractiveMap(
     if (map.getSource(FIELD_SOURCE)) map.removeSource(FIELD_SOURCE);
     revokeFieldBlob();
     removeIsobars();
+    removeCityValues();
+  }
+
+  // ----------------------------------------------------------------
+  // City value pills — zoom.earth's "Valores de etiquetas (B)" overlay.
+  // For field/wind layers, paints the active layer's value over each
+  // preset city as a small pill (e.g. "26°", "78%", "1014 hPa",
+  // "12 km/h ↑"). Recomputed via tooltipValueAt() whenever the grid
+  // or frame changes.
+  // ----------------------------------------------------------------
+  const CITY_VALUES_SOURCE = 'wx-city-values-src';
+  const CITY_VALUES_LAYER = 'wx-city-values-text';
+
+  function removeCityValues(): void {
+    if (map.getLayer(CITY_VALUES_LAYER)) map.removeLayer(CITY_VALUES_LAYER);
+    if (map.getSource(CITY_VALUES_SOURCE)) map.removeSource(CITY_VALUES_SOURCE);
+  }
+
+  function refreshCityValues(): void {
+    const def = getLayerDef(activeLayer);
+    const showable = def?.kind === 'field' || def?.kind === 'particles';
+    if (!showable) {
+      removeCityValues();
+      return;
+    }
+    const fc: FeatureCollection = {
+      type: 'FeatureCollection',
+      features: cities
+        .map((c) => {
+          const value = tooltipValueAt(c.lng, c.lat);
+          if (!value) return null;
+          return {
+            type: 'Feature' as const,
+            properties: { value, name: c.name },
+            geometry: {
+              type: 'Point' as const,
+              coordinates: [c.lng, c.lat] as [number, number],
+            },
+          };
+        })
+        .filter((f): f is NonNullable<typeof f> => f !== null),
+    };
+    const existing = map.getSource(CITY_VALUES_SOURCE) as
+      | maplibregl.GeoJSONSource
+      | undefined;
+    if (existing) {
+      existing.setData(fc);
+      return;
+    }
+    map.addSource(CITY_VALUES_SOURCE, { type: 'geojson', data: fc });
+    map.addLayer({
+      id: CITY_VALUES_LAYER,
+      type: 'symbol',
+      source: CITY_VALUES_SOURCE,
+      layout: {
+        'text-field': ['get', 'value'],
+        'text-size': 13,
+        'text-offset': [0, 1.4],
+        'text-anchor': 'top',
+        'text-allow-overlap': false,
+        'text-ignore-placement': false,
+        'text-padding': 4,
+        'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+      },
+      paint: {
+        'text-color': '#ffffff',
+        'text-halo-color': 'rgba(0,0,0,0.75)',
+        'text-halo-width': 1.4,
+        'text-halo-blur': 0.2,
+      },
+    });
   }
 
   // ----------------------------------------------------------------
@@ -1378,6 +1452,9 @@ export async function initInteractiveMap(
     // them whenever the underlying grid or frame changes. No-op for other
     // field layers (early-returns inside refreshIsobars).
     refreshIsobars();
+    // City value pills (zoom.earth "Valores de etiquetas") follow the same
+    // cadence — value sampled via tooltipValueAt() at each city.
+    refreshCityValues();
     const render = await renderFieldRaster(
       fieldGrid,
       FIELD_GRID_ROWS,
