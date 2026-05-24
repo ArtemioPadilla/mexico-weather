@@ -865,6 +865,14 @@ export async function initInteractiveMap(
   const FIELD_RASTER_W = 1000;
   const FIELD_RASTER_H = 700;
   let fieldGrid: FieldGrid | null = null;
+  // Cached per-layer grids so the multi-metric tooltip (#2.1) can show
+  // temp + humidity + pressure + wind simultaneously even when the
+  // user is only on one of those layers. Keyed by the layer id so the
+  // most-recent grid per layer survives layer switches. Small memory
+  // cost (~70 KB each) for materially better UX.
+  let lastTempGrid: FieldGrid | null = null;
+  let lastHumidityGrid: FieldGrid | null = null;
+  let lastPressureGrid: FieldGrid | null = null;
   let fieldBounds: RasterBounds | null = null;
   let fieldBlobUrl: string | null = null;
   const fieldResampleTimer = 0;
@@ -2202,6 +2210,13 @@ export async function initInteractiveMap(
       }
       if (ac.signal.aborted) return false;
       fieldGrid = parseFieldResponse(json, grid, cfg.hourlyVar);
+      // Cache per layer so the multi-metric tooltip can read it later
+      // even when the user has switched to a different layer.
+      if (fieldGrid) {
+        if (layerId === 'temperature') lastTempGrid = fieldGrid;
+        else if (layerId === 'humidity') lastHumidityGrid = fieldGrid;
+        else if (layerId === 'pressure') lastPressureGrid = fieldGrid;
+      }
     } catch {
       if (ac.signal.aborted) return false;
       fieldGrid = null;
@@ -2433,28 +2448,76 @@ export async function initInteractiveMap(
     }
   }
 
-  /** Format the active-layer value for the tooltip. Returns null when
-   *  the layer doesn't have a per-pixel value (radar, satellite, base)
-   *  or when interpolation has no data at that point. */
+  /**
+   * Multi-metric tooltip at the cursor. zoom.earth shows only the
+   * active layer's value; we additionally surface any other previously-
+   * loaded metric (temp, humidity, pressure) so the user sees the full
+   * weather context with one hover. Returns null when no data is
+   * available at this point.
+   *
+   * Format: "26°\n78%\n1014 hPa" — newline-separated; the floating
+   * tooltip div whitespace-preserves them via CSS.
+   */
   function tooltipValueAt(lng: number, lat: number): string | null {
     const def = getLayerDef(activeLayer);
     if (!def) return null;
-    if (def.kind === 'field') {
-      if (!fieldGrid || !fieldBounds || frameIndex < 0) return null;
-      const v = bilerpValue(
-        fieldGrid,
-        FIELD_GRID_ROWS,
-        FIELD_GRID_COLS,
-        fieldBounds,
-        lat,
-        lng,
-        frameIndex,
-      );
-      if (v === null) return null;
-      if (activeLayer === 'temperature') return `${Math.round(v)}°`;
-      if (activeLayer === 'humidity') return `${Math.round(v)}%`;
-      if (activeLayer === 'pressure') return `${Math.round(v)} hPa`;
-      return `${Math.round(v)}`;
+    if (def.kind === 'field' || def.kind === 'particles') {
+      if (!fieldBounds || frameIndex < 0) return null;
+      const lines: string[] = [];
+      const sampleField = (g: FieldGrid | null): number | null =>
+        g
+          ? bilerpValue(
+              g,
+              FIELD_GRID_ROWS,
+              FIELD_GRID_COLS,
+              fieldBounds,
+              lat,
+              lng,
+              frameIndex,
+            )
+          : null;
+
+      // Temperature
+      const tGrid = activeLayer === 'temperature' ? fieldGrid : lastTempGrid;
+      const tVal = sampleField(tGrid);
+      if (tVal !== null) lines.push(`🌡 ${Math.round(tVal)}°`);
+
+      // Humidity
+      const hGrid = activeLayer === 'humidity' ? fieldGrid : lastHumidityGrid;
+      const hVal = sampleField(hGrid);
+      if (hVal !== null) lines.push(`💧 ${Math.round(hVal)}%`);
+
+      // Pressure
+      const pGrid = activeLayer === 'pressure' ? fieldGrid : lastPressureGrid;
+      const pVal = sampleField(pGrid);
+      if (pVal !== null) lines.push(`🧭 ${Math.round(pVal)} hPa`);
+
+      if (lines.length === 0 && def.kind !== 'particles') {
+        // Fall through to legacy single-value behavior for field layers
+        // when no cached grids exist yet (first paint).
+        if (fieldGrid) {
+          const v = bilerpValue(
+            fieldGrid,
+            FIELD_GRID_ROWS,
+            FIELD_GRID_COLS,
+            fieldBounds,
+            lat,
+            lng,
+            frameIndex,
+          );
+          if (v === null) return null;
+          if (activeLayer === 'temperature') return `${Math.round(v)}°`;
+          if (activeLayer === 'humidity') return `${Math.round(v)}%`;
+          if (activeLayer === 'pressure') return `${Math.round(v)} hPa`;
+          return `${Math.round(v)}`;
+        }
+        return null;
+      }
+
+      if (def.kind === 'field') {
+        return lines.join('\n');
+      }
+      // particles continues below (wind) and appends to lines
     }
     if (def.kind === 'particles') {
       // Wind: lerp u/v at the cursor, then derive speed (km/h) +
@@ -2521,7 +2584,29 @@ export async function initInteractiveMap(
       const norm = ((bearing % 360) + 360) % 360;
       const cardinals = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
       const idx = Math.round(norm / 45) % 8;
-      return `${kmh} km/h ${cardinals[idx]}`;
+      const windLine = `💨 ${kmh} km/h ${cardinals[idx]}`;
+      // Wind layer: combine with cached field grids (multi-metric).
+      const fLines: string[] = [];
+      const sample = (g: FieldGrid | null): number | null =>
+        g && fieldBounds
+          ? bilerpValue(
+              g,
+              FIELD_GRID_ROWS,
+              FIELD_GRID_COLS,
+              fieldBounds,
+              lat,
+              lng,
+              frameIndex,
+            )
+          : null;
+      const tV = sample(lastTempGrid);
+      if (tV !== null) fLines.push(`🌡 ${Math.round(tV)}°`);
+      const hV = sample(lastHumidityGrid);
+      if (hV !== null) fLines.push(`💧 ${Math.round(hV)}%`);
+      const pV = sample(lastPressureGrid);
+      if (pV !== null) fLines.push(`🧭 ${Math.round(pV)} hPa`);
+      fLines.push(windLine);
+      return fLines.join('\n');
     }
     if (def.kind === 'overlay' && activeLayer === 'sol') {
       // Day/Night = angular distance from subsolar point < or > 90°.
