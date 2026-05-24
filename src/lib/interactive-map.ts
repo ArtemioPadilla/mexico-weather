@@ -1511,9 +1511,16 @@ export async function initInteractiveMap(
     if (map.getSource(CITY_VALUES_SOURCE)) map.removeSource(CITY_VALUES_SOURCE);
   }
 
+  // User toggle for the value pills overlay (plan P1.3). Default ON
+  // because the value is exactly the feature that differentiates a
+  // weather pill from a generic city label — but the user can hide it
+  // to get a clean basemap view (e.g. for screenshot).
+  let cityValuesEnabled = true;
+
   function refreshCityValues(): void {
     const def = getLayerDef(activeLayer);
-    const showable = def?.kind === 'field' || def?.kind === 'particles';
+    const showable =
+      cityValuesEnabled && (def?.kind === 'field' || def?.kind === 'particles');
     if (!showable) {
       removeCityValues();
       return;
@@ -1552,6 +1559,10 @@ export async function initInteractiveMap(
       id: CITY_VALUES_LAYER,
       type: 'symbol',
       source: CITY_VALUES_SOURCE,
+      // Hide at country-wide zoom (≤4.99) to avoid label saturation
+      // — at zoom 5 the labels start to be readable; at zoom 7+ the
+      // value text reads clearly.
+      minzoom: 5,
       layout: {
         // Pre-composed "Name\nValue" in properties.label. Plain getter
         // — no format/section expression because that silently failed
@@ -4110,6 +4121,7 @@ export async function initInteractiveMap(
       | 'quakes'
       | 'volcanoes'
       | 'colorBlind'
+      | 'cityValues'
       | 'aqi'
       | 'marine'
       | 'webcams'
@@ -4208,6 +4220,16 @@ export async function initInteractiveMap(
       shortcut: 'J',
       isEnabled: () => !!map.getLayer(VOLCANOES_CIRCLE_LAYER),
       setEnabled: (on) => setVolcanoesEnabled(on),
+    },
+    {
+      id: 'cityValues',
+      label: 'Valores de etiquetas',
+      shortcut: 'E',
+      isEnabled: () => cityValuesEnabled,
+      setEnabled: (on) => {
+        cityValuesEnabled = on;
+        refreshCityValues();
+      },
     },
     {
       id: 'aqi',
