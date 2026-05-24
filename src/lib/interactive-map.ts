@@ -298,6 +298,44 @@ export async function initInteractiveMap(
     );
   }
 
+  function placePopupHtml(lat: number, lng: number): string {
+    const coords = formatLatLngDM(lat, lng);
+    const name = `Ubicación ${coords}`;
+    const fc = `${base}forecast?lat=${lat.toFixed(4)}&lng=${lng.toFixed(4)}&name=${encodeURIComponent(coords)}`;
+    return (
+      `<div class="text-sm">` +
+      `<strong>${esc(coords)}</strong><br>` +
+      `<span class="text-gray-600 dark:text-gray-300">${esc(name)}</span><br>` +
+      `<a href="${esc(fc)}" class="mt-1 inline-block text-blue-600 underline">${esc(t.map_popup_full_forecast)} →</a>` +
+      `</div>`
+    );
+  }
+
+  // Click-to-place popup — zoom.earth-style. When the user clicks on
+  // empty map (not on a city marker), open a popup with the cursor's
+  // DMS coordinates and a link to the full forecast page for that point.
+  // Only wired on the full /mapa page (features.layerRail) and when
+  // markerPopups is enabled.
+  let placePopup: maplibregl.Popup | null = null;
+  if (features.layerRail && markerPopups) {
+    map.on('click', (e) => {
+      // Ignore clicks that landed on a layer feature (storm dots, city
+      // values, isobars). Those have their own interactions or none.
+      const features = map.queryRenderedFeatures(e.point, {
+        layers: ['wx-storms-circle'],
+      });
+      if (features.length > 0) return;
+      if (placePopup) {
+        placePopup.remove();
+        placePopup = null;
+      }
+      placePopup = new maplibre.Popup({ offset: 8, closeButton: true })
+        .setLngLat(e.lngLat)
+        .setHTML(placePopupHtml(e.lngLat.lat, e.lngLat.lng))
+        .addTo(map);
+    });
+  }
+
   function renderPins(): void {
     while (markers.length) markers.pop()!.remove();
     for (const p of pins) {
