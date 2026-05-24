@@ -15,6 +15,7 @@ describe('parseMapHash', () => {
       zoom: 6.5,
       layer: 'base',
       t: '2026-05-18T00:00:00Z',
+      model: null,
     });
   });
 
@@ -25,7 +26,18 @@ describe('parseMapHash', () => {
       zoom: 3,
       layer: 'base',
       t: null,
+      model: null,
     });
+  });
+
+  it('parses an accepted model id', () => {
+    expect(parseMapHash('#view=0,0,3z&layer=temperature&model=icon_seamless').model).toBe(
+      'icon_seamless',
+    );
+  });
+
+  it('rejects an unknown model id (falls to null)', () => {
+    expect(parseMapHash('#view=0,0,3z&layer=temperature&model=fake').model).toBe(null);
   });
 
   it('falls back to default view on out-of-range coords or zoom', () => {
@@ -48,8 +60,29 @@ describe('parseMapHash', () => {
 
 describe('buildMapHash', () => {
   it('round-trips through parseMapHash', () => {
-    const state = { lat: 25.67, lng: -100.31, zoom: 7.25, layer: 'base', t: null };
+    const state = { lat: 25.67, lng: -100.31, zoom: 7.25, layer: 'base', t: null, model: null };
     expect(parseMapHash(buildMapHash(state))).toEqual(state);
+  });
+
+  it('round-trips with a specific model', () => {
+    const state = {
+      lat: 19.43,
+      lng: -99.13,
+      zoom: 6,
+      layer: 'temperature',
+      t: null,
+      model: 'icon_seamless',
+    };
+    expect(parseMapHash(buildMapHash(state))).toEqual(state);
+  });
+
+  it('omits model from hash when it is null or best_match', () => {
+    expect(
+      buildMapHash({ lat: 0, lng: 0, zoom: 3, layer: 'base', t: null, model: null }),
+    ).toBe('#view=0,0,3z&layer=base');
+    expect(
+      buildMapHash({ lat: 0, lng: 0, zoom: 3, layer: 'base', t: null, model: 'best_match' }),
+    ).toBe('#view=0,0,3z&layer=base');
   });
 
   it('rounds coordinates to 4 dp and zoom to 2 dp', () => {
