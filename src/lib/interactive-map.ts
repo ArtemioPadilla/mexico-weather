@@ -382,24 +382,12 @@ export async function initInteractiveMap(
     hashTimer = window.setTimeout(syncHash, 250);
   });
 
-  map.on('moveend', () => {
-    if (getLayerDef(activeLayer)?.kind !== 'field') return;
-    window.clearTimeout(fieldResampleTimer);
-    fieldResampleTimer = window.setTimeout(() => {
-      void (async () => {
-        const ok = await loadFieldGrid(activeLayer);
-        if (!ok || !fieldGrid) return;
-        tlFrames = fieldGrid.times.map((iso) => ({
-          time: Math.floor(
-            Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') /
-              1000,
-          ),
-          path: '',
-        }));
-        applyFrame(frameIndex >= 0 ? frameIndex : 0);
-      })();
-    }, 500);
-  });
+  // Field layers (temperature/humidity/pressure) now use a FIXED MX
+  // grid (see MX_FIELD_BOUNDS) so panning/zooming no longer needs to
+  // refetch — values stay stable per lat/lng. The moveend resample
+  // handler is intentionally removed; the raster gets upscaled by
+  // MapLibre at zoom-in (raster-resampling: linear) and clips
+  // gracefully at the fixed extent when the user pans WAY out.
 
   if (
     exposeE2eHook &&
@@ -802,6 +790,23 @@ export async function initInteractiveMap(
   // current MapLibre image source — revoked + replaced on each update.
   const FIELD_GRID_COLS = 10;
   const FIELD_GRID_ROWS = 7;
+  /**
+   * Fixed bounding box used by all field layers (temperature, humidity,
+   * pressure) so the bilinear interpolation samples the SAME 70 points
+   * regardless of camera zoom. Without a fixed grid the same lat/lng
+   * paints different colors at different zooms because the sample
+   * density changes — temperature in MX would change just by zooming.
+   *
+   * Covers México plus a margin for the southern US, Caribbean,
+   * Central America so when the user pans / zooms out we still have
+   * meaningful coverage in the visible viewport.
+   */
+  const MX_FIELD_BOUNDS: RasterBounds = {
+    west: -120,
+    south: 5,
+    east: -78,
+    north: 35,
+  };
   // Offscreen canvas size for the rendered raster. 600×420 is the
   // sweet spot for the bicubic upsample from the 10×7 input grid: each
   // input cell expands into a ~60×60 px region of smoothly-curving
@@ -814,7 +819,7 @@ export async function initInteractiveMap(
   let fieldGrid: FieldGrid | null = null;
   let fieldBounds: RasterBounds | null = null;
   let fieldBlobUrl: string | null = null;
-  let fieldResampleTimer = 0;
+  const fieldResampleTimer = 0;
 
   interface FieldConfig {
     hourlyVar: string;
@@ -1884,13 +1889,13 @@ export async function initInteractiveMap(
   async function loadFieldGrid(layerId: string): Promise<boolean> {
     const cfg = FIELD_CONFIGS[layerId];
     if (!cfg) return false;
-    const b = map.getBounds();
-    const bounds: RasterBounds = {
-      west: b.getWest(),
-      south: b.getSouth(),
-      east: b.getEast(),
-      north: b.getNorth(),
-    };
+    // Always sample on a FIXED grid covering Mexico + margin so the
+    // bilinear interpolation gives stable values per lat/lng across
+    // zoom levels. The raster image is drawn at MX_FIELD_BOUNDS — when
+    // the viewport zooms in, MapLibre's raster-resampling: linear
+    // smoothly upscales the same field; zooming changes detail, not
+    // colors.
+    const bounds: RasterBounds = { ...MX_FIELD_BOUNDS };
     const grid = viewportGrid(bounds, FIELD_GRID_COLS, FIELD_GRID_ROWS);
     fieldBounds = bounds;
     fieldAbort?.abort();
