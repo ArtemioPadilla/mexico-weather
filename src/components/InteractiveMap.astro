@@ -249,32 +249,64 @@ const cfg = JSON.stringify({
   {features.timeline && (
     <div
       id={ids.timeline}
-      class="absolute bottom-3 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-2 rounded-lg bg-white/95 px-3 py-2 text-sm shadow dark:bg-gray-900/95"
+      class="absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 items-center gap-1 rounded-full bg-gray-900/85 px-3 py-1.5 text-sm text-white shadow-lg backdrop-blur-sm sm:gap-2 sm:px-4"
       role="group"
       aria-label={t.timeline_label}
     >
-      <button
-        id={ids.tlPrev}
-        type="button"
-        aria-label={t.timeline_prev}
-        class="rounded px-2 py-1 hover:bg-blue-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:bg-blue-400/10"
-        >‹</button
-      >
       <button
         id={ids.tlPlay}
         type="button"
         aria-label={t.timeline_play}
         aria-pressed="false"
         disabled
-        class="rounded px-2 py-1 hover:bg-blue-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:opacity-40 dark:hover:bg-blue-400/10"
+        class="rounded-full bg-white/10 px-2.5 py-1 text-base leading-none hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-40"
         >▶</button
       >
+      <button
+        id="tl-day-prev"
+        type="button"
+        aria-label="Día anterior"
+        title="Día anterior (-24 h)"
+        class="hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+        >«</button
+      >
+      <button
+        id={ids.tlPrev}
+        type="button"
+        aria-label={t.timeline_prev}
+        title="Hora anterior"
+        class="px-1.5 py-1 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        >‹</button
+      >
+      <span
+        id={ids.tlTime}
+        aria-live="polite"
+        aria-atomic="true"
+        class="min-w-[7rem] text-center font-medium tabular-nums sm:min-w-[8rem]"
+      >—</span>
       <button
         id={ids.tlNext}
         type="button"
         aria-label={t.timeline_next}
-        class="rounded px-2 py-1 hover:bg-blue-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:bg-blue-400/10"
+        title="Hora siguiente"
+        class="px-1.5 py-1 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
         >›</button
+      >
+      <button
+        id="tl-day-next"
+        type="button"
+        aria-label="Día siguiente"
+        title="Día siguiente (+24 h)"
+        class="hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+        >»</button
+      >
+      <button
+        id="tl-now"
+        type="button"
+        aria-label="Volver al frame actual"
+        title="Ahora"
+        class="hidden rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+        >Ahora</button
       >
       <input
         id={ids.tlRange}
@@ -282,10 +314,9 @@ const cfg = JSON.stringify({
         min="0"
         max="0"
         value="0"
-        class="w-40 accent-blue-600"
+        class="hidden w-40 accent-blue-500 lg:inline-block"
         aria-label={t.timeline_label}
       />
-      <span id={ids.tlTime} aria-live="polite" aria-atomic="true" class="w-28 text-right tabular-nums text-gray-700 dark:text-gray-300"></span>
     </div>
   )}
 
