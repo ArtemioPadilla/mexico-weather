@@ -69,7 +69,14 @@ import { cities } from '../data/cities';
 import { geocode } from './geocode';
 import { ui } from '../i18n/ui';
 import { siteBase } from '../utils/paths';
-import { nhcSource, type NhcStorm } from './map/sources';
+import {
+  nhcSource,
+  type NhcStorm,
+  GIBS_LAYERS,
+  gibsTileUrl,
+  gibsRoundedTime,
+  ATTRIBUTION_GIBS,
+} from './map/sources';
 
 export interface InteractiveMapElements {
   /** The container element MapLibre attaches to. Required. */
@@ -1804,29 +1811,33 @@ export async function initInteractiveMap(
   }
 
   function showWeatherFrame(layerId: string, frame: RadarFrame): void {
-    if (!rvData) return;
-    const tileUrl =
-      layerId === 'satellite'
-        ? rainviewerTileUrl(rvData.host, frame, { color: 0, snow: false })
-        : rainviewerTileUrl(rvData.host, frame);
     removeWeatherRaster();
-    // Dim first so the radar/satellite raster paints on top of it. Both
-    // radar AND satellite get the dim treatment — satellite-IR mosaics
-    // also have transparent gaps that read as missing data when the
-    // basemap shows through.
     addRadarDim();
-    // RainViewer's free tile mosaic is published natively up to z=10; past
-    // that the CDN returns no-data and the user sees a blank/"Zoom level
-    // not supported" radar. Capping maxzoom here makes MapLibre re-use the
-    // z=10 parent tile at city zooms (overzoom) — pixelated but visible,
-    // which matches zoom.earth's behavior at high zoom.
-    map.addSource(RV_SOURCE, {
-      type: 'raster',
-      tiles: [tileUrl],
-      tileSize: 256,
-      maxzoom: 10,
-      attribution: '© RainViewer',
-    });
+    if (layerId === 'satellite') {
+      // Satellite layer now uses NASA GIBS GOES-East IR (Band 13). Much
+      // higher resolution than the RainViewer satellite mosaic, true
+      // hemispheric coverage, no API key. Time is rounded to a 10-min
+      // boundary so the URL benefits from HTTP caching.
+      const tileUrl = gibsTileUrl(GIBS_LAYERS.goesIR, gibsRoundedTime());
+      map.addSource(RV_SOURCE, {
+        type: 'raster',
+        tiles: [tileUrl],
+        tileSize: 256,
+        maxzoom: GIBS_LAYERS.goesIR.maxZoom,
+        attribution: ATTRIBUTION_GIBS,
+      });
+    } else {
+      // Radar still comes from RainViewer (multi-source, includes Mexico).
+      if (!rvData) return;
+      const tileUrl = rainviewerTileUrl(rvData.host, frame);
+      map.addSource(RV_SOURCE, {
+        type: 'raster',
+        tiles: [tileUrl],
+        tileSize: 256,
+        maxzoom: 10,
+        attribution: '© RainViewer',
+      });
+    }
     map.addLayer({
       id: RV_LAYER,
       type: 'raster',

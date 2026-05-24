@@ -23,3 +23,11 @@ export {
 } from './rainviewer';
 
 export { nhcSource, parseNhcResponse, type NhcStorm } from './nhc';
+
+export {
+  GIBS_LAYERS,
+  gibsTileUrl,
+  gibsRoundedTime,
+  ATTRIBUTION_GIBS,
+  type GibsLayerDef,
+} from './nasa-gibs';
