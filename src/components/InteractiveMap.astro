@@ -89,6 +89,7 @@ const ids = {
   legend: mapId === 'map' ? 'legend' : `${mapId}-legend`,
   msg: mapId === 'map' ? 'mapmsg' : `${mapId}-msg`,
   tooltip: mapId === 'map' ? 'mapTooltip' : `${mapId}-tooltip`,
+  coords: mapId === 'map' ? 'mapCoords' : `${mapId}-coords`,
   timeline: mapId === 'map' ? 'timeline' : `${mapId}-timeline`,
   tlPrev: mapId === 'map' ? 'tl-prev' : `${mapId}-tl-prev`,
   tlPlay: mapId === 'map' ? 'tl-play' : `${mapId}-tl-play`,
@@ -254,6 +255,19 @@ const cfg = JSON.stringify({
     class="im-tooltip pointer-events-none absolute left-0 top-0 z-50 hidden whitespace-nowrap rounded bg-gray-900/85 px-2 py-1 text-sm font-medium text-white shadow-lg backdrop-blur-sm dark:bg-gray-950/90"
     style="will-change: transform, left, top;"
   ></div>
+
+  {/*
+    Cursor coordinate badge in the bottom-left, zoom.earth-style. Hidden
+    on embeds where the corner is too cramped — only the full /mapa page
+    passes a non-null `coords` element to initInteractiveMap.
+  */}
+  {features.layerRail && (
+    <div
+      id={ids.coords}
+      class="pointer-events-none absolute bottom-2 left-2 z-10 rounded bg-gray-900/70 px-2 py-1 text-xs font-mono tabular-nums text-gray-200 backdrop-blur-sm hidden sm:inline-block"
+      aria-hidden="true"
+    ></div>
+  )}
 </div>
 
 {/*
@@ -370,6 +384,7 @@ const cfg = JSON.stringify({
           tlTime: document.getElementById(cfg.ids.tlTime),
           msg: document.getElementById(cfg.ids.msg),
           tooltip: document.getElementById(cfg.ids.tooltip),
+          coords: document.getElementById(cfg.ids.coords),
         };
         void initInteractiveMap({
           els,

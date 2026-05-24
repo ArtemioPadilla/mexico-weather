@@ -96,6 +96,10 @@ export interface InteractiveMapElements {
    *  field/wind/sun layers (zoom.earth-style). Optional — when absent
    *  the hover handler is a no-op. */
   tooltip?: HTMLElement | null;
+  /** Cursor coordinate badge in the bottom-left corner. Optional —
+   *  when present, the cursor's lat/lng renders as "19°25′N 99°07′O"
+   *  on mousemove (zoom.earth-style). */
+  coords?: HTMLElement | null;
 }
 
 export interface InteractiveMapFeatures {
@@ -111,7 +115,7 @@ export interface InteractiveMapFeatures {
 // (extracted in F2 of the architecture migration — see docs/ARCHITECTURE.md).
 // Re-imported here so existing call sites in this monolith keep working
 // unchanged.
-import { cachedFetch } from './map/utils';
+import { cachedFetch, formatLatLngDM } from './map/utils';
 
 export interface InteractiveMapOptions {
   els: InteractiveMapElements;
@@ -255,6 +259,25 @@ export async function initInteractiveMap(
 
   if (controls) {
     map.addControl(new maplibre.NavigationControl({}), 'bottom-left');
+    // Scale bar in the bottom-right — zoom.earth-style, distance updates
+    // with zoom (e.g. "200 km" at z=6, "10 km" at z=12).
+    map.addControl(
+      new maplibre.ScaleControl({ unit: 'metric', maxWidth: 120 }),
+      'bottom-right',
+    );
+  }
+
+  // Cursor coordinate badge — only shown on the full /mapa page, not on
+  // the smaller embedded maps. Renders DM-style "19°25′N 99°07′O" in the
+  // bottom-left corner, the same format zoom.earth uses.
+  if (controls && opts.els.coords) {
+    const coordsEl = opts.els.coords;
+    map.on('mousemove', (e) => {
+      coordsEl.textContent = formatLatLngDM(e.lngLat.lat, e.lngLat.lng);
+    });
+    map.on('mouseout', () => {
+      coordsEl.textContent = '';
+    });
   }
 
   let pins: MapPin[] = features.presetPins ? presetPins(cities) : [];
