@@ -1463,9 +1463,14 @@ export async function initInteractiveMap(
         .map((c) => {
           const value = tooltipValueAt(c.lng, c.lat);
           if (!value) return null;
+          // Pre-compose label as "Name\nValue" so the symbol layer
+          // uses a plain ['get','label'] expression — the format/
+          // section expression in #167 was silently failing on the
+          // MapLibre version we ship.
+          const label = `${c.name}\n${value}`;
           return {
             type: 'Feature' as const,
-            properties: { value, name: c.name },
+            properties: { value, name: c.name, label },
             geometry: {
               type: 'Point' as const,
               coordinates: [c.lng, c.lat] as [number, number],
@@ -1487,20 +1492,12 @@ export async function initInteractiveMap(
       type: 'symbol',
       source: CITY_VALUES_SOURCE,
       layout: {
-        // Stack city name above the value, zoom.earth-style:
-        //   Monterrey
-        //     29°
-        // (newline + 2-line text composition via MapLibre expressions).
-        'text-field': [
-          'format',
-          ['get', 'name'],
-          { 'font-scale': 0.85 },
-          '\n',
-          {},
-          ['get', 'value'],
-          { 'font-scale': 1.05 },
-        ],
-        'text-size': 13,
+        // Pre-composed "Name\nValue" in properties.label. Plain getter
+        // — no format/section expression because that silently failed
+        // in production (#167 attempted format() but the layer didn't
+        // get added at all — checked via source absence).
+        'text-field': ['get', 'label'],
+        'text-size': 12,
         'text-offset': [0, 1.4],
         'text-anchor': 'top',
         'text-allow-overlap': false,
