@@ -820,11 +820,21 @@ export async function initInteractiveMap(
     hourlyVar: string;
     color: (v: number) => string;
   }
+  /** Sub-option state per layer. zoom.earth's Temperatura has
+   *  Actual/Aparente; we wire Actual + Aparente here. Other layers
+   *  will follow the same pattern. */
+  type TempSubOption = 'actual' | 'aparente';
+  let tempSubOption: TempSubOption = 'actual';
+  function tempHourlyVar(): string {
+    return tempSubOption === 'aparente'
+      ? 'apparent_temperature'
+      : 'temperature_2m';
+  }
   const FIELD_CONFIGS: Record<string, FieldConfig> = {
-    temperature: { hourlyVar: 'temperature_2m', color: tempColor },
+    temperature: { get hourlyVar() { return tempHourlyVar(); }, color: tempColor },
     humidity: { hourlyVar: 'relative_humidity_2m', color: humidityColor },
     pressure: { hourlyVar: 'pressure_msl', color: pressureColor },
-  };
+  } as unknown as Record<string, FieldConfig>;
   let fieldAbort: AbortController | null = null;
 
   const WIND_LAYER = 'wx-wind-layer';
@@ -1934,6 +1944,7 @@ export async function initInteractiveMap(
       const btn = wrap.querySelector(`#layerbtn-${def.id}`);
       if (btn) btn.setAttribute('aria-pressed', String(def.id === activeLayer));
     }
+    refreshTempSubOptions();
     const akind = getLayerDef(activeLayer)?.kind;
     opts.els.opacityWrap?.classList.toggle(
       'hidden',
@@ -2353,13 +2364,63 @@ export async function initInteractiveMap(
   buildLayerButtons();
 
   // ----------------------------------------------------------------
+  // Sub-options (zoom.earth's per-layer variants). Only Temperature
+  // gets sub-options today: Actual ↔ Aparente. Rendered inline in the
+  // layer rail, below the active layer's button when that layer has
+  // sub-options. Hidden otherwise.
+  // ----------------------------------------------------------------
+  function buildTempSubOptions(): void {
+    const wrap = opts.els.layerBtns;
+    if (!wrap || !features.layerRail) return;
+    const container = document.createElement('div');
+    container.id = 'temp-sub-options';
+    container.className =
+      'mt-1 ml-4 hidden flex-col gap-0.5 text-xs text-gray-600 dark:text-gray-400';
+    const mkBtn = (id: TempSubOption, label: string): HTMLButtonElement => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.dataset.sub = id;
+      btn.textContent = label;
+      btn.className =
+        'rounded px-2 py-0.5 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold aria-pressed:text-gray-800 dark:aria-pressed:text-gray-100';
+      btn.setAttribute('aria-pressed', String(tempSubOption === id));
+      btn.addEventListener('click', () => {
+        if (tempSubOption === id) return;
+        tempSubOption = id;
+        refreshTempSubOptions();
+        // Refetch the field with the new variable.
+        void setActiveLayer('temperature');
+      });
+      return btn;
+    };
+    container.appendChild(mkBtn('actual', 'Actual'));
+    container.appendChild(mkBtn('aparente', 'Aparente'));
+    wrap.appendChild(container);
+  }
+  function refreshTempSubOptions(): void {
+    const container = document.getElementById('temp-sub-options');
+    if (!container) return;
+    const show = activeLayer === 'temperature';
+    container.classList.toggle('hidden', !show);
+    container.classList.toggle('flex', show);
+    container.querySelectorAll('button').forEach((b) => {
+      b.setAttribute(
+        'aria-pressed',
+        String((b as HTMLButtonElement).dataset.sub === tempSubOption),
+      );
+    });
+  }
+  buildTempSubOptions();
+  refreshTempSubOptions();
+
+  // ----------------------------------------------------------------
   // Overlays menu — zoom.earth's "Superposiciones" panel. Each entry
   // declares its label + keyboard shortcut + toggle function so the
   // UI checkboxes and the global keydown handler stay in sync via
   // refreshOverlayCheckboxes().
   // ----------------------------------------------------------------
   interface OverlayDef {
-    id: 'graticule' | 'tropical';
+    id: 'graticule' | 'tropical' | 'nightLights';
     label: string;
     shortcut: string;
     isEnabled: () => boolean;
