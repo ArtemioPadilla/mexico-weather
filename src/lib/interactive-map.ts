@@ -244,6 +244,11 @@ export async function initInteractiveMap(
     attributionControl: controls ? undefined : false,
     style: {
       version: 8,
+      // Symbol layers (e.g. city value pills) need a glyphs URL to render
+      // text. MapLibre's demotiles host serves a stable Noto/Open Sans
+      // stack with no API key required.
+      glyphs:
+        'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
       sources: {
         osm: {
           type: 'raster',
@@ -1359,7 +1364,9 @@ export async function initInteractiveMap(
         'text-allow-overlap': false,
         'text-ignore-placement': false,
         'text-padding': 4,
-        'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+        // Demotiles ships an Open Sans + Noto stack; this glyph name is
+        // available at https://demotiles.maplibre.org/font/...
+        'text-font': ['Open Sans Semibold'],
       },
       paint: {
         'text-color': '#ffffff',
