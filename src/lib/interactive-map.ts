@@ -2036,6 +2036,142 @@ export async function initInteractiveMap(
   }
 
   // ----------------------------------------------------------------
+  // Beaches / marine overlay — MX-unique. Wave height (Hs) + sea-
+  // surface temperature at major MX coastal destinations. Open-Meteo
+  // marine API is keyless + CORS-enabled. Pacific + Caribbean +
+  // Gulf coverage.
+  // ----------------------------------------------------------------
+  const MARINE_SOURCE = 'wx-marine-src';
+  const MARINE_CIRCLE_LAYER = 'wx-marine-circle';
+  const MARINE_LABEL_LAYER = 'wx-marine-label';
+  const MX_BEACHES: { name: string; lng: number; lat: number }[] = [
+    { name: 'Cancún', lng: -86.85, lat: 21.16 },
+    { name: 'Playa del Carmen', lng: -87.07, lat: 20.63 },
+    { name: 'Cozumel', lng: -86.95, lat: 20.42 },
+    { name: 'Veracruz', lng: -96.13, lat: 19.18 },
+    { name: 'Tampico', lng: -97.86, lat: 22.25 },
+    { name: 'Acapulco', lng: -99.82, lat: 16.85 },
+    { name: 'Puerto Vallarta', lng: -105.23, lat: 20.65 },
+    { name: 'Mazatlán', lng: -106.42, lat: 23.22 },
+    { name: 'Los Cabos', lng: -109.7, lat: 22.89 },
+    { name: 'La Paz', lng: -110.31, lat: 24.14 },
+    { name: 'Huatulco', lng: -96.13, lat: 15.77 },
+    { name: 'Puerto Escondido', lng: -97.07, lat: 15.86 },
+    { name: 'Manzanillo', lng: -104.32, lat: 19.11 },
+    { name: 'Ensenada', lng: -116.6, lat: 31.86 },
+  ];
+
+  async function fetchMarine(): Promise<FeatureCollection> {
+    const lats = MX_BEACHES.map((c) => c.lat).join(',');
+    const lngs = MX_BEACHES.map((c) => c.lng).join(',');
+    const url =
+      `https://marine-api.open-meteo.com/v1/marine?` +
+      `latitude=${lats}&longitude=${lngs}` +
+      `&current=wave_height,sea_surface_temperature&timezone=UTC`;
+    try {
+      const r = await cachedFetch(url);
+      if (!r.ok) throw new Error('marine http');
+      const json = (await r.json()) as
+        | { current?: { wave_height?: number; sea_surface_temperature?: number } }
+        | { current?: { wave_height?: number; sea_surface_temperature?: number } }[];
+      const arr = Array.isArray(json) ? json : [json];
+      const sstToColor = (sst: number): string => {
+        // Cold (18°) → blue, warm (32°) → orange. Coarse 5-stop ramp.
+        if (sst <= 18) return '#5b8ff9';
+        if (sst <= 22) return '#7dd1c8';
+        if (sst <= 26) return '#7ad151';
+        if (sst <= 29) return '#f9d423';
+        return '#f08a24';
+      };
+      const features = MX_BEACHES.map((c, i) => {
+        const cur = arr[i]?.current;
+        const hs = typeof cur?.wave_height === 'number' ? cur.wave_height : null;
+        const sst =
+          typeof cur?.sea_surface_temperature === 'number'
+            ? cur.sea_surface_temperature
+            : null;
+        if (hs === null && sst === null) return null;
+        const parts: string[] = [c.name];
+        if (hs !== null) parts.push(`🌊 ${hs.toFixed(1)} m`);
+        if (sst !== null) parts.push(`🌡 ${Math.round(sst)}°`);
+        return {
+          type: 'Feature',
+          properties: {
+            name: c.name,
+            hs: hs ?? 0,
+            color: sst === null ? '#94a3b8' : sstToColor(sst),
+            label: parts.join('\n'),
+          },
+          geometry: {
+            type: 'Point',
+            coordinates: [c.lng, c.lat],
+          },
+        };
+      }).filter((f): f is NonNullable<typeof f> => f !== null);
+      return { type: 'FeatureCollection', features } as FeatureCollection;
+    } catch {
+      return { type: 'FeatureCollection', features: [] } as FeatureCollection;
+    }
+  }
+
+  async function setMarineEnabled(on: boolean): Promise<void> {
+    if (!on) {
+      if (map.getLayer(MARINE_LABEL_LAYER))
+        map.removeLayer(MARINE_LABEL_LAYER);
+      if (map.getLayer(MARINE_CIRCLE_LAYER))
+        map.removeLayer(MARINE_CIRCLE_LAYER);
+      if (map.getSource(MARINE_SOURCE)) map.removeSource(MARINE_SOURCE);
+      return;
+    }
+    if (map.getSource(MARINE_SOURCE)) return;
+    const data = await fetchMarine();
+    if (map.getSource(MARINE_SOURCE)) return;
+    map.addSource(MARINE_SOURCE, { type: 'geojson', data });
+    map.addLayer({
+      id: MARINE_CIRCLE_LAYER,
+      type: 'circle',
+      source: MARINE_SOURCE,
+      paint: {
+        // Radius grows with wave height (Hs in m): calm 5 px, big swell 14 px.
+        'circle-radius': [
+          'interpolate',
+          ['linear'],
+          ['get', 'hs'],
+          0, 5,
+          1.5, 8,
+          3, 11,
+          5, 14,
+        ],
+        // Color is pre-baked per feature by SST (no expression null-handling
+        // headaches in MapLibre style spec).
+        'circle-color': ['get', 'color'],
+        'circle-opacity': 0.85,
+        'circle-stroke-color': '#0f172a',
+        'circle-stroke-width': 1.2,
+      },
+    });
+    map.addLayer({
+      id: MARINE_LABEL_LAYER,
+      type: 'symbol',
+      source: MARINE_SOURCE,
+      minzoom: 4,
+      layout: {
+        'text-field': ['get', 'label'],
+        'text-size': 10,
+        'text-offset': [0, 1.5],
+        'text-anchor': 'top',
+        'text-allow-overlap': false,
+        'text-optional': true,
+      },
+      paint: {
+        'text-color': '#0f172a',
+        'text-halo-color': '#ffffff',
+        'text-halo-width': 1.3,
+      },
+    });
+  }
+
+  // ----------------------------------------------------------------
   // USGS earthquakes overlay — MX-unique. Past 7 days, M≥2.5,
   // filtered to a generous MX bbox. USGS earthquake GeoJSON is
   // CORS-enabled and updated every minute; no API key.
@@ -3559,7 +3695,8 @@ export async function initInteractiveMap(
       | 'quakes'
       | 'volcanoes'
       | 'colorBlind'
-      | 'aqi';
+      | 'aqi'
+      | 'marine';
     label: string;
     shortcut: string;
     isEnabled: () => boolean;
@@ -3661,6 +3798,15 @@ export async function initInteractiveMap(
       isEnabled: () => !!map.getLayer(AQI_CIRCLE_LAYER),
       setEnabled: (on) => {
         void setAqiEnabled(on);
+      },
+    },
+    {
+      id: 'marine',
+      label: 'Playas (oleaje + SST)',
+      shortcut: 'Z',
+      isEnabled: () => !!map.getLayer(MARINE_CIRCLE_LAYER),
+      setEnabled: (on) => {
+        void setMarineEnabled(on);
       },
     },
     {
