@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 24 May 2026 11:47:27 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2026 12:43:21 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -27,22 +27,22 @@ Para hoy, una vaguada en altura y una circulación ciclónica en niveles medios 
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 24 de mayo del 2026 | Emisión 03:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 24 de mayo del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 24 de mayo del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 24 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-24-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Viento de 30 a 40 km/h con rachas de 50 a 70 km/h y tolvaneras: Durango, Nayarit, Jalisco, Aguascalientes y Zacatecas.</title>
+      <title>⚠️ Alerta SMN: Temperaturas máximas de 40 a 45 °C: Sinaloa (norte y centro), Nayarit (norte), Jalisco (sur y suroeste), Colima (este), Michoacán (centro y oeste), Guerrero (noroeste), Oaxaca (sureste), Chiapas (oeste), Campeche (norte) y Yucatán (oeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C con heladas durante la madrugada del domingo: zonas serranas de Chihuahua y Durango.]]></description>
-      <pubDate>Sun, 24 May 2026 05:47:18 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-24-80e0</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Sinaloa (norte y centro), Nayarit (norte), Jalisco (sur y suroeste), Colima (este), Michoacán (centro y oeste), Guerrero (noroeste), Oaxaca (sureste), Chiapas (oeste), Campeche (norte) y Yucatán (oeste).]]></description>
+      <pubDate>Sun, 24 May 2026 06:43:12 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-24-1e24</guid>
       <category>Alerta</category>
     </item>
     <item>
