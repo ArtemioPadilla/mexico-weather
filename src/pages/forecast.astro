@@ -142,7 +142,12 @@ const t = ui[lang];
   </style>
 
   <script>
-    import { getForecast, uvLabel, windDir } from '../lib/forecast';
+    import {
+      getForecast,
+      getModelDisagreement,
+      uvLabel,
+      windDir,
+    } from '../lib/forecast';
     import { has, toggle } from '../lib/favorites';
     import { ui } from '../i18n/ui';
     import { initInteractiveMap } from '../lib/interactive-map';
@@ -323,6 +328,7 @@ const t = ui[lang];
             <p class="text-lg text-gray-800 dark:text-gray-200">${esc(current.condition)}</p>
             <p class="text-xs text-gray-600 dark:text-gray-500">${esc(t.sunrise)} ${esc(timeOnly(d0 ? d0.sunrise : null))} · ${esc(t.sunset)} ${esc(timeOnly(d0 ? d0.sunset : null))}</p>
             <p id="fc-updated" class="text-xs text-gray-500 dark:text-gray-500"></p>
+            <p id="fc-models" class="hidden text-xs text-gray-600 dark:text-gray-400 pt-1" aria-live="polite"></p>
             <div class="fc-map-wrap mt-3" aria-label="Mapa interactivo">
               <div id="fc-map" class="h-full w-full"></div>
             </div>
@@ -584,6 +590,52 @@ const t = ui[lang];
               }).format(new Date());
             }
             updatedEl.textContent = `Última actualización: ${timeStr} · ${resolvedTz}`;
+          }
+
+          // Multi-model disagreement (plan 3.4). zoom.earth shows only one
+          // operational model; here we surface the spread across ICON
+          // (DWD), GFS (NOAA), ECMWF and JMA so users can judge confidence.
+          // Background-fetched: never blocks the main render.
+          const modelsEl = document.getElementById('fc-models');
+          if (modelsEl) {
+            getModelDisagreement(
+              { lat: loc.lat, lng: loc.lng, tz: loc.tz },
+              {
+                fetch: window.fetch.bind(window),
+                sleep: (ms: number) =>
+                  new Promise<void>((r) => setTimeout(r, ms)),
+              },
+            )
+              .then((d) => {
+                const parts: string[] = [];
+                const labels: Record<string, string> = {
+                  icon_seamless: 'ICON',
+                  gfs_seamless: 'GFS',
+                  ecmwf_ifs04: 'ECMWF',
+                  jma_seamless: 'JMA',
+                };
+                for (const [k, v] of Object.entries(d.byModel)) {
+                  if (v !== null) {
+                    parts.push(
+                      `${labels[k] ?? k} ${Math.round(v as number)}°`,
+                    );
+                  }
+                }
+                if (parts.length < 2 || d.spread === null) return;
+                const spreadColor =
+                  d.spread <= 1
+                    ? 'text-green-600 dark:text-green-400'
+                    : d.spread <= 3
+                      ? 'text-yellow-600 dark:text-yellow-400'
+                      : 'text-orange-600 dark:text-orange-400';
+                modelsEl.innerHTML =
+                  `<span class="font-semibold">Modelos:</span> ${parts.join(' · ')} ` +
+                  `<span class="${spreadColor}">(desacuerdo ${d.spread.toFixed(1)}°)</span>`;
+                modelsEl.classList.remove('hidden');
+              })
+              .catch(() => {
+                /* enhancement-only — silent on failure */
+              });
           }
 
           // Embedded INTERACTIVE map for the location.

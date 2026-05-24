@@ -250,3 +250,69 @@ export function windDir(deg: number): { label: string; arrow: string } {
   const idx = Math.round((((deg % 360) + 360) % 360) / 45) % 8;
   return { label: WIND_LABELS[idx], arrow: WIND_ARROWS[idx] };
 }
+
+/**
+ * Multi-model forecast disagreement. Open-Meteo accepts a `models=` query
+ * param naming any combination of national/global NWP models; when passed
+ * multiple values the response surfaces variables suffixed with each model
+ * name (e.g. `temperature_2m_icon_seamless`). We probe ICON (DWD), GFS
+ * (NOAA), ECMWF and JMA — four independently-produced operational global
+ * models. Returns the per-model temperatures and the spread (max − min).
+ */
+export const DISAGREEMENT_MODELS = [
+  'icon_seamless',
+  'gfs_seamless',
+  'ecmwf_ifs04',
+  'jma_seamless',
+] as const;
+export type DisagreementModel = (typeof DISAGREEMENT_MODELS)[number];
+
+export interface ModelDisagreement {
+  /** Temperature (°C) predicted by each model for the current hour; null
+   *  when the model has no value for the location. */
+  byModel: Record<DisagreementModel, number | null>;
+  /** Max − min across models that returned a value; null if fewer than 2. */
+  spread: number | null;
+}
+
+export function buildDisagreementUrl(loc: ForecastLocation): string {
+  const params = new URLSearchParams({
+    latitude: String(loc.lat),
+    longitude: String(loc.lng),
+    timezone: loc.tz || 'auto',
+    forecast_days: '1',
+    current: 'temperature_2m',
+    models: DISAGREEMENT_MODELS.join(','),
+  });
+  return `https://api.open-meteo.com/v1/forecast?${params.toString()}`;
+}
+
+export async function getModelDisagreement(
+  loc: ForecastLocation,
+  deps: RequestDeps,
+  retry: RetryOptions = DEFAULT_RETRY,
+): Promise<ModelDisagreement> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data: any = await requestJsonWithRetry(
+    buildDisagreementUrl(loc),
+    deps,
+    retry,
+  );
+  const cur = data?.current ?? {};
+  const byModel: Record<DisagreementModel, number | null> = {
+    icon_seamless: null,
+    gfs_seamless: null,
+    ecmwf_ifs04: null,
+    jma_seamless: null,
+  };
+  for (const m of DISAGREEMENT_MODELS) {
+    const v = cur[`temperature_2m_${m}`];
+    if (typeof v === 'number' && Number.isFinite(v)) byModel[m] = v;
+  }
+  const vals = Object.values(byModel).filter(
+    (v): v is number => v !== null,
+  );
+  const spread =
+    vals.length >= 2 ? Math.max(...vals) - Math.min(...vals) : null;
+  return { byModel, spread };
+}
