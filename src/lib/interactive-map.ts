@@ -4423,6 +4423,66 @@ export async function initInteractiveMap(
         applyFrame(Number(tlRange.value));
       }
     });
+    // Day-skip + 'Ahora' (plan P0.3 — zoom.earth has these as separate
+    // ↑↓ keys for hour and day). We compute the day-stride dynamically
+    // from the frame timestamps because raster-tile frames are usually
+    // ~10 min apart (RainViewer) while field/wind frames are 1 h apart.
+    const dayStride = (): number => {
+      if (tlFrames.length < 2) return 0;
+      const a = tlFrames[0]?.time;
+      const b = tlFrames[1]?.time;
+      if (typeof a !== 'number' || typeof b !== 'number') return 0;
+      const stepSec = Math.abs(b - a);
+      if (stepSec <= 0) return 0;
+      return Math.max(1, Math.round(86400 / stepSec));
+    };
+    document.getElementById('tl-day-prev')?.addEventListener('click', () => {
+      if (tlFrames.length) {
+        tlStop();
+        applyFrame(frameIndex - dayStride());
+      }
+    });
+    document.getElementById('tl-day-next')?.addEventListener('click', () => {
+      if (tlFrames.length) {
+        tlStop();
+        applyFrame(frameIndex + dayStride());
+      }
+    });
+    document.getElementById('tl-now')?.addEventListener('click', () => {
+      if (tlFrames.length) {
+        tlStop();
+        // Pick the frame whose timestamp is closest to "now" (Date.now()/1000).
+        const now = Date.now() / 1000;
+        let best = 0;
+        let bestDelta = Infinity;
+        for (let i = 0; i < tlFrames.length; i++) {
+          const t = tlFrames[i]?.time;
+          if (typeof t !== 'number') continue;
+          const d = Math.abs(t - now);
+          if (d < bestDelta) {
+            best = i;
+            bestDelta = d;
+          }
+        }
+        applyFrame(best);
+      }
+    });
+    // Surface the day-skip + 'Ahora' buttons once frames are available.
+    const surfaceWideControls = (): void => {
+      if (!tlFrames.length) return;
+      const dayPrev = document.getElementById('tl-day-prev');
+      const dayNext = document.getElementById('tl-day-next');
+      const now = document.getElementById('tl-now');
+      // Day-stride buttons only when there are ≥48 frames covered (~2 days).
+      const hasDays = dayStride() > 0 && tlFrames.length >= dayStride();
+      dayPrev?.classList.toggle('hidden', !hasDays);
+      dayNext?.classList.toggle('hidden', !hasDays);
+      now?.classList.toggle('hidden', false);
+    };
+    // The frame array is rebuilt every time activeLayer changes; we re-
+    // evaluate on each tick of the visibility refresh (frame change).
+    const surfaceInterval = window.setInterval(surfaceWideControls, 1500);
+    window.setTimeout(() => window.clearInterval(surfaceInterval), 30000);
   }
 
   if (features.search && q) {
