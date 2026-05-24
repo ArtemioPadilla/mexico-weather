@@ -888,10 +888,12 @@ export async function initInteractiveMap(
   type HumiditySubOption = 'relativa' | 'rocio';
   type PressureSubOption = 'msl' | 'surface';
   type WindSubOption = 'velocidad' | 'rachas';
+  type SatelliteSubOption = 'geocolor' | 'ir' | 'truecolor';
   let tempSubOption: TempSubOption = 'actual';
   let humiditySubOption: HumiditySubOption = 'relativa';
   let pressureSubOption: PressureSubOption = 'msl';
   let windSubOption: WindSubOption = 'velocidad';
+  let satelliteSubOption: SatelliteSubOption = 'geocolor';
   function tempHourlyVar(): string {
     if (tempSubOption === 'aparente') return 'apparent_temperature';
     if (tempSubOption === 'bulbo') return 'wet_bulb_temperature_2m';
@@ -2298,16 +2300,22 @@ export async function initInteractiveMap(
     removeWeatherRaster();
     addRadarDim();
     if (layerId === 'satellite') {
-      // GOES-East GeoColor (true color daytime + night-side enhancement
-      // with city lights). Replaces the grayscale IR Band 13 we shipped
-      // earlier — matches what zoom.earth shows on /maps/satellite and
-      // looks like Earth from space rather than a thermal image.
-      const tileUrl = gibsTileUrl(GIBS_LAYERS.goesGeocolor, gibsRoundedTime());
+      // Satellite sub-options (zoom.earth parity + extension):
+      //   geocolor  → GOES-East GeoColor (true color day + night lights)
+      //   ir        → GOES-East ABI Band 13 Clean IR (thermal, always-on)
+      //   truecolor → MODIS Terra CorrectedReflectance (true color, ~1×/day)
+      const gibsLayer =
+        satelliteSubOption === 'ir'
+          ? GIBS_LAYERS.goesIR
+          : satelliteSubOption === 'truecolor'
+            ? GIBS_LAYERS.modisTrueColor
+            : GIBS_LAYERS.goesGeocolor;
+      const tileUrl = gibsTileUrl(gibsLayer, gibsRoundedTime());
       map.addSource(RV_SOURCE, {
         type: 'raster',
         tiles: [tileUrl],
         tileSize: 256,
-        maxzoom: GIBS_LAYERS.goesGeocolor.maxZoom,
+        maxzoom: gibsLayer.maxZoom,
         attribution: ATTRIBUTION_GIBS,
       });
     } else {
@@ -2381,6 +2389,7 @@ export async function initInteractiveMap(
     refreshHumiditySubOptions();
     refreshPressureSubOptions();
     refreshWindSubOptions();
+    refreshSatelliteSubOptions();
     const akind = getLayerDef(activeLayer)?.kind;
     opts.els.opacityWrap?.classList.toggle(
       'hidden',
@@ -2463,6 +2472,7 @@ export async function initInteractiveMap(
     if (!def) return null;
     if (def.kind === 'field' || def.kind === 'particles') {
       if (!fieldBounds || frameIndex < 0) return null;
+      const bounds = fieldBounds;
       const lines: string[] = [];
       const sampleField = (g: FieldGrid | null): number | null =>
         g
@@ -2470,7 +2480,7 @@ export async function initInteractiveMap(
               g,
               FIELD_GRID_ROWS,
               FIELD_GRID_COLS,
-              fieldBounds,
+              bounds,
               lat,
               lng,
               frameIndex,
@@ -2587,13 +2597,14 @@ export async function initInteractiveMap(
       const windLine = `💨 ${kmh} km/h ${cardinals[idx]}`;
       // Wind layer: combine with cached field grids (multi-metric).
       const fLines: string[] = [];
+      const wb = fieldBounds;
       const sample = (g: FieldGrid | null): number | null =>
-        g && fieldBounds
+        g && wb
           ? bilerpValue(
               g,
               FIELD_GRID_ROWS,
               FIELD_GRID_COLS,
-              fieldBounds,
+              wb,
               lat,
               lng,
               frameIndex,
@@ -3207,6 +3218,53 @@ export async function initInteractiveMap(
   }
   buildWindSubOptions();
   refreshWindSubOptions();
+
+  function buildSatelliteSubOptions(): void {
+    const wrap = opts.els.layerBtns;
+    if (!wrap || !features.layerRail) return;
+    const container = document.createElement('div');
+    container.id = 'satellite-sub-options';
+    container.className =
+      'mt-1 ml-4 hidden max-sm:!hidden flex-col gap-0.5 text-xs text-gray-600 dark:text-gray-400';
+    const mkBtn = (
+      id: SatelliteSubOption,
+      label: string,
+    ): HTMLButtonElement => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.dataset.sub = id;
+      btn.textContent = label;
+      btn.className =
+        'rounded px-2 py-0.5 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold aria-pressed:text-gray-800 dark:aria-pressed:text-gray-100';
+      btn.setAttribute('aria-pressed', String(satelliteSubOption === id));
+      btn.addEventListener('click', () => {
+        if (satelliteSubOption === id) return;
+        satelliteSubOption = id;
+        refreshSatelliteSubOptions();
+        void setActiveLayer('satellite');
+      });
+      return btn;
+    };
+    container.appendChild(mkBtn('geocolor', 'GeoColor'));
+    container.appendChild(mkBtn('ir', 'Infrarrojo'));
+    container.appendChild(mkBtn('truecolor', 'Color real'));
+    wrap.appendChild(container);
+  }
+  function refreshSatelliteSubOptions(): void {
+    const container = document.getElementById('satellite-sub-options');
+    if (!container) return;
+    const show = activeLayer === 'satellite';
+    container.classList.toggle('hidden', !show);
+    container.classList.toggle('flex', show);
+    container.querySelectorAll('button').forEach((b) => {
+      b.setAttribute(
+        'aria-pressed',
+        String((b as HTMLButtonElement).dataset.sub === satelliteSubOption),
+      );
+    });
+  }
+  buildSatelliteSubOptions();
+  refreshSatelliteSubOptions();
 
   // ----------------------------------------------------------------
   // Overlays menu — zoom.earth's "Superposiciones" panel. Each entry
