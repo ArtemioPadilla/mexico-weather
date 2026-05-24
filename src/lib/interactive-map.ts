@@ -1676,6 +1676,87 @@ export async function initInteractiveMap(
   }
 
   // ----------------------------------------------------------------
+  // Radar coverage overlay (zoom.earth "Cobertura de radar Q") —
+  // hardcoded SMN/CONAGUA station list rendered as ~230 km radius
+  // discs. RainViewer's mosaic aggregates these stations but doesn't
+  // expose per-station shapes; this is the closest UX parity.
+  // ----------------------------------------------------------------
+  const RADAR_COVERAGE_SOURCE = 'wx-radar-coverage-src';
+  const RADAR_COVERAGE_LAYER = 'wx-radar-coverage-fill';
+  const RADAR_STATIONS: ReadonlyArray<{
+    name: string;
+    lat: number;
+    lng: number;
+    rangeKm: number;
+  }> = [
+    { name: 'Cancún', lat: 21.04, lng: -86.85, rangeKm: 230 },
+    { name: 'Mérida', lat: 20.94, lng: -89.65, rangeKm: 230 },
+    { name: 'Cerro Catedral', lat: 19.55, lng: -99.43, rangeKm: 230 },
+    { name: 'Guasave', lat: 25.57, lng: -108.46, rangeKm: 230 },
+    { name: 'Hermosillo', lat: 28.99, lng: -111.04, rangeKm: 230 },
+    { name: 'La Paz', lat: 24.16, lng: -110.32, rangeKm: 230 },
+    { name: 'Mazatlán', lat: 23.21, lng: -106.42, rangeKm: 230 },
+    { name: 'Querétaro', lat: 20.61, lng: -100.39, rangeKm: 230 },
+    { name: 'Sabancuy', lat: 18.96, lng: -91.18, rangeKm: 230 },
+    { name: 'Tampico', lat: 22.27, lng: -97.86, rangeKm: 230 },
+    { name: 'Veracruz', lat: 19.18, lng: -96.13, rangeKm: 230 },
+  ];
+
+  function circlePolygon(
+    lat: number,
+    lng: number,
+    rangeKm: number,
+  ): { type: 'Polygon'; coordinates: [number, number][][] } {
+    const KM_PER_DEG_LAT = 110.574;
+    const km_per_deg_lng = 111.32 * Math.cos((lat * Math.PI) / 180);
+    const dLat = rangeKm / KM_PER_DEG_LAT;
+    const dLng = rangeKm / km_per_deg_lng;
+    const ring: [number, number][] = [];
+    const STEPS = 64;
+    for (let i = 0; i <= STEPS; i++) {
+      const t = (i / STEPS) * 2 * Math.PI;
+      ring.push([lng + dLng * Math.cos(t), lat + dLat * Math.sin(t)]);
+    }
+    return { type: 'Polygon', coordinates: [ring] };
+  }
+
+  function radarCoverageFeatureCollection(): FeatureCollection {
+    return {
+      type: 'FeatureCollection',
+      features: RADAR_STATIONS.map((s) => ({
+        type: 'Feature',
+        properties: { name: s.name },
+        geometry: circlePolygon(s.lat, s.lng, s.rangeKm),
+      })),
+    };
+  }
+
+  function setRadarCoverageEnabled(on: boolean): void {
+    if (!on) {
+      if (map.getLayer(RADAR_COVERAGE_LAYER))
+        map.removeLayer(RADAR_COVERAGE_LAYER);
+      if (map.getSource(RADAR_COVERAGE_SOURCE))
+        map.removeSource(RADAR_COVERAGE_SOURCE);
+      return;
+    }
+    if (map.getSource(RADAR_COVERAGE_SOURCE)) return;
+    map.addSource(RADAR_COVERAGE_SOURCE, {
+      type: 'geojson',
+      data: radarCoverageFeatureCollection(),
+    });
+    map.addLayer({
+      id: RADAR_COVERAGE_LAYER,
+      type: 'fill',
+      source: RADAR_COVERAGE_SOURCE,
+      paint: {
+        'fill-color': '#10b981',
+        'fill-opacity': 0.12,
+        'fill-outline-color': '#34d399',
+      },
+    });
+  }
+
+  // ----------------------------------------------------------------
   // Fires overlay (zoom.earth "Incendios activos I") — NASA FIRMS
   // VIIRS-SNPP 24-hour fire detections in NA/Central America, cached
   // every 4 h to public/data/fires-na.json by .github/workflows/
@@ -2924,7 +3005,8 @@ export async function initInteractiveMap(
       | 'nightLights'
       | 'nightLine'
       | 'borders'
-      | 'fires';
+      | 'fires'
+      | 'radarCoverage';
     label: string;
     shortcut: string;
     isEnabled: () => boolean;
@@ -2986,6 +3068,13 @@ export async function initInteractiveMap(
       setEnabled: (on) => {
         void setFiresEnabled(on);
       },
+    },
+    {
+      id: 'radarCoverage',
+      label: 'Cobertura de radar',
+      shortcut: 'Q',
+      isEnabled: () => !!map.getLayer(RADAR_COVERAGE_LAYER),
+      setEnabled: (on) => setRadarCoverageEnabled(on),
     },
   ];
 
