@@ -1140,7 +1140,7 @@ export async function initInteractiveMap(
       id: WIND_LAYER,
       type: 'custom',
       renderingMode: '2d',
-      onAdd(_map, gl) {
+      onAdd(_map: maplibregl.Map, gl: WebGLRenderingContext) {
         updateProg = link(gl, updateVs, updateFs);
         prog = link(gl, drawVs, drawFs);
         upd_aPos = gl.getAttribLocation(updateProg, 'a_pos');
@@ -1216,7 +1216,7 @@ export async function initInteractiveMap(
         };
         windRaf = window.requestAnimationFrame(tick);
       },
-      onRemove(_map, gl) {
+      onRemove(_map: maplibregl.Map, gl: WebGLRenderingContext) {
         if (windRaf) {
           window.cancelAnimationFrame(windRaf);
           windRaf = 0;
@@ -1230,7 +1230,7 @@ export async function initInteractiveMap(
         if (posBuf) gl.deleteBuffer(posBuf);
         if (quadBuf) gl.deleteBuffer(quadBuf);
       },
-      prerender(gl) {
+      prerender(gl: WebGLRenderingContext) {
         if (!updateProg || !posTexA || !posTexB || !windTex || !fbo || !quadBuf)
           return;
         ensureWindTex(gl);
@@ -1262,7 +1262,7 @@ export async function initInteractiveMap(
         posTexA = posTexB;
         posTexB = tmp;
       },
-      render(gl) {
+      render(gl: WebGLRenderingContext) {
         if (!prog || !posTexA || !windTex || !posBuf) return;
         gl.useProgram(prog);
         gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
