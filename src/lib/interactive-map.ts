@@ -1835,6 +1835,86 @@ export async function initInteractiveMap(
     });
   }
 
+  // ----------------------------------------------------------------
+  // Cloud cover overlay (zoom.earth's "Nubes" — translucent grayscale
+  // cloud field over any base layer). Uses Open-Meteo cloud_cover
+  // sampled on the same 32×24 MX grid, rendered as a grayscale raster
+  // where alpha tracks cloud_cover %.
+  // ----------------------------------------------------------------
+  const CLOUDS_SOURCE = 'wx-clouds-src';
+  const CLOUDS_LAYER = 'wx-clouds-layer';
+  let cloudsBlobUrl: string | null = null;
+  let cloudsAbort: AbortController | null = null;
+
+  async function setCloudsEnabled(on: boolean): Promise<void> {
+    if (!on) {
+      if (map.getLayer(CLOUDS_LAYER)) map.removeLayer(CLOUDS_LAYER);
+      if (map.getSource(CLOUDS_SOURCE)) map.removeSource(CLOUDS_SOURCE);
+      cloudsAbort?.abort();
+      if (cloudsBlobUrl) {
+        try {
+          URL.revokeObjectURL(cloudsBlobUrl);
+        } catch {
+          /* ignore */
+        }
+        cloudsBlobUrl = null;
+      }
+      return;
+    }
+    if (map.getSource(CLOUDS_SOURCE)) return;
+    cloudsAbort?.abort();
+    const ac = new AbortController();
+    cloudsAbort = ac;
+    const bounds: RasterBounds = { ...MX_FIELD_BOUNDS };
+    const grid = viewportGrid(bounds, FIELD_GRID_COLS, FIELD_GRID_ROWS);
+    try {
+      const url = buildFieldUrl(grid, 'cloud_cover');
+      const res = await deps.fetch(url, { signal: ac.signal });
+      if (!res.ok || ac.signal.aborted) return;
+      const cloudGrid = parseFieldResponse(
+        await res.json(),
+        grid,
+        'cloud_cover',
+      );
+      if (!cloudGrid || ac.signal.aborted) return;
+      // Render grayscale raster: alpha = clamp(cloud% / 100, 0..0.85).
+      // White color so light cloud reads as haze, dense cloud reads as
+      // solid white — matches zoom.earth's cloud appearance.
+      const render = await renderFieldRaster(
+        cloudGrid,
+        FIELD_GRID_ROWS,
+        FIELD_GRID_COLS,
+        bounds,
+        0, // first frame
+        () => '#f8fafc', // near-white; alpha encodes density
+        { width: 800, height: 560, alpha: 255 },
+      );
+      if (!render || ac.signal.aborted) return;
+      cloudsBlobUrl = render.blobUrl;
+      map.addSource(CLOUDS_SOURCE, {
+        type: 'image',
+        url: render.blobUrl,
+        coordinates: render.coords,
+      });
+      map.addLayer({
+        id: CLOUDS_LAYER,
+        type: 'raster',
+        source: CLOUDS_SOURCE,
+        paint: {
+          // Color ramp is constant white; cloud density modulates alpha
+          // through the field's edgeFalloff. Cap at 0.55 so basemap
+          // labels stay legible.
+          'raster-opacity': 0.55,
+          'raster-resampling': 'linear',
+        },
+      });
+    } catch {
+      /* network failure — silently skip */
+    } finally {
+      if (cloudsAbort === ac) cloudsAbort = null;
+    }
+  }
+
   function setNightLightsEnabled(on: boolean): void {
     if (!on) {
       if (map.getLayer(NIGHT_LIGHTS_LAYER)) map.removeLayer(NIGHT_LIGHTS_LAYER);
@@ -2203,16 +2283,16 @@ export async function initInteractiveMap(
     removeWeatherRaster();
     addRadarDim();
     if (layerId === 'satellite') {
-      // Satellite layer now uses NASA GIBS GOES-East IR (Band 13). Much
-      // higher resolution than the RainViewer satellite mosaic, true
-      // hemispheric coverage, no API key. Time is rounded to a 10-min
-      // boundary so the URL benefits from HTTP caching.
-      const tileUrl = gibsTileUrl(GIBS_LAYERS.goesIR, gibsRoundedTime());
+      // GOES-East GeoColor (true color daytime + night-side enhancement
+      // with city lights). Replaces the grayscale IR Band 13 we shipped
+      // earlier — matches what zoom.earth shows on /maps/satellite and
+      // looks like Earth from space rather than a thermal image.
+      const tileUrl = gibsTileUrl(GIBS_LAYERS.goesGeocolor, gibsRoundedTime());
       map.addSource(RV_SOURCE, {
         type: 'raster',
         tiles: [tileUrl],
         tileSize: 256,
-        maxzoom: GIBS_LAYERS.goesIR.maxZoom,
+        maxzoom: GIBS_LAYERS.goesGeocolor.maxZoom,
         attribution: ATTRIBUTION_GIBS,
       });
     } else {
@@ -3057,7 +3137,8 @@ export async function initInteractiveMap(
       | 'nightLine'
       | 'borders'
       | 'fires'
-      | 'radarCoverage';
+      | 'radarCoverage'
+      | 'clouds';
     label: string;
     shortcut: string;
     isEnabled: () => boolean;
@@ -3126,6 +3207,15 @@ export async function initInteractiveMap(
       shortcut: 'Q',
       isEnabled: () => !!map.getLayer(RADAR_COVERAGE_LAYER),
       setEnabled: (on) => setRadarCoverageEnabled(on),
+    },
+    {
+      id: 'clouds',
+      label: 'Nubes',
+      shortcut: 'U',
+      isEnabled: () => !!map.getLayer(CLOUDS_LAYER),
+      setEnabled: (on) => {
+        void setCloudsEnabled(on);
+      },
     },
   ];
 
