@@ -1852,6 +1852,134 @@ export async function initInteractiveMap(
   }
 
   // ----------------------------------------------------------------
+  // Webcams overlay (plan 3.7). Static curated list of public live
+  // webcams across MX destinations. Click → opens the external page
+  // in a new tab (rel=noopener,noreferrer). We never embed third-party
+  // iframes ourselves and we never track the click — just window.open.
+  // URLs may rot over time; this is best-effort, the surrounding
+  // architecture makes adding/removing entries trivial.
+  // ----------------------------------------------------------------
+  const WEBCAMS_SOURCE = 'wx-webcams-src';
+  const WEBCAMS_CIRCLE_LAYER = 'wx-webcams-circle';
+  const WEBCAMS_LABEL_LAYER = 'wx-webcams-label';
+  const MX_WEBCAMS: { name: string; lng: number; lat: number; url: string }[] = [
+    {
+      name: 'Cancún — Playa',
+      lng: -86.85,
+      lat: 21.16,
+      url: 'https://www.skylinewebcams.com/en/webcam/mexico/quintana-roo/cancun.html',
+    },
+    {
+      name: 'Playa del Carmen',
+      lng: -87.07,
+      lat: 20.63,
+      url: 'https://www.skylinewebcams.com/en/webcam/mexico/quintana-roo/playa-del-carmen.html',
+    },
+    {
+      name: 'Cozumel',
+      lng: -86.95,
+      lat: 20.42,
+      url: 'https://www.skylinewebcams.com/en/webcam/mexico/quintana-roo/cozumel.html',
+    },
+    {
+      name: 'Acapulco — Bahía',
+      lng: -99.82,
+      lat: 16.85,
+      url: 'https://www.skylinewebcams.com/en/webcam/mexico/guerrero/acapulco.html',
+    },
+    {
+      name: 'Puerto Vallarta',
+      lng: -105.23,
+      lat: 20.65,
+      url: 'https://www.skylinewebcams.com/en/webcam/mexico/jalisco/puerto-vallarta.html',
+    },
+    {
+      name: 'Cabo San Lucas — Arco',
+      lng: -109.7,
+      lat: 22.89,
+      url: 'https://www.skylinewebcams.com/en/webcam/mexico/baja-california-sur/los-cabos.html',
+    },
+    {
+      name: 'Tulum',
+      lng: -87.46,
+      lat: 20.21,
+      url: 'https://www.skylinewebcams.com/en/webcam/mexico/quintana-roo/tulum.html',
+    },
+  ];
+
+  function setWebcamsEnabled(on: boolean): void {
+    if (!on) {
+      if (map.getLayer(WEBCAMS_LABEL_LAYER))
+        map.removeLayer(WEBCAMS_LABEL_LAYER);
+      if (map.getLayer(WEBCAMS_CIRCLE_LAYER))
+        map.removeLayer(WEBCAMS_CIRCLE_LAYER);
+      if (map.getSource(WEBCAMS_SOURCE)) map.removeSource(WEBCAMS_SOURCE);
+      return;
+    }
+    if (map.getSource(WEBCAMS_SOURCE)) return;
+    const data: FeatureCollection = {
+      type: 'FeatureCollection',
+      features: MX_WEBCAMS.map((w) => ({
+        type: 'Feature',
+        properties: { name: w.name, url: w.url, label: `📹 ${w.name}` },
+        geometry: { type: 'Point', coordinates: [w.lng, w.lat] },
+      })),
+    };
+    map.addSource(WEBCAMS_SOURCE, { type: 'geojson', data });
+    map.addLayer({
+      id: WEBCAMS_CIRCLE_LAYER,
+      type: 'circle',
+      source: WEBCAMS_SOURCE,
+      paint: {
+        'circle-radius': 6,
+        'circle-color': '#0ea5e9',
+        'circle-opacity': 0.85,
+        'circle-stroke-color': '#e0f2fe',
+        'circle-stroke-width': 1.2,
+      },
+    });
+    map.addLayer({
+      id: WEBCAMS_LABEL_LAYER,
+      type: 'symbol',
+      source: WEBCAMS_SOURCE,
+      minzoom: 5,
+      layout: {
+        'text-field': ['get', 'label'],
+        'text-size': 11,
+        'text-offset': [0, 1.1],
+        'text-anchor': 'top',
+        'text-allow-overlap': false,
+        'text-optional': true,
+      },
+      paint: {
+        'text-color': '#0369a1',
+        'text-halo-color': '#ffffff',
+        'text-halo-width': 1.2,
+      },
+    });
+    // Click → open external webcam page in a new tab. Pointer cursor
+    // hint on hover. Listeners scoped by layer id so they don't
+    // interfere with other layers.
+    map.on('mouseenter', WEBCAMS_CIRCLE_LAYER, () => {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', WEBCAMS_CIRCLE_LAYER, () => {
+      map.getCanvas().style.cursor = '';
+    });
+    map.on('click', WEBCAMS_CIRCLE_LAYER, (e) => {
+      const f = e.features?.[0];
+      const url =
+        f &&
+        typeof (f.properties as Record<string, unknown> | null)?.url === 'string'
+          ? (f.properties as Record<string, string>).url
+          : null;
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
+    });
+  }
+
+  // ----------------------------------------------------------------
   // Active volcanoes overlay — MX-unique. Static list of currently-
   // monitored MX volcanoes (CENAPRED). Static because there are only
   // a handful, locations don't change, and no public CORS-friendly
@@ -3700,7 +3828,8 @@ export async function initInteractiveMap(
       | 'volcanoes'
       | 'colorBlind'
       | 'aqi'
-      | 'marine';
+      | 'marine'
+      | 'webcams';
     label: string;
     shortcut: string;
     isEnabled: () => boolean;
@@ -3812,6 +3941,13 @@ export async function initInteractiveMap(
       setEnabled: (on) => {
         void setMarineEnabled(on);
       },
+    },
+    {
+      id: 'webcams',
+      label: 'Cámaras en vivo',
+      shortcut: 'W',
+      isEnabled: () => !!map.getLayer(WEBCAMS_CIRCLE_LAYER),
+      setEnabled: (on) => setWebcamsEnabled(on),
     },
     {
       id: 'colorBlind',
