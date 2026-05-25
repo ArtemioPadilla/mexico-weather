@@ -1159,6 +1159,63 @@ export async function initInteractiveMap(
     removeCityValues();
   }
 
+  /** Plan P2.6 — Wind animation as a concurrent overlay.
+   *
+   * When the user enables "Animación de viento" with a field layer
+   * active (temperatura/humedad/presión), we render the WIND particles
+   * on top of the field without unsetting activeLayer. The wind grid
+   * is fetched once for the current viewport and tracks the global
+   * frameIndex (both are 1-hour stride from Open-Meteo).
+   *
+   * Distinct from removeWind() which is called by the layer switcher:
+   * this one leaves city-value pills intact (those belong to the
+   * underlying field).
+   */
+  let windOverlayEnabled = false;
+  async function addWindOverlay(): Promise<void> {
+    if (activeLayer === 'wind') return; // already showing
+    const b = map.getBounds();
+    const grid = viewportGrid(
+      {
+        west: b.getWest(),
+        south: b.getSouth(),
+        east: b.getEast(),
+        north: b.getNorth(),
+      },
+      8,
+      6,
+    );
+    const speedVar =
+      windSubOption === 'rachas' ? 'wind_gusts_10m' : 'wind_speed_10m';
+    try {
+      const res = await deps.fetch(
+        buildWindUrl(grid, speedVar, activeModel),
+      );
+      if (!res.ok) return;
+      const wg = parseWindResponse(await res.json(), grid, speedVar);
+      if (!wg || wg.points.length === 0) return;
+      windGrid = wg;
+      windTexDirty = true;
+      const h = Math.max(
+        0,
+        Math.min(wg.times.length - 1, frameIndex >= 0 ? frameIndex : 0),
+      );
+      showWindFrame(h);
+    } catch {
+      /* enhancement only — silent on failure */
+    }
+  }
+  function removeWindOverlay(): void {
+    if (activeLayer === 'wind') return; // owned by the layer, not us
+    if (windRaf) {
+      window.cancelAnimationFrame(windRaf);
+      windRaf = 0;
+    }
+    if (map.getLayer(WIND_LAYER)) map.removeLayer(WIND_LAYER);
+    if (map.getLayer(WIND_CIRCLE_LAYER)) map.removeLayer(WIND_CIRCLE_LAYER);
+    if (map.getSource(WIND_CIRCLE_SOURCE)) map.removeSource(WIND_CIRCLE_SOURCE);
+  }
+
   function windPointsAtHour(g: WindGrid, h: number): WindPoint[] {
     return g.points.map((p) => ({ lat: p.lat, lng: p.lng, u: p.u[h], v: p.v[h] }));
   }
@@ -3270,6 +3327,17 @@ export async function initInteractiveMap(
     refreshPressureSubOptions();
     refreshWindSubOptions();
     refreshSatelliteSubOptions();
+    // Plan P2.6: reconcile the wind overlay so it persists across
+    // layer changes. addWindOverlay() is async-safe and idempotent;
+    // removeWindOverlay() refuses to touch the wind layer when it
+    // belongs to the active layer (activeLayer === 'wind').
+    if (activeLayer !== 'wind') {
+      if (windOverlayEnabled && !map.getLayer(WIND_LAYER)) {
+        void addWindOverlay();
+      } else if (!windOverlayEnabled && map.getLayer(WIND_LAYER)) {
+        removeWindOverlay();
+      }
+    }
     const akind = getLayerDef(activeLayer)?.kind;
     opts.els.opacityWrap?.classList.toggle(
       'hidden',
@@ -4167,6 +4235,7 @@ export async function initInteractiveMap(
       | 'volcanoes'
       | 'colorBlind'
       | 'cityValues'
+      | 'windOverlay'
       | 'aqi'
       | 'marine'
       | 'webcams'
@@ -4274,6 +4343,20 @@ export async function initInteractiveMap(
       setEnabled: (on) => {
         cityValuesEnabled = on;
         refreshCityValues();
+      },
+    },
+    {
+      id: 'windOverlay',
+      label: 'Animación de viento',
+      shortcut: 'C',
+      isEnabled: () => windOverlayEnabled || activeLayer === 'wind',
+      setEnabled: (on) => {
+        windOverlayEnabled = on;
+        if (on) {
+          void addWindOverlay();
+        } else {
+          removeWindOverlay();
+        }
       },
     },
     {
