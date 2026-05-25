@@ -157,6 +157,7 @@ import {
   CARTO_DARK_TILES as BASEMAP_CARTO_DARK_TILES,
 } from './map/chrome/basemap-theme';
 import { createSunLayer } from './map/layers/sun-layer';
+import { createWeatherRaster } from './map/layers/weather-raster';
 import { computeIsobars } from './map/utils/isobars';
 
 export interface InteractiveMapOptions {
@@ -1869,140 +1870,27 @@ export async function initInteractiveMap(
     return !!fieldGrid && fieldGrid.points.length > 0;
   }
 
-  // ----------------------------------------------------------------
-  // Radar / satellite "no-coverage dim" overlay. RainViewer tiles are
-  // fully transparent where the radar/satellite mosaic has no data
-  // (large stretches of ocean, parts of central Mexico, polar regions).
-  // zoom.earth's trick is to paint a uniform dark fill UNDER the tiles
-  // so the user reads the coverage shape — present-radar areas stay
-  // bright (radar pixels are opaque), absent-radar areas show through
-  // as deliberately darker than the basemap.
-  // ----------------------------------------------------------------
-  const RV_DIM_SOURCE = 'wx-rv-dim-src';
-  const RV_DIM_LAYER = 'wx-rv-dim-layer';
-  /** Full-world rectangle (clipped to Web Mercator's ±85° lat clamp). */
-  const WORLD_RECT_FC: FeatureCollection = {
-    type: 'FeatureCollection',
-    features: [
+  // Radar/satellite weather raster + dim backdrop — extracted to
+  // src/lib/map/layers/weather-raster.ts. The factory exposes show /
+  // remove / setOpacity. We bind it to the existing showMsg/hideMsg so
+  // the satellite zoom-limit hint still surfaces from this map's UI.
+  const weatherRaster = createWeatherRaster(map, {
+    showMsg,
+    hideMsg,
+  });
+  const removeWeatherRaster = (): void => weatherRaster.remove();
+  const showWeatherFrame = (layerId: string, frame: RadarFrame): void => {
+    weatherRaster.show(
+      layerId === 'satellite' ? 'satellite' : 'radar',
+      frame,
       {
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'Polygon',
-          coordinates: [
-            [
-              [-180, -85],
-              [180, -85],
-              [180, 85],
-              [-180, 85],
-              [-180, -85],
-            ],
-          ],
-        },
+        rvData,
+        satelliteSubOption,
+        opacity: rvOpacity,
+        currentZoom: map.getZoom(),
       },
-    ],
-  };
-
-  function addRadarDim(): void {
-    if (map.getLayer(RV_DIM_LAYER)) return;
-    if (!map.getSource(RV_DIM_SOURCE)) {
-      map.addSource(RV_DIM_SOURCE, { type: 'geojson', data: WORLD_RECT_FC });
-    }
-    // Insert BEFORE any existing radar/sat raster layer so the dim
-    // paints underneath — opaque radar pixels will then cover the dim,
-    // transparent tiles let it show through.
-    const beneath = map.getLayer(RV_LAYER) ? RV_LAYER : undefined;
-    map.addLayer(
-      {
-        id: RV_DIM_LAYER,
-        type: 'fill',
-        source: RV_DIM_SOURCE,
-        paint: {
-          'fill-color': '#0a0e1a',
-          'fill-opacity': 0.45,
-        },
-      },
-      beneath,
     );
-  }
-
-  function removeRadarDim(): void {
-    if (map.getLayer(RV_DIM_LAYER)) map.removeLayer(RV_DIM_LAYER);
-    if (map.getSource(RV_DIM_SOURCE)) map.removeSource(RV_DIM_SOURCE);
-  }
-
-  function removeWeatherRaster(): void {
-    if (map.getLayer(RV_LAYER)) map.removeLayer(RV_LAYER);
-    if (map.getSource(RV_SOURCE)) map.removeSource(RV_SOURCE);
-    removeRadarDim();
-  }
-
-  function showWeatherFrame(layerId: string, frame: RadarFrame): void {
-    removeWeatherRaster();
-    addRadarDim();
-    if (layerId === 'satellite') {
-      // Satellite sub-options (zoom.earth parity + extension):
-      //   geocolor  → GOES-East GeoColor (true color day + night lights)
-      //   ir        → GOES-East ABI Band 13 Clean IR (thermal, always-on)
-      //   truecolor → MODIS Terra CorrectedReflectance (true color, ~1×/day)
-      const gibsLayer =
-        satelliteSubOption === 'ir'
-          ? GIBS_LAYERS.goesIR
-          : satelliteSubOption === 'truecolor'
-            ? GIBS_LAYERS.modisTrueColor
-            : GIBS_LAYERS.goesGeocolor;
-      const tileUrl = gibsTileUrl(gibsLayer, gibsRoundedTime());
-      map.addSource(RV_SOURCE, {
-        type: 'raster',
-        tiles: [tileUrl],
-        tileSize: 256,
-        maxzoom: gibsLayer.maxZoom,
-        attribution: ATTRIBUTION_GIBS,
-      });
-      // GIBS GOES products max at z6 (truecolor at z9); at city zoom
-      // the overzoom is 4-16× which makes the satellite raster
-      // essentially indistinguishable from the basemap. Surface that
-      // limit so the user understands why they're not seeing detail.
-      const currentZ = map.getZoom();
-      if (currentZ > gibsLayer.maxZoom + 1) {
-        showMsg(
-          `Satélite limitado a zoom z${gibsLayer.maxZoom} (NASA GIBS). Acercando más solo aparece la mancha del basemap.`,
-        );
-        window.setTimeout(hideMsg, 5000);
-      }
-    } else {
-      // Radar from RainViewer.
-      //
-      // The 256-pixel tile pyramid only reaches z≈8 — at z9+ the
-      // server returns a "Zoom Level Not Supported" placeholder PNG
-      // that ends up rendered all over the map (user-reported bug,
-      // visible at city zoom across MX). The 512-pixel pyramid covers
-      // up through z10, so we ask for size=512 and tell MapLibre the
-      // tileSize is 512 — equivalent visual density to a native 256
-      // tile at z+1 but with the higher z available.
-      //
-      // maxzoom: 10 retained — at zoom 11+ MapLibre auto-overzooms
-      // from the z10 tile, slightly blurry but a valid raster.
-      if (!rvData) return;
-      const tileUrl = rainviewerTileUrl(rvData.host, frame, { size: 512 });
-      map.addSource(RV_SOURCE, {
-        type: 'raster',
-        tiles: [tileUrl],
-        tileSize: 512,
-        maxzoom: 10,
-        attribution: '© RainViewer',
-      });
-    }
-    map.addLayer({
-      id: RV_LAYER,
-      type: 'raster',
-      source: RV_SOURCE,
-      paint: {
-        'raster-opacity': rvOpacity,
-        'raster-resampling': 'linear',
-      },
-    });
-  }
+  };
 
   function renderLegend(
     kind: 'radar' | 'temperature' | 'humidity' | 'pressure' | 'wind' | null,
