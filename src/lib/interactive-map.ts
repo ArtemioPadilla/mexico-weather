@@ -151,6 +151,11 @@ import { createRadarCoverageOverlay } from './map/overlays/radar-coverage';
 import { createNightLineOverlay } from './map/overlays/night-line';
 import { createNightLightsOverlay } from './map/overlays/night-lights';
 import { createTropicalStormsOverlay } from './map/overlays/tropical-storms';
+import {
+  createBasemapThemeController,
+  OSM_TILES as BASEMAP_OSM_TILES,
+  CARTO_DARK_TILES as BASEMAP_CARTO_DARK_TILES,
+} from './map/chrome/basemap-theme';
 import { computeIsobars } from './map/utils/isobars';
 
 export interface InteractiveMapOptions {
@@ -261,13 +266,11 @@ export async function initInteractiveMap(
   // already in flight come back as OSM (light) and paint as light patches
   // next to Dark Matter tiles for a couple of seconds.
   const initialDark = document.documentElement.classList.contains('dark');
-  const OSM_TILES_INIT = ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'];
-  const CARTO_DARK_TILES_INIT = [
-    'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-    'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-    'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-    'https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-  ];
+  // Initial tile arrays — sourced from the shared basemap-theme module
+  // to keep the single source of truth (no diverging URL lists between
+  // the map construction and the runtime theme controller).
+  const OSM_TILES_INIT = BASEMAP_OSM_TILES;
+  const CARTO_DARK_TILES_INIT = BASEMAP_CARTO_DARK_TILES;
 
   const map = new maplibre.Map({
     container: opts.els.container,
@@ -638,89 +641,25 @@ export async function initInteractiveMap(
     ro.observe(opts.els.container);
   }
 
-  // ------------------------------------------------------------------
-  // Dark basemap (CartoDB Dark Matter) when html.dark is set.
-  // ------------------------------------------------------------------
-  const OSM_TILES = ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'];
-  const CARTO_DARK_TILES = [
-    'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-    'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-    'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-    'https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-  ];
-  // Plan P2.5: at country-wide zooms the OSM and Carto label density
-  // makes the map look busy compared to zoom.earth. Carto exposes a
-  // nolabels variant we can swap to below the zoom threshold so MX
-  // looks clean at zoom ≤ 4 and gains city labels at zoom ≥ 5.
-  // (OSM Mapnik has no nolabels equivalent, so we use Carto voyager
-  // for light mode too in this regime.)
-  const CARTO_DARK_NOLABELS = [
-    'https://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
-    'https://b.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
-    'https://c.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
-    'https://d.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
-  ];
-  const CARTO_LIGHT_NOLABELS = [
-    'https://a.basemaps.cartocdn.com/voyager_nolabels/{z}/{x}/{y}.png',
-    'https://b.basemaps.cartocdn.com/voyager_nolabels/{z}/{x}/{y}.png',
-    'https://c.basemaps.cartocdn.com/voyager_nolabels/{z}/{x}/{y}.png',
-    'https://d.basemaps.cartocdn.com/voyager_nolabels/{z}/{x}/{y}.png',
-  ];
-  const LABEL_ZOOM_THRESHOLD = 5;
-
-  // Seeded with the value used at construction so the first user-driven
-  // theme toggle is the first time we actually swap tiles.
-  let lastBasemapDark: boolean | null = initialDark;
-  let lastLabelsDense: boolean | null = null;
-  function pickBasemapTiles(dark: boolean, dense: boolean): string[] {
-    if (dark) {
-      return dense ? CARTO_DARK_TILES : CARTO_DARK_NOLABELS;
-    }
-    return dense ? OSM_TILES : CARTO_LIGHT_NOLABELS;
-  }
-  function syncBasemapTheme(): void {
-    const dark = document.documentElement.classList.contains('dark');
-    const dense = map.getZoom() >= LABEL_ZOOM_THRESHOLD;
-    if (dark === lastBasemapDark && dense === lastLabelsDense) return;
-    const src = map.getSource('osm') as
-      | maplibregl.RasterTileSource
-      | undefined;
-    if (!src || typeof src.setTiles !== 'function') return;
-    try {
-      src.setTiles(pickBasemapTiles(dark, dense));
-      const anySrc = src as unknown as { attribution?: string };
-      anySrc.attribution = dark
-        ? '© OpenStreetMap contributors © CARTO'
-        : '© OpenStreetMap © CARTO';
-      // setTiles changes the URL template for FUTURE fetches but doesn't
-      // evict already-cached/in-flight tiles, so the previous CDN can keep
-      // painting alongside the new one for a few seconds. Force a refetch
-      // via the source cache so all tiles re-resolve through the new URL.
-      const styleAny = map.style as unknown as {
-        sourceCaches?: Record<string, { clearTiles?: () => void; update?: (t: unknown) => void }>;
-        _otherSourceCaches?: Record<string, { clearTiles?: () => void; update?: (t: unknown) => void }>;
-      };
-      const sc =
-        styleAny.sourceCaches?.['osm'] ?? styleAny._otherSourceCaches?.['osm'];
-      sc?.clearTiles?.();
-      sc?.update?.((map as unknown as { transform: unknown }).transform);
-      lastBasemapDark = dark;
-      lastLabelsDense = dense;
-    } catch {
-      /* retry on next mutation */
-    }
-  }
-  // Trigger re-evaluation when the zoom level crosses the threshold.
-  map.on('zoomend', () => syncBasemapTheme());
-
-  let themeObserver: MutationObserver | null = null;
-  function observeThemeForBasemap(): void {
-    themeObserver = new MutationObserver(() => syncBasemapTheme());
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-  }
+  // Basemap theme + label-density controller — extracted to
+  // src/lib/map/chrome/basemap-theme.ts. Watches the html.dark class
+  // and the map's zoom level; swaps the 'osm' source tiles when
+  // either crosses a boundary.
+  const basemapTheme = createBasemapThemeController(map, {
+    sourceId: 'osm',
+    initialDark,
+  });
+  map.on('zoomend', () => basemapTheme.sync());
+  const syncBasemapTheme = (): void => basemapTheme.sync();
+  // observeThemeForBasemap is now a no-op shim — the observer starts
+  // automatically inside the controller's constructor. Kept here so
+  // the existing call site in map.on('load') compiles unchanged.
+  const observeThemeForBasemap = (): void => {
+    /* observer attached by createBasemapThemeController() */
+  };
+  const themeObserver: { disconnect: () => void } | null = {
+    disconnect: () => basemapTheme.dispose(),
+  };
 
   function setUserPin(
     name: string,
