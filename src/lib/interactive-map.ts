@@ -144,6 +144,8 @@ import { createHistStormsOverlay } from './map/overlays/hist-storms';
 import { createWebcamsOverlay } from './map/overlays/webcams';
 import { createAqiOverlay } from './map/overlays/aqi';
 import { createMarineOverlay } from './map/overlays/marine';
+import { createGraticuleOverlay } from './map/overlays/graticule';
+import { createFiresOverlay } from './map/overlays/fires';
 import { computeIsobars } from './map/utils/isobars';
 
 export interface InteractiveMapOptions {
@@ -1723,57 +1725,8 @@ export async function initInteractiveMap(
     if (map.getSource(ISOBAR_SOURCE)) map.removeSource(ISOBAR_SOURCE);
   }
 
-  // ----------------------------------------------------------------
-  // Graticule overlay (zoom.earth "Retícula X") — lat/lng grid at 10°
-  // intervals. Toggle via keyboard shortcut 'X'.
-  // ----------------------------------------------------------------
-  const GRATICULE_SOURCE = 'wx-graticule-src';
-  const GRATICULE_LAYER = 'wx-graticule-line';
-
-  function buildGraticule(): FeatureCollection {
-    const features: Feature[] = [];
-    for (let lng = -180; lng <= 180; lng += 10) {
-      features.push({
-        type: 'Feature',
-        properties: { kind: 'meridian', value: lng },
-        geometry: {
-          type: 'LineString',
-          coordinates: [[lng, -85], [lng, 85]],
-        },
-      });
-    }
-    for (let lat = -80; lat <= 80; lat += 10) {
-      const coords: [number, number][] = [];
-      for (let lng = -180; lng <= 180; lng += 5) coords.push([lng, lat]);
-      features.push({
-        type: 'Feature',
-        properties: { kind: 'parallel', value: lat },
-        geometry: { type: 'LineString', coordinates: coords },
-      });
-    }
-    return { type: 'FeatureCollection', features };
-  }
-
-  function setGraticuleEnabled(on: boolean): void {
-    if (!on) {
-      if (map.getLayer(GRATICULE_LAYER)) map.removeLayer(GRATICULE_LAYER);
-      if (map.getSource(GRATICULE_SOURCE)) map.removeSource(GRATICULE_SOURCE);
-      return;
-    }
-    if (map.getSource(GRATICULE_SOURCE)) return;
-    map.addSource(GRATICULE_SOURCE, { type: 'geojson', data: buildGraticule() });
-    map.addLayer({
-      id: GRATICULE_LAYER,
-      type: 'line',
-      source: GRATICULE_SOURCE,
-      paint: {
-        'line-color': '#ffffff',
-        'line-width': 0.6,
-        'line-opacity': 0.25,
-        'line-dasharray': [2, 2],
-      },
-    });
-  }
+  // Graticule overlay — extracted to src/lib/map/overlays/graticule.ts
+  const graticuleOverlay = createGraticuleOverlay(map);
 
   // ----------------------------------------------------------------
   // Night lights overlay — NASA VIIRS Day-Night Band imagery, the
@@ -1969,65 +1922,12 @@ export async function initInteractiveMap(
     });
   }
 
-  // ----------------------------------------------------------------
-  // Fires overlay (zoom.earth "Incendios activos I") — NASA FIRMS
-  // VIIRS-SNPP 24-hour fire detections in NA/Central America, cached
-  // every 4 h to public/data/fires-na.json by .github/workflows/
-  // firms-fires.yml (FIRMS's public CSV endpoint has no CORS, so we
-  // proxy it at build time, similar to the SMN RSS workflow).
-  // ----------------------------------------------------------------
-  const FIRES_SOURCE = 'wx-fires-src';
-  const FIRES_LAYER = 'wx-fires-circle';
-  let firesFetchPromise: Promise<FeatureCollection> | null = null;
-
-  function fetchFires(): Promise<FeatureCollection> {
-    if (firesFetchPromise) return firesFetchPromise;
-    firesFetchPromise = cachedFetch(`${base}data/fires-na.json`)
-      .then((r) =>
-        r.ok
-          ? (r.json() as Promise<FeatureCollection>)
-          : ({ type: 'FeatureCollection', features: [] } as FeatureCollection),
-      )
-      .catch(
-        () =>
-          ({ type: 'FeatureCollection', features: [] } as FeatureCollection),
-      );
-    return firesFetchPromise;
-  }
-
-  async function setFiresEnabled(on: boolean): Promise<void> {
-    if (!on) {
-      if (map.getLayer(FIRES_LAYER)) map.removeLayer(FIRES_LAYER);
-      if (map.getSource(FIRES_SOURCE)) map.removeSource(FIRES_SOURCE);
-      return;
-    }
-    if (map.getSource(FIRES_SOURCE)) return;
-    const data = await fetchFires();
-    if (map.getSource(FIRES_SOURCE)) return;
-    map.addSource(FIRES_SOURCE, { type: 'geojson', data });
-    map.addLayer({
-      id: FIRES_LAYER,
-      type: 'circle',
-      source: FIRES_SOURCE,
-      paint: {
-        // Brightness scales with Fire Radiative Power (frp, MW). Even
-        // small detections show as 3 px; very intense fires up to 9 px.
-        'circle-radius': [
-          'interpolate',
-          ['linear'],
-          ['get', 'frp'],
-          0, 3,
-          5, 4,
-          50, 6,
-          200, 9,
-        ],
-        'circle-color': '#f97316', // orange-500 — fire glow
-        'circle-opacity': 0.85,
-        'circle-stroke-color': '#fef3c7', // amber halo
-        'circle-stroke-width': 0.8,
-      },
-    });
-  }
+  // Fires overlay — extracted to src/lib/map/overlays/fires.ts. Takes
+  // cachedFetch + the site base for the cached JSON path.
+  const firesOverlay = createFiresOverlay(map, {
+    fetch: cachedFetch,
+    base,
+  });
 
   // Static MX-unique overlays — extracted to per-module factories
   // under src/lib/map/overlays/. Single line per overlay because all
@@ -3583,8 +3483,8 @@ export async function initInteractiveMap(
       id: 'graticule',
       label: 'Retícula',
       shortcut: 'X',
-      isEnabled: () => !!map.getLayer(GRATICULE_LAYER),
-      setEnabled: (on) => setGraticuleEnabled(on),
+      isEnabled: () => graticuleOverlay.isEnabled(),
+      setEnabled: (on) => graticuleOverlay.setEnabled(on),
     },
     {
       id: 'nightLights',
@@ -3613,9 +3513,9 @@ export async function initInteractiveMap(
       id: 'fires',
       label: 'Incendios activos',
       shortcut: 'I',
-      isEnabled: () => !!map.getLayer(FIRES_LAYER),
+      isEnabled: () => firesOverlay.isEnabled(),
       setEnabled: (on) => {
-        void setFiresEnabled(on);
+        void firesOverlay.setEnabled(on);
       },
     },
     {
