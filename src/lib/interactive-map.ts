@@ -175,6 +175,7 @@ import { createIsobarsLayer } from './map/layers/isobars';
 import { createCloudsOverlay } from './map/overlays/clouds';
 import { createCityValuesOverlay } from './map/overlays/city-values';
 import { createTimelinePlayer } from './map/chrome/timeline-player';
+import { createSubOptionsGroup } from './map/chrome/sub-options';
 import { computeIsobars } from './map/utils/isobars';
 
 export interface InteractiveMapOptions {
@@ -2083,237 +2084,95 @@ export async function initInteractiveMap(
   refreshSettingsButtons();
 
   // ----------------------------------------------------------------
-  // Sub-options (zoom.earth's per-layer variants). Only Temperature
-  // gets sub-options today: Actual ↔ Aparente. Rendered inline in the
-  // layer rail, below the active layer's button when that layer has
-  // sub-options. Hidden otherwise.
+  // Sub-options (zoom.earth's per-layer variants). Single generic
+  // factory (createSubOptionsGroup) replaces five near-identical
+  // copies — see src/lib/map/chrome/sub-options.ts.
   // ----------------------------------------------------------------
-  function buildTempSubOptions(): void {
-    const wrap = opts.els.layerBtns;
-    if (!wrap || !features.layerRail) return;
-    const container = document.createElement('div');
-    container.id = 'temp-sub-options';
-    container.className =
-      'mt-1 ml-4 hidden max-sm:!hidden flex-col gap-0.5 text-xs text-gray-600 dark:text-gray-400';
-    const mkBtn = (id: TempSubOption, label: string): HTMLButtonElement => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.dataset.sub = id;
-      btn.textContent = label;
-      btn.className =
-        'rounded px-2 py-0.5 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold aria-pressed:text-gray-800 dark:aria-pressed:text-gray-100';
-      btn.setAttribute('aria-pressed', String(tempSubOption === id));
-      btn.addEventListener('click', () => {
-        if (tempSubOption === id) return;
-        tempSubOption = id;
-        refreshTempSubOptions();
-        // Refetch the field with the new variable.
-        void setActiveLayer('temperature');
-      });
-      return btn;
-    };
-    container.appendChild(mkBtn('actual', 'Actual'));
-    container.appendChild(mkBtn('aparente', 'Aparente'));
-    container.appendChild(mkBtn('bulbo', 'Bulbo húmedo'));
-    wrap.appendChild(container);
-  }
-  function refreshTempSubOptions(): void {
-    const container = document.getElementById('temp-sub-options');
-    if (!container) return;
-    const show = activeLayer === 'temperature';
-    container.classList.toggle('hidden', !show);
-    container.classList.toggle('flex', show);
-    container.querySelectorAll('button').forEach((b) => {
-      b.setAttribute(
-        'aria-pressed',
-        String((b as HTMLButtonElement).dataset.sub === tempSubOption),
-      );
-    });
-  }
-  buildTempSubOptions();
-  refreshTempSubOptions();
+  const tempSub = createSubOptionsGroup<TempSubOption>(opts.els.layerBtns, {
+    containerId: 'temp-sub-options',
+    getActive: () => tempSubOption,
+    onSelect: (id) => {
+      tempSubOption = id;
+      void setActiveLayer('temperature');
+    },
+    isVisible: () => activeLayer === 'temperature',
+    options: [
+      { id: 'actual', label: 'Actual' },
+      { id: 'aparente', label: 'Aparente' },
+      { id: 'bulbo', label: 'Bulbo húmedo' },
+    ],
+  });
+  const refreshTempSubOptions = (): void => tempSub.refresh();
 
-  function buildHumiditySubOptions(): void {
-    const wrap = opts.els.layerBtns;
-    if (!wrap || !features.layerRail) return;
-    const container = document.createElement('div');
-    container.id = 'humidity-sub-options';
-    container.className =
-      'mt-1 ml-4 hidden max-sm:!hidden flex-col gap-0.5 text-xs text-gray-600 dark:text-gray-400';
-    const mkBtn = (
-      id: HumiditySubOption,
-      label: string,
-    ): HTMLButtonElement => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.dataset.sub = id;
-      btn.textContent = label;
-      btn.className =
-        'rounded px-2 py-0.5 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold aria-pressed:text-gray-800 dark:aria-pressed:text-gray-100';
-      btn.setAttribute('aria-pressed', String(humiditySubOption === id));
-      btn.addEventListener('click', () => {
-        if (humiditySubOption === id) return;
+  const humiditySub = createSubOptionsGroup<HumiditySubOption>(
+    opts.els.layerBtns,
+    {
+      containerId: 'humidity-sub-options',
+      getActive: () => humiditySubOption,
+      onSelect: (id) => {
         humiditySubOption = id;
-        refreshHumiditySubOptions();
         void setActiveLayer('humidity');
-      });
-      return btn;
-    };
-    container.appendChild(mkBtn('relativa', 'Relativa'));
-    container.appendChild(mkBtn('rocio', 'Punto de rocío'));
-    wrap.appendChild(container);
-  }
-  function refreshHumiditySubOptions(): void {
-    const container = document.getElementById('humidity-sub-options');
-    if (!container) return;
-    const show = activeLayer === 'humidity';
-    container.classList.toggle('hidden', !show);
-    container.classList.toggle('flex', show);
-    container.querySelectorAll('button').forEach((b) => {
-      b.setAttribute(
-        'aria-pressed',
-        String((b as HTMLButtonElement).dataset.sub === humiditySubOption),
-      );
-    });
-  }
-  buildHumiditySubOptions();
-  refreshHumiditySubOptions();
+      },
+      isVisible: () => activeLayer === 'humidity',
+      options: [
+        { id: 'relativa', label: 'Relativa' },
+        { id: 'rocio', label: 'Punto de rocío' },
+      ],
+    },
+  );
+  const refreshHumiditySubOptions = (): void => humiditySub.refresh();
 
-  function buildPressureSubOptions(): void {
-    const wrap = opts.els.layerBtns;
-    if (!wrap || !features.layerRail) return;
-    const container = document.createElement('div');
-    container.id = 'pressure-sub-options';
-    container.className =
-      'mt-1 ml-4 hidden max-sm:!hidden flex-col gap-0.5 text-xs text-gray-600 dark:text-gray-400';
-    const mkBtn = (
-      id: PressureSubOption,
-      label: string,
-    ): HTMLButtonElement => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.dataset.sub = id;
-      btn.textContent = label;
-      btn.className =
-        'rounded px-2 py-0.5 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold aria-pressed:text-gray-800 dark:aria-pressed:text-gray-100';
-      btn.setAttribute('aria-pressed', String(pressureSubOption === id));
-      btn.addEventListener('click', () => {
-        if (pressureSubOption === id) return;
+  const pressureSub = createSubOptionsGroup<PressureSubOption>(
+    opts.els.layerBtns,
+    {
+      containerId: 'pressure-sub-options',
+      getActive: () => pressureSubOption,
+      onSelect: (id) => {
         pressureSubOption = id;
-        refreshPressureSubOptions();
         void setActiveLayer('pressure');
-      });
-      return btn;
-    };
-    container.appendChild(mkBtn('msl', 'Nivel del mar'));
-    container.appendChild(mkBtn('surface', 'Superficie'));
-    wrap.appendChild(container);
-  }
-  function refreshPressureSubOptions(): void {
-    const container = document.getElementById('pressure-sub-options');
-    if (!container) return;
-    const show = activeLayer === 'pressure';
-    container.classList.toggle('hidden', !show);
-    container.classList.toggle('flex', show);
-    container.querySelectorAll('button').forEach((b) => {
-      b.setAttribute(
-        'aria-pressed',
-        String((b as HTMLButtonElement).dataset.sub === pressureSubOption),
-      );
-    });
-  }
-  buildPressureSubOptions();
-  refreshPressureSubOptions();
+      },
+      isVisible: () => activeLayer === 'pressure',
+      options: [
+        { id: 'msl', label: 'Nivel del mar' },
+        { id: 'surface', label: 'Superficie' },
+      ],
+    },
+  );
+  const refreshPressureSubOptions = (): void => pressureSub.refresh();
 
-  function buildWindSubOptions(): void {
-    const wrap = opts.els.layerBtns;
-    if (!wrap || !features.layerRail) return;
-    const container = document.createElement('div');
-    container.id = 'wind-sub-options';
-    container.className =
-      'mt-1 ml-4 hidden max-sm:!hidden flex-col gap-0.5 text-xs text-gray-600 dark:text-gray-400';
-    const mkBtn = (id: WindSubOption, label: string): HTMLButtonElement => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.dataset.sub = id;
-      btn.textContent = label;
-      btn.className =
-        'rounded px-2 py-0.5 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold aria-pressed:text-gray-800 dark:aria-pressed:text-gray-100';
-      btn.setAttribute('aria-pressed', String(windSubOption === id));
-      btn.addEventListener('click', () => {
-        if (windSubOption === id) return;
-        windSubOption = id;
-        refreshWindSubOptions();
-        void setActiveLayer('wind');
-      });
-      return btn;
-    };
-    container.appendChild(mkBtn('velocidad', 'Velocidad'));
-    container.appendChild(mkBtn('rachas', 'Rachas'));
-    wrap.appendChild(container);
-  }
-  function refreshWindSubOptions(): void {
-    const container = document.getElementById('wind-sub-options');
-    if (!container) return;
-    const show = activeLayer === 'wind';
-    container.classList.toggle('hidden', !show);
-    container.classList.toggle('flex', show);
-    container.querySelectorAll('button').forEach((b) => {
-      b.setAttribute(
-        'aria-pressed',
-        String((b as HTMLButtonElement).dataset.sub === windSubOption),
-      );
-    });
-  }
-  buildWindSubOptions();
-  refreshWindSubOptions();
+  const windSub = createSubOptionsGroup<WindSubOption>(opts.els.layerBtns, {
+    containerId: 'wind-sub-options',
+    getActive: () => windSubOption,
+    onSelect: (id) => {
+      windSubOption = id;
+      void setActiveLayer('wind');
+    },
+    isVisible: () => activeLayer === 'wind',
+    options: [
+      { id: 'velocidad', label: 'Velocidad' },
+      { id: 'rachas', label: 'Rachas' },
+    ],
+  });
+  const refreshWindSubOptions = (): void => windSub.refresh();
 
-  function buildSatelliteSubOptions(): void {
-    const wrap = opts.els.layerBtns;
-    if (!wrap || !features.layerRail) return;
-    const container = document.createElement('div');
-    container.id = 'satellite-sub-options';
-    container.className =
-      'mt-1 ml-4 hidden max-sm:!hidden flex-col gap-0.5 text-xs text-gray-600 dark:text-gray-400';
-    const mkBtn = (
-      id: SatelliteSubOption,
-      label: string,
-    ): HTMLButtonElement => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.dataset.sub = id;
-      btn.textContent = label;
-      btn.className =
-        'rounded px-2 py-0.5 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold aria-pressed:text-gray-800 dark:aria-pressed:text-gray-100';
-      btn.setAttribute('aria-pressed', String(satelliteSubOption === id));
-      btn.addEventListener('click', () => {
-        if (satelliteSubOption === id) return;
+  const satelliteSub = createSubOptionsGroup<SatelliteSubOption>(
+    opts.els.layerBtns,
+    {
+      containerId: 'satellite-sub-options',
+      getActive: () => satelliteSubOption,
+      onSelect: (id) => {
         satelliteSubOption = id;
-        refreshSatelliteSubOptions();
         void setActiveLayer('satellite');
-      });
-      return btn;
-    };
-    container.appendChild(mkBtn('geocolor', 'GeoColor'));
-    container.appendChild(mkBtn('ir', 'Infrarrojo'));
-    container.appendChild(mkBtn('truecolor', 'Color real'));
-    wrap.appendChild(container);
-  }
-  function refreshSatelliteSubOptions(): void {
-    const container = document.getElementById('satellite-sub-options');
-    if (!container) return;
-    const show = activeLayer === 'satellite';
-    container.classList.toggle('hidden', !show);
-    container.classList.toggle('flex', show);
-    container.querySelectorAll('button').forEach((b) => {
-      b.setAttribute(
-        'aria-pressed',
-        String((b as HTMLButtonElement).dataset.sub === satelliteSubOption),
-      );
-    });
-  }
-  buildSatelliteSubOptions();
-  refreshSatelliteSubOptions();
+      },
+      isVisible: () => activeLayer === 'satellite',
+      options: [
+        { id: 'geocolor', label: 'GeoColor' },
+        { id: 'ir', label: 'Infrarrojo' },
+        { id: 'truecolor', label: 'Color real' },
+      ],
+    },
+  );
+  const refreshSatelliteSubOptions = (): void => satelliteSub.refresh();
 
   // ----------------------------------------------------------------
   // Overlays menu — zoom.earth's "Superposiciones" panel. Each entry
