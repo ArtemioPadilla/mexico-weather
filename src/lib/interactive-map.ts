@@ -4531,6 +4531,31 @@ export async function initInteractiveMap(
   }
 
   if (features.search && q) {
+    // Search collapse (plan P1.7). Icon-only by default; click reveals
+    // the input; ESC or blur (when empty) collapses back to icon.
+    const searchToggle = document.getElementById('mw-search-toggle');
+    function expandSearch(): void {
+      q?.classList.remove('hidden');
+      searchToggle?.setAttribute('aria-expanded', 'true');
+      try { q?.focus(); } catch { /* ignore */ }
+    }
+    function collapseSearch(): void {
+      if (!q || q.value.trim().length > 0) return;
+      q.classList.add('hidden');
+      searchToggle?.setAttribute('aria-expanded', 'false');
+    }
+    searchToggle?.addEventListener('click', () => {
+      const isHidden = q?.classList.contains('hidden');
+      if (isHidden) expandSearch();
+      else collapseSearch();
+    });
+    q.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        q.value = '';
+        collapseSearch();
+      }
+    });
     q.addEventListener('input', () => {
       window.clearTimeout(qTimer);
       const query = q.value.trim();

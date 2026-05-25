@@ -141,8 +141,18 @@ const cfg = JSON.stringify({
   />
 
   {features.search && (
-    <div class="absolute right-3 top-3 z-10 flex w-80 max-w-[calc(100vw-1.5rem)] flex-col items-end gap-2">
-      <div class="flex w-full gap-2">
+    <div id="mw-search-wrap" class="absolute right-3 top-3 z-20 flex flex-col items-end gap-2">
+      <div class="flex items-center gap-2">
+        {/* Search icon — click expands the input (plan P1.7). */}
+        <button
+          id="mw-search-toggle"
+          type="button"
+          class="flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95"
+          aria-label={t.map_search_placeholder}
+          aria-expanded="false"
+          aria-controls={ids.q}
+          title={t.map_search_placeholder}
+        >🔍</button>
         <input
           id={ids.q}
           type="text"
@@ -153,21 +163,22 @@ const cfg = JSON.stringify({
           aria-autocomplete="list"
           aria-label={t.map_search_placeholder}
           placeholder={t.map_search_placeholder}
-          class="flex-1 rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/95 dark:text-gray-100"
+          class="hidden w-72 max-w-[calc(100vw-6rem)] rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-gray-900 shadow focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/95 dark:text-gray-100"
         />
         {features.locateButton && (
           <button
             id={ids.loc}
             type="button"
-            class="whitespace-nowrap rounded-lg border border-gray-300 bg-white/95 px-3 py-1.5 text-sm text-blue-700 shadow hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900/95 dark:text-blue-300"
-            ><span aria-hidden="true">📍</span> {t.map_locate}</button
-          >
+            class="flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95"
+            aria-label={t.map_locate}
+            title={t.map_locate}
+          >📍</button>
         )}
       </div>
       <ul
         id={ids.ac}
         role="listbox"
-        class="hidden w-full overflow-hidden rounded-lg border border-gray-300 bg-white/95 text-start shadow dark:border-gray-700 dark:bg-gray-900/95"
+        class="hidden w-72 max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-lg border border-gray-300 bg-white/95 text-start shadow dark:border-gray-700 dark:bg-gray-900/95"
       ></ul>
     </div>
   )}
@@ -439,20 +450,23 @@ const cfg = JSON.stringify({
   )}
 
   {/*
-    Settings panel (zoom.earth-style ⚙️). Timezone + hour format
-    persisted in localStorage. Plain HTML <details> with inline
-    onclick handlers so no extra bundle.
+    Settings panel (zoom.earth-style ⚙️). Compact icon (plan P1.6) —
+    open/close handled by <details>; when open, the panel anchors to
+    its summary and extends to the left so it doesn't escape the
+    viewport.
   */}
   {features.layerRail && (
     <details
       id="mw-settings"
-      class="absolute right-3 top-12 z-10 max-w-xs rounded-lg bg-white/95 text-xs shadow dark:bg-gray-900/95"
+      class="absolute right-3 top-[6.25rem] z-20 text-xs [&[open]>summary]:bg-blue-500/15 [&[open]>div]:block"
     >
       <summary
-        class="cursor-pointer select-none rounded-lg px-2 py-1.5 font-semibold text-gray-700 hover:bg-blue-500/10 dark:text-gray-200"
+        class="flex h-9 w-9 cursor-pointer select-none items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95 list-none [&::-webkit-details-marker]:hidden"
         aria-label="Configuración"
-      >⚙️ Configuración</summary>
-      <div class="space-y-3 border-t border-gray-200 px-3 py-2 text-gray-600 dark:border-gray-700 dark:text-gray-300">
+        title="Configuración"
+      >⚙️</summary>
+      <div class="hidden absolute right-11 top-0 w-56 max-w-[calc(100vw-3.5rem)] space-y-3 rounded-lg bg-white/95 px-3 py-2 text-gray-600 shadow dark:bg-gray-900/95 dark:text-gray-300">
+        <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Configuración</p>
         <div>
           <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Zona horaria</p>
           <div class="flex gap-1" data-mw-tz>
@@ -475,18 +489,20 @@ const cfg = JSON.stringify({
   )}
 
   {/*
-    Info panel (zoom.earth-style ℹ️). Lists data sources and credits.
-    Pure HTML via <details> — no JS needed.
+    Info panel (zoom.earth-style ℹ️). Compact icon (plan P1.6) — open
+    expands to the left as a popover.
   */}
   {features.layerRail && (
     <details
-      class="absolute right-3 top-3 z-10 max-w-xs rounded-lg bg-white/95 text-xs shadow dark:bg-gray-900/95"
+      class="absolute right-3 top-14 z-20 text-xs [&[open]>summary]:bg-blue-500/15 [&[open]>div]:block"
     >
       <summary
-        class="cursor-pointer select-none rounded-lg px-2 py-1.5 font-semibold text-gray-700 hover:bg-blue-500/10 dark:text-gray-200"
+        class="flex h-9 w-9 cursor-pointer select-none items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95 list-none [&::-webkit-details-marker]:hidden"
         aria-label="Información y fuentes de datos"
-      >ℹ️ Fuentes</summary>
-      <div class="space-y-2 border-t border-gray-200 px-3 py-2 text-gray-600 dark:border-gray-700 dark:text-gray-300">
+        title="Información y fuentes de datos"
+      >ℹ️</summary>
+      <div class="hidden absolute right-11 top-0 w-64 max-w-[calc(100vw-3.5rem)] space-y-2 rounded-lg bg-white/95 px-3 py-2 text-gray-600 shadow dark:bg-gray-900/95 dark:text-gray-300">
+        <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Información y fuentes</p>
         <p>
           <strong class="text-gray-800 dark:text-gray-100">Clima México</strong>
           — mapa interactivo del tiempo. Sin cuenta, sin cookies.
