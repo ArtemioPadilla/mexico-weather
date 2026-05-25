@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 25 May 2026 15:27:34 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 May 2026 17:02:23 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -43,7 +43,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Oaxaca (norte, este y sur) y Chiapas (norte, centro y sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Sinaloa (norte y centro), Jalisco (sur y suroeste), Colima (norte y este), Michoacán (centro y oeste), Guerrero (noroeste), O...]]></description>
-      <pubDate>Mon, 25 May 2026 09:27:23 -0600</pubDate>
+      <pubDate>Mon, 25 May 2026 11:02:09 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-25-78d0</guid>
       <category>Alerta</category>
     </item>
