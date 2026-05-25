@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { TOP_CITIES, type TopCity } from '../../lib/top-cities';
+import { siteBase } from '../../utils/paths';
+
+/**
+ * Statically generated per-city landing page (one per slug in
+ * TOP_CITIES). Renders SEO content server-side — city name in title,
+ * H1, meta description — then hydrates "now" + 3-day preview from
+ * Open-Meteo at page load. Big CTA points to the full interactive
+ * /forecast/?lat=&lng=&… so the page is a teaser, not a
+ * reimplementation.
+ *
+ * Server-rendered HTML matters because the interactive /forecast/
+ * page is empty before JS runs, which is bad SEO. These per-city
+ * landings give Google something to index for each metro.
+ */
+export function getStaticPaths() {
+  return TOP_CITIES.map((city) => ({
+    params: { slug: city.slug },
+    props: {
+      city,
+      otherCities: TOP_CITIES.filter((c) => c.slug !== city.slug).slice(0, 10),
+    },
+  }));
+}
+
+const { city, otherCities } = Astro.props as {
+  city: TopCity;
+  otherCities: TopCity[];
+};
+const base = siteBase();
+const forecastHref =
+  `${base}forecast/?lat=${city.lat}&lng=${city.lng}` +
+  `&name=${encodeURIComponent(city.name)}` +
+  `&admin=${encodeURIComponent(city.admin)}` +
+  `&tz=${encodeURIComponent(city.tz)}`;
+
+const title = `Clima en ${city.name} — Pronóstico para hoy y los próximos días`;
+const description =
+  `Pronóstico del tiempo para ${city.name}, ${city.admin}. ` +
+  `Temperatura actual, lluvia, viento y los próximos 7 días. ` +
+  `Datos del modelo meteorológico de Open-Meteo, sin cuentas ni cookies.`;
+---
+
+<BaseLayout title={title} description={description} lang="es">
+  <main class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+    <div class="max-w-3xl mx-auto px-4 py-8 space-y-8">
+      <nav aria-label="breadcrumb" class="text-sm">
+        <ol class="flex flex-wrap items-center gap-1 text-gray-600 dark:text-gray-400">
+          <li>
+            <a href={base} class="hover:text-gray-900 dark:hover:text-gray-200 underline">
+              Inicio
+            </a>
+          </li>
+          <li aria-hidden="true">›</li>
+          <li>Clima por ciudad</li>
+          <li aria-hidden="true">›</li>
+          <li class="text-gray-900 dark:text-gray-100" aria-current="page">{city.name}</li>
+        </ol>
+      </nav>
+
+      <header class="space-y-2">
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+          Clima en {city.name}, <span class="text-gray-700 dark:text-gray-300">{city.admin}</span>
+        </h1>
+        <p class="text-base text-gray-700 dark:text-gray-300">
+          Pronóstico del tiempo para {city.name}. Temperatura actual, lluvia, viento y los próximos
+          7 días. Datos del modelo meteorológico de Open-Meteo, gratis y sin registro.
+        </p>
+      </header>
+
+      <section
+        aria-labelledby="now-h"
+        class="rounded-lg border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900"
+      >
+        <h2 id="now-h" class="text-lg font-semibold">Ahora en {city.name}</h2>
+        <div
+          id="now-loading"
+          aria-hidden="true"
+          class="mt-3 space-y-2 animate-pulse"
+        >
+          <div class="h-10 w-32 rounded bg-gray-200 dark:bg-gray-800"></div>
+          <div class="h-4 w-48 rounded bg-gray-200 dark:bg-gray-800"></div>
+          <div class="h-4 w-64 rounded bg-gray-200 dark:bg-gray-800"></div>
+        </div>
+        <div id="now-content" class="mt-3 hidden">
+          <div class="flex items-baseline gap-2">
+            <span id="now-temp" class="text-4xl font-bold tabular-nums">—</span>
+            <span class="text-xl text-gray-500 dark:text-gray-400">°C</span>
+            <span id="now-feels" class="ml-2 text-sm text-gray-600 dark:text-gray-400"></span>
+          </div>
+          <p id="now-cond" class="mt-1 text-base text-gray-800 dark:text-gray-200">—</p>
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            <span id="now-wind">Viento —</span> ·
+            <span id="now-humidity">Humedad —</span>
+          </p>
+        </div>
+        <p id="now-error" class="mt-3 hidden text-sm text-red-600 dark:text-red-400">
+          No pudimos cargar el clima actual.
+          <a id="now-error-link" href={forecastHref} class="underline">Intenta el pronóstico completo</a>.
+        </p>
+      </section>
+
+      <section aria-labelledby="next-h" class="space-y-3">
+        <h2 id="next-h" class="text-lg font-semibold">Próximos días</h2>
+        <ul id="next-list" class="grid grid-cols-1 gap-2 sm:grid-cols-3">
+          <li class="h-20 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+          <li class="h-20 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+          <li class="h-20 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+        </ul>
+      </section>
+
+      <a
+        href={forecastHref}
+        class="block rounded-lg bg-blue-600 px-5 py-4 text-center text-white shadow-sm hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
+      >
+        <span class="font-semibold">Ver pronóstico completo de {city.name}</span>
+        <span class="block text-sm opacity-90">
+          7 días, mapa interactivo, alertas SMN, calidad del aire
+        </span>
+      </a>
+
+      <section
+        aria-labelledby="meta-h"
+        class="text-sm text-gray-600 dark:text-gray-400"
+      >
+        <h2 id="meta-h" class="sr-only">Detalles de ubicación</h2>
+        <p>
+          Coordenadas: {city.lat.toFixed(2)}°, {city.lng.toFixed(2)}° · Zona horaria: <code class="text-xs"
+            >{city.tz}</code
+          >
+        </p>
+      </section>
+
+      <nav aria-label="Otras ciudades" class="border-t border-gray-200 pt-6 dark:border-gray-800">
+        <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+          Otras ciudades
+        </h2>
+        <ul class="flex flex-wrap gap-2">
+          {
+            otherCities.map((c) => (
+              <li>
+                <a
+                  href={`${base}clima/${c.slug}/`}
+                  class="inline-block rounded-md border border-gray-200 px-3 py-1 text-sm text-blue-700 hover:bg-blue-50 dark:border-gray-700 dark:text-blue-400 dark:hover:bg-gray-900"
+                >
+                  {c.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </main>
+
+  <div
+    id="city-data"
+    data-lat={city.lat}
+    data-lng={city.lng}
+    data-tz={city.tz}
+    data-name={city.name}
+    class="hidden"
+  ></div>
+
+  <script>
+    import { getForecast } from '../../lib/forecast';
+
+    const dataEl = document.getElementById('city-data');
+    const data = {
+      lat: Number(dataEl?.dataset.lat ?? NaN),
+      lng: Number(dataEl?.dataset.lng ?? NaN),
+      tz: dataEl?.dataset.tz ?? 'auto',
+      name: dataEl?.dataset.name ?? '',
+    };
+
+    const loadingEl = document.getElementById('now-loading');
+    const contentEl = document.getElementById('now-content');
+    const errorEl = document.getElementById('now-error');
+    const tempEl = document.getElementById('now-temp');
+    const feelsEl = document.getElementById('now-feels');
+    const condEl = document.getElementById('now-cond');
+    const windEl = document.getElementById('now-wind');
+    const humEl = document.getElementById('now-humidity');
+    const nextList = document.getElementById('next-list');
+
+    function fmtTemp(n: number | null): string {
+      return n === null ? '—' : String(Math.round(n));
+    }
+
+    function dayShort(iso: string): string {
+      try {
+        const d = new Date(iso + 'T12:00:00');
+        return d.toLocaleDateString('es-MX', { weekday: 'short' });
+      } catch {
+        return iso.slice(5);
+      }
+    }
+
+    async function run(): Promise<void> {
+      if (!Number.isFinite(data.lat) || !Number.isFinite(data.lng)) {
+        loadingEl?.classList.add('hidden');
+        errorEl?.classList.remove('hidden');
+        return;
+      }
+      try {
+        const fc = await getForecast(
+          { lat: data.lat, lng: data.lng, tz: data.tz ?? 'auto' },
+          { fetch: window.fetch.bind(window) },
+        );
+        loadingEl?.classList.add('hidden');
+        contentEl?.classList.remove('hidden');
+        if (tempEl) tempEl.textContent = fmtTemp(fc.current.temperature);
+        if (feelsEl)
+          feelsEl.textContent =
+            fc.current.feelsLike === null
+              ? ''
+              : `Sensación ${fmtTemp(fc.current.feelsLike)}°`;
+        if (condEl) condEl.textContent = fc.current.condition || '—';
+        if (windEl)
+          windEl.textContent = `Viento ${Math.round(fc.current.windSpeed)} km/h`;
+        if (humEl) humEl.textContent = `Humedad ${Math.round(fc.current.humidity)}%`;
+
+        // Skip today (idx 0); show next 3 days.
+        const next = fc.daily.slice(1, 4);
+        if (nextList && next.length) {
+          nextList.innerHTML = next
+            .map((d) => {
+              const day = dayShort(d.date);
+              const hi = fmtTemp(d.tmax);
+              const lo = fmtTemp(d.tmin);
+              const cond = (d.condition || '').replace(/[<>&"']/g, '');
+              return (
+                `<li class="rounded-md border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-900">` +
+                `<div class="text-sm font-medium capitalize">${day}</div>` +
+                `<div class="mt-1 text-sm text-gray-700 dark:text-gray-300">${cond}</div>` +
+                `<div class="mt-1 text-base"><span class="font-semibold">${hi}°</span> ` +
+                `<span class="text-gray-500 dark:text-gray-400">/ ${lo}°</span></div>` +
+                `</li>`
+              );
+            })
+            .join('');
+        }
+      } catch {
+        loadingEl?.classList.add('hidden');
+        errorEl?.classList.remove('hidden');
+        if (nextList) nextList.innerHTML = '';
+      }
+    }
+
+    void run();
+  </script>
+</BaseLayout>
