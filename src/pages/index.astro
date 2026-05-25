@@ -166,6 +166,7 @@ const base = siteBase();
     import { geocode } from '../lib/geocode';
     import { list, has, toggle, remove, type Favorite } from '../lib/favorites';
     import { ui } from '../i18n/ui';
+    import { TOP_CITIES } from '../lib/top-cities';
 
     const t = ui.es;
 
@@ -183,6 +184,24 @@ const base = siteBase();
     // concatenate route paths.
     const base = (import.meta.env.BASE_URL as string).replace(/\/$/, '');
 
+    /** Return the TOP_CITIES slug whose coordinates match within ~5 km,
+     *  so homepage cards funnel into the SEO-friendly /clima/<slug>/
+     *  landing page rather than the URL-param /forecast/?lat=… route. */
+    function findSlugByCoords(latS: string, lngS: string): string | null {
+      const lat = Number(latS);
+      const lng = Number(lngS);
+      if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+      // 0.05° ≈ 5 km — generous enough to absorb rounding in cities.ts
+      // (2 dp) without colliding with neighbouring metros.
+      const TOL = 0.05;
+      for (const c of TOP_CITIES) {
+        if (Math.abs(c.lat - lat) <= TOL && Math.abs(c.lng - lng) <= TOL) {
+          return c.slug;
+        }
+      }
+      return null;
+    }
+
     function fullHref(
       lat: string,
       lng: string,
@@ -190,6 +209,8 @@ const base = siteBase();
       name: string,
       admin?: string,
     ): string {
+      const slug = findSlugByCoords(lat, lng);
+      if (slug) return base + '/clima/' + slug + '/';
       const p = new URLSearchParams({ lat, lng, tz, name });
       if (admin) p.set('admin', admin);
       return base + '/forecast?' + p.toString();
