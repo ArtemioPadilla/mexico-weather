@@ -1,0 +1,53 @@
+name: AQI Snapshot MX
+
+# Pre-computes the current PM2.5 reading for the 12 MX-AQI cities
+# featured in the Calidad del aire overlay. The overlay reads this
+# static JSON instead of hitting Open-Meteo air-quality on every
+# toggle — the layer toggle now feels instant.
+
+on:
+  schedule:
+    # Every hour at minute 7. Air-quality CAMS data updates ~hourly.
+    - cron: '7 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: aqi-snapshot
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh PM2.5 snapshot
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Build aqi-snapshot.json from Open-Meteo Air Quality
+        run: python3 scripts/build-aqi-snapshot.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git diff --quiet -- public/data/aqi-snapshot.json || (
+            git add public/data/aqi-snapshot.json &&
+            git commit -m 'chore: refresh AQI snapshot' &&
+            git push &&
+            echo 'committed=true' >> "$GITHUB_OUTPUT"
+          )
+
+      - name: Trigger CD deploy
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cd.yml

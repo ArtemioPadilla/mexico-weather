@@ -57,6 +57,10 @@ export interface AqiOverlay {
 
 export interface AqiOverlayDeps {
   fetch: typeof fetch;
+  /** Optional site base. When set, the overlay reads the pre-computed
+   *  snapshot at ${base}data/aqi-snapshot.json BEFORE falling back to
+   *  the live air-quality endpoint. */
+  base?: string;
 }
 
 export function createAqiOverlay(
@@ -64,7 +68,20 @@ export function createAqiOverlay(
   deps: AqiOverlayDeps,
   cities: AqiCity[] = MX_AQI_CITIES,
 ): AqiOverlay {
-  const fetchData = async (): Promise<FeatureCollection> => {
+  const tryStatic = async (): Promise<FeatureCollection | null> => {
+    if (!deps.base) return null;
+    try {
+      const r = await deps.fetch(`${deps.base}data/aqi-snapshot.json`);
+      if (!r.ok) return null;
+      const fc = (await r.json()) as FeatureCollection;
+      if (!fc?.features?.length) return null;
+      return fc;
+    } catch {
+      return null;
+    }
+  };
+
+  const fetchLive = async (): Promise<FeatureCollection> => {
     try {
       const r = await deps.fetch(buildAqiUrl(cities));
       if (!r.ok) throw new Error('aqi http');
@@ -94,6 +111,12 @@ export function createAqiOverlay(
     } catch {
       return { type: 'FeatureCollection', features: [] };
     }
+  };
+
+  const fetchData = async (): Promise<FeatureCollection> => {
+    const cached = await tryStatic();
+    if (cached) return cached;
+    return fetchLive();
   };
 
   return {
