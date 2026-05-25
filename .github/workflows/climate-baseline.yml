@@ -1,0 +1,55 @@
+name: Climate Baseline MX
+
+# Pre-computes a 10-year mean Tmax/Tmin per day-of-year for the top 30
+# MX metros, sourced from Open-Meteo's free Archive (ERA5-Land) API.
+# Output: public/data/climate-baseline-mx.json. The /forecast/ page's
+# anomaly chip reads this static file first before falling back to a
+# live archive fetch — saves ~30k API calls/day for returning visitors.
+
+on:
+  schedule:
+    # Once a week on Sunday at 06:30 UTC. ERA5-Land lags ~2 months from
+    # real time so weekly is plenty of cadence.
+    - cron: '30 6 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: climate-baseline
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh climate baseline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Build climate-baseline-mx.json from Open-Meteo Archive
+        run: python3 scripts/build-climate-baseline-mx.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git diff --quiet -- public/data/climate-baseline-mx.json || (
+            git add public/data/climate-baseline-mx.json &&
+            git commit -m 'chore: refresh climate baseline (Open-Meteo archive)' &&
+            git push &&
+            echo 'committed=true' >> "$GITHUB_OUTPUT"
+          )
+
+      - name: Trigger CD deploy
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cd.yml

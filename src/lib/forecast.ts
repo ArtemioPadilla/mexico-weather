@@ -328,13 +328,112 @@ export function buildArchiveDoyUrl(
   return `https://archive-api.open-meteo.com/v1/archive?${params.toString()}`;
 }
 
+/** Shape of the static baseline shipped by
+ *  `.github/workflows/climate-baseline.yml`. */
+interface BaselineCity {
+  key: string;
+  name: string;
+  lat: number;
+  lng: number;
+}
+interface BaselineDoy {
+  tmaxMean: number;
+  tminMean?: number;
+  yearsUsed: number;
+}
+interface BaselineDoc {
+  cities: BaselineCity[];
+  baseline: Record<string, Record<string, BaselineDoy>>;
+}
+
+/** Cache the static baseline doc across invocations (per page load). */
+let baselineCache: Promise<BaselineDoc | null> | null = null;
+
+function fetchStaticBaseline(
+  deps: RequestDeps,
+  baseUrl: string,
+): Promise<BaselineDoc | null> {
+  if (baselineCache) return baselineCache;
+  baselineCache = (async () => {
+    try {
+      const res = await deps.fetch(`${baseUrl}data/climate-baseline-mx.json`);
+      if (!res.ok) return null;
+      return (await res.json()) as BaselineDoc;
+    } catch {
+      return null;
+    }
+  })();
+  return baselineCache;
+}
+
+/** Find the closest city in the static baseline within `maxKm` km of
+ *  the requested location. */
+function findClosestCity(
+  doc: BaselineDoc,
+  lat: number,
+  lng: number,
+  maxKm: number,
+): BaselineCity | null {
+  const R = 6371;
+  const d2r = Math.PI / 180;
+  let best: BaselineCity | null = null;
+  let bestKm = Infinity;
+  for (const c of doc.cities) {
+    const dLat = (c.lat - lat) * d2r;
+    const dLng = (c.lng - lng) * d2r;
+    const s =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(lat * d2r) * Math.cos(c.lat * d2r) * Math.sin(dLng / 2) ** 2;
+    const km = 2 * R * Math.asin(Math.min(1, Math.sqrt(s)));
+    if (km < bestKm) {
+      bestKm = km;
+      best = c;
+    }
+  }
+  return bestKm <= maxKm ? best : null;
+}
+
+export interface ClimateAnomalyDeps extends RequestDeps {
+  /** Static site base used to resolve the pre-computed baseline JSON.
+   *  When omitted, the function skips the static-cache path entirely
+   *  and hits the live archive directly. */
+  baseUrl?: string;
+}
+
 export async function getClimateAnomaly(
   loc: ForecastLocation,
   forecastTmax: number,
   monthDay: string,
-  deps: RequestDeps,
+  deps: ClimateAnomalyDeps,
   retry: RetryOptions = DEFAULT_RETRY,
 ): Promise<ClimateAnomaly | null> {
+  // Fast path: pre-computed baseline from the GH Action. Saves a live
+  // archive fetch per visitor.
+  if (deps.baseUrl) {
+    const doc = await fetchStaticBaseline(deps, deps.baseUrl);
+    if (doc) {
+      const closest = findClosestCity(
+        doc,
+        Number(loc.lat),
+        Number(loc.lng),
+        100, // within 100 km of a known metro
+      );
+      if (closest) {
+        const cityBaseline = doc.baseline[closest.key];
+        const entry = cityBaseline?.[monthDay];
+        if (entry && Number.isFinite(entry.tmaxMean)) {
+          return {
+            forecastTmax,
+            baselineTmax: entry.tmaxMean,
+            anomalyC: forecastTmax - entry.tmaxMean,
+            yearsUsed: entry.yearsUsed,
+          };
+        }
+      }
+    }
+  }
+
+  // Slow path: live archive fetch.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data: any = await requestJsonWithRetry(
     buildArchiveDoyUrl(loc, monthDay),
@@ -347,8 +446,6 @@ export async function getClimateAnomaly(
   const tmaxArr: unknown[] = Array.isArray(data?.daily?.temperature_2m_max)
     ? data.daily.temperature_2m_max
     : [];
-  // Filter to entries matching the requested month-day (defensive — the
-  // archive sometimes returns adjacent days for short ranges).
   const samples: number[] = [];
   for (let i = 0; i < dailyTimes.length; i++) {
     const t = dailyTimes[i];
@@ -363,8 +460,7 @@ export async function getClimateAnomaly(
     }
   }
   if (samples.length === 0) return null;
-  const baselineTmax =
-    samples.reduce((a, b) => a + b, 0) / samples.length;
+  const baselineTmax = samples.reduce((a, b) => a + b, 0) / samples.length;
   return {
     forecastTmax,
     baselineTmax,
