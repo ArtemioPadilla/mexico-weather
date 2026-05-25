@@ -1,0 +1,53 @@
+name: City Forecasts MX
+
+# Pre-bakes a slim per-city forecast snapshot for every entry in
+# TOP_CITIES. The /clima/<slug>/ landing pages read these instead of
+# calling Open-Meteo live on every page open. Hourly refresh keeps
+# the snapshot within ~1 model run of fresh while staying well under
+# the Open-Meteo non-commercial limits (30 calls/hour × 24h ≈ 720/day,
+# limit is 10 000/day).
+
+on:
+  schedule:
+    - cron: '27 * * * *'  # offset from other hourly jobs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: city-forecasts
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh per-city forecast snapshots
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Build city forecast snapshots
+        run: python3 scripts/build-city-forecasts.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A public/data/city-forecast/
+          git diff --cached --quiet || (
+            git commit -m 'chore: refresh city forecast snapshots' &&
+            git push &&
+            echo 'committed=true' >> "$GITHUB_OUTPUT"
+          )
+
+      - name: Trigger CD deploy
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cd.yml
