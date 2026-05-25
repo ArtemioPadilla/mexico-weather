@@ -174,6 +174,7 @@ import {
 import { createIsobarsLayer } from './map/layers/isobars';
 import { createCloudsOverlay } from './map/overlays/clouds';
 import { createCityValuesOverlay } from './map/overlays/city-values';
+import { createTimelinePlayer } from './map/chrome/timeline-player';
 import { computeIsobars } from './map/utils/isobars';
 
 export interface InteractiveMapOptions {
@@ -2599,52 +2600,20 @@ export async function initInteractiveMap(
   }
 
   // ------------------------------------------------------------------
-  // Timeline controls (only wired when features.timeline === true).
+  // Timeline play/pause loop — extracted to chrome/timeline-player.ts.
   // ------------------------------------------------------------------
-  let tlPlaying = false;
-  let tlTimer = 0;
-  const tlReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)',
-  ).matches;
-  const tlPlayBtn = features.timeline
-    ? (opts.els.tlPlay ?? null)
-    : null;
-
-  function tlStop(): void {
-    tlPlaying = false;
-    if (tlTimer) {
-      window.clearInterval(tlTimer);
-      tlTimer = 0;
-    }
-    if (tlPlayBtn) {
-      tlPlayBtn.setAttribute('aria-pressed', 'false');
-      tlPlayBtn.setAttribute('aria-label', t.timeline_play);
-      tlPlayBtn.textContent = '▶';
-    }
-  }
-
-  function tlStart(): void {
-    if (tlReducedMotion || tlFrames.length < 2) return;
-    tlPlaying = true;
-    if (tlPlayBtn) {
-      tlPlayBtn.setAttribute('aria-pressed', 'true');
-      tlPlayBtn.setAttribute('aria-label', t.timeline_pause);
-      tlPlayBtn.textContent = '⏸';
-    }
-    tlTimer = window.setInterval(() => {
-      const next = frameIndex + 1 >= tlFrames.length ? 0 : frameIndex + 1;
-      applyFrame(next);
-    }, 700);
-  }
-
-  if (tlPlayBtn) {
-    tlPlayBtn.disabled = tlReducedMotion;
-    if (tlReducedMotion) tlPlayBtn.title = t.timeline_play;
-    tlPlayBtn.addEventListener('click', () => {
-      if (tlPlaying) tlStop();
-      else tlStart();
-    });
-  }
+  const tlPlayBtn = features.timeline ? (opts.els.tlPlay ?? null) : null;
+  const tlPlayer = createTimelinePlayer(
+    { playBtn: tlPlayBtn },
+    { play: t.timeline_play, pause: t.timeline_pause },
+    () => tlFrames.length,
+    () => frameIndex,
+    (i) => applyFrame(i),
+  );
+  const tlStop = (): void => tlPlayer.stop();
+  const tlStart = (): void => tlPlayer.start();
+  const tlReducedMotion = tlPlayer.reducedMotion();
+  tlPlayBtn?.addEventListener('click', () => tlPlayer.toggle());
 
   if (features.timeline) {
     opts.els.tlPrev?.addEventListener('click', () => {
