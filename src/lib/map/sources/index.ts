@@ -22,7 +22,12 @@ export {
   type TileOpts,
 } from './rainviewer';
 
-export { nhcSource, parseNhcResponse, type NhcStorm } from './nhc';
+export {
+  nhcSource,
+  createNhcSource,
+  parseNhcResponse,
+  type NhcStorm,
+} from './nhc';
 
 export {
   GIBS_LAYERS,

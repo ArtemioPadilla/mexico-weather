@@ -1,0 +1,57 @@
+name: Quakes + Storms Snapshot
+
+# Caches two live-ish geo feeds — USGS earthquakes and NHC active
+# tropical storms — every 15 min via GitHub Action. The browser
+# reads our static JSON instead of hitting USGS/NHC directly per
+# overlay toggle.
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: quakes-storms-snapshot
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh quakes + storms
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Build quakes snapshot
+        run: python3 scripts/build-quakes-snapshot.py
+
+      - name: Build storms snapshot
+        run: python3 scripts/build-storms-snapshot.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          changed=0
+          for f in public/data/quakes-snapshot.json public/data/storms-snapshot.json; do
+            git diff --quiet -- "$f" || { git add "$f"; changed=1; }
+          done
+          if [ "$changed" = "1" ]; then
+            git commit -m 'chore: refresh quakes + storms snapshots' &&
+            git push &&
+            echo 'committed=true' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Trigger CD deploy
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cd.yml

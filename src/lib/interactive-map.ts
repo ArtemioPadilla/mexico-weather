@@ -72,7 +72,7 @@ import { geocode } from './geocode';
 import { ui } from '../i18n/ui';
 import { siteBase } from '../utils/paths';
 import {
-  nhcSource,
+  createNhcSource,
   type NhcStorm,
   GIBS_LAYERS,
   gibsTileUrl,
@@ -1124,7 +1124,10 @@ export async function initInteractiveMap(
   // USGS earthquakes overlay — extracted to src/lib/map/overlays/quakes.ts
   // (refactor). The factory takes a fetch function so it can be the
   // existing cachedFetch in production and a stub in unit tests.
-  const quakesOverlay = createQuakesOverlay(map, { fetch: cachedFetch });
+  const quakesOverlay = createQuakesOverlay(map, {
+    fetch: cachedFetch,
+    base,
+  });
 
   // ----------------------------------------------------------------
   // Cloud cover overlay (zoom.earth's "Nubes" — translucent grayscale
@@ -1147,7 +1150,7 @@ export async function initInteractiveMap(
   // can auto-disable the checkbox when there are no active systems.
   const tropicalStormsOverlay = createTropicalStormsOverlay(
     map,
-    nhcSource,
+    createNhcSource(base),
     () => {
       tropicalEnabled = false;
       refreshOverlayCheckboxes();
