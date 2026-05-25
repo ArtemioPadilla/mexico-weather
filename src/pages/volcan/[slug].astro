@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { MX_VOLCANOES, type MxVolcano } from '../../lib/mx-volcanoes';
+import { MX_STATES } from '../../lib/mx-states';
 import { siteBase } from '../../utils/paths';
 import { breadcrumbLd } from '../../lib/structured-data';
 
@@ -32,6 +33,14 @@ const { volcano, otherVolcanoes } = Astro.props as {
 };
 
 const base = siteBase();
+
+// A volcano can straddle two or three states (Popo: Puebla / Estado de
+// México / Morelos). Resolve every part of the admin string against
+// MX_STATES so we can link out to each state page.
+const linkedStates = volcano.admin
+  .split(/\s*\/\s*/)
+  .map((part) => MX_STATES.find((s) => s.name === part.trim()))
+  .filter((s): s is (typeof MX_STATES)[number] => Boolean(s));
 
 const forecastHref =
   `${base}forecast/?lat=${volcano.lat}&lng=${volcano.lng}` +
@@ -160,6 +169,34 @@ const jsonLd = [
           Viento, visibilidad y temperatura para evaluar dispersión de ceniza o ascenso
         </span>
       </a>
+
+      {
+        linkedStates.length > 0 && (
+          <section
+            aria-labelledby="states-h"
+            class="rounded-lg border border-orange-200 bg-orange-50 p-4 text-sm dark:border-orange-900 dark:bg-orange-950"
+          >
+            <h2 id="states-h" class="sr-only">
+              Estados
+            </h2>
+            <p class="text-gray-700 dark:text-gray-300">
+              <span aria-hidden="true">📍</span> Cubre {linkedStates.length === 1 ? 'el estado de' : 'los estados de'}{' '}
+              {linkedStates.map((s, i) => (
+                <>
+                  <a
+                    href={`${base}estado/${s.slug}/`}
+                    class="font-medium text-orange-700 hover:underline dark:text-orange-400"
+                  >
+                    {s.name}
+                  </a>
+                  {i < linkedStates.length - 1 && (i === linkedStates.length - 2 ? ' y ' : ', ')}
+                </>
+              ))}
+              .
+            </p>
+          </section>
+        )
+      }
 
       <nav aria-label="Otros volcanes" class="border-t border-gray-200 pt-6 dark:border-gray-800">
         <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">

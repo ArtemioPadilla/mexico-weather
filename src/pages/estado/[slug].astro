@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { MX_STATES, resolveStateName, type MxState } from '../../lib/mx-states';
 import { TOP_CITIES, type TopCity } from '../../lib/top-cities';
 import { TOP_BEACHES } from '../../lib/top-beaches';
+import { MX_VOLCANOES } from '../../lib/mx-volcanoes';
 import { siteBase } from '../../utils/paths';
 import { breadcrumbLd, stateLd } from '../../lib/structured-data';
 
@@ -31,6 +32,13 @@ const citiesInState: TopCity[] = TOP_CITIES.filter(
   (c) => resolveStateName(c.admin) === state.name,
 );
 const beachesInState = TOP_BEACHES.filter((b) => b.admin === state.name);
+// Volcanoes can straddle two states (Popo: Puebla / Edomex / Morelos),
+// so split the comma-or-slash-joined admin string and look for any match.
+const volcanoesInState = MX_VOLCANOES.filter((v) =>
+  v.admin
+    .split(/\s*\/\s*/)
+    .some((part) => part.trim() === state.name),
+);
 
 const capitalHref = state.capitalSlug
   ? `${base}clima/${state.capitalSlug}/`
@@ -151,6 +159,31 @@ const jsonLd = [
                     </div>
                     <div class="text-xs text-gray-600 dark:text-gray-400">
                       {b.lat.toFixed(2)}°, {b.lng.toFixed(2)}°
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      {
+        volcanoesInState.length > 0 && (
+          <section aria-labelledby="volcanoes-h" class="space-y-3">
+            <h2 id="volcanoes-h" class="text-lg font-semibold">Volcanes</h2>
+            <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {volcanoesInState.map((v) => (
+                <li>
+                  <a
+                    href={`${base}volcan/${v.slug}/`}
+                    class="block rounded-md border border-gray-200 p-3 hover:border-orange-500/40 dark:border-gray-800 dark:hover:border-orange-500/40"
+                  >
+                    <div class="font-medium">
+                      <span aria-hidden="true">🌋</span> {v.name}
+                    </div>
+                    <div class="text-xs text-gray-600 dark:text-gray-400">
+                      Elevación {v.elevationM} m
                     </div>
                   </a>
                 </li>
