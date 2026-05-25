@@ -211,18 +211,89 @@ export function planRoute(intent: Intent, city: City | null): RoutePlan {
   };
 }
 
-/** Convenience wrapper used by /pregunta/. Pure on the dictionary path; falls
- *  back to a geocoding fetch only when needed. */
+/** Shape of the static dictionary shipped by
+ *  `.github/workflows/mx-cities.yml`. */
+interface StaticCityEntry {
+  key: string;
+  name: string;
+  admin1?: string;
+  lat: number;
+  lng: number;
+  population?: number;
+}
+interface StaticCityDoc {
+  cities: StaticCityEntry[];
+}
+
+let staticDictCache: Promise<StaticCityDoc | null> | null = null;
+
+function fetchStaticDict(
+  fetchImpl: typeof fetch,
+  baseUrl: string,
+): Promise<StaticCityDoc | null> {
+  if (staticDictCache) return staticDictCache;
+  staticDictCache = (async () => {
+    try {
+      const r = await fetchImpl(`${baseUrl}data/mx-cities.json`);
+      if (!r.ok) return null;
+      return (await r.json()) as StaticCityDoc;
+    } catch {
+      return null;
+    }
+  })();
+  return staticDictCache;
+}
+
+/** Substring search the static dictionary for the normalized query.
+ *  Returns the most populous match — the dict is pre-sorted by
+ *  population so the first include() hit is usually the best one. */
+export function lookupStaticCity(
+  doc: StaticCityDoc,
+  q: string,
+): City | null {
+  // Normalize each city name once (cheap; ~250 entries).
+  for (const c of doc.cities) {
+    if (normalize(c.name).includes(q) || q.includes(normalize(c.name))) {
+      return {
+        name: c.name,
+        lat: c.lat,
+        lng: c.lng,
+        admin: c.admin1 || undefined,
+      };
+    }
+  }
+  return null;
+}
+
+/** Convenience wrapper used by /pregunta/. Pure on the dictionary
+ *  path; falls back to a geocoding fetch only when needed.
+ *
+ *  Resolution priority:
+ *    1. KNOWN_CITIES (built-in, ~30 entries, zero network).
+ *    2. Static dict at /data/mx-cities.json (~250 entries, single
+ *       network for the dict — cached across calls).
+ *    3. Live Open-Meteo geocoder (per-query network).
+ *
+ *  Pass `baseUrl` (typically import.meta.env.BASE_URL) to enable the
+ *  static-dict path. Omit it to skip straight from #1 to #3.
+ */
 export async function resolveQuestion(
   raw: string,
   fetchImpl: typeof fetch,
+  baseUrl?: string,
 ): Promise<RoutePlan> {
   const q = normalize(raw);
   if (!q) return planRoute('unknown', null);
   const intent = detectIntent(q);
   let city = lookupKnownCity(q);
+  if (!city && baseUrl) {
+    const dict = await fetchStaticDict(fetchImpl, baseUrl);
+    if (dict) {
+      city = lookupStaticCity(dict, q);
+    }
+  }
   if (!city) {
-    // Try Open-Meteo geocoder. Best-effort: ignore network errors.
+    // Last resort: Open-Meteo geocoder. Best-effort.
     try {
       const r = await fetchImpl(buildGeocodeUrl(q));
       if (r.ok) {
