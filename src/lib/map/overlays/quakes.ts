@@ -53,6 +53,10 @@ export interface QuakesOverlay {
 
 export interface QuakesOverlayDeps {
   fetch: typeof fetch;
+  /** Optional site base. When set, the overlay reads the cached
+   *  snapshot at ${base}data/quakes-snapshot.json before falling
+   *  back to the live USGS feed. */
+  base?: string;
 }
 
 export function createQuakesOverlay(
@@ -63,19 +67,38 @@ export function createQuakesOverlay(
 
   const loadData = (): Promise<FeatureCollection> => {
     if (fetchPromise) return fetchPromise;
-    fetchPromise = deps
-      .fetch(QUAKES_URL)
-      .then(async (r) => {
-        if (!r.ok) {
-          return { type: 'FeatureCollection', features: [] } as FeatureCollection;
-        }
+    const loadStatic = async (): Promise<FeatureCollection | null> => {
+      if (!deps.base) return null;
+      try {
+        const r = await deps.fetch(`${deps.base}data/quakes-snapshot.json`);
+        if (!r.ok) return null;
         const fc = (await r.json()) as FeatureCollection;
-        return filterToMxBbox(fc);
-      })
-      .catch(
-        () =>
-          ({ type: 'FeatureCollection', features: [] } as FeatureCollection),
-      );
+        return fc?.features?.length ? fc : null;
+      } catch {
+        return null;
+      }
+    };
+    const loadLive = (): Promise<FeatureCollection> =>
+      deps
+        .fetch(QUAKES_URL)
+        .then(async (r) => {
+          if (!r.ok) {
+            return {
+              type: 'FeatureCollection',
+              features: [],
+            } as FeatureCollection;
+          }
+          const fc = (await r.json()) as FeatureCollection;
+          return filterToMxBbox(fc);
+        })
+        .catch(
+          () =>
+            ({
+              type: 'FeatureCollection',
+              features: [],
+            }) as FeatureCollection,
+        );
+    fetchPromise = loadStatic().then((cached) => cached ?? loadLive());
     return fetchPromise;
   };
 

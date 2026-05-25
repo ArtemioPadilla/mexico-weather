@@ -14,6 +14,11 @@ import type { DataSource } from '../core/types';
 import { cachedFetch } from '../utils/fetch';
 
 const CURRENT_URL = 'https://www.nhc.noaa.gov/CurrentStorms.json';
+/** Static snapshot refreshed every 15 min by the
+ *  quakes-storms-snapshot.yml GitHub Action. Tried before the live
+ *  CURRENT_URL so the browser reads from our CDN unless the static
+ *  cache is unavailable. */
+const STATIC_SNAPSHOT_PATH = 'data/storms-snapshot.json';
 const ATTRIBUTION = '© NOAA NHC';
 /** NHC updates advisories every ~6 h; cache for 5 min so the page reuses
  *  across base-layer switches without refetching constantly. */
@@ -53,6 +58,18 @@ interface RawPayload {
   activeStorms?: unknown;
 }
 
+/** Static-snapshot shape emitted by scripts/build-storms-snapshot.py. */
+interface StaticStormsDoc {
+  updated?: string;
+  storms?: Array<{
+    name?: unknown;
+    lat?: unknown;
+    lng?: unknown;
+    classification?: unknown;
+    intensityKt?: unknown;
+  }>;
+}
+
 function num(v: unknown): number | null {
   if (typeof v === 'number' && Number.isFinite(v)) return v;
   if (typeof v === 'string') {
@@ -90,15 +107,63 @@ export function parseNhcResponse(raw: unknown): NhcStorm[] {
   return out;
 }
 
-export const nhcSource: DataSource<void, NhcStorm[]> = {
-  id: 'nhc-current',
-  ttl: TTL_MS,
-  attribution: ATTRIBUTION,
+/** Try the static snapshot first; resolve to null on any failure so
+ *  the caller falls through to the live NHC endpoint. */
+async function fetchStaticSnapshot(
+  base: string | undefined,
+  signal: AbortSignal | undefined,
+): Promise<NhcStorm[] | null> {
+  if (!base) return null;
+  try {
+    const res = await cachedFetch(`${base}${STATIC_SNAPSHOT_PATH}`, {
+      signal,
+    });
+    if (!res.ok) return null;
+    const doc = (await res.json()) as StaticStormsDoc;
+    if (!doc?.storms?.length) return null;
+    const out: NhcStorm[] = [];
+    for (const s of doc.storms) {
+      const lat = num(s.lat);
+      const lng = num(s.lng);
+      if (lat === null || lng === null) continue;
+      out.push({
+        id: `static-${out.length}`,
+        name: str(s.name, 'Unnamed'),
+        classification: str(s.classification, 'TS'),
+        intensityKt: num(s.intensityKt),
+        pressureHpa: null,
+        lat,
+        lng,
+        advisoryTime: typeof doc.updated === 'string' ? doc.updated : null,
+      });
+    }
+    return out;
+  } catch {
+    return null;
+  }
+}
 
-  async fetch(_params, signal) {
-    const res = await cachedFetch(CURRENT_URL, { signal });
-    if (!res.ok) return [];
-    const json = await res.json();
-    return parseNhcResponse(json);
-  },
-};
+/** Factory: returns an nhcSource bound to a specific site base, so
+ *  the static cache lookup uses the right URL. Falls through to the
+ *  live endpoint when the cache is unavailable. */
+export function createNhcSource(
+  base?: string,
+): DataSource<void, NhcStorm[]> {
+  return {
+    id: 'nhc-current',
+    ttl: TTL_MS,
+    attribution: ATTRIBUTION,
+    async fetch(_params, signal) {
+      const cached = await fetchStaticSnapshot(base, signal);
+      if (cached) return cached;
+      const res = await cachedFetch(CURRENT_URL, { signal });
+      if (!res.ok) return [];
+      const json = await res.json();
+      return parseNhcResponse(json);
+    },
+  };
+}
+
+/** Default singleton — no base path; only the live endpoint is hit.
+ *  Kept for backwards compatibility with any existing imports. */
+export const nhcSource: DataSource<void, NhcStorm[]> = createNhcSource();
