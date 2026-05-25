@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { TOP_BEACHES, type TopBeach } from '../../lib/top-beaches';
+import { findStateByAdmin } from '../../lib/mx-states';
 import { siteBase } from '../../utils/paths';
 import { beachLd, breadcrumbLd } from '../../lib/structured-data';
 
@@ -31,6 +32,7 @@ const { beach, otherBeaches } = Astro.props as {
 };
 
 const base = siteBase();
+const state = findStateByAdmin(beach.admin);
 const forecastHref =
   `${base}forecast/?lat=${beach.lat}&lng=${beach.lng}` +
   `&name=${encodeURIComponent(beach.name)}` +
@@ -149,6 +151,28 @@ const jsonLd = [
         <h2 id="meta-h" class="sr-only">Detalles de ubicación</h2>
         <p>Coordenadas: {beach.lat.toFixed(2)}°, {beach.lng.toFixed(2)}°</p>
       </section>
+
+      {
+        state && (
+          <section
+            aria-labelledby="state-h"
+            class="rounded-lg border border-cyan-200 bg-cyan-50 p-4 text-sm dark:border-cyan-900 dark:bg-cyan-950"
+          >
+            <h2 id="state-h" class="sr-only">
+              Estado
+            </h2>
+            <p class="text-gray-700 dark:text-gray-300">
+              <span aria-hidden="true">📍</span> Ver el resumen de todo el estado:{' '}
+              <a
+                href={`${base}estado/${state.slug}/`}
+                class="font-medium text-cyan-700 hover:underline dark:text-cyan-400"
+              >
+                Clima en {state.name} →
+              </a>
+            </p>
+          </section>
+        )
+      }
 
       <nav aria-label="Otras playas" class="border-t border-gray-200 pt-6 dark:border-gray-800">
         <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">

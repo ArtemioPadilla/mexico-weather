@@ -73,3 +73,11 @@ const ADMIN_ALIASES: Record<string, string> = {
 export function resolveStateName(admin: string): string {
   return ADMIN_ALIASES[admin] ?? admin;
 }
+
+/** Look up the MX_STATES entry whose name matches the given admin
+ *  label (with alias resolution). Returns undefined when no state
+ *  matches — typical when a city's admin string is novel. */
+export function findStateByAdmin(admin: string): MxState | undefined {
+  const name = resolveStateName(admin);
+  return MX_STATES.find((s) => s.name === name);
+}
