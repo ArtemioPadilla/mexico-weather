@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { siteBase } from '../utils/paths';
+import { TOP_CITIES } from '../lib/top-cities';
 
 /**
  * Hand-built sitemap (no @astrojs/sitemap dependency — follows the
@@ -8,7 +9,14 @@ import { siteBase } from '../utils/paths';
 export const GET: APIRoute = ({ site }) => {
   const basePath = siteBase();
 
-  const pages = ['', 'privacidad/'];
+  const pages = [
+    '',
+    'privacidad/',
+    'mapa/',
+    'forecast/',
+    'pregunta/',
+    ...TOP_CITIES.map((c) => `clima/${c.slug}/`),
+  ];
   const urls = pages
     .map((page) => new URL(`${basePath}${page}`, site).href)
     .map((loc) => `  <url>\n    <loc>${loc}</loc>\n  </url>`)

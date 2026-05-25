@@ -32,5 +32,22 @@ test.describe('static routes', () => {
     expect(res.headers()['content-type']).toMatch(/xml/);
     const body = await res.text();
     expect(body).toMatch(/<(urlset|sitemapindex)/);
+    // City landing pages should appear so search engines can discover them.
+    expect(body).toContain('clima/cdmx/');
+  });
+
+  test('clima-1: /clima/cdmx/ has SEO title + H1 with city name', async ({ page }) => {
+    await page.goto('clima/cdmx/');
+    await expect(page).toHaveTitle(/Clima en Ciudad de México/);
+    const h1 = page.getByRole('heading', { level: 1 });
+    await expect(h1).toContainText('Ciudad de México');
+    // The CTA must link to the interactive forecast with the right params.
+    const cta = page.getByRole('link', {
+      name: /Ver pronóstico completo de Ciudad de México/,
+    });
+    await expect(cta).toBeVisible();
+    const href = await cta.getAttribute('href');
+    expect(href).toMatch(/forecast\/\?lat=19\.43/);
+    expect(href).toMatch(/lng=-99\.13/);
   });
 });
