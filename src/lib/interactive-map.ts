@@ -158,6 +158,11 @@ import {
 } from './map/chrome/basemap-theme';
 import { createSunLayer } from './map/layers/sun-layer';
 import { createWeatherRaster } from './map/layers/weather-raster';
+import {
+  type MapSettings,
+  readSettings,
+  writeSettings,
+} from './map/settings';
 import { computeIsobars } from './map/utils/isobars';
 
 export interface InteractiveMapOptions {
@@ -814,33 +819,9 @@ export async function initInteractiveMap(
     return `${clock}${s.tz === 'UTC' ? ' UTC' : ''} · ${rel}`;
   }
 
-  // Settings persistence — zoom.earth-parity gear-icon panel writes here.
-  interface MapSettings {
-    tz: 'local' | 'UTC';
-    hourFormat: '12' | '24';
-  }
-  function readSettings(): MapSettings {
-    try {
-      const raw = window.localStorage.getItem('mw:settings');
-      if (raw) {
-        const parsed = JSON.parse(raw) as Partial<MapSettings>;
-        return {
-          tz: parsed.tz === 'UTC' ? 'UTC' : 'local',
-          hourFormat: parsed.hourFormat === '12' ? '12' : '24',
-        };
-      }
-    } catch {
-      /* default below */
-    }
-    return { tz: 'local', hourFormat: '24' };
-  }
-  function writeSettings(s: MapSettings): void {
-    try {
-      window.localStorage.setItem('mw:settings', JSON.stringify(s));
-    } catch {
-      /* private mode — ignore */
-    }
-  }
+  // Settings persistence — extracted to src/lib/map/settings.ts.
+  // (readSettings / writeSettings / MapSettings re-exported via the
+  // import so the existing references stay unchanged.)
 
   function applyFrame(i: number): void {
     const idx = clampIndex(i, tlFrames.length);
