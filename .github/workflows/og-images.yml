@@ -1,0 +1,66 @@
+name: OG Images
+
+# Generates per-page 1200x630 PNG Open Graph images for every entry
+# in TOP_CITIES, TOP_BEACHES, MX_STATES and MX_VOLCANOES. Output is
+# committed under public/og/<type>/<slug>.png and shipped statically.
+#
+# Triggers:
+#  - manual (workflow_dispatch): regenerate after a list change
+#  - path-filtered push: any change to one of the source TS lists or
+#    the build script itself reruns the workflow so the PNGs stay in
+#    sync without us having to remember.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build-og-images.py'
+      - 'src/lib/top-cities.ts'
+      - 'src/lib/top-beaches.ts'
+      - 'src/lib/mx-states.ts'
+      - 'src/lib/mx-volcanoes.ts'
+      - '.github/workflows/og-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: og-images
+  cancel-in-progress: false
+
+jobs:
+  render:
+    name: Render OG PNGs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install Pillow
+        run: pip install --upgrade 'Pillow>=10,<12'
+
+      - name: Render images
+        run: python3 scripts/build-og-images.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A public/og/
+          git diff --cached --quiet || (
+            git commit -m 'chore: regenerate OG images' &&
+            git push &&
+            echo 'committed=true' >> "$GITHUB_OUTPUT"
+          )
+
+      - name: Trigger CD deploy
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cd.yml

@@ -46,6 +46,7 @@ const description =
   `oficial de CENAPRED.`;
 
 const canonical = new URL(`${base}volcan/${volcano.slug}/`, Astro.site).href;
+const ogImage = new URL(`${base}og/volcan/${volcano.slug}.png`, Astro.site).href;
 const homeUrl = new URL(base, Astro.site).href;
 const jsonLd = [
   {
@@ -73,7 +74,13 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={title} description={description} lang="es" jsonLd={jsonLd}>
+<BaseLayout
+  title={title}
+  description={description}
+  lang="es"
+  image={ogImage}
+  jsonLd={jsonLd}
+>
   <main class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
     <div class="max-w-3xl mx-auto px-4 py-8 space-y-8">
       <nav aria-label="breadcrumb" class="text-sm">
