@@ -61,6 +61,10 @@ export interface MarineOverlay {
 
 export interface MarineOverlayDeps {
   fetch: typeof fetch;
+  /** Optional site base. When set, tries the pre-computed static
+   *  snapshot at ${base}data/marine-snapshot.json before falling
+   *  back to the live marine API. */
+  base?: string;
 }
 
 export function createMarineOverlay(
@@ -68,7 +72,26 @@ export function createMarineOverlay(
   deps: MarineOverlayDeps,
   beaches: Beach[] = MX_BEACHES,
 ): MarineOverlay {
+  const tryStatic = async (): Promise<FeatureCollection | null> => {
+    if (!deps.base) return null;
+    try {
+      const r = await deps.fetch(`${deps.base}data/marine-snapshot.json`);
+      if (!r.ok) return null;
+      const fc = (await r.json()) as FeatureCollection;
+      if (!fc?.features?.length) return null;
+      return fc;
+    } catch {
+      return null;
+    }
+  };
+
   const fetchData = async (): Promise<FeatureCollection> => {
+    const cached = await tryStatic();
+    if (cached) return cached;
+    return fetchLive();
+  };
+
+  const fetchLive = async (): Promise<FeatureCollection> => {
     try {
       const r = await deps.fetch(buildMarineUrl(beaches));
       if (!r.ok) throw new Error('marine http');

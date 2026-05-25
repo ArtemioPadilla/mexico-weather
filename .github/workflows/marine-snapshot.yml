@@ -1,0 +1,50 @@
+name: Marine Snapshot MX
+
+# Pre-computes wave height + sea-surface temperature for the 14 MX
+# beach destinations in the Playas overlay. Hourly refresh via this
+# Action eliminates the per-toggle live marine API call.
+
+on:
+  schedule:
+    - cron: '13 * * * *'  # offset from aqi-snapshot
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: marine-snapshot
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh marine snapshot
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Build marine-snapshot.json
+        run: python3 scripts/build-marine-snapshot.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git diff --quiet -- public/data/marine-snapshot.json || (
+            git add public/data/marine-snapshot.json &&
+            git commit -m 'chore: refresh marine snapshot' &&
+            git push &&
+            echo 'committed=true' >> "$GITHUB_OUTPUT"
+          )
+
+      - name: Trigger CD deploy
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cd.yml
