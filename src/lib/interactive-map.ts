@@ -2523,7 +2523,7 @@ export async function initInteractiveMap(
       qTimer = window.setTimeout(async () => {
         const gen = ++searchGen;
         try {
-          const results = await geocode(query, deps);
+          const results = await geocode(query, deps, 'es', undefined, base);
           if (gen !== searchGen) return;
           if (!results.length) {
             closeAcList();

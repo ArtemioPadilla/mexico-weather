@@ -869,7 +869,7 @@ const base = siteBase();
     async function runSearch(term: string) {
       const gen = ++searchGen;
       try {
-        const res = await geocode(term, deps);
+        const res = await geocode(term, deps, 'es', undefined, base + '/');
         if (gen !== searchGen) return;
         if (!res.length) {
           closeList();

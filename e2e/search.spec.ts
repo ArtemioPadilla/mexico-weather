@@ -24,12 +24,15 @@ test.describe('search & forecast (deterministic, mocked Open-Meteo)', () => {
 
     await option.first().click();
 
-    await page.waitForURL(/\/forecast\?/);
-    const url = new URL(page.url());
-    expect(url.pathname).toMatch(/\/forecast$/);
-    expect(Number(url.searchParams.get('lat'))).toBeCloseTo(19.42847, 3);
-    expect(Number(url.searchParams.get('lng'))).toBeCloseTo(-99.12766, 3);
-    expect(url.searchParams.get('name')).toBe('Ciudad de México');
+    // Since #240, searches that match a TOP_CITIES entry within ~5 km
+    // funnel into the SEO landing page /clima/<slug>/ instead of the
+    // URL-param /forecast/?lat=…&lng=… page. CDMX is in TOP_CITIES so
+    // we land on /clima/cdmx/.
+    await page.waitForURL(/\/clima\/cdmx\/?$/);
+    expect(page.url()).toMatch(/\/mexico-weather\/clima\/cdmx\/$/);
+    await expect(
+      page.getByRole('heading', { level: 1, name: /Ciudad de México/ }),
+    ).toBeVisible();
   });
 
   test('/forecast with query params renders current temp, 7-day section and detail panels', async ({
