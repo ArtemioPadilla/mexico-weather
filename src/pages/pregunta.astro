@@ -84,7 +84,13 @@ const home = siteBase();
         out.classList.remove('hidden');
         out.textContent = 'Pensando…';
         try {
-          const plan = await resolveQuestion(raw, window.fetch.bind(window));
+          // Static dict at /data/mx-cities.json (250+ MX cities)
+          // intercepts most queries before reaching the live geocoder.
+          const plan = await resolveQuestion(
+            raw,
+            window.fetch.bind(window),
+            base,
+          );
           const href = base + plan.path.replace(/^\//, '');
           out.innerHTML =
             `<p class="font-semibold mb-1">${plan.description}</p>` +
