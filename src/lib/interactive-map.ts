@@ -172,6 +172,7 @@ import {
   windPointsAtHour,
 } from './map/layers/wind-particles';
 import { createIsobarsLayer } from './map/layers/isobars';
+import { createCloudsOverlay } from './map/overlays/clouds';
 import { computeIsobars } from './map/utils/isobars';
 
 export interface InteractiveMapOptions {
@@ -1222,79 +1223,14 @@ export async function initInteractiveMap(
   // sampled on the same 32×24 MX grid, rendered as a grayscale raster
   // where alpha tracks cloud_cover %.
   // ----------------------------------------------------------------
-  const CLOUDS_SOURCE = 'wx-clouds-src';
-  const CLOUDS_LAYER = 'wx-clouds-layer';
-  let cloudsBlobUrl: string | null = null;
-  let cloudsAbort: AbortController | null = null;
-
-  async function setCloudsEnabled(on: boolean): Promise<void> {
-    if (!on) {
-      if (map.getLayer(CLOUDS_LAYER)) map.removeLayer(CLOUDS_LAYER);
-      if (map.getSource(CLOUDS_SOURCE)) map.removeSource(CLOUDS_SOURCE);
-      cloudsAbort?.abort();
-      if (cloudsBlobUrl) {
-        try {
-          URL.revokeObjectURL(cloudsBlobUrl);
-        } catch {
-          /* ignore */
-        }
-        cloudsBlobUrl = null;
-      }
-      return;
-    }
-    if (map.getSource(CLOUDS_SOURCE)) return;
-    cloudsAbort?.abort();
-    const ac = new AbortController();
-    cloudsAbort = ac;
-    const bounds: RasterBounds = { ...MX_FIELD_BOUNDS };
-    const grid = viewportGrid(bounds, FIELD_GRID_COLS, FIELD_GRID_ROWS);
-    try {
-      const url = buildFieldUrl(grid, 'cloud_cover');
-      const res = await deps.fetch(url, { signal: ac.signal });
-      if (!res.ok || ac.signal.aborted) return;
-      const cloudGrid = parseFieldResponse(
-        await res.json(),
-        grid,
-        'cloud_cover',
-      );
-      if (!cloudGrid || ac.signal.aborted) return;
-      // Render grayscale raster: alpha = clamp(cloud% / 100, 0..0.85).
-      // White color so light cloud reads as haze, dense cloud reads as
-      // solid white — matches zoom.earth's cloud appearance.
-      const render = await renderFieldRaster(
-        cloudGrid,
-        FIELD_GRID_ROWS,
-        FIELD_GRID_COLS,
-        bounds,
-        0, // first frame
-        () => '#f8fafc', // near-white; alpha encodes density
-        { width: 800, height: 560, alpha: 255 },
-      );
-      if (!render || ac.signal.aborted) return;
-      cloudsBlobUrl = render.blobUrl;
-      map.addSource(CLOUDS_SOURCE, {
-        type: 'image',
-        url: render.blobUrl,
-        coordinates: render.coords,
-      });
-      map.addLayer({
-        id: CLOUDS_LAYER,
-        type: 'raster',
-        source: CLOUDS_SOURCE,
-        paint: {
-          // Color ramp is constant white; cloud density modulates alpha
-          // through the field's edgeFalloff. Cap at 0.55 so basemap
-          // labels stay legible.
-          'raster-opacity': 0.55,
-          'raster-resampling': 'linear',
-        },
-      });
-    } catch {
-      /* network failure — silently skip */
-    } finally {
-      if (cloudsAbort === ac) cloudsAbort = null;
-    }
-  }
+  // Clouds overlay — extracted to src/lib/map/overlays/clouds.ts.
+  const cloudsOverlay = createCloudsOverlay(map, {
+    fetch: deps.fetch,
+    bounds: MX_FIELD_BOUNDS,
+    gridCols: FIELD_GRID_COLS,
+    gridRows: FIELD_GRID_ROWS,
+    getModel: () => activeModel,
+  });
 
 
   // Tropical storms overlay — extracted to src/lib/map/overlays/tropical-storms.ts.
@@ -2544,9 +2480,9 @@ export async function initInteractiveMap(
       id: 'clouds',
       label: 'Nubes',
       shortcut: 'U',
-      isEnabled: () => !!map.getLayer(CLOUDS_LAYER),
+      isEnabled: () => cloudsOverlay.isEnabled(),
       setEnabled: (on) => {
-        void setCloudsEnabled(on);
+        void cloudsOverlay.setEnabled(on);
       },
     },
     {
