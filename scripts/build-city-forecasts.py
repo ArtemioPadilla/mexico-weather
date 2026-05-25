@@ -109,6 +109,7 @@ def fetch_one(city):
             'weather_code',
             'temperature_2m_max',
             'temperature_2m_min',
+            'precipitation_probability_max',
         ]),
         'forecast_days': 4,
         'temperature_unit': 'celsius',
@@ -127,24 +128,32 @@ def fetch_one(city):
     return None
 
 
+def _day_at(daily, i):
+    """Pull a normalized day-summary dict out of the Open-Meteo daily
+    arrays at index i, or None if no data."""
+    dates = daily.get('time') or []
+    if i >= len(dates):
+        return None
+    codes = daily.get('weather_code') or []
+    tmaxs = daily.get('temperature_2m_max') or []
+    tmins = daily.get('temperature_2m_min') or []
+    rains = daily.get('precipitation_probability_max') or []
+    code = codes[i] if i < len(codes) else None
+    return {
+        'date': dates[i],
+        'condition': wmo_label(code) if code is not None else '—',
+        'hi': tmaxs[i] if i < len(tmaxs) else None,
+        'lo': tmins[i] if i < len(tmins) else None,
+        'rain': rains[i] if i < len(rains) else None,
+    }
+
+
 def normalize(raw):
     cur = (raw or {}).get('current') or {}
     daily = (raw or {}).get('daily') or {}
-    days_dates = daily.get('time') or []
-    days_codes = daily.get('weather_code') or []
-    days_tmax = daily.get('temperature_2m_max') or []
-    days_tmin = daily.get('temperature_2m_min') or []
 
-    # Skip today (idx 0), keep next 3.
-    next_days = []
-    for i in range(1, min(4, len(days_dates))):
-        code = days_codes[i] if i < len(days_codes) else None
-        next_days.append({
-            'date': days_dates[i],
-            'condition': wmo_label(code) if code is not None else '—',
-            'hi': days_tmax[i] if i < len(days_tmax) else None,
-            'lo': days_tmin[i] if i < len(days_tmin) else None,
-        })
+    today = _day_at(daily, 0)
+    next_days = [d for d in (_day_at(daily, i) for i in range(1, 4)) if d]
 
     cur_code = cur.get('weather_code')
     return {
@@ -155,6 +164,7 @@ def normalize(raw):
             'windKmh': cur.get('wind_speed_10m'),
             'humidity': cur.get('relative_humidity_2m'),
         },
+        'today': today,
         'next': next_days,
     }
 
