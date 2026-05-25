@@ -786,6 +786,10 @@ const t = ui[lang];
                 fetch: window.fetch.bind(window),
                 sleep: (ms: number) =>
                   new Promise<void>((r) => setTimeout(r, ms)),
+                // Static baseline shipped by the climate-baseline GH
+                // Action. When the closest known metro is within 100 km
+                // we skip the live archive fetch entirely.
+                baseUrl: import.meta.env.BASE_URL,
               },
             )
               .then((a) => {
