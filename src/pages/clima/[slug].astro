@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { TOP_CITIES, type TopCity } from '../../lib/top-cities';
+import { findStateByAdmin } from '../../lib/mx-states';
 import { siteBase } from '../../utils/paths';
 import { breadcrumbLd, cityLd } from '../../lib/structured-data';
 
@@ -31,6 +32,7 @@ const { city, otherCities } = Astro.props as {
   otherCities: TopCity[];
 };
 const base = siteBase();
+const state = findStateByAdmin(city.admin);
 const forecastHref =
   `${base}forecast/?lat=${city.lat}&lng=${city.lng}` +
   `&name=${encodeURIComponent(city.name)}` +
@@ -157,6 +159,28 @@ const jsonLd = [
           >
         </p>
       </section>
+
+      {
+        state && (
+          <section
+            aria-labelledby="state-h"
+            class="rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm dark:border-blue-900 dark:bg-blue-950"
+          >
+            <h2 id="state-h" class="sr-only">
+              Estado
+            </h2>
+            <p class="text-gray-700 dark:text-gray-300">
+              <span aria-hidden="true">📍</span> Ver el resumen de todo el estado:{' '}
+              <a
+                href={`${base}estado/${state.slug}/`}
+                class="font-medium text-blue-700 hover:underline dark:text-blue-400"
+              >
+                Clima en {state.name} →
+              </a>
+            </p>
+          </section>
+        )
+      }
 
       <nav aria-label="Otras ciudades" class="border-t border-gray-200 pt-6 dark:border-gray-800">
         <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
