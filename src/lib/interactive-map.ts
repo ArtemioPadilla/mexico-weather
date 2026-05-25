@@ -1116,7 +1116,10 @@ export async function initInteractiveMap(
   // object matching the overlay registry interface.
   const volcanoesOverlay = createVolcanoesOverlay(map);
   const aqiOverlay = createAqiOverlay(map, { fetch: cachedFetch, base });
-  const marineOverlay = createMarineOverlay(map, { fetch: cachedFetch });
+  const marineOverlay = createMarineOverlay(map, {
+    fetch: cachedFetch,
+    base,
+  });
 
   // USGS earthquakes overlay — extracted to src/lib/map/overlays/quakes.ts
   // (refactor). The factory takes a fetch function so it can be the
