@@ -173,6 +173,7 @@ import {
 } from './map/layers/wind-particles';
 import { createIsobarsLayer } from './map/layers/isobars';
 import { createCloudsOverlay } from './map/overlays/clouds';
+import { createCityValuesOverlay } from './map/overlays/city-values';
 import { computeIsobars } from './map/utils/isobars';
 
 export interface InteractiveMapOptions {
@@ -1079,96 +1080,22 @@ export async function initInteractiveMap(
     removeCityValues();
   }
 
-  // ----------------------------------------------------------------
-  // City value pills — zoom.earth's "Valores de etiquetas (B)" overlay.
-  // For field/wind layers, paints the active layer's value over each
-  // preset city as a small pill (e.g. "26°", "78%", "1014 hPa",
-  // "12 km/h ↑"). Recomputed via tooltipValueAt() whenever the grid
-  // or frame changes.
-  // ----------------------------------------------------------------
-  const CITY_VALUES_SOURCE = 'wx-city-values-src';
-  const CITY_VALUES_LAYER = 'wx-city-values-text';
-
-  function removeCityValues(): void {
-    if (map.getLayer(CITY_VALUES_LAYER)) map.removeLayer(CITY_VALUES_LAYER);
-    if (map.getSource(CITY_VALUES_SOURCE)) map.removeSource(CITY_VALUES_SOURCE);
-  }
-
-  // User toggle for the value pills overlay (plan P1.3). Default ON
-  // because the value is exactly the feature that differentiates a
-  // weather pill from a generic city label — but the user can hide it
-  // to get a clean basemap view (e.g. for screenshot).
+  // City value pills overlay — extracted to
+  // src/lib/map/overlays/city-values.ts.
+  const cityValues = createCityValuesOverlay(map, {
+    cities,
+    getValueAt: (lng, lat) => tooltipValueAt(lng, lat),
+    isShowable: () => {
+      const def = getLayerDef(activeLayer);
+      return def?.kind === 'field' || def?.kind === 'particles';
+    },
+  });
+  // Thin wrappers preserve historic names used by the multi-metric
+  // tooltip + field/wind refresh paths.
+  const removeCityValues = (): void => cityValues.remove();
+  const refreshCityValues = (): void => cityValues.refresh();
+  // Backing flag mirrored by the overlay registry entry below.
   let cityValuesEnabled = true;
-
-  function refreshCityValues(): void {
-    const def = getLayerDef(activeLayer);
-    const showable =
-      cityValuesEnabled && (def?.kind === 'field' || def?.kind === 'particles');
-    if (!showable) {
-      removeCityValues();
-      return;
-    }
-    const fc: FeatureCollection = {
-      type: 'FeatureCollection',
-      features: cities
-        .map((c) => {
-          const value = tooltipValueAt(c.lng, c.lat);
-          if (!value) return null;
-          // Pre-compose label as "Name\nValue" so the symbol layer
-          // uses a plain ['get','label'] expression — the format/
-          // section expression in #167 was silently failing on the
-          // MapLibre version we ship.
-          const label = `${c.name}\n${value}`;
-          return {
-            type: 'Feature' as const,
-            properties: { value, name: c.name, label },
-            geometry: {
-              type: 'Point' as const,
-              coordinates: [c.lng, c.lat] as [number, number],
-            },
-          };
-        })
-        .filter((f): f is NonNullable<typeof f> => f !== null),
-    };
-    const existing = map.getSource(CITY_VALUES_SOURCE) as
-      | maplibregl.GeoJSONSource
-      | undefined;
-    if (existing) {
-      existing.setData(fc);
-      return;
-    }
-    map.addSource(CITY_VALUES_SOURCE, { type: 'geojson', data: fc });
-    map.addLayer({
-      id: CITY_VALUES_LAYER,
-      type: 'symbol',
-      source: CITY_VALUES_SOURCE,
-      // Hide at country-wide zoom (≤4.99) to avoid label saturation
-      // — at zoom 5 the labels start to be readable; at zoom 7+ the
-      // value text reads clearly.
-      minzoom: 5,
-      layout: {
-        // Pre-composed "Name\nValue" in properties.label. Plain getter
-        // — no format/section expression because that silently failed
-        // in production (#167 attempted format() but the layer didn't
-        // get added at all — checked via source absence).
-        'text-field': ['get', 'label'],
-        'text-size': 12,
-        'text-offset': [0, 1.4],
-        'text-anchor': 'top',
-        'text-allow-overlap': false,
-        'text-ignore-placement': false,
-        'text-padding': 4,
-        'text-line-height': 1.1,
-        'text-font': ['Open Sans Semibold'],
-      },
-      paint: {
-        'text-color': '#ffffff',
-        'text-halo-color': 'rgba(0,0,0,0.75)',
-        'text-halo-width': 1.4,
-        'text-halo-blur': 0.2,
-      },
-    });
-  }
 
   // Pressure isobars — extracted to src/lib/map/layers/isobars.ts.
   const isobarsLayer = createIsobarsLayer(map);
@@ -2505,10 +2432,10 @@ export async function initInteractiveMap(
       id: 'cityValues',
       label: 'Valores de etiquetas',
       shortcut: 'E',
-      isEnabled: () => cityValuesEnabled,
+      isEnabled: () => cityValues.isEnabled(),
       setEnabled: (on) => {
         cityValuesEnabled = on;
-        refreshCityValues();
+        cityValues.setEnabled(on);
       },
     },
     {
