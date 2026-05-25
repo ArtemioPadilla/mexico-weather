@@ -161,6 +161,8 @@ const description =
     data-lng={city.lng}
     data-tz={city.tz}
     data-name={city.name}
+    data-slug={city.slug}
+    data-base={base}
     class="hidden"
   ></div>
 
@@ -173,7 +175,94 @@ const description =
       lng: Number(dataEl?.dataset.lng ?? NaN),
       tz: dataEl?.dataset.tz ?? 'auto',
       name: dataEl?.dataset.name ?? '',
+      slug: dataEl?.dataset.slug ?? '',
+      base: dataEl?.dataset.base ?? '/',
     };
+
+    /** Slim shape emitted by scripts/build-city-forecasts.py. */
+    interface SnapshotDoc {
+      updated?: string;
+      current?: {
+        temperature?: number | null;
+        feelsLike?: number | null;
+        condition?: string | null;
+        windKmh?: number | null;
+        humidity?: number | null;
+      };
+      next?: Array<{
+        date?: string;
+        condition?: string;
+        hi?: number | null;
+        lo?: number | null;
+      }>;
+    }
+
+    /** View model the renderer consumes. Both the static snapshot
+     *  and the live fallback get normalized into this shape. */
+    interface CityView {
+      temperature: number | null;
+      feelsLike: number | null;
+      condition: string;
+      windKmh: number;
+      humidity: number;
+      next: Array<{
+        date: string;
+        condition: string;
+        hi: number | null;
+        lo: number | null;
+      }>;
+    }
+
+    async function loadStatic(): Promise<CityView | null> {
+      if (!data.slug || !data.base) return null;
+      try {
+        const r = await fetch(`${data.base}data/city-forecast/${data.slug}.json`);
+        if (!r.ok) return null;
+        const doc = (await r.json()) as SnapshotDoc;
+        const cur = doc.current ?? {};
+        return {
+          temperature: cur.temperature ?? null,
+          feelsLike: cur.feelsLike ?? null,
+          condition: cur.condition ?? '—',
+          windKmh: Number(cur.windKmh ?? 0),
+          humidity: Number(cur.humidity ?? 0),
+          next: (doc.next ?? [])
+            .filter((d) => typeof d?.date === 'string')
+            .map((d) => ({
+              date: d.date as string,
+              condition: d.condition ?? '—',
+              hi: d.hi ?? null,
+              lo: d.lo ?? null,
+            })),
+        };
+      } catch {
+        return null;
+      }
+    }
+
+    async function loadLive(): Promise<CityView | null> {
+      try {
+        const fc = await getForecast(
+          { lat: data.lat, lng: data.lng, tz: data.tz ?? 'auto' },
+          { fetch: window.fetch.bind(window) },
+        );
+        return {
+          temperature: fc.current.temperature,
+          feelsLike: fc.current.feelsLike,
+          condition: fc.current.condition || '—',
+          windKmh: fc.current.windSpeed,
+          humidity: fc.current.humidity,
+          next: fc.daily.slice(1, 4).map((d) => ({
+            date: d.date,
+            condition: d.condition,
+            hi: d.tmax,
+            lo: d.tmin,
+          })),
+        };
+      } catch {
+        return null;
+      }
+    }
 
     const loadingEl = document.getElementById('now-loading');
     const contentEl = document.getElementById('now-content');
@@ -198,55 +287,50 @@ const description =
       }
     }
 
+    function render(v: CityView): void {
+      loadingEl?.classList.add('hidden');
+      contentEl?.classList.remove('hidden');
+      if (tempEl) tempEl.textContent = fmtTemp(v.temperature);
+      if (feelsEl)
+        feelsEl.textContent =
+          v.feelsLike === null ? '' : `Sensación ${fmtTemp(v.feelsLike)}°`;
+      if (condEl) condEl.textContent = v.condition || '—';
+      if (windEl) windEl.textContent = `Viento ${Math.round(v.windKmh)} km/h`;
+      if (humEl) humEl.textContent = `Humedad ${Math.round(v.humidity)}%`;
+      if (nextList && v.next.length) {
+        nextList.innerHTML = v.next
+          .map((d) => {
+            const day = dayShort(d.date);
+            const hi = fmtTemp(d.hi);
+            const lo = fmtTemp(d.lo);
+            const cond = (d.condition || '').replace(/[<>&"']/g, '');
+            return (
+              `<li class="rounded-md border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-900">` +
+              `<div class="text-sm font-medium capitalize">${day}</div>` +
+              `<div class="mt-1 text-sm text-gray-700 dark:text-gray-300">${cond}</div>` +
+              `<div class="mt-1 text-base"><span class="font-semibold">${hi}°</span> ` +
+              `<span class="text-gray-500 dark:text-gray-400">/ ${lo}°</span></div>` +
+              `</li>`
+            );
+          })
+          .join('');
+      }
+    }
+
     async function run(): Promise<void> {
       if (!Number.isFinite(data.lat) || !Number.isFinite(data.lng)) {
         loadingEl?.classList.add('hidden');
         errorEl?.classList.remove('hidden');
         return;
       }
-      try {
-        const fc = await getForecast(
-          { lat: data.lat, lng: data.lng, tz: data.tz ?? 'auto' },
-          { fetch: window.fetch.bind(window) },
-        );
-        loadingEl?.classList.add('hidden');
-        contentEl?.classList.remove('hidden');
-        if (tempEl) tempEl.textContent = fmtTemp(fc.current.temperature);
-        if (feelsEl)
-          feelsEl.textContent =
-            fc.current.feelsLike === null
-              ? ''
-              : `Sensación ${fmtTemp(fc.current.feelsLike)}°`;
-        if (condEl) condEl.textContent = fc.current.condition || '—';
-        if (windEl)
-          windEl.textContent = `Viento ${Math.round(fc.current.windSpeed)} km/h`;
-        if (humEl) humEl.textContent = `Humedad ${Math.round(fc.current.humidity)}%`;
-
-        // Skip today (idx 0); show next 3 days.
-        const next = fc.daily.slice(1, 4);
-        if (nextList && next.length) {
-          nextList.innerHTML = next
-            .map((d) => {
-              const day = dayShort(d.date);
-              const hi = fmtTemp(d.tmax);
-              const lo = fmtTemp(d.tmin);
-              const cond = (d.condition || '').replace(/[<>&"']/g, '');
-              return (
-                `<li class="rounded-md border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-900">` +
-                `<div class="text-sm font-medium capitalize">${day}</div>` +
-                `<div class="mt-1 text-sm text-gray-700 dark:text-gray-300">${cond}</div>` +
-                `<div class="mt-1 text-base"><span class="font-semibold">${hi}°</span> ` +
-                `<span class="text-gray-500 dark:text-gray-400">/ ${lo}°</span></div>` +
-                `</li>`
-              );
-            })
-            .join('');
-        }
-      } catch {
+      const view = (await loadStatic()) ?? (await loadLive());
+      if (!view) {
         loadingEl?.classList.add('hidden');
         errorEl?.classList.remove('hidden');
         if (nextList) nextList.innerHTML = '';
+        return;
       }
+      render(view);
     }
 
     void run();
