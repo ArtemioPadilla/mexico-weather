@@ -14,6 +14,7 @@ import {
   requestJsonWithRetry,
 } from './weather';
 import { resolveMxAlias, normalizeMx } from '../data/mx-places';
+import { tryStaticGeocode } from './static-geocode';
 
 export interface GeoResult {
   name: string;
@@ -148,9 +149,19 @@ export async function geocode(
   deps: RequestDeps,
   lang = 'es',
   retry: RetryOptions = DEFAULT_RETRY,
+  staticBase?: string,
 ): Promise<GeoResult[]> {
   const trimmed = query.trim();
   if (trimmed === '') return [];
+
+  // Step 1: try the static MX cities dictionary (~250 entries, cached
+  // monthly by mx-cities.yml). When it has ANY hit, surface those —
+  // the dict is curated and population-ranked, so its top result is
+  // usually the right answer. Live call skipped entirely on cache hit.
+  if (staticBase) {
+    const staticHits = await tryStaticGeocode(trimmed, staticBase, deps.fetch);
+    if (staticHits && staticHits.length > 0) return staticHits;
+  }
 
   const alias = resolveMxAlias(trimmed);
 
