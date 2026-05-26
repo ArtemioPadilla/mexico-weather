@@ -114,10 +114,10 @@ const jsonLd = [
         <p class="text-sm text-gray-600 dark:text-gray-400">{volcano.admin}</p>
       </header>
 
-      {/* Each volcano can straddle multiple states; surface avisos
-          for the first listed (primary) state. Pages with no matching
-          state silently fall back to global-only avisos. */}
-      <SmnAvisos stateSlug={linkedStates[0]?.slug} />
+      {/* Volcanoes straddle 2–3 states (Popo: Puebla / Edomex /
+          Morelos). Pass every covered state so a Morelos-only alert
+          still surfaces for someone reading the Popocatépetl page. */}
+      <SmnAvisos stateSlugs={linkedStates.map((s) => s.slug)} />
 
       <section class="prose prose-sm max-w-none dark:prose-invert">
         <p class="text-base text-gray-800 dark:text-gray-200">{volcano.summary}</p>

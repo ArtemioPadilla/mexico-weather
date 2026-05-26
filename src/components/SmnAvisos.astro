@@ -3,68 +3,90 @@
  * SMN avisos widget. Renders any SMN alerts/notices that apply to a
  * location, plus the national bucket.
  *
- * Pass exactly one of:
- *   - `stateSlug` — known at build time (curated landing pages)
- *   - `coords`   — resolved at runtime via point-in-polygon
- *                  (for /forecast, favorites, geolocation)
+ * Pass any of:
+ *   - `stateSlug`  — single state, known at build time
+ *   - `stateSlugs` — multiple states (volcanoes straddle 2–3 states)
+ *   - `coords`     — resolved at runtime via point-in-polygon
+ *                    (for /forecast, favorites, geolocation)
  *
- * Empty state renders nothing visible (graceful degradation when no
- * avisos apply or the static data isn't available yet).
+ * When none of these is passed, the runtime script falls back to URL
+ * params (?lat=&lng=) — used by /forecast.
+ *
+ * The widget always renders, including when there are zero avisos
+ * (shows a calm "Sin alertas vigentes" line) — users get explicit
+ * confirmation we checked. Staleness is surfaced when the index is
+ * more than 6 hours old. Overflow beyond 5 items collapses to "+N
+ * más" linking to /rss.xml.
  */
 import { siteBase } from '../utils/paths';
 
 interface Props {
-  /** Curated detail pages can pass the state slug directly. */
   stateSlug?: string;
-  /** Forecast / arbitrary-location pages pass coords; the runtime
-   *  script resolves them to a state via point-in-polygon. */
+  stateSlugs?: readonly string[];
   coords?: { lat: number; lng: number };
 }
 
-const { stateSlug, coords } = Astro.props;
+const { stateSlug, stateSlugs, coords } = Astro.props;
 const base = siteBase();
-// 'slug' = known at build time. 'coords' = resolve via polygon at
-// runtime. When neither is passed, fall back to coords mode and let
-// the runtime script read URL params (forecast.astro use case).
-const mode = stateSlug ? 'slug' : 'coords';
+// Resolved mode: 'slugs' = known at build time. 'coords' = polygon
+// lookup at runtime (also the URL-params fallback path).
+const slugs = stateSlugs ?? (stateSlug ? [stateSlug] : []);
+const mode = slugs.length > 0 ? 'slugs' : 'coords';
 ---
 
 <section
   data-smn-avisos
   data-mode={mode}
-  data-state={stateSlug ?? ''}
+  data-slugs={slugs.join(',')}
   data-lat={coords?.lat ?? ''}
   data-lng={coords?.lng ?? ''}
   data-base={base}
   aria-labelledby="smn-h"
-  class="hidden rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950"
+  class="hidden rounded-lg border p-4"
+  data-smn-state="loading"
 >
-  <h2 id="smn-h" class="flex items-center gap-2 text-base font-semibold text-amber-900 dark:text-amber-200">
-    <span aria-hidden="true">⚠️</span>
-    Alertas SMN
+  <h2
+    id="smn-h"
+    class="flex items-center gap-2 text-base font-semibold"
+    data-smn-title
+  >
+    <span data-smn-icon aria-hidden="true">⚠️</span>
+    <span data-smn-heading>Alertas SMN</span>
   </h2>
-  <p
-    data-smn-loc
-    class="mt-0.5 text-xs text-amber-800 dark:text-amber-300"
-  ></p>
+  <p data-smn-loc class="mt-0.5 text-xs"></p>
   <ul data-smn-list class="mt-3 space-y-2"></ul>
-  <p class="mt-3 text-xs text-amber-800 dark:text-amber-300">
-    Fuente:{' '}
-    <a
-      href="https://smn.conagua.gob.mx/es/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="underline hover:text-amber-900 dark:hover:text-amber-100"
-    >
-      Servicio Meteorológico Nacional (Conagua)
-    </a>
+  <p data-smn-overflow class="mt-2 hidden text-xs"></p>
+  <p class="mt-3 flex flex-wrap items-center gap-x-2 text-xs">
+    <span data-smn-stale class="hidden"></span>
+    <span>
+      Fuente:{' '}
+      <a
+        href="https://smn.conagua.gob.mx/es/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline"
+      >
+        Servicio Meteorológico Nacional (Conagua)
+      </a>
+    </span>
   </p>
 </section>
 
 <script>
-  import { loadSmnAvisos, avisosForState, type SmnAviso } from '../lib/smn-avisos';
+  import {
+    avisosForStates,
+    loadSmnAvisos,
+    type SmnAviso,
+    type SmnByStateDoc,
+  } from '../lib/smn-avisos';
   import { resolveStateByCoords } from '../lib/state-by-coords';
   import { findStateBySlug } from '../lib/mx-states';
+
+  const MAX_VISIBLE = 5;
+  /** Anything older than this triggers the staleness banner. The
+   *  smn-rss workflow runs hourly so 6 h covers ~5 missed cron firings
+   *  before users start seeing a warning. */
+  const STALE_AFTER_MS = 6 * 60 * 60 * 1000;
 
   function fmtPubDate(s: string): string {
     try {
@@ -79,6 +101,19 @@ const mode = stateSlug ? 'slug' : 'coords';
     } catch {
       return s;
     }
+  }
+
+  function relativeAge(iso: string): string {
+    const t = Date.parse(iso);
+    if (!Number.isFinite(t)) return '';
+    const ageMs = Date.now() - t;
+    if (ageMs < 0) return '';
+    const m = Math.round(ageMs / 60000);
+    if (m < 60) return `hace ${m} min`;
+    const h = Math.round(m / 60);
+    if (h < 24) return `hace ${h} h`;
+    const d = Math.round(h / 24);
+    return `hace ${d} d`;
   }
 
   function severityClass(sev: SmnAviso['severity']): string {
@@ -97,18 +132,61 @@ const mode = stateSlug ? 'slug' : 'coords';
       .replace(/"/g, '&quot;');
   }
 
-  function render(host: HTMLElement, avisos: SmnAviso[], locLabel: string): void {
+  /** Toggle the host element between three visual states:
+   *   loading → (transient, never rendered)
+   *   alert   → amber/red callout with avisos
+   *   calm    → gray, low-key, says "Sin alertas vigentes" */
+  function applyVisualState(host: HTMLElement, state: 'alert' | 'calm'): void {
+    host.dataset.smnState = state;
+    const heading = host.querySelector('[data-smn-heading]') as HTMLElement | null;
+    const icon = host.querySelector('[data-smn-icon]') as HTMLElement | null;
+    host.classList.remove(
+      'border-amber-200', 'bg-amber-50', 'dark:border-amber-900', 'dark:bg-amber-950',
+      'border-gray-200', 'bg-gray-50', 'dark:border-gray-800', 'dark:bg-gray-900/40',
+    );
+    const title = host.querySelector('[data-smn-title]') as HTMLElement | null;
+    const loc = host.querySelector('[data-smn-loc]') as HTMLElement | null;
+    const stale = host.querySelector('[data-smn-stale]') as HTMLElement | null;
+    if (state === 'alert') {
+      host.classList.add('border-amber-200', 'bg-amber-50', 'dark:border-amber-900', 'dark:bg-amber-950');
+      if (title) title.className = 'flex items-center gap-2 text-base font-semibold text-amber-900 dark:text-amber-200';
+      if (loc) loc.className = 'mt-0.5 text-xs text-amber-800 dark:text-amber-300';
+      if (stale) stale.className = stale.classList.contains('hidden')
+        ? 'hidden'
+        : 'text-amber-800 dark:text-amber-300';
+      if (icon) icon.textContent = '⚠️';
+      if (heading) heading.textContent = 'Alertas SMN';
+    } else {
+      host.classList.add('border-gray-200', 'bg-gray-50', 'dark:border-gray-800', 'dark:bg-gray-900/40');
+      if (title) title.className = 'flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300';
+      if (loc) loc.className = 'mt-0.5 text-xs text-gray-600 dark:text-gray-400';
+      if (stale) stale.className = stale.classList.contains('hidden')
+        ? 'hidden'
+        : 'text-gray-600 dark:text-gray-400';
+      if (icon) icon.textContent = '✓';
+      if (heading) heading.textContent = 'Sin alertas SMN vigentes';
+    }
+  }
+
+  function render(
+    host: HTMLElement,
+    avisos: SmnAviso[],
+    locLabel: string,
+    doc: SmnByStateDoc,
+  ): void {
     const list = host.querySelector('[data-smn-list]') as HTMLUListElement | null;
     const locEl = host.querySelector('[data-smn-loc]') as HTMLElement | null;
+    const overflowEl = host.querySelector('[data-smn-overflow]') as HTMLElement | null;
+    const staleEl = host.querySelector('[data-smn-stale]') as HTMLElement | null;
     if (!list) return;
-    if (avisos.length === 0) {
-      // Hide the section entirely; no alerts is a good sign.
-      host.classList.add('hidden');
-      return;
-    }
+
+    applyVisualState(host, avisos.length === 0 ? 'calm' : 'alert');
+    host.classList.remove('hidden');
+
     if (locEl) locEl.textContent = locLabel;
+
     list.innerHTML = avisos
-      .slice(0, 5) // cap so a noisy day doesn't dominate the page
+      .slice(0, MAX_VISIBLE)
       .map(
         (a) => `
         <li class="rounded-md border p-3 text-sm ${severityClass(a.severity)}">
@@ -122,7 +200,32 @@ const mode = stateSlug ? 'slug' : 'coords';
       `,
       )
       .join('');
-    host.classList.remove('hidden');
+
+    // Overflow notice when there are more avisos than we show. Links
+    // back to /rss.xml where the full feed lives.
+    if (overflowEl) {
+      const hidden = Math.max(0, avisos.length - MAX_VISIBLE);
+      if (hidden > 0) {
+        const baseAttr = host.dataset.base || '/';
+        overflowEl.innerHTML = `<a href="${escapeHtml(baseAttr)}rss.xml" class="underline">+${hidden} aviso${hidden === 1 ? '' : 's'} más en el feed RSS</a>`;
+        overflowEl.classList.remove('hidden');
+      } else {
+        overflowEl.classList.add('hidden');
+      }
+    }
+
+    // Staleness — show 'Actualizado hace X' when older than threshold.
+    if (staleEl) {
+      const upd = doc.metadata?.updated;
+      const age = upd ? Date.parse(upd) : NaN;
+      const ageMs = Number.isFinite(age) ? Date.now() - age : NaN;
+      if (Number.isFinite(ageMs) && ageMs > STALE_AFTER_MS) {
+        staleEl.textContent = `Actualizado ${relativeAge(upd!)} ·`;
+        staleEl.classList.remove('hidden');
+      } else {
+        staleEl.classList.add('hidden');
+      }
+    }
   }
 
   async function init(host: HTMLElement): Promise<void> {
@@ -130,19 +233,21 @@ const mode = stateSlug ? 'slug' : 'coords';
     const base = host.dataset.base || '/';
     const doc = await loadSmnAvisos(base);
     if (!doc) {
+      // No SMN data available at all — hide entirely. Distinct from
+      // 'no avisos' (which renders the calm state).
       host.classList.add('hidden');
       return;
     }
 
-    let stateSlug: string | null = null;
-    if (mode === 'slug') {
-      stateSlug = host.dataset.state || null;
+    let resolvedSlugs: string[] = [];
+    if (mode === 'slugs') {
+      const raw = host.dataset.slugs || '';
+      resolvedSlugs = raw.split(',').map((s) => s.trim()).filter(Boolean);
     } else {
       let lat = Number(host.dataset.lat);
       let lng = Number(host.dataset.lng);
       if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
-        // Fall back to URL params for /forecast and similar pages
-        // where the coords aren't known until runtime.
+        // /forecast and similar pages get coords from URL params.
         const params = new URLSearchParams(window.location.search);
         const latS = params.get('lat');
         const lngS = params.get('lng');
@@ -152,20 +257,32 @@ const mode = stateSlug ? 'slug' : 'coords';
         }
       }
       if (Number.isFinite(lat) && Number.isFinite(lng)) {
-        stateSlug = await resolveStateByCoords(lat, lng, base);
+        const slug = await resolveStateByCoords(lat, lng, base);
+        if (slug) resolvedSlugs = [slug];
       }
     }
 
-    const avisos = avisosForState(doc, stateSlug);
-    const stateName = stateSlug ? findStateBySlug(stateSlug)?.name : null;
-    const label = stateName
-      ? `Estado afectado: ${stateName}. Avisos vigentes:`
-      : 'Avisos nacionales vigentes:';
-    render(host, avisos, label);
+    const avisos = avisosForStates(doc, resolvedSlugs);
+    const stateNames = resolvedSlugs
+      .map((s) => findStateBySlug(s)?.name)
+      .filter((n): n is string => Boolean(n));
+    let label: string;
+    if (stateNames.length === 0) {
+      label = avisos.length === 0
+        ? 'Sin avisos nacionales activos.'
+        : 'Avisos nacionales vigentes:';
+    } else {
+      const list =
+        stateNames.length === 1
+          ? stateNames[0]
+          : stateNames.slice(0, -1).join(', ') + ' y ' + stateNames.slice(-1);
+      label = avisos.length === 0
+        ? `Sin avisos vigentes para ${list}.`
+        : `${stateNames.length === 1 ? 'Estado afectado' : 'Estados afectados'}: ${list}. Avisos vigentes:`;
+    }
+    render(host, avisos, label, doc);
   }
 
-  // Each landing renders exactly one widget but support multiple in case
-  // a future page (e.g. /mapa) embeds it twice.
   document
     .querySelectorAll<HTMLElement>('[data-smn-avisos]')
     .forEach((el) => void init(el));

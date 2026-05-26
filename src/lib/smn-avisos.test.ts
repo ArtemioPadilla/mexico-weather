@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   avisosForState,
+  avisosForStates,
   loadSmnAvisos,
   resetSmnAvisosCache,
 } from './smn-avisos';
@@ -101,5 +102,89 @@ describe('avisosForState', () => {
 
   it('returns empty array when doc is null', () => {
     expect(avisosForState(null, 'jalisco')).toEqual([]);
+  });
+});
+
+describe('avisosForStates (multi-state, volcano use case)', () => {
+  // Simulate Popocatépetl covering Puebla / Edomex / Morelos. Add an
+  // overlapping aviso (same link) tagged in two of the three to verify
+  // dedupe.
+  const VOLCANO_DOC = {
+    metadata: { updated: '2026-05-25', total_items: 4 },
+    byState: {
+      puebla: [
+        {
+          title: 'Aviso de ceniza Popo (Puebla)',
+          link: 'https://example.com/popo-ash',
+          pubDate: 'Mon, 25 May 2026 12:00:00 -0600',
+          category: 'Alerta',
+          severity: 'critical' as const,
+        },
+        {
+          title: 'Lluvias en Puebla',
+          link: 'https://example.com/puebla-rain',
+          pubDate: 'Mon, 25 May 2026 10:00:00 -0600',
+          category: 'Aviso',
+          severity: 'warn' as const,
+        },
+      ],
+      'estado-de-mexico': [
+        // Same aviso ID as the Puebla one — should dedupe by link.
+        {
+          title: 'Aviso de ceniza Popo (Edomex)',
+          link: 'https://example.com/popo-ash',
+          pubDate: 'Mon, 25 May 2026 12:00:00 -0600',
+          category: 'Alerta',
+          severity: 'critical' as const,
+        },
+      ],
+      morelos: [
+        {
+          title: 'Caída de ceniza en Morelos',
+          link: 'https://example.com/morelos-ash',
+          pubDate: 'Mon, 25 May 2026 11:00:00 -0600',
+          category: 'Aviso',
+          severity: 'warn' as const,
+        },
+      ],
+    },
+    global: [
+      {
+        title: 'Frente frío núm. 51',
+        link: 'https://example.com/frente',
+        pubDate: 'Mon, 25 May 2026',
+        category: 'Pronóstico',
+        severity: 'info' as const,
+      },
+    ],
+  };
+
+  it('aggregates avisos from every passed state slug', () => {
+    const out = avisosForStates(VOLCANO_DOC, ['puebla', 'estado-de-mexico', 'morelos']);
+    // Puebla (2) + Edomex dedupe-to-0 new + Morelos (1) + global (1) = 4.
+    expect(out).toHaveLength(4);
+    const titles = out.map((a) => a.title);
+    expect(titles).toContain('Aviso de ceniza Popo (Puebla)');
+    expect(titles).toContain('Caída de ceniza en Morelos');
+    expect(titles).toContain('Frente frío núm. 51');
+  });
+
+  it('dedupes by link across overlapping state buckets', () => {
+    const out = avisosForStates(VOLCANO_DOC, ['puebla', 'estado-de-mexico']);
+    // Same advisory in both buckets — only one copy comes out, and the
+    // first-seen (Puebla) wins on title.
+    const ashHits = out.filter((a) => a.link === 'https://example.com/popo-ash');
+    expect(ashHits).toHaveLength(1);
+    expect(ashHits[0]?.title).toBe('Aviso de ceniza Popo (Puebla)');
+  });
+
+  it('returns just global avisos when slugs are empty', () => {
+    const out = avisosForStates(VOLCANO_DOC, []);
+    expect(out).toHaveLength(1);
+    expect(out[0]?.title).toBe('Frente frío núm. 51');
+  });
+
+  it('returns empty when doc is null', () => {
+    expect(avisosForStates(null, ['puebla'])).toEqual([]);
   });
 });

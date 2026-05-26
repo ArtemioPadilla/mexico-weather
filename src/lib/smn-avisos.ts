@@ -62,3 +62,28 @@ export function avisosForState(
   const stateHits = stateSlug ? doc.byState?.[stateSlug] ?? [] : [];
   return [...stateHits, ...(doc.global ?? [])];
 }
+
+/** Multi-state variant for places that span multiple federal
+ *  entities (volcanoes straddling 2–3 states). Aggregates state-
+ *  tagged avisos from every slug, dedupes by `link` (the SMN advisory
+ *  PDF URL is the most stable identifier across re-scrapes), and
+ *  appends the global bucket. Order preserved by first-seen. */
+export function avisosForStates(
+  doc: SmnByStateDoc | null,
+  stateSlugs: readonly string[],
+): SmnAviso[] {
+  if (!doc) return [];
+  const seen = new Set<string>();
+  const out: SmnAviso[] = [];
+  const pushUnique = (a: SmnAviso): void => {
+    const key = a.link || a.title;
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push(a);
+  };
+  for (const slug of stateSlugs) {
+    for (const a of doc.byState?.[slug] ?? []) pushUnique(a);
+  }
+  for (const a of doc.global ?? []) pushUnique(a);
+  return out;
+}
