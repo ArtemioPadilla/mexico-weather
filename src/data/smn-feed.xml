@@ -5,27 +5,54 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 26 May 2026 09:33:28 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2026 13:25:00 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de mayo del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 291 | 26 de Mayo del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN TAMAULIPAS Y SAN LUIS POTOSÍ Y PUNTUALES MUY FUERTES EN NUEVO LEÓN, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 291
+Ciudad de México a 26 de Mayo del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN TAMAULIPAS Y SAN LUIS POTOSÍ Y PUNTUALES MUY FUERTES EN NUEVO LEÓN, OAXACA Y CHIAPAS
+
+Para hoy, una vaguada en altura sobre el norte de México, aunado a inestabilidad atmosférica y al ingreso de aire húmedo del golfo de México, ocasionarán lluvias puntuales intensas en Tamaulipas y San Luis Potosí; puntuales muy fuertes en Nuevo León y puntuales fuertes en Coahuila, todas con descargas eléctricas, posible caída de granizo y rachas muy fuertes de viento, además de probabilidad de formación de torbellinos o tornados en zonas de Coahuila. Simultáneamente, otra vaguada en altura sobre la península de Yucatán y el desplazamiento de la onda tropical núm. 2 sobre el sureste mexicano, generarán lluvias puntuales muy fuertes en Chiapas; y puntuales fuertes en Quintana Roo, Campeche y Yucatán, todas acompañadas con descargas eléctricas; así como chubascos en Tabasco.…]]></description>
+      <pubDate>Tue, 26 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-05-26-291</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de mayo del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de mayo del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 26 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-26-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Oaxaca (norte y sur), Chiapas (centro y sur), Campeche (norte) y Yucatán (oeste).</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Tamps y SLP. Temperaturas máximas de 40 a 45 °C: Sin, Chih, Nay, Jal, Col, Mich, Gro, Oax, Tab, Camp y Yuc.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento con rachas de 50 a 70 km/h y tolvaneras: Baja California, Chihuahua, Coahuila y Durango; y de 30 a 50 km/h: Baja California Sur, Sonora, Sinaloa y Jalisco.]]></description>
-      <pubDate>Tue, 26 May 2026 03:33:16 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-26-5cd9</guid>
+      <description><![CDATA[Viento de 40 a 50 km/h con rachas de 60 a 80 km/h y tolvaneras: BC, Chih, Dgo y Zac; y con posibilidad para la formación de torbellinos o tornados: Coah. Viento d...]]></description>
+      <pubDate>Tue, 26 May 2026 07:24:51 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-26-859d</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 26 MAY 2026: Se pronostican lluvias intensas en el noreste de México, así como condiciones para torbellinos o tornados en el norte ...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_26.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en el noreste de México, así como condiciones para torbellinos o tornados en el norte ... — Reporte Matutino del 26 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_26.pdf]]></description>
+      <pubDate>Tue, 26 May 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 25 MAY 2026: Para esta noche se pronostican lluvias intensas en regiones de Oaxaca, Chiapas, Campeche y Yucatán</title>
@@ -34,26 +61,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 25 May 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_25</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 290 | 25 de Mayo del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN OAXACA, CHIAPAS, CAMPECHE Y YUCATÁN
-
----
-Pronóstico Meteorológico General
-No. Aviso: 290
-Ciudad de México a 25 de Mayo del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-LLUVIAS PUNTUALES INTENSAS EN OAXACA, CHIAPAS, CAMPECHE Y YUCATÁN
-
-Una vaguada en niveles altos de la atmósfera extendida hasta el sureste del país y el desplazamiento de la onda tropical núm. 2 e inestabilidad atmosférica, ocasionarán lluvias intensas en Chiapas (centro y sur), Campeche (norte) y Yucatán (oeste), lluvias muy fuertes en Tabasco (este y sur), así como lluvias fuertes en Quintana Roo (norte). Canales de baja presión e inestabilidad atmosférica sobre el interior de México, ocasionarán lluvias intensas en Oaxaca (norte y sur); lluvias muy fuertes en Veracruz (sur); lluvias fuertes en Nuevo León (sur), Tamaulipas (suroeste), San Luis Potosí (norte), Puebla (este y sureste), Estado de México (suroeste), Ciudad de México (oeste y sur), Morelos (norte) y Guerrero (este); así como chubascos en Chihuahua, Coahuila, Michoacán, Guanajuato, Querétaro, Hidalgo y Tlaxcala. Todas acompañadas con descargas eléctricas y posible caída de granizo.…]]></description>
-      <pubDate>Mon, 25 May 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-05-25-290</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 25 MAY 2026: Se pronostican lluvias intensas para zonas de Oaxaca y Chiapas, y de fuertes a muy fuertes en otras 10 entidades de Méx...</title>
@@ -77,14 +84,6 @@ Una vaguada en niveles altos de la atmósfera extendida hasta el sureste del p
       <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de 13 estados de México — Reporte Matutino del 23 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_23.pdf]]></description>
       <pubDate>Sat, 23 May 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_23</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 22 MAY 2026: Se pronostican lluvias de fuertes a muy fuertes en zonas del noreste, oriente, sur y sureste del país</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_22.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de fuertes a muy fuertes en zonas del noreste, oriente, sur y sureste del país — Reporte Vespertino del 22 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_22.pdf]]></description>
-      <pubDate>Fri, 22 May 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_22</guid>
       <category>Comunicado</category>
     </item>
   </channel>
