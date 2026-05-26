@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 26 May 2026 03:31:05 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2026 05:44:51 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Oaxaca (norte y sur), Chiapas (centro y sur), Campeche (norte) y Yucatán (oeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Sinaloa (norte y centro), Jalisco (norte, sur y suroeste), Colima (norte y este), Michoacán (centro y oeste), Guerrero (noroe...]]></description>
-      <pubDate>Mon, 25 May 2026 21:30:51 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-25-f2f9</guid>
+      <description><![CDATA[Viento con rachas de 50 a 70 km/h y tolvaneras: Baja California, Chihuahua, Coahuila y Durango; y de 30 a 50 km/h: Baja California Sur, Sonora, Sinaloa y Jalisco.]]></description>
+      <pubDate>Mon, 25 May 2026 23:44:39 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-25-5cd9</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 25 MAY 2026: Para esta noche se pronostican lluvias intensas en regiones de Oaxaca, Chiapas, Campeche y Yucatán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_25.pdf</link>
+      <description><![CDATA[Para esta noche se pronostican lluvias intensas en regiones de Oaxaca, Chiapas, Campeche y Yucatán — Reporte Vespertino del 25 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_25.pdf]]></description>
+      <pubDate>Mon, 25 May 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_25</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 290 | 25 de Mayo del 2026 | Emisión 18:00h</title>
@@ -48,9 +56,9 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 25 MAY 2026: Para esta noche se pronostican lluvias intensas en regiones de Oaxaca, Chiapas, Campeche y Yucatán</title>
+      <title>📋 SMN Reporte Matutino 25 MAY 2026: Se pronostican lluvias intensas para zonas de Oaxaca y Chiapas, y de fuertes a muy fuertes en otras 10 entidades de Méx...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_25.pdf</link>
-      <description><![CDATA[Para esta noche se pronostican lluvias intensas en regiones de Oaxaca, Chiapas, Campeche y Yucatán — Reporte Matutino del 25 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_25.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias intensas para zonas de Oaxaca y Chiapas, y de fuertes a muy fuertes en otras 10 entidades de Méx... — Reporte Matutino del 25 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_25.pdf]]></description>
       <pubDate>Mon, 25 May 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_25</guid>
       <category>Comunicado</category>
