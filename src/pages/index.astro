@@ -360,7 +360,7 @@ const base = siteBase();
       const star = document.createElement('button');
       star.type = 'button';
       star.className =
-        'js-fav-star absolute top-2 right-2 text-lg leading-none text-gray-400 hover:text-amber-400 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded';
+        'js-fav-star absolute top-1 right-1 flex h-11 w-11 items-center justify-center text-lg leading-none text-gray-400 hover:text-amber-400 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded';
       star.setAttribute('aria-pressed', 'false');
       star.setAttribute('aria-label', 'Agregar a favoritos');
       star.title = 'Agregar a favoritos';
@@ -790,7 +790,7 @@ const base = siteBase();
         const rm = document.createElement('button');
         rm.type = 'button';
         rm.className =
-          'absolute top-2 right-9 text-lg leading-none text-gray-400 hover:text-red-500 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded';
+          'absolute top-1 right-12 flex h-11 w-11 items-center justify-center text-lg leading-none text-gray-400 hover:text-red-500 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded';
         rm.setAttribute('aria-label', 'Quitar de favoritos');
         rm.title = 'Quitar de favoritos';
         rm.textContent = '✕';
