@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SmnAvisos from '../../components/SmnAvisos.astro';
 import { MX_STATES, resolveStateName, type MxState } from '../../lib/mx-states';
 import { TOP_CITIES, type TopCity } from '../../lib/top-cities';
 import { TOP_BEACHES } from '../../lib/top-beaches';
@@ -105,6 +106,8 @@ const jsonLd = [
           que cubrimos en {state.name}.
         </p>
       </header>
+
+      <SmnAvisos stateSlug={state.slug} />
 
       <section
         aria-labelledby="capital-h"

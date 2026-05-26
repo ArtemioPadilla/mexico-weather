@@ -1,0 +1,172 @@
+---
+/**
+ * SMN avisos widget. Renders any SMN alerts/notices that apply to a
+ * location, plus the national bucket.
+ *
+ * Pass exactly one of:
+ *   - `stateSlug` — known at build time (curated landing pages)
+ *   - `coords`   — resolved at runtime via point-in-polygon
+ *                  (for /forecast, favorites, geolocation)
+ *
+ * Empty state renders nothing visible (graceful degradation when no
+ * avisos apply or the static data isn't available yet).
+ */
+import { siteBase } from '../utils/paths';
+
+interface Props {
+  /** Curated detail pages can pass the state slug directly. */
+  stateSlug?: string;
+  /** Forecast / arbitrary-location pages pass coords; the runtime
+   *  script resolves them to a state via point-in-polygon. */
+  coords?: { lat: number; lng: number };
+}
+
+const { stateSlug, coords } = Astro.props;
+const base = siteBase();
+// 'slug' = known at build time. 'coords' = resolve via polygon at
+// runtime. When neither is passed, fall back to coords mode and let
+// the runtime script read URL params (forecast.astro use case).
+const mode = stateSlug ? 'slug' : 'coords';
+---
+
+<section
+  data-smn-avisos
+  data-mode={mode}
+  data-state={stateSlug ?? ''}
+  data-lat={coords?.lat ?? ''}
+  data-lng={coords?.lng ?? ''}
+  data-base={base}
+  aria-labelledby="smn-h"
+  class="hidden rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950"
+>
+  <h2 id="smn-h" class="flex items-center gap-2 text-base font-semibold text-amber-900 dark:text-amber-200">
+    <span aria-hidden="true">⚠️</span>
+    Alertas SMN
+  </h2>
+  <p
+    data-smn-loc
+    class="mt-0.5 text-xs text-amber-800 dark:text-amber-300"
+  ></p>
+  <ul data-smn-list class="mt-3 space-y-2"></ul>
+  <p class="mt-3 text-xs text-amber-800 dark:text-amber-300">
+    Fuente:{' '}
+    <a
+      href="https://smn.conagua.gob.mx/es/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="underline hover:text-amber-900 dark:hover:text-amber-100"
+    >
+      Servicio Meteorológico Nacional (Conagua)
+    </a>
+  </p>
+</section>
+
+<script>
+  import { loadSmnAvisos, avisosForState, type SmnAviso } from '../lib/smn-avisos';
+  import { resolveStateByCoords } from '../lib/state-by-coords';
+  import { findStateBySlug } from '../lib/mx-states';
+
+  function fmtPubDate(s: string): string {
+    try {
+      const d = new Date(s);
+      if (Number.isNaN(d.getTime())) return s;
+      return d.toLocaleString('es-MX', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    } catch {
+      return s;
+    }
+  }
+
+  function severityClass(sev: SmnAviso['severity']): string {
+    if (sev === 'critical')
+      return 'border-red-300 bg-red-50 dark:border-red-900 dark:bg-red-950';
+    if (sev === 'warn')
+      return 'border-amber-300 bg-white dark:border-amber-900 dark:bg-amber-900/30';
+    return 'border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900';
+  }
+
+  function escapeHtml(s: string): string {
+    return s
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function render(host: HTMLElement, avisos: SmnAviso[], locLabel: string): void {
+    const list = host.querySelector('[data-smn-list]') as HTMLUListElement | null;
+    const locEl = host.querySelector('[data-smn-loc]') as HTMLElement | null;
+    if (!list) return;
+    if (avisos.length === 0) {
+      // Hide the section entirely; no alerts is a good sign.
+      host.classList.add('hidden');
+      return;
+    }
+    if (locEl) locEl.textContent = locLabel;
+    list.innerHTML = avisos
+      .slice(0, 5) // cap so a noisy day doesn't dominate the page
+      .map(
+        (a) => `
+        <li class="rounded-md border p-3 text-sm ${severityClass(a.severity)}">
+          <a href="${escapeHtml(a.link)}" target="_blank" rel="noopener noreferrer" class="block font-medium text-gray-900 hover:underline dark:text-gray-100">
+            ${escapeHtml(a.title)}
+          </a>
+          <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+            ${escapeHtml(a.category || 'SMN')} · ${escapeHtml(fmtPubDate(a.pubDate))}
+          </p>
+        </li>
+      `,
+      )
+      .join('');
+    host.classList.remove('hidden');
+  }
+
+  async function init(host: HTMLElement): Promise<void> {
+    const mode = host.dataset.mode;
+    const base = host.dataset.base || '/';
+    const doc = await loadSmnAvisos(base);
+    if (!doc) {
+      host.classList.add('hidden');
+      return;
+    }
+
+    let stateSlug: string | null = null;
+    if (mode === 'slug') {
+      stateSlug = host.dataset.state || null;
+    } else {
+      let lat = Number(host.dataset.lat);
+      let lng = Number(host.dataset.lng);
+      if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+        // Fall back to URL params for /forecast and similar pages
+        // where the coords aren't known until runtime.
+        const params = new URLSearchParams(window.location.search);
+        const latS = params.get('lat');
+        const lngS = params.get('lng');
+        if (latS && lngS) {
+          lat = Number(latS);
+          lng = Number(lngS);
+        }
+      }
+      if (Number.isFinite(lat) && Number.isFinite(lng)) {
+        stateSlug = await resolveStateByCoords(lat, lng, base);
+      }
+    }
+
+    const avisos = avisosForState(doc, stateSlug);
+    const stateName = stateSlug ? findStateBySlug(stateSlug)?.name : null;
+    const label = stateName
+      ? `Estado afectado: ${stateName}. Avisos vigentes:`
+      : 'Avisos nacionales vigentes:';
+    render(host, avisos, label);
+  }
+
+  // Each landing renders exactly one widget but support multiple in case
+  // a future page (e.g. /mapa) embeds it twice.
+  document
+    .querySelectorAll<HTMLElement>('[data-smn-avisos]')
+    .forEach((el) => void init(el));
+</script>

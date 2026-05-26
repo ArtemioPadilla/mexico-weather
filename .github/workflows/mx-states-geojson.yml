@@ -1,0 +1,57 @@
+name: MX States GeoJSON
+
+# Regenerates public/data/mx-states.geojson from Natural Earth
+# ne_10m_admin_1_states_provinces. The output rarely needs updating
+# (state boundaries are stable), so this workflow runs only on manual
+# dispatch or when the build script itself changes.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build-mx-states-geojson.py'
+      - '.github/workflows/mx-states-geojson.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: mx-states-geojson
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    name: Rebuild MX state polygons
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install shapely
+        run: pip install --upgrade 'shapely>=2,<3'
+
+      - name: Build polygons
+        run: python3 scripts/build-mx-states-geojson.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/data/mx-states.geojson
+          git diff --cached --quiet || (
+            git commit -m 'chore: rebuild MX state polygons' &&
+            git push &&
+            echo 'committed=true' >> "$GITHUB_OUTPUT"
+          )
+
+      - name: Trigger CD deploy
+        if: steps.commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run cd.yml

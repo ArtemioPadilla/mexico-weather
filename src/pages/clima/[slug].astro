@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SmnAvisos from '../../components/SmnAvisos.astro';
 import { TOP_CITIES, type TopCity } from '../../lib/top-cities';
 import { findStateByAdmin } from '../../lib/mx-states';
 import { siteBase } from '../../utils/paths';
@@ -96,6 +97,8 @@ const jsonLd = [
           7 días. Datos del modelo meteorológico de Open-Meteo, gratis y sin registro.
         </p>
       </header>
+
+      <SmnAvisos stateSlug={state?.slug} />
 
       <section
         aria-labelledby="now-h"

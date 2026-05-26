@@ -55,15 +55,21 @@ jobs:
       - name: Scrape SMN and regenerate feed
         run: python scripts/smn-rss/smn_rss.py
 
+      - name: Build per-state SMN index
+        # Post-processor — scans the freshly scraped feed and emits
+        # public/data/smn-by-state.json keyed by MX state slug. Consumed
+        # by the <SmnAvisos> widget on every detail page.
+        run: python3 scripts/build-smn-by-state.py
+
       - name: Commit feed if changed
         id: commit
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           grep -q '<item>' src/data/smn-feed.xml || { echo "Feed has no items — skipping commit"; exit 0; }
-          git diff --quiet -- src/data/smn-feed.xml || (
-            git add src/data/smn-feed.xml &&
-            git commit -m 'chore: refresh SMN RSS feed' &&
+          git add src/data/smn-feed.xml public/data/smn-by-state.json
+          git diff --cached --quiet || (
+            git commit -m 'chore: refresh SMN RSS feed + per-state index' &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

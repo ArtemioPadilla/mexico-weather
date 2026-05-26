@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SmnAvisos from '../../components/SmnAvisos.astro';
 import { MX_VOLCANOES, type MxVolcano } from '../../lib/mx-volcanoes';
 import { MX_STATES } from '../../lib/mx-states';
 import { siteBase } from '../../utils/paths';
@@ -112,6 +113,11 @@ const jsonLd = [
         </h1>
         <p class="text-sm text-gray-600 dark:text-gray-400">{volcano.admin}</p>
       </header>
+
+      {/* Each volcano can straddle multiple states; surface avisos
+          for the first listed (primary) state. Pages with no matching
+          state silently fall back to global-only avisos. */}
+      <SmnAvisos stateSlug={linkedStates[0]?.slug} />
 
       <section class="prose prose-sm max-w-none dark:prose-invert">
         <p class="text-base text-gray-800 dark:text-gray-200">{volcano.summary}</p>
