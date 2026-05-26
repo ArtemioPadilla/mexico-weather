@@ -1,5 +1,6 @@
 ---
 import FeedbackFAB from '../components/common/FeedbackFAB.astro';
+import LanguageToggle from '../components/common/LanguageToggle.astro';
 import PwaInstall from '../components/common/PwaInstall.astro';
 import SmnAlertRibbon from '../components/SmnAlertRibbon.astro';
 import ThemeToggle from '../components/common/ThemeToggle.astro';
@@ -83,6 +84,41 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
           window.matchMedia('(prefers-color-scheme: dark)').matches;
         var dark = pref === 'dark' || (pref !== 'light' && prefersDark);
         document.documentElement.classList.toggle('dark', dark);
+      })();
+    </script>
+    {/* Story 6.1 — apply language preference before first paint.
+        Reads sessionStorage mw:lang and updates html.lang + swaps
+        every element with a data-i18n-en attribute to its English
+        text. Inline so it runs before any user-visible content. */}
+    <script is:inline>
+      (function () {
+        var lang;
+        try { lang = sessionStorage.getItem('mw:lang'); } catch (e) { lang = null; }
+        if (lang !== 'en' && lang !== 'es') {
+          var nl = (navigator && navigator.language) || '';
+          lang = nl.toLowerCase().indexOf('en') === 0 ? 'en' : 'es';
+        }
+        document.documentElement.lang = lang;
+        document.documentElement.setAttribute('data-lang', lang);
+        if (lang === 'en') {
+          // Swap text nodes carrying data-i18n-en after DOM is parsed.
+          document.addEventListener('DOMContentLoaded', function () {
+            var nodes = document.querySelectorAll('[data-i18n-en]');
+            nodes.forEach(function (n) {
+              var v = n.getAttribute('data-i18n-en');
+              if (v) n.textContent = v;
+            });
+            // Swap attribute-based translations (placeholder, aria-label).
+            document.querySelectorAll('[data-i18n-en-placeholder]').forEach(function (n) {
+              var v = n.getAttribute('data-i18n-en-placeholder');
+              if (v) n.setAttribute('placeholder', v);
+            });
+            document.querySelectorAll('[data-i18n-en-aria-label]').forEach(function (n) {
+              var v = n.getAttribute('data-i18n-en-aria-label');
+              if (v) n.setAttribute('aria-label', v);
+            });
+          });
+        }
       })();
     </script>
 
@@ -239,11 +275,13 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
           <a
             href={base}
             class="rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+            data-i18n-en="Home"
             >Inicio</a
           >
           <a
             href={`${base}mapa`}
             class="rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+            data-i18n-en="Map"
             >Mapa</a
           >
           {/* Catálogo dropdown — story 4.1. Native <details>/<summary>
@@ -257,7 +295,7 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
               class="flex cursor-pointer list-none items-center gap-1 rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
               aria-label="Abrir catálogo"
             >
-              <span>Catálogo</span>
+              <span data-i18n-en="Catalog">Catálogo</span>
               <span aria-hidden="true" class="text-xs">▾</span>
             </summary>
             <div
@@ -268,33 +306,39 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
                 role="menuitem"
                 href={`${base}clima/`}
                 class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                data-i18n-en="Cities"
                 >Ciudades</a
               >
               <a
                 role="menuitem"
                 href={`${base}playa/`}
                 class="block px-3 py-2 text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-cyan-400"
-                ><span aria-hidden="true">🌊</span> Playas</a
+                ><span aria-hidden="true">🌊</span>
+                <span data-i18n-en="Beaches">Playas</span></a
               >
               <a
                 role="menuitem"
                 href={`${base}estado/`}
                 class="block px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-400"
+                data-i18n-en="States"
                 >Estados</a
               >
               <a
                 role="menuitem"
                 href={`${base}volcan/`}
                 class="block px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-orange-400"
-                ><span aria-hidden="true">🌋</span> Volcanes</a
+                ><span aria-hidden="true">🌋</span>
+                <span data-i18n-en="Volcanoes">Volcanes</span></a
               >
             </div>
           </details>
           <a
             href={`${base}pregunta`}
-            class="rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+            class="hidden sm:inline-block rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+            data-i18n-en="Ask"
             >Pregunta</a
           >
+          <LanguageToggle />
           <ThemeToggle lang={lang} />
         </div>
       </div>
