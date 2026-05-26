@@ -18,6 +18,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { ui } from '../i18n/ui';
 import InteractiveMap from '../components/InteractiveMap.astro';
+import SmnAvisos from '../components/SmnAvisos.astro';
 
 const lang = 'es' as const;
 const t = ui[lang];
@@ -45,5 +46,76 @@ const t = ui[lang];
       lazy={false}
       lang={lang}
     />
+
+    {/* Floating SMN avisos panel — collapsed pill in the corner that
+        expands into the full <SmnAvisos> widget. Shows global
+        (national-scope) avisos by default. A future PR could hook the
+        panel's coords to map click / locate / search events for state-
+        specific avisos, but the country-view default of /mapa makes
+        the global feed the most-useful initial set. */}
+    <details
+      id="mapa-smn-panel"
+      class="group pointer-events-auto absolute bottom-3 right-3 z-10 max-w-[min(380px,calc(100vw-1.5rem))] rounded-lg border border-amber-200 bg-amber-50/95 shadow-md backdrop-blur dark:border-amber-900 dark:bg-amber-950/95"
+    >
+      <summary
+        class="cursor-pointer list-none rounded-lg px-3 py-2 text-sm font-medium text-amber-900 hover:bg-amber-100/60 dark:text-amber-200 dark:hover:bg-amber-900/40"
+        aria-label="Mostrar avisos SMN"
+      >
+        <span aria-hidden="true">⚠️</span>
+        <span id="mapa-smn-count">Avisos SMN</span>
+        <span class="ml-1 text-xs opacity-70 group-open:hidden">▾</span>
+        <span class="ml-1 hidden text-xs opacity-70 group-open:inline">▴</span>
+      </summary>
+      <div class="border-t border-amber-200 p-2 dark:border-amber-900">
+        <SmnAvisos />
+      </div>
+    </details>
   </main>
+
+  <script>
+    // Populate the floating pill's count label from the SMN doc. The
+    // <SmnAvisos> widget inside the panel handles its own rendering;
+    // this script only touches the summary text so users can see the
+    // count without opening the panel.
+    import { loadSmnAvisos } from '../lib/smn-avisos';
+    const base = (() => {
+      const b = (import.meta.env.BASE_URL as string) || '/';
+      return b.endsWith('/') ? b : b + '/';
+    })();
+
+    void (async () => {
+      const doc = await loadSmnAvisos(base);
+      const label = document.getElementById('mapa-smn-count');
+      if (!label) return;
+      if (!doc) {
+        label.textContent = 'Avisos SMN';
+        return;
+      }
+      // The country-view map cares about global + every state, so the
+      // headline number is total avisos across all buckets (deduped
+      // by link to avoid double-counting cross-state advisories).
+      const seen = new Set<string>();
+      const count = (() => {
+        let n = 0;
+        for (const list of Object.values(doc.byState ?? {})) {
+          for (const a of list) {
+            const k = a.link || a.title;
+            if (!seen.has(k)) {
+              seen.add(k);
+              n += 1;
+            }
+          }
+        }
+        for (const a of doc.global ?? []) {
+          const k = a.link || a.title;
+          if (!seen.has(k)) {
+            seen.add(k);
+            n += 1;
+          }
+        }
+        return n;
+      })();
+      label.textContent = count > 0 ? `${count} aviso${count === 1 ? '' : 's'} SMN` : 'Sin alertas SMN';
+    })();
+  </script>
 </BaseLayout>
