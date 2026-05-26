@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 26 May 2026 20:58:51 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2026 21:57:25 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Tamaulipas (suroeste) y San Luis Potosí (noreste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Vientos con rachas muy fuertes y probabilidad de formación de torbellinos o tornados en Coahuila, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Tue, 26 May 2026 14:58:39 -0600</pubDate>
+      <pubDate>Tue, 26 May 2026 15:57:10 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-26-a3d5</guid>
       <category>Alerta</category>
     </item>
@@ -36,11 +36,11 @@ Para hoy, una vaguada en altura sobre el norte de México, aunado a inestabilida
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de mayo del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de mayo del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de mayo del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 26 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-26-12</guid>
