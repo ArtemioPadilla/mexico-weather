@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect } from 'vitest';
 import {
   FAVORITES_KEY,
   MAX_FAVORITES,
+  getLastViewedAt,
   keyOf,
   load,
   save,
@@ -10,8 +11,44 @@ import {
   add,
   remove,
   toggle,
+  markViewed,
   type Favorite,
 } from './favorites';
+
+/** Tiny in-memory StorageLike for tests. */
+function makeStorage() {
+  const map = new Map<string, string>();
+  return {
+    getItem: (k: string) => map.get(k) ?? null,
+    setItem: (k: string, v: string) => {
+      map.set(k, v);
+    },
+    removeItem: (k: string) => {
+      map.delete(k);
+    },
+  };
+}
+
+describe('markViewed / getLastViewedAt', () => {
+  it('stores and retrieves a view timestamp', () => {
+    const s = makeStorage();
+    markViewed(s, 19.43, -99.13);
+    const t = getLastViewedAt(s, 19.43, -99.13);
+    expect(t).toBeGreaterThan(0);
+    expect(t).toBeLessThanOrEqual(Date.now());
+  });
+
+  it('returns undefined for never-viewed coords', () => {
+    const s = makeStorage();
+    expect(getLastViewedAt(s, 40.7, -74.0)).toBeUndefined();
+  });
+
+  it('rounds coords to 3 dp so close-enough lookups hit', () => {
+    const s = makeStorage();
+    markViewed(s, 19.43099, -99.12999);
+    expect(getLastViewedAt(s, 19.431, -99.13)).toBeGreaterThan(0);
+  });
+});
 
 type Store = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
 

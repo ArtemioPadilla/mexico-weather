@@ -178,7 +178,15 @@ const base = siteBase();
     // Bundled module script (NOT is:inline) so the import is processed by Astro/Vite.
     import { getForecast, uvLabel, windDir } from '../lib/forecast';
     import { geocode } from '../lib/geocode';
-    import { list, has, toggle, remove, type Favorite } from '../lib/favorites';
+    import {
+      getLastViewedAt,
+      has,
+      list,
+      markViewed,
+      remove,
+      toggle,
+      type Favorite,
+    } from '../lib/favorites';
     import { ui } from '../i18n/ui';
     import {
       fetchCitySnapshotByCoords,
@@ -442,6 +450,15 @@ const base = siteBase();
         'js-full inline-block mt-2 text-xs text-blue-600 border border-blue-200 rounded px-2 py-1 dark:text-blue-400 dark:border-blue-900';
       full.href = fullHref(spec.lat, spec.lng, tz, spec.name, spec.admin);
       full.textContent = `${t.full_forecast} →`;
+      // Story 2.3 — stamp the view-time when the user clicks through
+      // so renderFavorites can later emphasize the most-checked one.
+      full.addEventListener('click', () => {
+        const latN = Number(spec.lat);
+        const lngN = Number(spec.lng);
+        if (Number.isFinite(latN) && Number.isFinite(lngN)) {
+          markViewed(store, latN, lngN);
+        }
+      });
       card.appendChild(full);
 
       // Per-card peek toggle.
@@ -777,8 +794,20 @@ const base = siteBase();
         favSection.classList.add('hidden');
         return;
       }
+      // Story 2.3 — sort by lastViewedAt desc so the most-checked
+      // favorite is first. Undefined timestamps (favorites added
+      // before this feature) sort last. Stable for ties on insertion
+      // order.
+      const sorted = [...favs].sort((a, b) => {
+        const ta = getLastViewedAt(store, a.lat, a.lng) ?? 0;
+        const tb = getLastViewedAt(store, b.lat, b.lng) ?? 0;
+        return tb - ta;
+      });
+      const topKey = sorted.length > 1 && getLastViewedAt(store, sorted[0]!.lat, sorted[0]!.lng)
+        ? `${sorted[0]!.lat},${sorted[0]!.lng}`
+        : null;
       favSection.classList.remove('hidden');
-      favs.forEach((f, i) => {
+      sorted.forEach((f, i) => {
         const card = buildCityCardElement({
           lat: String(f.lat),
           lng: String(f.lng),
@@ -786,6 +815,22 @@ const base = siteBase();
           tz: f.tz || 'America/Mexico_City',
           admin: f.admin,
         });
+        // Emphasize the most-recently-viewed favorite (when there
+        // are 2+ favorites AND the top one has actually been
+        // viewed). Subtle ring + a 'Favorito frecuente' tag.
+        if (topKey && `${f.lat},${f.lng}` === topKey) {
+          card.classList.add(
+            'ring-2',
+            'ring-amber-400',
+            'dark:ring-amber-500',
+          );
+          const tag = document.createElement('span');
+          tag.className =
+            'absolute -top-2 left-3 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-900 ring-1 ring-amber-300 dark:bg-amber-950 dark:text-amber-200 dark:ring-amber-700';
+          tag.setAttribute('aria-label', 'Favorito más visitado');
+          tag.textContent = '★ Más visitado';
+          card.appendChild(tag);
+        }
         // Remove (✕) button: toggles the favorite off and re-renders.
         const rm = document.createElement('button');
         rm.type = 'button';
