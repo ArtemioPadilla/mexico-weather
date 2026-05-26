@@ -21,7 +21,10 @@ const base = siteBase();
         <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">
           Clima México 🇲🇽
         </h1>
-        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+        <p
+          class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed"
+          data-i18n-en="SMN + Open-Meteo forecasts and alerts for major Mexican cities."
+        >
           Pronósticos y alertas meteorológicas del SMN + Open-Meteo para las principales ciudades de México.
         </p>
         <div class="max-w-xl mx-auto mt-6 space-y-2">
@@ -35,7 +38,7 @@ const base = siteBase();
             class="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-60 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
           >
             <span aria-hidden="true" class="text-xl leading-none">📍</span>
-            <span id="geo-label">Mostrar mi clima</span>
+            <span id="geo-label" data-i18n-en="Show my weather">Mostrar mi clima</span>
           </button>
           {/* Secondary path: search by name. Kept full-width below
               the primary CTA so the search input is wider + thumb-

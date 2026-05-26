@@ -28,6 +28,11 @@ export default defineConfig({
   use: {
     baseURL: BASE_URL,
     trace: 'on-first-retry',
+    // Pin navigator.language so the i18n auto-detect (Story 6.1)
+    // doesn't flip the UI to English on test runners with an
+    // en-* system locale. Specs that exercise the EN path
+    // override this individually.
+    locale: 'es-MX',
   },
   projects: [
     {
