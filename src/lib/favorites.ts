@@ -23,6 +23,65 @@ export interface Favorite {
   admin?: string;
   tz?: string;
   addedAt: number;
+  /** Timestamp of the most recent "Pronóstico completo" click for
+   *  this favorite (Story 2.3). Used to emphasize the most-used
+   *  favorite on the homepage. Optional — older favorites won't
+   *  have it. */
+  lastViewedAt?: number;
+}
+
+export const VIEWED_TIMES_KEY = 'mw:fav-viewed';
+
+/** Per-favorite view-time map kept separately from the main
+ *  favorites store so existing favorites don't need a migration.
+ *  Keyed by `keyOf(lat, lng)` → epoch ms of most recent view. */
+function readViewedMap(storage: StorageLike): Record<string, number> {
+  try {
+    const raw = storage.getItem(VIEWED_TIMES_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as unknown;
+    if (typeof parsed !== 'object' || parsed === null) return {};
+    const out: Record<string, number> = {};
+    for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+      if (typeof v === 'number' && Number.isFinite(v)) out[k] = v;
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
+
+function writeViewedMap(
+  storage: StorageLike,
+  m: Record<string, number>,
+): void {
+  try {
+    storage.setItem(VIEWED_TIMES_KEY, JSON.stringify(m));
+  } catch {
+    /* private mode / quota — silent */
+  }
+}
+
+/** Stamp the current time as the last-viewed timestamp for the given
+ *  lat/lng. Called when the user clicks 'Pronóstico completo' on a
+ *  favorite card. */
+export function markViewed(
+  storage: StorageLike,
+  lat: number,
+  lng: number,
+): void {
+  const m = readViewedMap(storage);
+  m[keyOf(lat, lng)] = Date.now();
+  writeViewedMap(storage, m);
+}
+
+/** Look up the last-viewed timestamp for a (lat, lng), or undefined. */
+export function getLastViewedAt(
+  storage: StorageLike,
+  lat: number,
+  lng: number,
+): number | undefined {
+  return readViewedMap(storage)[keyOf(lat, lng)];
 }
 
 /** Redondea un número a 3 decimales (granularidad de deduplicación). */
