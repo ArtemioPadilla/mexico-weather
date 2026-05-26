@@ -246,6 +246,50 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
             class="rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
             >Mapa</a
           >
+          {/* Catálogo dropdown — story 4.1. Native <details>/<summary>
+              gives us keyboard + screen-reader semantics for free
+              (Enter/Space toggles, Escape closes when focused).
+              Closes on outside-click via a small script below.
+              Hidden below sm: on mobile the nav row is tight and
+              catalog discovery happens via the homepage. */}
+          <details id="catalog-dropdown" class="relative hidden sm:block">
+            <summary
+              class="flex cursor-pointer list-none items-center gap-1 rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+              aria-label="Abrir catálogo"
+            >
+              <span>Catálogo</span>
+              <span aria-hidden="true" class="text-xs">▾</span>
+            </summary>
+            <div
+              role="menu"
+              class="absolute right-0 z-50 mt-1 min-w-[180px] rounded-lg border border-gray-200 bg-white py-1 text-sm shadow-lg dark:border-gray-700 dark:bg-gray-900"
+            >
+              <a
+                role="menuitem"
+                href={`${base}clima/`}
+                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                >Ciudades</a
+              >
+              <a
+                role="menuitem"
+                href={`${base}playa/`}
+                class="block px-3 py-2 text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-cyan-400"
+                ><span aria-hidden="true">🌊</span> Playas</a
+              >
+              <a
+                role="menuitem"
+                href={`${base}estado/`}
+                class="block px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-400"
+                >Estados</a
+              >
+              <a
+                role="menuitem"
+                href={`${base}volcan/`}
+                class="block px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-orange-400"
+                ><span aria-hidden="true">🌋</span> Volcanes</a
+              >
+            </div>
+          </details>
           <a
             href={`${base}pregunta`}
             class="rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
@@ -255,6 +299,23 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
         </div>
       </div>
     </nav>
+    <script is:inline>
+      // Catálogo dropdown — close on outside-click + Escape.
+      (function () {
+        var dd = document.getElementById('catalog-dropdown');
+        if (!dd) return;
+        document.addEventListener('click', function (e) {
+          if (!dd.contains(e.target)) dd.removeAttribute('open');
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && dd.hasAttribute('open')) {
+            dd.removeAttribute('open');
+            var s = dd.querySelector('summary');
+            if (s) s.focus();
+          }
+        });
+      })();
+    </script>
     <slot />
     <FeedbackFAB lang={lang} />
     <PwaInstall />
