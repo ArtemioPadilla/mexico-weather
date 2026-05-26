@@ -843,6 +843,33 @@ const t = ui[lang];
               }).format(new Date());
             }
             updatedEl.textContent = `Última actualización: ${timeStr} · ${resolvedTz}`;
+            // Stamp the data with a fetch timestamp + freshness
+            // checker (Story 3.6). After STALE_AFTER_MS the line
+            // turns amber and a 'Actualizar' link re-runs render().
+            const fetchedAt = Date.now();
+            const STALE_AFTER_MS = 60 * 60 * 1000; // 1 h
+            (updatedEl as HTMLElement).dataset.fetchedAt = String(fetchedAt);
+            const refresh = (): void => {
+              void render(loc);
+            };
+            const checkStaleness = (): void => {
+              const ageMs = Date.now() - fetchedAt;
+              if (ageMs < STALE_AFTER_MS) return;
+              const ageH = Math.round(ageMs / 3600000);
+              updatedEl.innerHTML =
+                `<span class="text-amber-700 dark:text-amber-400">⚠️ Datos de hace ${ageH} h · </span>` +
+                `<button type="button" id="fc-refresh-btn" class="underline text-blue-600 dark:text-blue-400">Actualizar</button>`;
+              const btn = document.getElementById('fc-refresh-btn');
+              btn?.addEventListener('click', refresh);
+            };
+            // Stop any previous staleness interval from a prior render
+            // call to avoid stacking timers across refreshes.
+            const prev = (window as Window & { __fcStaleTimer?: number }).__fcStaleTimer;
+            if (prev) window.clearInterval(prev);
+            (window as Window & { __fcStaleTimer?: number }).__fcStaleTimer = window.setInterval(
+              checkStaleness,
+              60 * 1000,
+            );
           }
 
           // Climate anomaly (plan 3.6). How does today's forecast Tmax
