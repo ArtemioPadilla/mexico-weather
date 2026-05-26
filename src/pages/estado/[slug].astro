@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButton from '../../components/ShareButton.astro';
 import SmnAvisos from '../../components/SmnAvisos.astro';
 import { MX_STATES, resolveStateName, type MxState } from '../../lib/mx-states';
 import { TOP_CITIES, type TopCity } from '../../lib/top-cities';
@@ -195,6 +196,13 @@ const jsonLd = [
           </section>
         )
       }
+
+      <div class="flex justify-end pt-2">
+        <ShareButton
+          label={`Compartir ${state.name}`}
+          shareTitle={`Clima en ${state.name} — Clima México`}
+        />
+      </div>
 
       <nav aria-label="Otros estados" class="border-t border-gray-200 pt-6 dark:border-gray-800">
         <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">

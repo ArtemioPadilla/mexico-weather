@@ -2,6 +2,7 @@
 import AqiPanel from '../../components/AqiPanel.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ClimateAnomalyBadge from '../../components/ClimateAnomalyBadge.astro';
+import ShareButton from '../../components/ShareButton.astro';
 import SmnAvisos from '../../components/SmnAvisos.astro';
 import { TOP_CITIES, type TopCity } from '../../lib/top-cities';
 import { findStateByAdmin } from '../../lib/mx-states';
@@ -158,14 +159,19 @@ const jsonLd = [
 
       <section
         aria-labelledby="meta-h"
-        class="text-sm text-gray-600 dark:text-gray-400"
+        class="flex flex-wrap items-center justify-between gap-3 text-sm text-gray-600 dark:text-gray-400"
       >
-        <h2 id="meta-h" class="sr-only">Detalles de ubicación</h2>
-        <p>
-          Coordenadas: {city.lat.toFixed(2)}°, {city.lng.toFixed(2)}° · Zona horaria: <code class="text-xs"
-            >{city.tz}</code
-          >
-        </p>
+        <div>
+          <h2 id="meta-h" class="sr-only">Detalles de ubicación</h2>
+          <p>
+            Coordenadas: {city.lat.toFixed(2)}°, {city.lng.toFixed(2)}° · Zona horaria:
+            <code class="text-xs">{city.tz}</code>
+          </p>
+        </div>
+        <ShareButton
+          label={`Compartir ${city.name}`}
+          shareTitle={`Clima en ${city.name} — Clima México`}
+        />
       </section>
 
       {

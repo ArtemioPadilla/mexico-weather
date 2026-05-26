@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButton from '../../components/ShareButton.astro';
 import SmnAvisos from '../../components/SmnAvisos.astro';
 import { TOP_BEACHES, type TopBeach } from '../../lib/top-beaches';
 import { findStateByAdmin } from '../../lib/mx-states';
@@ -149,10 +150,16 @@ const jsonLd = [
 
       <section
         aria-labelledby="meta-h"
-        class="text-sm text-gray-600 dark:text-gray-400"
+        class="flex flex-wrap items-center justify-between gap-3 text-sm text-gray-600 dark:text-gray-400"
       >
-        <h2 id="meta-h" class="sr-only">Detalles de ubicación</h2>
-        <p>Coordenadas: {beach.lat.toFixed(2)}°, {beach.lng.toFixed(2)}°</p>
+        <div>
+          <h2 id="meta-h" class="sr-only">Detalles de ubicación</h2>
+          <p>Coordenadas: {beach.lat.toFixed(2)}°, {beach.lng.toFixed(2)}°</p>
+        </div>
+        <ShareButton
+          label={`Compartir ${beach.name}`}
+          shareTitle={`Mar en ${beach.name} — Clima México`}
+        />
       </section>
 
       {
