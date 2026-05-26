@@ -143,6 +143,7 @@ import { createLakesOverlay } from './map/overlays/lakes';
 import { createHistStormsOverlay } from './map/overlays/hist-storms';
 import { createWebcamsOverlay } from './map/overlays/webcams';
 import { createAqiOverlay } from './map/overlays/aqi';
+import { createSmnStateTintOverlay } from './map/overlays/smn-state-tint';
 import { createMarineOverlay } from './map/overlays/marine';
 import { createGraticuleOverlay } from './map/overlays/graticule';
 import { createFiresOverlay } from './map/overlays/fires';
@@ -1116,6 +1117,10 @@ export async function initInteractiveMap(
   // object matching the overlay registry interface.
   const volcanoesOverlay = createVolcanoesOverlay(map);
   const aqiOverlay = createAqiOverlay(map, { fetch: cachedFetch, base });
+  const smnStateTintOverlay = createSmnStateTintOverlay(map, {
+    fetch: cachedFetch,
+    base,
+  });
   const marineOverlay = createMarineOverlay(map, {
     fetch: cachedFetch,
     base,
@@ -2350,6 +2355,15 @@ export async function initInteractiveMap(
       isEnabled: () => aqiOverlay.isEnabled(),
       setEnabled: (on) => {
         void aqiOverlay.setEnabled(on);
+      },
+    },
+    {
+      id: 'smnStateTint',
+      label: 'Alertas SMN por estado',
+      shortcut: 'A',
+      isEnabled: () => smnStateTintOverlay.isEnabled(),
+      setEnabled: (on) => {
+        void smnStateTintOverlay.setEnabled(on);
       },
     },
     {
