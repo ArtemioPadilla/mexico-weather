@@ -1,0 +1,117 @@
+---
+/**
+ * Reusable share button — Story 5.2.
+ *
+ * Uses the Web Share API when available (native share sheet on
+ * mobile, falls back to clipboard on desktop). Toast appears for 2 s
+ * after a successful copy. Hidden when neither share nor clipboard
+ * is available (very rare).
+ *
+ * The button is small + secondary by default so it doesn't compete
+ * with the page's primary CTAs. Pass `prominent` to make it bigger.
+ */
+interface Props {
+  /** Visible label inside the button. */
+  label?: string;
+  /** Override the shared URL (default: current page). */
+  url?: string;
+  /** Override the share-sheet title (default: document.title). */
+  shareTitle?: string;
+  /** Make the button visually prominent (full-width + bigger). */
+  prominent?: boolean;
+}
+
+const {
+  label = 'Compartir',
+  url,
+  shareTitle,
+  prominent = false,
+} = Astro.props;
+---
+
+<span
+  data-share-button
+  data-url={url ?? ''}
+  data-title={shareTitle ?? ''}
+  class:list={['inline-flex items-center gap-2', { 'w-full': prominent }]}
+>
+  <button
+    type="button"
+    aria-label={label}
+    title={label}
+    class:list={[
+      'inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded border border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
+      prominent ? 'w-full px-4 py-3 text-base font-medium' : 'min-w-[44px] px-3 text-sm',
+    ]}
+  >
+    <span aria-hidden="true">🔗</span>
+    <span>{label}</span>
+  </button>
+  <span
+    data-share-toast
+    aria-live="polite"
+    class="hidden text-xs text-green-700 dark:text-green-400"
+  >
+    URL copiada
+  </span>
+</span>
+
+<script>
+  async function init(host: HTMLElement): Promise<void> {
+    const btn = host.querySelector('button');
+    const toast = host.querySelector('[data-share-toast]') as HTMLElement | null;
+    if (!btn) return;
+
+    const urlOverride = host.dataset.url || '';
+    const titleOverride = host.dataset.title || '';
+
+    let toastTimer: number | undefined;
+    function flash(): void {
+      if (!toast) return;
+      toast.classList.remove('hidden');
+      if (toastTimer) window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2000);
+    }
+
+    btn.addEventListener('click', async () => {
+      const shareUrl = urlOverride || location.href;
+      const shareTitle = titleOverride || document.title;
+      const nav = navigator as Navigator & {
+        share?: (data: { title?: string; url?: string }) => Promise<void>;
+      };
+      try {
+        if (typeof nav.share === 'function') {
+          await nav.share({ title: shareTitle, url: shareUrl });
+          return;
+        }
+      } catch {
+        // User cancelled or share failed — fall through to clipboard.
+      }
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(shareUrl);
+          flash();
+          return;
+        }
+      } catch {
+        // Clipboard blocked — silently fail. The url is in the
+        // address bar anyway.
+      }
+    });
+
+    // Hide the button entirely if neither share nor clipboard is
+    // available — rare, but avoids a dead button.
+    const hasShare =
+      typeof (navigator as { share?: unknown }).share === 'function';
+    const hasClipboard = !!navigator.clipboard?.writeText;
+    if (!hasShare && !hasClipboard) {
+      host.classList.add('hidden');
+    }
+  }
+
+  document
+    .querySelectorAll<HTMLElement>('[data-share-button]')
+    .forEach((el) => void init(el));
+</script>

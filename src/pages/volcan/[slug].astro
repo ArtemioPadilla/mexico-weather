@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButton from '../../components/ShareButton.astro';
 import SmnAvisos from '../../components/SmnAvisos.astro';
 import { MX_VOLCANOES, type MxVolcano } from '../../lib/mx-volcanoes';
 import { MX_STATES } from '../../lib/mx-states';
@@ -203,6 +204,13 @@ const jsonLd = [
           </section>
         )
       }
+
+      <div class="flex justify-end pt-2">
+        <ShareButton
+          label={`Compartir ${volcano.name}`}
+          shareTitle={`Volcán ${volcano.name} — Clima México`}
+        />
+      </div>
 
       <nav aria-label="Otros volcanes" class="border-t border-gray-200 pt-6 dark:border-gray-800">
         <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
