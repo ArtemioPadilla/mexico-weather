@@ -1,0 +1,137 @@
+---
+/**
+ * Site-wide alert ribbon for critical national SMN avisos.
+ *
+ * Sits above the sticky nav on EVERY page (rendered from BaseLayout).
+ * The runtime script loads smn-by-state.json and, if doc.global
+ * contains any aviso with severity='critical', shows a slim red bar
+ * with the aviso title + a 'Ver detalles' link to /rss.xml.
+ *
+ * Dismissible per-session via sessionStorage — re-shows on the next
+ * fresh visit, not on every page navigation within the same session.
+ * That balance is intentional: a user who saw a hurricane warning
+ * once shouldn't be re-shown the same warning on every click during
+ * the same browsing session, but should be re-warned when they come
+ * back the next day.
+ *
+ * Renders a hidden placeholder during SSR — the actual visibility
+ * decision is JS-driven so the static HTML is identical on every
+ * page regardless of current alert state.
+ */
+import { siteBase } from '../utils/paths';
+
+const base = siteBase();
+---
+
+<div
+  id="smn-alert-ribbon"
+  data-base={base}
+  role="alert"
+  aria-live="polite"
+  class="hidden bg-red-600 text-white"
+>
+  <div class="mx-auto flex max-w-6xl items-center gap-3 px-3 py-2 text-sm">
+    <span aria-hidden="true" class="text-base leading-none">⚠️</span>
+    <p class="flex-1 truncate">
+      <strong class="font-semibold">Alerta nacional:</strong>{' '}
+      <span data-alert-title>—</span>{' '}
+      <a
+        data-alert-link
+        href={`${base}rss.xml`}
+        class="underline hover:no-underline"
+      >
+        Ver detalles
+      </a>
+    </p>
+    <button
+      type="button"
+      data-alert-dismiss
+      aria-label="Cerrar alerta"
+      title="Cerrar alerta"
+      class="rounded p-1 leading-none hover:bg-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+    >
+      <span aria-hidden="true">✕</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  import { loadSmnAvisos } from '../lib/smn-avisos';
+
+  const DISMISS_KEY = 'mw:smn-alert-dismissed';
+  const TITLE_MAX = 80;
+
+  /** A dismissal is keyed by the aviso link so a brand-new aviso
+   *  re-shows even within the same session — a fresh hurricane after
+   *  the user dismissed an earlier frente frío shouldn't be silently
+   *  suppressed. */
+  function readDismissed(): Set<string> {
+    try {
+      const raw = sessionStorage.getItem(DISMISS_KEY);
+      if (!raw) return new Set();
+      const arr = JSON.parse(raw) as unknown;
+      return Array.isArray(arr) ? new Set(arr.filter((s): s is string => typeof s === 'string')) : new Set();
+    } catch {
+      return new Set();
+    }
+  }
+
+  function writeDismissed(set: Set<string>): void {
+    try {
+      sessionStorage.setItem(DISMISS_KEY, JSON.stringify([...set]));
+    } catch {
+      /* private mode — silent */
+    }
+  }
+
+  function truncate(s: string, max: number): string {
+    if (s.length <= max) return s;
+    return s.slice(0, max - 1).trimEnd() + '…';
+  }
+
+  async function run(): Promise<void> {
+    const ribbon = document.getElementById('smn-alert-ribbon');
+    if (!ribbon) return;
+    const base = ribbon.dataset.base || '/';
+    const doc = await loadSmnAvisos(base);
+    if (!doc) return;
+
+    const globals = doc.global ?? [];
+    const critical = globals.filter((a) => a.severity === 'critical');
+    if (critical.length === 0) return;
+
+    const dismissed = readDismissed();
+    const fresh = critical.filter((a) => !dismissed.has(a.link || a.title));
+    if (fresh.length === 0) return;
+
+    // Surface only the most recent — the rest are visible inside the
+    // existing <SmnAvisos> widget on every page. The ribbon's job is
+    // 'something is seriously wrong, click for details'.
+    const top = fresh[0]!;
+    const titleEl = ribbon.querySelector('[data-alert-title]') as HTMLElement | null;
+    const linkEl = ribbon.querySelector('[data-alert-link]') as HTMLAnchorElement | null;
+    if (titleEl) titleEl.textContent = truncate(top.title, TITLE_MAX);
+    // External SMN advisory page is the authoritative source. Fall
+    // back to /rss.xml when no link is present.
+    if (linkEl && top.link) linkEl.href = top.link;
+
+    ribbon.classList.remove('hidden');
+
+    const dismissBtn = ribbon.querySelector('[data-alert-dismiss]');
+    dismissBtn?.addEventListener('click', () => {
+      const key = top.link || top.title;
+      const next = readDismissed();
+      next.add(key);
+      writeDismissed(next);
+      ribbon.classList.add('hidden');
+    });
+  }
+
+  // Defer until idle so we never block initial paint. The ribbon's
+  // job is informational, not first-paint critical.
+  if ('requestIdleCallback' in window) {
+    (window as Window & typeof globalThis).requestIdleCallback(() => void run());
+  } else {
+    window.setTimeout(() => void run(), 50);
+  }
+</script>
