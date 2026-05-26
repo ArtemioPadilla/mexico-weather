@@ -1,6 +1,7 @@
 ---
 import FeedbackFAB from '../components/common/FeedbackFAB.astro';
 import PwaInstall from '../components/common/PwaInstall.astro';
+import SmnAlertRibbon from '../components/SmnAlertRibbon.astro';
 import ThemeToggle from '../components/common/ThemeToggle.astro';
 import { siteBase } from '../utils/paths';
 import '../styles/global.css';
@@ -208,6 +209,12 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
     }
   </head>
   <body class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased">
+    {/* Site-wide alert ribbon for critical national SMN avisos.
+        Renders as a slim red bar ABOVE the sticky nav so it's
+        impossible to miss. Hidden by default; the runtime script
+        in SmnAlertRibbon.astro shows it only when there's an active
+        critical aviso the user hasn't dismissed this session. */}
+    <SmnAlertRibbon />
     {/*
      * Slim sticky topbar (closes #93). Sits above any in-page absolute
      * controls (MapLibre uses z-10..z-20 on /mapa). position:sticky (not
