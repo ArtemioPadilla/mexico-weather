@@ -1,17 +1,20 @@
 ---
 /**
- * PWA install prompt — listens for the browser's beforeinstallprompt
- * event and surfaces a discrete bottom-left "Instalar app" button so
- * the user can add the site to their home screen / launcher. Hidden
- * after install or dismissal; remembered in localStorage so we don't
- * pester the same user repeatedly.
+ * PWA install prompt — handles two distinct paths:
  *
- * iOS Safari doesn't fire beforeinstallprompt; on iOS we show a
- * one-shot tip instead, with manual instructions ("Compartir →
- * Añadir a inicio").
+ * Android Chrome / Edge / Chromium: listens for beforeinstallprompt
+ * and surfaces a discrete bottom-left "Instalar app" button.
+ *
+ * iOS Safari: doesn't fire beforeinstallprompt at all (#7.2). On the
+ * 2nd+ session visit, surfaces a bottom-sheet with inline visual
+ * instructions ("Toca Compartir → Añadir a pantalla de inicio").
+ * Gated on visit count so first-time visitors aren't ambushed,
+ * dismissible per-device via localStorage so the prompt doesn't
+ * pester users who said no.
  */
 ---
 
+{/* Chromium path — round button, shown when beforeinstallprompt fires */}
 <div
   id="pwa-install-wrap"
   class="pointer-events-none fixed bottom-3 left-3 z-30 hidden"
@@ -41,12 +44,70 @@
   </button>
 </div>
 
+{/* iOS Safari path — bottom-sheet with inline instructions. Hidden
+    by default; the script reveals it on 2nd+ session visit when not
+    already installed and not previously dismissed. */}
+<div
+  id="ios-install-sheet"
+  role="dialog"
+  aria-labelledby="ios-install-h"
+  aria-modal="false"
+  class="pointer-events-none fixed bottom-0 left-0 right-0 z-40 hidden p-3"
+>
+  <div
+    class="pointer-events-auto mx-auto max-w-md rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-800"
+    style="padding-bottom: calc(env(safe-area-inset-bottom) + 1rem)"
+  >
+    <div class="flex items-start gap-3">
+      <span aria-hidden="true" class="text-2xl leading-none">📱</span>
+      <div class="flex-1">
+        <h2
+          id="ios-install-h"
+          class="text-sm font-semibold text-gray-900 dark:text-gray-100"
+        >
+          Añade Clima México a tu pantalla de inicio
+        </h2>
+        <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+          Toca{' '}
+          <svg
+            class="-mb-0.5 inline-block h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-label="botón Compartir"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4v12m0-12l-4 4m4-4l4 4M5 20h14"
+            />
+          </svg>
+          <strong>Compartir</strong>, luego elige <strong
+            >"Añadir a pantalla de inicio"</strong
+          >.
+        </p>
+      </div>
+      <button
+        id="ios-install-dismiss"
+        type="button"
+        aria-label="Cerrar"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+        >✕</button
+      >
+    </div>
+  </div>
+</div>
+
 <script is:inline>
   (function () {
-    var KEY = 'mw:pwa-install-dismissed';
+    var DISMISS_KEY = 'mw:pwa-install-dismissed';
+    var VISITS_KEY = 'mw:visits';
+
     var wrap = document.getElementById('pwa-install-wrap');
     var btn = document.getElementById('pwa-install-btn');
-    if (!wrap || !btn) return;
+    var sheet = document.getElementById('ios-install-sheet');
+    var sheetDismiss = document.getElementById('ios-install-dismiss');
 
     function alreadyInstalled() {
       try {
@@ -60,60 +121,77 @@
     }
     function dismissed() {
       try {
-        return localStorage.getItem(KEY) === '1';
+        return localStorage.getItem(DISMISS_KEY) === '1';
       } catch (e) {
         return false;
       }
     }
-    function dismiss() {
+    function persistDismiss() {
       try {
-        localStorage.setItem(KEY, '1');
+        localStorage.setItem(DISMISS_KEY, '1');
       } catch (e) {
         /* ignore */
       }
-      wrap.classList.add('hidden');
+    }
+    function bumpVisits() {
+      try {
+        var n = parseInt(localStorage.getItem(VISITS_KEY) || '0', 10) || 0;
+        n += 1;
+        localStorage.setItem(VISITS_KEY, String(n));
+        return n;
+      } catch (e) {
+        return 0;
+      }
     }
 
     if (alreadyInstalled() || dismissed()) return;
 
-    var deferred = null;
-    window.addEventListener('beforeinstallprompt', function (e) {
-      e.preventDefault();
-      deferred = e;
-      wrap.classList.remove('hidden');
-    });
-    btn.addEventListener('click', function () {
-      if (!deferred) {
-        // iOS Safari path — no prompt available, show a manual tip.
-        alert(
-          'En iOS: toca el botón Compartir (cuadro con flecha) y elige "Añadir a inicio" para instalar Clima México como app.',
-        );
-        dismiss();
-        return;
-      }
-      deferred.prompt();
-      deferred.userChoice.then(function (choice) {
-        if (choice && choice.outcome === 'accepted') {
-          dismiss();
-        }
-        deferred = null;
-      });
-    });
+    // Increment visits counter once per page-load. The iOS sheet
+    // shows on the 2nd visit + later — gives first-time visitors a
+    // clean experience without an immediate install nag.
+    var visits = bumpVisits();
 
-    // iOS Safari fallback: surface the button anyway (manual instructions)
-    // on first visit, dismissed on click.
     var isIosSafari =
       /iphone|ipad|ipod/i.test(navigator.userAgent) &&
       !/crios|fxios|edgios/i.test(navigator.userAgent);
-    if (isIosSafari && !alreadyInstalled() && !dismissed()) {
-      // Wait a beat so the button doesn't compete with first paint.
-      setTimeout(function () {
+
+    // --- Chromium path ----------------------------------------------
+    var deferred = null;
+    if (wrap && btn) {
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferred = e;
         wrap.classList.remove('hidden');
-      }, 3000);
+      });
+      btn.addEventListener('click', function () {
+        if (!deferred) return;
+        deferred.prompt();
+        deferred.userChoice.then(function (choice) {
+          if (choice && choice.outcome === 'accepted') {
+            persistDismiss();
+            wrap.classList.add('hidden');
+          }
+          deferred = null;
+        });
+      });
+    }
+
+    // --- iOS Safari path -------------------------------------------
+    if (isIosSafari && sheet && sheetDismiss && visits >= 2) {
+      // Delay reveal so it doesn't compete with first paint.
+      setTimeout(function () {
+        sheet.classList.remove('hidden');
+      }, 2000);
+      sheetDismiss.addEventListener('click', function () {
+        sheet.classList.add('hidden');
+        persistDismiss();
+      });
     }
 
     window.addEventListener('appinstalled', function () {
-      dismiss();
+      persistDismiss();
+      if (wrap) wrap.classList.add('hidden');
+      if (sheet) sheet.classList.add('hidden');
     });
   })();
 </script>
