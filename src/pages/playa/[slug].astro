@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SmnAvisos from '../../components/SmnAvisos.astro';
 import { TOP_BEACHES, type TopBeach } from '../../lib/top-beaches';
 import { findStateByAdmin } from '../../lib/mx-states';
 import { siteBase } from '../../utils/paths';
@@ -97,6 +98,8 @@ const jsonLd = [
           Datos del modelo marino de Open-Meteo, actualizados cada hora.
         </p>
       </header>
+
+      <SmnAvisos stateSlug={state?.slug} />
 
       <section
         aria-labelledby="marine-h"
