@@ -369,10 +369,13 @@ const base = siteBase();
 
       // SMN alert badge — initially hidden, populated by the
       // enrichSmnBadges() pass after the SMN + polygon docs load.
+      // We don't set href/aria-label here: an <a> without href has
+      // an implicit role of 'generic' which makes aria-label invalid
+      // per axe (aria-prohibited-attr). enrichSmnBadges sets both
+      // simultaneously when revealing the badge.
       const smnBadge = document.createElement('a');
       smnBadge.className =
         'js-smn-badge hidden absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-900 ring-1 ring-amber-300 hover:bg-amber-200 dark:bg-amber-950 dark:text-amber-200 dark:ring-amber-900';
-      smnBadge.setAttribute('aria-label', 'Avisos SMN activos para esta ubicación');
       card.appendChild(smnBadge);
 
       const head = document.createElement('div');
@@ -752,10 +755,15 @@ const base = siteBase();
         badge.textContent = `⚠️ ${stateHits} aviso${stateHits === 1 ? '' : 's'}`;
         badge.title = `${stateHits} aviso(s) SMN activo(s) en ${slug}`;
         // Link to the curated /clima/<slug>/ page (the SmnAvisos
-        // widget surfaces the full list there). Falls through to the
-        // /forecast page for off-list locations whose state polygon
-        // resolved but city doesn't match TOP_CITIES.
+        // widget surfaces the full list there). Setting href first
+        // gives the <a> its implicit 'link' role, so aria-label is
+        // valid (axe rule aria-prohibited-attr would fire if we set
+        // aria-label without href).
         badge.href = `${baseUrl}clima/${slug}/`;
+        badge.setAttribute(
+          'aria-label',
+          `${stateHits} aviso(s) SMN activo(s) en ${slug}`,
+        );
         badge.classList.remove('hidden');
       }
     }
