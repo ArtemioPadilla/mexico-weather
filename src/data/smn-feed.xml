@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 26 May 2026 05:44:51 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2026 07:33:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de mayo del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 26 de mayo del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Tue, 26 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-05-26-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Oaxaca (norte y sur), Chiapas (centro y sur), Campeche (norte) y Yucatán (oeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento con rachas de 50 a 70 km/h y tolvaneras: Baja California, Chihuahua, Coahuila y Durango; y de 30 a 50 km/h: Baja California Sur, Sonora, Sinaloa y Jalisco.]]></description>
-      <pubDate>Mon, 25 May 2026 23:44:39 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-25-5cd9</guid>
+      <pubDate>Tue, 26 May 2026 01:33:31 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-26-5cd9</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -43,17 +54,6 @@ Una vaguada en niveles altos de la atmósfera extendida hasta el sureste del p
       <pubDate>Mon, 25 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-05-25-290</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de mayo del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 25 de mayo del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Mon, 25 May 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-05-25-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 25 MAY 2026: Se pronostican lluvias intensas para zonas de Oaxaca y Chiapas, y de fuertes a muy fuertes en otras 10 entidades de Méx...</title>
