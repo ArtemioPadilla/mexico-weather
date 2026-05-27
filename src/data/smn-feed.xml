@@ -5,15 +5,15 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 27 May 2026 20:03:09 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 May 2026 21:02:01 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Puebla (sureste), Veracruz (centro), Oaxaca (norte y suroeste) y Chiapas (norte, centro y este).</title>
+      <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): Puebla, Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Sinaloa (norte y centro), Nayarit (norte y costa), Jalisco (sur y suroeste), Colima (este), Michoacán (centro y oeste), Guerr...]]></description>
-      <pubDate>Wed, 27 May 2026 14:03:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-27-2657</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero y Oaxaca.]]></description>
+      <pubDate>Wed, 27 May 2026 15:01:48 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-27-7d28</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -40,11 +40,11 @@ Este día, una vaguada en altura se extenderá sobre el noreste y oriente del 
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de mayo del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de mayo del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de mayo del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 27 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-27-12</guid>
