@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 27 May 2026 03:31:33 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 May 2026 05:47:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Tamaulipas (suroeste) y San Luis Potosí (noreste).</title>
+      <title>⚠️ Alerta SMN: Viento de 40 a 50 km/h con rachas de 60 a 80 km/h y con probabilidad de formación de torbellinos o tornados: Coahuila (norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Vientos con rachas muy fuertes y probabilidad de formación de torbellinos o tornados en Coahuila, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Tue, 26 May 2026 21:31:23 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-26-a3d5</guid>
+      <description><![CDATA[Viento de 40 a 50 km/h con rachas de 60 a 80 km/h y con probabilidad de formación de torbellinos o tornados: Coahuila (norte).]]></description>
+      <pubDate>Tue, 26 May 2026 23:47:21 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-26-15e3</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 26 MAY 2026: Se pronostican lluvias intensas en zonas de Tamaulipas y San Luis Potosí</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_26.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Tamaulipas y San Luis Potosí — Reporte Vespertino del 26 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_26.pdf]]></description>
+      <pubDate>Tue, 26 May 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 292 | 26 de Mayo del 2026 | Emisión 18:00h</title>
@@ -48,9 +56,9 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 26 MAY 2026: Se pronostican lluvias intensas en zonas de Tamaulipas y San Luis Potosí</title>
+      <title>📋 SMN Reporte Matutino 26 MAY 2026: Se pronostican lluvias intensas en el noreste de México, así como condiciones para torbellinos o tornados en el norte ...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_26.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Tamaulipas y San Luis Potosí — Reporte Matutino del 26 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_26.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias intensas en el noreste de México, así como condiciones para torbellinos o tornados en el norte ... — Reporte Matutino del 26 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_26.pdf]]></description>
       <pubDate>Tue, 26 May 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_26</guid>
       <category>Comunicado</category>
