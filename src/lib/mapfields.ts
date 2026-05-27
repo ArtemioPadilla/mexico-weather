@@ -59,6 +59,63 @@ export function buildFieldUrl(
   );
 }
 
+/** Open-Meteo's GET URL limit is ~8 KB (nginx default). At 4-dp
+ *  coords each point takes ~7 chars in both lat= and lng=, plus a
+ *  comma — so the URL grows by ~16 chars/point. 200 points yields
+ *  a ~3 KB URL with comfortable margin. Without this cap, the
+ *  32×24=768 point MX field grid triggers HTTP 414 (#280-prod
+ *  diagnostic). */
+export const FIELD_CHUNK_SIZE = 200;
+
+/** Fetch a field grid in URL-safe chunks. Mirrors the chunking
+ *  done by scripts/build-field-grids.py so the client + the build
+ *  see identical responses. Returns the merged Open-Meteo response
+ *  array (one entry per input point, in input order), or throws if
+ *  any chunk fails after the caller-supplied fetchImpl gives up. */
+export async function fetchFieldChunks(
+  points: LngLat[],
+  hourlyVar: string,
+  fetchImpl: typeof fetch,
+  opts?: { signal?: AbortSignal; model?: string },
+): Promise<unknown[]> {
+  const out: unknown[] = [];
+  for (let i = 0; i < points.length; i += FIELD_CHUNK_SIZE) {
+    const chunk = points.slice(i, i + FIELD_CHUNK_SIZE);
+    const url = buildFieldUrl(chunk, hourlyVar, opts?.model);
+    const res = await fetchImpl(url, { signal: opts?.signal });
+    if (!res.ok) {
+      throw new Error(`field chunk ${i} failed: HTTP ${res.status}`);
+    }
+    const json = (await res.json()) as unknown;
+    if (Array.isArray(json)) out.push(...json);
+    else out.push(json);
+  }
+  return out;
+}
+
+/** Same as fetchFieldChunks but for the wind endpoint (separate
+ *  hourly variables). */
+export async function fetchWindChunks(
+  points: LngLat[],
+  speedVar: 'wind_speed_10m' | 'wind_gusts_10m',
+  fetchImpl: typeof fetch,
+  opts?: { signal?: AbortSignal; model?: string },
+): Promise<unknown[]> {
+  const out: unknown[] = [];
+  for (let i = 0; i < points.length; i += FIELD_CHUNK_SIZE) {
+    const chunk = points.slice(i, i + FIELD_CHUNK_SIZE);
+    const url = buildWindUrl(chunk, speedVar, opts?.model);
+    const res = await fetchImpl(url, { signal: opts?.signal });
+    if (!res.ok) {
+      throw new Error(`wind chunk ${i} failed: HTTP ${res.status}`);
+    }
+    const json = (await res.json()) as unknown;
+    if (Array.isArray(json)) out.push(...json);
+    else out.push(json);
+  }
+  return out;
+}
+
 function isNumberOrNullArray(a: unknown): a is (number | null)[] {
   return (
     Array.isArray(a) &&

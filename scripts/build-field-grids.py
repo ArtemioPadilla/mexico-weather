@@ -71,9 +71,16 @@ def build_url(points, hourly_var):
     return f'https://api.open-meteo.com/v1/forecast?{qs}'
 
 
-def fetch_json(url):
-    """Open-Meteo bulk requests can be ~5 KB GET URLs; their server
-    accepts this. We retry on transient failures."""
+# Open-Meteo's GET URL limit is ~8 KB (nginx default). A 32x24=768
+# point grid with 4-dp coords builds an ~11 KB URL — that's what was
+# triggering HTTP 414 in CI. Chunk at 200 points so each URL stays
+# under ~3 KB with comfortable margin.
+CHUNK_SIZE = 200
+
+
+def fetch_chunk(chunk, hourly_var):
+    """Fetch one ≤200-point batch. Retries on transient failures."""
+    url = build_url(chunk, hourly_var)
     req = urllib.request.Request(
         url,
         headers={'User-Agent': 'mexico-weather/static-snapshot'},
@@ -88,6 +95,24 @@ def fetch_json(url):
             wait = 2 ** attempt
             print(f'  retry {attempt + 1}/3 in {wait}s ({e})', file=sys.stderr)
             time.sleep(wait)
+
+
+def fetch_json(points, hourly_var):
+    """Fetch all points in chunks and concatenate the per-point
+    response arrays. Open-Meteo returns an array when the request had
+    multiple lat/lng — preserving that shape across chunks lets the
+    existing parse_response() work unchanged."""
+    out = []
+    for i in range(0, len(points), CHUNK_SIZE):
+        chunk = points[i:i + CHUNK_SIZE]
+        data = fetch_chunk(chunk, hourly_var)
+        arr = data if isinstance(data, list) else [data]
+        out.extend(arr)
+        # Be polite between chunks. The free tier has generous limits
+        # but we don't want to be the noisy neighbour.
+        if i + CHUNK_SIZE < len(points):
+            time.sleep(0.3)
+    return out
 
 
 def parse_response(raw, points, hourly_var):
@@ -139,7 +164,7 @@ def main():
     ok = 0
     for var in LAYERS:
         try:
-            raw = fetch_json(build_url(points, var))
+            raw = fetch_json(points, var)
         except Exception as e:  # noqa: BLE001
             print(f'  ! {var}: fetch failed: {e}', file=sys.stderr)
             continue

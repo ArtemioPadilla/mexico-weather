@@ -276,6 +276,24 @@ const tr = feedback[lang];
     console.error = function () { captureLog('error', arguments); origError.apply(console, arguments); W.__secid_updateBadge && W.__secid_updateBadge(); };
     console.warn  = function () { captureLog('warn',  arguments); origWarn.apply(console, arguments); };
 
+    // Helpers: identify EXPECTED errors that shouldn't pollute the
+    // diagnostic log. The site catches AbortErrors internally (rapid
+    // layer toggles cancel in-flight fetches by design), and the
+    // browser fires unhandledrejection on the cancelled inner
+    // promise even when the outer caller swallows it. Filtering them
+    // here means real errors stay visible in the user's report.
+    function isAbortError(reason) {
+      if (!reason) return false;
+      if (typeof reason === 'object' && reason.name === 'AbortError') return true;
+      var s = String(reason && reason.message ? reason.message : reason);
+      return /signal is aborted|AbortError|The operation was aborted/i.test(s);
+    }
+    function isNetworkErrorReason(reason) {
+      if (!reason) return false;
+      var s = String(reason && reason.message ? reason.message : reason);
+      return /Failed to fetch|NetworkError|net::ERR_|ERR_NETWORK|Load failed/i.test(s);
+    }
+
     // Unhandled errors + rejections
     W.addEventListener('error', function (ev) {
       diag.errors.push({ ts: new Date().toISOString(), msg: (ev.message || 'Unknown').slice(0, 300), src: ev.filename ? ev.filename + ':' + ev.lineno : '' });
@@ -283,6 +301,12 @@ const tr = feedback[lang];
       W.__secid_updateBadge && W.__secid_updateBadge();
     });
     W.addEventListener('unhandledrejection', function (ev) {
+      // Drop AbortErrors entirely — they're a routine side-effect of
+      // user-driven layer toggles cancelling in-flight requests, not
+      // a real fault. Drop generic network errors too; the dedicated
+      // fetch wrapper below already captures those as network entries
+      // with status 0.
+      if (isAbortError(ev.reason) || isNetworkErrorReason(ev.reason)) return;
       var r = ev.reason;
       var msg = r instanceof Error ? r.message + '\n' + (r.stack || '') : String(r || 'Unhandled rejection');
       diag.errors.push({ ts: new Date().toISOString(), msg: msg.slice(0, 300), src: 'promise' });
@@ -305,9 +329,14 @@ const tr = feedback[lang];
           }
           return res;
         }, function (err) {
-          diag.network.push({ ts: new Date().toISOString(), method: method.toUpperCase(), url: urlStr.slice(0, 200), status: 0, statusText: err && err.message ? err.message.slice(0, 100) : 'Network error' });
-          if (diag.network.length > MAX) diag.network.shift();
-          W.__secid_updateBadge && W.__secid_updateBadge();
+          // Aborts aren't network failures — don't log them. The
+          // app aborts in-flight requests on every rapid layer
+          // toggle by design.
+          if (!isAbortError(err)) {
+            diag.network.push({ ts: new Date().toISOString(), method: method.toUpperCase(), url: urlStr.slice(0, 200), status: 0, statusText: err && err.message ? err.message.slice(0, 100) : 'Network error' });
+            if (diag.network.length > MAX) diag.network.shift();
+            W.__secid_updateBadge && W.__secid_updateBadge();
+          }
           throw err;
         });
       };
