@@ -10,7 +10,7 @@
  */
 import type maplibregl from 'maplibre-gl';
 import {
-  buildFieldUrl,
+  fetchFieldChunks,
   type FieldGrid,
   parseFieldResponse,
   viewportGrid,
@@ -104,14 +104,15 @@ export function createCloudsOverlay(
         if (ac.signal.aborted) return;
 
         if (!cloudGrid) {
-          const url = buildFieldUrl(grid, 'cloud_cover', model);
-          const res = await deps.fetch(url, { signal: ac.signal });
-          if (!res.ok || ac.signal.aborted) return;
-          cloudGrid = parseFieldResponse(
-            await res.json(),
-            grid,
-            'cloud_cover',
-          );
+          // Chunked: at 32×24=768 points the single-URL form exceeds
+          // Open-Meteo's ~8 KB GET limit (HTTP 414). fetchFieldChunks
+          // splits into ≤200-point batches.
+          const json = await fetchFieldChunks(grid, 'cloud_cover', deps.fetch, {
+            signal: ac.signal,
+            model,
+          });
+          if (ac.signal.aborted) return;
+          cloudGrid = parseFieldResponse(json, grid, 'cloud_cover');
         }
         if (!cloudGrid || ac.signal.aborted) return;
         // Render grayscale raster: alpha = clamp(cloud% / 100, 0..0.85).

@@ -36,6 +36,8 @@ import {
 import {
   viewportGrid,
   buildFieldUrl,
+  fetchFieldChunks,
+  fetchWindChunks,
   parseFieldResponse,
   fieldFrameIndex,
   tempColor,
@@ -1340,16 +1342,19 @@ export async function initInteractiveMap(
     // once after 500 ms before falling back to base layer — empirically
     // resolves the URL-hash cold-load failure where ?layer=temperature
     // sometimes activated as base.
-    async function attempt(): Promise<unknown> {
-      const res = await deps.fetch(
-        buildFieldUrl(grid, cfg.hourlyVar, activeModel),
-        { signal: ac.signal },
-      );
-      if (!res.ok) throw new Error('non-2xx');
-      return res.json();
+    //
+    // Chunked: at 32×24=768 points the single-request URL exceeds
+    // Open-Meteo's ~8 KB GET limit and the server returns HTTP 414.
+    // fetchFieldChunks splits into ≤200-point batches under the hood
+    // and concatenates the response arrays in input order.
+    async function attempt(): Promise<unknown[]> {
+      return fetchFieldChunks(grid, cfg.hourlyVar, deps.fetch, {
+        signal: ac.signal,
+        model: activeModel,
+      });
     }
     try {
-      let json: unknown;
+      let json: unknown[];
       try {
         json = await attempt();
       } catch {

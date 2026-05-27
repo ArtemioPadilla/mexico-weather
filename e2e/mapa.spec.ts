@@ -23,24 +23,31 @@ const RAINVIEWER_MANIFEST = JSON.stringify({
   satellite: { infrared: [{ time: 1779130800, path: '/v2/satellite/test' }] },
 });
 
-/** Minimal Open-Meteo bulk response: 140 points (14x10 grid — denser field
- *  sampling than the original 8x6 for visibly continuous gradients), 2 hourly
- *  steps, all field vars. Length must match the production grid size so
- *  parseFieldResponse accepts the mock. Grid is 32×24 = 768 since #172. */
-const OPEN_METEO_FIELD = JSON.stringify(
-  Array.from({ length: 32 * 24 }, () => ({
-    hourly: {
-      time: ['2026-05-19T00:00', '2026-05-19T01:00'],
-      temperature_2m: [22, 23],
-      relative_humidity_2m: [60, 65],
-      pressure_msl: [1013, 1012],
-      surface_pressure: [1010, 1009],
-      apparent_temperature: [22, 23],
-      dew_point_2m: [15, 16],
-      wet_bulb_temperature_2m: [18, 19],
-    },
-  })),
-);
+/** One per-point response slot. The mock route builds the array
+ *  dynamically based on how many lat/lng pairs the chunked request
+ *  asked for (Open-Meteo enforces an ~8 KB GET URL limit; see
+ *  fetchFieldChunks in src/lib/mapfields.ts which splits 768-point
+ *  requests into 4 chunks of ≤200 points). */
+const OPEN_METEO_FIELD_POINT = {
+  hourly: {
+    time: ['2026-05-19T00:00', '2026-05-19T01:00'],
+    temperature_2m: [22, 23],
+    relative_humidity_2m: [60, 65],
+    pressure_msl: [1013, 1012],
+    surface_pressure: [1010, 1009],
+    apparent_temperature: [22, 23],
+    dew_point_2m: [15, 16],
+    wet_bulb_temperature_2m: [18, 19],
+  },
+};
+
+function fieldResponseForUrl(url: string): string {
+  // Count commas in the latitude= param to figure out how many
+  // points the chunk requested. n = #commas + 1.
+  const m = /[?&]latitude=([^&]+)/.exec(url);
+  const n = m ? m[1]!.split(',').length : 32 * 24;
+  return JSON.stringify(Array.from({ length: n }, () => OPEN_METEO_FIELD_POINT));
+}
 
 /** Minimal Open-Meteo wind bulk response: 48 points (8x6 grid), 2 hourly steps. */
 const OPEN_METEO_WIND = JSON.stringify(
@@ -181,7 +188,11 @@ test.describe('mapa page', () => {
       route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
     );
     await page.route('**/api.open-meteo.com/v1/forecast**', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: OPEN_METEO_FIELD }),
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: fieldResponseForUrl(route.request().url()),
+      }),
     );
 
     await page.goto('mapa/');
@@ -215,7 +226,11 @@ test.describe('mapa page', () => {
         route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
       );
       await page.route('**/api.open-meteo.com/v1/forecast**', (route) =>
-        route.fulfill({ status: 200, contentType: 'application/json', body: OPEN_METEO_FIELD }),
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: fieldResponseForUrl(route.request().url()),
+        }),
       );
 
       await page.goto('mapa/');
