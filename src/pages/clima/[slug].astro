@@ -167,10 +167,14 @@ const jsonLd = [
         <h2 id="next-h" class="text-lg font-semibold" data-i18n-en="Next days">
           Próximos días
         </h2>
-        <ul id="next-list" class="grid grid-cols-1 gap-2 sm:grid-cols-3">
-          <li class="h-20 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
-          <li class="h-20 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
-          <li class="h-20 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+        <ul id="next-list" class="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
+          <li class="h-24 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+          <li class="h-24 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+          <li class="h-24 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+          <li class="h-24 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+          <li class="h-24 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+          <li class="h-24 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
+          <li class="h-24 rounded-md bg-gray-100 animate-pulse dark:bg-gray-900"></li>
         </ul>
       </section>
 
@@ -359,7 +363,7 @@ const jsonLd = [
           condition: fc.current.condition || '—',
           windKmh: fc.current.windSpeed,
           humidity: fc.current.humidity,
-          next: fc.daily.slice(1, 4).map((d) => ({
+          next: fc.daily.slice(1, 8).map((d) => ({
             date: d.date,
             condition: d.condition,
             hi: d.tmax,
@@ -416,6 +420,18 @@ const jsonLd = [
       if (windEl) windEl.textContent = `${tr.wind} ${Math.round(v.windKmh)} km/h`;
       if (humEl) humEl.textContent = `${tr.humidity} ${Math.round(v.humidity)}%`;
       if (nextList && v.next.length) {
+        // Range across the 7-day window — used to size each card's
+        // mini bar so the visualization is anchored to the actual
+        // forecast span (not an arbitrary global scale).
+        const losMins = v.next
+          .map((d) => d.lo)
+          .filter((n): n is number => n !== null);
+        const hisMaxs = v.next
+          .map((d) => d.hi)
+          .filter((n): n is number => n !== null);
+        const rangeMin = losMins.length ? Math.min(...losMins) : 0;
+        const rangeMax = hisMaxs.length ? Math.max(...hisMaxs) : 1;
+        const span = Math.max(1, rangeMax - rangeMin);
         nextList.innerHTML = v.next
           .map((d) => {
             const day = dayShort(d.date);
@@ -425,12 +441,24 @@ const jsonLd = [
               /[<>&"']/g,
               '',
             );
+            // Mini hi-lo bar: position + width as % of 7-day range.
+            // Hidden gracefully if either bound is null.
+            let bar = '';
+            if (d.lo !== null && d.hi !== null) {
+              const left = ((d.lo - rangeMin) / span) * 100;
+              const width = Math.max(4, ((d.hi - d.lo) / span) * 100);
+              bar =
+                `<div class="mt-2 h-1.5 w-full rounded-full bg-gray-100 dark:bg-gray-800" aria-hidden="true">` +
+                `<div class="h-full rounded-full bg-gradient-to-r from-blue-400 to-amber-400" style="margin-left:${left.toFixed(1)}%;width:${width.toFixed(1)}%"></div>` +
+                `</div>`;
+            }
             return (
               `<li class="rounded-md border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-900">` +
               `<div class="text-sm font-medium capitalize">${day}</div>` +
-              `<div class="mt-1 text-sm text-gray-700 dark:text-gray-300">${cond}</div>` +
+              `<div class="mt-1 text-xs text-gray-700 dark:text-gray-300 line-clamp-2">${cond}</div>` +
               `<div class="mt-1 text-base"><span class="font-semibold">${hi}°</span> ` +
               `<span class="text-gray-500 dark:text-gray-400">/ ${lo}°</span></div>` +
+              bar +
               `</li>`
             );
           })

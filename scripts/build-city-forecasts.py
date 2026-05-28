@@ -4,7 +4,7 @@ landing pages.
 
 For each entry in TOP_CITIES we call Open-Meteo's forecast endpoint
 once and emit a slim JSON shaped exactly like what the page consumes:
-current temp + condition + wind + humidity, plus the next three days.
+current temp + condition + wind + humidity, plus the next seven days.
 The page tries the static snapshot first (~0 ms after the asset is
 cached) and only falls back to a live API call if the file is
 missing.
@@ -111,7 +111,7 @@ def fetch_one(city):
             'temperature_2m_min',
             'precipitation_probability_max',
         ]),
-        'forecast_days': 4,
+        'forecast_days': 8,
         'temperature_unit': 'celsius',
         'wind_speed_unit': 'kmh',
     })
@@ -153,7 +153,7 @@ def normalize(raw):
     daily = (raw or {}).get('daily') or {}
 
     today = _day_at(daily, 0)
-    next_days = [d for d in (_day_at(daily, i) for i in range(1, 4)) if d]
+    next_days = [d for d in (_day_at(daily, i) for i in range(1, 8)) if d]
 
     cur_code = cur.get('weather_code')
     return {
