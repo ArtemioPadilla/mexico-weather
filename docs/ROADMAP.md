@@ -5,7 +5,8 @@ Status: **living document** · Last reviewed: 2026-05-28
 This is the single entry point for "what's done, what's next, and why."
 It reconciles the two older planning docs against what actually shipped,
 back-fills the epic/story structure that until now lived only in commit
-messages, and re-prioritizes the remaining work.
+messages, and breaks the remaining work into a prioritized
+**epic → story → task** backlog (see "Backlog" below).
 
 ## How to read this
 
@@ -85,113 +86,192 @@ correctness**, not feature count.
 
 ---
 
-## Open work (prioritized)
+## Backlog — epics → stories → tasks
 
-### P0 — Map first paint (reframes #124 + PLAN_UX_PARITY P0.1)
+The forward work, broken into the same scheme as the shipped epics.
+Numbering continues from E9 / Story 9.x.
 
-**The single most-investigated bug in the project, never actually root-caused.**
-Issue [#124](https://github.com/ArtemioPadilla/mexico-weather/issues/124)
-("forecast embed cold-load blank canvas") absorbed 6+ PRs (#111, #112,
-#117, #118, #122, #123) of resize/rAF/jumpTo/nudge attempts and was
-closed with a *workaround* ("renders on first interaction"), not a fix.
-`PLAN_UX_PARITY` P0.1 hypothesized a MapLibre style-load race.
-
-**New evidence (2026-05-28):** the recurring signature — "tiles downloaded,
-WebGL context alive, canvas correctly sized, blank until a single click
-triggers a paint" — is the classic symptom of **a requested animation
-frame that never fires**. `requestAnimationFrame` is throttled or paused
-entirely when a tab is not visible/focused (background tab, prerender,
-automation, window unfocused). A user click forces `triggerRepaint`, which
-is why interaction "fixes" it.
-
-PR #289 already switched the **boot scheduling** from `requestAnimationFrame`
-to `setTimeout` for `/mapa`. The remaining work is to apply the same
-reasoning to **first paint** of every embed:
-
-- Replace any rAF-gated first-paint/resize nudge with a `setTimeout`-based
-  path (fires in background tabs; rAF does not).
-- After `map.once('load')`, call `map.triggerRepaint()` once unconditionally
-  rather than relying on a frame the browser may never schedule.
-- Drop the 6-step deferred-nudge stack (#122) once the above lands — it was
-  compensating for the wrong primitive.
-- Add a Playwright test that asserts a canvas with non-zero painted pixels
-  **without any interaction**, run in a backgrounded context if the harness
-  allows, to lock the regression.
-
-**Caveat / unknown:** real foreground users may never have been affected —
-much of the prior "blank canvas" evidence (including production checks) was
-gathered through automation tabs that run `document.hidden === true`. Before
-investing, confirm the failure reproduces in a genuine **foreground** load
-(real device or a focused browser window). If it only reproduces in
-hidden/background contexts, this drops from P0 to P2 (correctness for
-background-opened tabs / prerender only).
-
-### P1 — Mobile UX gaps (from the 2026-05-27 audit, still open)
-
-These round-1 audit findings were never addressed and are real on
-foreground mobile:
-
-- **No mobile navigation.** Catalog dropdown + "Pregunta" are `hidden sm:block`
-  with no hamburger. Below 640px, Ciudades/Playas/Estados/Volcanes/Pregunta
-  are unreachable unless the user knows the URL. **Highest user impact.**
-- **Tap targets below 44px** across header nav (28px tall), map timeline
-  controls (19–20px), and model toggle (19px). WCAG 2.5.5.
-- **`/mapa` loses all chrome on mobile.** Opacity slider, overlay menu,
-  model toggle, snapshot + measure tools are all `hidden sm:*`. Mobile
-  users get layer buttons only.
-
-### P2 — Map plugin-registry migration (#136)
-
-Architecture refactor, incremental and revertible. Status:
-
-- ✅ F1 types + registry, F2 utils extraction, F4 sun BaseLayer plugin (#285)
-- ❌ F3 data-source extraction, F5a–f base-layer migration, F6 overlay
-  migration, F7 state-driven UI, F8 delete legacy `interactive-map.ts`
-- Note: F9a–d ("new features": isobars, tropical, fires, GIBS) already
-  **exist as overlays** — they shipped outside the registry. The remaining
-  value of #136 is the *refactor* (one-file-per-feature, ~2,200-LOC monolith
-  retired), not new capability. Sequence the migration only when the map
-  surface is otherwise stable, to avoid churn.
-
-### P3 — Differentiators worth pulling forward
-
-Highest ROI of the un-shipped `PLAN_SUPERIORITY` ideas:
-
-- **Multi-metric hover tooltip** (temp + humidity + wind at cursor) — 1wk,
-  genuinely beyond zoom.earth.
-- **Combined "Precipitación" mode** (GeoColor satellite + clouds + radar in
-  one toggle) — 1wk, closes the last visible parity gap.
-- **Multi-model disagreement view** — exposes forecast confidence; the data
-  (Open-Meteo `models=`) is already wired for the model toggle.
-- **WebGL field renderer** — replaces canvas bilinear with a fragment
-  shader; quality + perf win, no extra data.
+**Conventions**
+- **Epic** = a theme spanning multiple PRs. **Story** = one user-facing
+  increment, ~1 PR, tagged `Story N.M` (use the tag in the commit subject,
+  as Sprints 2–5 did). **Task** = a concrete dev step, one checkbox.
+- Status: `[ ]` todo · `[~]` in progress · `[x]` done. Priority: **P0**
+  correctness → **P1** daily-driver UX → **P2** architecture → **P3**
+  differentiation → **P4** icebox.
+- A story is "done" when every task is checked **and** its acceptance
+  criteria pass. Keep estimates honest; they're planning aids, not commitments.
 
 ---
 
-## Forward roadmap (re-sequenced)
+### E10 · Map first paint & render reliability — **P0**
 
-The original quarterly plan assumed everything was greenfield; most of Q3
-already shipped. Revised:
+> Outcome: the map paints on load without any interaction, in every embed,
+> including background/prerender contexts. Retires the longest-running bug
+> class in the project (#124).
 
-**Now → next** (correctness before expansion)
-1. P0 map first-paint — confirm foreground repro, then fix properly.
-2. P1 mobile nav + tap targets — real, daily-driver impact.
+Context: [#124](https://github.com/ArtemioPadilla/mexico-weather/issues/124)
+("cold-load blank canvas") absorbed 6 PRs (#111, #112, #117, #118, #122,
+#123) of resize/rAF/jumpTo nudges and was closed with a *workaround*. The
+signature — tiles loaded, WebGL context alive, canvas sized, blank until a
+click forces `triggerRepaint` — is the classic **rAF-never-fires** symptom.
+PR #289 fixed the `/mapa` boot scheduling (rAF→setTimeout); first paint of
+the embeds is the remainder.
 
-**Then** (differentiate)
-3. Multi-metric hover tooltip.
-4. Combined Precipitación mode.
-5. Multi-model disagreement view.
+**Story 10.1 — Confirm the failure reproduces in a foreground load** · est ½d
+- [ ] Load `/forecast?lat=19.43&lng=-99.13&...` cold (cleared SW/cache) in a
+      genuinely **foregrounded** window on a real device + desktop Chrome.
+- [ ] Record `document.visibilityState` at boot and whether canvas paints
+      pre-interaction.
+- [ ] Decision gate: if it only fails when hidden/backgrounded, **demote
+      this epic to P2** (background-tab correctness only) and note it here.
+- Acceptance: a written repro (or "cannot reproduce in foreground") with the
+  visibilityState evidence, recorded in #124.
 
-**Later** (architecture + depth)
-6. #136 plugin-registry migration (F3 → F8) as a focused sweep.
-7. WebGL field renderer.
-8. Temporal before/after compare; full-field climate anomaly.
+**Story 10.2 — First paint without interaction** · est ½d · *blocked by 10.1*
+- [ ] In `src/lib/interactive-map.ts`, after `map.once('load')` call
+      `map.triggerRepaint()` unconditionally (don't rely on a frame the
+      browser may never schedule).
+- [ ] Replace any rAF-gated first-paint/resize nudge with a `setTimeout(…,0)`
+      path in `src/components/InteractiveMap.astro` (the lazy
+      IntersectionObserver embed path still uses rAF-adjacent timing).
+- [ ] Remove the 6-step deferred-nudge stack (#122) once the above holds —
+      it was compensating for the wrong primitive.
+- [ ] Evaluate forcing eager import of maplibre-gl on `/mapa` only (drop the
+      dynamic-import latency variable; keep lazy for embeds).
+- Acceptance: reload `#view=23.6,-102.5,5z&layer=temperature` 10× — field
+  paints ≤3s each, zero clicks. Same for the `/forecast` embed.
 
-**Deliberately deferred** (need validation or violate constraints)
-- Personal web-push alerts — needs a no-backend design (SW periodic sync is
-  unreliable; verify feasibility before committing).
-- Native app wrappers (Capacitor / RN) — validate demand first.
-- PRO tier / accounts — out of scope by design.
+**Story 10.3 — Lock the regression** · est ¼d
+- [ ] Playwright test asserting the map canvas has non-zero painted pixels
+      **without any interaction** (sample `getImageData`, assert variance).
+- [ ] If the harness can background the page, add a hidden-context variant.
+- [x] Document the visibilityState/rAF gotcha (done — "Process notes" below
+      + memory `verify-foreground-before-render-bugs`).
+- Acceptance: the new test fails on `main` pre-10.2 and passes after.
+
+---
+
+### E11 · Mobile UX — **P1**
+
+> Outcome: the site is fully navigable and operable on a 360–414px phone.
+> All three findings below are real on foreground mobile (audit 2026-05-27).
+
+**Story 11.1 — Mobile navigation** · est 1d · **highest user impact**
+- [ ] Add a hamburger button (visible `< sm`) to `src/layouts/BaseLayout.astro`;
+      the catalog dropdown (`#catalog-dropdown`) + "Pregunta" link are
+      currently `hidden sm:block` / `hidden sm:inline-block` with no fallback.
+- [ ] Drawer/sheet listing Inicio, Ciudades, Playas, Estados, Volcanes,
+      Pregunta + theme/lang toggles.
+- [ ] A11y: focus trap, `Esc` to close, `aria-expanded`/`aria-controls`,
+      restore focus to the toggle on close.
+- [ ] e2e: at 360px, every top-level destination is reachable.
+- Acceptance: no top-level route is unreachable below 640px.
+
+**Story 11.2 — Tap targets ≥44px** · est ½d
+- [ ] Header nav links → min-height 44px (currently 28px).
+- [ ] Map timeline controls `#tl-prev/play/next` + day-skip (currently
+      19–20px) → 44px hit area (visual size can stay small via padding).
+- [ ] Model toggle buttons `.mw-model-btn` (currently 19px) → 44px hit area.
+- [ ] Confirm `e2e/mobile-audit.spec.ts` enforces this and un-skip if needed.
+- Acceptance: `mobile-audit.spec.ts` tap-target assertions pass with no
+  per-element exemptions beyond the documented `sr-only` one.
+
+**Story 11.3 — `/mapa` chrome on mobile** · est 1d
+- [ ] Surface opacity slider (`#opacitywrap`), overlay menu (Superposiciones),
+      model toggle, and measure/snapshot tools on mobile — all currently
+      `hidden sm:*` in `src/components/InteractiveMap.astro`.
+- [ ] Pattern: a single bottom-sheet "Controles" trigger that expands the
+      rail contents, rather than unhiding everything (screen real estate).
+- Acceptance: a mobile user can change opacity, toggle an overlay, and switch
+  model without resizing to desktop.
+
+---
+
+### E12 · Map plugin-registry migration (#136) — **P2**
+
+> Outcome: retire the ~2,200-LOC `interactive-map.ts` monolith; one file per
+> feature. Incremental and revertible — each story is one PR.
+> Note: the F9 "new features" (isobars, tropical, fires, GIBS) already exist
+> as overlays; only the *refactor* remains. Sequence after E10/E11 so the map
+> surface is stable. Done so far: F1 registry, F2 utils, F4 sun plugin (#285).
+
+**Story 12.1 — F3 data-source extraction** · est 1d
+- [ ] Move Open-Meteo / RainViewer / RV-manifest fetchers into
+      `src/lib/map/sources/` behind the `DataSource` interface (open-meteo +
+      rainviewer files already exist — finish wiring callers through them).
+- Acceptance: `interactive-map.ts` imports no raw fetch URLs; sources are
+  unit-tested.
+
+**Story 12.2 — F5 base-layer migration (a–f)** · est 3–4d
+- [ ] F5a basemap · [ ] F5b temperature (+ sub-options) · [ ] F5c humidity ·
+      [ ] F5d pressure · [ ] F5e wind (WebGL) · [ ] F5f radar + satellite —
+      each migrated to the `BaseLayer` plugin interface, flag-gated, behind
+      the registry (mirror the F4 sun-plugin pattern).
+- Acceptance: each layer renders identically pre/post migration; e2e green.
+
+**Story 12.3 — F6 overlay migration** · est 2d
+- [ ] Register the 17 existing overlays through the registry; drop their
+      bespoke wiring in the monolith.
+- Acceptance: overlay toggles + keyboard shortcuts read from the registry.
+
+**Story 12.4 — F7 state-driven UI** · est 2d
+- [ ] Replace imperative DOM mutation with subscriptions to the map store;
+      rail/timeline/shortcuts/hash all enumerate the registry.
+
+**Story 12.5 — F8 retire the monolith** · est ½d
+- [ ] Delete legacy `interactive-map.ts`; keep `index.ts` façade.
+- Acceptance: bundle size drops; `rg 'interactive-map'` shows only the façade.
+
+---
+
+### E13 · Differentiators — **P3**
+
+> Outcome: move from parity to lead. Highest-ROI un-shipped ideas from
+> `PLAN_SUPERIORITY`.
+
+**Story 13.1 — Multi-metric hover tooltip** · est 1wk
+- [ ] Show temp + humidity + wind (with a directional arrow) at the cursor;
+      sticky-on-touch for mobile. Genuinely beyond zoom.earth.
+
+**Story 13.2 — Combined "Precipitación" mode** · est 1wk
+- [ ] One toggle that stacks GIBS GeoColor satellite + clouds overlay + radar;
+      closes the last visible parity gap. GeoColor already in `nasa-gibs.ts`.
+
+**Story 13.3 — Multi-model disagreement view** · est 1wk
+- [ ] Expose ICON/GFS/ECMWF/GEM and a "where models diverge" confidence view.
+      Data path already wired for the model toggle (Open-Meteo `models=`).
+
+**Story 13.4 — WebGL field renderer** · est 1wk
+- [ ] Replace canvas bilinear with a fragment shader sampling the grid as a
+      texture; quality + perf win, no extra data. Test Safari/Firefox iOS.
+
+**Story 13.5 — Temporal before/after compare** · est 1wk
+- [ ] Split-screen "hace 24h vs ahora" slider for the same map view.
+
+**Story 13.6 — Full-field climate anomaly ramp** · est 2wk
+- [ ] Anomaly color ramp over the field (per-location badge already shipped
+      as 3.2). Needs ERA5/baseline preprocessing — reuses `climate-baseline`
+      workflow output.
+
+---
+
+### E14 · Icebox — **P4** (validation-gated or out of scope)
+
+- **Story 14.1 — Personal web-push alerts.** Needs a no-backend design; SW
+  periodic background sync is unreliable. Spike feasibility before committing.
+- **Story 14.2 — Native app wrappers** (Capacitor / RN). Validate demand
+  first; App/Play accounts cost money + ongoing maintenance.
+- **PRO tier / accounts** — ⛔ won't do; privacy-first is the competitive angle.
+
+---
+
+## Execution order
+
+1. **E10** map first paint (P0) — start with the 10.1 foreground-repro gate.
+2. **E11** mobile nav + tap targets (P1) — real daily-driver impact.
+3. **E13.1–13.3** the three high-ROI differentiators.
+4. **E12** plugin-registry sweep (P2) once the map surface is stable.
+5. **E13.4–13.6** depth; **E14** only after validation.
 
 ---
 
