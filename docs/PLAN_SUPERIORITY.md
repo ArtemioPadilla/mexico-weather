@@ -1,5 +1,10 @@
 # Plan: superar a zoom.earth en todo
 
+> ⚠️ **Status superseded.** ~65% of this plan has shipped since
+> 2026-05-24. For current status and priorities see
+> [ROADMAP.md](./ROADMAP.md) → "Reconciliation". Treat this file as an
+> idea backlog, not a to-do list.
+
 Estado: **propuesto** · Actualizado: 2026-05-24
 
 Después de 31 PRs alcanzamos **paridad funcional total** con zoom.earth

@@ -140,8 +140,12 @@ src/
 
 e2e/                      # Playwright specs (mapa, forecast, home, cross, static, ...)
 docs/
+  ROADMAP.md              # ← estado + prioridades (single source of truth)
+  ARCHITECTURE.md         # diseño del plugin-registry del mapa (#136)
   USER_GUIDE.md           # tour de features + URL schemas + a11y
   USER_JOURNEYS.md        # ~51 journeys e2e-shaped (selectores estables, mocks)
+  PLAN_SUPERIORITY.md     # backlog de ideas vs zoom.earth (ver ROADMAP)
+  PLAN_UX_PARITY.md       # gaps de pulido del mapa (ver ROADMAP)
   assets/demo.gif         # ← arriba
 public/
   sw.js                   # SW de aislamiento de scope (sin cache — ver comment)
