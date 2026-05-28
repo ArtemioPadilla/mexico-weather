@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 28 May 2026 15:33:03 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2026 17:32:51 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -42,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): Chiapas, Tabasco, Campeche y Yucatán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas Máximas (40 a 45 °C): Sinaloa, Chihuahua, Nayarit, Michoacán, Guerrero, Oaxaca y Yucatán.]]></description>
-      <pubDate>Thu, 28 May 2026 09:32:54 -0600</pubDate>
+      <pubDate>Thu, 28 May 2026 11:32:39 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-28-88bc</guid>
       <category>Alerta</category>
     </item>
