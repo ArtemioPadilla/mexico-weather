@@ -233,13 +233,37 @@ export async function initInteractiveMap(
 
   // Dynamic import of MapLibre — keeps the GL bundle out of pages until
   // this factory is actually invoked.
-  const maplibreModule = await import('maplibre-gl');
+  const maplibreModule = (await import('maplibre-gl')) as unknown as Record<
+    string,
+    unknown
+  >;
   await import('maplibre-gl/dist/maplibre-gl.css');
-  // The module's default export may not be present under strict TS dynamic
-  // imports; the named exports are always available.
-  const maplibre: typeof maplibregl =
-    (maplibreModule as unknown as { default?: typeof maplibregl }).default ??
-    (maplibreModule as unknown as typeof maplibregl);
+  // The module's export shape varies across bundlers and maplibre versions:
+  //
+  //   - maplibre-gl v4 (Vite/Rollup pre-bump): exposed via `.default`.
+  //   - maplibre-gl v5 (current): rollup emits
+  //       `export { ns as m }` so the namespace lives at `.m`.
+  //   - Some interop paths expose everything at the top level.
+  //
+  // Probe each shape in order. The v5 case was a production regression
+  // (#284 shipped v5 but the consumer still only checked `.default` and
+  // top-level, so `new maplibre.Map(...)` threw "Cannot read properties
+  // of undefined (reading 'Map')" and the whole map silently failed to
+  // mount).
+  const candidates = [
+    (maplibreModule as { m?: typeof maplibregl }).m,
+    (maplibreModule as { default?: typeof maplibregl }).default,
+    maplibreModule as unknown as typeof maplibregl,
+  ];
+  const maplibre = candidates.find(
+    (c): c is typeof maplibregl =>
+      !!(c as { Map?: unknown } | undefined)?.Map,
+  );
+  if (!maplibre) {
+    throw new Error(
+      'maplibre-gl module did not expose a Map constructor in any known shape',
+    );
+  }
 
   const deps = {
     // Module-scoped fetch with in-memory cache. Multiple map instances on the

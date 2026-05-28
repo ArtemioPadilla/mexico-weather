@@ -181,23 +181,24 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
           } else {
             applyI18n();
           }
-          // Skip-link target: every page that uses BaseLayout has a
-          // single <main>. Stamp #main-content on the first one we
-          // find so the skip link in the body has somewhere to land
-          // without threading an id through every page template.
-          var setSkipTarget = function () {
-            var m = document.querySelector('main');
-            if (m && !m.id) m.id = 'main-content';
-          };
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', setSkipTarget);
-          } else {
-            setSkipTarget();
-          }
           // Expose for runtime-generated content (the SMN widget,
           // /forecast templates, etc. can call window.__i18nApply()
           // after they inject HTML).
           /** @type {any} */ (window).__i18nApply = applyI18n;
+        }
+        // Skip-link target — stamp #main-content on the first <main>
+        // so the body's skip link has somewhere to land without
+        // threading an id through every page template. Lives
+        // OUTSIDE the lang === 'en' branch above so Spanish (the
+        // default) users get the anchor too.
+        var setSkipTarget = function () {
+          var m = document.querySelector('main');
+          if (m && !m.id) m.id = 'main-content';
+        };
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setSkipTarget);
+        } else {
+          setSkipTarget();
         }
       })();
     </script>
