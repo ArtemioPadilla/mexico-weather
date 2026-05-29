@@ -1,5 +1,10 @@
 # Plan UX/UI Parity & Superiority vs zoom.earth
 
+> ⚠️ **Status superseded.** The P0–P2 items shipped as the P-series PRs.
+> The P0.1 cold-load root-cause analysis below is **outdated** — see
+> [ROADMAP.md](./ROADMAP.md) → "Map first paint" for the current
+> (rAF-never-fires) diagnosis. Start at ROADMAP.md for live status.
+
 > **Origin**: side-by-side review en Chrome (2026-05-24) contra
 > `https://zoom.earth/maps/temperature/` y nuestra producción
 > `https://artemiop.com/mexico-weather/mapa/`.
