@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 30 May 2026 01:18:44 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2026 03:30:39 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Chiapas (este y sur), Campeche (norte) y Yucatán (oeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 30 a 40 km/h con rachas de 50 a 70 km/h y con posible formación de torbellinos y/o tornados: Coahuila (norte).]]></description>
-      <pubDate>Fri, 29 May 2026 19:18:34 -0600</pubDate>
+      <pubDate>Fri, 29 May 2026 21:30:28 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-29-0d67</guid>
       <category>Alerta</category>
     </item>
@@ -48,11 +48,11 @@ En el transcurso de esta noche y madrugada del sábado, una circulación cicl�
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de mayo del 2026 | Emisión 18:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de mayo del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 29 de mayo del 2026
-Emisión: 18:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 29 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-29-12</guid>
