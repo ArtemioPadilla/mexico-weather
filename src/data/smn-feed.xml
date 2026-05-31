@@ -5,26 +5,48 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 31 May 2026 11:52:05 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 May 2026 12:51:07 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de mayo del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 301 | 31 de Mayo del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN GUERRERO, OAXACA, CHIAPAS, TABASCO, CAMPECHE, YUCATÁN Y QUINTANA ROO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 301
+Ciudad de México a 31 de Mayo del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN GUERRERO, OAXACA, CHIAPAS, TABASCO, CAMPECHE, YUCATÁN Y QUINTANA ROO
+
+ 
+
+Este día, una circulación ciclónica en niveles medios y altos de la atmósfera prevalecerá sobre el sur y sureste mexicano, interactuando con la onda tropical núm. 3, al sur de Guerrero, y con canales de baja presión sobre la península de Yucatán, ocasionando lluvias puntuales intensas en Guerrero (este y sur), Oaxaca (norte, noroeste y oeste), Chiapas (norte y este), Tabasco (este), Campeche (este, oeste y sur), Yucatán (oeste y sur) y Quintana Roo (sur); muy fuertes en Veracruz (centro); además de chubascos y lluvias fuertes en estados del centro y oriente del territorio nacional.…]]></description>
+      <pubDate>Sun, 31 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-05-31-301</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de mayo del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 31 de mayo del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 31 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-31-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): Oaxaca (centro y sur), Chiapas (este y sur) y Quintana Roo (oeste y sur). Viento con rachas de 50 a 70 km/h con posibles torbellinos: Coahuila (norte).</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Guerrero (este y sur), Oaxaca (noroeste y oeste), Chiapas (norte y este), Tabasco (este), Campeche (este, oeste y sur), Yucatán (oeste y sur) y Quintana Roo (sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento con rachas de 40 a 60 km/h y posibles tolvaneras: Baja California, Chihuahua, Durango, Sinaloa y Nayarit; y de 30 a 50 km/h con posibles tolvaneras: Baja Cal...]]></description>
-      <pubDate>Sun, 31 May 2026 05:51:55 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-31-83e2</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California Sur (sur), Sonora (este y sur), Chihuahua (noreste y suroeste), Durango (oeste), Sinaloa (norte y centro), Col...]]></description>
+      <pubDate>Sun, 31 May 2026 06:50:54 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-31-35b7</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -34,28 +56,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sat, 30 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_05_30</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 300 | 30 de Mayo del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[ESTA NOCHE, EXISTEN CONDICIONES PARA LA FORMACIÓN DE TORBELLINOS EN EL NORTE DE COAHUILA, ASÍ COMO PROBABILIDAD DE LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA, CHIAPAS Y QUINTANA ROO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 300
-Ciudad de México a 30 de Mayo del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-ESTA NOCHE, EXISTEN CONDICIONES PARA LA FORMACIÓN DE TORBELLINOS EN EL NORTE DE COAHUILA, ASÍ COMO PROBABILIDAD DE LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA, CHIAPAS Y QUINTANA ROO
-
-
-
-En el transcurso de esta noche y la madrugada del domingo, una circulación ciclónica en niveles medios y altos de la atmósfera sobre el sureste mexicano, en interacción con la onda tropical número 3 frente a las costas de Oaxaca, canales de baja presión e ingreso de humedad procedente del océano Pacífico y mar Caribe, ocasionarán lluvias fuertes, descargas eléctricas y posible caída de granizo en estados del sur y sureste del país, incluida la península de Yucatán; con lluvias puntuales muy fuertes en Guerrero (este y sureste), Tabasco (este), Campeche (norte y centro) y Yucatán (oeste y sur) e intensas en Oaxaca (centro y sur), Chiapas (este y sur) y Quintana Roo (oeste y sur).…]]></description>
-      <pubDate>Sat, 30 May 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-05-30-300</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 29 MAY 2026: Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en zonas de Chiapas y Campeche</title>
