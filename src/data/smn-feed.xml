@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 31 May 2026 14:55:19 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 May 2026 15:46:55 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -31,11 +31,11 @@ Este día, una circulación ciclónica en niveles medios y altos de la atmósfe
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de mayo del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de mayo del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 31 de mayo del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 31 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-31-12</guid>
@@ -45,7 +45,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Guerrero (este y sur), Oaxaca (noroeste y oeste), Chiapas (norte y este), Tabasco (este), Campeche (este, oeste y sur), Yucatán (oeste y sur) y Quintana Roo (sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California Sur (sur), Sonora (este y sur), Chihuahua (noreste y suroeste), Durango (oeste), Sinaloa (norte y centro), Col...]]></description>
-      <pubDate>Sun, 31 May 2026 08:55:06 -0600</pubDate>
+      <pubDate>Sun, 31 May 2026 09:46:46 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-31-35b7</guid>
       <category>Alerta</category>
     </item>
