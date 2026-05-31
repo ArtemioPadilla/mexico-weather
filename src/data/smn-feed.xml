@@ -5,9 +5,25 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 31 May 2026 17:42:16 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 May 2026 18:45:21 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Guerrero (este y sur), Oaxaca (noroeste y oeste), Chiapas (norte y este), Tabasco (este), Campeche (este, oeste y sur), Yucatán (oeste y sur) y Quintana Roo (sur).</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California Sur (sur), Sonora (este y sur), Chihuahua (noreste y suroeste), Durango (oeste), Sinaloa (norte y centro), Col...]]></description>
+      <pubDate>Sun, 31 May 2026 12:45:07 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-05-31-35b7</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 31 MAY 2026: Para este día se pronostican lluvias de muy fuertes a intensas en 11 entidades del país</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_05_31.pdf</link>
+      <description><![CDATA[Para este día se pronostican lluvias de muy fuertes a intensas en 11 entidades del país — Comunicado del 31 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_05_31.pdf]]></description>
+      <pubDate>Sun, 31 May 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_05_31</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 301 | 31 de Mayo del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -31,23 +47,15 @@ Este día, una circulación ciclónica en niveles medios y altos de la atmósfe
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de mayo del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de mayo del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 31 de mayo del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 31 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-31-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Guerrero (este y sur), Oaxaca (noroeste y oeste), Chiapas (norte y este), Tabasco (este), Campeche (este, oeste y sur), Yucatán (oeste y sur) y Quintana Roo (sur).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California Sur (sur), Sonora (este y sur), Chihuahua (noreste y suroeste), Durango (oeste), Sinaloa (norte y centro), Col...]]></description>
-      <pubDate>Sun, 31 May 2026 11:42:04 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-05-31-35b7</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 30 MAY 2026: Se pronostican lluvias de muy fuertes a intensas en zonas del sur y sureste de México</title>
@@ -71,14 +79,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Chiapas, Campeche, Yucatán y Quintana Roo — Reporte Matutino del 29 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_05_29.pdf]]></description>
       <pubDate>Fri, 29 May 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_05_29</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 28 MAY 2026: Se mantiene el pronóstico de lluvias muy fuertes a intensas en zonas del sureste de México y la península de Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_28.pdf</link>
-      <description><![CDATA[Se mantiene el pronóstico de lluvias muy fuertes a intensas en zonas del sureste de México y la península de Yucatán — Reporte Vespertino del 28 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_28.pdf]]></description>
-      <pubDate>Thu, 28 May 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_28</guid>
       <category>Comunicado</category>
     </item>
   </channel>
