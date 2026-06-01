@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 01 Jun 2026 01:30:39 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2026 03:32:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Posible formación de torbellinos en el noroeste de Coahuila y este de Chihuahua.]]></description>
-      <pubDate>Sun, 31 May 2026 19:30:27 -0600</pubDate>
+      <pubDate>Sun, 31 May 2026 21:31:45 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-05-31-b9ed</guid>
       <category>Alerta</category>
     </item>
@@ -31,27 +31,45 @@
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 302
-Ciudad de México a 31 de Mayo del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-ESTA NOCHE, SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA, CHIAPAS, TABASCO Y LA PENÍNSULA DE YUCATÁN; ASÍ COMO LLUVIAS MUY FUERTES EN REGIONES DE GUERRERO, PUEBLA Y VERACRUZ.
-
-
-
-En el transcurso de esta noche y la madrugada del lunes, una circulación ciclónica en niveles medios y altos de la atmósfera prevalecerá sobre el sur y sureste mexicano en interacción con un canal de baja presión en la península de Yucatán y el abundante ingreso de humedad del océano Pacífico, golfo de México y mar Caribe, originarán lluvias puntuales intensas en Oaxaca (noreste y centro), Chiapas (norte y este), Tabasco (este), Campeche (norte y centro), Yucatán (oeste, centro y sur) y Quintana Roo (centro y sur); y lluvias muy fuertes en Guerrero (este), Puebla (este y sureste) y Veracruz (centro y sur).…]]></description>
+Imagen Interpretada
+Reporte de Lluvias Registradas
+Reporte de Lluvias Acumuladas a Cinco Días
+Pronóstico Extendido a 96 h
+Reporte de Lluvia Acumulada de Tres Días
+Reporte Meteorológico para la Agricultura
+Pronóstico Meteorológico especial por cuencas para el Sureste Mexicano a 96 horas
+Pronóstico Meteorológico especial por cuencas para el Sureste Mexicano a 360 horas
+Pronóstico Regional para el Valle de México y la Megalópolis
+Avisos
+Aviso de Ciclón Tropical en el Océano Pacífico
+Aviso de Ciclón Tropical en el Océano Atlántico
+Aviso de Sistemas Frontales y Evento de “Norte” en el Golfo de México
+Aviso Especial por la actividad del Volcán Popocatépetl
+Aviso Especial por la actividad del Volcán de Colima
+Mapa de Áreas con Potencial de Tormentas
+Aviso de Potencial de Tormentas
+Aviso de Potencial de Tormentas en el Valle de México
+Ciclones Tropicales
+Temporada Ciclones Tropicales 2026
+Información Histórica de Ciclones
+Lluvias asociadas a ciclones tropicales
+Climatología
+Temperaturas y Lluvia
+Mapas Diarios de Temperaturas y Lluvia
+Resúmenes Mensuales de Temperaturas y Lluvia
+Información Climatológica
+Información Estadística Climatológica
+…]]></description>
       <pubDate>Sun, 31 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-05-31-302</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de mayo del 2026 | Emisión 18:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de mayo del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 31 de mayo del 2026
-Emisión: 18:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 31 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-05-31-12</guid>
