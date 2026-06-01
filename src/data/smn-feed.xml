@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 01 Jun 2026 06:01:34 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2026 08:14:22 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -23,7 +23,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en Oaxaca (noreste y centro), Chiapas (norte y este), Tabasco (este), Campeche (norte y centro), Yucatán (oeste, centro y sur) y Quintana Roo (centro y sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Posible formación de torbellinos en Coahuila (noroeste).]]></description>
-      <pubDate>Mon, 01 Jun 2026 00:01:21 -0600</pubDate>
+      <pubDate>Mon, 01 Jun 2026 02:14:12 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-01-e00f</guid>
       <category>Alerta</category>
     </item>
