@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 01 Jun 2026 12:17:07 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2026 17:06:51 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -30,23 +30,31 @@ Para hoy, dará inicio un temporal de lluvias en el sur y sureste de México, ad
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de junio del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de junio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 01 de junio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 01 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-01-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en Oaxaca (noreste y centro), Chiapas (norte y este), Tabasco (este), Campeche (norte y centro), Yucatán (oeste, centro y sur) y Quintana Roo (centro y sur).</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Puebla (centro, este y sureste), Veracruz (centro y sur), Oaxaca (norte) y Chiapas (este y sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Posible formación de torbellinos en Coahuila (noroeste).]]></description>
-      <pubDate>Mon, 01 Jun 2026 06:16:57 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-01-e00f</guid>
+      <description><![CDATA[Temperaturas máximas mayores a 45 °C: Sinaloa (norte).]]></description>
+      <pubDate>Mon, 01 Jun 2026 11:06:42 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-01-45e2</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 01 JUN 2026: A partir de hoy, se prevé un temporal de lluvias para el sur y sureste de México y la península de Yucatán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_01_6.pdf</link>
+      <description><![CDATA[A partir de hoy, se prevé un temporal de lluvias para el sur y sureste de México y la península de Yucatán — Reporte Matutino del 01 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_01_6.pdf]]></description>
+      <pubDate>Mon, 01 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_01_6</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 31 MAY 2026: Para este día se pronostican lluvias de muy fuertes a intensas en 11 entidades del país</title>
