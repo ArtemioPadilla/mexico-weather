@@ -5,53 +5,68 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 02 Jun 2026 11:48:15 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jun 2026 13:43:21 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de junio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 305 | 02 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 305
+Ciudad de México a 02 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+
+Este día, prevalecerá el temporal de lluvias en el oriente y sureste de México, incluida la península de Yucatán, debido a la interacción de una vaguada en niveles medios y altos de la atmósfera, con inestabilidad atmosférica, un canal de baja presión en superficie extendido sobre la península de Yucatán y la cercanía de la onda tropical núm. 4 al sur de la península de Yucatán, por lo que se prevén lluvias muy fuertes con puntuales intensas, descargas eléctricas, rachas de viento y posible caída de granizo en las regiones mencionadas, además del sur del país. Así mismo, otro canal de baja presión extendido sobre el interior del territorio nacional aunado al ingreso de humedad del océano Pacífico y golfo de México y a inestabilidad atmosférica, originarán chubascos y lluvias fuertes acompañadas con descargas eléctricas y posible caída de granizo en estados del norte, occidente y centro de México.…]]></description>
+      <pubDate>Tue, 02 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-02-305</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 02 de junio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 02 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-02-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas a puntuales torrenciales (150 a 250 mm): Yucatán (oeste y norte).</title>
+      <title>⚠️ Alerta SMN: Temperaturas máximas mayores a 45 °C: Sinaloa (norte y centro).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas a puntuales torrenciales (150 a 250 mm): Yucatán (oeste y norte).]]></description>
-      <pubDate>Tue, 02 Jun 2026 05:48:06 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-02-f2cf</guid>
+      <description><![CDATA[Temperaturas máximas mayores a 45 °C: Sinaloa (norte y centro).]]></description>
+      <pubDate>Tue, 02 Jun 2026 07:43:10 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-02-493d</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 304 | 01 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[DURANTE ESTA NOCHE SE PREVÉN LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE YUCATÁN Y LLUVIAS INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y CAMPECHE
-
----
-Pronóstico Meteorológico General
-No. Aviso: 304
-Ciudad de México a 01 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-DURANTE ESTA NOCHE SE PREVÉN LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE YUCATÁN Y LLUVIAS INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y CAMPECHE
-
- 
-
-Durante esta tarde y noche, se mantendrá un temporal de lluvias en el oriente y sureste del país, incluida la península de Yucatán, debido a la interacción de una circulación ciclónica en niveles medios y altos de la atmósfera, inestabilidad atmosférica y la aproximación de la nueva onda tropical núm.…]]></description>
-      <pubDate>Mon, 01 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-01-304</guid>
-      <category>Pronóstico General</category>
+      <title>📋 SMN Reporte Matutino 02 JUN 2026: Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_02.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Matutino del 02 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_02.pdf]]></description>
+      <pubDate>Tue, 02 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_02</guid>
+      <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 01 JUN 2026: Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en Puebla, Veracruz, Oaxaca, Chia...</title>
+      <title>📋 SMN Reporte Vespertino 01 JUN 2026: Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en Puebla, Veracruz, Oaxaca, Chia...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_01.pdf</link>
+      <description><![CDATA[Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en Puebla, Veracruz, Oaxaca, Chia... — Reporte Vespertino del 01 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_01.pdf]]></description>
+      <pubDate>Mon, 01 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_01</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 01 JUN 2026: A partir de hoy, se prevé un temporal de lluvias para el sur y sureste de México y la península de Yucatán</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_01.pdf</link>
-      <description><![CDATA[Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en Puebla, Veracruz, Oaxaca, Chia... — Reporte Matutino del 01 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_01.pdf]]></description>
+      <description><![CDATA[A partir de hoy, se prevé un temporal de lluvias para el sur y sureste de México y la península de Yucatán — Reporte Matutino del 01 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_01.pdf]]></description>
       <pubDate>Mon, 01 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_01</guid>
       <category>Comunicado</category>
@@ -70,14 +85,6 @@ Durante esta tarde y noche, se mantendrá un temporal de lluvias en el oriente y
       <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas del sur y sureste de México — Comunicado del 30 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_05_30.pdf]]></description>
       <pubDate>Sat, 30 May 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_05_30</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 29 MAY 2026: Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en zonas de Chiapas y Campeche</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_29.pdf</link>
-      <description><![CDATA[Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en zonas de Chiapas y Campeche — Reporte Vespertino del 29 MAY 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_05_29.pdf]]></description>
-      <pubDate>Fri, 29 May 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_05_29</guid>
       <category>Comunicado</category>
     </item>
   </channel>
