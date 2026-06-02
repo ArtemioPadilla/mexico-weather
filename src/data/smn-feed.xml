@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 02 Jun 2026 05:58:34 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jun 2026 08:00:34 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de junio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 02 de junio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Tue, 02 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-02-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias intensas a puntuales torrenciales (150 a 250 mm): Yucatán (oeste y norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas a puntuales torrenciales (150 a 250 mm): Yucatán (oeste y norte).]]></description>
-      <pubDate>Mon, 01 Jun 2026 23:58:21 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-01-f2cf</guid>
+      <pubDate>Tue, 02 Jun 2026 02:00:21 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-02-f2cf</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -36,17 +47,6 @@ Durante esta tarde y noche, se mantendrá un temporal de lluvias en el oriente y
       <pubDate>Mon, 01 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-06-01-304</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de junio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 01 de junio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Mon, 01 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-01-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 01 JUN 2026: Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en Puebla, Veracruz, Oaxaca, Chia...</title>
