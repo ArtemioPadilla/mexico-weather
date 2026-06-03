@@ -5,25 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 03 Jun 2026 14:03:33 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jun 2026 15:54:52 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 307 | 03 de Junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS MUY FUERTES EN EL NORTE, CENTRO Y SUR DEL PAÍS, E INTENSAS EN ZONAS DE COAHUILA, JALISCO, PUEBLA, VERACRUZ, OAXACA Y CHIAPAS
 
 ---
-]]></description>
-      <pubDate>Wed, 03 Jun 2026 08:03:30 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-03</guid>
+Pronóstico Meteorológico General
+No. Aviso: 307
+Ciudad de México a 03 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS MUY FUERTES EN EL NORTE, CENTRO Y SUR DEL PAÍS, E INTENSAS EN ZONAS DE COAHUILA, JALISCO, PUEBLA, VERACRUZ, OAXACA Y CHIAPAS
+
+ 
+
+Para hoy, una vaguada en niveles medios y altos de la atmósfera se extenderá sobre el oriente y sureste de México, en interacción con inestabilidad atmosférica y con la onda tropical núm. 4 que se desplazará sobre el sureste del país, generarán lluvias puntuales intensas en Chiapas (centro y sur), Oaxaca (norte, centro y sur), Veracruz (centro) y Puebla (centro, este y sur); puntuales muy fuertes en Tabasco (sur); y puntuales fuertes en Campeche (suroeste) y Yucatán (norte); y lluvias con intervalos de chubascos en Quintana Roo, acompañadas con descargas eléctricas y fuertes rachas de viento, además de posible caída de granizo. Dichas lluvias podrían originar el incremento en los niveles de ríos y arroyos, deslaves, inundaciones, encharcamientos y visibilidad reducida.…]]></description>
+      <pubDate>Wed, 03 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-03-307</guid>
       <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de junio del 2026 | Emisión 09:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 03 de junio del 2026
+Emisión: 09:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 03 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-03-12</guid>
+      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>⚠️ Alerta SMN: Temperaturas máximas superiores a 45 °C: Sonora (este) y Sinaloa (norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas superiores a 45 °C: Sonora (este) y Sinaloa (norte).]]></description>
-      <pubDate>Wed, 03 Jun 2026 08:03:27 -0600</pubDate>
+      <pubDate>Wed, 03 Jun 2026 09:54:42 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-03-90b4</guid>
       <category>Alerta</category>
     </item>
