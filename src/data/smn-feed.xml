@@ -5,17 +5,9 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 03 Jun 2026 23:01:53 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jun 2026 23:56:58 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Jalisco, Michoacán, Guerrero, Puebla, Veracruz, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): Chih, Coah, NL, SLP, Zac, Ags, Col, Gto, EdoMéx, CDMX, Mor, Tlax y Tab.]]></description>
-      <pubDate>Wed, 03 Jun 2026 17:01:43 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-03-1a7f</guid>
-      <category>Alerta</category>
-    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 307 | 03 de Junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -47,38 +39,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 03 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-03-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 03 JUN 2026: Para este miércoles se prevén lluvias intensas en regiones de Coahuila, Jalisco, Puebla, Veracruz, Oaxaca y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_3.pdf</link>
-      <description><![CDATA[Para este miércoles se prevén lluvias intensas en regiones de Coahuila, Jalisco, Puebla, Veracruz, Oaxaca y Chiapas — Reporte Matutino del 03 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_3.pdf]]></description>
-      <pubDate>Wed, 03 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_3</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 02 JUN 2026: Continuará el temporal de lluvias en el oriente, sur y sureste de México, así como en la península de Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_02.pdf</link>
-      <description><![CDATA[Continuará el temporal de lluvias en el oriente, sur y sureste de México, así como en la península de Yucatán — Reporte Matutino del 02 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_02.pdf]]></description>
-      <pubDate>Tue, 02 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_02</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 01 JUN 2026: Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en Puebla, Veracruz, Oaxaca, Chia...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_01.pdf</link>
-      <description><![CDATA[Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en Puebla, Veracruz, Oaxaca, Chia... — Reporte Vespertino del 01 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_01.pdf]]></description>
-      <pubDate>Mon, 01 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_01</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 01 JUN 2026: A partir de hoy, se prevé un temporal de lluvias para el sur y sureste de México y la península de Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_01.pdf</link>
-      <description><![CDATA[A partir de hoy, se prevé un temporal de lluvias para el sur y sureste de México y la península de Yucatán — Reporte Matutino del 01 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_01.pdf]]></description>
-      <pubDate>Mon, 01 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_01</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
