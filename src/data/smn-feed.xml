@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 03 Jun 2026 10:00:31 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jun 2026 12:00:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -23,7 +23,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Puebla (suroeste y sureste), Veracruz (centro y sur), Oaxaca (norte, noreste y centro) y Chiapas (este, centro y sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Puebla (suroeste y sureste), Veracruz (centro y sur), Oaxaca (norte, noreste y centro) y Chiapas (este, centro y sur).]]></description>
-      <pubDate>Wed, 03 Jun 2026 04:00:17 -0600</pubDate>
+      <pubDate>Wed, 03 Jun 2026 06:00:18 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-03-e808</guid>
       <category>Alerta</category>
     </item>
