@@ -5,29 +5,9 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 04 Jun 2026 15:30:18 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jun 2026 17:23:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 309 | 04 de Junio del 2026 | Emisión 06:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[PREVALECE EL TEMPORAL DE LLUVIAS EN LA MAYOR PARTE DE LA REPÚBLICA MEXICANA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 309
-Ciudad de México a 04 de Junio del 2026.
-Emisión: 06:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-PREVALECE EL TEMPORAL DE LLUVIAS EN LA MAYOR PARTE DE LA REPÚBLICA MEXICANA
-
-Este día, la interacción de una circulación ciclónica en niveles medios y altos de la atmósfera sobre el noroeste de México, canales de baja presión sobre el interior del país, inestabilidad en altura y el ingreso de humedad, mantendrán el temporal de lluvias en la mayor parte del territorio nacional, con lluvias fuertes a muy fuertes en regiones del norte, noreste, occidente y centro del país, además de lluvias puntuales intensas en zonas de Coahuila, Nuevo León, Jalisco y Michoacán. Dichas lluvias podrán acompañarse con descargas eléctricas, rachas de viento y posible caída de granizo. De igual forma, la onda tropical núm. 4 se integrará en la circulación de una zona de inestabilidad al sur de Chiapas, lo cual propiciará lluvias puntuales intensas en Puebla, Veracruz, Oaxaca y Chiapas, muy fuertes en Guerrero y Tabasco; así como chubascos y lluvias fuertes en la península de Yucatán.…]]></description>
-      <pubDate>Thu, 04 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-04-309</guid>
-      <category>Pronóstico General</category>
-    </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de junio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
@@ -40,10 +20,21 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[
+
+---
+]]></description>
+      <pubDate>Thu, 04 Jun 2026 11:23:44 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-04</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Coahuila (norte, centro y oeste), Nuevo León (centro y sur), Jalisco (noreste y sur), Michoacán (oeste y suroeste), Puebla (norte, este y sureste), Veracruz (centro y sur), Oaxaca (norte, oriente y sur) y Chiapas (norte, centro y sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California (noreste), Sonora, Chihuahua (suroeste), Durango (noroeste), Sinaloa y Nayarit (norte).]]></description>
-      <pubDate>Thu, 04 Jun 2026 09:30:08 -0600</pubDate>
+      <pubDate>Thu, 04 Jun 2026 11:23:41 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-04-df76</guid>
       <category>Alerta</category>
     </item>
