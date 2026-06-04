@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 04 Jun 2026 05:59:59 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jun 2026 07:58:24 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -15,16 +15,16 @@
 
 ---
 ]]></description>
-      <pubDate>Wed, 03 Jun 2026 23:59:54 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-03</guid>
+      <pubDate>Thu, 04 Jun 2026 01:58:21 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-04</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en Jalisco (sur y sureste), Michoacán (este, oeste y suroeste), Guerrero (norte y noroeste), Puebla (centro, este y sur), Veracruz (centro), Oaxaca (norte, centro y sur) y Chiapas (centro y sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en Jalisco (sur y sureste), Michoacán (este, oeste y suroeste), Guerrero (norte y noroeste), Puebla (centro, este y sur), Veracruz (centro), Oaxaca (norte, centro y sur) y Chiapas (centro y sur).]]></description>
-      <pubDate>Wed, 03 Jun 2026 23:59:51 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-03-70b3</guid>
+      <pubDate>Thu, 04 Jun 2026 01:58:18 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-04-70b3</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -34,17 +34,6 @@
       <pubDate>Wed, 03 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_03</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de junio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 03 de junio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Wed, 03 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-03-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 03 JUN 2026: Para este miércoles se prevén lluvias intensas en regiones de Coahuila, Jalisco, Puebla, Veracruz, Oaxaca y Chiapas</title>
