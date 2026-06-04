@@ -5,59 +5,27 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 04 Jun 2026 07:58:24 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jun 2026 09:37:00 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 308 | 03 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
+      <description><![CDATA[PREVALECE EL TEMPORAL DE LLUVIAS EN LA MAYOR PARTE DE MÉXICO
 
 ---
-]]></description>
-      <pubDate>Thu, 04 Jun 2026 01:58:21 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-04</guid>
+Pronóstico Meteorológico General
+No. Aviso: 308
+Ciudad de México a 03 de Junio del 2026.
+Emisión: 18:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+PREVALECE EL TEMPORAL DE LLUVIAS EN LA MAYOR PARTE DE MÉXICO
+
+Durante esta noche y madrugada del jueves, una vaguada en niveles medios y altos de la atmósfera se desplazará hacia el centro-oriente del golfo de México, su interacción con un canal de baja presión extendido sobre el centro y sureste del país, y el recorrido de la onda tropical núm. 4, ocasionarán lluvias puntuales intensas en zonas de Puebla (centro, este y sur), Guerrero (norte y noroeste), Veracruz (centro), Oaxaca (norte, centro y sur) y Chiapas (norte, centro y sur); lluvias muy fuertes en Tabasco (este, centro y sur); lluvias fuertes en Campeche (suroeste) y Yucatán (norte), así como chubascos en Quintana Roo.…]]></description>
+      <pubDate>Wed, 03 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-03-308</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en Jalisco (sur y sureste), Michoacán (este, oeste y suroeste), Guerrero (norte y noroeste), Puebla (centro, este y sur), Veracruz (centro), Oaxaca (norte, centro y sur) y Chiapas (centro y sur).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en Jalisco (sur y sureste), Michoacán (este, oeste y suroeste), Guerrero (norte y noroeste), Puebla (centro, este y sur), Veracruz (centro), Oaxaca (norte, centro y sur) y Chiapas (centro y sur).]]></description>
-      <pubDate>Thu, 04 Jun 2026 01:58:18 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-04-70b3</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 03 JUN 2026: Continuará el temporal de lluvias en gran parte de México, ocasionará lluvias intensas en siete entidades</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_03.pdf</link>
-      <description><![CDATA[Continuará el temporal de lluvias en gran parte de México, ocasionará lluvias intensas en siete entidades — Reporte Vespertino del 03 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_03.pdf]]></description>
-      <pubDate>Wed, 03 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_03</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 03 JUN 2026: Para este miércoles se prevén lluvias intensas en regiones de Coahuila, Jalisco, Puebla, Veracruz, Oaxaca y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_3.pdf</link>
-      <description><![CDATA[Para este miércoles se prevén lluvias intensas en regiones de Coahuila, Jalisco, Puebla, Veracruz, Oaxaca y Chiapas — Reporte Matutino del 03 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_3.pdf]]></description>
-      <pubDate>Wed, 03 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_3</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 02 JUN 2026: Continuará el temporal de lluvias en el oriente, sur y sureste de México, así como en la península de Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_02.pdf</link>
-      <description><![CDATA[Continuará el temporal de lluvias en el oriente, sur y sureste de México, así como en la península de Yucatán — Reporte Matutino del 02 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_02.pdf]]></description>
-      <pubDate>Tue, 02 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_02</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 01 JUN 2026: Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en Puebla, Veracruz, Oaxaca, Chia...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_01.pdf</link>
-      <description><![CDATA[Para esta noche se pronostican lluvias torrenciales en regiones de Yucatán e intensas en Puebla, Veracruz, Oaxaca, Chia... — Reporte Vespertino del 01 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_01.pdf]]></description>
-      <pubDate>Mon, 01 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_01</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
