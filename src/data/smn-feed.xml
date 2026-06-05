@@ -5,46 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 05 Jun 2026 13:25:13 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Jun 2026 15:26:28 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 311 | 05 de Junio del 2026 | Emisión 06:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[DURANTE ESTE DÍA, PREVALECERÁ EL TEMPORAL DE LLUVIAS EN LA MAYOR PARTE DE LA REPÚBLICA MEXICANA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 311
-Ciudad de México a 05 de Junio del 2026.
-Emisión: 06:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-DURANTE ESTE DÍA, PREVALECERÁ EL TEMPORAL DE LLUVIAS EN LA MAYOR PARTE DE LA REPÚBLICA MEXICANA
-
-Para hoy, una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera, sobre el noroeste y norte de México, canales de baja presión sobre el interior del territorio nacional, así como inestabilidad atmosférica y el ingreso de aire húmedo del océano Pacífico y golfo de México, mantendrán un temporal de lluvias, por lo que se pronostican lluvias puntuales intensas en Tamaulipas (oeste y suroeste), San Luis Potosí (este), Hidalgo (norte), Puebla (norte, este y sureste), Veracruz (norte y centro), Oaxaca (norte y centro) y Chiapas (centro y sur); lluvias muy fuertes en Nuevo León (norte y sur), Michoacán (oeste y centro), Querétaro (norte), Tlaxcala y Guerrero (norte y centro); lluvias puntuales fuertes en Chihuahua (centro y noreste), Coahuila (norte), Jalisco (sur y este), Colima, Guanajuato (noreste y suroeste), Morelos, Estado de México (norte, centro y suroeste), …]]></description>
-      <pubDate>Fri, 05 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-05-311</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de junio del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de junio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de junio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 05 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-05-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[
+
+---
+]]></description>
+      <pubDate>Fri, 05 Jun 2026 09:26:23 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-05</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas (40 a 45 °C): en zonas de Baja California, Sonora, Sinaloa, Chihuahua, Durango y Nayarit.]]></description>
-      <pubDate>Fri, 05 Jun 2026 07:25:03 -0600</pubDate>
+      <pubDate>Fri, 05 Jun 2026 09:26:20 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-05-e678</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 05 JUN 2026: Se prevén para este jueves lluvias intensas en regiones de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oax...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_6.pdf</link>
+      <description><![CDATA[Se prevén para este jueves lluvias intensas en regiones de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oax... — Reporte Matutino del 05 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_6.pdf]]></description>
+      <pubDate>Fri, 05 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_6</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 04 JUN 2026: Continuará el temporal de lluvias en gran parte de México</title>
@@ -76,14 +76,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Para este miércoles se prevén lluvias intensas en regiones de Coahuila, Jalisco, Puebla, Veracruz, Oaxaca y Chiapas — Reporte Matutino del 03 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_3.pdf]]></description>
       <pubDate>Wed, 03 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_3</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 02 JUN 2026: Continuará el temporal de lluvias en el oriente, sur y sureste de México, así como en la península de Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_02.pdf</link>
-      <description><![CDATA[Continuará el temporal de lluvias en el oriente, sur y sureste de México, así como en la península de Yucatán — Reporte Matutino del 02 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_02.pdf]]></description>
-      <pubDate>Tue, 02 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_02</guid>
       <category>Comunicado</category>
     </item>
   </channel>
