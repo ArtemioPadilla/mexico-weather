@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 05 Jun 2026 18:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Jun 2026 19:00:05 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas máximas (40 a 45 °C): en zonas de Baja California, Sonora, Sinaloa, Chihuahua, Durango y Nayarit.]]></description>
+      <pubDate>Fri, 05 Jun 2026 12:59:52 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-05-e678</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 311 | 05 de Junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -28,23 +36,15 @@ Para hoy, una circulación ciclónica y una vaguada en niveles medios y altos d
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de junio del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de junio del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de junio del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 05 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-05-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas (40 a 45 °C): en zonas de Baja California, Sonora, Sinaloa, Chihuahua, Durango y Nayarit.]]></description>
-      <pubDate>Fri, 05 Jun 2026 11:59:48 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-05-e678</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 05 JUN 2026: Se prevén para este jueves lluvias intensas en regiones de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oax...</title>
