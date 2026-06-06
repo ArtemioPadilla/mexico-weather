@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 06 Jun 2026 14:53:44 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jun 2026 15:47:50 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -29,11 +29,11 @@ Este día, continuará el temporal de lluvias fuertes a muy fuertes sobre enti
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de junio del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de junio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 06 de junio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 06 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-06-12</guid>
@@ -43,7 +43,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): Oaxaca.]]></description>
-      <pubDate>Sat, 06 Jun 2026 08:53:35 -0600</pubDate>
+      <pubDate>Sat, 06 Jun 2026 09:47:40 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-06-5cc4</guid>
       <category>Alerta</category>
     </item>
