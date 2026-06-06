@@ -5,17 +5,9 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 06 Jun 2026 03:30:47 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jun 2026 05:39:43 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Nuevo León, Michoacán, Querétaro, Tlaxcala y Guerrero.]]></description>
-      <pubDate>Fri, 05 Jun 2026 21:30:41 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-05-f098</guid>
-      <category>Alerta</category>
-    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 312 | 05 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -36,36 +28,15 @@ En el transcurso de la noche de hoy y madrugada del sábado, prevalecerá el tem
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 05 JUN 2026: Esta noche y el fin de semana, seguirá el temporal de lluvias en gran parte de México con precipitaciones intensas en ...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_6.pdf</link>
-      <description><![CDATA[Esta noche y el fin de semana, seguirá el temporal de lluvias en gran parte de México con precipitaciones intensas en ... — Reporte Matutino del 05 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_6.pdf]]></description>
-      <pubDate>Fri, 05 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_6</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 04 JUN 2026: Continuará el temporal de lluvias en gran parte de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_04.pdf</link>
-      <description><![CDATA[Continuará el temporal de lluvias en gran parte de México — Reporte Vespertino del 04 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_04.pdf]]></description>
-      <pubDate>Thu, 04 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_04</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 04 JUN 2026: Hoy prevalecerá el temporal de lluvias con precipitaciones de fuertes a intensas en la mayor parte de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_4.pdf</link>
-      <description><![CDATA[Hoy prevalecerá el temporal de lluvias con precipitaciones de fuertes a intensas en la mayor parte de México — Reporte Matutino del 04 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_4.pdf]]></description>
-      <pubDate>Thu, 04 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_4</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 03 JUN 2026: Continuará el temporal de lluvias en gran parte de México, ocasionará lluvias intensas en siete entidades</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_03.pdf</link>
-      <description><![CDATA[Continuará el temporal de lluvias en gran parte de México, ocasionará lluvias intensas en siete entidades — Reporte Vespertino del 03 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_03.pdf]]></description>
-      <pubDate>Wed, 03 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_03</guid>
-      <category>Comunicado</category>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de junio del 2026 | Emisión 21:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 05 de junio del 2026
+Emisión: 21:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 05 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-05-12</guid>
+      <category>Aviso Tormentas</category>
     </item>
   </channel>
 </rss>
