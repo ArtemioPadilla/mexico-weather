@@ -5,9 +5,29 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 06 Jun 2026 12:48:46 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jun 2026 13:59:50 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 313 | 06 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE MANTIENE EL TEMPORAL DE LLUVIAS EN GRAN PARTE DE LA REPÚBLICA MEXICANA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 313
+Ciudad de México a 06 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+SE MANTIENE EL TEMPORAL DE LLUVIAS EN GRAN PARTE DE LA REPÚBLICA MEXICANA
+
+Este día, continuará el temporal de lluvias fuertes a muy fuertes sobre entidades del norte, occidente, centro, oriente, sur y sureste de México, con lluvias puntuales torrenciales en Oaxaca (norte) y lluvias puntuales intensas en Guerrero (costa), Puebla (norte, este y sureste), Veracruz (norte y centro) y Chiapas (centro y sur) debido a una vaguada en niveles medios y altos de la atmósfera, canales de baja presión en el interior del territorio nacional, inestabilidad atmosférica y el abundante ingreso de humedad generado por dos zonas de baja presión con probabilidad para desarrollo ciclónico, localizadas frente a las costas del Pacífico sur mexicano. Por otra parte, un canal de baja presión sobre la península de Yucatán, aunado al ingreso de humedad del mar Caribe, ocasionará lluvias y chubascos en la región mencionada.…]]></description>
+      <pubDate>Sat, 06 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-06-313</guid>
+      <category>Pronóstico General</category>
+    </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
@@ -20,21 +40,10 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
-
----
-]]></description>
-      <pubDate>Sat, 06 Jun 2026 06:48:42 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-06</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
       <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): Oaxaca.]]></description>
-      <pubDate>Sat, 06 Jun 2026 06:48:39 -0600</pubDate>
+      <pubDate>Sat, 06 Jun 2026 07:59:43 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-06-5cc4</guid>
       <category>Alerta</category>
     </item>
