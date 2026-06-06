@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 06 Jun 2026 16:43:55 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jun 2026 17:44:10 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>📋 SMN Comunicado 06 JUN 2026: Continuará este sábado el temporal de lluvias en la mayor parte de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_6.pdf</link>
+      <description><![CDATA[Continuará este sábado el temporal de lluvias en la mayor parte de México — Comunicado del 06 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_6.pdf]]></description>
+      <pubDate>Sat, 06 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_06_6</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 313 | 06 de Junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -43,7 +51,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chiapas, San Luis Potosí, Hidalgo, Puebla y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chiapas, San Luis Potosí, Hidalgo, Puebla y Veracruz.]]></description>
-      <pubDate>Sat, 06 Jun 2026 10:43:45 -0600</pubDate>
+      <pubDate>Sat, 06 Jun 2026 11:44:00 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-06-8bc2</guid>
       <category>Alerta</category>
     </item>
@@ -77,14 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Hoy prevalecerá el temporal de lluvias con precipitaciones de fuertes a intensas en la mayor parte de México — Reporte Matutino del 04 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_4.pdf]]></description>
       <pubDate>Thu, 04 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_4</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 03 JUN 2026: Continuará el temporal de lluvias en gran parte de México, ocasionará lluvias intensas en siete entidades</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_03.pdf</link>
-      <description><![CDATA[Continuará el temporal de lluvias en gran parte de México, ocasionará lluvias intensas en siete entidades — Reporte Vespertino del 03 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_03.pdf]]></description>
-      <pubDate>Wed, 03 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_03</guid>
       <category>Comunicado</category>
     </item>
   </channel>
