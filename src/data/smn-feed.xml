@@ -5,21 +5,21 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 07 Jun 2026 21:45:13 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 22:41:39 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150-250 mm): en zonas de Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75-150 mm): en zonas de Michoacán, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 07 Jun 2026 15:45:05 -0600</pubDate>
+      <pubDate>Sun, 07 Jun 2026 16:41:31 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-07-1270</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 07 JUN 2026: El Gobierno de México llama a extremar medidas de prevención ante los efectos de la depresión tropical Dos-E en costa...</title>
+      <title>📋 SMN Comunicado 07 JUN 2026: La depresión tropical Dos-E se localizó frente a las costas de Guerrero</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado091-26.pdf</link>
-      <description><![CDATA[El Gobierno de México llama a extremar medidas de prevención ante los efectos de la depresión tropical Dos-E en costa... — Comunicado del 07 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado091-26.pdf]]></description>
+      <description><![CDATA[La depresión tropical Dos-E se localizó frente a las costas de Guerrero — Comunicado del 07 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado091-26.pdf]]></description>
       <pubDate>Sun, 07 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Comunicado091-26</guid>
       <category>Comunicado</category>
@@ -52,6 +52,17 @@ Para hoy, prevalecerá un temporal de lluvias sobre entidades del noreste, orien
       <category>Pronóstico General</category>
     </item>
     <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de junio del 2026 | Emisión 15:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 07 de junio del 2026
+Emisión: 15:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sun, 07 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-07-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
       <title>📋 SMN Comunicado 06 JUN 2026: Continuará este sábado el temporal de lluvias en la mayor parte de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_6.pdf</link>
       <description><![CDATA[Continuará este sábado el temporal de lluvias en la mayor parte de México — Comunicado del 06 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_6.pdf]]></description>
@@ -65,14 +76,6 @@ Para hoy, prevalecerá un temporal de lluvias sobre entidades del noreste, orien
       <description><![CDATA[Esta noche y el fin de semana, seguirá el temporal de lluvias en gran parte de México con precipitaciones intensas en ... — Reporte Vespertino del 05 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_05.pdf]]></description>
       <pubDate>Fri, 05 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_05</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 05 JUN 2026: Se prevén para este jueves lluvias intensas en regiones de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oax...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_6.pdf</link>
-      <description><![CDATA[Se prevén para este jueves lluvias intensas en regiones de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oax... — Reporte Matutino del 05 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_6.pdf]]></description>
-      <pubDate>Fri, 05 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_6</guid>
       <category>Comunicado</category>
     </item>
   </channel>
