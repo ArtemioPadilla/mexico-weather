@@ -5,13 +5,13 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 07 Jun 2026 16:48:38 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 17:46:46 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>📋 SMN Comunicado 07 JUN 2026: Hoy seguirá el temporal de lluvias en la mayor parte de México con precipitaciones torrenciales en la costa de Guerrer...</title>
+      <title>📋 SMN Comunicado 07 JUN 2026: El Gobierno de México llama a extremar medidas de prevención ante los efectos de la depresión tropical Dos-E en costa...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_7.pdf</link>
-      <description><![CDATA[Hoy seguirá el temporal de lluvias en la mayor parte de México con precipitaciones torrenciales en la costa de Guerrer... — Comunicado del 07 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_7.pdf]]></description>
+      <description><![CDATA[El Gobierno de México llama a extremar medidas de prevención ante los efectos de la depresión tropical Dos-E en costa... — Comunicado del 07 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_7.pdf]]></description>
       <pubDate>Sun, 07 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_06_7</guid>
       <category>Comunicado</category>
@@ -50,7 +50,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Guerrero.]]></description>
-      <pubDate>Sun, 07 Jun 2026 10:48:27 -0600</pubDate>
+      <pubDate>Sun, 07 Jun 2026 11:46:36 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-07-6f2c</guid>
       <category>Alerta</category>
     </item>
@@ -76,14 +76,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén para este jueves lluvias intensas en regiones de San Luis Potosí, Hidalgo, Puebla, Tamaulipas, Veracruz, Oax... — Reporte Matutino del 05 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_6.pdf]]></description>
       <pubDate>Fri, 05 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_6</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 04 JUN 2026: Continuará el temporal de lluvias en gran parte de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_04.pdf</link>
-      <description><![CDATA[Continuará el temporal de lluvias en gran parte de México — Reporte Vespertino del 04 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_04.pdf]]></description>
-      <pubDate>Thu, 04 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_04</guid>
       <category>Comunicado</category>
     </item>
   </channel>
