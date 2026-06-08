@@ -1,1 +1,1 @@
-{"updated":"2026-06-08T16:46:21Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Boris","lat":16.0,"lng":-99.2,"classification":"TS","intensityKt":35.0},{"name":"Three-E","lat":11.5,"lng":-87.5,"classification":"TD","intensityKt":30.0}]}
+{"updated":"2026-06-08T17:59:33Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Boris","lat":15.3,"lng":-99.2,"classification":"TS","intensityKt":40.0},{"name":"Cristina","lat":11.7,"lng":-87.7,"classification":"TS","intensityKt":40.0}]}
