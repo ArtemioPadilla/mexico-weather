@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 08 Jun 2026 05:59:39 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2026 08:08:32 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de junio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 08 de junio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-08-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm) en: zonas de Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en: zonas de Michoacán, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 07 Jun 2026 23:59:29 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-07-acc0</guid>
+      <pubDate>Mon, 08 Jun 2026 02:08:23 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-08-acc0</guid>
       <category>Alerta</category>
     </item>
     <item>
