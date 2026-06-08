@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 07 Jun 2026 23:41:44 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2026 01:28:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150-250 mm): en zonas de Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75-150 mm): en zonas de Michoacán, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 07 Jun 2026 17:41:36 -0600</pubDate>
+      <pubDate>Sun, 07 Jun 2026 19:28:33 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-07-1270</guid>
       <category>Alerta</category>
     </item>
@@ -33,30 +33,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 315 | 07 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 316 | 07 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[TEMPORAL DE LLUVIAS SE MANTENDRÁ EN GRAN PARTE DE LA REPÚBLICA MEXICANA
+      <description><![CDATA[SE MANTENDRÁ EL TEMPORAL DE LLUVIAS EN GRAN PARTE DE LA REPÚBLICA MEXICANA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 315
+No. Aviso: 316
 Ciudad de México a 07 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-TEMPORAL DE LLUVIAS SE MANTENDRÁ EN GRAN PARTE DE LA REPÚBLICA MEXICANA
+SE MANTENDRÁ EL TEMPORAL DE LLUVIAS EN GRAN PARTE DE LA REPÚBLICA MEXICANA
 
-Para hoy, prevalecerá un temporal de lluvias sobre entidades del noreste, oriente, centro, occidente, sur y sureste del país, incluido el valle de México; debido a la interacción de dos zonas de baja presión con alta probabilidad para desarrollo ciclónico en las costas del Pacífico Sur Mexicano, con una vaguada en niveles medios y altos de la atmósfera sobre el norte y noreste del país, además de canales de baja presión en el interior del territorio nacional e inestabilidad atmosférica; pronosticándose lluvias puntuales torrenciales en Guerrero (costa); puntuales intensas en Puebla (suroeste), Michoacán (noreste y costa), Oaxaca (norte y suroeste) y Chiapas (sur); puntuales muy fuertes en Colima, Jalisco (sur), Estado de México (norte y suroeste), Morelos (sur), Veracruz (norte y centro), Hidalgo (norte y este), Querétaro (norte), Guanajuato (sureste), San Luis Potosí (este) y Tamaulipas (sur); puntuales fuert…]]></description>
+Para esta noche y madrugada del lunes, prevalecerá el temporal de lluvias fuertes a muy fuertes sobre entidades del noreste, oriente, centro, occidente, sur y sureste del país, incluido el valle de México, debido a la interacción de la depresión tropical Dos-E del océano Pacífico que se ha generado al sur de las costas de Guerrero, una vaguada en niveles medios y altos de la atmósfera, además de canales de baja presión e inestabilidad atmosférica; pronosticándose lluvias puntuales torrenciales y rachas de viento de hasta 80 km/h en Guerrero (oeste y costa); lluvias puntuales intensas en Michoacán (sureste y costa), Oaxaca (suroeste) y Chiapas (sur); puntuales muy fuertes en Jalisco (sur), Colima, Tamaulipas (sur), San Luis Potosí (este), Guanajuato (sureste), Querétaro (norte y sur), Hidalgo (norte, este y sureste), Veracruz (norte, centro y sur), Puebla (norte, sureste y suroeste), Estado de México (norte …]]></description>
       <pubDate>Sun, 07 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-07-315</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-07-316</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 07 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 07 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-07-12</guid>
