@@ -1,1 +1,1 @@
-{"updated":"2026-06-08T09:05:44Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Amanda","lat":11.3,"lng":-136.3,"classification":"PTC","intensityKt":25.0},{"name":"Boris","lat":15.9,"lng":-99.2,"classification":"TS","intensityKt":35.0}]}
+{"updated":"2026-06-08T10:53:08Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Boris","lat":15.9,"lng":-99.2,"classification":"TS","intensityKt":35.0}]}
