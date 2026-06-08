@@ -1,1 +1,1 @@
-{"updated":"2026-06-08T02:19:58Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Amanda","lat":11.3,"lng":-135.7,"classification":"TD","intensityKt":30.0},{"name":"Two-E","lat":15.5,"lng":-99.5,"classification":"TD","intensityKt":30.0}]}
+{"updated":"2026-06-08T03:45:42Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Amanda","lat":11.3,"lng":-136.3,"classification":"PTC","intensityKt":25.0},{"name":"Two-E","lat":15.3,"lng":-99.4,"classification":"TD","intensityKt":30.0}]}
