@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 08 Jun 2026 13:49:10 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2026 15:33:10 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -25,32 +25,41 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 317 | 08 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE MANTENDRÁ EL TEMPORAL DE LLUVIAS EN GRAN PARTE DE LA REPÚBLICA MEXICANA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 317
+Ciudad de México a 08 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+SE MANTENDRÁ EL TEMPORAL DE LLUVIAS EN GRAN PARTE DE LA REPÚBLICA MEXICANA
+
+Este día, prevalecerá el temporal de lluvias fuertes a muy fuertes sobre entidades del noreste, oriente, centro, occidente, sur y sureste del país, incluido el valle de México, con lluvias intensas a puntuales torrenciales en zonas de Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chiapas, Veracruz, Puebla, San Luis Potosí y Tamaulipas, debido a la interacción de la tormenta tropical Boris del océano Pacífico, con una vaguada en niveles medios y altos de la atmósfera, canales de baja presión y con inestabilidad atmosférica. Por otra parte, el desplazamiento de la onda tropical núm.…]]></description>
+      <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-08-317</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de junio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de junio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-08-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
-
----
-]]></description>
-      <pubDate>Mon, 08 Jun 2026 07:49:06 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-08</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
       <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 60 a 80 km/h con rachas de 90 a 110 km/h: costa de Guerrero.]]></description>
-      <pubDate>Mon, 08 Jun 2026 07:49:03 -0600</pubDate>
+      <pubDate>Mon, 08 Jun 2026 09:32:58 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-08-3343</guid>
       <category>Alerta</category>
     </item>
