@@ -5,35 +5,62 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 09 Jun 2026 11:28:06 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2026 13:19:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>📋 SMN Reporte Vespertino 09 JUN 2026: La tormenta tropical Boris tocó tierra esta madrugada entre los límites entre Guerrero y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_08.pdf</link>
-      <description><![CDATA[La tormenta tropical Boris tocó tierra esta madrugada entre los límites entre Guerrero y Oaxaca — Reporte Vespertino del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_08.pdf]]></description>
-      <pubDate>Tue, 09 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_08</guid>
+      <title>📋 SMN Comunicado 09 JUN 2026: La tormenta tropical Boris tocó tierra esta madrugada entre los límites de Guerrero y Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso09-26.pdf</link>
+      <description><![CDATA[La tormenta tropical Boris tocó tierra esta madrugada entre los límites de Guerrero y Oaxaca — Comunicado del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso09-26.pdf]]></description>
+      <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso09-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de junio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 319 | 09 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS VERACRUZ, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 319
+Ciudad de México a 09 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS VERACRUZ, OAXACA Y CHIAPAS
+
+Para hoy, se prevé que la depresión tropical Boris se desplace sobre Guerrero, e interaccionarán con canales de baja presión en el interior del país, inestabilidad atmosférica y con el ingreso de aire húmedo del océano Pacífico, golfo de México y mar Caribe, lo que originará lluvias puntuales intensas en Veracruz (sur), Oaxaca (este y noreste) y Chiapas (sur); puntuales muy fuertes en Jalisco (sur), Colima, Michoacán (costa) y Guerrero (este y suroeste); puntuales fuertes en Chihuahua (suroeste), Durango (noroeste), San Luis Potosí (este), Nayarit (sur), Guanajuato (suroeste), Querétaro (norte), Hidalgo (norte y este), Puebla (norte y sureste), Tlaxcala, Morelos, Estado de México (oeste y suroeste), Ciudad de México, Tamaulipas (sur), Tabasco (oeste y sur), Campeche (suroeste), Yucatán (este) y Quintana Roo (norte y costa); y chubascos en Coahuila, Nuevo León, Sinaloa, Zacatecas y Aguascalientes.…]]></description>
+      <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-09-319</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 09 de junio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-09-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): Guerrero (sureste y costa) y Oaxaca (oeste y sur).</title>
+      <title>⚠️ Alerta SMN: Temperaturas máximas superiores a 45 °C: Sonora (este).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 60 a 80 km/h con rachas de 90 a 110 km/h: costas de Guerrero.]]></description>
-      <pubDate>Tue, 09 Jun 2026 05:27:54 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-09-edfc</guid>
+      <description><![CDATA[Temperaturas máximas superiores a 45 °C: Sonora (este).]]></description>
+      <pubDate>Tue, 09 Jun 2026 07:19:38 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-09-ad09</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 08 JUN 2026: Boris se acerca lentamente a la costa y esta noche se encuentra a 75 kilómetros al sur-sureste de Punta Maldonado, Guer...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_08.pdf</link>
+      <description><![CDATA[Boris se acerca lentamente a la costa y esta noche se encuentra a 75 kilómetros al sur-sureste de Punta Maldonado, Guer... — Reporte Vespertino del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_08.pdf]]></description>
+      <pubDate>Mon, 08 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_08</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 08 JUN 2026: Boris se acerca lentamente a la costa; está a 45 km al sureste de Punta Maldonado, Guerrero</title>
@@ -58,27 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 06-26</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 318 | 08 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[ESTA TARDE Y NOCHE, SE PRONOSTICAN LLUVIAS INTENSAS A PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS, VERACRUZ Y PUEBLA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 318
-Ciudad de México a 08 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-ESTA TARDE Y NOCHE, SE PRONOSTICAN LLUVIAS INTENSAS A PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS, VERACRUZ Y PUEBLA
-
-En el transcurso de esta noche y madrugada del martes, la tormenta tropical Boris generará lluvias puntuales torrenciales en Guerrero (sureste y costa) y Oaxaca (oeste y sur), lluvias intensas en Jalisco (este y sur), Colima y Michoacán (centro, costa y sureste), además de viento de 60 a 80 km/h con rachas de 90 a 110 km/h en la costa de Guerrero; de 50 a 60 km/h con rachas de 70 a 90 km/h en las costas de Michoacán y Oaxaca (oeste), y de 30 a 40 km/h con rachas de 50 a 70 km/h en las costas de Jalisco y Colima, así como oleaje de 4.0 a 5.0 metros de altura en las costas de Michoacán, Guerrero y Oaxaca (oeste), y oleaje de 3.0 a 4.0 metros de altura en las costas de Jalisco y Colima.…]]></description>
-      <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-08-318</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
