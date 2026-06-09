@@ -5,16 +5,32 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 08 Jun 2026 21:08:01 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2026 05:45:28 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): Guerrero (sureste y costa) y Oaxaca (oeste y sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 60 a 80 km/h con rachas de 90 a 110 km/h: costa de Guerrero.]]></description>
-      <pubDate>Mon, 08 Jun 2026 15:07:52 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-08-3343</guid>
+      <description><![CDATA[Viento de 60 a 80 km/h con rachas de 90 a 110 km/h: costas de Guerrero.]]></description>
+      <pubDate>Mon, 08 Jun 2026 23:45:18 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-08-edfc</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 08 JUN 2026: Boris se acerca lentamente a la costa; está a 45 km al sureste de Punta Maldonado, Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_08.pdf</link>
+      <description><![CDATA[Boris se acerca lentamente a la costa; está a 45 km al sureste de Punta Maldonado, Guerrero — Reporte Vespertino del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_08.pdf]]></description>
+      <pubDate>Mon, 08 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_08</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 08 JUN 2026: Boris genera lluvias torrenciales en zonas de Guerrero y Oaxaca, e intensas en Jalisco, Colima y Michoacán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso07-26.pdf</link>
+      <description><![CDATA[Boris genera lluvias torrenciales en zonas de Guerrero y Oaxaca, e intensas en Jalisco, Colima y Michoacán — Comunicado del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso07-26.pdf]]></description>
+      <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso07-26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 08 JUN 2026: La tormenta tropical Boris se localiza a 130 km al sur-suroeste de Punta Maldonado, Guerrero</title>
@@ -33,59 +49,36 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 08 JUN 2026: La tormenta tropical Boris se localiza a 80 km al suroeste de Punta Maldonado, Guerrero</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso04-26.pdf</link>
-      <description><![CDATA[La tormenta tropical Boris se localiza a 80 km al suroeste de Punta Maldonado, Guerrero — Comunicado del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso04-26.pdf]]></description>
-      <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso04-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 08 JUN 2026: La depresión tropical Dos-E se ha intensificado a tormenta tropical Boris</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso03-26.pdf</link>
-      <description><![CDATA[La depresión tropical Dos-E se ha intensificado a tormenta tropical Boris — Comunicado del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso03-26.pdf]]></description>
-      <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso03-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 317 | 08 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 318 | 08 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE MANTENDRÁ EL TEMPORAL DE LLUVIAS EN GRAN PARTE DE LA REPÚBLICA MEXICANA
+      <description><![CDATA[ESTA TARDE Y NOCHE, SE PRONOSTICAN LLUVIAS INTENSAS A PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS, VERACRUZ Y PUEBLA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 317
+No. Aviso: 318
 Ciudad de México a 08 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
+ 
 
-SE MANTENDRÁ EL TEMPORAL DE LLUVIAS EN GRAN PARTE DE LA REPÚBLICA MEXICANA
+ESTA TARDE Y NOCHE, SE PRONOSTICAN LLUVIAS INTENSAS A PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS, VERACRUZ Y PUEBLA
 
-Este día, prevalecerá el temporal de lluvias fuertes a muy fuertes sobre entidades del noreste, oriente, centro, occidente, sur y sureste del país, incluido el valle de México, con lluvias intensas a puntuales torrenciales en zonas de Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chiapas, Veracruz, Puebla, San Luis Potosí y Tamaulipas, debido a la interacción de la tormenta tropical Boris del océano Pacífico, con una vaguada en niveles medios y altos de la atmósfera, canales de baja presión y con inestabilidad atmosférica. Por otra parte, el desplazamiento de la onda tropical núm.…]]></description>
+En el transcurso de esta noche y madrugada del martes, la tormenta tropical Boris generará lluvias puntuales torrenciales en Guerrero (sureste y costa) y Oaxaca (oeste y sur), lluvias intensas en Jalisco (este y sur), Colima y Michoacán (centro, costa y sureste), además de viento de 60 a 80 km/h con rachas de 90 a 110 km/h en la costa de Guerrero; de 50 a 60 km/h con rachas de 70 a 90 km/h en las costas de Michoacán y Oaxaca (oeste), y de 30 a 40 km/h con rachas de 50 a 70 km/h en las costas de Jalisco y Colima, así como oleaje de 4.0 a 5.0 metros de altura en las costas de Michoacán, Guerrero y Oaxaca (oeste), y oleaje de 3.0 a 4.0 metros de altura en las costas de Jalisco y Colima.…]]></description>
       <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-08-317</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-08-318</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de junio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de junio del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-08-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 08 JUN 2026: Por tormenta tropical Boris se pronostican lluvias torrenciales en zonas de Guerrero y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_08.pdf</link>
-      <description><![CDATA[Por tormenta tropical Boris se pronostican lluvias torrenciales en zonas de Guerrero y Oaxaca — Reporte Matutino del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_08.pdf]]></description>
-      <pubDate>Mon, 08 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_08</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
