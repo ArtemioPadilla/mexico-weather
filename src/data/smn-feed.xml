@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 09 Jun 2026 21:00:33 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2026 21:57:40 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Temperaturas máximas superiores a 45 °C: Sonora (este).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas superiores a 45 °C: Sonora (este).]]></description>
-      <pubDate>Tue, 09 Jun 2026 15:00:22 -0600</pubDate>
+      <pubDate>Tue, 09 Jun 2026 15:57:33 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-09-ad09</guid>
       <category>Alerta</category>
     </item>
@@ -50,17 +50,6 @@ Para hoy, se prevé que la depresión tropical Boris se desplace sobre Guerrero,
       <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-06-09-319</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de junio del 2026 | Emisión 15:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 09 de junio del 2026
-Emisión: 15:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-09-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 08 JUN 2026: Boris se acerca lentamente a la costa y esta noche se encuentra a 75 kilómetros al sur-sureste de Punta Maldonado, Guer...</title>
