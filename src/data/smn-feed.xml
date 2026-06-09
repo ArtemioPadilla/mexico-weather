@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 09 Jun 2026 19:05:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2026 20:02:06 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Temperaturas máximas superiores a 45 °C: Sonora (este).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas superiores a 45 °C: Sonora (este).]]></description>
-      <pubDate>Tue, 09 Jun 2026 13:04:50 -0600</pubDate>
+      <pubDate>Tue, 09 Jun 2026 14:01:57 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-09-ad09</guid>
       <category>Alerta</category>
     </item>
