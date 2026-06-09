@@ -1,1 +1,1 @@
-{"updated":"2026-06-09T13:53:49Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Boris","lat":16.7,"lng":-98.5,"classification":"TD","intensityKt":30.0},{"name":"Cristina","lat":12.7,"lng":-87.8,"classification":"TS","intensityKt":35.0}]}
+{"updated":"2026-06-09T16:13:54Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Boris","lat":16.9,"lng":-98.9,"classification":"PTC","intensityKt":25.0},{"name":"Cristina","lat":12.5,"lng":-87.7,"classification":"TS","intensityKt":35.0}]}
