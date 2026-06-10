@@ -8,6 +8,8 @@ import {
   buildForecastUrl,
   requestJsonWithRetry,
   WMO,
+  WMO_LABEL_TO_CODE,
+  translateCondition,
 } from './weather';
 
 function dailyPayload(over: Record<string, unknown[]> = {}) {
@@ -52,6 +54,55 @@ describe('WMO mapping', () => {
 
   it('falls back to em-dash for unknown codes', () => {
     expect(describeWeatherCode(123)).toBe('—');
+  });
+});
+
+describe('WMO_LABEL_TO_CODE', () => {
+  it('first code wins for duplicate labels (code 0 beats code 1 for Despejado ☀️)', () => {
+    // DATA-8: WMO codes 0 and 1 both map to 'Despejado ☀️'; first (0) must win.
+    expect(WMO_LABEL_TO_CODE[WMO['0']!]).toBe('0');
+  });
+});
+
+describe('translateCondition — build-city-forecasts.py parity', () => {
+  // Full list of Spanish labels emitted by scripts/build-city-forecasts.py
+  // WMO_LABELS dict. Keep in sync with that script.
+  const PY_WMO_LABELS = [
+    'Despejado',
+    'Mayormente despejado',
+    'Parcialmente nublado',
+    'Nublado',
+    'Niebla',
+    'Niebla con escarcha',
+    'Llovizna ligera',
+    'Llovizna',
+    'Llovizna intensa',
+    'Lluvia ligera',
+    'Lluvia',
+    'Lluvia intensa',
+    'Nevada ligera',
+    'Nevada',
+    'Nevada intensa',
+    'Chubascos',
+    'Chubascos intensos',
+    'Chubascos violentos',
+    'Tormenta',
+    'Tormenta con granizo',
+    'Tormenta severa',
+  ];
+
+  it('translates every Python-emitted WMO label to English (not a passthrough)', () => {
+    for (const label of PY_WMO_LABELS) {
+      const translated = translateCondition(label, 'en');
+      expect(translated, `label '${label}' should be translated`).not.toBe(label);
+      expect(translated.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('returns the original label unchanged when lang is es', () => {
+    for (const label of PY_WMO_LABELS) {
+      expect(translateCondition(label, 'es')).toBe(label);
+    }
   });
 });
 

@@ -48,6 +48,8 @@ def epa_color(pm: float) -> str:
         return '#f97316'  # USG
     if pm < 150:
         return '#dc2626'  # unhealthy
+    if pm < 250:
+        return '#a855f7'  # very-unhealthy (matches src/lib/aqi.ts bg-purple band)
     return '#7c2d12'  # hazardous
 
 
