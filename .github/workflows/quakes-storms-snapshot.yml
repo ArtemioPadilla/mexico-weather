@@ -46,12 +46,14 @@ jobs:
           for f in public/data/quakes-snapshot.json public/data/storms-snapshot.json; do
             git add "$f"
           done
-          if ! git diff --staged --quiet; then
+          # `|| ( … )` instead of `if`: bash -e exempts commands inside an
+          # if/then block, so a failed push would exit 0 silently there.
+          git diff --staged --quiet || (
             git commit -m 'chore: refresh quakes + storms snapshots' &&
             git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
-          fi
+          )
 
       - name: Trigger CD deploy
         if: steps.commit.outputs.committed == 'true'
