@@ -2911,6 +2911,7 @@ export async function initInteractiveMap(
       tlPlayer.stop(); // clears the timeline timer if running
       fieldAbort?.abort();
       fieldAbort = null;
+      revokeFieldBlob(); // free the last field raster blob URL
       placePopup?.remove();
       placePopup = null;
       window.clearTimeout(hashTimer);
