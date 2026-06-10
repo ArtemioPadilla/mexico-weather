@@ -5,37 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 10 Jun 2026 13:33:53 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2026 15:32:03 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 321 | 10 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS INTENSAS EN PUEBLA, VERACRUZ, OAXACA, CHIAPAS, CAMPECHE Y QUINTANA ROO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 321
+Ciudad de México a 10 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS INTENSAS EN PUEBLA, VERACRUZ, OAXACA, CHIAPAS, CAMPECHE Y QUINTANA ROO
+
+Este día, una circulación ciclónica en altura sobre el sur del golfo de México, un canal de baja presión sobre el sureste mexicano e inestabilidad atmosférica, originarán lluvias muy fuertes a puntuales intensas en las regiones mencionadas, incluida la península de Yucatán. Por otra parte, canales de baja presión en el interior del país, en interacción con inestabilidad atmosférica y con el ingreso de humedad del océano Pacífico y golfo de México, ocasionarán lluvias puntuales intensas en Puebla (suroeste y sureste); así como lluvias fuertes a muy fuertes en el norte, occidente y centro del territorio nacional, incluido el Valle de México; además de chubascos en el resto del territorio nacional. Se mantendrá oleaje elevado en las costas del Pacífico mexicano y en las costas de Quintana Roo.…]]></description>
+      <pubDate>Wed, 10 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-10-321</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de junio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 10 de junio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 10 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-10-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
-
----
-]]></description>
-      <pubDate>Wed, 10 Jun 2026 07:33:48 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-10</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Temperaturas máximas superiores a 45 °C: Sonora (este).</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) zonas de Puebla, Veracruz, Oaxaca, Chiapas, Campeche y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas superiores a 45 °C: Sonora (este).]]></description>
-      <pubDate>Wed, 10 Jun 2026 07:33:45 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-10-ad09</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) zonas de Puebla, Veracruz, Oaxaca, Chiapas, Campeche y Quintana Roo.]]></description>
+      <pubDate>Wed, 10 Jun 2026 09:31:52 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-10-bb28</guid>
       <category>Alerta</category>
     </item>
     <item>
