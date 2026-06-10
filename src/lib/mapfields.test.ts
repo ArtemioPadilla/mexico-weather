@@ -171,6 +171,77 @@ describe('buildWindUrl', () => {
   });
 });
 
+import { fetchFieldChunks, fetchWindChunks, FIELD_CHUNK_SIZE } from './mapfields';
+
+describe('fetchFieldChunks / fetchWindChunks', () => {
+  /** points spanning 2 chunks (FIELD_CHUNK_SIZE + 1). */
+  const manyPoints = Array.from({ length: FIELD_CHUNK_SIZE + 1 }, (_, i) => ({
+    lat: 10 + i * 0.01,
+    lng: -100,
+  }));
+  const okJson = (body: unknown): Response =>
+    new Response(JSON.stringify(body), { status: 200 });
+
+  it('fetches chunks in parallel and merges responses in input order', async () => {
+    let inFlight = 0;
+    let maxInFlight = 0;
+    const resolvers: (() => void)[] = [];
+    const fetchImpl = (async (url: RequestInfo | URL) => {
+      inFlight += 1;
+      maxInFlight = Math.max(maxInFlight, inFlight);
+      await new Promise<void>((r) => resolvers.push(r));
+      inFlight -= 1;
+      // Tag each chunk response by its point count so ordering is checkable.
+      const n = String(url).match(/latitude=([^&]*)/)![1].split(',').length;
+      return okJson(Array.from({ length: n }, (_, i) => ({ chunkSize: n, i })));
+    }) as unknown as typeof fetch;
+    const p = fetchFieldChunks(manyPoints, 'temperature_2m', fetchImpl);
+    // Both chunk requests must be in flight before any resolve (parallel).
+    await Promise.resolve();
+    expect(resolvers.length).toBe(2);
+    // Resolve out of order; merged output must still follow input order.
+    resolvers[1]();
+    resolvers[0]();
+    const out = (await p) as { chunkSize: number }[];
+    expect(maxInFlight).toBe(2);
+    expect(out).toHaveLength(FIELD_CHUNK_SIZE + 1);
+    expect(out[0].chunkSize).toBe(FIELD_CHUNK_SIZE);
+    expect(out[out.length - 1].chunkSize).toBe(1);
+  });
+
+  it('throws an Error carrying the HTTP status when a chunk fails', async () => {
+    const fetchImpl = (async () =>
+      new Response('boom', { status: 503 })) as unknown as typeof fetch;
+    await expect(
+      fetchFieldChunks(manyPoints.slice(0, 2), 'temperature_2m', fetchImpl),
+    ).rejects.toThrow('field chunk 0 failed: HTTP 503');
+    await expect(
+      fetchWindChunks(manyPoints.slice(0, 2), 'wind_speed_10m', fetchImpl),
+    ).rejects.toThrow('wind chunk 0 failed: HTTP 503');
+  });
+
+  it('rejects with AbortError without fetching when the signal is already aborted', async () => {
+    const calls: string[] = [];
+    const fetchImpl = (async (url: RequestInfo | URL) => {
+      calls.push(String(url));
+      return okJson([]);
+    }) as unknown as typeof fetch;
+    const ac = new AbortController();
+    ac.abort();
+    await expect(
+      fetchFieldChunks(manyPoints, 'temperature_2m', fetchImpl, {
+        signal: ac.signal,
+      }),
+    ).rejects.toMatchObject({ name: 'AbortError' });
+    await expect(
+      fetchWindChunks(manyPoints, 'wind_speed_10m', fetchImpl, {
+        signal: ac.signal,
+      }),
+    ).rejects.toMatchObject({ name: 'AbortError' });
+    expect(calls).toHaveLength(0);
+  });
+});
+
 describe('parseWindResponse', () => {
   const pts = [
     { lat: 10, lng: -100 },

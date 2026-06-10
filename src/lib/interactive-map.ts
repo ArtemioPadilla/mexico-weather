@@ -574,6 +574,9 @@ export async function initInteractiveMap(
       /* best-effort */
     }
   });
+  // First-5-seconds repaint-nudge interval id, hoisted so destroy()
+  // can clear it if the map is torn down before it self-clears.
+  let repaintNudgeInterval = 0;
   map.on('load', () => {
     renderPins();
     // Fetch active NHC tropical systems once at mount. List is empty
@@ -588,14 +591,14 @@ export async function initInteractiveMap(
     // load event, sourcedata events, nor the deferred timers happen to
     // align with the moment tiles actually arrive.
     let ticks = 0;
-    const intervalId = window.setInterval(() => {
+    repaintNudgeInterval = window.setInterval(() => {
       try {
         map.triggerRepaint();
       } catch {
         /* best-effort */
       }
       ticks += 1;
-      if (ticks >= 25) window.clearInterval(intervalId);
+      if (ticks >= 25) window.clearInterval(repaintNudgeInterval);
     }, 200);
     // Replay the click/pointer trigger that resolves the cold-load blank
     // canvas (#124) when the user clicks the map. We can't tell what
@@ -916,9 +919,10 @@ export async function initInteractiveMap(
 
   let windGrid: WindGrid | null = null;
   let windHourIndex = 0;
-  const windReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)',
-  ).matches;
+  // Read live (not snapshotted) so toggling the OS accessibility
+  // setting mid-session takes effect on the next wind frame.
+  const isReducedMotion = (): boolean =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let windRaf = 0;
   let windTexDirty = true;
 
@@ -1019,7 +1023,7 @@ export async function initInteractiveMap(
     if (!windGrid) return;
     windHourIndex = h;
     windTexDirty = true;
-    if (windReducedMotion) {
+    if (isReducedMotion()) {
       const data = windCircleGeoJSON(windGrid, h);
       const src = map.getSource(WIND_CIRCLE_SOURCE) as
         | maplibregl.GeoJSONSource
@@ -1267,9 +1271,21 @@ export async function initInteractiveMap(
         })
       | undefined;
     if (existing && typeof existing.updateImage === 'function') {
+      const prev = fieldBlobUrl;
       existing.updateImage({ url: render.blobUrl, coordinates: render.coords });
-      revokeFieldBlob();
       fieldBlobUrl = render.blobUrl;
+      // Defer revoking the previous blob a frame: on rapid scrubs the
+      // GPU may still be decoding the just-swapped image and revoking
+      // synchronously yields a blank/corrupt raster frame.
+      if (prev && prev !== render.blobUrl) {
+        window.requestAnimationFrame(() => {
+          try {
+            URL.revokeObjectURL(prev);
+          } catch {
+            /* already revoked */
+          }
+        });
+      }
       return;
     }
     // Either no source yet, or the runtime stub lacks updateImage —
@@ -2496,6 +2512,10 @@ export async function initInteractiveMap(
   const tlReducedMotion = tlPlayer.reducedMotion();
   tlPlayBtn?.addEventListener('click', () => tlPlayer.toggle());
 
+  // Wide-control surfacing timers (set inside the timeline block below),
+  // hoisted so destroy() can clear them before they self-clear.
+  let surfaceInterval = 0;
+  let surfaceTimeout = 0;
   if (features.timeline) {
     opts.els.tlPrev?.addEventListener('click', () => {
       if (tlFrames.length) {
@@ -2573,10 +2593,16 @@ export async function initInteractiveMap(
     };
     // The frame array is rebuilt every time activeLayer changes; we re-
     // evaluate on each tick of the visibility refresh (frame change).
-    const surfaceInterval = window.setInterval(surfaceWideControls, 1500);
-    window.setTimeout(() => window.clearInterval(surfaceInterval), 30000);
+    surfaceInterval = window.setInterval(surfaceWideControls, 1500);
+    surfaceTimeout = window.setTimeout(
+      () => window.clearInterval(surfaceInterval),
+      30000,
+    );
   }
 
+  // Autocomplete outside-click handler (set inside the search block
+  // below), hoisted so destroy() can remove the document listener.
+  let acOutsideClickHandler: ((e: MouseEvent) => void) | null = null;
   if (features.search && q) {
     // Search collapse (plan P1.7). Icon-only by default; click reveals
     // the input; ESC or blur (when empty) collapses back to icon.
@@ -2658,12 +2684,13 @@ export async function initInteractiveMap(
       }
     });
 
-    document.addEventListener('click', (e) => {
+    acOutsideClickHandler = (e: MouseEvent): void => {
       const target = e.target as Node;
       if (q && acList && !q.contains(target) && !acList.contains(target)) {
         closeAcList();
       }
-    });
+    };
+    document.addEventListener('click', acOutsideClickHandler);
   }
 
   if (features.locateButton && opts.els.locate) {
@@ -2691,6 +2718,9 @@ export async function initInteractiveMap(
   // and 'area' (closed polygon). Pure math lives in
   // src/lib/map/utils/measure.ts; this block is the MapLibre wiring.
   // ESC exits the active mode.
+  // Measure-ESC keydown handler (set inside the block below), hoisted
+  // so destroy() can remove the document listener.
+  let measureEscHandler: ((e: KeyboardEvent) => void) | null = null;
   if (features.layerRail) {
     const MEASURE_SOURCE = 'mw-measure-src';
     const MEASURE_LINE_LAYER = 'mw-measure-line';
@@ -2807,12 +2837,13 @@ export async function initInteractiveMap(
       refreshMeasureGeometry();
       refreshMeasureResult();
     });
-    document.addEventListener('keydown', (e) => {
+    measureEscHandler = (e: KeyboardEvent): void => {
       if (e.key === 'Escape' && measureMode) {
         e.preventDefault();
         setMeasureMode(null);
       }
-    });
+    };
+    document.addEventListener('keydown', measureEscHandler);
     map.once('idle', () => {
       wrap?.classList.remove('hidden');
       wrap?.classList.add('flex');
@@ -2878,6 +2909,20 @@ export async function initInteractiveMap(
       sunLayer.remove(); // also stops the internal ticker
       if (windRaf) window.cancelAnimationFrame(windRaf);
       tlPlayer.stop(); // clears the timeline timer if running
+      fieldAbort?.abort();
+      fieldAbort = null;
+      placePopup?.remove();
+      placePopup = null;
+      window.clearTimeout(hashTimer);
+      window.clearTimeout(qTimer);
+      if (repaintNudgeInterval) window.clearInterval(repaintNudgeInterval);
+      if (surfaceInterval) window.clearInterval(surfaceInterval);
+      if (surfaceTimeout) window.clearTimeout(surfaceTimeout);
+      if (acOutsideClickHandler)
+        document.removeEventListener('click', acOutsideClickHandler);
+      if (measureEscHandler)
+        document.removeEventListener('keydown', measureEscHandler);
+      overlayRegistry.dispose();
       try {
         map.remove();
       } catch {

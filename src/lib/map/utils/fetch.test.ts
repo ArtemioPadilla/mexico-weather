@@ -85,6 +85,28 @@ describe('cachedFetch', () => {
     expect(fetchSpy).toHaveBeenCalledTimes(2);
   });
 
+  it('rejects with AbortError for an already-aborted signal on a cache hit', async () => {
+    await cachedFetch('https://example.com/ab');
+    expect(__cacheCounts().cached).toBe(1);
+    const ac = new AbortController();
+    ac.abort();
+    await expect(
+      cachedFetch('https://example.com/ab', { signal: ac.signal }),
+    ).rejects.toMatchObject({ name: 'AbortError' });
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('rejects with AbortError for an already-aborted signal while a request is in flight', async () => {
+    const first = cachedFetch('https://example.com/inflight');
+    const ac = new AbortController();
+    ac.abort();
+    await expect(
+      cachedFetch('https://example.com/inflight', { signal: ac.signal }),
+    ).rejects.toMatchObject({ name: 'AbortError' });
+    await first;
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+  });
+
   it('preserves response body across multiple .text() reads from cache', async () => {
     await cachedFetch('https://example.com/m');
     const a = await cachedFetch('https://example.com/m');

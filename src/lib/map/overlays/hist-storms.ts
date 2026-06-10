@@ -200,6 +200,10 @@ export function createHistStormsOverlay(
   }
 
   function addLayers(data: FeatureCollection): void {
+    // Re-check at add time: the inline fallback and the async archive
+    // resolver can race (or two rapid toggles can queue two resolvers);
+    // whichever lands second must not addSource twice.
+    if (map.getSource(SOURCE_ID)) return;
     map.addSource(SOURCE_ID, { type: 'geojson', data });
     map.addLayer({
       id: LINE_LAYER_ID,

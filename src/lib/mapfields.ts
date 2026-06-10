@@ -67,6 +67,42 @@ export function buildFieldUrl(
  *  diagnostic). */
 export const FIELD_CHUNK_SIZE = 200;
 
+/** Shared chunked fetcher: splits `points` into URL-safe chunks, fires
+ *  all requests in parallel and merges the responses in input order.
+ *  Throws AbortError immediately when the caller's signal is already
+ *  aborted, and an Error carrying the HTTP status for non-ok chunks. */
+async function fetchChunks(
+  points: LngLat[],
+  buildUrl: (chunk: LngLat[]) => string,
+  fetchImpl: typeof fetch,
+  label: string,
+  signal?: AbortSignal,
+): Promise<unknown[]> {
+  const jobs: Promise<unknown>[] = [];
+  for (let i = 0; i < points.length; i += FIELD_CHUNK_SIZE) {
+    if (signal?.aborted) {
+      throw new DOMException('Aborted', 'AbortError');
+    }
+    const chunk = points.slice(i, i + FIELD_CHUNK_SIZE);
+    const url = buildUrl(chunk);
+    jobs.push(
+      fetchImpl(url, { signal }).then((res) => {
+        if (!res.ok) {
+          throw new Error(`${label} chunk ${i} failed: HTTP ${res.status}`);
+        }
+        return res.json() as Promise<unknown>;
+      }),
+    );
+  }
+  const results = await Promise.all(jobs);
+  const out: unknown[] = [];
+  for (const json of results) {
+    if (Array.isArray(json)) out.push(...json);
+    else out.push(json);
+  }
+  return out;
+}
+
 /** Fetch a field grid in URL-safe chunks. Mirrors the chunking
  *  done by scripts/build-field-grids.py so the client + the build
  *  see identical responses. Returns the merged Open-Meteo response
@@ -78,19 +114,13 @@ export async function fetchFieldChunks(
   fetchImpl: typeof fetch,
   opts?: { signal?: AbortSignal; model?: string },
 ): Promise<unknown[]> {
-  const out: unknown[] = [];
-  for (let i = 0; i < points.length; i += FIELD_CHUNK_SIZE) {
-    const chunk = points.slice(i, i + FIELD_CHUNK_SIZE);
-    const url = buildFieldUrl(chunk, hourlyVar, opts?.model);
-    const res = await fetchImpl(url, { signal: opts?.signal });
-    if (!res.ok) {
-      throw new Error(`field chunk ${i} failed: HTTP ${res.status}`);
-    }
-    const json = (await res.json()) as unknown;
-    if (Array.isArray(json)) out.push(...json);
-    else out.push(json);
-  }
-  return out;
+  return fetchChunks(
+    points,
+    (chunk) => buildFieldUrl(chunk, hourlyVar, opts?.model),
+    fetchImpl,
+    'field',
+    opts?.signal,
+  );
 }
 
 /** Same as fetchFieldChunks but for the wind endpoint (separate
@@ -101,19 +131,13 @@ export async function fetchWindChunks(
   fetchImpl: typeof fetch,
   opts?: { signal?: AbortSignal; model?: string },
 ): Promise<unknown[]> {
-  const out: unknown[] = [];
-  for (let i = 0; i < points.length; i += FIELD_CHUNK_SIZE) {
-    const chunk = points.slice(i, i + FIELD_CHUNK_SIZE);
-    const url = buildWindUrl(chunk, speedVar, opts?.model);
-    const res = await fetchImpl(url, { signal: opts?.signal });
-    if (!res.ok) {
-      throw new Error(`wind chunk ${i} failed: HTTP ${res.status}`);
-    }
-    const json = (await res.json()) as unknown;
-    if (Array.isArray(json)) out.push(...json);
-    else out.push(json);
-  }
-  return out;
+  return fetchChunks(
+    points,
+    (chunk) => buildWindUrl(chunk, speedVar, opts?.model),
+    fetchImpl,
+    'wind',
+    opts?.signal,
+  );
 }
 
 function isNumberOrNullArray(a: unknown): a is (number | null)[] {

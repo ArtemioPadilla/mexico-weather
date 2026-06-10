@@ -39,6 +39,22 @@ describe('terminatorPolygon', () => {
       expect(lng).toBeLessThanOrEqual(180.001);
     }
   });
+  it('closes the ring through the pole opposite the subsolar hemisphere, south at the equinox edge', () => {
+    const capLats = (ms: number): [number, number] => {
+      const ring = terminatorPolygon(ms, 60).coordinates[0];
+      // The two cap vertices follow the 60 sampled terminator points.
+      return [ring[60][1], ring[61][1]];
+    };
+    // June solstice: sun north → cap at the south pole.
+    expect(capLats(Date.UTC(2026, 5, 21, 12, 0, 0))).toEqual([-90, -90]);
+    // December solstice: sun south → cap at the north pole.
+    expect(capLats(Date.UTC(2026, 11, 21, 12, 0, 0))).toEqual([90, 90]);
+    // Equinox edge: sun.lat ≈ 0 — cap must stay deterministic and match
+    // the sun.lat >= 0 ? -90 : 90 convention (south pole when sun.lat is 0).
+    const eqMs = Date.UTC(2026, 2, 20, 17, 0, 0);
+    const expected = solarPosition(eqMs).lat >= 0 ? -90 : 90;
+    expect(capLats(eqMs)).toEqual([expected, expected]);
+  });
   it('returns a polygon for arbitrary distanceDeg used by the soft-terminator gradient', () => {
     const ts = Date.UTC(2026, 5, 21, 12, 0, 0);
     const inner = terminatorPolygon(ts, 60, 91.5);
