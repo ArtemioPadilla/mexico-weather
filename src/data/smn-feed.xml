@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 09 Jun 2026 23:48:10 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2026 01:23:55 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Temperaturas máximas superiores a 45 °C: Sonora (este).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas superiores a 45 °C: Sonora (este).]]></description>
-      <pubDate>Tue, 09 Jun 2026 17:47:59 -0600</pubDate>
+      <pubDate>Tue, 09 Jun 2026 19:23:46 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-09-ad09</guid>
       <category>Alerta</category>
     </item>
@@ -33,30 +33,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 319 | 09 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 320 | 09 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS VERACRUZ, OAXACA Y CHIAPAS
+      <description><![CDATA[PREVALECERÁN CONDICIONES PARA LLUVIAS MUY FUERTES A INTENSAS EN EL OCCIDENTE, ORIENTE, SUR Y SURESTE DE LA REPÚBLICA MEXICANA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 319
+No. Aviso: 320
 Ciudad de México a 09 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS VERACRUZ, OAXACA Y CHIAPAS
+PREVALECERÁN CONDICIONES PARA LLUVIAS MUY FUERTES A INTENSAS EN EL OCCIDENTE, ORIENTE, SUR Y SURESTE DE LA REPÚBLICA MEXICANA
 
-Para hoy, se prevé que la depresión tropical Boris se desplace sobre Guerrero, e interaccionarán con canales de baja presión en el interior del país, inestabilidad atmosférica y con el ingreso de aire húmedo del océano Pacífico, golfo de México y mar Caribe, lo que originará lluvias puntuales intensas en Veracruz (sur), Oaxaca (este y noreste) y Chiapas (sur); puntuales muy fuertes en Jalisco (sur), Colima, Michoacán (costa) y Guerrero (este y suroeste); puntuales fuertes en Chihuahua (suroeste), Durango (noroeste), San Luis Potosí (este), Nayarit (sur), Guanajuato (suroeste), Querétaro (norte), Hidalgo (norte y este), Puebla (norte y sureste), Tlaxcala, Morelos, Estado de México (oeste y suroeste), Ciudad de México, Tamaulipas (sur), Tabasco (oeste y sur), Campeche (suroeste), Yucatán (este) y Quintana Roo (norte y costa); y chubascos en Coahuila, Nuevo León, Sinaloa, Zacatecas y Aguascalientes.…]]></description>
+En el transcurso de esta noche y madrugada del miércoles, los remanentes de Boris y dos canales de baja presión extendidos sobre el oriente y sureste del país, respectivamente, ocasionarán lluvias puntuales intensas en Colima, Michoacán (costa), Puebla (norte, este y sureste), Veracruz (centro y sur), Oaxaca (este y noreste) y Chiapas (norte y sur); lluvias puntuales muy fuertes en Jalisco (sur), Guerrero (este y suroeste) y Tabasco (oeste y sur); así como lluvias fuertes en Nayarit (sur), Guanajuato (suroeste), Querétaro (norte), Hidalgo (norte y este), Tlaxcala, Morelos, Estado de México (centro y suroeste) y Ciudad de México.…]]></description>
       <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-09-319</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-09-320</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 09 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-09-12</guid>
@@ -71,19 +71,19 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Comunicado</category>
     </item>
     <item>
+      <title>📋 SMN Reporte Vespertino 08 JUN 2026: Se pronostican lluvias intensas para regiones de Colima, Michoacán, Puebla, Veracruz, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_09.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas para regiones de Colima, Michoacán, Puebla, Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_09.pdf]]></description>
+      <pubDate>Mon, 08 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_09</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
       <title>📋 SMN Comunicado 08 JUN 2026: Boris se acerca lentamente a la costa; está a 45 km al sureste de Punta Maldonado, Guerrero</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso08-26.pdf</link>
       <description><![CDATA[Boris se acerca lentamente a la costa; está a 45 km al sureste de Punta Maldonado, Guerrero — Comunicado del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso08-26.pdf]]></description>
       <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso08-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 08 JUN 2026: Boris genera lluvias torrenciales en zonas de Guerrero y Oaxaca, e intensas en Jalisco, Colima y Michoacán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso07-26.pdf</link>
-      <description><![CDATA[Boris genera lluvias torrenciales en zonas de Guerrero y Oaxaca, e intensas en Jalisco, Colima y Michoacán — Comunicado del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso07-26.pdf]]></description>
-      <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso07-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
