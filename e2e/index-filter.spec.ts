@@ -26,7 +26,6 @@ test.describe('catalog index filter', () => {
 
       // Type a string that matches very few items.
       await input.fill('zzz-nonexistent-xyz');
-      await page.waitForTimeout(200);
       const empty = page.locator('#catalog-empty');
       await expect(empty).toBeVisible();
     });
@@ -35,7 +34,6 @@ test.describe('catalog index filter', () => {
   test('clima filter is diacritic-insensitive', async ({ page }) => {
     await page.goto('clima/');
     await page.locator('#catalog-filter').fill('merida');
-    await page.waitForTimeout(200);
     // The Mérida link should still be visible
     await expect(page.getByRole('link', { name: /Mérida/ })).toBeVisible();
   });

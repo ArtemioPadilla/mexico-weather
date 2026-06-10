@@ -8,7 +8,6 @@ test.describe('/compara/', () => {
   test('renders 2 default columns when no slugs param', async ({ page }) => {
     await page.goto('compara/');
     await page.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(500);
     const cards = page.locator('#cmp-grid article');
     await expect(cards).toHaveCount(2);
   });
@@ -16,7 +15,6 @@ test.describe('/compara/', () => {
   test('renders 3 columns from ?slugs= URL', async ({ page }) => {
     await page.goto('compara/?slugs=cdmx,guadalajara,monterrey');
     await page.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(500);
     const cards = page.locator('#cmp-grid article');
     await expect(cards).toHaveCount(3);
   });
@@ -24,7 +22,6 @@ test.describe('/compara/', () => {
   test('clicking a toggle adds a city, click again removes', async ({ page }) => {
     await page.goto('compara/?slugs=cdmx');
     await page.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(300);
     // Click Guadalajara toggle to add
     const gdl = page.locator('button[data-cmp-toggle][data-slug="guadalajara"]');
     await gdl.click();
@@ -40,7 +37,6 @@ test.describe('/compara/', () => {
   }) => {
     await page.goto('compara/?slugs=cdmx,guadalajara,monterrey,puebla');
     await page.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(300);
     const slots = page.locator('#cmp-grid article');
     await expect(slots).toHaveCount(4);
     // Try to add a 5th

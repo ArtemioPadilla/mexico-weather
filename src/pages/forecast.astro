@@ -4,16 +4,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MarinePanel from '../components/MarinePanel.astro';
 import SmnAvisos from '../components/SmnAvisos.astro';
 import { ui } from '../i18n/ui';
+import { siteBase } from '../utils/paths';
 
 // keep in sync with the other lang declaration in this file
 const lang = 'es' as const;
 const t = ui[lang];
+const base = siteBase();
 ---
 
 <BaseLayout
   title="Pronóstico — Clima México 🇲🇽"
   description="Pronóstico detallado por ubicación"
   lang={lang}
+  robots="noindex,follow"
 >
   <main class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
     <div class="max-w-3xl mx-auto px-4 py-8 space-y-6">
@@ -33,7 +36,7 @@ const t = ui[lang];
       >
         <p class="text-gray-700 dark:text-gray-300">{t.pick_location}</p>
         <a
-          href={import.meta.env.BASE_URL}
+          href={base}
           class="inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
           >← {t.back_home}</a
         >
@@ -230,6 +233,7 @@ const t = ui[lang];
     } from '../lib/alerts';
     import { ui } from '../i18n/ui';
     import { initInteractiveMap } from '../lib/interactive-map';
+    import { siteBase } from '../utils/paths';
 
     // Runtime language read — set by BaseLayout's pre-paint script
     // (covers sessionStorage, ?lang= URL param and navigator.language
@@ -390,8 +394,7 @@ const t = ui[lang];
           ? esc(safeAdmin)
           : esc(loc.lat + ', ' + loc.lng);
 
-        const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
-        const mapHref = `${baseUrl}/mapa/#view=${loc.lat},${loc.lng},9z`;
+        const mapHref = `${siteBase()}mapa/#view=${loc.lat},${loc.lng},9z`;
 
         const currentHtml = `
           <header class="space-y-1">

@@ -19,6 +19,7 @@
  * the existing rendered output rather than introducing a new colour.
  */
 @theme {
+  --color-primary-50: #ecfdf5;
   --color-primary-400: #34d399;
   --color-primary-500: #10b981;
   --color-primary-600: #059669;
