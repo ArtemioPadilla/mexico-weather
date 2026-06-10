@@ -380,8 +380,8 @@ const base = siteBase();
       star.className =
         'js-fav-star absolute top-1 right-1 flex h-11 w-11 items-center justify-center text-lg leading-none text-gray-400 hover:text-amber-400 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded';
       star.setAttribute('aria-pressed', 'false');
-      star.setAttribute('aria-label', 'Agregar a favoritos');
-      star.title = 'Agregar a favoritos';
+      star.setAttribute('aria-label', t.fav_add);
+      star.title = t.fav_add;
       star.textContent = '☆';
       card.appendChild(star);
 
@@ -688,7 +688,7 @@ const base = siteBase();
       btn.textContent = on ? '★' : '☆';
       btn.classList.toggle('text-amber-400', on);
       btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      const label = on ? 'Quitar de favoritos' : 'Agregar a favoritos';
+      const label = on ? t.fav_remove : t.fav_add;
       btn.setAttribute('aria-label', label);
       btn.setAttribute('title', label);
     }
@@ -714,7 +714,7 @@ const base = siteBase();
         const nowOn = toggle(store, fav);
         if (!wasFav && !nowOn) {
           // Cap reached: surface a brief non-blocking note.
-          if (favMsg) favMsg.textContent = 'Máximo 12 lugares — quita uno';
+          if (favMsg) favMsg.textContent = t.fav_cap;
         } else if (favMsg) {
           favMsg.textContent = '';
         }
@@ -846,8 +846,8 @@ const base = siteBase();
           const tag = document.createElement('span');
           tag.className =
             'absolute -top-2 left-3 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-900 ring-1 ring-amber-300 dark:bg-amber-950 dark:text-amber-200 dark:ring-amber-700';
-          tag.setAttribute('aria-label', 'Favorito más visitado');
-          tag.textContent = '★ Más visitado';
+          tag.setAttribute('aria-label', t.fav_most_visited);
+          tag.textContent = t.fav_most_visited;
           card.appendChild(tag);
         }
         // Remove (✕) button: toggles the favorite off and re-renders.
@@ -855,8 +855,8 @@ const base = siteBase();
         rm.type = 'button';
         rm.className =
           'absolute top-1 right-12 flex h-11 w-11 items-center justify-center text-lg leading-none text-gray-400 hover:text-red-500 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded';
-        rm.setAttribute('aria-label', 'Quitar de favoritos');
-        rm.title = 'Quitar de favoritos';
+        rm.setAttribute('aria-label', t.fav_remove);
+        rm.title = t.fav_remove;
         rm.textContent = '✕';
         rm.addEventListener('click', () => {
           remove(store, f.lat, f.lng);
@@ -1123,9 +1123,7 @@ const base = siteBase();
             );
             if (!stateSlug) {
               setBusy(false);
-              showMsg(
-                'Parece que estás fuera de México. Usa la búsqueda para otra ubicación.',
-              );
+              showMsg(t.geo_outside_mx);
               return;
             }
             // Inside MX — funnel into the curated /clima/<slug>/ page
@@ -1144,11 +1142,9 @@ const base = siteBase();
             // 2=POSITION_UNAVAILABLE, 3=TIMEOUT. Surface a useful
             // distinction so users know which to fix.
             if (err.code === 1) {
-              showMsg(
-                'Necesitamos tu permiso para mostrar el clima local. Usa la búsqueda.',
-              );
+              showMsg(t.geo_denied);
             } else if (err.code === 3) {
-              showMsg('Tiempo agotado al buscar tu ubicación. Intenta de nuevo.');
+              showMsg(t.geo_timeout);
             } else {
               showMsg(t.geo_denied);
             }

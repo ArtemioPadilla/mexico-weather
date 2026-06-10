@@ -3,7 +3,9 @@ export interface UiStrings {
   use_my_location: string;
   searching: string;
   no_results: string;
+  geo_outside_mx: string;
   geo_denied: string;
+  geo_timeout: string;
   quick_peek: string;
   full_forecast: string;
   back_home: string;
@@ -67,6 +69,14 @@ export interface UiStrings {
   refresh: string;
   redirecting_to: string;
   in_one_s: string;
+  thinking: string;
+  ask_error: string;
+  share: string;
+  url_copied: string;
+  fav_add: string;
+  fav_remove: string;
+  fav_cap: string;
+  fav_most_visited: string;
 }
 
 export const ui: Record<'es' | 'en', UiStrings> = {
@@ -75,7 +85,9 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     use_my_location: 'Usar mi ubicación',
     searching: 'Buscando…',
     no_results: 'Sin resultados para',
-    geo_denied: 'No se pudo obtener tu ubicación.',
+    geo_outside_mx: 'Parece que estás fuera de México. Usa la búsqueda para otra ubicación.',
+    geo_denied: 'Necesitamos tu permiso para mostrar el clima local. Usa la búsqueda.',
+    geo_timeout: 'Tiempo agotado al buscar tu ubicación. Intenta de nuevo.',
     quick_peek: 'Ver vista rápida',
     full_forecast: 'Ver pronóstico completo',
     back_home: 'Volver al inicio',
@@ -138,13 +150,23 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     refresh: 'Actualizar',
     redirecting_to: 'Redirigiendo a',
     in_one_s: 'en 1 s…',
+    thinking: 'Pensando…',
+    ask_error: 'No pude resolver tu pregunta. Prueba con algo más simple, o abre el mapa.',
+    share: 'Compartir',
+    url_copied: 'URL copiada',
+    fav_add: 'Agregar a favoritos',
+    fav_remove: 'Quitar de favoritos',
+    fav_cap: 'Máximo 12 lugares — quita uno',
+    fav_most_visited: '★ Más visitado',
   },
   en: {
     search_placeholder: 'Search any city or place…',
     use_my_location: 'Use my location',
     searching: 'Searching…',
     no_results: 'No results for',
-    geo_denied: 'Could not get your location.',
+    geo_outside_mx: 'Looks like you are outside Mexico. Use the search for another location.',
+    geo_denied: 'We need your permission to show local weather. Use the search.',
+    geo_timeout: 'Timed out looking for your location. Try again.',
     quick_peek: 'Quick peek',
     full_forecast: 'See full forecast',
     back_home: 'Back to home',
@@ -207,5 +229,13 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     refresh: 'Refresh',
     redirecting_to: 'Redirecting to',
     in_one_s: 'in 1 s…',
+    thinking: 'Thinking…',
+    ask_error: 'I could not resolve your question. Try something simpler, or open the map.',
+    share: 'Share',
+    url_copied: 'URL copied',
+    fav_add: 'Add to favourites',
+    fav_remove: 'Remove from favourites',
+    fav_cap: 'Maximum 12 places — remove one',
+    fav_most_visited: '★ Most visited',
   },
 };

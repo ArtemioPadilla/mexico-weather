@@ -88,7 +88,7 @@ const home = siteBase();
         const raw = q.value.trim();
         if (!raw) return;
         out.classList.remove('hidden');
-        out.textContent = 'Pensando…';
+        out.textContent = t.thinking;
         try {
           // Static dict at /data/mx-cities.json (250+ MX cities)
           // intercepts most queries before reaching the live geocoder.
@@ -116,8 +116,7 @@ const home = siteBase();
             location.href = href;
           }, 1000);
         } catch {
-          out.textContent =
-            'No pude resolver tu pregunta. Prueba con algo más simple, o abre el mapa.';
+          out.textContent = t.ask_error;
         }
       });
     }
