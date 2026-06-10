@@ -5,30 +5,87 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 10 Jun 2026 20:06:08 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2026 21:12:21 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) zonas de Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes (50 a 75 mm): zonas del Estado de México y Morelos.]]></description>
+      <pubDate>Wed, 10 Jun 2026 15:12:10 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-10-ec15</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 321 | 10 de Junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
+      <description><![CDATA[LLUVIAS INTENSAS EN PUEBLA, VERACRUZ, OAXACA, CHIAPAS, CAMPECHE Y QUINTANA ROO
 
 ---
-]]></description>
-      <pubDate>Wed, 10 Jun 2026 14:06:03 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-10</guid>
+Pronóstico Meteorológico General
+No. Aviso: 321
+Ciudad de México a 10 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS INTENSAS EN PUEBLA, VERACRUZ, OAXACA, CHIAPAS, CAMPECHE Y QUINTANA ROO
+
+Este día, una circulación ciclónica en altura sobre el sur del golfo de México, un canal de baja presión sobre el sureste mexicano e inestabilidad atmosférica, originarán lluvias muy fuertes a puntuales intensas en las regiones mencionadas, incluida la península de Yucatán. Por otra parte, canales de baja presión en el interior del país, en interacción con inestabilidad atmosférica y con el ingreso de humedad del océano Pacífico y golfo de México, ocasionarán lluvias puntuales intensas en Puebla (suroeste y sureste); así como lluvias fuertes a muy fuertes en el norte, occidente y centro del territorio nacional, incluido el Valle de México; además de chubascos en el resto del territorio nacional. Se mantendrá oleaje elevado en las costas del Pacífico mexicano y en las costas de Quintana Roo.…]]></description>
+      <pubDate>Wed, 10 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-10-321</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de junio del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de junio del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 10 de junio del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 10 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-10-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 10 JUN 2026: Se prevén lluvias intensas para regiones de Puebla, Veracruz, Oaxaca, Chiapas, Campeche y Quintana Roo</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_10.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas para regiones de Puebla, Veracruz, Oaxaca, Chiapas, Campeche y Quintana Roo — Reporte Matutino del 10 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_10.pdf]]></description>
+      <pubDate>Wed, 10 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_10</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 09 JUN 2026: Se pronostican lluvias intensas para regiones de Colima, Michoacán, Puebla, Veracruz, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_09.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas para regiones de Colima, Michoacán, Puebla, Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_09.pdf]]></description>
+      <pubDate>Tue, 09 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_09</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 09 JUN 2026: Como depresión tropical, Boris se ubica a 45 km al nor-noreste de Punta Maldonado, Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 10-26.pdf</link>
+      <description><![CDATA[Como depresión tropical, Boris se ubica a 45 km al nor-noreste de Punta Maldonado, Guerrero — Comunicado del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 10-26.pdf]]></description>
+      <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 10-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 09 JUN 2026: La tormenta tropical Boris tocó tierra esta madrugada entre los límites de Guerrero y Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso09-26.pdf</link>
+      <description><![CDATA[La tormenta tropical Boris tocó tierra esta madrugada entre los límites de Guerrero y Oaxaca — Comunicado del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso09-26.pdf]]></description>
+      <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso09-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 08 JUN 2026: Boris se acerca lentamente a la costa; está a 45 km al sureste de Punta Maldonado, Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso08-26.pdf</link>
+      <description><![CDATA[Boris se acerca lentamente a la costa; está a 45 km al sureste de Punta Maldonado, Guerrero — Comunicado del 08 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso08-26.pdf]]></description>
+      <pubDate>Mon, 08 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso08-26</guid>
+      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
