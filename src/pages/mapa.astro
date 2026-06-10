@@ -24,7 +24,7 @@ const lang = 'es' as const;
 const t = ui[lang];
 ---
 
-<BaseLayout title={`${t.map_title} — Clima México 🇲🇽`} description={t.map_teaser_heading} lang={lang}>
+<BaseLayout title={`${t.map_title} — Clima México 🇲🇽`} description={t.map_teaser_heading} lang={lang} noFooter>
   {/* Subtract nav height so the map fills the rest of the viewport
       exactly, no vertical scrollbar (plan P2.2). Nav is h-12 mobile,
       h-14 sm+. */}

@@ -24,6 +24,10 @@ interface Props {
    *  builders from src/lib/structured-data.ts so the shape matches
    *  schema.org. */
   jsonLd?: object | object[];
+  /** Suppress the shared site footer. Used by /mapa, whose main is
+   *  sized to exactly fill the viewport below the nav (plan P2.2 —
+   *  no vertical scrollbar); a footer would force page scroll. */
+  noFooter?: boolean;
 }
 
 const base = siteBase();
@@ -45,6 +49,7 @@ const {
   image = defaultImage,
   robots = 'index,follow',
   jsonLd,
+  noFooter = false,
 } = Astro.props;
 
 const jsonLdEntries = jsonLd === undefined
@@ -565,6 +570,7 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
         sources; its Privacidad link moved here to avoid duplicates).
         Links are inline-block + padded so short labels still meet
         the 44px tap-target rule in at least one dimension. */}
+    {!noFooter && (
     <footer
       class="border-t border-gray-200 py-4 dark:border-gray-800"
     >
@@ -624,6 +630,7 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
         >
       </nav>
     </footer>
+    )}
     <FeedbackFAB lang={lang} />
     <PwaInstall />
     {
