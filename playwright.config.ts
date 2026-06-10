@@ -13,7 +13,10 @@ import { defineConfig, devices } from '@playwright/test';
 // page.goto('forecast') resolves *relative to the base path* rather than
 // replacing it.
 const BASE_PATH = '/mexico-weather/';
-const PORT = 4321;
+// Overridable so e2e can run on machines where 4321 is taken by
+// another dev server (astro preview silently falls back to 4322+,
+// which would leave the webServer probe waiting forever).
+const PORT = Number(process.env.PREVIEW_PORT ?? 4321);
 const BASE_URL = `http://localhost:${PORT}${BASE_PATH}`;
 
 export default defineConfig({
@@ -41,7 +44,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run build && npm run preview',
+    command: `npm run build && npm run preview -- --port ${PORT}`,
     url: BASE_URL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

@@ -16,7 +16,7 @@ const base = siteBase();
       <div class="text-center space-y-4">
         <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/40 bg-blue-500/10 px-4 py-1.5 text-sm font-medium text-blue-600 dark:border-blue-500/30 dark:text-blue-400">
           <span class="h-2 w-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-pulse"></span>
-          Actualizado cada 10 minutos
+          <span data-i18n-en="Updated every 10 minutes">Actualizado cada 10 minutos</span>
         </div>
         <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">
           Clima México 🇲🇽
@@ -44,12 +44,12 @@ const base = siteBase();
               the primary CTA so the search input is wider + thumb-
               reachable on mobile. */}
           <div class="relative">
-            <input id="q" type="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-autocomplete="list" aria-label={t.search_placeholder} placeholder={`O busca otra ubicación: ${t.search_placeholder}`} class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100" />
+            <input id="q" type="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-autocomplete="list" aria-label={t.search_placeholder} data-i18n-en-aria-label={ui.en.search_placeholder} placeholder={`O busca otra ubicación: ${t.search_placeholder}`} data-i18n-en-placeholder={`Or search another location: ${ui.en.search_placeholder}`} class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100" />
           </div>
           <ul id="ac" role="listbox" class="hidden mt-1 text-start bg-white border border-gray-300 rounded-lg overflow-hidden dark:bg-gray-900 dark:border-gray-700"></ul>
           <p id="qmsg" class="hidden mt-1 text-xs text-gray-600 dark:text-gray-500" aria-live="polite"></p>
         </div>
-        <p id="js-updated-at" class="text-xs text-gray-600 dark:text-gray-500" aria-live="polite">Cargando datos más recientes...</p>
+        <p id="js-updated-at" class="text-xs text-gray-600 dark:text-gray-500" aria-live="polite" data-i18n-en="Loading latest data...">Cargando datos más recientes...</p>
       </div>
 
       <!-- Embedded interactive map (replaces the old SVG teaser).
@@ -58,7 +58,7 @@ const base = siteBase();
            here (the page already has its own #q + #geo above the fold) and
            the back-link is off (we're already at "home"). -->
       <section class="space-y-3" aria-labelledby="home-map-heading">
-        <h2 id="home-map-heading" class="text-xl font-semibold text-gray-800 dark:text-gray-200">
+        <h2 id="home-map-heading" class="text-xl font-semibold text-gray-800 dark:text-gray-200" data-i18n-en={ui.en.map_teaser_heading}>
           {t.map_teaser_heading}
         </h2>
         <div class="overflow-hidden rounded-xl border border-blue-500/40 dark:border-blue-500/30">
@@ -88,7 +88,7 @@ const base = siteBase();
       <div class="rounded-xl border border-yellow-500/40 bg-yellow-500/10 p-5 space-y-3 dark:border-yellow-500/30">
         <div class="flex items-center gap-2">
           <span class="text-2xl">⚠️</span>
-          <h2 class="text-lg font-semibold text-yellow-700 dark:text-yellow-300">Alertas Activas — SMN</h2>
+          <h2 class="text-lg font-semibold text-yellow-700 dark:text-yellow-300" data-i18n-en="Active alerts — SMN">Alertas Activas — SMN</h2>
         </div>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Consulta nuestro feed RSS con avisos meteorológicos derivados de los datos oficiales del SMN:
@@ -109,15 +109,15 @@ const base = siteBase();
       <script id="preset-data" type="application/json" is:inline set:html={JSON.stringify(cities).replace(/</g, '\\u003c')}></script>
 
       <!-- Tus lugares (favoritos, llenado por el cliente) -->
-      <section id="fav-section" class="hidden mb-8" aria-label="Tus lugares">
-        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2"><span aria-hidden="true">⭐</span> Tus lugares</h2>
+      <section id="fav-section" class="hidden mb-8" aria-label="Tus lugares" data-i18n-en-aria-label="Your places">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2"><span aria-hidden="true">⭐</span> <span data-i18n-en="Your places">Tus lugares</span></h2>
         <div id="fav-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
       </section>
       <p id="fav-msg" class="sr-only" aria-live="polite"></p>
 
       <!-- Ciudades -->
       <div class="space-y-4">
-        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Pronóstico por Ciudad</h2>
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200" data-i18n-en="Forecast by city">Pronóstico por Ciudad</h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
           <!-- Tarjetas preset insertadas por el script (mismo render que favoritos) -->
@@ -204,7 +204,14 @@ const base = siteBase();
     // its own because it accepts any point that's within 5 km of a
     // TOP_CITIES entry.
 
-    const t = ui.es;
+    // Runtime language read — set by BaseLayout's pre-paint script
+    // (covers sessionStorage, ?lang= URL param and navigator.language
+    // in one place). Same pattern as clima/[slug].astro.
+    const lang = (document.documentElement.getAttribute('data-lang') === 'en'
+      ? 'en'
+      : 'es') as 'es' | 'en';
+    const t = ui[lang];
+    const dateLocale = lang === 'en' ? 'en-US' : 'es-MX';
 
     const REFRESH_INTERVAL_MS = 10 * 60 * 1000;
 
@@ -242,13 +249,13 @@ const base = siteBase();
     function setUpdatedAtMessage() {
       if (!updatedAt) return;
       const now = new Date();
-      const time = now.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
-      updatedAt.textContent = `Última actualización: ${time}`;
+      const time = now.toLocaleTimeString(dateLocale, { hour: '2-digit', minute: '2-digit' });
+      updatedAt.textContent = `${t.last_updated} ${time}`;
     }
 
     function setUpdateFailedMessage() {
       if (!updatedAt) return;
-      updatedAt.textContent = 'No se pudo actualizar. Reintentando automáticamente.';
+      updatedAt.textContent = t.update_failed;
     }
 
     function setStatusMessage(card: Element, message: string, isError: boolean) {
@@ -274,12 +281,12 @@ const base = siteBase();
 
     function renderRetrying(card: Element) {
       // Accurate copy: a retry is genuinely in progress.
-      setStatusMessage(card, 'Error al cargar. Reintentando...', true);
+      setStatusMessage(card, t.load_retrying, true);
     }
 
     function renderTerminalError(card: Element) {
       // Attempts exhausted; the 10-minute interval is the only further retry.
-      setStatusMessage(card, 'Error al cargar. Se reintentará automáticamente.', true);
+      setStatusMessage(card, t.load_error, true);
     }
 
     interface PeekData {
@@ -410,7 +417,7 @@ const base = siteBase();
       const status = document.createElement('p');
       status.className = 'text-sm text-gray-600 js-status dark:text-gray-500';
       status.setAttribute('aria-live', 'polite');
-      status.textContent = 'Cargando pronóstico...';
+      status.textContent = t.loading;
       card.appendChild(status);
 
       const weather = document.createElement('div');
@@ -432,7 +439,7 @@ const base = siteBase();
       const rainS = document.createElement('span');
       rainS.className = 'js-rain';
       rainS.textContent = '--';
-      rainP.append(document.createTextNode('💧 '), rainS, document.createTextNode('% lluvia'));
+      rainP.append(document.createTextNode('💧 '), rainS, document.createTextNode(t.rain_suffix));
       weather.append(temps, cond, rainP);
       card.appendChild(weather);
 
@@ -772,18 +779,27 @@ const base = siteBase();
         const list = doc.byState?.[slug] ?? [];
         if (list.length === 0) continue;
         const stateHits = list.length;
-        badge.textContent = `⚠️ ${stateHits} aviso${stateHits === 1 ? '' : 's'}`;
-        badge.title = `${stateHits} aviso(s) SMN activo(s) en ${slug}`;
+        // Human-readable place: the card's own city name (e.g.
+        // "Ciudad de México"), not the state slug ("cdmx").
+        const cityName =
+          card.querySelector('h3')?.textContent?.trim() || slug;
+        const one = stateHits === 1;
+        const chipLabel =
+          lang === 'en'
+            ? `${stateHits} active SMN ${one ? 'advisory' : 'advisories'} in ${cityName}`
+            : `${stateHits} aviso${one ? '' : 's'} SMN activo${one ? '' : 's'} en ${cityName}`;
+        badge.textContent =
+          lang === 'en'
+            ? `⚠️ ${stateHits} ${one ? 'advisory' : 'advisories'}`
+            : `⚠️ ${stateHits} aviso${one ? '' : 's'}`;
+        badge.title = chipLabel;
         // Link to the curated /clima/<slug>/ page (the SmnAvisos
         // widget surfaces the full list there). Setting href first
         // gives the <a> its implicit 'link' role, so aria-label is
         // valid (axe rule aria-prohibited-attr would fire if we set
         // aria-label without href).
         badge.href = `${baseUrl}clima/${slug}/`;
-        badge.setAttribute(
-          'aria-label',
-          `${stateHits} aviso(s) SMN activo(s) en ${slug}`,
-        );
+        badge.setAttribute('aria-label', chipLabel);
         badge.classList.remove('hidden');
       }
     }

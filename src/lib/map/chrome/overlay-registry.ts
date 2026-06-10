@@ -67,6 +67,11 @@ export function createOverlayRegistry(
       cb.id = id;
       cb.checked = def.isEnabled();
       cb.className = 'accent-blue-600';
+      // Explicit accessible name (A11Y-1). The wrapping <label> should
+      // already name the input, but some AT/browser combos announced
+      // these checkboxes as just "on" — aria-label makes the name
+      // unambiguous and matches the visible label text.
+      cb.setAttribute('aria-label', def.label);
       cb.addEventListener('change', () => def.setEnabled(cb.checked));
       const lbl = document.createElement('span');
       lbl.textContent = def.label;

@@ -58,6 +58,15 @@ export interface UiStrings {
   legend_moderate: string;
   legend_heavy: string;
   legend_snow: string;
+  last_updated: string;
+  update_failed: string;
+  load_retrying: string;
+  rain_suffix: string;
+  /** Stale-data banner — `{n}` is replaced with the age in hours. */
+  stale_data: string;
+  refresh: string;
+  redirecting_to: string;
+  in_one_s: string;
 }
 
 export const ui: Record<'es' | 'en', UiStrings> = {
@@ -121,6 +130,14 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     legend_moderate: 'Moderada',
     legend_heavy: 'Intensa',
     legend_snow: 'Nieve',
+    last_updated: 'Última actualización:',
+    update_failed: 'No se pudo actualizar. Reintentando automáticamente.',
+    load_retrying: 'Error al cargar. Reintentando...',
+    rain_suffix: '% lluvia',
+    stale_data: 'Datos de hace {n} h · ',
+    refresh: 'Actualizar',
+    redirecting_to: 'Redirigiendo a',
+    in_one_s: 'en 1 s…',
   },
   en: {
     search_placeholder: 'Search any city or place…',
@@ -182,5 +199,13 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     legend_moderate: 'Moderate',
     legend_heavy: 'Heavy',
     legend_snow: 'Snow',
+    last_updated: 'Last updated:',
+    update_failed: 'Could not update. Retrying automatically.',
+    load_retrying: 'Failed to load. Retrying...',
+    rain_suffix: '% rain',
+    stale_data: 'Data from {n} h ago · ',
+    refresh: 'Refresh',
+    redirecting_to: 'Redirecting to',
+    in_one_s: 'in 1 s…',
   },
 };

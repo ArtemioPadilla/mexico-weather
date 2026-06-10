@@ -71,8 +71,14 @@ const home = siteBase();
   <script>
     import { resolveQuestion } from '../lib/ask-router';
     import { siteBase } from '../utils/paths';
+    import { ui } from '../i18n/ui';
 
     const base = siteBase();
+    // Runtime language read — set by BaseLayout's pre-paint script.
+    const lang = (document.documentElement.getAttribute('data-lang') === 'en'
+      ? 'en'
+      : 'es') as 'es' | 'en';
+    const t = ui[lang];
     const form = document.getElementById('ask-form') as HTMLFormElement | null;
     const q = document.getElementById('ask-q') as HTMLInputElement | null;
     const out = document.getElementById('ask-result');
@@ -98,13 +104,13 @@ const home = siteBase();
           descP.textContent = plan.description;
           out.appendChild(descP);
           const redirectP = document.createElement('p');
-          redirectP.textContent = 'Redirigiendo a ';
+          redirectP.textContent = `${t.redirecting_to} `;
           const linkEl = document.createElement('a');
           linkEl.className = 'underline';
           linkEl.href = href;
           linkEl.textContent = href.replace(location.origin, '');
           redirectP.appendChild(linkEl);
-          redirectP.appendChild(document.createTextNode(' en 1 s…'));
+          redirectP.appendChild(document.createTextNode(` ${t.in_one_s}`));
           out.appendChild(redirectP);
           window.setTimeout(() => {
             location.href = href;

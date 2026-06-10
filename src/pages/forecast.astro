@@ -232,8 +232,13 @@ const t = ui[lang];
     import { ui } from '../i18n/ui';
     import { initInteractiveMap } from '../lib/interactive-map';
 
-    // keep in sync with the other lang declaration in this file
-    const lang: 'es' | 'en' = 'es';
+    // Runtime language read — set by BaseLayout's pre-paint script
+    // (covers sessionStorage, ?lang= URL param and navigator.language
+    // in one place). The frontmatter `lang` stays 'es' because the
+    // static HTML is Spanish-first and swapped via data-i18n-en.
+    const lang = (document.documentElement.getAttribute('data-lang') === 'en'
+      ? 'en'
+      : 'es') as 'es' | 'en';
     const t = ui[lang];
     const dateLocale = lang === 'es' ? 'es-MX' : 'en-US';
 
@@ -910,7 +915,7 @@ const t = ui[lang];
                 hour12: false,
               }).format(new Date());
             }
-            updatedEl.textContent = `Última actualización: ${timeStr} · ${resolvedTz}`;
+            updatedEl.textContent = `${t.last_updated} ${timeStr} · ${resolvedTz}`;
             // Stamp the data with a fetch timestamp + freshness
             // checker (Story 3.6). After STALE_AFTER_MS the line
             // turns amber and a 'Actualizar' link re-runs render().
@@ -927,12 +932,12 @@ const t = ui[lang];
               updatedEl.textContent = '';
               const staleSpan = document.createElement('span');
               staleSpan.className = 'text-amber-700 dark:text-amber-400';
-              staleSpan.textContent = `⚠️ Datos de hace ${ageH} h · `;
+              staleSpan.textContent = `⚠️ ${t.stale_data.replace('{n}', String(ageH))}`;
               const refreshBtn = document.createElement('button');
               refreshBtn.type = 'button';
               refreshBtn.id = 'fc-refresh-btn';
               refreshBtn.className = 'underline text-blue-600 dark:text-blue-400';
-              refreshBtn.textContent = 'Actualizar';
+              refreshBtn.textContent = t.refresh;
               refreshBtn.addEventListener('click', refresh);
               updatedEl.appendChild(staleSpan);
               updatedEl.appendChild(refreshBtn);

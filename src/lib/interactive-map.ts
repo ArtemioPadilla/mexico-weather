@@ -321,11 +321,27 @@ export async function initInteractiveMap(
   const LIGHT_TILES_INIT = BASEMAP_LIGHT_TILES;
   const CARTO_DARK_TILES_INIT = BASEMAP_CARTO_DARK_TILES;
 
+  // A11Y-3 — translate MapLibre's built-in control strings (zoom
+  // buttons, compass) when the document language is Spanish. MapLibre
+  // ships English defaults; `locale` patches the default table.
+  const docLang =
+    document.documentElement.getAttribute('data-lang') ||
+    document.documentElement.lang;
+  const mapLocale =
+    docLang === 'es'
+      ? {
+          'NavigationControl.ZoomIn': 'Acercar',
+          'NavigationControl.ZoomOut': 'Alejar',
+          'NavigationControl.ResetBearing': 'Restablecer orientación al norte',
+        }
+      : undefined;
+
   const map = new maplibre.Map({
     container: opts.els.container,
     center: [initial.lng, initial.lat],
     zoom: initial.zoom,
     interactive,
+    locale: mapLocale,
     // Required so map.getCanvas().toDataURL() returns the rendered
     // pixels (plan 3.3 snapshot compare). WebGL discards the buffer
     // by default at the end of each frame; this keeps it readable.
