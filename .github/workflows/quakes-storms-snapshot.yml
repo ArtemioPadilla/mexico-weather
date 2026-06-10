@@ -48,6 +48,7 @@ jobs:
           done
           if ! git diff --staged --quiet; then
             git commit -m 'chore: refresh quakes + storms snapshots' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           fi

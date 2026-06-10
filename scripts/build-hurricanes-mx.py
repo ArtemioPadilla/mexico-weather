@@ -24,6 +24,7 @@ import io
 import json
 import os
 import sys
+import time
 import urllib.request
 from typing import Optional
 
@@ -71,8 +72,16 @@ def main() -> None:
 
     for url in URLS:
         print(f'fetching {url}', file=sys.stderr)
-        with urllib.request.urlopen(url, timeout=120) as r:  # noqa: S310
-            data = r.read().decode('utf-8', errors='replace')
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(url, timeout=120) as r:  # noqa: S310
+                    data = r.read().decode('utf-8', errors='replace')
+                break
+            except Exception as e:  # noqa: BLE001
+                if attempt == 2:
+                    print(f'  IBTrACS fetch failed after 3 attempts: {e}', file=sys.stderr)
+                    sys.exit(1)
+                time.sleep(2 ** attempt)
         # IBTrACS CSVs have two header lines (column names + units). Skip the
         # units line.
         lines = data.splitlines()

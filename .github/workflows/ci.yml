@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build & Check
@@ -20,6 +24,7 @@ jobs:
       - run: npm run lint
       - run: npm run type-check
       - run: npm run check
+      - run: npm test
       - run: npm run build
         env:
           # Complete the incomplete SMN TLS chain (see src/data/smn-ca.pem)

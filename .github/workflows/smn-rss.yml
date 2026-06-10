@@ -70,6 +70,7 @@ jobs:
           git add src/data/smn-feed.xml public/data/smn-by-state.json
           git diff --cached --quiet || (
             git commit -m 'chore: refresh SMN RSS feed + per-state index' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

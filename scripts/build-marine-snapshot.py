@@ -70,6 +70,9 @@ def fetch_marine() -> list[dict]:
 
 def main() -> None:
     arr = fetch_marine()
+    if not arr:
+        print('marine fetch returned empty — preserving previous snapshot', file=sys.stderr)
+        sys.exit(1)
     features = []
     for i, c in enumerate(MX_BEACHES):
         try:

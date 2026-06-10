@@ -45,6 +45,7 @@ jobs:
           git add public/data/aqi-snapshot.json
           git diff --staged --quiet || (
             git commit -m 'chore: refresh AQI snapshot' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

@@ -42,6 +42,7 @@ jobs:
           git add -A public/data/city-forecast/
           git diff --cached --quiet || (
             git commit -m 'chore: refresh city forecast snapshots' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

@@ -86,6 +86,9 @@ def fetch_pm() -> dict[str, Optional[float]]:
 
 def main() -> None:
     pm_by_city = fetch_pm()
+    if not pm_by_city:
+        print('air-quality fetch returned empty — preserving previous snapshot', file=sys.stderr)
+        sys.exit(1)
     features = []
     for c in MX_AQI_CITIES:
         name = str(c['name'])

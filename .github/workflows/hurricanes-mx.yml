@@ -45,6 +45,7 @@ jobs:
           git add public/data/hurricanes-mx.json
           git diff --staged --quiet || (
             git commit -m 'chore: refresh IBTrACS hurricanes archive' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )
