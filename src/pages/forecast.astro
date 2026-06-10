@@ -924,11 +924,18 @@ const t = ui[lang];
               const ageMs = Date.now() - fetchedAt;
               if (ageMs < STALE_AFTER_MS) return;
               const ageH = Math.round(ageMs / 3600000);
-              updatedEl.innerHTML =
-                `<span class="text-amber-700 dark:text-amber-400">⚠️ Datos de hace ${ageH} h · </span>` +
-                `<button type="button" id="fc-refresh-btn" class="underline text-blue-600 dark:text-blue-400">Actualizar</button>`;
-              const btn = document.getElementById('fc-refresh-btn');
-              btn?.addEventListener('click', refresh);
+              updatedEl.textContent = '';
+              const staleSpan = document.createElement('span');
+              staleSpan.className = 'text-amber-700 dark:text-amber-400';
+              staleSpan.textContent = `⚠️ Datos de hace ${ageH} h · `;
+              const refreshBtn = document.createElement('button');
+              refreshBtn.type = 'button';
+              refreshBtn.id = 'fc-refresh-btn';
+              refreshBtn.className = 'underline text-blue-600 dark:text-blue-400';
+              refreshBtn.textContent = 'Actualizar';
+              refreshBtn.addEventListener('click', refresh);
+              updatedEl.appendChild(staleSpan);
+              updatedEl.appendChild(refreshBtn);
             };
             // Stop any previous staleness interval from a prior render
             // call to avoid stacking timers across refreshes.

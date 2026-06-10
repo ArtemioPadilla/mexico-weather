@@ -39,10 +39,10 @@ export const CARTO_DARK_NOLABELS = [
   'https://d.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
 ];
 export const CARTO_LIGHT_NOLABELS = [
-  'https://a.basemaps.cartocdn.com/voyager_nolabels/{z}/{x}/{y}.png',
-  'https://b.basemaps.cartocdn.com/voyager_nolabels/{z}/{x}/{y}.png',
-  'https://c.basemaps.cartocdn.com/voyager_nolabels/{z}/{x}/{y}.png',
-  'https://d.basemaps.cartocdn.com/voyager_nolabels/{z}/{x}/{y}.png',
+  'https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+  'https://b.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+  'https://c.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+  'https://d.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
 ];
 
 /** Below this zoom the basemap drops labels to reduce saturation. */

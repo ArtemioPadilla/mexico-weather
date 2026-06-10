@@ -31,7 +31,7 @@ describe('pickBasemapTiles', () => {
     }
   });
 
-  it('light + !dense → CARTO voyager_nolabels', () => {
+  it('light + !dense → CARTO light_nolabels', () => {
     expect(pickBasemapTiles(false, false)).toBe(CARTO_LIGHT_NOLABELS);
   });
 

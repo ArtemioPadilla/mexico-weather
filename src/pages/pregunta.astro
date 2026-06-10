@@ -92,9 +92,20 @@ const home = siteBase();
             base,
           );
           const href = base + plan.path.replace(/^\//, '');
-          out.innerHTML =
-            `<p class="font-semibold mb-1">${plan.description}</p>` +
-            `<p>Redirigiendo a <a class="underline" href="${href}">${href.replace(location.origin, '')}</a> en 1 s…</p>`;
+          out.textContent = '';
+          const descP = document.createElement('p');
+          descP.className = 'font-semibold mb-1';
+          descP.textContent = plan.description;
+          out.appendChild(descP);
+          const redirectP = document.createElement('p');
+          redirectP.textContent = 'Redirigiendo a ';
+          const linkEl = document.createElement('a');
+          linkEl.className = 'underline';
+          linkEl.href = href;
+          linkEl.textContent = href.replace(location.origin, '');
+          redirectP.appendChild(linkEl);
+          redirectP.appendChild(document.createTextNode(' en 1 s…'));
+          out.appendChild(redirectP);
           window.setTimeout(() => {
             location.href = href;
           }, 1000);
