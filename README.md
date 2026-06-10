@@ -52,14 +52,14 @@ Todas las fuentes son públicas y CORS-enabled:
 
 - **Open-Meteo** (gridded forecast: temperatura, humedad, presión, viento)
 - **RainViewer** (radar + satélite-IR)
-- **OpenStreetMap** (basemap claro)
+- **CARTO Positron** (basemap claro, derivado de OSM)
 - **CartoDB Dark Matter** (basemap oscuro)
 - **SMN / CONAGUA** (avisos meteorológicos vía RSS, refrescado por GitHub Actions)
 
 ### 🎨 Detalles de UX
 
 - **Sticky topbar** con brand 🇲🇽 + nav + theme toggle (Sistema/Claro/Oscuro).
-- **Dark basemap automático** — CartoDB Dark Matter en tema oscuro, OSM standard en claro, con swap dinámico via `MutationObserver`.
+- **Dark basemap automático** — CartoDB Dark Matter en tema oscuro, CARTO Positron en claro, con swap dinámico via `MutationObserver`.
 - **Cache compartida** in-memory con TTL de 10 min + request coalescing para no saturar Open-Meteo.
 - **Skeleton states** con `animate-pulse` mientras carga.
 - **Favorites dedupe** — un preset que ya está en favoritos no se duplica.
@@ -86,7 +86,7 @@ El hash del mapa preserva centro, zoom, capa activa y frame del timeline. Recarg
 - **Tailwind CSS 4** (mobile-first, dark-mode-aware)
 - **TypeScript** estricto
 - **MapLibre GL JS** (lazy-loaded — sólo en páginas con mapa)
-- **Vitest** (unit) + **Playwright** (e2e, 31 specs)
+- **Vitest** (unit) + **Playwright** (e2e, 20 specs)
 - **GitHub Actions** (CI + Pages deploy + SMN RSS refresh horario)
 
 ## Desarrollo local
@@ -104,8 +104,8 @@ Scripts útiles:
 | `npm run check` | Astro diagnostics (TS + componentes) |
 | `npm run build` | Build estático a `dist/` |
 | `npm run preview` | Preview del build de producción |
-| `npm test` | Vitest unit suite (173 tests) |
-| `npm run test:e2e` | Playwright e2e suite (31 tests) |
+| `npm test` | Suite de tests: ~448 unit (Vitest) + ~103 e2e (Playwright) — conteo exacto en docs/ROADMAP.md |
+| `npm run test:e2e` | Playwright e2e suite (20 specs, 103 tests) |
 | `npm run lint` / `npm run format` | ESLint + Prettier |
 
 Hooks de pre-commit (Husky) corren `eslint --fix` sobre los archivos staged.
