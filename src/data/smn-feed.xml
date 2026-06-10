@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 10 Jun 2026 22:56:23 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2026 23:51:32 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) zonas de Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes (50 a 75 mm): zonas del Estado de México y Morelos.]]></description>
-      <pubDate>Wed, 10 Jun 2026 16:56:15 -0600</pubDate>
+      <pubDate>Wed, 10 Jun 2026 17:51:22 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-10-ec15</guid>
       <category>Alerta</category>
     </item>
