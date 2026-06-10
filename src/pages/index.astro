@@ -156,14 +156,10 @@ const base = siteBase();
         <p class="text-xs text-gray-600 mt-2 dark:text-gray-400">
           Datos libres • Sin cookies • Sin rastreo
         </p>
+        {/* Privacidad link moved to the shared BaseLayout footer
+            (audit UX-10) — kept out of here so the homepage doesn't
+            render two identical "Privacidad" links. */}
         <div class="flex flex-wrap justify-center gap-4 text-xs text-gray-600 dark:text-gray-500 mt-1">
-          <a
-            href={`${base}privacidad/`}
-            class="hover:text-gray-900 transition-colors dark:hover:text-gray-300"
-          >
-            Privacidad
-          </a>
-          <span>•</span>
           <a
             href="https://artemiop.com/"
             target="_blank"

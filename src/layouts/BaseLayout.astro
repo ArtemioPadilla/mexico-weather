@@ -372,15 +372,18 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
           <span>Clima México</span>
         </a>
         <div class="flex items-center gap-1 sm:gap-2">
+          {/* Inicio/Mapa text links hide below sm — at 360px the row
+              (brand + two 44px toggles + 44px hamburger) has no room
+              for them, and both live in the mobile menu below. */}
           <a
             href={base}
-            class="rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+            class="hidden sm:inline-block rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
             data-i18n-en="Home"
             >Inicio</a
           >
           <a
             href={`${base}mapa`}
-            class="rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+            class="hidden sm:inline-block rounded-md px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
             data-i18n-en="Map"
             >Mapa</a
           >
@@ -444,27 +447,183 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
           >
           <LanguageToggle />
           <ThemeToggle lang={lang} />
+          {/* Mobile menu — audit UX-2. Below sm the Catálogo dropdown
+              and the Inicio/Mapa/Pregunta links are hidden, leaving
+              phones with no nav path to /clima/, /playa/, /estado/,
+              /volcan/ or /pregunta/. Same no-JS <details>/<summary>
+              pattern as the Catálogo dropdown above; the outside-click
+              + Escape script below handles both. */}
+          <details id="mobile-menu" class="relative sm:hidden">
+            <summary
+              class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-md text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+              aria-label="Abrir menú"
+              data-i18n-en-aria-label="Open menu"
+            >
+              <svg
+                aria-hidden="true"
+                class="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </summary>
+            <div
+              role="menu"
+              class="absolute right-0 z-50 mt-1 min-w-[200px] rounded-lg border border-gray-200 bg-white py-1 text-sm shadow-lg dark:border-gray-700 dark:bg-gray-900"
+            >
+              <a
+                role="menuitem"
+                href={base}
+                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                data-i18n-en="Home"
+                >Inicio</a
+              >
+              <a
+                role="menuitem"
+                href={`${base}mapa`}
+                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                data-i18n-en="Map"
+                >Mapa</a
+              >
+              <a
+                role="menuitem"
+                href={`${base}clima/`}
+                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                data-i18n-en="Cities"
+                >Ciudades</a
+              >
+              <a
+                role="menuitem"
+                href={`${base}playa/`}
+                aria-label="Playas"
+                data-i18n-en-aria-label="Beaches"
+                class="block px-3 py-2 text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-cyan-400"
+                ><span aria-hidden="true">🌊</span>
+                <span data-i18n-en="Beaches">Playas</span></a
+              >
+              <a
+                role="menuitem"
+                href={`${base}estado/`}
+                class="block px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-400"
+                data-i18n-en="States"
+                >Estados</a
+              >
+              <a
+                role="menuitem"
+                href={`${base}volcan/`}
+                aria-label="Volcanes"
+                data-i18n-en-aria-label="Volcanoes"
+                class="block px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-orange-400"
+                ><span aria-hidden="true">🌋</span>
+                <span data-i18n-en="Volcanoes">Volcanes</span></a
+              >
+              <a
+                role="menuitem"
+                href={`${base}pregunta`}
+                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                data-i18n-en="Ask"
+                >Pregunta</a
+              >
+            </div>
+          </details>
         </div>
       </div>
     </nav>
     <script is:inline>
-      // Catálogo dropdown — close on outside-click + Escape.
+      // Catálogo + mobile-menu dropdowns — close on outside-click + Escape.
       (function () {
-        var dd = document.getElementById('catalog-dropdown');
-        if (!dd) return;
+        var dds = ['catalog-dropdown', 'mobile-menu']
+          .map(function (id) {
+            return document.getElementById(id);
+          })
+          .filter(Boolean);
+        if (!dds.length) return;
         document.addEventListener('click', function (e) {
-          if (!dd.contains(e.target)) dd.removeAttribute('open');
+          dds.forEach(function (dd) {
+            if (!dd.contains(e.target)) dd.removeAttribute('open');
+          });
         });
         document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape' && dd.hasAttribute('open')) {
-            dd.removeAttribute('open');
-            var s = dd.querySelector('summary');
-            if (s) s.focus();
-          }
+          if (e.key !== 'Escape') return;
+          dds.forEach(function (dd) {
+            if (dd.hasAttribute('open')) {
+              dd.removeAttribute('open');
+              var s = dd.querySelector('summary');
+              if (s) s.focus();
+            }
+          });
         });
       })();
     </script>
     <slot />
+    {/* Shared site footer — audit UX-10. Every page gets a quiet row
+        of site links (the homepage's in-page footer keeps its data
+        sources; its Privacidad link moved here to avoid duplicates).
+        Links are inline-block + padded so short labels still meet
+        the 44px tap-target rule in at least one dimension. */}
+    <footer
+      class="border-t border-gray-200 py-4 dark:border-gray-800"
+    >
+      <nav
+        aria-label="Enlaces del sitio"
+        data-i18n-en-aria-label="Site links"
+        class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-1 gap-y-1 px-3 text-xs text-gray-600 dark:text-gray-500"
+      >
+        <a
+          href={`${base}mapa`}
+          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          data-i18n-en="Interactive map"
+          >Mapa interactivo</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
+          href={`${base}clima/`}
+          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          data-i18n-en="Catalog"
+          >Catálogo</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
+          href={`${base}compara/`}
+          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          data-i18n-en="Compare"
+          >Comparar</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
+          href={`${base}huracanes/`}
+          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          data-i18n-en="Hurricanes"
+          >Huracanes</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
+          href={`${base}rss.xml`}
+          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          data-i18n-en="RSS feed"
+          >Feed RSS</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
+          href={`${base}privacidad/`}
+          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          data-i18n-en="Privacy"
+          >Privacidad</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
+          href="https://github.com/ArtemioPadilla/mexico-weather"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          >GitHub</a
+        >
+      </nav>
+    </footer>
     <FeedbackFAB lang={lang} />
     <PwaInstall />
     {
