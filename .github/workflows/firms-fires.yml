@@ -27,17 +27,39 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Fetch FIRMS CSV (Central America + USA contiguous)
+        id: fetch
         run: |
           mkdir -p public/data
           # Two CSVs cover MX + USA south + Caribbean. Public no-key.
-          curl -sf --retry 3 --retry-delay 5 \
-            -o /tmp/firms-ca.csv \
-            'https://firms.modaps.eosdis.nasa.gov/data/active_fire/viirs-snpp/csv/SUOMI_VIIRS_C2_Central_America_24h.csv'
-          curl -sf --retry 3 --retry-delay 5 \
-            -o /tmp/firms-us.csv \
-            'https://firms.modaps.eosdis.nasa.gov/data/active_fire/viirs-snpp/csv/SUOMI_VIIRS_C2_USA_contiguous_and_Hawaii_24h.csv'
+          # NASA FIRMS stalls regularly (curl exit 28 after minutes with no
+          # data): bound every attempt with --connect-timeout/--max-time and
+          # retry on ALL errors, not just transient HTTP ones. If FIRMS is
+          # still down after that, exit 0 without the CSVs — the convert
+          # step keeps the previous snapshot and the cron doesn't go red
+          # on a NASA outage (same policy as the SMN scraper).
+          fetch() {
+            curl -sf --connect-timeout 30 --max-time 240 \
+              --retry 4 --retry-delay 15 --retry-all-errors \
+              -o "$1" "$2"
+          }
+          ok=true
+          fetch /tmp/firms-ca.csv \
+            'https://firms.modaps.eosdis.nasa.gov/data/active_fire/viirs-snpp/csv/SUOMI_VIIRS_C2_Central_America_24h.csv' \
+            || ok=false
+          fetch /tmp/firms-us.csv \
+            'https://firms.modaps.eosdis.nasa.gov/data/active_fire/viirs-snpp/csv/SUOMI_VIIRS_C2_USA_contiguous_and_Hawaii_24h.csv' \
+            || ok=false
+          if [ "$ok" = false ]; then
+            echo "FIRMS unreachable — keeping previous fires snapshot" >&2
+            echo 'fetched=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'fetched=true' >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Convert to GeoJSON (MX-area bbox)
+        # Skipped when FIRMS was unreachable: converting with missing
+        # CSVs would write an empty snapshot over the previous one.
+        if: steps.fetch.outputs.fetched == 'true'
         run: |
           python3 - <<'PY'
           import csv, json, os
@@ -91,6 +113,7 @@ jobs:
           PY
 
       - name: Commit if changed
+        if: steps.fetch.outputs.fetched == 'true'
         id: commit
         run: |
           git config user.name 'github-actions[bot]'
