@@ -5,15 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 11 Jun 2026 11:51:26 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2026 13:44:17 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 323 | 11 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS, TABASCO, CAMPECHE, YUCATÁN Y QUINTANA ROO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 323
+Ciudad de México a 11 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS, TABASCO, CAMPECHE, YUCATÁN Y QUINTANA ROO
+
+Para hoy, una circulación ciclónica en altura persistirá sobre el golfo de México, e interaccionará con una vaguada en niveles medios de la atmósfera, con una zona de baja presión con potencial para desarrollo ciclónico, con inestabilidad atmosférica y con los remanentes de Cristina, lo que generará lluvias muy fuertes a puntuales intensas en zonas de Oaxaca, Chiapas, Veracruz, Tabasco, Campeche, Yucatán y Quintana Roo.…]]></description>
+      <pubDate>Thu, 11 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-11-323</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 11 de junio del 2026
+Emisión: 06:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Thu, 11 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-11-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.]]></description>
-      <pubDate>Thu, 11 Jun 2026 05:51:17 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-11-af11</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.]]></description>
+      <pubDate>Thu, 11 Jun 2026 07:44:08 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-11-190f</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -23,26 +53,6 @@
       <pubDate>Wed, 10 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_10</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 322 | 10 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS, TABASCO, CAMPECHE, YUCATÁN Y QUINTANA ROO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 322
-Ciudad de México a 10 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS, TABASCO, CAMPECHE, YUCATÁN Y QUINTANA ROO
-
-Durante esta noche y madrugada del jueves, una circulación ciclónica en altura sobre el golfo de México, en interacción con una vaguada en niveles medios de la atmósfera sobre la península de Yucatán, un canal de baja presión sobre el sureste del país y una zona de baja presión con potencial para desarrollo ciclónico frente a las costas de Quintana Roo, ocasionarán lluvias puntuales intensas en Veracruz (centro y sur), Oaxaca (norte, este y sur), Chiapas (oeste y sur), Tabasco (este y sur), Campeche (norte y suroeste), Yucatán (este) y Quintana Roo (norte y centro).…]]></description>
-      <pubDate>Wed, 10 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-10-322</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 10 JUN 2026: Se prevén lluvias intensas para regiones de Puebla, Veracruz, Oaxaca, Chiapas, Campeche y Quintana Roo</title>
