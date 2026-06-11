@@ -24,6 +24,7 @@ import json
 import os
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -79,21 +80,38 @@ CHUNK_SIZE = 200
 
 
 def fetch_chunk(chunk, hourly_var):
-    """Fetch one ≤200-point batch. Retries on transient failures."""
+    """Fetch one ≤200-point batch. Retries on transient failures.
+
+    429s get a much longer backoff than other errors: Open-Meteo's
+    free-tier rate limit is per-minute, so 1-2s retries (the old
+    behaviour) burned all attempts inside the same limit window and
+    the hourly run failed. Honour Retry-After when present.
+    """
     url = build_url(chunk, hourly_var)
     req = urllib.request.Request(
         url,
         headers={'User-Agent': 'mexico-weather/static-snapshot'},
     )
-    for attempt in range(3):
+    attempts = 5
+    for attempt in range(attempts):
         try:
             with urllib.request.urlopen(req, timeout=120) as r:  # noqa: S310
                 return json.loads(r.read().decode('utf-8'))
         except Exception as e:  # noqa: BLE001
-            if attempt == 2:
+            if attempt == attempts - 1:
                 raise
-            wait = 2 ** attempt
-            print(f'  retry {attempt + 1}/3 in {wait}s ({e})', file=sys.stderr)
+            if isinstance(e, urllib.error.HTTPError) and e.code == 429:
+                retry_after = e.headers.get('Retry-After') if e.headers else None
+                try:
+                    wait = max(int(retry_after), 30) if retry_after else 60
+                except ValueError:
+                    wait = 60
+            else:
+                wait = 2 ** attempt
+            print(
+                f'  retry {attempt + 1}/{attempts} in {wait}s ({e})',
+                file=sys.stderr,
+            )
             time.sleep(wait)
 
 
@@ -108,10 +126,10 @@ def fetch_json(points, hourly_var):
         data = fetch_chunk(chunk, hourly_var)
         arr = data if isinstance(data, list) else [data]
         out.extend(arr)
-        # Be polite between chunks. The free tier has generous limits
-        # but we don't want to be the noisy neighbour.
+        # Be polite between chunks — 1s keeps the whole run well under
+        # Open-Meteo's per-minute free-tier budget (we saw 429s at 0.3s).
         if i + CHUNK_SIZE < len(points):
-            time.sleep(0.3)
+            time.sleep(1.0)
     return out
 
 
