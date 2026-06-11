@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 11 Jun 2026 19:18:13 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2026 21:09:11 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.]]></description>
-      <pubDate>Thu, 11 Jun 2026 13:18:05 -0600</pubDate>
+      <pubDate>Thu, 11 Jun 2026 15:09:00 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-11-190f</guid>
       <category>Alerta</category>
     </item>
@@ -36,15 +36,23 @@ Para hoy, una circulación ciclónica en altura persistirá sobre el golfo de M�
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de junio del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de junio del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 11 de junio del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 11 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-11-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 11 JUN 2026: Se pronostican lluvias intensas para regiones de Puebla, Veracruz, Tabasco, Oaxaca y Chiapas, así como la península de...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_11.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas para regiones de Puebla, Veracruz, Tabasco, Oaxaca y Chiapas, así como la península de... — Reporte Matutino del 11 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_11.pdf]]></description>
+      <pubDate>Thu, 11 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_11</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 10 JUN 2026: Se esperan lluvias intensas en regiones de Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Como depresión tropical, Boris se ubica a 45 km al nor-noreste de Punta Maldonado, Guerrero — Comunicado del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 10-26.pdf]]></description>
       <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 10-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 09 JUN 2026: La tormenta tropical Boris tocó tierra esta madrugada entre los límites de Guerrero y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso09-26.pdf</link>
-      <description><![CDATA[La tormenta tropical Boris tocó tierra esta madrugada entre los límites de Guerrero y Oaxaca — Comunicado del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso09-26.pdf]]></description>
-      <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso09-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
