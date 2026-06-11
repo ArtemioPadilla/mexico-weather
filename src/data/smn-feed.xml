@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 11 Jun 2026 17:32:59 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2026 19:18:13 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.]]></description>
+      <pubDate>Thu, 11 Jun 2026 13:18:05 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-11-190f</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 323 | 11 de Junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -28,23 +36,15 @@ Para hoy, una circulación ciclónica en altura persistirá sobre el golfo de M�
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de junio del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de junio del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 11 de junio del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 11 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-11-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.]]></description>
-      <pubDate>Thu, 11 Jun 2026 11:32:48 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-11-190f</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 10 JUN 2026: Se esperan lluvias intensas en regiones de Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo</title>
