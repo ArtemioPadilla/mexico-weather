@@ -299,6 +299,18 @@ test.describe('mapa page', () => {
     page,
   }) => {
     // Mocks: geocode (CDMX fixture has 2 results) + RainViewer + OSM tiles.
+    // The static MX-cities dictionary is mocked EMPTY so the search falls
+    // through to the mocked remote geocoder: the real dictionary is
+    // refreshed monthly by a cron and its match count for "Ciudad" is not
+    // stable (the 2026-06-07 refresh grew it from 2 to 8+ and broke the
+    // exact-count assertion below).
+    await page.route('**/data/mx-cities.json', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: '{"cities":[]}',
+      }),
+    );
     await mockOpenMeteo(page);
     await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
       route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
