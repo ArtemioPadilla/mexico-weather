@@ -48,6 +48,8 @@ def epa_color(pm: float) -> str:
         return '#f97316'  # USG
     if pm < 150:
         return '#dc2626'  # unhealthy
+    if pm < 250:
+        return '#a855f7'  # very-unhealthy (matches src/lib/aqi.ts bg-purple band)
     return '#7c2d12'  # hazardous
 
 
@@ -86,6 +88,9 @@ def fetch_pm() -> dict[str, Optional[float]]:
 
 def main() -> None:
     pm_by_city = fetch_pm()
+    if not pm_by_city:
+        print('air-quality fetch returned empty — preserving previous snapshot', file=sys.stderr)
+        sys.exit(1)
     features = []
     for c in MX_AQI_CITIES:
         name = str(c['name'])

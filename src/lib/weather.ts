@@ -55,10 +55,16 @@ export const WMO_EN: Record<string, string> = {
 /** Reverse map: Spanish label → numeric WMO code. Used at runtime
  *  by the i18n layer to translate condition strings that were
  *  baked into JSON snapshots at build time (e.g., the city-forecast
- *  snapshot stores 'Despejado'; the EN client looks it up here). */
-export const WMO_LABEL_TO_CODE: Record<string, string> = Object.fromEntries(
-  Object.entries(WMO).map(([code, label]) => [label, code]),
-);
+ *  snapshot stores 'Despejado'; the EN client looks it up here).
+ *  When multiple codes share the same label (e.g., 0 and 1 both map
+ *  to 'Despejado ☀️'), the FIRST code wins. */
+export const WMO_LABEL_TO_CODE: Record<string, string> = (() => {
+  const map: Record<string, string> = {};
+  for (const [code, label] of Object.entries(WMO)) {
+    if (!(label in map)) map[label] = code;
+  }
+  return map;
+})();
 
 /** Map a WMO weather code to a human-readable label + emoji.
  *  Defaults to Spanish; pass lang='en' for English. */
@@ -79,21 +85,31 @@ export function translateCondition(label: string, lang: 'es' | 'en'): string {
   if (code) return WMO_EN[code] ?? label;
   // Fallback: dictionary of strings used in build-city-forecasts.py
   // and elsewhere that may not exactly match WMO[] above.
+  // Keep this list in sync with WMO_LABELS in scripts/build-city-forecasts.py.
   const extras: Record<string, string> = {
     '—': '—',
+    // WMO_LABELS values from build-city-forecasts.py (plain text, no emoji)
+    'Despejado': 'Clear',
     'Mayormente despejado': 'Mostly clear',
+    'Parcialmente nublado': 'Partly cloudy',
+    'Nublado': 'Overcast',
+    'Niebla': 'Fog',
+    'Niebla con escarcha': 'Freezing fog',
     'Llovizna ligera': 'Light drizzle',
+    'Llovizna': 'Drizzle',
     'Llovizna intensa': 'Heavy drizzle',
     'Lluvia ligera': 'Light rain',
+    'Lluvia': 'Rain',
+    'Lluvia intensa': 'Heavy rain',
     'Nevada ligera': 'Light snow',
     'Nevada': 'Snow',
     'Nevada intensa': 'Heavy snow',
+    'Chubascos': 'Showers',
     'Chubascos intensos': 'Heavy showers',
     'Chubascos violentos': 'Violent showers',
     'Tormenta': 'Thunderstorm',
     'Tormenta con granizo': 'Thunderstorm with hail',
     'Tormenta severa': 'Severe thunderstorm',
-    'Niebla con escarcha': 'Freezing fog',
   };
   return extras[label] ?? label;
 }

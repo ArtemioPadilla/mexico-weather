@@ -122,7 +122,7 @@ The site is mobile-first and tested at four representative breakpoints. There ar
 
 ## Data sources & attributions
 
-- **OpenStreetMap** — basemap raster tiles when the UI is in the light theme. © OpenStreetMap contributors.
+- **CARTO Positron** — basemap raster tiles when the UI is in the light theme (derived from OSM data). © OpenStreetMap contributors © CARTO.
 - **CartoDB Dark Matter** — basemap raster tiles when the UI is in the dark theme (resolved from explicit "Oscuro" or "Sistema → dark"). The map swaps the tile source live; the MapLibre instance is not recreated. © OpenStreetMap contributors © CARTO.
 - **RainViewer** — radar + satellite-IR frames and tiles. © RainViewer.
 - **Open-Meteo** — keyless gridded forecast (temperature, humidity, pressure, wind). © Open-Meteo.

@@ -4,25 +4,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MarinePanel from '../components/MarinePanel.astro';
 import SmnAvisos from '../components/SmnAvisos.astro';
 import { ui } from '../i18n/ui';
+import { siteBase } from '../utils/paths';
 
 // keep in sync with the other lang declaration in this file
 const lang = 'es' as const;
 const t = ui[lang];
+const base = siteBase();
 ---
 
 <BaseLayout
   title="Pronóstico — Clima México 🇲🇽"
   description="Pronóstico detallado por ubicación"
   lang={lang}
+  robots="noindex,follow"
 >
   <main class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
     <div class="max-w-3xl mx-auto px-4 py-8 space-y-6">
-      {/* Single page h1 — sr-only until the hero resolves. The
-          live-render script (loadForecast) updates this element's
-          text and removes sr-only so we never end up with two
-          <h1>s on the page. The injected hero markup further down
-          uses a styled <span> for the visible title instead of a
-          second <h1>. */}
+      {/* Single page h1 — stays sr-only permanently. The live-render
+          script only updates its text (city name) for assistive tech;
+          the visible title is the styled aria-hidden <span> in the
+          injected hero markup, so un-hiding this h1 would duplicate
+          the title for sighted users. */}
       <h1
         id="fc-h1"
         class="sr-only text-2xl font-bold"
@@ -34,7 +36,7 @@ const t = ui[lang];
       >
         <p class="text-gray-700 dark:text-gray-300">{t.pick_location}</p>
         <a
-          href={import.meta.env.BASE_URL}
+          href={base}
           class="inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
           >← {t.back_home}</a
         >
@@ -231,9 +233,15 @@ const t = ui[lang];
     } from '../lib/alerts';
     import { ui } from '../i18n/ui';
     import { initInteractiveMap } from '../lib/interactive-map';
+    import { siteBase } from '../utils/paths';
 
-    // keep in sync with the other lang declaration in this file
-    const lang: 'es' | 'en' = 'es';
+    // Runtime language read — set by BaseLayout's pre-paint script
+    // (covers sessionStorage, ?lang= URL param and navigator.language
+    // in one place). The frontmatter `lang` stays 'es' because the
+    // static HTML is Spanish-first and swapped via data-i18n-en.
+    const lang = (document.documentElement.getAttribute('data-lang') === 'en'
+      ? 'en'
+      : 'es') as 'es' | 'en';
     const t = ui[lang];
     const dateLocale = lang === 'es' ? 'es-MX' : 'en-US';
 
@@ -386,22 +394,21 @@ const t = ui[lang];
           ? esc(safeAdmin)
           : esc(loc.lat + ', ' + loc.lng);
 
-        const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
-        const mapHref = `${baseUrl}/mapa/#view=${loc.lat},${loc.lng},9z`;
+        const mapHref = `${siteBase()}mapa/#view=${loc.lat},${loc.lng},9z`;
 
         const currentHtml = `
           <header class="space-y-1">
             <div class="flex items-center flex-wrap gap-2">
               <span class="text-2xl font-bold" aria-hidden="true">${esc(title)}</span>
-              <button type="button" id="fc-fav" class="inline-flex items-center justify-center gap-1 min-w-[44px] min-h-[44px] px-2 text-2xl leading-none text-gray-400 hover:text-amber-400 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded ml-1" aria-pressed="false" aria-label="Agregar a favoritos" title="Agregar a favoritos">
+              <button type="button" id="fc-fav" class="inline-flex items-center justify-center gap-1 min-w-[44px] min-h-[44px] px-2 text-2xl leading-none text-gray-400 hover:text-amber-400 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded ml-1" aria-pressed="false" aria-label="${t.fav_add}" title="${t.fav_add}">
                 <span id="fc-fav-icon" aria-hidden="true">☆</span>
                 <span id="fc-fav-saved" class="hidden text-xs font-medium text-amber-500">Guardado</span>
               </button>
               <button type="button" id="fc-alert" class="inline-flex items-center justify-center gap-1 min-w-[44px] min-h-[44px] px-2 text-xl leading-none text-gray-400 hover:text-blue-500 dark:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="Crear alerta personal" title="Crear alerta personal">
                 <span id="fc-alert-icon" aria-hidden="true">🔔</span>
               </button>
-              <button type="button" id="fc-share" class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] px-3 text-sm rounded border border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Compartir" title="Compartir">Compartir</button>
-              <span id="fc-share-toast" aria-live="polite" class="hidden text-xs text-green-600 dark:text-green-400">URL copiada</span>
+              <button type="button" id="fc-share" class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] px-3 text-sm rounded border border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="${t.share}" title="${t.share}">${t.share}</button>
+              <span id="fc-share-toast" aria-live="polite" class="hidden text-xs text-green-600 dark:text-green-400">${t.url_copied}</span>
             </div>
             <p class="text-xs text-gray-600 dark:text-gray-500">${subLine}</p>
             <div class="flex items-end gap-3 pt-2">
@@ -650,7 +657,7 @@ const t = ui[lang];
         const contextHtml = `
           <div class="rounded-md border border-yellow-600/60 bg-yellow-600/10 p-3 text-sm text-yellow-900 dark:text-yellow-100">
             ⚠️ Contexto SMN/CONAGUA — avisos vigentes:
-            <a href="${esc(baseUrl)}/rss.xml" target="_blank" rel="noopener noreferrer" class="underline">rss.xml</a>
+            <a href="${esc(siteBase())}rss.xml" target="_blank" rel="noopener noreferrer" class="underline">rss.xml</a>
           </div>
           <footer class="border-t border-gray-200 dark:border-gray-800 mt-4 pt-3 text-center text-[11px] text-gray-500 dark:text-gray-600">Datos: Open-Meteo (ECMWF/DWD/GFS) · Alertas: SMN / CONAGUA · Sin cookies · Sin rastreo · <a href="https://artemiop.com/" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900 transition-colors dark:hover:text-gray-300">Artemio Padilla</a></footer>`;
 
@@ -691,7 +698,7 @@ const t = ui[lang];
             if (favIcon) favIcon.textContent = on ? '★' : '☆';
             favBtn.classList.toggle('text-amber-400', on);
             favBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
-            const label = on ? 'Quitar de favoritos' : 'Agregar a favoritos';
+            const label = on ? t.fav_remove : t.fav_add;
             favBtn.setAttribute('aria-label', label);
             favBtn.setAttribute('title', label);
             if (favSaved) favSaved.classList.toggle('hidden', !on);
@@ -910,7 +917,7 @@ const t = ui[lang];
                 hour12: false,
               }).format(new Date());
             }
-            updatedEl.textContent = `Última actualización: ${timeStr} · ${resolvedTz}`;
+            updatedEl.textContent = `${t.last_updated} ${timeStr} · ${resolvedTz}`;
             // Stamp the data with a fetch timestamp + freshness
             // checker (Story 3.6). After STALE_AFTER_MS the line
             // turns amber and a 'Actualizar' link re-runs render().
@@ -924,11 +931,18 @@ const t = ui[lang];
               const ageMs = Date.now() - fetchedAt;
               if (ageMs < STALE_AFTER_MS) return;
               const ageH = Math.round(ageMs / 3600000);
-              updatedEl.innerHTML =
-                `<span class="text-amber-700 dark:text-amber-400">⚠️ Datos de hace ${ageH} h · </span>` +
-                `<button type="button" id="fc-refresh-btn" class="underline text-blue-600 dark:text-blue-400">Actualizar</button>`;
-              const btn = document.getElementById('fc-refresh-btn');
-              btn?.addEventListener('click', refresh);
+              updatedEl.textContent = '';
+              const staleSpan = document.createElement('span');
+              staleSpan.className = 'text-amber-700 dark:text-amber-400';
+              staleSpan.textContent = `⚠️ ${t.stale_data.replace('{n}', String(ageH))}`;
+              const refreshBtn = document.createElement('button');
+              refreshBtn.type = 'button';
+              refreshBtn.id = 'fc-refresh-btn';
+              refreshBtn.className = 'underline text-blue-600 dark:text-blue-400';
+              refreshBtn.textContent = t.refresh;
+              refreshBtn.addEventListener('click', refresh);
+              updatedEl.appendChild(staleSpan);
+              updatedEl.appendChild(refreshBtn);
             };
             // Stop any previous staleness interval from a prior render
             // call to avoid stacking timers across refreshes.

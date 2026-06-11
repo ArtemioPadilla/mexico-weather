@@ -181,6 +181,16 @@ def main():
             time.sleep(0.2)
             continue
         doc = normalize(raw)
+        # Schema guard: skip cities whose normalized doc has no meaningful
+        # content — keeps previous file intact rather than writing empty data.
+        if doc.get('today') is None and not doc.get('next'):
+            print(
+                f'  ! {city["slug"]}: normalized doc has no today/next — skipping write',
+                file=sys.stderr,
+            )
+            manifest.append({'slug': city['slug'], 'status': 'empty'})
+            time.sleep(0.2)
+            continue
         doc['updated'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         doc['slug'] = city['slug']
         out_path = os.path.join(out_dir, f'{city["slug"]}.json')
@@ -199,6 +209,9 @@ def main():
             'cities': manifest,
         }, f, separators=(',', ':'), ensure_ascii=False)
     print(f'wrote {ok_count}/{len(TOP_CITIES)} city forecasts to {out_dir}', file=sys.stderr)
+    if ok_count == 0:
+        print('all cities failed — aborting', file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == '__main__':

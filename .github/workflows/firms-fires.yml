@@ -95,9 +95,10 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git diff --quiet -- public/data/fires-na.json || (
-            git add public/data/fires-na.json &&
+          git add public/data/fires-na.json
+          git diff --staged --quiet || (
             git commit -m 'chore: refresh FIRMS fires data' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

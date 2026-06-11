@@ -120,15 +120,29 @@ Source of truth: [`src/components/common/FeedbackFAB.astro`](../src/components/c
 
 # Existing test coverage at a glance
 
-| File | Tests | Total |
+| File | Tests | Description |
 |---|---|---|
-| `e2e/home.spec.ts` | loads w/ heading + 200; 5 preset cards; SMN alert link; footer privacy link | 4 |
-| `e2e/search.spec.ts` | typing → autocomplete → navigate to `/forecast`; `/forecast` renders sections from params | 2 |
-| `e2e/favorites.spec.ts` | star on detail → appears in "Tus lugares" → persists → remove hides section | 1 |
-| `e2e/theme.spec.ts` | no-FOUC; toggle cycles + applies `.dark`; persists across reload | 3 |
-| `e2e/mapa.spec.ts` | map + search visible; radar + legend; satellite (no legend); timeline scrubs; temperature; humidity; pressure; wind; sunlight | 9 |
-| `e2e/privacy.spec.ts` | renders w/ heading; no cookies/tracking; source-attribution links | 3 |
-| **Total** | | **22** |
+| `e2e/a11y.spec.ts` | 2 | axe 0 critical/serious on all page families + `/mapa` |
+| `e2e/catalog-nav.spec.ts` | 4 | catalog dropdown opens, navigates to /clima/, Escape closes, hidden at 360 px |
+| `e2e/compara.spec.ts` | 5 | compare view: 2-col default, 3-col from URL, toggle add/remove city, cap at 4, catalog link |
+| `e2e/cross.spec.ts` | 4 | theme persists across routes; nav links visible site-wide; FAB reachable; SW scope |
+| `e2e/favorites.spec.ts` | 1 | star on detail → appears in "Tus lugares" → persists → remove hides section |
+| `e2e/forecast-curated-hint.spec.ts` | 3 | hint shown for CDMX coords, absent for off-list, dismiss persists via sessionStorage |
+| `e2e/home.spec.ts` | 5 | loads 200 + heading; 5 preset cards; hides favorited city; SMN alert link; footer link |
+| `e2e/huracanes.spec.ts` | 4 | title + breadcrumb; empty-state; storm cards with classification + winds; 404 fallback |
+| `e2e/i18n-toggle.spec.ts` | 9 | language toggle: default ES; swap to EN; persist across pages; ?lang=en; hreflang; city/beach/state/volcano EN |
+| `e2e/index-filter.spec.ts` | 2 | typing filters catalog index items; diacritic-insensitive match |
+| `e2e/mapa.spec.ts` | 9 | map container + search; radar + legend; satellite (no legend); timeline scrubs; temperature; extra field layers; wind; search autocomplete; sunlight overlay |
+| `e2e/mobile-audit.spec.ts` | 3 | no horizontal overflow + ≥44 px tap targets at 360×640; axe at mobile viewport |
+| `e2e/mostrar-mi-clima.spec.ts` | 4 | "Mostrar mi clima" button is primary CTA; CDMX → /clima/cdmx/; off-list MX → /forecast/; outside MX → toast |
+| `e2e/outdoor-mode.spec.ts` | 2 | toggle hides low-priority panels; persists across navigation |
+| `e2e/print-styles.spec.ts` | 3 | print hides nav + chrome on home; hides interactive panels on forecast; hides canvas on /mapa |
+| `e2e/privacy.spec.ts` | 3 | renders w/ heading; no cookies/tracking; source-attribution links present |
+| `e2e/search.spec.ts` | 2 | typing → autocomplete → navigate to /forecast; /forecast renders current temp + 7-day + detail panels |
+| `e2e/smn-alert-ribbon.spec.ts` | 3 | ribbon shown for critical aviso; hidden when none; dismiss + sessionStorage persistence |
+| `e2e/static.spec.ts` | 8 | privacy back-link; rss.xml; sitemap.xml; /clima/ lists 30 cities; /clima/cdmx/ SEO; /volcan/popocatepetl/; /estado/jalisco/; /playa/cancun/ |
+| `e2e/theme.spec.ts` | 3 | no-FOUC on served HTML; toggle cycles Sistema → Claro → Oscuro; persists across reload |
+| **Total** | **103** | 20 spec files |
 
 Journeys flagged **NOT YET COVERED** below are candidates for new tests.
 

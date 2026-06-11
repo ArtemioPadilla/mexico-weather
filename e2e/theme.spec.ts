@@ -1,6 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { mockOpenMeteo } from './helpers';
+
+const HERE = dirname(fileURLToPath(import.meta.url));
 
 // Force a deterministic OS preference so the 'system' branch resolves to a
 // known theme regardless of the runner's settings.
@@ -14,7 +18,7 @@ test.describe('theme', () => {
   test('no-FOUC: served HTML has no hardcoded class="dark" on <html>', async () => {
     // The theme is applied by an inline script at runtime, never baked into
     // the static HTML. Assert against the built artifact on disk.
-    const html = readFileSync('dist/index.html', 'utf8');
+    const html = readFileSync(join(HERE, '..', 'dist', 'index.html'), 'utf8');
     const htmlTag = html.match(/<html[^>]*>/i)?.[0] ?? '';
     expect(htmlTag).not.toMatch(/class\s*=\s*["'][^"']*\bdark\b/i);
     // The anti-FOUC inline script must be present in <head>.

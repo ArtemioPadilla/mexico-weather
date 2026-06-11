@@ -41,6 +41,7 @@ jobs:
           git add -A public/data/field-grids/
           git diff --cached --quiet || (
             git commit -m 'chore: refresh field-grid snapshots' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

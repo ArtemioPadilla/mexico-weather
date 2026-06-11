@@ -59,7 +59,15 @@ jobs:
         # Post-processor — scans the freshly scraped feed and emits
         # public/data/smn-by-state.json keyed by MX state slug. Consumed
         # by the <SmnAvisos> widget on every detail page.
-        run: python3 scripts/build-smn-by-state.py
+        # Skipped when the scrape produced zero items (SMN outage): rebuilding
+        # from an item-less feed would clobber the previous good index, and
+        # the commit-step guard below only protects the feed file itself.
+        run: |
+          if grep -q '<item>' src/data/smn-feed.xml; then
+            python3 scripts/build-smn-by-state.py
+          else
+            echo "Feed has no items — keeping previous per-state index"
+          fi
 
       - name: Commit feed if changed
         id: commit
@@ -70,6 +78,7 @@ jobs:
           git add src/data/smn-feed.xml public/data/smn-by-state.json
           git diff --cached --quiet || (
             git commit -m 'chore: refresh SMN RSS feed + per-state index' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

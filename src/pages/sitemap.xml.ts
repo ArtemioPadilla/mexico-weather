@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { siteBase } from '../utils/paths';
+import { escapeXml } from './rss.xml';
 import { TOP_CITIES } from '../lib/top-cities';
 import { TOP_BEACHES } from '../lib/top-beaches';
 import { MX_STATES } from '../lib/mx-states';
@@ -16,7 +17,6 @@ export const GET: APIRoute = ({ site }) => {
     '',
     'privacidad/',
     'mapa/',
-    'forecast/',
     'pregunta/',
     'clima/',
     'playa/',
@@ -31,7 +31,7 @@ export const GET: APIRoute = ({ site }) => {
   ];
   const urls = pages
     .map((page) => new URL(`${basePath}${page}`, site).href)
-    .map((loc) => `  <url>\n    <loc>${loc}</loc>\n  </url>`)
+    .map((loc) => `  <url>\n    <loc>${escapeXml(loc)}</loc>\n  </url>`)
     .join('\n');
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

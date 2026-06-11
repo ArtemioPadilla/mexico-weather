@@ -48,12 +48,15 @@ const linkedStates = volcano.admin
 // swap can replace the whole inline-content paragraph. Template
 // literals would be awkward inside JSX, so the frontmatter builds
 // both strings once.
+const escapeHtml = (s: string): string =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
 const stateLinkHtml = (lang: 'es' | 'en'): string => {
   if (linkedStates.length === 0) return '';
   const links = linkedStates
     .map(
       (s) =>
-        `<a href="${base}estado/${s.slug}/" class="font-medium text-orange-700 hover:underline dark:text-orange-400">${s.name}</a>`,
+        `<a href="${base}estado/${escapeHtml(s.slug)}/" class="font-medium text-orange-700 hover:underline dark:text-orange-400">${escapeHtml(s.name)}</a>`,
     )
     .reduce<string>((acc, link, i) => {
       if (i === 0) return link;

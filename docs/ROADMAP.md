@@ -28,9 +28,9 @@ competitive angle, not limitations.
   overlays), and full functional parity with zoom.earth.
 - **Open backlog:** 5 epics (E10–E14), 19 stories. Next up: **E10** (map
   first paint, P0) gated on a foreground-repro check, then **E11** (mobile).
-- **Health:** 438 unit tests + 103 e2e green on `main`; Core Web Vitals
-  baseline established (Story 8.2). Known data-pipeline fix (#288) confirmed
-  live in production.
+- **Health:** 448 unit tests (51 files) + 103 e2e (20 specs) green on `main`
+  (as of commit fc7a9af, 2026-06-10); Core Web Vitals baseline established
+  (Story 8.2). Known data-pipeline fix (#288) confirmed live in production.
 
 ---
 

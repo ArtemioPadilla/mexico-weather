@@ -46,6 +46,7 @@ jobs:
           git add public/data/mx-states.geojson
           git diff --cached --quiet || (
             git commit -m 'chore: rebuild MX state polygons' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

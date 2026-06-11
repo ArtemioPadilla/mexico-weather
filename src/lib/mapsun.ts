@@ -65,6 +65,11 @@ export function terminatorPolygon(
   const sinD = Math.sin(dR);
   const nightPoleLat = -sun.lat;
   const nightPoleLng = sun.lng > 0 ? sun.lng - 180 : sun.lng + 180;
+  // Close the ring through the pole on the night side. Derive from
+  // sun.lat (not nightPoleLat) so the exact equinox (sun.lat === 0,
+  // where nightPoleLat is -0) deterministically picks the south pole
+  // instead of depending on the sign of negative zero.
+  const capLat = sun.lat >= 0 ? -90 : 90;
   const ring: number[][] = [];
   for (let i = 0; i < n; i++) {
     const a = (i / n) * 2 * Math.PI;
@@ -79,8 +84,8 @@ export function terminatorPolygon(
       );
     ring.push([normalizeLng(lng * RAD), lat * RAD]);
   }
-  ring.push([normalizeLng(nightPoleLng), nightPoleLat > 0 ? 90 : -90]);
-  ring.push([normalizeLng(nightPoleLng + 180), nightPoleLat > 0 ? 90 : -90]);
+  ring.push([normalizeLng(nightPoleLng), capLat]);
+  ring.push([normalizeLng(nightPoleLng + 180), capLat]);
   ring.push(ring[0]);
   return { type: 'Polygon', coordinates: [ring] };
 }

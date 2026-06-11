@@ -71,8 +71,14 @@ const home = siteBase();
   <script>
     import { resolveQuestion } from '../lib/ask-router';
     import { siteBase } from '../utils/paths';
+    import { ui } from '../i18n/ui';
 
     const base = siteBase();
+    // Runtime language read — set by BaseLayout's pre-paint script.
+    const lang = (document.documentElement.getAttribute('data-lang') === 'en'
+      ? 'en'
+      : 'es') as 'es' | 'en';
+    const t = ui[lang];
     const form = document.getElementById('ask-form') as HTMLFormElement | null;
     const q = document.getElementById('ask-q') as HTMLInputElement | null;
     const out = document.getElementById('ask-result');
@@ -82,7 +88,7 @@ const home = siteBase();
         const raw = q.value.trim();
         if (!raw) return;
         out.classList.remove('hidden');
-        out.textContent = 'Pensando…';
+        out.textContent = t.thinking;
         try {
           // Static dict at /data/mx-cities.json (250+ MX cities)
           // intercepts most queries before reaching the live geocoder.
@@ -92,15 +98,25 @@ const home = siteBase();
             base,
           );
           const href = base + plan.path.replace(/^\//, '');
-          out.innerHTML =
-            `<p class="font-semibold mb-1">${plan.description}</p>` +
-            `<p>Redirigiendo a <a class="underline" href="${href}">${href.replace(location.origin, '')}</a> en 1 s…</p>`;
+          out.textContent = '';
+          const descP = document.createElement('p');
+          descP.className = 'font-semibold mb-1';
+          descP.textContent = plan.description;
+          out.appendChild(descP);
+          const redirectP = document.createElement('p');
+          redirectP.textContent = `${t.redirecting_to} `;
+          const linkEl = document.createElement('a');
+          linkEl.className = 'underline';
+          linkEl.href = href;
+          linkEl.textContent = href.replace(location.origin, '');
+          redirectP.appendChild(linkEl);
+          redirectP.appendChild(document.createTextNode(` ${t.in_one_s}`));
+          out.appendChild(redirectP);
           window.setTimeout(() => {
             location.href = href;
           }, 1000);
         } catch {
-          out.textContent =
-            'No pude resolver tu pregunta. Prueba con algo más simple, o abre el mapa.';
+          out.textContent = t.ask_error;
         }
       });
     }

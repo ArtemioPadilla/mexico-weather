@@ -43,6 +43,7 @@ jobs:
           git add public/data/marine-snapshot.json
           git diff --staged --quiet || (
             git commit -m 'chore: refresh marine snapshot' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

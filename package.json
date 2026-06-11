@@ -24,6 +24,9 @@
     "d3-contour": "^4.0.2",
     "maplibre-gl": "^5.24.0"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@axe-core/playwright": "^4.11.3",
@@ -42,7 +45,7 @@
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^4.3.0",
-    "typescript": "^6.0.3",
+    "typescript": "~6.0.3",
     "typescript-eslint": "^8.59.4",
     "vitest": "^4.1.7"
   },

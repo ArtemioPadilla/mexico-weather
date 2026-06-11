@@ -37,14 +37,16 @@ jobs:
       - name: Run Lighthouse CI
         id: lhci
         uses: treosh/lighthouse-ci-action@v12
-        # Advisory only: never fail the job on regressions. Promote
-        # to 'error' once the baseline is stable.
-        continue-on-error: true
+        # Accessibility is asserted at 'error' level in .lighthouserc.json
+        # (audit TEST-3), so an a11y regression fails this job. The other
+        # budgets remain 'warn' (advisory) inside the same config.
         with:
           configPath: ./.lighthouserc.json
 
       - name: Comment with results URL
-        if: github.event_name == 'pull_request' && steps.lhci.outputs.links != ''
+        # always(): still post the report link when the a11y assertion
+        # fails the LHCI step — that run is the one worth inspecting.
+        if: always() && github.event_name == 'pull_request' && steps.lhci.outputs.links != ''
         uses: actions/github-script@v8
         with:
           script: |

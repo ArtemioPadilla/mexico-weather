@@ -37,6 +37,11 @@ export function cachedFetch(
 
   const cached = fetchCache.get(url);
   if (cached && Date.now() - cached.ts < FETCH_CACHE_TTL_MS) {
+    // Honour an already-aborted signal even on the cache-hit path, so
+    // callers get the same AbortError semantics as a real fetch.
+    if (init?.signal?.aborted) {
+      return Promise.reject(new DOMException('Aborted', 'AbortError'));
+    }
     return Promise.resolve(
       new Response(cached.body, {
         status: cached.status,
@@ -48,6 +53,9 @@ export function cachedFetch(
   // Coalesce concurrent identical requests.
   const existing = inFlight.get(url);
   if (existing) {
+    if (init?.signal?.aborted) {
+      return Promise.reject(new DOMException('Aborted', 'AbortError'));
+    }
     // Each caller needs its own Response (body can only be read once),
     // so clone before handing back.
     return existing.then((r) => r.clone());

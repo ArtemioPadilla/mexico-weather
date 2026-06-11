@@ -15,11 +15,19 @@ jobs:
   claude:
     name: Triage with Claude
     runs-on: ubuntu-latest
-    # Only run on issues (not PRs) and on @claude mentions in comments
+    # Only run on issues (not PRs) opened by repo members, and on
+    # @claude mentions in comments from trusted collaborators.
     if: |
-      (github.event_name == 'issues' && github.event.action == 'opened') ||
+      (github.event_name == 'issues' &&
+       github.event.action == 'opened' &&
+       (github.event.issue.author_association == 'OWNER' ||
+        github.event.issue.author_association == 'MEMBER' ||
+        github.event.issue.author_association == 'COLLABORATOR')) ||
       (github.event_name == 'issue_comment' &&
        github.event.issue.pull_request == null &&
+       (github.event.comment.author_association == 'OWNER' ||
+        github.event.comment.author_association == 'MEMBER' ||
+        github.event.comment.author_association == 'COLLABORATOR') &&
        contains(github.event.comment.body, '@claude'))
     steps:
       - uses: actions/checkout@v6

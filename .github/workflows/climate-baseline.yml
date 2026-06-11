@@ -46,6 +46,7 @@ jobs:
           git add public/data/climate-baseline-mx.json
           git diff --staged --quiet || (
             git commit -m 'chore: refresh climate baseline (Open-Meteo archive)' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

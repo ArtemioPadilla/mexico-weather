@@ -55,6 +55,7 @@ jobs:
           git add -A public/og/
           git diff --cached --quiet || (
             git commit -m 'chore: regenerate OG images' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

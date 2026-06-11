@@ -47,6 +47,7 @@ jobs:
           git add public/data/mx-cities.json
           git diff --staged --quiet || (
             git commit -m 'chore: refresh MX cities dictionary' &&
+            git pull --rebase origin main &&
             git push &&
             echo 'committed=true' >> "$GITHUB_OUTPUT"
           )

@@ -23,6 +23,9 @@ export interface OverlayRegistry {
   build: () => void;
   /** Re-sync each checkbox's `checked` property with `isEnabled()`. */
   refresh: () => void;
+  /** Remove the global keydown listener installed by installShortcuts().
+   *  No-op when shortcuts were never installed. */
+  dispose: () => void;
 }
 
 export interface LayerShortcut {
@@ -64,6 +67,11 @@ export function createOverlayRegistry(
       cb.id = id;
       cb.checked = def.isEnabled();
       cb.className = 'accent-blue-600';
+      // Explicit accessible name (A11Y-1). The wrapping <label> should
+      // already name the input, but some AT/browser combos announced
+      // these checkboxes as just "on" — aria-label makes the name
+      // unambiguous and matches the visible label text.
+      cb.setAttribute('aria-label', def.label);
       cb.addEventListener('change', () => def.setEnabled(cb.checked));
       const lbl = document.createElement('span');
       lbl.textContent = def.label;
@@ -92,9 +100,10 @@ export function createOverlayRegistry(
   // or layer list, and when a window is available. Caller can wrap
   // this in a feature-gate (`features.layerRail`) by simply not
   // calling installShortcuts() — see the dedicated method below.
+  let shortcutsHandler: ((e: KeyboardEvent) => void) | null = null;
   function installShortcuts(): void {
-    if (typeof window === 'undefined') return;
-    window.addEventListener('keydown', (e) => {
+    if (typeof window === 'undefined' || shortcutsHandler) return;
+    shortcutsHandler = (e: KeyboardEvent): void => {
       const target = e.target as HTMLElement | null;
       if (
         e.ctrlKey ||
@@ -120,12 +129,21 @@ export function createOverlayRegistry(
         overlay.setEnabled(!overlay.isEnabled());
         refresh();
       }
-    });
+    };
+    window.addEventListener('keydown', shortcutsHandler);
+  }
+
+  function dispose(): void {
+    if (typeof window !== 'undefined' && shortcutsHandler) {
+      window.removeEventListener('keydown', shortcutsHandler);
+      shortcutsHandler = null;
+    }
   }
 
   return {
     build,
     refresh,
+    dispose,
     // Not in the type but exposed via cast — see usage in the
     // interactive-map.ts wiring.
     ...({ installShortcuts } as { installShortcuts: () => void }),

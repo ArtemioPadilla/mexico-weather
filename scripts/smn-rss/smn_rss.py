@@ -569,8 +569,9 @@ def main():
             browser.close()
 
     if not all_items:
-        print("⚠️  No se obtuvieron items. Abortando sin sobrescribir el feed existente.", file=sys.stderr)
-        sys.exit(1)
+        print("⚠️  No se obtuvieron items (SMN posiblemente en mantenimiento). "
+              "Saltando sobrescritura del feed — el feed existente se conserva.", file=sys.stderr)
+        sys.exit(0)
 
     rss_xml = build_rss(all_items, feed_url=args.feed_url)
 
