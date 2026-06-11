@@ -20,7 +20,7 @@
     "*.{json,css}": "prettier --write"
   },
   "dependencies": {
-    "astro": "^6.3.7",
+    "astro": "^6.4.6",
     "d3-contour": "^4.0.2",
     "maplibre-gl": "^5.24.0"
   },
@@ -35,19 +35,19 @@
     "@tailwindcss/vite": "^4.3.0",
     "@types/d3-contour": "^3.0.6",
     "astro-eslint-parser": "^1.4.0",
-    "eslint": "^10.4.0",
+    "eslint": "^10.4.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.7.0",
     "globals": "^17.6.0",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "lint-staged": "^16.0.0",
-    "prettier": "^3.8.3",
+    "prettier": "^3.8.4",
     "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^4.3.0",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.59.4",
-    "vitest": "^4.1.7"
+    "typescript-eslint": "^8.61.0",
+    "vitest": "^4.1.8"
   },
   "overrides": {
     "vite": "7.3.3"
