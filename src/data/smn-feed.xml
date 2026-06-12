@@ -5,27 +5,56 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 12 Jun 2026 21:01:21 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2026 21:58:15 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
-
----
-]]></description>
-      <pubDate>Fri, 12 Jun 2026 15:01:19 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-12</guid>
-      <category>Pronóstico General</category>
-    </item>
     <item>
       <title>⚠️ Alerta SMN: Zona de baja presión con potencial ciclónico, circulación ciclónica y canal de baja presión.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en: Nay, Jal, Pue, Ver, Oax, Chis, Tab, Camp, Yuc y QRoo.]]></description>
-      <pubDate>Fri, 12 Jun 2026 15:01:16 -0600</pubDate>
+      <pubDate>Fri, 12 Jun 2026 15:58:05 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-12-a28e</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 325 | 12 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS INTENSAS EN ZONAS DEL OCCIDENTE, ORIENTE Y SURESTE DEL PAÍS, INCLUIDA LA PENÍNSULA DE YUCATÁN
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 325
+Ciudad de México a 12 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS INTENSAS EN ZONAS DEL OCCIDENTE, ORIENTE Y SURESTE DEL PAÍS, INCLUIDA LA PENÍNSULA DE YUCATÁN
+
+
+
+
+
+Este día, la onda tropical núm. 6 recorrerá el sureste mexicano y continuará interactuando con una zona de baja presión con potencial para desarrollo ciclónico que se ubicará sobre el suroeste del golfo de México, con una circulación ciclónica en altura y con inestabilidad atmosférica, condiciones que originarán lluvias puntuales intensas en regiones de Jalisco, Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo, así como chubascos con lluvias fuertes a muy fuertes en gran parte del territorio nacional. Por último, se prevén temperaturas calurosas a muy calurosas en el norte y noroeste de la República Mexicana, así como en la península de Yucatán, continuando la onda de calor en Sonora (centro, este y sureste), Chihuahua (este, oeste y suroeste), Durango (noroeste y norte) y Sinaloa (norte), e iniciando en Baja California (noreste).
+
+ 
+
+…]]></description>
+      <pubDate>Fri, 12 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-12-325</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 12 de junio del 2026 | Emisión 15:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 12 de junio del 2026
+Emisión: 15:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 12 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-12-12</guid>
+      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 12 JUN 2026: Se pronostican lluvias intensas en zonas del occidente, oriente y sureste del país, incluida la península de Yucatán</title>
