@@ -5,49 +5,64 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 12 Jun 2026 11:33:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2026 13:30:14 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 12 de junio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 325 | 12 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS INTENSAS EN ZONAS DEL OCCIDENTE, ORIENTE Y SURESTE DEL PAÍS, INCLUIDA LA PENÍNSULA DE YUCATÁN
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 325
+Ciudad de México a 12 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS INTENSAS EN ZONAS DEL OCCIDENTE, ORIENTE Y SURESTE DEL PAÍS, INCLUIDA LA PENÍNSULA DE YUCATÁN
+
+
+
+
+
+Este día, la onda tropical núm. 6 recorrerá el sureste mexicano y continuará interactuando con una zona de baja presión con potencial para desarrollo ciclónico que se ubicará sobre el suroeste del golfo de México, con una circulación ciclónica en altura y con inestabilidad atmosférica, condiciones que originarán lluvias puntuales intensas en regiones de Jalisco, Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo, así como chubascos con lluvias fuertes a muy fuertes en gran parte del territorio nacional. Por último, se prevén temperaturas calurosas a muy calurosas en el norte y noroeste de la República Mexicana, así como en la península de Yucatán, continuando la onda de calor en Sonora (centro, este y sureste), Chihuahua (este, oeste y suroeste), Durango (noroeste y norte) y Sinaloa (norte), e iniciando en Baja California (noreste).
+
+ 
+
+…]]></description>
+      <pubDate>Fri, 12 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-12-325</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 12 de junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 12 de junio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 12 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-12-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas a puntuales torrenciales (150 a 250 mm): en zonas de Yucatán y Quintana Roo.</title>
+      <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): en zonas de Jalisco, Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas a puntuales torrenciales (150 a 250 mm): en zonas de Yucatán y Quintana Roo.]]></description>
-      <pubDate>Fri, 12 Jun 2026 05:32:51 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-12-eceb</guid>
+      <description><![CDATA[Lluvias muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Tamaulipas, San Luis Potosí, Hidalgo, Estado de México, Tlaxcala, Morelos, Nayarit y Guerrero]]></description>
+      <pubDate>Fri, 12 Jun 2026 07:30:05 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-12-fbc6</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 324 | 11 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES TORRENCIALES EN YUCATÁN Y QUINTANA ROO E INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, TABASCO, OAXACA, CHIAPAS Y CAMPECHE
-
----
-Pronóstico Meteorológico General
-No. Aviso: 324
-Ciudad de México a 11 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES TORRENCIALES EN YUCATÁN Y QUINTANA ROO E INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, TABASCO, OAXACA, CHIAPAS Y CAMPECHE
-
-
-
-En el transcurso de la noche de hoy y madrugada del viernes, la onda tropical núm. 6 continuará su desplazamiento sobre la península de Yucatán y sureste mexicano, en interacción con una zona de baja presión con probabilidad para desarrollo ciclónico en la sonda de Campeche, una circulación ciclónica en altura sobre el golfo de México e inestabilidad atmosférica, ocasionarán lluvias puntuales torrenciales en Yucatán (norte, este y oeste) y Quintana Roo (centro y sur), además de lluvias puntuales intensas en Veracruz (centro y sur), Tabasco (sur y sureste), Oaxaca (norte y este), Chiapas (norte, centro, este y sur) y Campeche (este, oeste y suroeste).…]]></description>
-      <pubDate>Thu, 11 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-11-324</guid>
-      <category>Pronóstico General</category>
+      <title>📋 SMN Reporte Matutino 12 JUN 2026: Se pronostican lluvias intensas en zonas del occidente, oriente y sureste del país, incluida la península de Yucatán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_12.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas del occidente, oriente y sureste del país, incluida la península de Yucatán — Reporte Matutino del 12 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_12.pdf]]></description>
+      <pubDate>Fri, 12 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_12</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 11 JUN 2026: Se pronostican lluvias intensas para regiones de Puebla, Veracruz, Tabasco, Oaxaca y Chiapas, así como la península de...</title>
@@ -79,14 +94,6 @@ En el transcurso de la noche de hoy y madrugada del viernes, la onda tropical n�
       <description><![CDATA[Se pronostican lluvias intensas para regiones de Colima, Michoacán, Puebla, Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_09.pdf]]></description>
       <pubDate>Tue, 09 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_09</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 09 JUN 2026: Como depresión tropical, Boris se ubica a 45 km al nor-noreste de Punta Maldonado, Guerrero</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 10-26.pdf</link>
-      <description><![CDATA[Como depresión tropical, Boris se ubica a 45 km al nor-noreste de Punta Maldonado, Guerrero — Comunicado del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 10-26.pdf]]></description>
-      <pubDate>Tue, 09 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 10-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
