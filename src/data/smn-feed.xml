@@ -5,42 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 11 Jun 2026 23:53:51 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2026 01:30:07 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de: Puebla, Veracruz, Tabasco, Oaxaca, Chiapas, Campeche, Yucatán y Quintana Roo.]]></description>
-      <pubDate>Thu, 11 Jun 2026 17:53:41 -0600</pubDate>
+      <pubDate>Thu, 11 Jun 2026 19:29:57 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-11-190f</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 323 | 11 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 324 | 11 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS, TABASCO, CAMPECHE, YUCATÁN Y QUINTANA ROO
+      <description><![CDATA[EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES TORRENCIALES EN YUCATÁN Y QUINTANA ROO E INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, TABASCO, OAXACA, CHIAPAS Y CAMPECHE
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 323
+No. Aviso: 324
 Ciudad de México a 11 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS, TABASCO, CAMPECHE, YUCATÁN Y QUINTANA ROO
 
-Para hoy, una circulación ciclónica en altura persistirá sobre el golfo de México, e interaccionará con una vaguada en niveles medios de la atmósfera, con una zona de baja presión con potencial para desarrollo ciclónico, con inestabilidad atmosférica y con los remanentes de Cristina, lo que generará lluvias muy fuertes a puntuales intensas en zonas de Oaxaca, Chiapas, Veracruz, Tabasco, Campeche, Yucatán y Quintana Roo.…]]></description>
+EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES TORRENCIALES EN YUCATÁN Y QUINTANA ROO E INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, TABASCO, OAXACA, CHIAPAS Y CAMPECHE
+
+
+
+En el transcurso de la noche de hoy y madrugada del viernes, la onda tropical núm. 6 continuará su desplazamiento sobre la península de Yucatán y sureste mexicano, en interacción con una zona de baja presión con probabilidad para desarrollo ciclónico en la sonda de Campeche, una circulación ciclónica en altura sobre el golfo de México e inestabilidad atmosférica, ocasionarán lluvias puntuales torrenciales en Yucatán (norte, este y oeste) y Quintana Roo (centro y sur), además de lluvias puntuales intensas en Veracruz (centro y sur), Tabasco (sur y sureste), Oaxaca (norte y este), Chiapas (norte, centro, este y sur) y Campeche (este, oeste y suroeste).…]]></description>
       <pubDate>Thu, 11 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-11-323</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-11-324</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 11 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 11 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-11-12</guid>
