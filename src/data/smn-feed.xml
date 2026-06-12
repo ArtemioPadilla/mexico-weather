@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 12 Jun 2026 05:57:46 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2026 07:59:05 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 12 de junio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 12 de junio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 12 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-12-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias intensas a puntuales torrenciales (150 a 250 mm): en zonas de Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas a puntuales torrenciales (150 a 250 mm): en zonas de Yucatán y Quintana Roo.]]></description>
-      <pubDate>Thu, 11 Jun 2026 23:57:37 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-11-eceb</guid>
+      <pubDate>Fri, 12 Jun 2026 01:58:51 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-12-eceb</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -37,17 +48,6 @@ En el transcurso de la noche de hoy y madrugada del viernes, la onda tropical n�
       <pubDate>Thu, 11 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-06-11-324</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de junio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 11 de junio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Thu, 11 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-11-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 11 JUN 2026: Se pronostican lluvias intensas para regiones de Puebla, Veracruz, Tabasco, Oaxaca y Chiapas, así como la península de...</title>
