@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 13 Jun 2026 15:52:10 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jun 2026 16:51:16 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -44,9 +44,17 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de: San Luis Potosí, Jalisco, Puebla, Tamaulipas, Veracruz y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en zonas de: San Luis Potosí, Jalisco, Puebla, Tamaulipas, Veracruz y Chiapas.]]></description>
-      <pubDate>Sat, 13 Jun 2026 09:52:01 -0600</pubDate>
+      <pubDate>Sat, 13 Jun 2026 10:51:06 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-13-7efc</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 13 JUN 2026: Se pronostican lluvias intensas en regiones de Nayarit, Jalisco, Tamaulipas, San Luis Potosí, Puebla, Veracruz y Chiapa...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_13.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en regiones de Nayarit, Jalisco, Tamaulipas, San Luis Potosí, Puebla, Veracruz y Chiapa... — Reporte Matutino del 13 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_13.pdf]]></description>
+      <pubDate>Sat, 13 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_13</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 12 JUN 2026: Se prevén lluvias intensas en regiones de Jalisco, Puebla, Veracruz, Tabasco, Oaxaca y Chiapas, así como la península...</title>
@@ -78,14 +86,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se esperan lluvias intensas en regiones de Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo — Reporte Vespertino del 10 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_10.pdf]]></description>
       <pubDate>Wed, 10 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_10</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 10 JUN 2026: Se prevén lluvias intensas para regiones de Puebla, Veracruz, Oaxaca, Chiapas, Campeche y Quintana Roo</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_10.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas para regiones de Puebla, Veracruz, Oaxaca, Chiapas, Campeche y Quintana Roo — Reporte Matutino del 10 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_10.pdf]]></description>
-      <pubDate>Wed, 10 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_10</guid>
       <category>Comunicado</category>
     </item>
   </channel>
