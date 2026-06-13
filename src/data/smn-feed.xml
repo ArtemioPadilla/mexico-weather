@@ -5,9 +5,30 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 13 Jun 2026 11:04:47 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jun 2026 11:59:06 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 327 | 13 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE SAN LUIS POTOSÍ, JALISCO, PUEBLA, TAMAULIPAS, VERACRUZ Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 327
+Ciudad de México a 13 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE SAN LUIS POTOSÍ, JALISCO, PUEBLA, TAMAULIPAS, VERACRUZ Y CHIAPAS
+
+ 
+
+Para hoy, la zona de baja presión con probabilidad para desarrollo ciclónico y una circulación ciclónica en niveles medios de la atmósfera sobre el occidente del golfo de México, en interacción con inestabilidad atmosférica, ocasionarán lluvias puntuales intensas en Chiapas (este y sureste), Veracruz (norte y centro), Puebla (norte, este y sureste), San Luis Potosí (este) y Tamaulipas (sur); puntuales muy fuertes en Campeche (suroeste), Tabasco (sureste), Oaxaca (norte) e Hidalgo (norte); puntuales fuertes en Quintana Roo (norte y centro), Tlaxcala y Nuevo León (sur); e intervalos de chubascos en Yucatán.…]]></description>
+      <pubDate>Sat, 13 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-13-327</guid>
+      <category>Pronóstico General</category>
+    </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de junio del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
@@ -23,7 +44,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.]]></description>
-      <pubDate>Sat, 13 Jun 2026 05:04:37 -0600</pubDate>
+      <pubDate>Sat, 13 Jun 2026 05:58:57 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-13-44be</guid>
       <category>Alerta</category>
     </item>
@@ -34,28 +55,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 12 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_12</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 326 | 12 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[CONTINUARÁN LAS LLUVIAS INTENSAS EN ZONAS DEL OCCIDENTE, ORIENTE Y SURESTE DEL PAÍS, INCLUIDA LA PENÍNSULA DE YUCATÁN
-
----
-Pronóstico Meteorológico General
-No. Aviso: 326
-Ciudad de México a 12 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-CONTINUARÁN LAS LLUVIAS INTENSAS EN ZONAS DEL OCCIDENTE, ORIENTE Y SURESTE DEL PAÍS, INCLUIDA LA PENÍNSULA DE YUCATÁN
-
-
-
-Esta tarde y madrugada del sábado, una zona de baja presión con probabilidad para desarrollo ciclónico y una vaguada en niveles altos de la atmósfera sobre el suroeste del golfo de México, en interacción con inestabilidad atmosférica, ocasionarán lluvias puntuales intensas en Puebla (norte, centro y sureste), Veracruz (norte, centro y sur), Oaxaca (norte, este y sureste), Chiapas (norte, este y sur), Tabasco (este, sur y sureste), Campeche (centro, oeste y suroeste), Yucatán (oeste y sur) y Quintana Roo (sur); lluvias muy fuertes en Tamaulipas (sur), San Luis Potosí (este) e Hidalgo (norte y este).…]]></description>
-      <pubDate>Fri, 12 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-12-326</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 12 JUN 2026: Se pronostican lluvias intensas en zonas del occidente, oriente y sureste del país, incluida la península de Yucatán</title>
