@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 13 Jun 2026 01:27:37 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jun 2026 03:31:06 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Zona de baja presión con potencial ciclónico, circulación ciclónica y canal de baja presión.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en: Nay, Jal, Pue, Ver, Oax, Chis, Tab, Camp, Yuc y QRoo.]]></description>
-      <pubDate>Fri, 12 Jun 2026 19:27:28 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-12-a28e</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo.]]></description>
+      <pubDate>Fri, 12 Jun 2026 21:30:59 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-12-44be</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 12 JUN 2026: Se prevén lluvias intensas en regiones de Jalisco, Puebla, Veracruz, Tabasco, Oaxaca y Chiapas, así como la península...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_12.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas en regiones de Jalisco, Puebla, Veracruz, Tabasco, Oaxaca y Chiapas, así como la península... — Reporte Vespertino del 12 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_12.pdf]]></description>
+      <pubDate>Fri, 12 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_12</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 326 | 12 de Junio del 2026 | Emisión 18:00h</title>
@@ -39,11 +47,11 @@ Esta tarde y madrugada del sábado, una zona de baja presión con probabilidad p
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 12 de junio del 2026 | Emisión 18:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 12 de junio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 12 de junio del 2026
-Emisión: 18:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 12 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-12-12</guid>
@@ -79,14 +87,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias intensas para regiones de Puebla, Veracruz, Oaxaca, Chiapas, Campeche y Quintana Roo — Reporte Matutino del 10 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_10.pdf]]></description>
       <pubDate>Wed, 10 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_10</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 09 JUN 2026: Se pronostican lluvias intensas para regiones de Colima, Michoacán, Puebla, Veracruz, Oaxaca y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_09.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas para regiones de Colima, Michoacán, Puebla, Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 09 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_09.pdf]]></description>
-      <pubDate>Tue, 09 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_09</guid>
       <category>Comunicado</category>
     </item>
   </channel>
