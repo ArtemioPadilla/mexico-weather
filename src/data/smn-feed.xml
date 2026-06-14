@@ -5,44 +5,44 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 13 Jun 2026 23:42:48 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2026 01:31:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco, Tamaulipas, San Luis Potosí, Puebla, Veracruz y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco, Tamaulipas, San Luis Potosí, Puebla, Veracruz y Chiapas.]]></description>
-      <pubDate>Sat, 13 Jun 2026 17:42:38 -0600</pubDate>
+      <pubDate>Sat, 13 Jun 2026 19:31:00 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-13-4521</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 327 | 13 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 328 | 13 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE SAN LUIS POTOSÍ, JALISCO, PUEBLA, TAMAULIPAS, VERACRUZ Y CHIAPAS
+      <description><![CDATA[SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE NAYARIT, JALISCO, TAMAULIPAS, SAN LUIS POTOSÍ, PUEBLA, VERACRUZ Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 327
+No. Aviso: 328
 Ciudad de México a 13 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE SAN LUIS POTOSÍ, JALISCO, PUEBLA, TAMAULIPAS, VERACRUZ Y CHIAPAS
+SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE NAYARIT, JALISCO, TAMAULIPAS, SAN LUIS POTOSÍ, PUEBLA, VERACRUZ Y CHIAPAS
 
  
 
-Para hoy, la zona de baja presión con probabilidad para desarrollo ciclónico y una circulación ciclónica en niveles medios de la atmósfera sobre el occidente del golfo de México, en interacción con inestabilidad atmosférica, ocasionarán lluvias puntuales intensas en Chiapas (este y sureste), Veracruz (norte y centro), Puebla (norte, este y sureste), San Luis Potosí (este) y Tamaulipas (sur); puntuales muy fuertes en Campeche (suroeste), Tabasco (sureste), Oaxaca (norte) e Hidalgo (norte); puntuales fuertes en Quintana Roo (norte y centro), Tlaxcala y Nuevo León (sur); e intervalos de chubascos en Yucatán.…]]></description>
+Para esta noche y madrugada del domingo, una zona de baja presión con potencial para desarrollo ciclónico sobre el occidente del golfo de México, en combinación con inestabilidad atmosferica, ocasionarán lluvias puntuales intensas en Tamaulipas (sur), San Luis Potosí (este), Puebla (norte, este y sureste), Veracruz (norte y centro) y Chiapas (este), lluvias muy fuertes en Estado de México (norte, centro y este), Hidalgo (norte y este) y Oaxaca (norte), lluvias fuertes en Nuevo León (este y sur), Guanajuato (sur y suroeste), Querétaro (norte y sur), Ciudad de México, Tlaxcala, Morelos (norte), Tabasco (sureste), Campeche (norte, este y suroeste), Yucatán (oeste) y Quintana Roo (suroeste), y chubascos en Coahuila y Guerrero.…]]></description>
       <pubDate>Sat, 13 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-13-327</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-13-328</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 13 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-13-12</guid>
