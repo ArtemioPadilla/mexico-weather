@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 14 Jun 2026 16:50:09 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2026 17:51:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -42,11 +42,11 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nuevo León, Tamaulipas, San Luis Potosí y Veracruz.</title>
+      <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): en zonas de Sinaloa, Durango y Nayarit.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nuevo León, Tamaulipas, San Luis Potosí y Veracruz.]]></description>
-      <pubDate>Sun, 14 Jun 2026 10:50:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-14-f719</guid>
+      <description><![CDATA[Lluvias muy fuertes (50 a 75 mm): en zonas de: Chihuahua, Nuevo León, Tamaulipas, Veracruz, San Luis Potosí, Zacatecas y Jalisco.]]></description>
+      <pubDate>Sun, 14 Jun 2026 11:51:21 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-14-5ecd</guid>
       <category>Alerta</category>
     </item>
     <item>
