@@ -5,45 +5,34 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 14 Jun 2026 23:45:58 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2026 01:33:12 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[
+
+---
+]]></description>
+      <pubDate>Sun, 14 Jun 2026 19:33:08 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-14</guid>
+      <category>Pronóstico General</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): en zonas de Sinaloa, Durango y Nayarit.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas (75 a 150 mm): en zonas de Sinaloa, Durango y Nayarit.]]></description>
-      <pubDate>Sun, 14 Jun 2026 17:45:48 -0600</pubDate>
+      <pubDate>Sun, 14 Jun 2026 19:33:06 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-14-b9e5</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 329 | 14 de Junio del 2026 | Emisión 06:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS INTENSAS EN ZONAS DE NUEVO LEÓN, TAMAULIPAS, SAN LUIS POTOSÍ Y VERACRUZ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 329
-Ciudad de México a 14 de Junio del 2026.
-Emisión: 06:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-LLUVIAS INTENSAS EN ZONAS DE NUEVO LEÓN, TAMAULIPAS, SAN LUIS POTOSÍ Y VERACRUZ
-
- 
-
-Este día, la zona de baja presión con potencial para desarrollo ciclónico del golfo de México se disipa sobre el noreste del territorio nacional, sin embargo, originará lluvias puntuales intensas en zonas de Nuevo León, Tamaulipas, Veracruz y San Luis Potosí, así como lluvias fuertes a muy fuertes en el noreste, oriente y centro del país. Por otra parte, un canal de baja presión sobre la sierra madre occidental, aunado a inestabilidad atmosférica y al ingreso de humedad del océano Pacífico, generarán chubascos y lluvias fuertes a muy fuertes con descargas eléctricas y posible caída de granizo en zonas del noroeste, norte y occidente de México. A su vez, un canal de baja presión en el sureste mexicano, en interacción con inestabilidad atmosférica, el ingreso de humedad del océano Pacífico, golfo de México y mar Caribe y con la aproximación de una onda tropical (núm.…]]></description>
-      <pubDate>Sun, 14 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-14-329</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 14 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 14 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-14-12</guid>
