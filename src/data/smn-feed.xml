@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 15 Jun 2026 23:01:21 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2026 23:57:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Coahuila, Nuevo León y Tamaulipas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Coahuila, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Mon, 15 Jun 2026 17:01:11 -0600</pubDate>
+      <pubDate>Mon, 15 Jun 2026 17:57:29 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-15-7cf7</guid>
       <category>Alerta</category>
     </item>
@@ -34,17 +34,6 @@ Para hoy, una circulación ciclónica en niveles medios de la atmósfera, en int
       <pubDate>Mon, 15 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-06-15-331</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de junio del 2026 | Emisión 15:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 15 de junio del 2026
-Emisión: 15:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Mon, 15 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-15-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 15 JUN 2026: Se prevén lluvias intensas para este lunes en regiones de Coahuila, Nuevo León y Tamaulipas</title>
