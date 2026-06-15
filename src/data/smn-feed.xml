@@ -5,34 +5,48 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 15 Jun 2026 01:33:12 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2026 03:31:58 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
-
----
-]]></description>
-      <pubDate>Sun, 14 Jun 2026 19:33:08 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-14</guid>
-      <category>Pronóstico General</category>
-    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): en zonas de Sinaloa, Durango y Nayarit.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas (75 a 150 mm): en zonas de Sinaloa, Durango y Nayarit.]]></description>
-      <pubDate>Sun, 14 Jun 2026 19:33:06 -0600</pubDate>
+      <pubDate>Sun, 14 Jun 2026 21:31:49 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-14-b9e5</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de junio del 2026 | Emisión 18:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 330 | 14 de Junio del 2026 | Emisión 18:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[CANALES DE BAJA PRESIÓN EN EL PAÍS MANTENDRÁN PROBABILIDAD DE LLUVIAS EN GRAN PARTE DEL TERRITORIO NACIONAL
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 330
+Ciudad de México a 14 de Junio del 2026.
+Emisión: 18:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+
+CANALES DE BAJA PRESIÓN EN EL PAÍS MANTENDRÁN PROBABILIDAD DE LLUVIAS EN GRAN PARTE DEL TERRITORIO NACIONAL
+
+ 
+
+ 
+
+El resto de la tarde, así como en la noche y madrugada del lunes; un canal de baja presión sobre el noreste y oriente del país, mantendrá la probabilidad de lluvias fuertes a muy fuertes Nuevo León (sur), Tamaulipas (norte y suroeste), Veracruz (norte) y San Luis Potosí (norte y este). Por otro lado, inestabilidad atmosférica sobre el occidente del territorio mexicano, en interacción con un canal de baja presión sobre la sierra madre occidental, así como el ingreso de humedad del océano Pacífico, ocasionarán chubascos en Colima y Michoacán; lluvias fuertes en Sonora (este y sureste), Coahuila (norte y sureste), Aguascalientes; así como lluvias muy fuertes con descargas eléctricas en Chihuahua (suroeste), Zacatecas (oeste) y Jalisco (norte y noroeste), sin embargo, pueden ser puntuales intensas Durango (oeste y sur), Sinaloa (este) y Nayarit (norte).…]]></description>
+      <pubDate>Sun, 14 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-14-330</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de junio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 14 de junio del 2026
-Emisión: 18:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 14 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-14-12</guid>
