@@ -5,38 +5,47 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 16 Jun 2026 17:00:45 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2026 18:44:40 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de junio del 2026 | Emisión 09:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 16 de junio del 2026
-Emisión: 09:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-16-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
-
----
-]]></description>
-      <pubDate>Tue, 16 Jun 2026 11:00:40 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-16</guid>
-      <category>Pronóstico General</category>
-    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nuevo León y Tamaulipas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Tue, 16 Jun 2026 11:00:27 -0600</pubDate>
+      <pubDate>Tue, 16 Jun 2026 12:44:32 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-16-290c</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 333 | 16 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS INTENSAS EN ZONAS DE NUEVO LEÓN Y TAMAULIPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 333
+Ciudad de México a 16 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS INTENSAS EN ZONAS DE NUEVO LEÓN Y TAMAULIPAS
+
+Este día, una circulación ciclónica en niveles medios de la atmósfera sobre el noreste del país, en interacción con una zona de inestabilidad con probabilidad para desarrollo ciclónico, sobre el sureste de Estados Unidos, y el ingreso de humedad del golfo de México, generarán lluvias puntuales intensas en zonas de Nuevo León y Tamaulipas, además de lluvias fuertes a muy fuertes en zonas de Coahuila y San Luis Potosí. A su vez, canales de baja presión sobre la Mesa del Norte, el oriente y sureste de México, asociados con inestabilidad atmosférica y la onda tropical núm. 7, que se desplazará frente a las costas de Oaxaca y Guerrero, originarán chubascos y lluvias fuertes en el norte, noroeste, occidente, centro, sur y sureste del territorio nacional, con lluvias puntuales muy fuertes en zonas de Sinaloa, Durango y Chiapas. Todas las lluvias mencionadas podrán acompañarse con descargas eléctricas y posible caída de granizo.…]]></description>
+      <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-16-333</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de junio del 2026 | Emisión 12:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 16 de junio del 2026
+Emisión: 12:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-16-12</guid>
+      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 16 JUN 2026: Se forma el potencial ciclón tropical Uno, a 105 km de Reynosa, Tamaulipas</title>
