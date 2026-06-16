@@ -5,38 +5,55 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 16 Jun 2026 11:02:02 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2026 13:00:24 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de junio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 333 | 16 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS INTENSAS EN ZONAS DE NUEVO LEÓN Y TAMAULIPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 333
+Ciudad de México a 16 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS INTENSAS EN ZONAS DE NUEVO LEÓN Y TAMAULIPAS
+
+Este día, una circulación ciclónica en niveles medios de la atmósfera sobre el noreste del país, en interacción con una zona de inestabilidad con probabilidad para desarrollo ciclónico, sobre el sureste de Estados Unidos, y el ingreso de humedad del golfo de México, generarán lluvias puntuales intensas en zonas de Nuevo León y Tamaulipas, además de lluvias fuertes a muy fuertes en zonas de Coahuila y San Luis Potosí. A su vez, canales de baja presión sobre la Mesa del Norte, el oriente y sureste de México, asociados con inestabilidad atmosférica y la onda tropical núm. 7, que se desplazará frente a las costas de Oaxaca y Guerrero, originarán chubascos y lluvias fuertes en el norte, noroeste, occidente, centro, sur y sureste del territorio nacional, con lluvias puntuales muy fuertes en zonas de Sinaloa, Durango y Chiapas. Todas las lluvias mencionadas podrán acompañarse con descargas eléctricas y posible caída de granizo.…]]></description>
+      <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-16-333</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de junio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-16-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[
-
----
-]]></description>
-      <pubDate>Tue, 16 Jun 2026 05:01:57 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-16</guid>
-      <category>Pronóstico General</category>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nuevo León y Tamaulipas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nuevo León y Tamaulipas.]]></description>
+      <pubDate>Tue, 16 Jun 2026 07:00:12 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-16-290c</guid>
+      <category>Alerta</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Coahuila, Nuevo León y Tamaulipas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Sinaloa, Chihuahua, Durango, Zacatecas, San Luis Potosí, Puebla, Oaxaca y Chiapas.]]></description>
-      <pubDate>Tue, 16 Jun 2026 05:01:44 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-16-c986</guid>
-      <category>Alerta</category>
+      <title>📋 SMN Reporte Matutino 16 JUN 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de Nuevo León, Tamaulipas, Sinaloa, Durango, San Luis Potosí...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_16.pdf</link>
+      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de Nuevo León, Tamaulipas, Sinaloa, Durango, San Luis Potosí... — Reporte Matutino del 16 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_16.pdf]]></description>
+      <pubDate>Tue, 16 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_16</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 15 JUN 2026: Se prevén lluvias torrenciales para regiones de Coahuila, Nuevo León y Tamaulipas, durante esta noche</title>
@@ -68,14 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas en regiones de Nayarit, Jalisco, Tamaulipas, San Luis Potosí, Puebla, Veracruz y Chiapa... — Reporte Matutino del 13 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_13.pdf]]></description>
       <pubDate>Sat, 13 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_13</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 12 JUN 2026: Se prevén lluvias intensas en regiones de Jalisco, Puebla, Veracruz, Tabasco, Oaxaca y Chiapas, así como la península...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_12.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas en regiones de Jalisco, Puebla, Veracruz, Tabasco, Oaxaca y Chiapas, así como la península... — Reporte Vespertino del 12 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_12.pdf]]></description>
-      <pubDate>Fri, 12 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_12</guid>
       <category>Comunicado</category>
     </item>
   </channel>
