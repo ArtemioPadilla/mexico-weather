@@ -5,9 +5,28 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 17 Jun 2026 09:59:53 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2026 11:57:07 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 335 | 17 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 335
+Ciudad de México a 17 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIAPAS
+
+Para hoy, una línea seca se establecerá sobre el norte del país y originará vientos fuertes con rachas de 60 a 80 km/h en zonas de Chihuahua y Coahuila, así como rachas de 50 a 70 km/h en zonas de Nuevo León. A su vez, canales de baja presión en el interior del país, en interacción con una vaguada en niveles medios de la atmósfera, inestabilidad atmosférica y con el ingreso de aire húmedo del océano Pacífico y golfo de México, generarán lluvias puntuales fuertes en Veracruz (centro), Tamaulipas (noreste y sur), Oaxaca (norte y sureste), Hidalgo (sureste), Puebla (norte, centro y oeste), Tlaxcala, Morelos, Ciudad de México, Estado de México (este), Michoacán (norte y suroeste), Durango (oeste y noroeste), Sinaloa (este y noreste), Chihuahua (oeste y suroeste) y Sonora (este); intervalos de chubascos en Guerrero, Nayarit, Querétaro, Guanajuato, Aguascalientes, Zacatecas, San Luis Potosí y Nuevo León; así como lluvias aisladas …]]></description>
+      <pubDate>Wed, 17 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-17-335</guid>
+      <category>Pronóstico General</category>
+    </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de junio del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
@@ -23,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nuevo León, Tamaulipas y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nuevo León, Tamaulipas y Chiapas.]]></description>
-      <pubDate>Wed, 17 Jun 2026 03:59:44 -0600</pubDate>
+      <pubDate>Wed, 17 Jun 2026 05:56:57 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-17-61a0</guid>
       <category>Alerta</category>
     </item>
@@ -50,26 +69,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso Meteorológico 11-26</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 334 | 16 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE NUEVO LEÓN, TAMAULIPAS Y CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 334
-Ciudad de México a 16 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE NUEVO LEÓN, TAMAULIPAS Y CHIAPAS
-
-Durante esta noche y madrugada del miércoles, una circulación ciclónica y una vaguada en niveles medios de la atmósfera, en interacción con la circulación del potencial ciclón tropical Uno, ubicado esta tarde sobre el noroeste del golfo de México, generarán lluvias puntuales intensas en Nuevo León  (este y sureste) y Tamaulipas (noreste y sur); lluvias puntuales muy fuertes en San Luis Potosí (norte y este), Puebla (norte, este y sureste) y Veracruz (norte y centro); así como lluvias puntuales fuertes en Coahuila (sureste), Zacatecas (norte y oeste) y Aguascalientes. Por otra parte, canales de baja presión sobre el noroeste, occidente, centro y sureste del territorio nacional, aunados al ingreso de humedad procedente del océano Pacífico y mar Caribe, y el desplazamiento de la onda tropical núm.…]]></description>
-      <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-16-334</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 16 JUN 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de Nuevo León, Tamaulipas, Sinaloa, Durango, San Luis Potosí...</title>
