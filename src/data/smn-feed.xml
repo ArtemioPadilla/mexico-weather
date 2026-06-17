@@ -5,21 +5,48 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 17 Jun 2026 03:31:57 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2026 06:02:18 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Nuevo León, Tamaulipas y Chiapas.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de junio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 17 de junio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 17 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-17-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nuevo León, Tamaulipas y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Nuevo León, Tamaulipas y Chiapas.]]></description>
-      <pubDate>Tue, 16 Jun 2026 21:31:47 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-16-08ab</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nuevo León, Tamaulipas y Chiapas.]]></description>
+      <pubDate>Wed, 17 Jun 2026 00:02:10 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-17-61a0</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 16 JUN 2026: Esta noche se esperan lluvias intensas en regiones de Chiapas, Nuevo León y Tamaulipas</title>
+      <title>📋 SMN Reporte Vespertino 16 JUN 2026: Esta noche se esperan lluvias intensas en regiones de Chiapas, Nuevo León y Tamaulipas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_16.pdf</link>
+      <description><![CDATA[Esta noche se esperan lluvias intensas en regiones de Chiapas, Nuevo León y Tamaulipas — Reporte Vespertino del 16 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_16.pdf]]></description>
+      <pubDate>Tue, 16 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_16</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 16 JUN 2026: Debido al potencial ciclón tropical Uno, continúa el pronóstico de lluvias intensas en Nuevo León y Tamaulipas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso12-26.pdf</link>
+      <description><![CDATA[Debido al potencial ciclón tropical Uno, continúa el pronóstico de lluvias intensas en Nuevo León y Tamaulipas — Comunicado del 16 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso12-26.pdf]]></description>
+      <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso12-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 16 JUN 2026: Se forma el potencial ciclón tropical Uno, a 105 km de Reynosa, Tamaulipas</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 11-26.pdf</link>
-      <description><![CDATA[Esta noche se esperan lluvias intensas en regiones de Chiapas, Nuevo León y Tamaulipas — Comunicado del 16 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 11-26.pdf]]></description>
+      <description><![CDATA[Se forma el potencial ciclón tropical Uno, a 105 km de Reynosa, Tamaulipas — Comunicado del 16 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 11-26.pdf]]></description>
       <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso Meteorológico 11-26</guid>
       <category>Comunicado</category>
@@ -45,17 +72,6 @@ Durante esta noche y madrugada del miércoles, una circulación ciclónica y u
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de junio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 16 de junio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-16-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
       <title>📋 SMN Reporte Matutino 16 JUN 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de Nuevo León, Tamaulipas, Sinaloa, Durango, San Luis Potosí...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_16.pdf</link>
       <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de Nuevo León, Tamaulipas, Sinaloa, Durango, San Luis Potosí... — Reporte Matutino del 16 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_16.pdf]]></description>
@@ -69,14 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias torrenciales para regiones de Coahuila, Nuevo León y Tamaulipas, durante esta noche — Reporte Vespertino del 15 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_15.pdf]]></description>
       <pubDate>Mon, 15 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_15</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 15 JUN 2026: Se prevén lluvias intensas para este lunes en regiones de Coahuila, Nuevo León y Tamaulipas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_15.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas para este lunes en regiones de Coahuila, Nuevo León y Tamaulipas — Reporte Matutino del 15 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_15.pdf]]></description>
-      <pubDate>Mon, 15 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_15</guid>
       <category>Comunicado</category>
     </item>
   </channel>
