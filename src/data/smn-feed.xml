@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 17 Jun 2026 15:31:04 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2026 17:24:28 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -42,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chiapas.]]></description>
-      <pubDate>Wed, 17 Jun 2026 09:30:56 -0600</pubDate>
+      <pubDate>Wed, 17 Jun 2026 11:24:19 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-17-aec6</guid>
       <category>Alerta</category>
     </item>
