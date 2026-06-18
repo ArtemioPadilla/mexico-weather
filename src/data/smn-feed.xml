@@ -5,27 +5,65 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 18 Jun 2026 11:39:34 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2026 13:31:22 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de junio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 337 | 18 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS MUY FUERTES EN EL CENTRO, SUR Y SURESTE DEL PAÍS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 337
+Ciudad de México a 18 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS MUY FUERTES EN EL CENTRO, SUR Y SURESTE DEL PAÍS
+
+Este día, un canal de baja presión en el norte y centro del país, una línea seca en el noreste del territorio nacional, inestabilidad atmosférica y la aproximación de un frente frío a la frontera norte de México, generarán chubascos y lluvias fuertes a muy fuertes con descargas eléctricas y posible caída de granizo en las regiones mencionadas y el occidente de México; además de rachas de viento de hasta 80 km/h en Chihuahua. Otro canal de baja presión sobre el oriente y sureste de la República Mexicana, en combinación con la onda tropical núm. 8 que se desplazará frente a las costas de Oaxaca y Guerrero, ocasionarán chubascos y lluvias fuertes a muy fuertes con descargas eléctricas en dichas regiones.
+
+
+
+
+El Servicio Meteorológico Nacional monitorea el desplazamiento de la onda tropical número 8.
+
+Para mayor información en:
+https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-ciclon-tropical-en-el-oceano-atlantico
+
+…]]></description>
+      <pubDate>Thu, 18 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-18-337</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de junio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 18 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-18-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Michoacán, Guanajuato, Querétaro, Estado de México, Guerrero, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chiapas.]]></description>
-      <pubDate>Thu, 18 Jun 2026 05:39:24 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-18-4958</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Michoacán, Guanajuato, Querétaro, Estado de México, Guerrero, Oaxaca y Chiapas.]]></description>
+      <pubDate>Thu, 18 Jun 2026 07:31:13 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-18-6332</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 18 JUN 2026: Se pronostican lluvias muy fuertes en zonas del centro, sur y sureste de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_18.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas del centro, sur y sureste de México — Reporte Matutino del 18 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_18.pdf]]></description>
+      <pubDate>Thu, 18 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_18</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 17 JUN 2026: Se esperan lluvias de fuertes a muy fuertes en regiones de 16 estados de México</title>
@@ -34,25 +72,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 17 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_17</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 336 | 17 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 336
-Ciudad de México a 17 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIAPAS
-
-En el transcurso de la noche de hoy y madrugada del jueves, canales de baja presión en el interior del país, en interacción con una vaguada en niveles medios de la atmósfera sobre el centro y noreste del país e inestabilidad en niveles altos de la atmósfera, generarán lluvias puntuales fuertes en Sonora (este), Chihuahua (oeste y suroeste), Durango (oeste y noroeste), Sinaloa (este y noreste), Hidalgo (sureste), Puebla (norte, centro y sureste), Tlaxcala, Estado de México (este), Ciudad de México y Morelos, e intervalos de chubascos en Nuevo León, Tamaulipas, San Luis Potosí, Aguascalientes, Zacatecas, Nayarit, Jalisco, Colima, Michoacán, Guanajuato y Querétaro, así como lluvias aisladas en Baja California Sur y Coahuila. Simultáneamente el desplazamiento de la onda tropical núm.…]]></description>
-      <pubDate>Wed, 17 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-17-336</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 17 JUN 2026: Se prevén lluvias muy fuertes para el centro y sur de Chiapas durante este miércoles</title>
@@ -76,14 +95,6 @@ En el transcurso de la noche de hoy y madrugada del jueves, canales de baja pres
       <description><![CDATA[Debido al potencial ciclón tropical Uno, continúa el pronóstico de lluvias intensas en Nuevo León y Tamaulipas — Comunicado del 16 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso12-26.pdf]]></description>
       <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso12-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 16 JUN 2026: Se forma el potencial ciclón tropical Uno, a 105 km de Reynosa, Tamaulipas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 11-26.pdf</link>
-      <description><![CDATA[Se forma el potencial ciclón tropical Uno, a 105 km de Reynosa, Tamaulipas — Comunicado del 16 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 11-26.pdf]]></description>
-      <pubDate>Tue, 16 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorológico 11-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
