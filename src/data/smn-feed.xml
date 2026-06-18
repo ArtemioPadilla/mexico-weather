@@ -5,42 +5,42 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 17 Jun 2026 22:58:08 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2026 00:02:28 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chiapas.]]></description>
-      <pubDate>Wed, 17 Jun 2026 16:58:00 -0600</pubDate>
+      <pubDate>Wed, 17 Jun 2026 18:02:20 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-17-aec6</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 335 | 17 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 336 | 17 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIAPAS
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 335
+No. Aviso: 336
 Ciudad de México a 17 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIAPAS
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIAPAS
 
-Para hoy, una línea seca se establecerá sobre el norte del país y originará vientos fuertes con rachas de 60 a 80 km/h en zonas de Chihuahua y Coahuila, así como rachas de 50 a 70 km/h en zonas de Nuevo León. A su vez, canales de baja presión en el interior del país, en interacción con una vaguada en niveles medios de la atmósfera, inestabilidad atmosférica y con el ingreso de aire húmedo del océano Pacífico y golfo de México, generarán lluvias puntuales fuertes en Veracruz (centro), Tamaulipas (noreste y sur), Oaxaca (norte y sureste), Hidalgo (sureste), Puebla (norte, centro y oeste), Tlaxcala, Morelos, Ciudad de México, Estado de México (este), Michoacán (norte y suroeste), Durango (oeste y noroeste), Sinaloa (este y noreste), Chihuahua (oeste y suroeste) y Sonora (este); intervalos de chubascos en Guerrero, Nayarit, Querétaro, Guanajuato, Aguascalientes, Zacatecas, San Luis Potosí y Nuevo León; así como lluvias aislad…]]></description>
+En el transcurso de la noche de hoy y madrugada del jueves, canales de baja presión en el interior del país, en interacción con una vaguada en niveles medios de la atmósfera sobre el centro y noreste del país e inestabilidad en niveles altos de la atmósfera, generarán lluvias puntuales fuertes en Sonora (este), Chihuahua (oeste y suroeste), Durango (oeste y noroeste), Sinaloa (este y noreste), Hidalgo (sureste), Puebla (norte, centro y sureste), Tlaxcala, Estado de México (este), Ciudad de México y Morelos, e intervalos de chubascos en Nuevo León, Tamaulipas, San Luis Potosí, Aguascalientes, Zacatecas, Nayarit, Jalisco, Colima, Michoacán, Guanajuato y Querétaro, así como lluvias aisladas en Baja California Sur y Coahuila. Simultáneamente el desplazamiento de la onda tropical núm.…]]></description>
       <pubDate>Wed, 17 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-17-335</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-17-336</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 17 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 17 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-17-12</guid>
