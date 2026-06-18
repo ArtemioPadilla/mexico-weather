@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 18 Jun 2026 15:31:06 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2026 23:25:53 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Jalisco, Michoacán, Guanajuato, Querétaro, Estado de México, Guerrero, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Jalisco, Michoacán, Guanajuato, Querétaro, Estado de México, Guerrero, Oaxaca y Chiapas.]]></description>
+      <pubDate>Thu, 18 Jun 2026 17:25:44 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-18-84fb</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 337 | 18 de Junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -39,28 +47,20 @@ https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-ciclon-tropical-en-el-
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de junio del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de junio del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de junio del 2026
-Emisión: 09:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 18 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-18-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Michoacán, Guanajuato, Querétaro, Estado de México, Guerrero, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Michoacán, Guanajuato, Querétaro, Estado de México, Guerrero, Oaxaca y Chiapas.]]></description>
-      <pubDate>Thu, 18 Jun 2026 09:30:57 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-18-6332</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 18 JUN 2026: Se pronostican lluvias muy fuertes en zonas del centro, sur y sureste de México</title>
+      <title>📋 SMN Reporte Matutino 18 JUN 2026: Se establece el fenómeno de El Niño en el océano Pacífico ecuatorial</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_18.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas del centro, sur y sureste de México — Reporte Matutino del 18 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_18.pdf]]></description>
+      <description><![CDATA[Se establece el fenómeno de El Niño en el océano Pacífico ecuatorial — Reporte Matutino del 18 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_18.pdf]]></description>
       <pubDate>Thu, 18 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_18</guid>
       <category>Comunicado</category>
@@ -79,14 +79,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias muy fuertes para el centro y sur de Chiapas durante este miércoles — Reporte Matutino del 17 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_17.pdf]]></description>
       <pubDate>Wed, 17 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_17</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 16 JUN 2026: Esta noche se esperan lluvias intensas en regiones de Chiapas, Nuevo León y Tamaulipas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_16.pdf</link>
-      <description><![CDATA[Esta noche se esperan lluvias intensas en regiones de Chiapas, Nuevo León y Tamaulipas — Reporte Vespertino del 16 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_16.pdf]]></description>
-      <pubDate>Tue, 16 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_16</guid>
       <category>Comunicado</category>
     </item>
     <item>
