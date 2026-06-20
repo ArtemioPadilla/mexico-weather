@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 20 Jun 2026 09:29:22 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2026 11:04:59 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -23,7 +23,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nuevo León, Jalisco, Michoacán, Guerrero, Morelos, Estado de México y Guanajuato.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 40 a 50 km/h con rachas de 60 a 80 km/h: Coahuila.]]></description>
-      <pubDate>Sat, 20 Jun 2026 03:29:11 -0600</pubDate>
+      <pubDate>Sat, 20 Jun 2026 05:04:50 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-20-a875</guid>
       <category>Alerta</category>
     </item>
