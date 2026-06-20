@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 20 Jun 2026 14:00:46 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2026 15:01:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -32,11 +32,11 @@ Este día, una línea seca en la frontera norte del país, un canal de baja p
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de junio del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de junio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 20 de junio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 20 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-20-12</guid>
@@ -46,7 +46,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nayarit, Jalisco y Zacatecas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California, Baja California Sur, Sonora, Sinaloa y Chihuahua.]]></description>
-      <pubDate>Sat, 20 Jun 2026 08:00:37 -0600</pubDate>
+      <pubDate>Sat, 20 Jun 2026 09:01:32 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-20-46ed</guid>
       <category>Alerta</category>
     </item>
