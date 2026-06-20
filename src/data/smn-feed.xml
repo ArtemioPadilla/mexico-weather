@@ -5,9 +5,32 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 20 Jun 2026 11:04:59 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2026 11:59:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 341 | 20 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN NAYARIT, JALISCO Y ZACATECAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 341
+Ciudad de México a 20 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES INTENSAS EN NAYARIT, JALISCO Y ZACATECAS
+
+ 
+
+Este día, una línea seca en la frontera norte del país, un canal de baja presión sobre la Mesa del Norte, circulaciones ciclónicas en niveles medios de la atmósfera en el noreste y occidente del territorio nacional, el ingreso de humedad del océano Pacífico y golfo de México, además de la onda tropical núm. 8 que se desplazará al sur de las costas de Michoacán y Colima, ocasionarán lluvias puntuales intensas en zonas de Nayarit, Jalisco y Zacatecas; así como chubascos y lluvias fuertes a muy fuertes con descargas eléctricas y posible caída de granizo en zonas del noroeste, occidente, centro, norte y noreste de México; además de rachas de viento de 50 a 70 km/h en Coahuila, Nuevo León y Tamaulipas. Por otra parte, un canal de baja presión sobre el oriente y sureste del territorio mexicano, en interacción con la onda tropical núm.…]]></description>
+      <pubDate>Sat, 20 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-20-341</guid>
+      <category>Pronóstico General</category>
+    </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de junio del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
@@ -23,7 +46,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nuevo León, Jalisco, Michoacán, Guerrero, Morelos, Estado de México y Guanajuato.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 40 a 50 km/h con rachas de 60 a 80 km/h: Coahuila.]]></description>
-      <pubDate>Sat, 20 Jun 2026 05:04:50 -0600</pubDate>
+      <pubDate>Sat, 20 Jun 2026 05:59:39 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-20-a875</guid>
       <category>Alerta</category>
     </item>
@@ -34,26 +57,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 19 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_19</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 340 | 19 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN NUEVO LEÓN, JALISCO, MICHOACÁN, GUERRERO, MORELOS, ESTADO DE MÉXICO Y GUANAJUATO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 340
-Ciudad de México a 19 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN NUEVO LEÓN, JALISCO, MICHOACÁN, GUERRERO, MORELOS, ESTADO DE MÉXICO Y GUANAJUATO
-
-Para esta noche y madrugada del sábado, una línea seca en el noreste del país, un canal de baja presión sobre la Mesa del Norte, inestabilidad atmosférica, un sistema frontal (fuera de temporada) sobre la frontera norte del territorio nacional y el ingreso de humedad del océano Pacífico y golfo de México, generarán lluvias puntuales intensas en zonas de Nuevo León (norte y centro), Jalisco (este y sur), Michoacán (norte y noroeste), Guerrero (norte), Morelos, Estado de México (suroeste) y Guanajuato (suroeste); lluvias puntuales muy fuertes en Chihuahua (suroeste), Durango (noroeste), Coahuila (noreste, centro y sureste), Nuevo León (norte y oeste), Tamaulipas (noroeste) y Ciudad de México; puntuales fuertes en Sinaloa (este y noreste), Nayarit (norte y este), Colima, San Luis Potosí (norte, este y oeste), Zacatecas (noreste y sur) y Aguascalientes, y chub…]]></description>
-      <pubDate>Fri, 19 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-19-340</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 19 JUN 2026: Para este día se pronostican lluvias muy fuertes en zonas de 12 entidades del país</title>
