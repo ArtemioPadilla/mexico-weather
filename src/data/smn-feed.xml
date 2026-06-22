@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 22 Jun 2026 15:10:18 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2026 17:00:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -43,7 +43,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California (noreste), Sonora, Sinaloa (norte), Chihuahua (este, oeste y suroeste), Coahuila (norte, centro y suroeste), N...]]></description>
-      <pubDate>Mon, 22 Jun 2026 09:10:08 -0600</pubDate>
+      <pubDate>Mon, 22 Jun 2026 11:00:32 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-22-9add</guid>
       <category>Alerta</category>
     </item>
