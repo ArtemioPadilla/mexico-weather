@@ -5,27 +5,54 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 23 Jun 2026 11:27:15 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jun 2026 13:19:05 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de junio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 347 | 23 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, GUERRERO Y OAXACA • Y LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, HIDALGO Y PUEBLA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 347
+Ciudad de México a 23 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, GUERRERO Y OAXACA; Y LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, HIDALGO Y PUEBLA
+
+Para hoy, un canal de baja presión en el norte del territorio nacional, así como inestabilidad atmosférica e ingreso de aire húmedo del océano Pacífico y golfo de México, ocasionarán lluvias puntuales fuertes en San Luis Potosí (este) y Nayarit (sur); intervalos de chubascos en Baja California Sur, Sonora, Sinaloa, Chihuahua, Durango y Tamaulipas; y lluvias aisladas en zonas de Nuevo León, Zacatecas y Aguascalientes, con descargas eléctricas y posible caída de granizo en estados del norte y occidente del país. Por otro lado, una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera sobre el sur del país, en interacción con un canal de baja presión en el oriente y centro del territorio nacional, además de inestabilidad atmosférica y la onda tropical núm.…]]></description>
+      <pubDate>Tue, 23 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-23-347</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 23 de junio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 23 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-23-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Veracruz (sur), Oaxaca (norte y este) y Chiapas (centro, este y sur).</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Veracruz (sur), Oaxaca (norte y este) y Chiapas (centro, este y sur).]]></description>
-      <pubDate>Tue, 23 Jun 2026 05:27:06 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-23-63bc</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Guerrero y Oaxaca.]]></description>
+      <pubDate>Tue, 23 Jun 2026 07:18:55 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-23-adbb</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 23 JUN 2026: Hoy, la onda tropical número 9 ocasionará lluvias intensas en regiones de Veracruz, Guerrero y Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_23.pdf</link>
+      <description><![CDATA[Hoy, la onda tropical número 9 ocasionará lluvias intensas en regiones de Veracruz, Guerrero y Oaxaca — Reporte Matutino del 23 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_23.pdf]]></description>
+      <pubDate>Tue, 23 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_23</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 22 JUN 2026: Se prevén lluvias intensas en regiones de Veracruz, Oaxaca y Chiapas</title>
@@ -34,25 +61,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 22 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_22</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 346 | 22 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[ESTA NOCHE, SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, OAXACA Y CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 346
-Ciudad de México a 22 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-ESTA NOCHE, SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, OAXACA Y CHIAPAS
-
-Para esta noche y madrugada del martes, una línea seca sobre la frontera norte de la República Mexicana en interacción con un canal de baja presión en el interior del país, aunados a inestabilidad atmosférica y al ingreso de humedad del océano Pacífico y golfo de México, ocasionarán lluvias muy fuertes en Durango (sur), Sinaloa (centro y sur), Nayarit (sur), Jalisco (centro y oeste) y Puebla (sureste); puntuales fuertes en Zacatecas (oeste), Colima, Michoacán (norte y este), Guerrero (centro y este), Estado de México (centro y suroeste), Ciudad de México y Guanajuato (sur); chubascos en Baja California Sur, Sonora, Chihuahua, Tamaulipas, San Luis Potosí, Aguascalientes, Querétaro, Hidalgo, Morelos y Tlaxcala, y lluvias aisladas en Coahuila y Nuevo León.…]]></description>
-      <pubDate>Mon, 22 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-22-346</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 22 JUN 2026: Se pronostican lluvias intensas en zonas de Veracruz, Oaxaca y Chiapas</title>
@@ -76,14 +84,6 @@ Para esta noche y madrugada del martes, una línea seca sobre la frontera norte 
       <description><![CDATA[Se prevén lluvias intensas en regiones de Nayarit, Jalisco y Zacatecas, durante este sábado — Reporte Matutino del 20 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_20.pdf]]></description>
       <pubDate>Sat, 20 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_20</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 19 JUN 2026: Se prevén lluvias intensas en zonas de Jalisco, Michoacán, Guerrero, Morelos, Estado de México y Guanajuato, durante ...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_19.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas en zonas de Jalisco, Michoacán, Guerrero, Morelos, Estado de México y Guanajuato, durante ... — Reporte Vespertino del 19 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_19.pdf]]></description>
-      <pubDate>Fri, 19 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_19</guid>
       <category>Comunicado</category>
     </item>
   </channel>
