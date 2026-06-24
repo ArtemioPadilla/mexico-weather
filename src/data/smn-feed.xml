@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 24 Jun 2026 20:54:54 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 21:50:19 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Wed, 24 Jun 2026 14:54:45 -0600</pubDate>
+      <pubDate>Wed, 24 Jun 2026 15:50:10 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-24-8821</guid>
       <category>Alerta</category>
     </item>
@@ -37,11 +37,11 @@ Este día, vaguadas en niveles medios y altos de la atmósfera sobre el norest
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 24 de junio del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 24 de junio del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 24 de junio del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 24 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-24-12</guid>
