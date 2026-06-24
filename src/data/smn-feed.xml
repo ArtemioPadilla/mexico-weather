@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 24 Jun 2026 01:16:27 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 02:08:09 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Guerrero y Oaxaca.]]></description>
-      <pubDate>Tue, 23 Jun 2026 19:16:17 -0600</pubDate>
+      <pubDate>Tue, 23 Jun 2026 20:07:59 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-23-adbb</guid>
       <category>Alerta</category>
     </item>
