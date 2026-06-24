@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 24 Jun 2026 05:44:35 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 07:32:23 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 24 de junio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 24 de junio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 24 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-24-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en Guerrero, Oaxaca y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Tue, 23 Jun 2026 23:44:26 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-23-5818</guid>
+      <pubDate>Wed, 24 Jun 2026 01:32:13 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-24-5818</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -42,17 +53,6 @@ Durante esta noche y madrugada del miércoles, canales de baja presión sobre 
       <pubDate>Tue, 23 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-06-23-348</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de junio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 23 de junio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 23 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-06-23-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 23 JUN 2026: Hoy, la onda tropical número 9 ocasionará lluvias intensas en regiones de Veracruz, Guerrero y Oaxaca</title>
