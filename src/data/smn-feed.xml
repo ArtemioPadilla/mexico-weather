@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 24 Jun 2026 03:31:32 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 05:44:35 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Guerrero y Oaxaca.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en Guerrero, Oaxaca y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Guerrero y Oaxaca.]]></description>
-      <pubDate>Tue, 23 Jun 2026 21:31:23 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-23-adbb</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en Guerrero, Oaxaca y Veracruz.]]></description>
+      <pubDate>Tue, 23 Jun 2026 23:44:26 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-23-5818</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 23 JUN 2026: Se prevén lluvias de fuertes a intensas en regiones de 18 estados de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_23.pdf</link>
+      <description><![CDATA[Se prevén lluvias de fuertes a intensas en regiones de 18 estados de México — Reporte Vespertino del 23 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_23.pdf]]></description>
+      <pubDate>Tue, 23 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_23</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 348 | 23 de Junio del 2026 | Emisión 18:00h</title>
@@ -47,9 +55,9 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 23 JUN 2026: Se prevén lluvias de fuertes a intensas en regiones de 18 estados de México</title>
+      <title>📋 SMN Reporte Matutino 23 JUN 2026: Hoy, la onda tropical número 9 ocasionará lluvias intensas en regiones de Veracruz, Guerrero y Oaxaca</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_23.pdf</link>
-      <description><![CDATA[Se prevén lluvias de fuertes a intensas en regiones de 18 estados de México — Reporte Matutino del 23 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_23.pdf]]></description>
+      <description><![CDATA[Hoy, la onda tropical número 9 ocasionará lluvias intensas en regiones de Veracruz, Guerrero y Oaxaca — Reporte Matutino del 23 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_23.pdf]]></description>
       <pubDate>Tue, 23 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_23</guid>
       <category>Comunicado</category>
