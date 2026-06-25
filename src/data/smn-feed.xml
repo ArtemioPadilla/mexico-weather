@@ -5,15 +5,34 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 25 Jun 2026 11:15:43 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jun 2026 12:09:46 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de junio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 351 | 25 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE GUERRERO Y OAXACA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 351
+Ciudad de México a 25 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE GUERRERO Y OAXACA
+
+Para hoy, una vaguada en niveles altos de la atmósfera se extenderá sobre el oriente, centro y occidente de México, y la onda tropical núm. 11 frente las costas del Pacífico Sur Mexicano, en interacción con inestabilidad en los niveles altos y con el ingreso de aire húmedo del océano Pacífico, ocasionarán lluvias puntuales muy fuertes en Oaxaca (oeste) y Guerrero (sureste); puntuales fuertes en Puebla (suroeste), Morelos, Ciudad de México, Estado de México (centro, oeste y suroeste), Michoacán (noreste, oeste y suroeste), Guanajuato (sur), Colima, Jalisco (excepto noreste) y Nayarit (norte y sur); y lluvias con intervalos de chubascos en Tlaxcala, Hidalgo, Querétaro, San Luis Potosí y Tamaulipas, todas con descargas eléctricas; además de lluvias aisladas en zonas de Aguascalientes, Nuevo León y Coahuila.…]]></description>
+      <pubDate>Thu, 25 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-25-351</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 25 de junio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 25 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-25-12</guid>
@@ -23,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Thu, 25 Jun 2026 05:15:35 -0600</pubDate>
+      <pubDate>Thu, 25 Jun 2026 06:09:35 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-25-8821</guid>
       <category>Alerta</category>
     </item>
@@ -34,29 +53,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 24 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_24</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 350 | 24 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA Y VERACRUZ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 350
-Ciudad de México a 24 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA Y VERACRUZ
-
- 
-
-En el transcurso de esta noche y madrugada del jueves, vaguadas en niveles medios y altos de la atmósfera extendidas en el noreste, oriente y sur del país, en interacción con inestabilidad en los niveles altos, la onda tropical núm. 10 que se desplazará al sur de las costas de Michoacán y Colima, la onda tropical núm.…]]></description>
-      <pubDate>Wed, 24 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-24-350</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 24 JUN 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de Guerrero, Oaxaca, Jalisco, Colima, Michoacán y Veracruz</title>
