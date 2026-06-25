@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 25 Jun 2026 09:29:51 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jun 2026 11:15:43 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -23,7 +23,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Thu, 25 Jun 2026 03:29:42 -0600</pubDate>
+      <pubDate>Thu, 25 Jun 2026 05:15:35 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-25-8821</guid>
       <category>Alerta</category>
     </item>
