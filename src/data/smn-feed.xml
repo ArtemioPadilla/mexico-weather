@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 25 Jun 2026 12:09:46 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jun 2026 13:07:32 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -39,12 +39,20 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Thu, 25 Jun 2026 06:09:35 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-25-8821</guid>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Guerrero y Oaxaca.]]></description>
+      <pubDate>Thu, 25 Jun 2026 07:07:23 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-25-06c6</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 25 JUN 2026: Hoy se pronostican lluvias muy fuertes para el sureste de Guerrero y el oeste de Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_25.pdf</link>
+      <description><![CDATA[Hoy se pronostican lluvias muy fuertes para el sureste de Guerrero y el oeste de Oaxaca — Reporte Matutino del 25 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_25.pdf]]></description>
+      <pubDate>Thu, 25 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_25</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 24 JUN 2026: Se prevén lluvias intensas en regiones de Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz, durante esta noche</title>
@@ -68,22 +76,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias de fuertes a intensas en regiones de 18 estados de México — Reporte Vespertino del 23 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_23.pdf]]></description>
       <pubDate>Tue, 23 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_23</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 23 JUN 2026: Hoy, la onda tropical número 9 ocasionará lluvias intensas en regiones de Veracruz, Guerrero y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_23.pdf</link>
-      <description><![CDATA[Hoy, la onda tropical número 9 ocasionará lluvias intensas en regiones de Veracruz, Guerrero y Oaxaca — Reporte Matutino del 23 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_23.pdf]]></description>
-      <pubDate>Tue, 23 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_23</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 22 JUN 2026: Se prevén lluvias intensas en regiones de Veracruz, Oaxaca y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_22.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas en regiones de Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 22 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_22.pdf]]></description>
-      <pubDate>Mon, 22 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_22</guid>
       <category>Comunicado</category>
     </item>
   </channel>
