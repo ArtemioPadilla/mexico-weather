@@ -5,43 +5,54 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 24 Jun 2026 23:44:50 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jun 2026 01:20:40 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en zonas de: Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Wed, 24 Jun 2026 17:44:42 -0600</pubDate>
+      <pubDate>Wed, 24 Jun 2026 19:20:31 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-24-8821</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 349 | 24 de Junio del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 24 JUN 2026: Se prevén lluvias intensas en regiones de Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz, durante esta noche</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_24.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas en regiones de Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz, durante esta noche — Reporte Vespertino del 24 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_24.pdf]]></description>
+      <pubDate>Wed, 24 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_24</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 350 | 24 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN GUERRERO Y OAXACA
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA Y VERACRUZ
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 349
+No. Aviso: 350
 Ciudad de México a 24 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
+ 
 
-LLUVIAS PUNTUALES INTENSAS EN GUERRERO Y OAXACA
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA Y VERACRUZ
 
-Este día, vaguadas en niveles medios y altos de la atmósfera sobre el noreste, oriente, centro y sureste del país, en interacción con un canal de baja presión en el oriente y sureste de México, inestabilidad atmosférica,  el ingreso de humedad del océano Pacífico, golfo de México y mar Caribe, la onda tropical núm. 9 que se desplazará al sur de las costas de Baja California Sur, la onda tropical núm. 10, que se desplazará al sur de las costas del territorio Mexicano y la aproximación de la nueva onda tropical núm. 11 a la península de Yucatán, originarán lluvias puntuales intensas en zonas de Guerrero y Oaxaca, así como chubascos y lluvias fuertes a muy fuertes sobre la mayor parte de la República Mexicana, excepto en la península de Baja California. Se prevé que la onda tropical núm. 9 se integre en la circulación de una zona de baja presión con probabilidad para desarrollo ciclónico.…]]></description>
+ 
+
+En el transcurso de esta noche y madrugada del jueves, vaguadas en niveles medios y altos de la atmósfera extendidas en el noreste, oriente y sur del país, en interacción con inestabilidad en los niveles altos, la onda tropical núm. 10 que se desplazará al sur de las costas de Michoacán y Colima, la onda tropical núm.…]]></description>
       <pubDate>Wed, 24 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-24-349</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-24-350</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 24 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 24 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 24 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 24 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-24-12</guid>
@@ -77,14 +88,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias intensas en regiones de Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 22 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_22.pdf]]></description>
       <pubDate>Mon, 22 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_22</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 22 JUN 2026: Se pronostican lluvias intensas en zonas de Veracruz, Oaxaca y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_22.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Veracruz, Oaxaca y Chiapas — Reporte Matutino del 22 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_22.pdf]]></description>
-      <pubDate>Mon, 22 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_22</guid>
       <category>Comunicado</category>
     </item>
   </channel>
