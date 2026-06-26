@@ -5,15 +5,15 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 26 Jun 2026 20:54:12 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2026 21:46:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm) en zonas de Veracruz y Oaxaca.</title>
+      <title>⚠️ Alerta SMN: Temperaturas máximas superiores a 45 °C: Baja California (noreste) y Chihuahua (noreste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm) en zonas de Veracruz y Oaxaca.]]></description>
-      <pubDate>Fri, 26 Jun 2026 14:54:03 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-26-f14d</guid>
+      <description><![CDATA[Temperaturas máximas superiores a 45 °C: Baja California (noreste) y Chihuahua (noreste).]]></description>
+      <pubDate>Fri, 26 Jun 2026 15:46:33 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-26-1109</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -37,11 +37,11 @@ Este día, una circulación ciclónica en niveles altos de la atmósfera y una
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de junio del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de junio del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de junio del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 26 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-26-12</guid>
