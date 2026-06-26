@@ -5,42 +5,50 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 25 Jun 2026 23:48:49 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2026 01:23:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero.]]></description>
-      <pubDate>Thu, 25 Jun 2026 17:48:40 -0600</pubDate>
+      <pubDate>Thu, 25 Jun 2026 19:23:39 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-25-9cb7</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 351 | 25 de Junio del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 25 JUN 2026: Se prevén lluvias de fuertes a muy fuertes en regiones de 19 estados de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_25.pdf</link>
+      <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de 19 estados de México — Reporte Vespertino del 25 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_25.pdf]]></description>
+      <pubDate>Thu, 25 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_25</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 352 | 25 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE GUERRERO Y OAXACA
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 351
+No. Aviso: 352
 Ciudad de México a 25 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE GUERRERO Y OAXACA
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
 
-Para hoy, una vaguada en niveles altos de la atmósfera se extenderá sobre el oriente, centro y occidente de México, y la onda tropical núm. 11 frente las costas del Pacífico Sur Mexicano, en interacción con inestabilidad en los niveles altos y con el ingreso de aire húmedo del océano Pacífico, ocasionarán lluvias puntuales muy fuertes en Oaxaca (oeste) y Guerrero (sureste); puntuales fuertes en Puebla (suroeste), Morelos, Ciudad de México, Estado de México (centro, oeste y suroeste), Michoacán (noreste, oeste y suroeste), Guanajuato (sur), Colima, Jalisco (excepto noreste) y Nayarit (norte y sur); y lluvias con intervalos de chubascos en Tlaxcala, Hidalgo, Querétaro, San Luis Potosí y Tamaulipas, todas con descargas eléctricas; además de lluvias aisladas en zonas de Aguascalientes, Nuevo León y Coahuila.…]]></description>
+En el transcurso de esta noche y madrugada del viernes, una vaguada en niveles altos de la atmósfera se extenderá sobre el oriente, centro y occidente del territorio nacional, la onda tropical núm. 11 frente a las costas del Pacífico Sur y occidente mexicano e inestabilidad en los niveles altos de la atmósfera, ocasionarán lluvias puntuales muy fuertes en Nayarit (noreste y este), Jalisco (oeste y este), Colima y Michoacán (oeste y este), lluvias puntuales fuertes en Guanajuato (sur), Estado de México (centro, oeste y suroeste), Ciudad de México, Morelos y Puebla (suroeste), intervalos de chubascos en Tamaulipas, San Luis Potosí, Querétaro, Hidalgo, Tlaxcala y Veracruz, además de lluvias aisladas en Aguascalientes, Coahuila y Nuevo León.…]]></description>
       <pubDate>Thu, 25 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-25-351</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-25-352</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 25 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 25 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-25-12</guid>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias de fuertes a intensas en regiones de 18 estados de México — Reporte Vespertino del 23 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_23.pdf]]></description>
       <pubDate>Tue, 23 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_23</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 23 JUN 2026: Hoy, la onda tropical número 9 ocasionará lluvias intensas en regiones de Veracruz, Guerrero y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_23.pdf</link>
-      <description><![CDATA[Hoy, la onda tropical número 9 ocasionará lluvias intensas en regiones de Veracruz, Guerrero y Oaxaca — Reporte Matutino del 23 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_23.pdf]]></description>
-      <pubDate>Tue, 23 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_23</guid>
       <category>Comunicado</category>
     </item>
   </channel>
