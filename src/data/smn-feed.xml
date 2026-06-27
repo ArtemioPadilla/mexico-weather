@@ -5,9 +5,25 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 27 Jun 2026 17:41:54 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2026 18:45:15 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Veracruz, Guerrero, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Veracruz, Guerrero, Oaxaca y Chiapas.]]></description>
+      <pubDate>Sat, 27 Jun 2026 12:45:06 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-27-17e8</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 27 JUN 2026: Se pronostican lluvias muy fuertes en regiones de Jalisco, Michoacán, Guanajuato, Guerrero, Oaxaca, Veracruz y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_27.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Jalisco, Michoacán, Guanajuato, Guerrero, Oaxaca, Veracruz y Chiapas — Comunicado del 27 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_27.pdf]]></description>
+      <pubDate>Sat, 27 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_06_27</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 355 | 27 de Junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -28,23 +44,15 @@ Para hoy, una línea seca y un canal de baja presión en el norte de México, un
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de junio del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de junio del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de junio del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 27 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-27-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Veracruz, Guerrero, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Veracruz, Guerrero, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sat, 27 Jun 2026 11:41:44 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-27-17e8</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 26 JUN 2026: Se prevén lluvias muy fuertes para regiones de Chihuahua, Veracruz y Chiapas, durante esta noche</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Hoy se pronostican lluvias muy fuertes para el sureste de Guerrero y el oeste de Oaxaca — Reporte Matutino del 25 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_25.pdf]]></description>
       <pubDate>Thu, 25 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_25</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 24 JUN 2026: Se prevén lluvias intensas en regiones de Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz, durante esta noche</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_24.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas en regiones de Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Veracruz, durante esta noche — Reporte Vespertino del 24 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_24.pdf]]></description>
-      <pubDate>Wed, 24 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_24</guid>
       <category>Comunicado</category>
     </item>
   </channel>
