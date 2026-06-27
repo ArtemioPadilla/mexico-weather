@@ -5,43 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 26 Jun 2026 23:44:38 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2026 01:18:55 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Veracruz y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Veracruz y Chiapas.]]></description>
-      <pubDate>Fri, 26 Jun 2026 17:44:28 -0600</pubDate>
+      <pubDate>Fri, 26 Jun 2026 19:18:46 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-26-4819</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 353 | 26 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 354 | 26 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN VERACRUZ Y OAXACA
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, VERACRUZ Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 353
+No. Aviso: 354
 Ciudad de México a 26 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
+ 
 
-LLUVIAS PUNTUALES MUY FUERTES EN VERACRUZ Y OAXACA
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, VERACRUZ Y CHIAPAS
 
-Este día, una circulación ciclónica en niveles altos de la atmósfera y una vaguada en altura, se extenderán sobre el noreste, oriente, centro y occidente del país, canales de baja presión e inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en zonas de Veracruz y Oaxaca, así como chubascos con lluvias puntuales fuertes en las regiones antes mencionadas, así como en el norte de México. Por otra parte, el ingreso de humedad del océano Pacífico y mar Caribe y la onda tropical núm.12 frente a las costas de Quintana Roo, originarán chubascos con lluvias puntuales fuertes en el sur del país y la península de Yucatán.…]]></description>
+ 
+
+En el transcurso de esta noche y madrugada del sábado, una circulación ciclónica en niveles altos de la atmósfera sobre la porción norte de Veracruz, una vaguada en altura sobre el oriente, centro y occidente del país, un canal de baja presión e inestabilidad en los niveles altos de la atmósfera, originarán lluvias puntuales muy fuertes en Chihuahua (oeste); lluvias puntuales fuertes en Durango (oeste y sur), Sinaloa (este y sur), Nayarit (norte y sur), Jalisco (norte, sureste y oeste), Colima, Michoacán (norte, noreste y oeste), Guanajuato (suroeste) y Estado de México (centro y oeste); intervalos de chubascos en Sonora, Zacatecas, Aguascalientes, Tamaulipas, San Luis Potosí, Querétaro, Hidalgo, Tlaxcala, Puebla, Morelos y Ciudad de México; además de lluvias aisladas en Baja California, Coahuila y Nuevo León. Un segundo canal de baja presión en el sureste de México y la onda tropical núm.…]]></description>
       <pubDate>Fri, 26 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-26-353</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-26-354</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 26 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-26-12</guid>
