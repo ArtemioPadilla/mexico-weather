@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 27 Jun 2026 20:41:13 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2026 21:41:34 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Jalisco, Guanajuato, Michoacán, Guerrero, Oaxaca, Veracruz y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Jalisco, Guanajuato, Michoacán, Guerrero, Oaxaca, Veracruz y Chiapas.]]></description>
-      <pubDate>Sat, 27 Jun 2026 14:41:03 -0600</pubDate>
+      <pubDate>Sat, 27 Jun 2026 15:41:24 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-27-4554</guid>
       <category>Alerta</category>
     </item>
@@ -44,11 +44,11 @@ Para hoy, una línea seca y un canal de baja presión en el norte de México, un
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de junio del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de junio del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de junio del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 27 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-27-12</guid>
