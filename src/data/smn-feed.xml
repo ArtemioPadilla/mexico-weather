@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 27 Jun 2026 23:39:57 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2026 01:25:17 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Jalisco, Guanajuato, Michoacán, Guerrero, Oaxaca, Veracruz y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Jalisco, Guanajuato, Michoacán, Guerrero, Oaxaca, Veracruz y Chiapas.]]></description>
-      <pubDate>Sat, 27 Jun 2026 17:39:48 -0600</pubDate>
+      <pubDate>Sat, 27 Jun 2026 19:25:08 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-27-4554</guid>
       <category>Alerta</category>
     </item>
@@ -25,30 +25,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 355 | 27 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 356 | 27 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE VERACRUZ, GUERRERO, OAXACA Y CHIAPAS
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES JALISCO, MICHOACÁN, GUANAJUATO, GUERRERO, OAXACA, VERACRUZ Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 355
+No. Aviso: 356
 Ciudad de México a 27 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE VERACRUZ, GUERRERO, OAXACA Y CHIAPAS
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES JALISCO, MICHOACÁN, GUANAJUATO, GUERRERO, OAXACA, VERACRUZ Y CHIAPAS
 
-Para hoy, una línea seca y un canal de baja presión en el norte de México, una circulación ciclónica en niveles altos de la atmósfera sobre San Luis Potosí, una vaguada en altura en el oriente, centro y occidente del país, e inestabilidad atmosférica, así como la entrada de aire húmedo del océano Pacífico y golfo de México, originarán lluvias puntuales muy fuertes en Guerrero (este); puntuales fuertes en Chihuahua (oeste y suroeste), Durango (oeste y sur), Zacatecas (sur), Sinaloa (este y sur), Nayarit (norte y sur), Jalisco, Colima, Michoacán (norte, centro y suroeste), Puebla (norte), Tlaxcala (noroeste), Morelos, Estado de México (norte y oeste), Ciudad de México, Hidalgo (suroeste), Querétaro (sur) y Guanajuato (oeste y sur); e intervalos de chubascos en Sonora, Coahuila, Nuevo León, Tamaulipas, San Luis Potosí y Aguascalientes. La onda tropical núm.…]]></description>
+En el transcurso de esta noche y madrugada del sábado, una circulación ciclónica y la vaguada en niveles medios y altos de la atmósfera, ocasionarán lluvias puntuales muy fuertes en Jalisco (centro y occidente), Michoacán (norte y centro) y Guanajuato (oeste y suroeste); lluvias puntuales fuertes en Sinaloa (este y sur), Chihuahua (oeste y suroeste), Durango (oeste y sur), Zacatecas (sur), Nayarit (norte y sur), Colima, Querétaro (sur), Hidalgo (suroeste), Puebla (norte), Tlaxcala (noroeste), Morelos, Estado de México (norte, centro y oeste) y Ciudad de México; así como chubascos en Sonora, Coahuila, Nuevo León, Aguascalientes, San Luis Potosí, Tamaulipas. Por otra parte, un canal de baja presión sobre el sureste mexicano, la onda tropical núm. 12, extendida sobre Oaxaca y el ingreso de la nueva onda tropical núm.…]]></description>
       <pubDate>Sat, 27 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-27-355</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-27-356</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 27 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-27-12</guid>
