@@ -5,15 +5,15 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 28 Jun 2026 19:50:08 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2026 20:43:14 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Michoacán, Guerrero y Oaxaca.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Michoacán, Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California Sur, Sonora, Chihuahua, Sinaloa y Oaxaca.]]></description>
-      <pubDate>Sun, 28 Jun 2026 13:49:59 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-28-aace</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Michoacán, Guerrero y Oaxaca.]]></description>
+      <pubDate>Sun, 28 Jun 2026 14:43:05 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-28-9baf</guid>
       <category>Alerta</category>
     </item>
     <item>
