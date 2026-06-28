@@ -5,9 +5,37 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 28 Jun 2026 11:02:07 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2026 11:56:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 357 | 28 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN MICHOACÁN, GUERRERO Y OAXACA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 357
+Ciudad de México a 28 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN MICHOACÁN, GUERRERO Y OAXACA
+
+Este día, una circulación ciclónica en niveles medios y altos de la atmósfera sobre el interior del país, además de la onda tropical núm. 12 sobre el occidente mexicano, originarán chubascos con lluvias fuertes a muy fuertes en el norte, occidente, centro, oriente y sur del país, con lluvias puntuales intensas en Michoacán y Guerrero. Por otra parte, un canal de baja presión sobre el sureste mexicano y el desplazamiento de la onda tropical núm. 13 sobre Chiapas, originarán chubascos y lluvias fuertes en la región mencionada, incluida la península de Yucatán, además de lluvias puntuales intensas en Oaxaca. Este día también, finalizará la onda de calor en Baja California Sur (sur), Chihuahua (noreste), Colima (este), Michoacán (suroeste), Guerrero (costa) y Oaxaca (este y sur).
+
+
+
+El Servicio Meteorológico Nacional monitorea el desplazamiento de las ondas tropicales núm. 12 y 13
+
+Para mayor información consultar en:
+
+…]]></description>
+      <pubDate>Sun, 28 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-28-357</guid>
+      <category>Pronóstico General</category>
+    </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 28 de junio del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
@@ -23,7 +51,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Viento con rachas de 60 a 80 km/h: en zonas de BC y Chih; y de componente norte: en Oax (istmo de Tehuantepec).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Jal, Mich, Gto, Gro, Oax, Ver y Chis.]]></description>
-      <pubDate>Sun, 28 Jun 2026 05:01:59 -0600</pubDate>
+      <pubDate>Sun, 28 Jun 2026 05:56:39 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-28-14fc</guid>
       <category>Alerta</category>
     </item>
@@ -34,25 +62,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sat, 27 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_06_27</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 356 | 27 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES JALISCO, MICHOACÁN, GUANAJUATO, GUERRERO, OAXACA, VERACRUZ Y CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 356
-Ciudad de México a 27 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES JALISCO, MICHOACÁN, GUANAJUATO, GUERRERO, OAXACA, VERACRUZ Y CHIAPAS
-
-En el transcurso de esta noche y madrugada del sábado, una circulación ciclónica y la vaguada en niveles medios y altos de la atmósfera, ocasionarán lluvias puntuales muy fuertes en Jalisco (centro y occidente), Michoacán (norte y centro) y Guanajuato (oeste y suroeste); lluvias puntuales fuertes en Sinaloa (este y sur), Chihuahua (oeste y suroeste), Durango (oeste y sur), Zacatecas (sur), Nayarit (norte y sur), Colima, Querétaro (sur), Hidalgo (suroeste), Puebla (norte), Tlaxcala (noroeste), Morelos, Estado de México (norte, centro y oeste) y Ciudad de México; así como chubascos en Sonora, Coahuila, Nuevo León, Aguascalientes, San Luis Potosí, Tamaulipas. Por otra parte, un canal de baja presión sobre el sureste mexicano, la onda tropical núm. 12, extendida sobre Oaxaca y el ingreso de la nueva onda tropical núm.…]]></description>
-      <pubDate>Sat, 27 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-27-356</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 26 JUN 2026: Se prevén lluvias muy fuertes para regiones de Chihuahua, Veracruz y Chiapas, durante esta noche</title>
