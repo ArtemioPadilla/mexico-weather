@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 28 Jun 2026 23:42:18 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jun 2026 01:26:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Michoacán, Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Michoacán, Guerrero y Oaxaca.]]></description>
-      <pubDate>Sun, 28 Jun 2026 17:42:08 -0600</pubDate>
+      <pubDate>Sun, 28 Jun 2026 19:25:59 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-28-9baf</guid>
       <category>Alerta</category>
     </item>
@@ -25,39 +25,34 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 357 | 28 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 358 | 28 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN MICHOACÁN, GUERRERO Y OAXACA
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN MICHOACÁN, GUERRERO Y OAXACA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 357
+No. Aviso: 358
 Ciudad de México a 28 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
+ 
 
-LLUVIAS PUNTUALES INTENSAS EN MICHOACÁN, GUERRERO Y OAXACA
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN MICHOACÁN, GUERRERO Y OAXACA
 
-Este día, una circulación ciclónica en niveles medios y altos de la atmósfera sobre el interior del país, además de la onda tropical núm. 12 sobre el occidente mexicano, originarán chubascos con lluvias fuertes a muy fuertes en el norte, occidente, centro, oriente y sur del país, con lluvias puntuales intensas en Michoacán y Guerrero. Por otra parte, un canal de baja presión sobre el sureste mexicano y el desplazamiento de la onda tropical núm. 13 sobre Chiapas, originarán chubascos y lluvias fuertes en la región mencionada, incluida la península de Yucatán, además de lluvias puntuales intensas en Oaxaca. Este día también, finalizará la onda de calor en Baja California Sur (sur), Chihuahua (noreste), Colima (este), Michoacán (suroeste), Guerrero (costa) y Oaxaca (este y sur).
+ 
 
-
-
-El Servicio Meteorológico Nacional monitorea el desplazamiento de las ondas tropicales núm. 12 y 13
-
-Para mayor información consultar en:
-
-…]]></description>
+En el transcurso de esta noche y madrugada del domingo, una circulación ciclónica y la vaguada en niveles medios y altos de la atmósfera, en combinación con un canal de baja presión en el norte de México y el desplazamiento de la onda tropical núm. 12 sobre el occidente del territorio nacional, generarán lluvias puntuales intensas en Michoacán (centro) y Guerrero (noroeste y norte); lluvias puntuales muy fuertes en Jalisco (norte, oeste, centro y sur), Guanajuato (centro y este), Querétaro (oeste y sur), Hidalgo (oeste y sur), Estado de México (norte, centro y oeste) y Morelos; lluvias puntuales fuertes en Chihuahua (centro y suroeste), Durango (oeste y sur), Sinaloa, Nayarit (norte y sureste), Colima, Tamaulipas (sur), San Luis Potosí (este y sur), Zacatecas (sur), Aguascalientes, Ciudad de México, Puebla (norte, centro y suroeste) y Tlaxcala, así como lluvias con intervalos de chubascos en Sonora, Co…]]></description>
       <pubDate>Sun, 28 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-28-357</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-28-358</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 28 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 28 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 28 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 28 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-28-12</guid>
