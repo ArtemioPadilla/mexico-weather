@@ -5,27 +5,66 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 30 Jun 2026 11:22:11 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2026 13:02:44 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de junio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 361 | 30 de Junio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, DURANGO, SINALOA Y JALISCO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 361
+Ciudad de México a 30 de Junio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, DURANGO, SINALOA Y JALISCO
+
+ 
+
+Este día, una circulación ciclónica en niveles medios de la atmósfera sobre el interior del territorio nacional, en interacción con canales de baja presión, inestabilidad atmosférica y la onda tropical núm. 13 sobre el occidente del país, originarán chubascos y lluvias fuertes a muy fuertes acompañadas con descargas eléctricas en gran parte de la República Mexicana, y con posible caída de granizo en estados del norte y occidente del territorio nacional. La onda tropical núm. 13 dejará de afectar al territorio nacional al final del día. Finalmente, prevalecerá el ambiente muy caluroso en el noroeste y norte de México.
+
+ 
+
+El Servicio Meteorológico Nacional monitorea el desplazamiento de la onda tropical núm. 13
+
+Para mayor información consultar en:
+https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-extendido-a-96-horas
+
+…]]></description>
+      <pubDate>Tue, 30 Jun 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-30-361</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de junio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 30 de junio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 30 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-30-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guanajuato, Michoacán, Estado de México y Guerrero.</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Chihuahua, Durango, Sinaloa y Jalisco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guanajuato, Michoacán, Estado de México y Guerrero.]]></description>
-      <pubDate>Tue, 30 Jun 2026 05:22:02 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-30-e5d3</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Chihuahua, Durango, Sinaloa y Jalisco.]]></description>
+      <pubDate>Tue, 30 Jun 2026 07:02:34 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-30-5dba</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 30 JUN 2026: Hoy, se pronostican lluvias muy fuertes para zonas de Chihuahua, Durango, Sinaloa y Jalisco, y fuertes en otros 21 estad...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_30.pdf</link>
+      <description><![CDATA[Hoy, se pronostican lluvias muy fuertes para zonas de Chihuahua, Durango, Sinaloa y Jalisco, y fuertes en otros 21 estad... — Reporte Matutino del 30 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_30.pdf]]></description>
+      <pubDate>Tue, 30 Jun 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_30</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 29 JUN 2026: Para esta noche se pronostican lluvias intensas en regiones de Guanajuato, Michoacán, Estado de México y Guerrero</title>
@@ -34,26 +73,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 29 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_29_05</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 360 | 29 de Junio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO, MICHOACÁN, ESTADO DE MÉXICO Y GUERRERO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 360
-Ciudad de México a 29 de Junio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO, MICHOACÁN, ESTADO DE MÉXICO Y GUERRERO
-
-
-Para esta noche y madrugada del martes, vaguadas en niveles medios y altos de la atmósfera sobre el interior del territorio nacional, aunadas a canales de baja presión en el interior del país, inestabilidad atmosférica, la onda tropical núm. 13 sobre el sur del país y la entrada de humedad, ocasionarán lluvias puntuales intensas en Guanajuato (centro, suroeste y sur), Michoacán (norte, centro y noreste), Estado de México (noroeste y suroeste) y Guerrero (noroeste y este); lluvias puntuales muy fuertes en Chihuahua (este y suroeste), Durango (noroeste), Sinaloa (este y sur), Zacatecas (sur), Aguascalientes, Jalisco (norte, centro, este y sur), Ciudad de México, Colima y Oaxaca (oeste); lluvias puntuales fuertes en Coahuila (noroeste y oeste), Tamaulipas (sur), San Luis Potosí (suroeste, centro y este), Nayarit (norte y este), Querétaro (oeste y sur), Hida…]]></description>
-      <pubDate>Mon, 29 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-29-360</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 29 JUN 2026: Hoy, se pronostican lluvias intensas para regiones de Guerrero y muy fuertes en otras 10 entidades de México</title>
@@ -77,14 +96,6 @@ Para esta noche y madrugada del martes, vaguadas en niveles medios y altos de l
       <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Jalisco, Michoacán, Guanajuato, Guerrero, Oaxaca, Veracruz y Chiapas — Comunicado del 27 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_06_27.pdf]]></description>
       <pubDate>Sat, 27 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_06_27</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 26 JUN 2026: Se prevén lluvias muy fuertes para regiones de Chihuahua, Veracruz y Chiapas, durante esta noche</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_26.pdf</link>
-      <description><![CDATA[Se prevén lluvias muy fuertes para regiones de Chihuahua, Veracruz y Chiapas, durante esta noche — Reporte Vespertino del 26 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_26.pdf]]></description>
-      <pubDate>Fri, 26 Jun 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
