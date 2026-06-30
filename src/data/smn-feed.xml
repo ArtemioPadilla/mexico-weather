@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 30 Jun 2026 01:20:54 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2026 03:31:04 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guanajuato, Michoacán, Estado de México y Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guanajuato, Michoacán, Estado de México y Guerrero.]]></description>
-      <pubDate>Mon, 29 Jun 2026 19:20:45 -0600</pubDate>
+      <pubDate>Mon, 29 Jun 2026 21:30:55 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-29-e5d3</guid>
       <category>Alerta</category>
     </item>
@@ -37,20 +37,20 @@ Para esta noche y madrugada del martes, vaguadas en niveles medios y altos de l
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de junio del 2026 | Emisión 18:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de junio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 29 de junio del 2026
-Emisión: 18:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 29 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-29-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 29 JUN 2026: Hoy, se pronostican lluvias intensas para regiones de Guerrero y muy fuertes en otras 10 entidades de México</title>
+      <title>📋 SMN Reporte Matutino 29 JUN 2026: Para esta noche se pronostican lluvias intensas en regiones de Guanajuato, Michoacán, Estado de México y Guerrero</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_29.pdf</link>
-      <description><![CDATA[Hoy, se pronostican lluvias intensas para regiones de Guerrero y muy fuertes en otras 10 entidades de México — Reporte Matutino del 29 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_29.pdf]]></description>
+      <description><![CDATA[Para esta noche se pronostican lluvias intensas en regiones de Guanajuato, Michoacán, Estado de México y Guerrero — Reporte Matutino del 29 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_29.pdf]]></description>
       <pubDate>Mon, 29 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_29</guid>
       <category>Comunicado</category>
@@ -77,14 +77,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias muy fuertes para regiones de Chihuahua, Veracruz y Chiapas, durante esta noche — Reporte Vespertino del 26 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_26.pdf]]></description>
       <pubDate>Fri, 26 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 26 JUN 2026: Para este viernes se pronostican lluvias de fuertes a muy fuertes en 16 entidades de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_26.pdf</link>
-      <description><![CDATA[Para este viernes se pronostican lluvias de fuertes a muy fuertes en 16 entidades de México — Reporte Matutino del 26 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_26.pdf]]></description>
-      <pubDate>Fri, 26 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
