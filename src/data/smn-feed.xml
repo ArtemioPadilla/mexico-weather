@@ -5,42 +5,43 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 29 Jun 2026 23:40:02 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2026 01:20:54 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guanajuato, Michoacán, Estado de México y Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guanajuato, Michoacán, Estado de México y Guerrero.]]></description>
-      <pubDate>Mon, 29 Jun 2026 17:39:53 -0600</pubDate>
+      <pubDate>Mon, 29 Jun 2026 19:20:45 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-06-29-e5d3</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 359 | 29 de Junio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 360 | 29 de Junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO Y PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, CHIHUAHUA, COAHUILA, DURANGO, JALISCO, COLIMA, MICHOACÁN, GUANAJUATO, ESTADO DE MÉXICO Y OAXACA
+      <description><![CDATA[EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO, MICHOACÁN, ESTADO DE MÉXICO Y GUERRERO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 359
+No. Aviso: 360
 Ciudad de México a 29 de Junio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO Y PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, CHIHUAHUA, COAHUILA, DURANGO, JALISCO, COLIMA, MICHOACÁN, GUANAJUATO, ESTADO DE MÉXICO Y OAXACA
+EN LAS PRÓXIMAS HORAS, SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO, MICHOACÁN, ESTADO DE MÉXICO Y GUERRERO
 
-Para hoy, canales de baja presión en el interior del país, una circulación ciclónica y una vaguada en niveles altos de la atmósfera sobre el noreste de México, así como el ingreso de aire húmedo del océano Pacifico y golfo de México, inestabilidad atmosférica y la onda tropical núm.…]]></description>
+
+Para esta noche y madrugada del martes, vaguadas en niveles medios y altos de la atmósfera sobre el interior del territorio nacional, aunadas a canales de baja presión en el interior del país, inestabilidad atmosférica, la onda tropical núm. 13 sobre el sur del país y la entrada de humedad, ocasionarán lluvias puntuales intensas en Guanajuato (centro, suroeste y sur), Michoacán (norte, centro y noreste), Estado de México (noroeste y suroeste) y Guerrero (noroeste y este); lluvias puntuales muy fuertes en Chihuahua (este y suroeste), Durango (noroeste), Sinaloa (este y sur), Zacatecas (sur), Aguascalientes, Jalisco (norte, centro, este y sur), Ciudad de México, Colima y Oaxaca (oeste); lluvias puntuales fuertes en Coahuila (noroeste y oeste), Tamaulipas (sur), San Luis Potosí (suroeste, centro y este), Nayarit (norte y este), Querétaro (oeste y sur), Hida…]]></description>
       <pubDate>Mon, 29 Jun 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-06-29-359</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-06-29-360</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de junio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de junio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 29 de junio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 29 Jun 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-06-29-12</guid>
