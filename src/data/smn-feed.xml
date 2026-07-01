@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 01 Jul 2026 03:31:18 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2026 05:54:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Zacatecas, Jalisco, Michoacán, Estado de México, Campeche y Yucatán.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Zacatecas, Jalisco, Michoacán, Estado de México, Campeche y Yucatán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Zacatecas, Jalisco, Michoacán, Estado de México, Campeche y Yucatán.]]></description>
-      <pubDate>Tue, 30 Jun 2026 21:31:09 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-06-30-4c6b</guid>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Zacatecas, Jalisco, Michoacán, Estado de México, Campeche y Yucatán.]]></description>
+      <pubDate>Tue, 30 Jun 2026 23:53:58 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-06-30-2bf9</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 30 JUN 2026: Se pronostican lluvias muy fuertes en zonas de 9 entidades de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_30.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de 9 entidades de México — Reporte Vespertino del 30 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_06_30.pdf]]></description>
+      <pubDate>Tue, 30 Jun 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_06_30</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 362 | 30 de Junio del 2026 | Emisión 18:00h</title>
@@ -50,9 +58,9 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 30 JUN 2026: Se pronostican lluvias muy fuertes en zonas de 9 entidades de México</title>
+      <title>📋 SMN Reporte Matutino 30 JUN 2026: Hoy, se pronostican lluvias muy fuertes para zonas de Chihuahua, Durango, Sinaloa y Jalisco, y fuertes en otros 21 estad...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_30.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de 9 entidades de México — Reporte Matutino del 30 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_30.pdf]]></description>
+      <description><![CDATA[Hoy, se pronostican lluvias muy fuertes para zonas de Chihuahua, Durango, Sinaloa y Jalisco, y fuertes en otros 21 estad... — Reporte Matutino del 30 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_30.pdf]]></description>
       <pubDate>Tue, 30 Jun 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_30</guid>
       <category>Comunicado</category>
