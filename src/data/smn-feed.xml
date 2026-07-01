@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 01 Jul 2026 16:12:21 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2026 17:03:38 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -42,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Chihuahua, Durango, Jalisco, Colima, Michoacán, Guanajuato, Querétaro, Veracruz, Tabasco, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Chihuahua, Durango, Jalisco, Colima, Michoacán, Guanajuato, Querétaro, Veracruz, Tabasco, Oaxaca y Chiapas.]]></description>
-      <pubDate>Wed, 01 Jul 2026 10:12:11 -0600</pubDate>
+      <pubDate>Wed, 01 Jul 2026 11:03:29 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-01-2a4b</guid>
       <category>Alerta</category>
     </item>
