@@ -5,51 +5,53 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 01 Jul 2026 23:48:44 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2026 01:20:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Guerrero, Oaxaca, Campeche y Yucatán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Guerrero, Oaxaca, Campeche y Yucatán.]]></description>
-      <pubDate>Wed, 01 Jul 2026 17:48:35 -0600</pubDate>
+      <pubDate>Wed, 01 Jul 2026 19:20:00 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-01-8966</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 363 | 01 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 364 | 01 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO, JALISCO, COLIMA, MICHOACÁN, GUANAJUATO, QUERÉTARO, VERACRUZ, TABASCO, OAXACA Y CHIAPAS
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, SINALOA, QUERETARO, PUEBLA, TLAXCALA, GUERRERO, OAXACA, CHIAPAS, CAMPECHE Y YUCATÁN
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 363
+No. Aviso: 364
 Ciudad de México a 01 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO, JALISCO, COLIMA, MICHOACÁN, GUANAJUATO, QUERÉTARO, VERACRUZ, TABASCO, OAXACA Y CHIAPAS
+SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, SINALOA, QUERETARO, PUEBLA, TLAXCALA, GUERRERO, OAXACA, CHIAPAS, CAMPECHE Y YUCATÁN
 
-Para hoy, dos circulaciones ciclónicas, una en niveles altos de la atmósfera sobre el occidente del golfo de México, y otra en los niveles medios sobre el centro del país, en interacción con canales de baja presión extendidos sobre el interior del territorio nacional, aunados a inestabilidad atmosférica y al flujo de aire húmedo proveniente del océano Pacífico y golfo de México, propiciarán lluvias puntuales muy fuertes en Sinaloa (norte, centro y este), Chihuahua (sur y suroeste), Durango (oeste y noroeste), Jalisco (sur y sureste), Colima, Michoacán (oeste y noreste), Guanajuato (este), Querétaro (suroeste), Veracruz (sur) y Oaxaca (noroeste); puntuales fuertes en Zacatecas (sur y suroeste), Aguascalientes, Nayarit (norte y este), Hidalgo (este y suroeste), Puebla (norte, este y sureste), Tlaxcala, Morelos, Estado…]]></description>
+ 
+
+Para esta noche y madrugada del jueves, circulaciones ciclónicas en niveles medios y altos de la atmósfera en el oriente y sur del territorio nacional, en interacción con canales de baja presión en el norte y sureste de México, inestabilidad atmosférica y la onda tropical núm.…]]></description>
       <pubDate>Wed, 01 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-01-363</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-01-364</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 01 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 01 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-01-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 01 JUL 2026: Durante este día se prevén lluvias de fuertes a muy fuertes en 25 estados de México</title>
+      <title>📋 SMN Reporte Matutino 01 JUL 2026: Se pronostican lluvias muy fuertes en zonas de 11 entidades de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_01.pdf</link>
-      <description><![CDATA[Durante este día se prevén lluvias de fuertes a muy fuertes en 25 estados de México — Reporte Matutino del 01 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_01.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de 11 entidades de México — Reporte Matutino del 01 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_01.pdf]]></description>
       <pubDate>Wed, 01 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_01</guid>
       <category>Comunicado</category>
@@ -76,14 +78,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Para esta noche se pronostican lluvias intensas en regiones de Guanajuato, Michoacán, Estado de México y Guerrero — Reporte Vespertino del 29 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_29_05.pdf]]></description>
       <pubDate>Mon, 29 Jun 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_29_05</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 29 JUN 2026: Hoy, se pronostican lluvias intensas para regiones de Guerrero y muy fuertes en otras 10 entidades de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_29.pdf</link>
-      <description><![CDATA[Hoy, se pronostican lluvias intensas para regiones de Guerrero y muy fuertes en otras 10 entidades de México — Reporte Matutino del 29 JUN 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_06_29.pdf]]></description>
-      <pubDate>Mon, 29 Jun 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_06_29</guid>
       <category>Comunicado</category>
     </item>
   </channel>
