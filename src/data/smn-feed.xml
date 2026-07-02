@@ -5,16 +5,35 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 02 Jul 2026 03:30:49 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2026 07:46:13 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Guerrero, Oaxaca, Campeche y Yucatán.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de julio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 02 de julio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Thu, 02 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-02-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm) en zonas de:</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Guerrero, Oaxaca, Campeche y Yucatán.]]></description>
-      <pubDate>Wed, 01 Jul 2026 21:30:40 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-01-8966</guid>
+      <description><![CDATA[Chihuahua, Durango, Sinaloa, Querétaro, Puebla, Tlaxcala, Guerrero, Oaxaca, Chiapas, Campeche y Yucatán.]]></description>
+      <pubDate>Thu, 02 Jul 2026 01:46:04 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-02-ff78</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 01 JUL 2026: Se pronostican lluvias muy fuertes en zonas de 11 entidades de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_01.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de 11 entidades de México — Reporte Vespertino del 01 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_01.pdf]]></description>
+      <pubDate>Wed, 01 Jul 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_01</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 364 | 01 de Julio del 2026 | Emisión 18:00h</title>
@@ -38,20 +57,9 @@ Para esta noche y madrugada del jueves, circulaciones ciclónicas en niveles me
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de julio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 01 de julio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Wed, 01 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-01-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 01 JUL 2026: Se pronostican lluvias muy fuertes en zonas de 11 entidades de México</title>
+      <title>📋 SMN Reporte Matutino 01 JUL 2026: Durante este día se prevén lluvias de fuertes a muy fuertes en 25 estados de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_01.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de 11 entidades de México — Reporte Matutino del 01 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_01.pdf]]></description>
+      <description><![CDATA[Durante este día se prevén lluvias de fuertes a muy fuertes en 25 estados de México — Reporte Matutino del 01 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_01.pdf]]></description>
       <pubDate>Wed, 01 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_01</guid>
       <category>Comunicado</category>
