@@ -5,15 +5,15 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 02 Jul 2026 19:56:03 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2026 21:36:44 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Chihuahua, Durango, Sinaloa, Hidalgo, Tlaxcala, Puebla, Guerrero y Oaxaca.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): Puebla (norte) y Veracruz (norte y centro).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Chihuahua, Durango, Sinaloa, Hidalgo, Tlaxcala, Puebla, Guerrero y Oaxaca.]]></description>
-      <pubDate>Thu, 02 Jul 2026 13:55:54 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-02-acba</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California (noreste), Baja California Sur (centro y sur), Sonora y Sinaloa (norte y centro).]]></description>
+      <pubDate>Thu, 02 Jul 2026 15:36:35 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-02-4592</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -47,11 +47,11 @@ Para mayor información consultar en:
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de julio del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de julio del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 02 de julio del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 02 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-02-12</guid>
