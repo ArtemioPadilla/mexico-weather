@@ -5,42 +5,50 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 03 Jul 2026 23:30:39 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jul 2026 04:06:11 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa y Guerrero.</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Chih, Dgo, Sin, Edo. Méx, CDMX y Gro.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California (noreste), Baja California Sur (centro y sur), Sonora, Chihuahua (este y suroeste) y Sinaloa (norte y sur).]]></description>
-      <pubDate>Fri, 03 Jul 2026 17:30:30 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-03-d545</guid>
+      <description><![CDATA[Viento de 30 a 40 km/h con rachas de 50 a 70 km/h: Chih, Zac y Oax; de componente sur (surada): Coah y NL.]]></description>
+      <pubDate>Fri, 03 Jul 2026 22:05:59 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-03-ab59</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 367 | 03 de Julio del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 03 JUL 2026: Para esta noche se prevén lluvias muy fuertes en Chihuahua, Durango, Sinaloa, Estado de México, Ciudad de México y Gu...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_03.pdf</link>
+      <description><![CDATA[Para esta noche se prevén lluvias muy fuertes en Chihuahua, Durango, Sinaloa, Estado de México, Ciudad de México y Gu... — Reporte Vespertino del 03 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_03.pdf]]></description>
+      <pubDate>Fri, 03 Jul 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_03</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 368 | 03 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, SINALOA Y GUERRERO
+      <description><![CDATA[PERSISTEN LAS CONDICIONES PARA LLUVIAS PUNTUALES MUY FUERTES EN REGIONES DE CHIHUAHUA, DURANGO, SINALOA, ESTADO DE MÉXICO, CIUDAD DE MÉXICO Y GUERRERO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 367
+No. Aviso: 368
 Ciudad de México a 03 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, SINALOA Y GUERRERO
+PERSISTEN LAS CONDICIONES PARA LLUVIAS PUNTUALES MUY FUERTES EN REGIONES DE CHIHUAHUA, DURANGO, SINALOA, ESTADO DE MÉXICO, CIUDAD DE MÉXICO Y GUERRERO
 
-Para hoy, la onda tropical núm. 14 se extenderá frente a las costas de Colima y Michoacán, mientras que la onda tropical núm. 15 recorrerá el sureste mexicano; ambos sistemas interaccionarán con una vaguada en niveles altos de la atmósfera, canales de baja presión en el interior del país, inestabilidad atmosférica y con el ingreso de aire húmedo del océano Pacífico, golfo de México y mar Caribe, lo que originará condiciones para lluvias puntuales muy fuertes en Sinaloa (noreste y este), Chihuahua (suroeste), Durango (noroeste) y Guerrero (este); puntuales fuertes en Coahuila (sureste), San Luis Potosí (este), Jalisco (este), Michoacán (este), Querétaro (norte), Hidalgo (norte y este), Puebla (norte), Estado de México (norte y centro), Ciudad de México, Tamaulipas (sur), Veracruz (sur), Oaxaca (suroeste) y Chiapas (sur); intervalos de chubascos en Nuevo León, Zacatecas, Aguascalientes, N…]]></description>
+Durante esta noche y madrugada del sábado, la onda tropical núm. 14, extendida frente a las costas de Colima y Michoacán, interaccionará con una vaguada en niveles altos de la atmósfera y un canal de baja presión sobre el occidente y centro del país, ocasionando lluvias puntuales muy fuertes en el Estado de México (norte y centro), Ciudad de México y Guerrero (este y oeste), lluvias fuertes en Jalisco (este y sur), Colima, Michoacán, Querétaro (norte), Hidalgo (norte y este) y Puebla (norte), así como chubascos en Nayarit, Guanajuato, Tlaxcala y Morelos. Por otra parte, la onda tropical núm.…]]></description>
       <pubDate>Fri, 03 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-03-367</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-03-368</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de julio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 03 de julio del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 03 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-03-12</guid>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de 11 entidades de México — Reporte Vespertino del 01 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_01.pdf]]></description>
       <pubDate>Wed, 01 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_01</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 01 JUL 2026: Durante este día se prevén lluvias de fuertes a muy fuertes en 25 estados de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_01.pdf</link>
-      <description><![CDATA[Durante este día se prevén lluvias de fuertes a muy fuertes en 25 estados de México — Reporte Matutino del 01 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_01.pdf]]></description>
-      <pubDate>Wed, 01 Jul 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_01</guid>
       <category>Comunicado</category>
     </item>
   </channel>
