@@ -5,49 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 05 Jul 2026 11:14:55 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jul 2026 12:44:35 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de julio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 371 | 05 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES MUY EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO, ZACATECAS, NAYARIT, JALISCO, MICHOACÁN, ESTADO DE MÉXICO, MORELOS, GUERRERO, YUCATÁN Y QUINTANA ROO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 371
+Ciudad de México a 05 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ SE PREVÉN LLUVIAS PUNTUALES MUY EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO, ZACATECAS, NAYARIT, JALISCO, MICHOACÁN, ESTADO DE MÉXICO, MORELOS, GUERRERO, YUCATÁN Y QUINTANA ROO
+
+Para hoy, la entrada de aire húmedo del océano Pacífico a lo largo del litoral y un canal de baja presión sobre la Mesa del norte, en interacción con inestabilidad atmosférica, además de la onda tropical núm. 15 que se desplazará frente a las costas de Jalisco y Colima, ocasionarán lluvias puntuales muy fuertes en Sinaloa (noreste), Chihuahua (suroeste), Durango (noroeste, oeste y sur), Zacatecas (suroeste y sur), Nayarit (norte y este), Jalisco (norte, sur y sureste) y Michoacán (oeste y sur); puntuales fuertes en Sonora (sur), Aguascalientes, Colima y Guanajuato (sur); y lluvias con intervalos de chubascos en Coahuila; todas acompañadas con descargas eléctricas y posible caída de granizo.…]]></description>
+      <pubDate>Sun, 05 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-05-371</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de julio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de julio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 05 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-05-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Zacatecas, Nayarit, Jalisco, Colima, Michoacán y Guanajuato.</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Chihuahua, Durango, Zacatecas, Nayarit, Jalisco, Michoacán, Estado de México, Morelos, Guerrero, Yucatán y Quintana Roo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Zacatecas, Nayarit, Jalisco, Colima, Michoacán y Guanajuato.]]></description>
-      <pubDate>Sun, 05 Jul 2026 05:14:44 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-05-6c5f</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Chihuahua, Durango, Zacatecas, Nayarit, Jalisco, Michoacán, Estado de México, Morelos, Guerrero, Yucatán y Quintana Roo.]]></description>
+      <pubDate>Sun, 05 Jul 2026 06:44:26 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-05-8c97</guid>
       <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 370 | 04 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES MUY EN ZACATECAS, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUANAJUATO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 370
-Ciudad de México a 04 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PREVÉN LLUVIAS PUNTUALES MUY EN ZACATECAS, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUANAJUATO
-
- 
-
-En el transcurso de esta noche y madrugada del domingo, la onda tropical núm. 15 se desplazará al sur de las costas de Guerrero y Michoacán, interaccionará con un canales de baja presión sobre el norte, occidente, centro y sureste del país, la entrada de humedad del mar Caribe, golfo de México y océano Pacífico, así como inestabilidad atmosférica, ocasionarán lluvias muy fuertes en Zacatecas (sur y suroeste), Nayarit (este y sur), Jalisco (norte, este y oeste), Colima, Michoacán (norte y oeste) y Guanajuato (suroeste); lluvias fuertes en Chihuahua (suroeste), Durango (noroeste, oeste y sur), Sinaloa (este), Aguascalientes, Querétaro (sur), Estado de México (centro y oeste), Ciudad de México, Morelos (norte), Guerrero (centro y sureste), Oaxaca (oeste), Chiapas (sur), Campeche (centro y sur) y Yucatán (este y sur).…]]></description>
-      <pubDate>Sat, 04 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-04-370</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 04 JUL 2026: Se prevén chubascos y lluvias fuertes con posible granizo para este sábado en la mayor parte de la República Mexicana...</title>
