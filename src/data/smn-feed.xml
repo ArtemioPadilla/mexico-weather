@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 05 Jul 2026 04:34:27 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jul 2026 08:20:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de julio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 05 de julio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sun, 05 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-05-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Zacatecas, Nayarit, Jalisco, Colima, Michoacán y Guanajuato.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Zacatecas, Nayarit, Jalisco, Colima, Michoacán y Guanajuato.]]></description>
-      <pubDate>Sat, 04 Jul 2026 22:34:18 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-04-6c5f</guid>
+      <pubDate>Sun, 05 Jul 2026 02:20:34 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-05-6c5f</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -37,17 +48,6 @@ En el transcurso de esta noche y madrugada del domingo, la onda tropical núm. 1
       <pubDate>Sat, 04 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-07-04-370</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de julio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 04 de julio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Sat, 04 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-04-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 04 JUL 2026: Se prevén chubascos y lluvias fuertes con posible granizo para este sábado en la mayor parte de la República Mexicana...</title>
