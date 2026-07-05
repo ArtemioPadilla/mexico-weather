@@ -5,43 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 04 Jul 2026 23:27:06 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jul 2026 04:34:27 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Zacatecas, Nayarit, Jalisco, Colima, Michoacán y Guanajuato.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California, Baja California Sur, Sonora, Sinaloa y Chihuahua.]]></description>
-      <pubDate>Sat, 04 Jul 2026 17:26:57 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-04-46ed</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Zacatecas, Nayarit, Jalisco, Colima, Michoacán y Guanajuato.]]></description>
+      <pubDate>Sat, 04 Jul 2026 22:34:18 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-04-6c5f</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 369 | 04 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 370 | 04 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE JALISCO
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES MUY EN ZACATECAS, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUANAJUATO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 369
+No. Aviso: 370
 Ciudad de México a 04 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE JALISCO
+SE PREVÉN LLUVIAS PUNTUALES MUY EN ZACATECAS, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUANAJUATO
 
-Este día, la onda tropical núm. 14 se localizará frente a las costas del Pacífico central mexicano y originará lluvias puntuales intensas en Jalisco (oeste y centro), muy fuertes en Nayarit (este y sur), Michoacán (norte y oeste) y Colima. Simultáneamente, la onda tropical núm. 15 se desplazará frente a las costas de Oaxaca y Guerrero, generando lluvias fuertes en ambas entidades y chubascos en Puebla, Veracruz y Chiapas. Canales de baja presión en el interior del país, en interacción con inestabilidad atmosférica y el ingreso de humedad, ocasionarán lluvias puntuales muy fuertes en Zacatecas (oeste y sur); así como chubascos y lluvias fuertes en la península de Yucatán, y con posible caída de granizo en el norte y centro del país, incluido el Valle de México.…]]></description>
+ 
+
+En el transcurso de esta noche y madrugada del domingo, la onda tropical núm. 15 se desplazará al sur de las costas de Guerrero y Michoacán, interaccionará con un canales de baja presión sobre el norte, occidente, centro y sureste del país, la entrada de humedad del mar Caribe, golfo de México y océano Pacífico, así como inestabilidad atmosférica, ocasionarán lluvias muy fuertes en Zacatecas (sur y suroeste), Nayarit (este y sur), Jalisco (norte, este y oeste), Colima, Michoacán (norte y oeste) y Guanajuato (suroeste); lluvias fuertes en Chihuahua (suroeste), Durango (noroeste, oeste y sur), Sinaloa (este), Aguascalientes, Querétaro (sur), Estado de México (centro y oeste), Ciudad de México, Morelos (norte), Guerrero (centro y sureste), Oaxaca (oeste), Chiapas (sur), Campeche (centro y sur) y Yucatán (este y sur).…]]></description>
       <pubDate>Sat, 04 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-04-369</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-04-370</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de julio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 04 de julio del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 04 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-04-12</guid>
