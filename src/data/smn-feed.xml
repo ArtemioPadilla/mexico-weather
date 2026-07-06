@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 06 Jul 2026 13:00:58 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2026 16:33:24 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -35,23 +35,20 @@ Para mayor información consultar en:
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de julio del 2026 | Emisión 06:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 06 de julio del 2026
-Emisión: 06:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Mon, 06 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-06-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nayarit, Jalisco, Colima, Michoacán, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nayarit, Jalisco, Colima, Michoacán, Oaxaca y Chiapas.]]></description>
-      <pubDate>Mon, 06 Jul 2026 07:00:47 -0600</pubDate>
+      <pubDate>Mon, 06 Jul 2026 10:32:18 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-06-9d97</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 06 JUL 2026: Hoy, se pronostican lluvias intensas para regiones de Nayarit, Jalisco, Colima, Michoacán, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_06.pdf</link>
+      <description><![CDATA[Hoy, se pronostican lluvias intensas para regiones de Nayarit, Jalisco, Colima, Michoacán, Oaxaca y Chiapas — Reporte Matutino del 06 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_06.pdf]]></description>
+      <pubDate>Mon, 06 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_06</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 05 JUL 2026: Se pronostican lluvias muy fuertes durante este domingo para 12 estados de la República Mexicana</title>
@@ -83,14 +80,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Durante este día se prevén lluvias muy fuertes en zonas de Chihuahua, Durango, Sinaloa y Guerrero — Reporte Matutino del 03 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_03.pdf]]></description>
       <pubDate>Fri, 03 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_03</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 02 JUL 2026: Se pronostican lluvias intensas en zonas de Puebla y Veracruz</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_02.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla y Veracruz — Reporte Vespertino del 02 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_02.pdf]]></description>
-      <pubDate>Thu, 02 Jul 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_02</guid>
       <category>Comunicado</category>
     </item>
   </channel>
