@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 07 Jul 2026 12:11:53 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2026 15:19:27 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -28,23 +28,31 @@ Para hoy, circulaciones ciclónicas en niveles altos de la atmósfera, una sobre
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de julio del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de julio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 07 de julio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 07 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-07-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nayarit, Jalisco, Colima, Michoacán y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Tabasco, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nayarit, Jalisco, Colima, Michoacán y Chiapas.]]></description>
-      <pubDate>Tue, 07 Jul 2026 06:11:44 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-07-1fdc</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Tabasco, Oaxaca y Chiapas.]]></description>
+      <pubDate>Tue, 07 Jul 2026 09:19:17 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-07-0ad0</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 07 JUL 2026: Durante este día se prevén lluvias intensas en zonas de Veracruz, Tabasco, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_07.pdf</link>
+      <description><![CDATA[Durante este día se prevén lluvias intensas en zonas de Veracruz, Tabasco, Oaxaca y Chiapas — Reporte Matutino del 07 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_07.pdf]]></description>
+      <pubDate>Tue, 07 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_07</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 06 JUL 2026: Se pronostican lluvias intensas en zonas de Nayarit, Jalisco, Colima, Michoacán y Chiapas</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén chubascos y lluvias fuertes con posible granizo para este sábado en la mayor parte de la República Mexicana... — Reporte Matutino del 04 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_4.pdf]]></description>
       <pubDate>Sat, 04 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_4</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 03 JUL 2026: Para esta noche se prevén lluvias muy fuertes en Chihuahua, Durango, Sinaloa, Estado de México, Ciudad de México y Gu...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_03.pdf</link>
-      <description><![CDATA[Para esta noche se prevén lluvias muy fuertes en Chihuahua, Durango, Sinaloa, Estado de México, Ciudad de México y Gu... — Reporte Vespertino del 03 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_03.pdf]]></description>
-      <pubDate>Fri, 03 Jul 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_03</guid>
       <category>Comunicado</category>
     </item>
   </channel>
