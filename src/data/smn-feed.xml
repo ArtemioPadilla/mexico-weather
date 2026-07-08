@@ -5,9 +5,33 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 08 Jul 2026 09:41:08 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2026 11:59:13 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 377 | 08 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, TLAXCALA, PUEBLA, HIDALGO Y NAYARIT
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 377
+Ciudad de México a 08 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, TLAXCALA, PUEBLA, HIDALGO Y NAYARIT
+
+Este día, circulaciones ciclónicas en niveles medios y altos de la atmósfera sobre el norte, noreste y oriente del país, canales de baja presión en el interior del territorio nacional, inestabilidad atmosférica y la onda tropical núm. 16, generarán lluvias puntuales intensas en zonas de Veracruz, Tlaxcala, Puebla, Hidalgo y Nayarit; así como chubascos y lluvias fuertes a muy fuertes acompañadas con descargas eléctricas en gran parte de la República Mexicana y con posible caída de granizo en el noreste, oriente y centro, incluido el Valle de México. Finalmente, una circulación anticiclónica en niveles medios de la atmósfera mantendrá el ambiente muy caluroso sobre entidades del noroeste y norte del territorio mexicano, prevaleciendo la onda de calor en Baja California Sur (centro y sur), Sonora y Sinaloa (sur), e iniciando en Baja California (noreste).
+
+
+
+…]]></description>
+      <pubDate>Wed, 08 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-08-377</guid>
+      <category>Pronóstico General</category>
+    </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de julio del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
@@ -23,7 +47,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Veracruz, Puebla, Oaxaca, Chiapas y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Veracruz, Puebla, Oaxaca, Chiapas y Tabasco.]]></description>
-      <pubDate>Wed, 08 Jul 2026 03:40:58 -0600</pubDate>
+      <pubDate>Wed, 08 Jul 2026 05:59:04 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-08-6fbe</guid>
       <category>Alerta</category>
     </item>
@@ -34,25 +58,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 07 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_07</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 376 | 07 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, PUEBLA, TABASCO, OAXACA Y CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 376
-Ciudad de México a 07 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, PUEBLA, TABASCO, OAXACA Y CHIAPAS
-
-Durante esta noche y madrugada miércoles, circulaciones ciclónicas en niveles medios y altos de la atmósfera sobre el norte y noreste del país, una vaguada en niveles altos, canales de baja presión en el interior del país, inestabilidad atmosférica y la onda tropical núm. 16, ocasionarán lluvias puntuales intensas en Veracruz (centro y sur), Puebla (norte, este y sureste), Oaxaca (norte y noreste), Chiapas (noroeste) y Tabasco (oeste), lluvias puntuales muy fuertes en Coahuila (oeste, centro y sureste), Durango (oeste y sur), Sinaloa (centro y sur), Nayarit, Jalisco (oeste y sur), Colima, Michoacán (oeste y sur), Guerrero (noroeste y sureste), Campeche (costa y centro) y Yucatán (sur y oeste), así como lluvias puntuales fuertes en Sonora (sureste), Chihuahua (suroeste), Zacatecas (oeste y sur), Aguascalientes, Nuevo León (norte y sur), Tamaulipas (sur), San Luis Potosí (este), Guanajuato (…]]></description>
-      <pubDate>Tue, 07 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-07-376</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 07 JUL 2026: Durante este día se prevén lluvias intensas en zonas de Veracruz, Tabasco, Oaxaca y Chiapas</title>
