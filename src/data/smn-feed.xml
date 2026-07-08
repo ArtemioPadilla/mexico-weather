@@ -5,16 +5,35 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 08 Jul 2026 03:51:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2026 06:41:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Veracruz, Oaxaca, Chiapas y Tabasco.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de julio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 08 de julio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 08 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-08-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Veracruz, Puebla, Oaxaca, Chiapas y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas superiores a 45 °C: Baja California y Sonora.]]></description>
-      <pubDate>Tue, 07 Jul 2026 21:50:51 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-07-fb85</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Veracruz, Puebla, Oaxaca, Chiapas y Tabasco.]]></description>
+      <pubDate>Wed, 08 Jul 2026 00:41:28 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-08-6fbe</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 07 JUL 2026: Se pronostican lluvias intensas en Veracruz, Puebla, Oaxaca, Tabasco y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_07.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en Veracruz, Puebla, Oaxaca, Tabasco y Chiapas — Reporte Vespertino del 07 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_07.pdf]]></description>
+      <pubDate>Tue, 07 Jul 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_07</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 376 | 07 de Julio del 2026 | Emisión 18:00h</title>
@@ -36,20 +55,9 @@ Durante esta noche y madrugada miércoles, circulaciones ciclónicas en niveles 
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de julio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 07 de julio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 07 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-07-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 07 JUL 2026: Se pronostican lluvias intensas en Veracruz, Puebla, Oaxaca, Tabasco y Chiapas</title>
+      <title>📋 SMN Reporte Matutino 07 JUL 2026: Durante este día se prevén lluvias intensas en zonas de Veracruz, Tabasco, Oaxaca y Chiapas</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_07.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en Veracruz, Puebla, Oaxaca, Tabasco y Chiapas — Reporte Matutino del 07 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_07.pdf]]></description>
+      <description><![CDATA[Durante este día se prevén lluvias intensas en zonas de Veracruz, Tabasco, Oaxaca y Chiapas — Reporte Matutino del 07 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_07.pdf]]></description>
       <pubDate>Tue, 07 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_07</guid>
       <category>Comunicado</category>
