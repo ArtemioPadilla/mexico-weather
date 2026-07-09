@@ -5,15 +5,34 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 09 Jul 2026 08:54:11 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2026 12:17:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de julio del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 379 | 09 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE JALISCO, VERACRUZ Y TABASCO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 379
+Ciudad de México a 09 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE JALISCO, VERACRUZ Y TABASCO
+
+Para hoy, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera en el noreste y occidente de México, y canales de baja presión extendidos sobre el noroeste y norte del país, así como el ingreso de aire húmedo y el desplazamiento de las ondas tropicales núm. 16 y 17 sobre el litoral del Pacífico centro y sur, mantendrán las condiciones para lluvias puntuales intensas en Jalisco (noreste), Veracruz (norte y sur) y Tabasco (oeste); puntuales muy fuertes en Sonora (centro, este y sureste), Sinaloa (norte y centro), Chihuahua (oeste y suroeste), Durango (oeste), San Luis Potosí (este), Tamaulipas (centro y sur), Guanajuato (noreste), Querétaro (norte), Hidalgo (norte y este), Puebla (norte y centro), Oaxaca (norte) y Chiapas (sur); puntuales fuertes en Zacatecas (oeste y sur), Nayarit, Colima, Michoacán (norte y noreste), Estado de México (norte), Ciudad de México, Tlaxcala, Morelo…]]></description>
+      <pubDate>Thu, 09 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-09-379</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de julio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 09 de julio del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 09 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-09-12</guid>
@@ -23,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz, Puebla e Hidalgo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz, Puebla e Hidalgo.]]></description>
-      <pubDate>Thu, 09 Jul 2026 02:54:01 -0600</pubDate>
+      <pubDate>Thu, 09 Jul 2026 06:17:39 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-09-e445</guid>
       <category>Alerta</category>
     </item>
@@ -34,29 +53,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 08 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_7_08</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 378 | 08 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES TORRENCIALES EN VERACRUZ, PUEBLA E HIDALGO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 378
-Ciudad de México a 08 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PRONOSTICAN LLUVIAS PUNTUALES TORRENCIALES EN VERACRUZ, PUEBLA E HIDALGO
-
- 
-
-En el transcurso de esta noche y madrugada del jueves, circulaciones ciclónicas en niveles medios y altos de la atmósfera, en interacción con canales de baja presión en el interior del país, el ingreso de humedad del océano Pacífico y el desplazamiento de la onda tropical núm. 16 sobre el sureste mexicano, ocasionarán lluvias puntuales torrenciales en Veracruz (norte), Puebla (norte) e Hidalgo (este); lluvias puntuales intensas en Sinaloa (centro y sur), Nayarit (norte y este), San Luis Potosí (este), Tlaxcala y Oaxaca (norte); lluvias puntuales muy fuertes en Zacatecas (suroeste), Durango (oeste y sur), Jalisco (norte y oeste), Michoacán (centro, norte y noreste), Guerrero (oeste y norte), Chiapas (este), Tamaulipas (sur), Querétaro (norte y sur), Estado de México, Ciudad de México, Morelos y Tabasco (oeste); lluvias puntuales fuertes en Aguascalientes, Colima, Guanajuato (oeste y sur), Campeche (no…]]></description>
-      <pubDate>Wed, 08 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-08-378</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 08 JUL 2026: Este día, se pronostican lluvias intensas para regiones de Veracruz, Tlaxcala, Puebla, Hidalgo y Nayarit</title>
