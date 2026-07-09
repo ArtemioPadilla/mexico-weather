@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 09 Jul 2026 12:17:48 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2026 15:39:09 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -28,23 +28,31 @@ Para hoy, circulaciones ciclónicas y vaguadas en niveles medios y altos de la a
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de julio del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de julio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 09 de julio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 09 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-09-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz, Puebla e Hidalgo.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Veracruz y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz, Puebla e Hidalgo.]]></description>
-      <pubDate>Thu, 09 Jul 2026 06:17:39 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-09-e445</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Veracruz y Tabasco.]]></description>
+      <pubDate>Thu, 09 Jul 2026 09:39:01 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-09-de73</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 09 JUL 2026: Este día, se pronostican lluvias intensas para regiones de Jalisco, Veracruz y Tabasco, y muy fuertes en otros 12 estad...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_09.pdf</link>
+      <description><![CDATA[Este día, se pronostican lluvias intensas para regiones de Jalisco, Veracruz y Tabasco, y muy fuertes en otros 12 estad... — Reporte Matutino del 09 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_09.pdf]]></description>
+      <pubDate>Thu, 09 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_09</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 08 JUL 2026: Se prevén para las próximas horas lluvias torrenciales en el norte de Veracruz, norte de Puebla y este de Hidalgo</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Durante este día se prevén lluvias intensas en zonas de Veracruz, Tabasco, Oaxaca y Chiapas — Reporte Matutino del 07 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_07.pdf]]></description>
       <pubDate>Tue, 07 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_07</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 06 JUL 2026: Se pronostican lluvias intensas en zonas de Nayarit, Jalisco, Colima, Michoacán y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_06.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Nayarit, Jalisco, Colima, Michoacán y Chiapas — Reporte Vespertino del 06 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_06.pdf]]></description>
-      <pubDate>Mon, 06 Jul 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_06</guid>
       <category>Comunicado</category>
     </item>
   </channel>
