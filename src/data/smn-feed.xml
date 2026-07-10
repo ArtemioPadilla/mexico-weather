@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 10 Jul 2026 12:10:16 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2026 15:05:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -35,11 +35,11 @@ El Servicio Meteorológico Nacional monitorea el avance de las ondas tropicales 
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de julio del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de julio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 10 de julio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 10 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-10-12</guid>
@@ -49,9 +49,17 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Guerrero y Oaxaca.]]></description>
-      <pubDate>Fri, 10 Jul 2026 06:10:06 -0600</pubDate>
+      <pubDate>Fri, 10 Jul 2026 09:05:38 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-10-b1d2</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 10 JUL 2026: Durante este día se prevén lluvias intensas en zonas de Guerrero y Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_10.pdf</link>
+      <description><![CDATA[Durante este día se prevén lluvias intensas en zonas de Guerrero y Oaxaca — Reporte Matutino del 10 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_10.pdf]]></description>
+      <pubDate>Fri, 10 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_10</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 09 JUL 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 19 entidades de México</title>
@@ -83,14 +91,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Este día, se pronostican lluvias intensas para regiones de Veracruz, Tlaxcala, Puebla, Hidalgo y Nayarit — Reporte Matutino del 08 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_08.pdf]]></description>
       <pubDate>Wed, 08 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_08</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 07 JUL 2026: Se pronostican lluvias intensas en Veracruz, Puebla, Oaxaca, Tabasco y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_07.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en Veracruz, Puebla, Oaxaca, Tabasco y Chiapas — Reporte Vespertino del 07 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_07.pdf]]></description>
-      <pubDate>Tue, 07 Jul 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_07</guid>
       <category>Comunicado</category>
     </item>
   </channel>
