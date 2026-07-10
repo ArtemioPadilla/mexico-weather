@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 10 Jul 2026 15:05:47 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2026 17:13:02 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -49,7 +49,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Guerrero y Oaxaca.]]></description>
-      <pubDate>Fri, 10 Jul 2026 09:05:38 -0600</pubDate>
+      <pubDate>Fri, 10 Jul 2026 11:12:53 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-10-b1d2</guid>
       <category>Alerta</category>
     </item>
