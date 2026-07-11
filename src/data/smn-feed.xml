@@ -5,49 +5,43 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 10 Jul 2026 22:27:39 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jul 2026 00:13:02 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): Guerrero (sur y este) y Oaxaca (oeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): Guerrero (sur y este) y Oaxaca (oeste).]]></description>
-      <pubDate>Fri, 10 Jul 2026 16:27:27 -0600</pubDate>
+      <pubDate>Fri, 10 Jul 2026 18:12:53 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-10-3c59</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 381 | 10 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 382 | 10 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN GUERRERO Y OAXACA
+      <description><![CDATA[PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO Y OAXACA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 381
+No. Aviso: 382
 Ciudad de México a 10 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES INTENSAS EN GUERRERO Y OAXACA
+PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO Y OAXACA
 
-Este día, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, en combinación con canales de baja presión en el interior del país y el paso de la onda tropical núm. 17 sobre el sur del territorio nacional, ocasionarán chubascos y lluvias fuertes a muy fuertes con descargas eléctricas en la mayor parte del territorio nacional, además de lluvias puntuales intensas en Guerrero y Oaxaca. Por otra parte, una nueva onda tropical (núm. 18) ingresará a la península de Yucatán y propiciará lluvias fuertes en la península mencionada. Así mismo, un anticiclón en niveles medios de la atmósfera mantendrá el ambiente caluroso a muy caluroso en el noroeste y norte de la República Mexicana, persistiendo la onda de calor en Baja California Sur (centro y sur), Sonora, Sinaloa (centro y sur), Michoacán (costa) y Oaxaca (sur).
-
-
-
-El Servicio Meteorológico Nacional monitorea el avance de las ondas tropicales núm. 17 y 18.
-
-…]]></description>
+Durante esta noche y madrugada del sábado, una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera, en interacción con canales de baja presión en el interior del país y el paso de la onda tropical núm. 17 al sur del territorio nacional, ocasionarán lluvias puntuales intensas en Guerrero (sur y este) y Oaxaca (oeste), lluvias muy fuertes en regiones de Sonora (noreste y este), Sinaloa (norte y centro), Chihuahua (oeste), Coahuila (sureste), Nuevo León (sur), Tamaulipas (suroeste), San Luis Potosí (oeste y suroeste), Guanajuato (norte y noreste), Hidalgo (sur y sureste), Puebla (norte, centro y este), Tlaxcala (oeste), Veracruz (sur) y Chiapas (este y sur), lluvias puntuales fuertes en Durango (oeste, centro y este), Zacatecas (sur y sureste), Aguascalientes, Nayarit (sur), Jalisco (oeste y noreste), Colima, Michoacán (este y sur), Querétaro (oeste), Estado de México (norte, centro y es…]]></description>
       <pubDate>Fri, 10 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-10-381</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-10-382</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 10 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 10 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-10-12</guid>
