@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 12 Jul 2026 15:27:45 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jul 2026 17:28:44 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -47,9 +47,17 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Michoacán, Guerrero, Oaxaca, Puebla y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California, Baja California Sur, Sonora, Chihuahua, Durango, Sinaloa, Nayarit y Michoacán.]]></description>
-      <pubDate>Sun, 12 Jul 2026 09:27:37 -0600</pubDate>
+      <pubDate>Sun, 12 Jul 2026 11:28:36 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-12-482e</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 12 JUL 2026: Se prevén lluvias intensas en zonas de Sonora, Chihuahua, Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chiapas, Verac...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_12.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas en zonas de Sonora, Chihuahua, Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chiapas, Verac... — Reporte Matutino del 12 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_12.pdf]]></description>
+      <pubDate>Sun, 12 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_12</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 11 JUL 2026: Se prevén lluvias de muy fuertes a intensas en zonas de 14 estados de México</title>
@@ -81,14 +89,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 19 entidades de México — Reporte Vespertino del 09 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_09.pdf]]></description>
       <pubDate>Thu, 09 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_09</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 09 JUL 2026: Este día, se pronostican lluvias intensas para regiones de Jalisco, Veracruz y Tabasco, y muy fuertes en otros 12 estad...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_09.pdf</link>
-      <description><![CDATA[Este día, se pronostican lluvias intensas para regiones de Jalisco, Veracruz y Tabasco, y muy fuertes en otros 12 estad... — Reporte Matutino del 09 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_09.pdf]]></description>
-      <pubDate>Thu, 09 Jul 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_09</guid>
       <category>Comunicado</category>
     </item>
   </channel>
