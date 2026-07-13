@@ -5,47 +5,44 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 12 Jul 2026 23:12:13 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2026 00:14:01 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Sonora, Chihuahua, Jalisco, Colima Michoacán, Guerrero, Oaxaca, Chiapas, Veracruz y Puebla.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California, Baja California Sur, Sonora, Chihuahua, Durango, Sinaloa, Nayarit y Michoacán.]]></description>
-      <pubDate>Sun, 12 Jul 2026 17:12:04 -0600</pubDate>
+      <pubDate>Sun, 12 Jul 2026 18:13:52 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-12-482e</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 385 | 12 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 386 | 12 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN MICHOACÁN, GUERRERO, OAXACA, PUEBLA Y VERACRUZ
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA, JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS, VERACRUZ Y PUEBLA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 385
+No. Aviso: 386
 Ciudad de México a 12 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-
-LLUVIAS PUNTUALES INTENSAS EN MICHOACÁN, GUERRERO, OAXACA, PUEBLA Y VERACRUZ
-
-Este día, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, en combinación con la onda tropical núm. 18 que se desplazará sobre el sureste del país, generarán lluvias puntuales intensas en zonas de Michoacán, Guerrero, Oaxaca, Puebla y Veracruz; así como chubascos y lluvias fuertes a muy fuertes acompañadas con descargas eléctricas en gran parte del territorio nacional y con posible caída de granizo en estados del norte, occidente y centro del país. Por otra parte, se mantendrá el ambiente caluroso a muy caluroso sobre entidades del noroeste y norte de la República Mexicana; prevaleciendo la onda de calor en Baja California Sur (sur), Sinaloa (centro y sur), Nayarit, Jalisco (sur y costa), Colima, Michoacán (costa), Guerrero (costa central) y Oaxaca (sur), y finalizando a partir de este día en Sonora.
+LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA, JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS, VERACRUZ Y PUEBLA
 
  
 
-…]]></description>
+Para esta noche y madrugada del lunes, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, en combinación con un canal de baja presión sobre la Mesa del Norte y la onda tropical núm. 18 que se desplazará sobre el sureste de México, generarán lluvias puntuales intensas en Sonora (centro y este), Chihuahua (oeste), Jalisco (oeste y sur), Colima, Michoacán (oeste, centro y costa), Guerrero (este y oeste), Oaxaca (norte y suroeste), Chiapas (costa), Veracruz (centro y sur) y Puebla (sureste); lluvias puntuales muy fuertes en Coahuila (centro y norte), Durango (norte y sur), Nayarit (norte y sur) y Tabasco (oeste); lluvias puntuales fuertes en Sinaloa (sur), Zacatecas (oeste), San Luis Potosí (este), Hidalgo (norte), Estado de México (centro y suroeste), Ciudad de México y Morelos; chubascos en Baja California, Nuevo León, Tamaulipas, G…]]></description>
       <pubDate>Sun, 12 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-12-385</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-12-386</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 12 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 12 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 12 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 12 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-12-12</guid>
