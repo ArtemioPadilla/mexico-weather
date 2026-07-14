@@ -5,27 +5,59 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 14 Jul 2026 11:48:30 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 14:17:01 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de julio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 389 | 14 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN SONORA, CHIHUAHUA, COAHUILA, SINALOA, DURANGO, JALISCO, COLIMA, MICHOACÁN, OAXACA, CHIAPAS Y VERACRUZ
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 389
+Ciudad de México a 14 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES MUY FUERTES EN SONORA, CHIHUAHUA, COAHUILA, SINALOA, DURANGO, JALISCO, COLIMA, MICHOACÁN, OAXACA, CHIAPAS Y VERACRUZ
+
+Este día, el monzón mexicano sobre el noroeste de México, en interacción con circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión sobre la Mesa del Norte y el sureste del país, los desprendimientos nubosos de un posible ciclón tropical en las costas del Pacífico central mexicano y el paso de la onda tropical núm. 19 sobre la península de Yucatán, ocasionarán chubascos y lluvias fuertes a muy fuertes acompañadas con descargas eléctricas en gran parte de la República Mexicana, además de posible caída de granizo en estados del noroeste y occidente del país. Se mantendrá el ambiente caluroso a muy caluroso sobre entidades del noroeste y norte del territorio mexicano.
+
+ 
+
+…]]></description>
+      <pubDate>Tue, 14 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-14-389</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de julio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 14 de julio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 14 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-14-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Durango, Sinaloa y Nayarit.</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Sonora, Chihuahua, Coahuila, Durango, Sinaloa, Jalisco, Colima, Michoacán, Oaxaca, Chiapas y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Durango, Sinaloa y Nayarit.]]></description>
-      <pubDate>Tue, 14 Jul 2026 05:48:22 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-14-cf59</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Sonora, Chihuahua, Coahuila, Durango, Sinaloa, Jalisco, Colima, Michoacán, Oaxaca, Chiapas y Veracruz.]]></description>
+      <pubDate>Tue, 14 Jul 2026 08:16:51 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-14-ed35</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 14 JUL 2026: Hoy, se prevén lluvias muy fuertes en regiones de 11 entidades de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_14.pdf</link>
+      <description><![CDATA[Hoy, se prevén lluvias muy fuertes en regiones de 11 entidades de México — Reporte Matutino del 14 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_14.pdf]]></description>
+      <pubDate>Tue, 14 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_14</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 13 JUL 2026: Para esta noche se prevén lluvias intensas en regiones de Durango, Sinaloa y Nayarit</title>
@@ -34,25 +66,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 13 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_13</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 388 | 13 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN SINALOA, DURANGO Y NAYARIT
-
----
-Pronóstico Meteorológico General
-No. Aviso: 388
-Ciudad de México a 13 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN SINALOA, DURANGO Y NAYARIT
-
-Se ha establecido el patrón del monzón mexicano sobre el noroeste de México y, durante esta noche y madrugada del martes, interaccionará con circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, así como con la onda tropical núm. 18 que se desplazará frente a las costas de Michoacán y Colima, ocasionando lluvias puntuales intensas en Durango (oeste y sur), Sinaloa (centro y sur) y Nayarit (norte y centro); lluvias puntuales muy fuertes en Chihuahua (este, centro y sur), Coahuila (norte y oeste), Jalisco (oeste, este y sur), Colima, Michoacán (costa y oeste) y Guerrero (suroeste); lluvias puntuales fuertes en Sonora (este), Estado de México (oeste), Veracruz (sur), Oaxaca (norte y suroeste) y Chiapas (este); además de chubascos en Baja California, Nuevo León, Tamaulipas, San Luis Potosí, Zacatecas, Aguascalientes, Guanajuato, Querétaro, Hidalgo, Ciudad de México, Puebla, Tlaxcala, Morel…]]></description>
-      <pubDate>Mon, 13 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-13-388</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 13 JUL 2026: Este día, se pronostican lluvias intensas para regiones de Sinaloa, Durango, Nayarit, Michoacán y Guerrero</title>
@@ -76,14 +89,6 @@ Se ha establecido el patrón del monzón mexicano sobre el noroeste de México 
       <description><![CDATA[Se prevén lluvias de muy fuertes a intensas en zonas de 14 estados de México — Reporte Matutino del 11 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_11.pdf]]></description>
       <pubDate>Sat, 11 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_11</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 10 JUL 2026: Se pronostican lluvias intensas en zonas de Guerrero y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_10.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Guerrero y Oaxaca — Reporte Vespertino del 10 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_10.pdf]]></description>
-      <pubDate>Fri, 10 Jul 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_10</guid>
       <category>Comunicado</category>
     </item>
   </channel>
