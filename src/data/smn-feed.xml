@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 14 Jul 2026 21:17:47 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 22:27:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Coahuila y Jalisco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Coahuila y Jalisco.]]></description>
-      <pubDate>Tue, 14 Jul 2026 15:17:37 -0600</pubDate>
+      <pubDate>Tue, 14 Jul 2026 16:26:58 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-14-2f7a</guid>
       <category>Alerta</category>
     </item>
