@@ -5,47 +5,44 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 14 Jul 2026 22:27:08 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jul 2026 00:08:41 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Coahuila y Jalisco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Coahuila y Jalisco.]]></description>
-      <pubDate>Tue, 14 Jul 2026 16:26:58 -0600</pubDate>
+      <pubDate>Tue, 14 Jul 2026 18:08:32 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-14-2f7a</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 389 | 14 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 390 | 14 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN SONORA, CHIHUAHUA, COAHUILA, SINALOA, DURANGO, JALISCO, COLIMA, MICHOACÁN, OAXACA, CHIAPAS Y VERACRUZ
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN COAHUILA Y JALISCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 389
+No. Aviso: 390
 Ciudad de México a 14 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-
-LLUVIAS PUNTUALES MUY FUERTES EN SONORA, CHIHUAHUA, COAHUILA, SINALOA, DURANGO, JALISCO, COLIMA, MICHOACÁN, OAXACA, CHIAPAS Y VERACRUZ
-
-Este día, el monzón mexicano sobre el noroeste de México, en interacción con circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión sobre la Mesa del Norte y el sureste del país, los desprendimientos nubosos de un posible ciclón tropical en las costas del Pacífico central mexicano y el paso de la onda tropical núm. 19 sobre la península de Yucatán, ocasionarán chubascos y lluvias fuertes a muy fuertes acompañadas con descargas eléctricas en gran parte de la República Mexicana, además de posible caída de granizo en estados del noroeste y occidente del país. Se mantendrá el ambiente caluroso a muy caluroso sobre entidades del noroeste y norte del territorio mexicano.
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN COAHUILA Y JALISCO
 
  
 
-…]]></description>
+En el transcurso de esta noche y madrugada del martes, el monzón mexicano sobre el noroeste de México, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, además de canales de baja presión sobre el norte y centro del país, ocasionarán lluvias puntuales intensas en Coahuila (norte y centro) y Jalisco (oeste y sur); muy fuertes en Sonora (sureste), Chihuahua (noreste, oeste y sur), Durango (noroeste y oeste), Sinaloa (norte y centro), Colima y Michoacán (suroeste); lluvias fuertes en Nuevo León (norte y centro) y Nayarit (norte y sur); chubascos en Baja California Sur, Zacatecas, Tamaulipas Puebla, Estado de México, Ciudad de México, Hidalgo, Querétaro, y lluvias aisladas en Baja California, San Luis Potosí, Aguascalientes, Guanajuato, Tlaxcala y Morelos. Simultáneamente, la onda tropical núm.…]]></description>
       <pubDate>Tue, 14 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-14-389</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-14-390</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 14 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 14 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-14-12</guid>
