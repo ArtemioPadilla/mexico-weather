@@ -5,9 +5,28 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 15 Jul 2026 09:24:19 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jul 2026 11:52:53 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 391 | 15 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, COAHUILA, DURANGO, VERACRUZ, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 391
+Ciudad de México a 15 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, COAHUILA, DURANGO, VERACRUZ, OAXACA Y CHIAPAS
+
+Para hoy, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, así como el monzón mexicano sobre el noroeste de México, canales de baja presión sobre la Mesa del Norte, oriente y sureste del país, además del desplazamiento de la onda tropical núm. 19 sobre el sureste mexicano propiciarán lluvias puntuales muy fuertes en Chihuahua (centro, sur y este), Coahuila (norte y oeste), Durango (norte y oeste), Veracruz (sur), Oaxaca (noreste) y Chiapas (este y sur); puntuales fuertes en Sonora (sureste), Sinaloa (norte y centro), Nuevo León (norte), Tamaulipas (noroeste), Nayarit, Jalisco (norte, oeste y sur), Colima, Michoacán (oeste), Estado de México (centro y norte), Guerrero (este y costa), Campeche (sureste) y Quintana Roo (sur); lluvias con intervalos de chubascos en Baja California Sur, Zacatecas, Aguascalientes, San Luis Potosí, Guanajuato, Qu…]]></description>
+      <pubDate>Wed, 15 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-15-391</guid>
+      <category>Pronóstico General</category>
+    </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de julio del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
@@ -23,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Coahuila y Jalisco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Coahuila y Jalisco.]]></description>
-      <pubDate>Wed, 15 Jul 2026 03:24:09 -0600</pubDate>
+      <pubDate>Wed, 15 Jul 2026 05:52:43 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-15-2f7a</guid>
       <category>Alerta</category>
     </item>
@@ -34,27 +53,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 14 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_14</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 390 | 14 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN COAHUILA Y JALISCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 390
-Ciudad de México a 14 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN COAHUILA Y JALISCO
-
- 
-
-En el transcurso de esta noche y madrugada del martes, el monzón mexicano sobre el noroeste de México, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, además de canales de baja presión sobre el norte y centro del país, ocasionarán lluvias puntuales intensas en Coahuila (norte y centro) y Jalisco (oeste y sur); muy fuertes en Sonora (sureste), Chihuahua (noreste, oeste y sur), Durango (noroeste y oeste), Sinaloa (norte y centro), Colima y Michoacán (suroeste); lluvias fuertes en Nuevo León (norte y centro) y Nayarit (norte y sur); chubascos en Baja California Sur, Zacatecas, Tamaulipas Puebla, Estado de México, Ciudad de México, Hidalgo, Querétaro, y lluvias aisladas en Baja California, San Luis Potosí, Aguascalientes, Guanajuato, Tlaxcala y Morelos. Simultáneamente, la onda tropical núm.…]]></description>
-      <pubDate>Tue, 14 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-14-390</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 14 JUL 2026: Hoy, se prevén lluvias muy fuertes en regiones de 11 entidades de México</title>
