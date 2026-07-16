@@ -5,42 +5,42 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 15 Jul 2026 23:15:40 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2026 00:14:20 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Sonora, Chihuahua, Coahuila, Durango y Sinaloa.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 20 a 30 km/h con rachas de 40 a 60 km/h y posible formación de torbellinos: Coahuila (noreste).]]></description>
-      <pubDate>Wed, 15 Jul 2026 17:15:31 -0600</pubDate>
+      <pubDate>Wed, 15 Jul 2026 18:14:11 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-15-56af</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 391 | 15 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 392 | 15 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, COAHUILA, DURANGO, VERACRUZ, OAXACA Y CHIAPAS
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA, COAHUILA, DURANGO, SINALOA Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 391
+No. Aviso: 392
 Ciudad de México a 15 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, COAHUILA, DURANGO, VERACRUZ, OAXACA Y CHIAPAS
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA, COAHUILA, DURANGO, SINALOA Y CHIAPAS
 
-Para hoy, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, así como el monzón mexicano sobre el noroeste de México, canales de baja presión sobre la Mesa del Norte, oriente y sureste del país, además del desplazamiento de la onda tropical núm. 19 sobre el sureste mexicano propiciarán lluvias puntuales muy fuertes en Chihuahua (centro, sur y este), Coahuila (norte y oeste), Durango (norte y oeste), Veracruz (sur), Oaxaca (noreste) y Chiapas (este y sur); puntuales fuertes en Sonora (sureste), Sinaloa (norte y centro), Nuevo León (norte), Tamaulipas (noroeste), Nayarit, Jalisco (norte, oeste y sur), Colima, Michoacán (oeste), Estado de México (centro y norte), Guerrero (este y costa), Campeche (sureste) y Quintana Roo (sur); lluvias con intervalos de chubascos en Baja California Sur, Zacatecas, Aguascalientes, San Luis Potosí, Guanajuato, Qu…]]></description>
+En el transcurso de esta noche y madrugada del jueves, el monzón mexicano sobre el noroeste de México, en interacción con una circulación ciclónica y vaguada en niveles medios y altos de la atmósfera, canales de baja presión en el interior del país y el ingreso de humedad, ocasionarán lluvias puntuales intensas en regiones de Sonora (sureste), Chihuahua (suroeste), Coahuila (noreste), Durango (noroeste) y Sinaloa (norte); lluvias puntuales fuertes en Nayarit (norte y sur), Jalisco (oeste y sur), Colima, Michoacán (oeste y suroeste) y Estado de México (centro y oeste); chubascos en Baja California Sur, Nuevo León, Tamaulipas, San Luis Potosí, Zacatecas, Guanajuato, Querétaro, Hidalgo, Puebla, Tlaxcala, Ciudad de México y Morelos, así como lluvias aisladas en Baja California y Aguascalientes. Por otra parte, la onda tropical núm.…]]></description>
       <pubDate>Wed, 15 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-15-391</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-15-392</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 15 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 15 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-15-12</guid>
