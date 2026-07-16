@@ -5,27 +5,59 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 16 Jul 2026 11:55:50 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2026 14:27:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de julio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 393 | 16 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA Y DURANGO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 393
+Ciudad de México a 16 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA Y DURANGO
+
+Este día, el monzón mexicano sobre el noroeste de México, aunado a circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión sobre la Mesa del Norte y el sureste del país, la onda tropical núm. 19 que se desplazará sobre Guerrero y Michoacán, ocasionarán lluvias puntuales intensas en zonas de Sonora, Chihuahua y Durango; además de chubascos con lluvias fuertes a muy fuertes en gran parte del territorio nacional con descargas eléctricas y posible caída de granizo en el noroeste y occidente del país. Así mismo, persistirá el ambiente caluroso a muy caluroso sobre el noroeste, norte y occidente de la República Mexicana, así como en la península de Yucatán, previéndose temperaturas superiores a 45 °C en el noreste de Baja California.
+
+
+
+…]]></description>
+      <pubDate>Thu, 16 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-16-393</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de julio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de julio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 16 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-16-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Sonora, Chihuahua, Coahuila, Durango, Sinaloa y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Sonora, Chihuahua y Durango.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 20 a 30 km/h con rachas de 40 a 60 km/h con posible formación de torbellinos: Coahuila (noreste).]]></description>
-      <pubDate>Thu, 16 Jul 2026 05:55:40 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-16-bd8e</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Sonora.]]></description>
+      <pubDate>Thu, 16 Jul 2026 08:26:58 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-16-075a</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 16 JUL 2026: Para este jueves se pronostican lluvias intensas en regiones de Sonora, Chihuahua y Durango</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_16.pdf</link>
+      <description><![CDATA[Para este jueves se pronostican lluvias intensas en regiones de Sonora, Chihuahua y Durango — Reporte Matutino del 16 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_16.pdf]]></description>
+      <pubDate>Thu, 16 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_16</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 15 JUL 2026: Se pronostican lluvias intensas en regiones de Sonora, Chihuahua, Coahuila, Durango, Sinaloa y Chiapas</title>
@@ -34,25 +66,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 15 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_15</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 392 | 15 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA, COAHUILA, DURANGO, SINALOA Y CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 392
-Ciudad de México a 15 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA, COAHUILA, DURANGO, SINALOA Y CHIAPAS
-
-En el transcurso de esta noche y madrugada del jueves, el monzón mexicano sobre el noroeste de México, en interacción con una circulación ciclónica y vaguada en niveles medios y altos de la atmósfera, canales de baja presión en el interior del país y el ingreso de humedad, ocasionarán lluvias puntuales intensas en regiones de Sonora (sureste), Chihuahua (suroeste), Coahuila (noreste), Durango (noroeste) y Sinaloa (norte); lluvias puntuales fuertes en Nayarit (norte y sur), Jalisco (oeste y sur), Colima, Michoacán (oeste y suroeste) y Estado de México (centro y oeste); chubascos en Baja California Sur, Nuevo León, Tamaulipas, San Luis Potosí, Zacatecas, Guanajuato, Querétaro, Hidalgo, Puebla, Tlaxcala, Ciudad de México y Morelos, así como lluvias aisladas en Baja California y Aguascalientes. Por otra parte, la onda tropical núm.…]]></description>
-      <pubDate>Wed, 15 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-15-392</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 15 JUL 2026: Se prevén lluvias muy fuertes en regiones de Chihuahua, Coahuila, Durango, Veracruz, Oaxaca y Chiapas</title>
@@ -76,14 +89,6 @@ En el transcurso de esta noche y madrugada del jueves, el monzón mexicano sobre
       <description><![CDATA[Hoy, se prevén lluvias muy fuertes en regiones de 11 entidades de México — Reporte Matutino del 14 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_14.pdf]]></description>
       <pubDate>Tue, 14 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_14</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 13 JUL 2026: Para esta noche se prevén lluvias intensas en regiones de Durango, Sinaloa y Nayarit</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_13.pdf</link>
-      <description><![CDATA[Para esta noche se prevén lluvias intensas en regiones de Durango, Sinaloa y Nayarit — Reporte Vespertino del 13 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_13.pdf]]></description>
-      <pubDate>Mon, 13 Jul 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_13</guid>
       <category>Comunicado</category>
     </item>
   </channel>
