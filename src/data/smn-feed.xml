@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 16 Jul 2026 00:14:20 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2026 03:43:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Sonora, Chihuahua, Coahuila, Durango y Sinaloa.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Sonora, Chihuahua, Coahuila, Durango, Sinaloa y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 20 a 30 km/h con rachas de 40 a 60 km/h y posible formación de torbellinos: Coahuila (noreste).]]></description>
-      <pubDate>Wed, 15 Jul 2026 18:14:11 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-15-56af</guid>
+      <description><![CDATA[Viento de 20 a 30 km/h con rachas de 40 a 60 km/h con posible formación de torbellinos: Coahuila (noreste).]]></description>
+      <pubDate>Wed, 15 Jul 2026 21:43:38 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-15-bd8e</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 15 JUL 2026: Se pronostican lluvias intensas en regiones de Sonora, Chihuahua, Coahuila, Durango, Sinaloa y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_15.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en regiones de Sonora, Chihuahua, Coahuila, Durango, Sinaloa y Chiapas — Reporte Vespertino del 15 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_15.pdf]]></description>
+      <pubDate>Wed, 15 Jul 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_15</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 392 | 15 de Julio del 2026 | Emisión 18:00h</title>
@@ -36,11 +44,11 @@ En el transcurso de esta noche y madrugada del jueves, el monzón mexicano sobre
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de julio del 2026 | Emisión 18:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de julio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 15 de julio del 2026
-Emisión: 18:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 15 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-15-12</guid>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Para esta noche se prevén lluvias intensas en regiones de Durango, Sinaloa y Nayarit — Reporte Vespertino del 13 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_13.pdf]]></description>
       <pubDate>Mon, 13 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_13</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 13 JUL 2026: Este día, se pronostican lluvias intensas para regiones de Sinaloa, Durango, Nayarit, Michoacán y Guerrero</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_13.pdf</link>
-      <description><![CDATA[Este día, se pronostican lluvias intensas para regiones de Sinaloa, Durango, Nayarit, Michoacán y Guerrero — Reporte Matutino del 13 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_13.pdf]]></description>
-      <pubDate>Mon, 13 Jul 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_13</guid>
       <category>Comunicado</category>
     </item>
   </channel>
