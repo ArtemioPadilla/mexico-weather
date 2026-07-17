@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 17 Jul 2026 00:15:39 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2026 03:44:25 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora, Coahuila, Veracruz, Oaxaca y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Sonora, Coahuila, Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 30 a 40 km/h con rachas de 50 a 70 km/h con posible formación de torbellinos: Coahuila.]]></description>
-      <pubDate>Thu, 16 Jul 2026 18:15:31 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-16-47a9</guid>
+      <description><![CDATA[Viento con rachas de 50 a 70 km/h: Puebla, Oaxaca y Chiapas; de componente sur: Nuevo León y Tamaulipas; y con posible formación de torbellinos: Coahuila.]]></description>
+      <pubDate>Thu, 16 Jul 2026 21:44:16 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-16-4aa1</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 16 JUL 2026: Para esta noche se prevén lluvias intensas en regiones de Sonora, Coahuila, Veracruz, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_16.pdf</link>
+      <description><![CDATA[Para esta noche se prevén lluvias intensas en regiones de Sonora, Coahuila, Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 16 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_16.pdf]]></description>
+      <pubDate>Thu, 16 Jul 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_16</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 394 | 16 de Julio del 2026 | Emisión 18:00h</title>
@@ -37,11 +45,11 @@ Durante esta noche y madrugada del viernes, el monzón mexicano, en interacci�
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de julio del 2026 | Emisión 18:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de julio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de julio del 2026
-Emisión: 18:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 16 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-16-12</guid>
@@ -77,14 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas en zonas de Coahuila y Jalisco — Reporte Vespertino del 14 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_14.pdf]]></description>
       <pubDate>Tue, 14 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_14</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 14 JUL 2026: Hoy, se prevén lluvias muy fuertes en regiones de 11 entidades de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_14.pdf</link>
-      <description><![CDATA[Hoy, se prevén lluvias muy fuertes en regiones de 11 entidades de México — Reporte Matutino del 14 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_14.pdf]]></description>
-      <pubDate>Tue, 14 Jul 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_14</guid>
       <category>Comunicado</category>
     </item>
   </channel>
