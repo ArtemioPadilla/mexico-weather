@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 17 Jul 2026 03:44:25 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2026 06:31:12 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de julio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 17 de julio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 17 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-17-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Sonora, Coahuila, Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento con rachas de 50 a 70 km/h: Puebla, Oaxaca y Chiapas; de componente sur: Nuevo León y Tamaulipas; y con posible formación de torbellinos: Coahuila.]]></description>
-      <pubDate>Thu, 16 Jul 2026 21:44:16 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-16-4aa1</guid>
+      <pubDate>Fri, 17 Jul 2026 00:31:03 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-17-4aa1</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -43,17 +54,6 @@ Durante esta noche y madrugada del viernes, el monzón mexicano, en interacci�
       <pubDate>Thu, 16 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-07-16-394</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de julio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 16 de julio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Thu, 16 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-16-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 16 JUL 2026: Para este jueves se pronostican lluvias intensas en regiones de Sonora, Chihuahua y Durango</title>
