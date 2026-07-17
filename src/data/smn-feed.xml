@@ -5,47 +5,43 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 16 Jul 2026 23:13:55 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2026 00:15:39 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora, Coahuila, Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 30 a 40 km/h con rachas de 50 a 70 km/h con posible formación de torbellinos: Coahuila.]]></description>
-      <pubDate>Thu, 16 Jul 2026 17:13:47 -0600</pubDate>
+      <pubDate>Thu, 16 Jul 2026 18:15:31 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-16-47a9</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 393 | 16 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 394 | 16 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA Y DURANGO
+      <description><![CDATA[DURANTE ESTA NOCHE Y MADRUGADA, SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN SONORA, COAHUILA, VERACRUZ, OAXACA Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 393
+No. Aviso: 394
 Ciudad de México a 16 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES INTENSAS EN SONORA, CHIHUAHUA Y DURANGO
+DURANTE ESTA NOCHE Y MADRUGADA, SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN SONORA, COAHUILA, VERACRUZ, OAXACA Y CHIAPAS
 
-Este día, el monzón mexicano sobre el noroeste de México, aunado a circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión sobre la Mesa del Norte y el sureste del país, la onda tropical núm. 19 que se desplazará sobre Guerrero y Michoacán, ocasionarán lluvias puntuales intensas en zonas de Sonora, Chihuahua y Durango; además de chubascos con lluvias fuertes a muy fuertes en gran parte del territorio nacional con descargas eléctricas y posible caída de granizo en el noroeste y occidente del país. Así mismo, persistirá el ambiente caluroso a muy caluroso sobre el noroeste, norte y occidente de la República Mexicana, así como en la península de Yucatán, previéndose temperaturas superiores a 45 °C en el noreste de Baja California.
-
-
-
-…]]></description>
+Durante esta noche y madrugada del viernes, el monzón mexicano, en interacción con circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión y el paso de la onda tropical núm. 19 sobre el sur y occidente del país, ocasionarán lluvias puntuales intensas en zonas de Sonora (norte, este y sureste), Coahuila (norte), Veracruz (sur), Oaxaca (norte) y Chiapas (este y sur); lluvias muy fuertes en Sinaloa (norte y centro), Durango (norte y oeste), Chihuahua (oeste y sur), Michoacán (sureste), Guerrero (suroeste) y Puebla (sureste); lluvias puntuales fuertes en Zacatecas (oeste), Nayarit, Jalisco (norte, oeste y sur), Colima, Tamaulipas (sur), San Luis Potosí (este) e Hidalgo (norte); chubascos en Baja California, Baja California Sur, Nuevo León, Guanajuato, Querétaro, Estado de México, Ciudad de México, Morelos, Tabasco, Campech…]]></description>
       <pubDate>Thu, 16 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-16-393</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-16-394</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 16 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-16-12</guid>
