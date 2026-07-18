@@ -5,42 +5,43 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 17 Jul 2026 23:11:25 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Jul 2026 00:12:49 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Durango.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas superiores a 40 °C: Baja California (noreste), Baja California Sur (centro y sur), Sonora (noroeste, centro y sur) y Sinaloa (norte).]]></description>
-      <pubDate>Fri, 17 Jul 2026 17:11:16 -0600</pubDate>
+      <pubDate>Fri, 17 Jul 2026 18:12:39 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-17-0ae2</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 395 | 17 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 396 | 17 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA Y DURANGO, Y PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, JALISCO Y NAYARIT
+      <description><![CDATA[PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN SINALOA Y DURANGO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 395
+No. Aviso: 396
 Ciudad de México a 17 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA Y DURANGO, Y PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, JALISCO Y NAYARIT
 
-Para hoy, el monzón mexicano sobre el noroeste de México, canales de baja presión sobre la Mesa del Norte y el sureste del país, así como circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera e inestabilidad atmosférica, ocasionarán lluvias puntuales intensas en Sinaloa (centro) y Durango (oeste); puntuales muy fuertes en Sonora (este) y Chihuahua (oeste y suroeste); puntuales fuertes en Coahuila (norte), Zacatecas (oeste y sur), Michoacán (norte y este), Estado de México (oeste), Guerrero (este y costa), Oaxaca (norte y suroeste) y Veracruz (sur); e intervalos de chubascos en Nuevo León, San Luis Potosí, Guanajuato, Querétaro, Hidalgo, Puebla, Tlaxcala, Morelos, Ciudad de México, Chiapas, Tamaulipas, Tabasco, Campeche, Yucatán y Quintana Roo, con descargas eléctricas en la mayor parte del territorio nacional; así como…]]></description>
+PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN SINALOA Y DURANGO
+
+Durante esta noche y madrugada del sábado, el monzón mexicano en interacción con una circulación ciclónica y vaguadas en niveles medios y altos de la atmósfera, ocasionarán lluvias puntuales intensas en Durango (oeste) y Sinaloa (centro); muy fuertes en Chihuahua (oeste y suroeste); fuertes en Sonora (este) y chubascos en Baja California y Baja California Sur. Simultáneamente, canales de baja presión sobre el noreste, occidente, centro y sureste del país, la onda tropical núm.…]]></description>
       <pubDate>Fri, 17 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-17-395</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-17-396</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 17 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 17 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-17-12</guid>
