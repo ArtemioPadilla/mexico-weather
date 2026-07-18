@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 18 Jul 2026 09:02:13 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Jul 2026 10:43:09 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -23,7 +23,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Durango (oeste) y Sinaloa (centro).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Durango (oeste) y Sinaloa (centro).]]></description>
-      <pubDate>Sat, 18 Jul 2026 03:02:04 -0600</pubDate>
+      <pubDate>Sat, 18 Jul 2026 04:43:00 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-18-1542</guid>
       <category>Alerta</category>
     </item>
