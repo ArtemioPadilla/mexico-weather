@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 18 Jul 2026 12:08:25 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Jul 2026 13:53:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -50,7 +50,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Chihuahua, Durango, Sinaloa y Nayarit.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Chihuahua, Durango, Sinaloa y Nayarit.]]></description>
-      <pubDate>Sat, 18 Jul 2026 06:08:15 -0600</pubDate>
+      <pubDate>Sat, 18 Jul 2026 07:53:20 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-18-dc3f</guid>
       <category>Alerta</category>
     </item>
