@@ -5,26 +5,53 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 18 Jul 2026 10:43:09 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Jul 2026 12:08:25 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de julio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 397 | 18 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, DURANGO, SINALOA Y NAYARIT
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 397
+Ciudad de México a 18 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, DURANGO, SINALOA Y NAYARIT
+
+ 
+
+Este día, el monzón mexicano, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión en el interior del país y el ingreso de humedad, ocasionarán lluvias puntuales intensas en zonas de Chihuahua, Sinaloa, Durango y Nayarit; así como chubascos a lluvias puntuales muy fuertes con descargas eléctricas en la mayor parte del territorio nacional. Así mismo, se pronostican vientos de 30 a 40 km/h con rachas de 50 a 70 km/h en Puebla, Oaxaca y Chiapas. Por otra parte, persistirá el ambiente vespertino muy caluroso en el noroeste de México, y extremadamente caluroso en el noreste de Baja California. Finalmente, la onda tropical núm. 19 y una zona de baja presión con probabilidad para desarrollo ciclónico podrían dar origen a un ciclón tropical al sur de Jalisco y Colima.
+
+
+
+…]]></description>
+      <pubDate>Sat, 18 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-18-397</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de julio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de julio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 18 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-18-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Durango (oeste) y Sinaloa (centro).</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Chihuahua, Durango, Sinaloa y Nayarit.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes a puntuales intensas (75 a 150 mm): en zonas de Durango (oeste) y Sinaloa (centro).]]></description>
-      <pubDate>Sat, 18 Jul 2026 04:43:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-18-1542</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Chihuahua, Durango, Sinaloa y Nayarit.]]></description>
+      <pubDate>Sat, 18 Jul 2026 06:08:15 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-18-dc3f</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -34,26 +61,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 17 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_17</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 396 | 17 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN SINALOA Y DURANGO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 396
-Ciudad de México a 17 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN SINALOA Y DURANGO
-
-Durante esta noche y madrugada del sábado, el monzón mexicano en interacción con una circulación ciclónica y vaguadas en niveles medios y altos de la atmósfera, ocasionarán lluvias puntuales intensas en Durango (oeste) y Sinaloa (centro); muy fuertes en Chihuahua (oeste y suroeste); fuertes en Sonora (este) y chubascos en Baja California y Baja California Sur. Simultáneamente, canales de baja presión sobre el noreste, occidente, centro y sureste del país, la onda tropical núm.…]]></description>
-      <pubDate>Fri, 17 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-17-396</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 17 JUL 2026: Lluvias intensas se pronostican para hoy en regiones de Sinaloa y Durango, y muy fuertes en Sonora, Chihuahua, Jalisco y...</title>
