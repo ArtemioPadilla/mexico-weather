@@ -5,50 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 18 Jul 2026 23:14:17 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 19 Jul 2026 00:13:19 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Chihuahua, Durango, Sinaloa y Nayarit.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): zonas de Chihuahua, Durango, Sinaloa y Nayarit.]]></description>
-      <pubDate>Sat, 18 Jul 2026 17:14:08 -0600</pubDate>
+      <pubDate>Sat, 18 Jul 2026 18:13:09 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-18-1831</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 397 | 18 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 398 | 18 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, DURANGO, SINALOA Y NAYARIT
+      <description><![CDATA[PERSISTEN LAS CONDICIONES PARA LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, DURANGO, SINALOA Y NAYARIT
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 397
+No. Aviso: 398
 Ciudad de México a 18 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, DURANGO, SINALOA Y NAYARIT
+PERSISTEN LAS CONDICIONES PARA LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, DURANGO, SINALOA Y NAYARIT
 
  
 
-Este día, el monzón mexicano, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión en el interior del país y el ingreso de humedad, ocasionarán lluvias puntuales intensas en zonas de Chihuahua, Sinaloa, Durango y Nayarit; así como chubascos a lluvias puntuales muy fuertes con descargas eléctricas en la mayor parte del territorio nacional. Así mismo, se pronostican vientos de 30 a 40 km/h con rachas de 50 a 70 km/h en Puebla, Oaxaca y Chiapas. Por otra parte, persistirá el ambiente vespertino muy caluroso en el noroeste de México, y extremadamente caluroso en el noreste de Baja California. Finalmente, la onda tropical núm. 19 y una zona de baja presión con probabilidad para desarrollo ciclónico podrían dar origen a un ciclón tropical al sur de Jalisco y Colima.
-
-
-
-…]]></description>
+Durante esta noche y madrugada del domingo, el monzón mexicano en interacción con circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, ocasionarán lluvias puntuales intensas en Chihuahua (suroeste), Sinaloa (norte y sur), Durango (sur) y Nayarit (norte); lluvias puntuales muy fuertes en Sonora (sureste); fuertes en Coahuila (norte) y Zacatecas (sur); chubascos en Baja California Sur, Nuevo León, Tamaulipas, San Luis Potosí y Aguascalientes, así como lluvias aisladas en Baja California.…]]></description>
       <pubDate>Sat, 18 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-18-397</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-18-398</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 18 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-18-12</guid>
