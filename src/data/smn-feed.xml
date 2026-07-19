@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 19 Jul 2026 21:10:16 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 19 Jul 2026 22:12:01 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora, Sinaloa y Chihuahua.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora, Sinaloa y Chihuahua.]]></description>
-      <pubDate>Sun, 19 Jul 2026 15:10:07 -0600</pubDate>
+      <pubDate>Sun, 19 Jul 2026 16:11:50 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-19-3349</guid>
       <category>Alerta</category>
     </item>
