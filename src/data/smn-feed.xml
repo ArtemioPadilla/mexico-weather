@@ -5,15 +5,34 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 21 Jul 2026 09:43:37 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2026 12:02:50 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de julio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 403 | 21 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, MICHOACÁN Y GUERRERO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 403
+Ciudad de México a 21 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, MICHOACÁN Y GUERRERO
+
+Para hoy, el monzón mexicano sobre el noroeste del territorio nacional y en interacción con canales de baja presión en el interior de México, así como circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera e inestabilidad atmosférica, generarán lluvias puntuales muy fuertes en Sonora (este y noreste), Chihuahua (oeste y noroeste), Michoacán (sur) y Guerrero (suroeste y costa); puntuales fuertes en Jalisco (sur), Colima, Estado de México (suroeste) y Chiapas (sur); y lluvias con intervalos de chubascos en Baja California Sur, Sinaloa, Nayarit, Durango, Zacatecas, Ciudad de México, Morelos, Tlaxcala, Puebla, Veracruz, Oaxaca, Campeche, Yucatán y Quintana Roo. Todas las lluvias acompañadas con descargas eléctricas, y con posible caída de granizo en zonas del noroeste, occidente y centro del país.…]]></description>
+      <pubDate>Tue, 21 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-21-403</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de julio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 21 de julio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 21 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-21-12</guid>
@@ -23,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora y Chihuahua.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora y Chihuahua.]]></description>
-      <pubDate>Tue, 21 Jul 2026 03:43:28 -0600</pubDate>
+      <pubDate>Tue, 21 Jul 2026 06:02:40 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-21-634f</guid>
       <category>Alerta</category>
     </item>
@@ -34,26 +53,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 20 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_20</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 402 | 20 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[PARA HOY SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE SONORA Y CHIHUAHUA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 402
-Ciudad de México a 20 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-PARA HOY SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE SONORA Y CHIHUAHUA
-
-Se prevé que durante esta noche y madrugada del martes, el monzón mexicano en el noroeste del país, en interacción con circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, así como  con canales de baja presión sobre el occidente, centro y sureste del territorio nacional, además de la península de Yucatán, aunado al ingreso de humedad del océano Pacífico, golfo de México y mar Caribe, ocasionarán lluvias puntuales intensas en zonas de Sonora (norte, centro y este) y Chihuahua (centro, oeste y noroeste); lluvias muy fuertes en Sinaloa (norte) y Durango (noroeste); y lluvias fuertes en Baja California Sur (sur), Zacatecas (oeste y sur), Nayarit (este), Jalisco (oeste, centro y este), Colima, Guanajuato (centro, oeste y sur), Michoacán (norte, centro y este), Estado de México (oeste y sur), Ciudad de México,  Chiapas (sur) y Yucatán (norte, centro y este).…]]></description>
-      <pubDate>Mon, 20 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-20-402</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 20 JUL 2026: Se prevén lluvias intensas en regiones de Sonora y Chihuahua</title>
