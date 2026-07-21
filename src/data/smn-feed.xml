@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 21 Jul 2026 12:02:50 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2026 14:28:11 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -39,12 +39,20 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora y Chihuahua.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Chihuahua, Michoacán y Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora y Chihuahua.]]></description>
-      <pubDate>Tue, 21 Jul 2026 06:02:40 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-21-634f</guid>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Chihuahua, Michoacán y Guerrero.]]></description>
+      <pubDate>Tue, 21 Jul 2026 08:28:03 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-21-641f</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 21 JUL 2026: Para este día se prevén lluvias de fuertes a muy fuertes en regiones de 8 estados de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_21.pdf</link>
+      <description><![CDATA[Para este día se prevén lluvias de fuertes a muy fuertes en regiones de 8 estados de México — Reporte Matutino del 21 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_21.pdf]]></description>
+      <pubDate>Tue, 21 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_21</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 20 JUL 2026: Para esta noche se prevén lluvias intensas en regiones de Sonora y Chihuahua</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Algunas regiones de México ya experimentan la canícula — Comunicado del 18 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado108-26.pdf]]></description>
       <pubDate>Sat, 18 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Comunicado108-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 18 JUL 2026: Lluvias intensas se pronostican en regiones de Chihuahua, Sinaloa, Durango y Nayarit, y muy fuertes en Sonora, Jalisco y...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_18.pdf</link>
-      <description><![CDATA[Lluvias intensas se pronostican en regiones de Chihuahua, Sinaloa, Durango y Nayarit, y muy fuertes en Sonora, Jalisco y... — Reporte Matutino del 18 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_18.pdf]]></description>
-      <pubDate>Sat, 18 Jul 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_18</guid>
       <category>Comunicado</category>
     </item>
   </channel>
