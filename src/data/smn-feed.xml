@@ -5,26 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 22 Jul 2026 09:41:51 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jul 2026 12:07:52 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de julio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 405 | 22 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN JALISCO, COLIMA, MICHOACÁN Y GUERRERO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 405
+Ciudad de México a 22 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES MUY FUERTES EN JALISCO, COLIMA, MICHOACÁN Y GUERRERO
+
+Este día, el monzón mexicano en el noroeste del territorio nacional, canales de baja presión en el interior de México, una circulación ciclónica y vaguadas en niveles medios y altos de la atmósfera y la onda tropical núm. 20 que se desplazará sobre el sureste mexicano, originarán lluvias puntuales muy fuertes en Jalisco, Colima, Michoacán y Guerrero; así como chubascos y lluvias fuertes acompañadas con descargas eléctricas en el oriente, centro, sur y sureste  de la República Mexicana, incluida la península de Yucatán; y con posible caída de granizo en estados del noroeste y occidente del país. Así mismo, persistirá el ambiente caluroso a muy caluroso sobre entidades del norte del territorio mexicano, estados del litoral del Pacífico y del golfo de México, además de la península de Yucatán.…]]></description>
+      <pubDate>Wed, 22 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-22-405</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de julio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 22 de julio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 22 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-22-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Chihuahua, Michoacán y Guerrero.</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Jalisco, Colima, Michoacán y Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Chihuahua, Michoacán y Guerrero.]]></description>
-      <pubDate>Wed, 22 Jul 2026 03:41:42 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-22-5a74</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Jalisco, Colima, Michoacán y Guerrero.]]></description>
+      <pubDate>Wed, 22 Jul 2026 06:07:44 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-22-6442</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -34,25 +54,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 21 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_21</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 404 | 21 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE OAXACA Y CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 404
-Ciudad de México a 21 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE OAXACA Y CHIAPAS 
-
-Se prevé que, en el transcurso de esta noche y madrugada del miércoles, el monzón mexicano en el noroeste del territorio nacional, propiciará lluvias puntuales muy fuertes en Sonora (este y noreste) y Chihuahua (oeste y noroeste), lluvias fuertes en Baja California Sur (sur), chubascos en zonas de Sinaloa y lluvias aisladas en Baja California. Al mismo tiempo, canales de Baja presión en el interior del país, en interacción con una circulación ciclónica en niveles altos de la atmósfera sobre el sureste del país y con la onda tropical núm.…]]></description>
-      <pubDate>Tue, 21 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-21-404</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 21 JUL 2026: Para este día se prevén lluvias de fuertes a muy fuertes en regiones de 8 estados de México</title>
