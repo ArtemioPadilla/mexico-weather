@@ -5,15 +5,34 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 23 Jul 2026 09:40:57 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2026 12:05:32 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de julio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 407 | 23 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE COAHUILA, NUEVO LEÓN, TAMAULIPAS, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 407
+Ciudad de México a 23 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE COAHUILA, NUEVO LEÓN, TAMAULIPAS, OAXACA Y CHIAPAS
+
+Para hoy, el ingreso de humedad favorecido por el ciclón tropical Bertha, el cual se espera que impacte y que se desplace posteriormente como baja presión remanente sobre Texas, E.U.A., en interacción con inestabilidad en niveles altos de la atmósfera, ocasionará lluvias puntuales muy fuertes en Tamaulipas (norte), Nuevo León (norte y oeste) y Coahuila (este). Por otra parte, el monzón mexicano en interacción con una vaguada en niveles altos de la atmósfera, así como un canal de baja presión sobre el sureste del territorio nacional y el avance de la onda tropical núm.…]]></description>
+      <pubDate>Thu, 23 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-23-407</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de julio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 23 de julio del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 23 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-23-12</guid>
@@ -23,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero y Chiapas.]]></description>
-      <pubDate>Thu, 23 Jul 2026 03:40:47 -0600</pubDate>
+      <pubDate>Thu, 23 Jul 2026 06:05:23 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-23-514d</guid>
       <category>Alerta</category>
     </item>
@@ -34,29 +53,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 22 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_7_22</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 406 | 22 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, NAYARIT, JALISCO, COLIMA, MICHOACÁN, GUERRERO Y CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 406
-Ciudad de México a 22 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, NAYARIT, JALISCO, COLIMA, MICHOACÁN, GUERRERO Y CHIAPAS
-
- 
-
-Se prevé que, en el transcurso de esta noche y madrugada del jueves, el monzón mexicano en el noroeste del territorio nacional, canales de baja presión en el interior del país, vaguadas en niveles medios y altos de la atmósfera y el desplazamiento de la onda tropical núm. 20 sobre el sureste mexicano, originarán lluvias puntuales muy fuertes en Sinaloa (sur), Nayarit (oeste y sur), Jalisco (oeste y sur), Colima, Michoacán (oeste), Guerrero (este) y Chiapas (sur); lluvias fuertes en Sonora (noreste y este), Chihuahua (oeste y suroeste), Durango (oeste y suroeste) y Oaxaca (suroeste); chubascos en Zacatecas, Tamaulipas, Estado de México, Ciudad de México, Puebla, Veracruz y Campeche; así como lluvias aisladas en Baja California, Coahuila, Nuevo León, San Luis Potosí, Querétaro, Hidalgo, Tlaxcala, Morelos, Tabasco, Yucatán y Quintana Roo.…]]></description>
-      <pubDate>Wed, 22 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-22-406</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 22 JUL 2026: Se pronostican lluvias muy fuertes para regiones de Jalisco, Colima, Michoacán y Guerrero</title>
