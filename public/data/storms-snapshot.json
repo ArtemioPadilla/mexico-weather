@@ -1,1 +1,1 @@
-{"updated":"2026-07-24T09:31:23Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Bertha","lat":30.0,"lng":-96.0,"classification":"PTC","intensityKt":30.0},{"name":"Fausto","lat":18.5,"lng":-129.9,"classification":"HU","intensityKt":85.0}]}
+{"updated":"2026-07-24T11:22:56Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Fausto","lat":18.5,"lng":-129.9,"classification":"HU","intensityKt":85.0}]}
