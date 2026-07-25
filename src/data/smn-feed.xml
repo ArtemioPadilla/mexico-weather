@@ -5,9 +5,25 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 25 Jul 2026 17:25:32 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2026 19:38:03 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Nayarit, Jalisco, Colima y Michoacán.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Nayarit, Jalisco, Colima y Michoacán.]]></description>
+      <pubDate>Sat, 25 Jul 2026 13:37:54 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-25-d29c</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 25 JUL 2026: Se pronostican lluvias de fuertes a muy fuertes en zonas de 20 entidades del país</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_07_25.pdf</link>
+      <description><![CDATA[Se pronostican lluvias de fuertes a muy fuertes en zonas de 20 entidades del país — Comunicado del 25 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_07_25.pdf]]></description>
+      <pubDate>Sat, 25 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_07_25</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 411 | 25 de Julio del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -28,23 +44,15 @@ Para hoy, el monzón mexicano y un canal de baja presión sobre la Sierra Madre 
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de julio del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de julio del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 25 de julio del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 25 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-25-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Nayarit, Jalisco, Colima y Michoacán.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Nayarit, Jalisco, Colima y Michoacán.]]></description>
-      <pubDate>Sat, 25 Jul 2026 11:25:22 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-25-d29c</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 24 JUL 2026: Para esta noche se pronostican lluvias intensas en regiones de Sinaloa y Durango</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Para este día se prevén lluvias muy fuertes en regiones de Coahuila, Nuevo León, Tamaulipas, Oaxaca y Chiapas — Reporte Matutino del 23 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_23.pdf]]></description>
       <pubDate>Thu, 23 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_23</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 22 JUL 2026: Para esta noche se prevén lluvias muy fuertes en regiones de Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero y ...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_7_22.pdf</link>
-      <description><![CDATA[Para esta noche se prevén lluvias muy fuertes en regiones de Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero y ... — Reporte Vespertino del 22 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_7_22.pdf]]></description>
-      <pubDate>Wed, 22 Jul 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_7_22</guid>
       <category>Comunicado</category>
     </item>
   </channel>
