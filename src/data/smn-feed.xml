@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 26 Jul 2026 23:25:23 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2026 04:07:36 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Tabasco, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Tabasco, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 26 Jul 2026 17:25:13 -0600</pubDate>
+      <pubDate>Sun, 26 Jul 2026 22:07:26 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-26-0ad0</guid>
       <category>Alerta</category>
     </item>
@@ -25,31 +25,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 413 | 26 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 414 | 26 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, TABASCO, OAXACA Y CHIAPAS
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 413
+No. Aviso: 414
 Ciudad de México a 26 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, TABASCO, OAXACA Y CHIAPAS
 
 
-Este día, el monzón mexicano y un canal de baja presión sobre la Sierra Madre Occidental, aunados a inestabilidad atmosférica, originarán chubascos y lluvias fuertes a muy fuertes en el noroeste, norte y occidente de la República Mexicana. Una circulación ciclónica en niveles medios y altos de la atmósfera, en interacción con la onda tropical núm. 21 sobre el sureste mexicano, y con canales de baja presión e inestabilidad atmosférica, ocasionarán lluvias puntuales intensas en Veracruz, Oaxaca, Chiapas y Tabasco, así como chubascos y lluvias fuertes a muy fuertes en el centro, oriente, sur y sureste del territorio nacional, incluida la península de Yucatán. A su vez, los desprendimientos nubosos del huracán Genevieve en el océano Pacífico, reforzarán la probabilidad de lluvias en el occidente de México.…]]></description>
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+
+Durante esta noche y madrugada del lunes, el monzón mexicano en el noroeste del país, un canal de baja presión sobre la Sierra Madre Occidental e inestabilidad atmosférica, propiciarán lluvias fuertes con puntuales muy fuertes en Sonora (este y noreste), Chihuahua (oeste), Durango (oeste y sur), Sinaloa (norte y sur) y Nayarit, así como intervalos de chubascos en Baja California y Baja California Sur. A su vez, una circulación ciclónica junto con una vaguada en niveles medios y altos de la atmósfera sobre el oriente, centro y sureste del país, en interacción con la onda tropical núm.…]]></description>
       <pubDate>Sun, 26 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-26-413</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-26-414</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de julio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de julio del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 26 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-26-12</guid>
