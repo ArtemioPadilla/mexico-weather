@@ -5,27 +5,54 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 27 Jul 2026 11:44:11 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2026 15:17:56 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de julio del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 415 | 27 de Julio del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 415
+Ciudad de México a 27 de Julio del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, OAXACA Y CHIAPAS
+
+Para hoy, el monzón mexicano sobre el noroeste de México aunado a inestabilidad atmosférica y a canales de baja presión sobre el interior del país originarán lluvias puntuales intensas en Sonora (norte y centro); puntuales muy fuertes en Sinaloa (sur), Chihuahua (oeste) y Durango (oeste y sur); e intervalos de chubascos en Baja California y Baja California Sur. Por otro lado, el avance de la onda tropical núm.…]]></description>
+      <pubDate>Mon, 27 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-27-415</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de julio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de julio del 2026
-Emisión: 03:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 27 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-27-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en:</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Sonora, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Veracruz, Oaxaca, Chiapas y Tabasco.]]></description>
-      <pubDate>Mon, 27 Jul 2026 05:44:01 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-27-475c</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Sonora, Oaxaca y Chiapas.]]></description>
+      <pubDate>Mon, 27 Jul 2026 09:17:47 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-27-49ce</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 27 JUL 2026: Se pronostican lluvias intensas para regiones de Sonora, Oaxaca y Chiapas, y de fuertes a muy fuertes en otras 16 entida...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_27.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas para regiones de Sonora, Oaxaca y Chiapas, y de fuertes a muy fuertes en otras 16 entida... — Reporte Matutino del 27 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_27.pdf]]></description>
+      <pubDate>Mon, 27 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_27</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 26 JUL 2026: Se pronostican lluvias intensas en zonas de Veracruz, Tabasco, Oaxaca y Chiapas</title>
@@ -34,27 +61,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sun, 26 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_07_26</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 414 | 26 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 414
-Ciudad de México a 26 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
-Durante esta noche y madrugada del lunes, el monzón mexicano en el noroeste del país, un canal de baja presión sobre la Sierra Madre Occidental e inestabilidad atmosférica, propiciarán lluvias fuertes con puntuales muy fuertes en Sonora (este y noreste), Chihuahua (oeste), Durango (oeste y sur), Sinaloa (norte y sur) y Nayarit, así como intervalos de chubascos en Baja California y Baja California Sur. A su vez, una circulación ciclónica junto con una vaguada en niveles medios y altos de la atmósfera sobre el oriente, centro y sureste del país, en interacción con la onda tropical núm.…]]></description>
-      <pubDate>Sun, 26 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-26-414</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 25 JUL 2026: Se pronostican lluvias de fuertes a muy fuertes en zonas de 20 entidades del país</title>
@@ -78,14 +84,6 @@ Durante esta noche y madrugada del lunes, el monzón mexicano en el noroeste del
       <description><![CDATA[Para este día se prevén lluvias intensas en regiones de Sinaloa y Durango — Reporte Matutino del 24 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_24.pdf]]></description>
       <pubDate>Fri, 24 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_24</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 23 JUL 2026: Se pronostican lluvias intensas en zonas del noreste del país</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_23.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas del noreste del país — Reporte Vespertino del 23 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_23.pdf]]></description>
-      <pubDate>Thu, 23 Jul 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_23</guid>
       <category>Comunicado</category>
     </item>
   </channel>
