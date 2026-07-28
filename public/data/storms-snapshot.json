@@ -1,1 +1,1 @@
-{"updated":"2026-07-28T07:07:50Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Genevieve","lat":17.1,"lng":-114.6,"classification":"HU","intensityKt":125.0},{"name":"Fausto","lat":21.7,"lng":-149.0,"classification":"TS","intensityKt":60.0}]}
+{"updated":"2026-07-28T09:45:17Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Genevieve","lat":17.5,"lng":-115.4,"classification":"HU","intensityKt":120.0},{"name":"Fausto","lat":21.7,"lng":-150.3,"classification":"TS","intensityKt":55.0}]}
