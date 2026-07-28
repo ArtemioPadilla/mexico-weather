@@ -5,42 +5,43 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 27 Jul 2026 22:30:24 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jul 2026 00:13:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Sonora, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas superiores a 45 °C: Baja California (noreste) y Sonora (noroeste).]]></description>
-      <pubDate>Mon, 27 Jul 2026 16:30:15 -0600</pubDate>
+      <pubDate>Mon, 27 Jul 2026 18:13:38 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-27-bc4d</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 415 | 27 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 416 | 27 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, OAXACA Y CHIAPAS
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE SONORA, OAXACA Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 415
+No. Aviso: 416
 Ciudad de México a 27 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, OAXACA Y CHIAPAS
 
-Para hoy, el monzón mexicano sobre el noroeste de México aunado a inestabilidad atmosférica y a canales de baja presión sobre el interior del país originarán lluvias puntuales intensas en Sonora (norte y centro); puntuales muy fuertes en Sinaloa (sur), Chihuahua (oeste) y Durango (oeste y sur); e intervalos de chubascos en Baja California y Baja California Sur. Por otro lado, el avance de la onda tropical núm.…]]></description>
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE SONORA, OAXACA Y CHIAPAS
+
+Se prevé que, durante esta noche y madrugada del martes, el monzón mexicano en el noroeste del país, un canal de baja presión sobre la Sierra Madre Occidental e inestabilidad atmosférica, ocasionarán lluvias puntuales intensas en Sonora (norte, centro y este), lluvias muy fuertes en Chihuahua (oeste), Durango (oeste y sur), Sinaloa (centro y sur) y Nayarit (norte y oeste), así como intervalos de chubascos en Baja California y Baja California Sur. Por otro lado, una circulación ciclónica en niveles medios y altos de la atmósfera sobre el centro y sur del territorio, canales de baja presión en el interior de México, inestabilidad atmosférica y la onda tropical núm.…]]></description>
       <pubDate>Mon, 27 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-27-415</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-27-416</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 27 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-27-12</guid>
