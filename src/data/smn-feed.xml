@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 28 Jul 2026 12:16:31 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jul 2026 14:45:44 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -46,9 +46,17 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Jalisco, Colima, Michoacán, Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Jalisco, Colima, Michoacán, Guerrero y Oaxaca.]]></description>
-      <pubDate>Tue, 28 Jul 2026 06:16:22 -0600</pubDate>
+      <pubDate>Tue, 28 Jul 2026 08:45:35 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-28-293c</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 28 JUL 2026: Para este día se prevén lluvias intensas en regiones de Jalisco, Colima, Michoacán, Guerrero y Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_28.pdf</link>
+      <description><![CDATA[Para este día se prevén lluvias intensas en regiones de Jalisco, Colima, Michoacán, Guerrero y Oaxaca — Reporte Matutino del 28 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_28.pdf]]></description>
+      <pubDate>Tue, 28 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_28</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 27 JUL 2026: Para esta noche se prevén lluvias intensas en regiones de Sonora, Oaxaca y Chiapas</title>
@@ -80,14 +88,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias de fuertes a muy fuertes en zonas de 20 entidades del país — Comunicado del 25 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_07_25.pdf]]></description>
       <pubDate>Sat, 25 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_07_25</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 24 JUL 2026: Para esta noche se pronostican lluvias intensas en regiones de Sinaloa y Durango</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_24.pdf</link>
-      <description><![CDATA[Para esta noche se pronostican lluvias intensas en regiones de Sinaloa y Durango — Reporte Vespertino del 24 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_24.pdf]]></description>
-      <pubDate>Fri, 24 Jul 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_24</guid>
       <category>Comunicado</category>
     </item>
   </channel>
