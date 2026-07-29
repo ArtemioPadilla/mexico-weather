@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 29 Jul 2026 12:24:08 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2026 15:23:03 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -28,23 +28,31 @@ Para hoy, el monzón mexicano en el noroeste del país, ocasionará lluvias punt
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de julio del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de julio del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 29 de julio del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 29 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-29-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Michoacán, Guerrero, Morelos, Puebla y Oaxaca.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Sonora, Sinaloa, Chihuahua, Nayarit, Jalisco, Colima, Michoacán, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Michoacán, Guerrero, Morelos, Puebla y Oaxaca.]]></description>
-      <pubDate>Wed, 29 Jul 2026 06:23:58 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-29-fc87</guid>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Sonora, Sinaloa, Chihuahua, Nayarit, Jalisco, Colima, Michoacán, Oaxaca y Chiapas.]]></description>
+      <pubDate>Wed, 29 Jul 2026 09:22:54 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-29-bf79</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 29 JUL 2026: Se pronostican lluvias de fuertes a muy fuertes en regiones de 19 estados de la República Mexicana</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_29.pdf</link>
+      <description><![CDATA[Se pronostican lluvias de fuertes a muy fuertes en regiones de 19 estados de la República Mexicana — Reporte Matutino del 29 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_29.pdf]]></description>
+      <pubDate>Wed, 29 Jul 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_29</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 28 JUL 2026: Para la noche de hoy se pronostican lluvias intensas en regiones de Jalisco, Colima, Michoacán, Guerrero, Morelos, Pueb...</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas para regiones de Sonora, Oaxaca y Chiapas, y de fuertes a muy fuertes en otras 16 entida... — Reporte Matutino del 27 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_27.pdf]]></description>
       <pubDate>Mon, 27 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_27</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 26 JUL 2026: Se pronostican lluvias intensas en zonas de Veracruz, Tabasco, Oaxaca y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_07_26.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Veracruz, Tabasco, Oaxaca y Chiapas — Comunicado del 26 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_07_26.pdf]]></description>
-      <pubDate>Sun, 26 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_07_26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
