@@ -12,3 +12,7 @@ dist/
 /test-results/
 /blob-report/
 /playwright/.cache/
+
+# Python bytecode from scripts/ (data fetchers, smn-rss)
+__pycache__/
+*.py[cod]
