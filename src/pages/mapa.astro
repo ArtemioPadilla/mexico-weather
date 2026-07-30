@@ -47,6 +47,10 @@ const t = ui[lang];
         locateButton: true,
         presetPins: true,
         backLink: true,
+        /* Only the full-page map gets the mobile controls panel — the
+           homepage teaser sets layerRail too, and a 400px embed has no
+           room for it (Story 11.3). */
+        mobileControls: true,
       }}
       useHash={true}
       exposeE2eHook={true}

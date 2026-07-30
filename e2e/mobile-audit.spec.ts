@@ -55,6 +55,7 @@ const STRICT_SELECTORS: string[] = [
   '#maploc',
   '#mw-settings summary',
   '#mw-info summary',
+  '#mw-controls-toggle',
 ];
 
 async function strictViolations(page: import('@playwright/test').Page) {
@@ -204,6 +205,7 @@ test.describe('mobile UX — 360x640 portrait', () => {
     { page: 'mapa', selector: '#maploc', min: 1 },
     { page: 'mapa', selector: '#mw-settings summary', min: 1 },
     { page: 'mapa', selector: '#mw-info summary', min: 1 },
+    { page: 'mapa', selector: '#mw-controls-toggle', min: 1 },
   ];
 
   for (const pageUrl of ['', 'mapa']) {
