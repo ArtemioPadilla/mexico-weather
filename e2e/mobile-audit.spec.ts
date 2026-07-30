@@ -36,6 +36,49 @@ test.use({
   isMobile: true,
 });
 
+// Story 11.2 — the strict rule.
+//
+// The global rule below accepts >=44px in *either* axis and grants a
+// parent-container escape hatch, which is why 36px-tall full-bleed nav
+// links never failed it. These selectors are the controls a phone user
+// actually touches, and they must clear 44px in *both* axes measured on
+// the element itself. Listed explicitly so the rule can never silently
+// widen or narrow.
+const STRICT_SELECTORS: string[] = [
+  '#mobile-menu summary',
+  '#mobile-menu a[href]',
+  'body > footer a[href]',
+  '#tl-play',
+  '#tl-prev',
+  '#tl-next',
+  '#mw-search-toggle',
+  '#maploc',
+  '#mw-settings summary',
+  '#mw-info summary',
+];
+
+async function strictViolations(page: import('@playwright/test').Page) {
+  return page.evaluate((selectors: string[]) => {
+    const bad: Array<{ selector: string; w: number; h: number }> = [];
+    for (const sel of selectors) {
+      for (const el of Array.from(document.querySelectorAll<HTMLElement>(sel))) {
+        const r = el.getBoundingClientRect();
+        // Not rendered at this viewport (no map on /clima, no site footer
+        // on /mapa, collapsed <details> contents) — nothing to measure.
+        if (r.width === 0 || r.height === 0) continue;
+        if (r.width < 44 || r.height < 44) {
+          bad.push({
+            selector: sel,
+            w: Math.round(r.width),
+            h: Math.round(r.height),
+          });
+        }
+      }
+    }
+    return bad;
+  }, STRICT_SELECTORS);
+}
+
 test.describe('mobile UX — 360x640 portrait', () => {
   for (const p of PAGES) {
     test(`${p.name}: no horizontal overflow`, async ({ page }) => {
@@ -131,6 +174,76 @@ test.describe('mobile UX — 360x640 portrait', () => {
       }
     });
   }
+
+  for (const p of PAGES) {
+    test(`${p.name}: strict-set tap targets are ≥44px in both axes`, async ({
+      page,
+    }) => {
+      await page.goto(p.url);
+      await page.waitForLoadState('domcontentloaded');
+      await page.waitForTimeout(500);
+      // Open the mobile menu so its items are measurable.
+      const summary = page.locator('#mobile-menu summary');
+      if (await summary.count()) await summary.click();
+      expect(await strictViolations(page)).toEqual([]);
+    });
+  }
+
+  // Guard against the strict rule going vacuous. Every selector in
+  // STRICT_SELECTORS is measured only if it matches a rendered element, so
+  // an id rename would silently turn the assertions above into no-ops.
+  // These counts are the observed truth at 360px, menu open.
+  const STRICT_COVERAGE: Array<{ page: string; selector: string; min: number }> = [
+    { page: '', selector: '#mobile-menu summary', min: 1 },
+    { page: '', selector: '#mobile-menu a[href]', min: 11 },
+    { page: '', selector: 'body > footer a[href]', min: 7 },
+    { page: 'mapa', selector: '#tl-play', min: 1 },
+    { page: 'mapa', selector: '#tl-prev', min: 1 },
+    { page: 'mapa', selector: '#tl-next', min: 1 },
+    { page: 'mapa', selector: '#mw-search-toggle', min: 1 },
+    { page: 'mapa', selector: '#maploc', min: 1 },
+    { page: 'mapa', selector: '#mw-settings summary', min: 1 },
+    { page: 'mapa', selector: '#mw-info summary', min: 1 },
+  ];
+
+  for (const pageUrl of ['', 'mapa']) {
+    test(`${pageUrl || 'home'}: the strict rule actually measures its targets`, async ({
+      page,
+    }) => {
+      await page.goto(pageUrl);
+      await page.waitForLoadState('domcontentloaded');
+      if (pageUrl === 'mapa') {
+        await expect(page.locator('#layerbtn-base')).toBeVisible();
+      }
+      const summary = page.locator('#mobile-menu summary');
+      if (await summary.count()) await summary.click();
+      for (const c of STRICT_COVERAGE.filter((x) => x.page === pageUrl)) {
+        const rendered = await page.evaluate(
+          (sel) =>
+            Array.from(document.querySelectorAll<HTMLElement>(sel)).filter((el) => {
+              const r = el.getBoundingClientRect();
+              return r.width > 0 && r.height > 0;
+            }).length,
+          c.selector,
+        );
+        expect(rendered, `${c.selector} matched nothing — strict rule is vacuous`)
+          .toBeGreaterThanOrEqual(c.min);
+      }
+    });
+  }
+
+  // /mapa deliberately stays out of PAGES: its no-scroll design and dense
+  // controls would fail the overflow and global rules for unrelated
+  // reasons. The strict set still applies to it.
+  //
+  // Coverage limit: this runs with the layer rail's hidden-below-sm
+  // controls collapsed, so anything `hidden sm:*` is display:none and
+  // skipped by the zero-size guard above.
+  test('mapa: mobile-visible chrome meets the strict rule', async ({ page }) => {
+    await page.goto('mapa');
+    await expect(page.locator('#layerbtn-base')).toBeVisible(); // rail wired up
+    expect(await strictViolations(page)).toEqual([]);
+  });
 
   test('home: axe still passes at mobile viewport', async ({ page }) => {
     await page.goto('');
