@@ -47,7 +47,7 @@ jobs:
         # always(): still post the report link when the a11y assertion
         # fails the LHCI step — that run is the one worth inspecting.
         if: always() && github.event_name == 'pull_request' && steps.lhci.outputs.links != ''
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const links = JSON.parse(`${{ steps.lhci.outputs.links }}` || '{}');
