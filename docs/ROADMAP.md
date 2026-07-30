@@ -1,6 +1,6 @@
 # Roadmap — Clima México
 
-Status: **living document** · Last reviewed: 2026-05-28
+Status: **living document** · Last reviewed: 2026-07-29
 
 This is the single entry point for "what's done, what's next, and why."
 It reconciles the two older planning docs against what actually shipped,
@@ -29,8 +29,13 @@ competitive angle, not limitations.
 - **Open backlog:** 5 epics (E10–E14), 19 stories. Next up: **E10** (map
   first paint, P0) gated on a foreground-repro check, then **E11** (mobile).
 - **Health:** 448 unit tests (51 files) + 103 e2e (20 specs) green on `main`
-  (as of commit fc7a9af, 2026-06-10); Core Web Vitals baseline established
-  (Story 8.2). Known data-pipeline fix (#288) confirmed live in production.
+  (re-verified at commit 411e336, 2026-07-29); Core Web Vitals baseline
+  established (Story 8.2). All data-refresh workflows and CD green over the
+  last 60 runs.
+- **Staleness correction (2026-07-29):** parts of E11 shipped inside the audit
+  PR #296 and were never reflected here; E10's remaining root cause has since
+  been located. See E10 and E11 below — the story text was rewritten, not just
+  re-dated.
 
 ---
 
@@ -127,6 +132,22 @@ click forces `triggerRepaint` — is the classic **rAF-never-fires** symptom.
 PR #289 fixed the `/mapa` boot scheduling (rAF→setTimeout); first paint of
 the embeds is the remainder.
 
+Root cause of the remaining embed case, located 2026-07-29:
+`src/pages/forecast.astro:1075` wraps the whole `initInteractiveMap()` call in
+a bare `requestAnimationFrame` — the same antipattern #289 removed from
+`InteractiveMap.astro:716`. `/forecast` calls the factory directly rather than
+through `InteractiveMap.astro`, so it never received that fix. In a hidden or
+throttled tab the map therefore never *boots* (not merely never paints), which
+is consistent with every prior "blank canvas in automation" report.
+
+Measured on `main` at 411e336 (headless chromium, 64×64 luminance variance of
+the map canvas, zero interaction): `/mapa` 270 at 1s settling to 114;
+`/forecast` embed 0 at 1s, 45 at 3s, 45 steady (a 21-at-3s reading was also
+observed on a slower run — the crossing point is network-dependent, somewhere
+between 1s and 3s). **Both paint without interaction in a foreground context**
+— so the ≤3s target below is a marginal performance gap on the `/forecast`
+embed, not a blank-canvas bug.
+
 **Story 10.1 — Confirm the failure reproduces in a foreground load** · est ½d
 - [ ] Load `/forecast?lat=19.43&lng=-99.13&...` cold (cleared SW/cache) in a
       genuinely **foregrounded** window on a real device + desktop Chrome.
@@ -138,9 +159,13 @@ the embeds is the remainder.
   visibilityState evidence, recorded in #124.
 
 **Story 10.2 — First paint without interaction** · est ½d · *blocked by 10.1*
-- [ ] In `src/lib/interactive-map.ts`, after `map.once('load')` call
-      `map.triggerRepaint()` unconditionally (don't rely on a frame the
-      browser may never schedule).
+- [ ] ~~In `src/lib/interactive-map.ts`, after `map.once('load')` call
+      `map.triggerRepaint()` unconditionally~~ — **void (2026-07-29):**
+      `triggerRepaint()` is itself rAF-scheduled
+      (`triggerRepaint(){…!this._frameRequest && n.frame(…)}`, where `n.frame`
+      is `requestAnimationFrame`) and no-ops while a frame is already pending.
+      There is no synchronous repaint primitive in MapLibre; the fix is to
+      never gate a *boot* on rAF, not to add repaint calls.
 - [ ] Replace any rAF-gated first-paint/resize nudge with a `setTimeout(…,0)`
       path in `src/components/InteractiveMap.astro` (the lazy
       IntersectionObserver embed path still uses rAF-adjacent timing).
@@ -154,10 +179,25 @@ the embeds is the remainder.
 **Story 10.3 — Lock the regression** · est ¼d
 - [ ] Playwright test asserting the map canvas has non-zero painted pixels
       **without any interaction** (sample `getImageData`, assert variance).
-- [ ] If the harness can background the page, add a hidden-context variant.
+- [ ] ~~If the harness can background the page, add a hidden-context
+      variant.~~ It cannot: `bringToFront()` leaves
+      `document.visibilityState === 'visible'` in Playwright 1.60, headless
+      **and** headed (verified 2026-07-29), so any "hidden tab" test built on
+      it is vacuous. Stub the mechanism instead —
+      `page.addInitScript(() => { window.requestAnimationFrame = () => 0 })`
+      — and assert the map still *mounts* (pixels are impossible with rAF
+      starved, since MapLibre renders via rAF).
 - [x] Document the visibilityState/rAF gotcha (done — "Process notes" below
       + memory `verify-foreground-before-render-bugs`).
-- Acceptance: the new test fails on `main` pre-10.2 and passes after.
+- Acceptance: two tests. (a) An rAF-starvation test — stub
+  `requestAnimationFrame` to never fire, assert the map still mounts — which
+  fails on `main` pre-10.2 and passes after. (b) A pixel-variance test
+  asserting a non-blank canvas with zero interaction, which **already passes on
+  `main`** and exists to gate the nudge-stack removals in 10.2's third bullet.
+- Known gap (2026-07-29): the `/forecast` embed's first paint lands between 1s
+  and 3s depending on network, so it only marginally meets this epic's "≤3s"
+  criterion and misses it on slow runs. Not caused by the rAF boot bug; treat
+  as separate perf work.
 
 ---
 
@@ -166,25 +206,65 @@ the embeds is the remainder.
 > Outcome: the site is fully navigable and operable on a 360–414px phone.
 > All three findings below are real on foreground mobile (audit 2026-05-27).
 
-**Story 11.1 — Mobile navigation** · est 1d · **highest user impact**
-- [ ] Add a hamburger button (visible `< sm`) to `src/layouts/BaseLayout.astro`;
-      the catalog dropdown (`#catalog-dropdown`) + "Pregunta" link are
-      currently `hidden sm:block` / `hidden sm:inline-block` with no fallback.
-- [ ] Drawer/sheet listing Inicio, Ciudades, Playas, Estados, Volcanes,
-      Pregunta + theme/lang toggles.
-- [ ] A11y: focus trap, `Esc` to close, `aria-expanded`/`aria-controls`,
-      restore focus to the toggle on close.
-- [ ] e2e: at 360px, every top-level destination is reachable.
-- Acceptance: no top-level route is unreachable below 640px.
+**Story 11.1 — Mobile navigation** · est ½d (was 1d) · **partially shipped in #296**
+- [x] Hamburger button visible `< sm` — `<details id="mobile-menu">` at
+      `src/layouts/BaseLayout.astro:462`, 44×44 `<summary>`, 7 destinations
+      (Inicio, Mapa, Ciudades, Playas, Estados, Volcanes, Pregunta). The
+      desktop links stay `hidden sm:*`; the mobile menu is their fallback.
+- [x] Esc-to-close + focus restore to the toggle (`BaseLayout.astro:556-565`).
+- [ ] Close on focus leaving the menu (Tab-out currently leaves it open).
+- [ ] Drop `role="menu"`/`role="menuitem"`: that role contract requires
+      roving-tabindex arrow-key navigation which is not implemented, and
+      `role="menuitem"` on an `<a href>` overrides the link role and removes
+      the items from the AT link list. A nav disclosure should be a plain
+      `<ul><li><a>` list. Same fix for `#catalog-dropdown`.
+- [ ] Add the footer-only destinations (Comparar, Huracanes, Privacidad, Feed
+      RSS). They are unreachable on `/mapa`, which passes `noFooter`.
+- [ ] e2e: at 360px every top-level destination is reachable from any page
+      including `/mapa`; Esc closes and restores focus; axe clean with the menu
+      **open**. There is currently *no* e2e coverage of `#mobile-menu` at all.
+- **Not doing:** a focus trap, and `aria-expanded`/`aria-controls` on the
+  `<summary>`. This is a non-modal disclosure, so trapping focus is the wrong
+  pattern; and HTML-AAM computes the expanded state from `details[open]` in all
+  three engines, so a hand-managed `aria-expanded` would need a `toggle`-event
+  sync and could desync. The acceptance test is "axe clean with the menu open",
+  not the presence of a specific attribute.
+- Theme + language toggles are already always-visible 44×44 buttons beside the
+  hamburger (`ThemeToggle.astro:48`, `LanguageToggle.astro:21`), so they do not
+  need to move inside the menu.
+- Acceptance: no top-level route is unreachable below 640px, from any page
+  including `/mapa`.
 
 **Story 11.2 — Tap targets ≥44px** · est ½d
-- [ ] Header nav links → min-height 44px (currently 28px).
-- [ ] Map timeline controls `#tl-prev/play/next` + day-skip (currently
-      19–20px) → 44px hit area (visual size can stay small via padding).
-- [ ] Model toggle buttons `.mw-model-btn` (currently 19px) → 44px hit area.
-- [ ] Confirm `e2e/mobile-audit.spec.ts` enforces this and un-skip if needed.
-- Acceptance: `mobile-audit.spec.ts` tap-target assertions pass with no
-  per-element exemptions beyond the documented `sr-only` one.
+
+Correction (2026-07-29): the header nav links this story originally named are
+`hidden sm:inline-block` — desktop-only, so their 28px height was never a
+*mobile* tap-target defect. Sizes below were re-measured at 360px.
+
+- [ ] Mobile-menu items — 36px (`block px-3 py-2`) → 44px.
+- [ ] Footer links — 32px (`inline-block px-2 py-2` + `text-xs`) → 44px.
+- [ ] Timeline `#tl-play` / `#tl-prev` / `#tl-next` — **24px each**
+      (`text-base leading-none` + `py-1`), all visible on mobile → 44px
+      **vertical** hit area. Width stays natural: at `gap-1`, 44px-wide hit
+      areas on adjacent buttons would overlap and mis-route taps.
+- [ ] `#mw-search-toggle`, `#maploc`, `#mw-settings`, the info `<summary>` —
+      `h-9 w-9` (36px) → `h-11 w-11`. Re-check the right-edge stack offsets
+      (`top-3` / `top-14` / `top-[6.25rem]`) afterwards: they were tuned for
+      36px and go exactly flush at 44px.
+- [ ] `e2e/mobile-audit.spec.ts:106` uses `w < 44 && h < 44`, i.e. it passes
+      anything ≥44px in *either* axis — which is why 36px-tall full-width links
+      never failed. Add a strict `min(w,h) >= 44` rule, measured on the element
+      itself (no parent-container escape hatch), for a named selector set:
+      header controls, mobile-menu items, footer links, timeline buttons. Keep
+      the lenient rule as the global floor. `/mapa` is absent from that spec's
+      `PAGES` and needs its own test rather than being added wholesale.
+- **Documented deviation:** `.mw-model-btn` (5 segments in a corner pill,
+  currently ~19px) goes to ≥24px per WCAG 2.5.8 AA, not 44px — five 44px
+  segments would be a ~220px-wide pill over the map. If Story 11.3 reveals the
+  model toggle on mobile, lift the segments to a 44px *vertical* target there
+  while keeping the width compact.
+- Acceptance: the strict-set assertions pass; the global rule's only exemptions
+  remain the documented `sr-only`, zero-size, in-map and parent-container cases.
 
 **Story 11.3 — `/mapa` chrome on mobile** · est 1d
 - [ ] Surface opacity slider (`#opacitywrap`), overlay menu (Superposiciones),
