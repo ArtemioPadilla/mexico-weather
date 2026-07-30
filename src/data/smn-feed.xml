@@ -5,42 +5,50 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 29 Jul 2026 23:27:23 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2026 03:35:14 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): en zonas de Sonora, Chihuahua y Nayarit.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes (50 a 75 mm): en zonas de Sinaloa, Jalisco, Colima, Michoacán, Oaxaca y Chiapas.]]></description>
-      <pubDate>Wed, 29 Jul 2026 17:27:14 -0600</pubDate>
+      <pubDate>Wed, 29 Jul 2026 21:35:05 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-29-00ae</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 419 | 29 de Julio del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 29 JUL 2026: Se pronostican lluvias intensas en zonas de Sonora, Chihuahua y Nayarit</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_29.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Sonora, Chihuahua y Nayarit — Reporte Vespertino del 29 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_29.pdf]]></description>
+      <pubDate>Wed, 29 Jul 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_29</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 420 | 29 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, SINALOA, NAYARIT, JALISCO, COLIMA, MICHOACÁN, OAXACA Y CHIAPAS
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, CHIHUAHUA Y NAYARIT
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 419
+No. Aviso: 420
 Ciudad de México a 29 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, SINALOA, NAYARIT, JALISCO, COLIMA, MICHOACÁN, OAXACA Y CHIAPAS
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, CHIHUAHUA Y NAYARIT
 
-Para hoy, el monzón mexicano en el noroeste del país, ocasionará lluvias puntuales muy fuertes en Sonora (este y sureste), Sinaloa (norte y sur) y Chihuahua (oeste y suroeste); y puntuales fuertes en Durango (oeste y sur), todas con descargas eléctricas. A su vez, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera sobre el occidente y sureste del territorio nacional, inestabilidad atmosférica, así como canales de baja presión en el interior del país, y el ingreso y avance de la onda tropical núm.…]]></description>
+Para esta noche y madrugada del jueves, el monzón mexicano en el noroeste del país, en combinación con inestabilidad atmosférica, ocasionará lluvias puntuales intensas en Sonora (este y sureste) y Chihuahua (oeste y suroeste); muy fuertes en Sinaloa (norte y sur); lluvias fuertes en Durango (oeste y sur); chubascos en Baja California Sur y lluvias aisladas en Baja California. Por otro lado, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera sobre el occidente y sureste del territorio nacional, en combinación con el desplazamiento de la onda tropical núm.…]]></description>
       <pubDate>Wed, 29 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-29-419</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-29-420</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de julio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 29 de julio del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 29 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-29-12</guid>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Para esta noche se prevén lluvias intensas en regiones de Sonora, Oaxaca y Chiapas — Reporte Vespertino del 27 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_27.pdf]]></description>
       <pubDate>Mon, 27 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_27</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 27 JUL 2026: Se pronostican lluvias intensas para regiones de Sonora, Oaxaca y Chiapas, y de fuertes a muy fuertes en otras 16 entida...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_27.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas para regiones de Sonora, Oaxaca y Chiapas, y de fuertes a muy fuertes en otras 16 entida... — Reporte Matutino del 27 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_27.pdf]]></description>
-      <pubDate>Mon, 27 Jul 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_27</guid>
       <category>Comunicado</category>
     </item>
   </channel>
