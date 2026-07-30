@@ -15,17 +15,23 @@ test.describe('catalog dropdown nav', () => {
     const dd = page.locator('#catalog-dropdown');
     await expect(dd).toBeVisible();
     await dd.locator('summary').click();
-    await expect(page.getByRole('menuitem', { name: 'Ciudades' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: /Playas/ })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'Estados' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: /Volcanes/ })).toBeVisible();
+    // Scoped link queries, not getByRole('menuitem'): the dropdown is a
+    // <ul><li><a> list. role="menuitem" used to override the link role,
+    // which hid these items from the AT link list entirely.
+    await expect(dd.getByRole('link', { name: 'Ciudades' })).toBeVisible();
+    await expect(dd.getByRole('link', { name: /Playas/ })).toBeVisible();
+    await expect(dd.getByRole('link', { name: 'Estados' })).toBeVisible();
+    await expect(dd.getByRole('link', { name: /Volcanes/ })).toBeVisible();
   });
 
   test('Ciudades navigates to /clima/', async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
     await page.goto('');
     await page.locator('#catalog-dropdown summary').click();
-    await page.getByRole('menuitem', { name: 'Ciudades' }).click();
+    await page
+      .locator('#catalog-dropdown')
+      .getByRole('link', { name: 'Ciudades' })
+      .click();
     await page.waitForURL(/\/clima\/?$/);
     expect(page.url()).toMatch(/\/mexico-weather\/clima\/$/);
   });
