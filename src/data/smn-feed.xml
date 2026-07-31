@@ -5,16 +5,35 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 31 Jul 2026 03:57:56 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jul 2026 07:18:17 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): en zonas de Chiapas (centro, noroeste y sur) y Tabasco (centro y suroeste).</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de julio del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 31 de julio del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 31 Jul 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-31-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Chiapas y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas (75 a 150 mm): en zonas de Chiapas (centro, noroeste y sur) y Tabasco (centro y suroeste).]]></description>
-      <pubDate>Thu, 30 Jul 2026 21:57:47 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-30-a5d4</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Chiapas y Tabasco.]]></description>
+      <pubDate>Fri, 31 Jul 2026 01:18:08 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-31-fde7</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 30 JUL 2026: Para esta noche se prevén lluvias intensas en regiones de Chiapas y Tabasco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_30.pdf</link>
+      <description><![CDATA[Para esta noche se prevén lluvias intensas en regiones de Chiapas y Tabasco — Reporte Vespertino del 30 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_30.pdf]]></description>
+      <pubDate>Thu, 30 Jul 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_30</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 422 | 30 de Julio del 2026 | Emisión 18:00h</title>
@@ -39,20 +58,9 @@ Esta noche y madrugada del viernes, el monzón mexicano e inestabilidad atmosfé
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de julio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 30 de julio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Thu, 30 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-30-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 30 JUL 2026: Para esta noche se prevén lluvias intensas en regiones de Chiapas y Tabasco</title>
+      <title>📋 SMN Reporte Matutino 30 JUL 2026: Para este día se prevén lluvias de fuertes a intensas en regiones de 19 estados de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_30.pdf</link>
-      <description><![CDATA[Para esta noche se prevén lluvias intensas en regiones de Chiapas y Tabasco — Reporte Matutino del 30 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_30.pdf]]></description>
+      <description><![CDATA[Para este día se prevén lluvias de fuertes a intensas en regiones de 19 estados de México — Reporte Matutino del 30 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_30.pdf]]></description>
       <pubDate>Thu, 30 Jul 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_30</guid>
       <category>Comunicado</category>
