@@ -5,43 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 30 Jul 2026 22:29:51 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jul 2026 00:17:41 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): en zonas de Chiapas (centro, noroeste y sur) y Tabasco (centro y suroeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas (75 a 150 mm): en zonas de Chiapas (centro, noroeste y sur) y Tabasco (centro y suroeste).]]></description>
-      <pubDate>Thu, 30 Jul 2026 16:29:41 -0600</pubDate>
+      <pubDate>Thu, 30 Jul 2026 18:17:30 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-07-30-a5d4</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 421 | 30 de Julio del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 422 | 30 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN CHIAPAS Y TABASCO
+      <description><![CDATA[ESTA NOCHE, SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIAPAS Y TABASCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 421
+No. Aviso: 422
 Ciudad de México a 30 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES INTENSAS EN CHIAPAS Y TABASCO
+ESTA NOCHE, SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIAPAS Y TABASCO
 
-Este día, el monzón mexicano sobre el noroeste del país, en interacción con inestabilidad atmosférica, generará lluvias fuertes a muy fuertes con descargas eléctricas en Sonora, Chihuahua, Durango y Sinaloa, además de chubascos en Baja California Sur. Por otra parte, una circulación ciclónica en altura sobre el sureste del territorio nacional, vaguadas en niveles medios y altos de la atmósfera, canales de baja presión en el interior del territorio mexicano y la onda tropical núm.…]]></description>
+
+
+Esta noche y madrugada del viernes, el monzón mexicano e inestabilidad atmosférica ocasionarán lluvias puntuales muy fuertes en Sonora (norte, centro y este), Chihuahua (oeste) y Sinaloa (norte), así como lluvias puntuales fuertes en Baja California Sur (sur), Durango (oeste y sur) y Nayarit. Dichas lluvias estarán acompañadas con descargas eléctricas. Por su parte, una circulación ciclónica en altura sobre el sureste del país, vaguadas en niveles medios y altos de la atmósfera, canales de baja presión sobre el interior de la República Mexicana y la onda tropical núm.…]]></description>
       <pubDate>Thu, 30 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-30-421</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-30-422</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 30 de julio del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 30 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-30-12</guid>
