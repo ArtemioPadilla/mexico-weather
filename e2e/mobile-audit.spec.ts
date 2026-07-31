@@ -7,7 +7,8 @@ import AxeBuilder from '@axe-core/playwright';
  * Survey every page family on a 360×640 portrait viewport (the
  * conservative end of common Android phones) and assert:
  *   - No horizontal overflow (body.scrollWidth <= viewport)
- *   - Every interactive (button, a, input) has tap target ≥44 px
+ *   - Every interactive (button, a, input) has tap target ≥44 px,
+ *     excluding inline links in prose (WCAG 2.5.5/2.5.8 "inline" exception)
  *   - axe still reports 0 critical / 0 serious
  *
  * Uses a manual viewport + DPR + touch config rather than
@@ -137,6 +138,21 @@ test.describe('mobile UX — 360x640 portrait', () => {
           // visibility, so an unfocused sr-only link can't be a
           // mobile target by definition.
           if (el.classList.contains('sr-only')) continue;
+          // WCAG 2.5.5 and 2.5.8 both exempt *inline* targets — a link
+          // inside a sentence or block of text, where the author cannot
+          // change the size without changing the text. Without this,
+          // prose links trip the rule purely on font metrics: the state
+          // links on /volcan/<slug>/ measure 44.0px wide on macOS and
+          // 43.x on the Linux CI runner, so the same commit passed
+          // locally and failed in CI depending on which state names the
+          // data refresh happened to link.
+          const inlineInProse =
+            getComputedStyle(el).display === 'inline' &&
+            !!el.parentElement &&
+            Array.from(el.parentElement.childNodes).some(
+              (n) => n.nodeType === Node.TEXT_NODE && (n.textContent ?? '').trim() !== '',
+            );
+          if (inlineInProse) continue;
           // Targets where the element is small but is inside a larger
           // touchable parent (the parent's hit area is what counts).
           // We check the parent <li> / wrapper for grid lists.
