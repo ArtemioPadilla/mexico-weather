@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 01 Aug 2026 03:55:18 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2026 06:43:18 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de agosto del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 01 de agosto del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sat, 01 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-08-01-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa Nayarit, Puebla, Estado de México, Veracruz, Tabasco y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Rachas de viento de 40 a 60 km/h: Chihuahua, Coahuila, Nuevo León, Tamaulipas, Durango, Aguascalientes, Zacatecas, San Luis Potosí, Oaxaca (istmo de Tehuantepec),...]]></description>
-      <pubDate>Fri, 31 Jul 2026 21:55:09 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-31-295e</guid>
+      <pubDate>Sat, 01 Aug 2026 00:43:05 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-01-295e</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -44,17 +55,6 @@ Durante esta noche y madrugada del sábado, el monzón mexicano sobre el noroest
       <pubDate>Fri, 31 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-07-31-424</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de julio del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 31 de julio del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Fri, 31 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-07-31-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 31 JUL 2026: Se pronostican lluvias muy fuertes en regiones de Morelos, Puebla y Oaxaca, y fuertes en otros 20 estados de México</title>
