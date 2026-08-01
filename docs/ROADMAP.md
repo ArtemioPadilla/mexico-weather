@@ -166,11 +166,28 @@ embed, not a blank-canvas bug.
       is `requestAnimationFrame`) and no-ops while a frame is already pending.
       There is no synchronous repaint primitive in MapLibre; the fix is to
       never gate a *boot* on rAF, not to add repaint calls.
-- [ ] Replace any rAF-gated first-paint/resize nudge with a `setTimeout(…,0)`
-      path in `src/components/InteractiveMap.astro` (the lazy
-      IntersectionObserver embed path still uses rAF-adjacent timing).
-- [ ] Remove the 6-step deferred-nudge stack (#122) once the above holds —
-      it was compensating for the wrong primitive.
+- [x] Replace the rAF-gated boot with `setTimeout(…, 0)` — done for
+      `src/pages/forecast.astro:1075`, the last remaining site (`/mapa` got
+      this in #289). Guarded by a source-text test at both call sites and by
+      an rAF-starvation e2e test that fails on the pre-fix code.
+- [ ] **BLOCKED (2026-07-31) — Remove the 6-step deferred-nudge stack (#122)**
+      (`aggressiveNudge`'s 6 timers, `synthesizeMove`'s 4 synthetic pointer
+      events, the 200 ms × 25 repaint interval).
+      **Gate: a real-device foreground check, not the automated probe.** The
+      probe cannot background a page (see Story 10.3), so
+      "cannot reproduce in foreground" is its *only* possible verdict —
+      treating that as sufficient would rubber-stamp deleting six PRs' worth
+      of workaround. Someone must load, on a phone, foregrounded, with
+      cache/SW cleared:
+      `https://artemiop.com/mexico-weather/forecast/?lat=19.43&lng=-99.13&name=CDMX&tz=America/Mexico_City`
+      and answer: does the map show imagery *before* the screen is touched?
+      - **Yes** → E10 demotes to P2; remove the layers one commit at a time,
+        each gated on `e2e/map-first-paint.spec.ts --repeat-each=10`.
+      - **No** → the #124 signature is real in foreground; E10 stays P0 and
+        the stack stays until the actual cause is found.
+      Keep regardless: the `sourcedata` → `triggerRepaint` hook, the
+      `ResizeObserver`, `once('idle')`, and the `osm` visibility flip (the
+      one nudge with a mechanism rather than a timing guess).
 - [ ] Evaluate forcing eager import of maplibre-gl on `/mapa` only (drop the
       dynamic-import latency variable; keep lazy for embeds).
 - Acceptance: reload `#view=23.6,-102.5,5z&layer=temperature` 10× — field
