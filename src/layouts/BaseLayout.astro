@@ -640,8 +640,10 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
     {/* Shared site footer — audit UX-10. Every page gets a quiet row
         of site links (the homepage's in-page footer keeps its data
         sources; its Privacidad link moved here to avoid duplicates).
-        Links are inline-block + padded so short labels still meet
-        the 44px tap-target rule in at least one dimension. */}
+        Links are inline-flex + min-h-[44px] so they meet the tap-target
+        rule on the axis that actually failed: they were 32px tall
+        (text-xs + py-2), and passed the old audit only because it
+        accepted >=44px in *either* dimension (Story 11.2). */}
     {!noFooter && (
     <footer
       class="border-t border-gray-200 py-4 dark:border-gray-800"
@@ -653,42 +655,42 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
       >
         <a
           href={`${base}mapa`}
-          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           data-i18n-en="Interactive map"
           >Mapa interactivo</a
         >
         <span aria-hidden="true">•</span>
         <a
           href={`${base}clima/`}
-          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           data-i18n-en="Catalog"
           >Catálogo</a
         >
         <span aria-hidden="true">•</span>
         <a
           href={`${base}compara/`}
-          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           data-i18n-en="Compare"
           >Comparar</a
         >
         <span aria-hidden="true">•</span>
         <a
           href={`${base}huracanes/`}
-          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           data-i18n-en="Hurricanes"
           >Huracanes</a
         >
         <span aria-hidden="true">•</span>
         <a
           href={`${base}rss.xml`}
-          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           data-i18n-en="RSS feed"
           >Feed RSS</a
         >
         <span aria-hidden="true">•</span>
         <a
           href={`${base}privacidad/`}
-          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           data-i18n-en="Privacy"
           >Privacidad</a
         >
@@ -697,7 +699,7 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
           href="https://github.com/ArtemioPadilla/mexico-weather"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-block px-2 py-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           >GitHub</a
         >
       </nav>
