@@ -7,7 +7,12 @@
  * Used by:
  *   /mapa      — full-screen (all features on)
  *   /          — 400px embed (layer rail + timeline + preset pins)
- *   /forecast  — 320px embed (basemap only; pin + popup)
+ *
+ * NOT used by /forecast: that page calls initInteractiveMap() directly from
+ * its own client script (src/pages/forecast.astro), so it gets none of this
+ * component's boot scheduling, double-init guard or lazy IntersectionObserver
+ * path. That is why the #289 rAF→setTimeout fix had to be applied there
+ * separately (issue #124).
  *
  * Each instance owns a uniquely-prefixed set of IDs (mapId="map" stays
  * stable for /mapa to preserve e2e selectors and the ?e2e=1 affordance).

@@ -1072,7 +1072,12 @@ const base = siteBase();
           // the current location preserved in the URL hash.
           const mapEl = document.getElementById('fc-map');
           if (mapEl) {
-            window.requestAnimationFrame(() => {
+            // setTimeout, never requestAnimationFrame: rAF is paused in
+            // hidden/backgrounded tabs, so an rAF-gated boot means the map
+            // never mounts at all — not merely never paints (issue #124).
+            // Same fix PR #289 applied to InteractiveMap.astro's non-lazy
+            // path; this page calls the factory directly, so it never got it.
+            window.setTimeout(() => {
               void initInteractiveMap({
                 els: { container: mapEl },
                 features: {
@@ -1132,7 +1137,7 @@ const base = siteBase();
                   /* MapLibre failed to load (offline, blocked) — keep the
                      placeholder block + click-through link. No throw. */
                 });
-            });
+            }, 0);
           }
         }
       } catch {
