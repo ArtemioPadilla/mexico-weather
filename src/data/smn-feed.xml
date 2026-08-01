@@ -5,26 +5,55 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 01 Aug 2026 11:36:55 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2026 14:00:10 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 425 | 01 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[Pronóstico Meteorológico General
+No. Aviso: 425
+Ciudad de México a 01 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN GUERRERO
+
+Este día, el monzón mexicano e inestabilidad atmosféri
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 425
+Ciudad de México a 01 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN GUERRERO
+
+Este día, el monzón mexicano e inestabilidad atmosférica, mantendrán condiciones para lluvias muy fuertes en zonas de Sonora, Sinaloa, Chihuahua, Durango, Zacatecas y Nayarit, así como chubascos en Baja California Sur. Simultáneamente, un frente frío se extenderá cerca de la frontera noreste de México e interaccionará con un canal de baja presión, generando vientos fuertes y lluvias con chubascos y descargas eléctricas en la región. Circulaciones ciclónicas y una vaguada en niveles medios y altos de la atmósfera, en interacción con la onda tropical núm. 23 sobre el sureste mexicano, propiciarán lluvias puntuales intensas en Guerrero, además de chubascos y lluvias fuertes a muy fuertes en el occidente, centro, oriente, sur y sureste de territorio nacional, incluida la península de Yucatán.…]]></description>
+      <pubDate>Sat, 01 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-01-425</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 01 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 01 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-01-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa Nayarit, Puebla, Estado de México, Veracruz, Tabasco y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Rachas de viento de 40 a 60 km/h: Chihuahua, Coahuila, Nuevo León, Tamaulipas, Durango, Aguascalientes, Zacatecas, San Luis Potosí, Oaxaca (istmo de Tehuantepec),...]]></description>
-      <pubDate>Sat, 01 Aug 2026 05:36:46 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-01-295e</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Guerrero.]]></description>
+      <pubDate>Sat, 01 Aug 2026 08:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-01-527d</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -34,27 +63,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 31 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_31</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 424 | 31 de Julio del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, PUEBLA, VERACRUZ, TABASCO Y CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 424
-Ciudad de México a 31 de Julio del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, PUEBLA, VERACRUZ, TABASCO Y CHIAPAS
-
- 
-
-Durante esta noche y madrugada del sábado, el monzón mexicano sobre el noroeste del país, en combinación con inestabilidad en altura, generará lluvias puntuales muy fuertes en Sinaloa y Nayarit (norte), así como lluvias fuertes en Sonora (este y sureste), Chihuahua (oeste y suroeste) y Durango (oeste y sur).…]]></description>
-      <pubDate>Fri, 31 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-31-424</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 31 JUL 2026: Se pronostican lluvias muy fuertes en regiones de Morelos, Puebla y Oaxaca, y fuertes en otros 20 estados de México</title>
