@@ -407,43 +407,52 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
               <span data-i18n-en="Catalog">Catálogo</span>
               <span aria-hidden="true" class="text-xs">▾</span>
             </summary>
-            <div
-              role="menu"
+            {/* A list, not role="menu". The ARIA menu contract requires
+                roving-tabindex arrow-key navigation, which a disclosure
+                dropdown does not implement — and role="menuitem" on an
+                <a href> overrides the link role, so the items disappear
+                from the AT link list entirely. */}
+            <ul
+              role="list"
               class="absolute right-0 z-50 mt-1 min-w-[180px] rounded-lg border border-gray-200 bg-white py-1 text-sm shadow-lg dark:border-gray-700 dark:bg-gray-900"
             >
-              <a
-                role="menuitem"
-                href={`${base}clima/`}
-                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
-                data-i18n-en="Cities"
-                >Ciudades</a
-              >
-              <a
-                role="menuitem"
-                href={`${base}playa/`}
-                aria-label="Playas"
-                data-i18n-en-aria-label="Beaches"
-                class="block px-3 py-2 text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-cyan-400"
-                ><span aria-hidden="true">🌊</span>
-                <span data-i18n-en="Beaches">Playas</span></a
-              >
-              <a
-                role="menuitem"
-                href={`${base}estado/`}
-                class="block px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-400"
-                data-i18n-en="States"
-                >Estados</a
-              >
-              <a
-                role="menuitem"
-                href={`${base}volcan/`}
-                aria-label="Volcanes"
-                data-i18n-en-aria-label="Volcanoes"
-                class="block px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-orange-400"
-                ><span aria-hidden="true">🌋</span>
-                <span data-i18n-en="Volcanoes">Volcanes</span></a
-              >
-            </div>
+              <li>
+                <a
+                  href={`${base}clima/`}
+                  class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Cities"
+                  >Ciudades</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}playa/`}
+                  aria-label="Playas"
+                  data-i18n-en-aria-label="Beaches"
+                  class="block px-3 py-2 text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-cyan-400"
+                  ><span aria-hidden="true">🌊</span>
+                  <span data-i18n-en="Beaches">Playas</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}estado/`}
+                  class="block px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-400"
+                  data-i18n-en="States"
+                  >Estados</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}volcan/`}
+                  aria-label="Volcanes"
+                  data-i18n-en-aria-label="Volcanoes"
+                  class="block px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-orange-400"
+                  ><span aria-hidden="true">🌋</span>
+                  <span data-i18n-en="Volcanoes">Volcanes</span></a
+                >
+              </li>
+            </ul>
           </details>
           <a
             href={`${base}pregunta`}
@@ -477,64 +486,112 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
                 <path d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
             </summary>
-            <div
-              role="menu"
+            {/* A list, not role="menu" — see the note on #catalog-dropdown
+                above. Items are min-h-[44px] flex rows: at 360px this is the
+                primary navigation, so the tap-target rule applies to the
+                element itself, not just to its full-bleed width (Story 11.2).
+                Includes the footer-only destinations, because /mapa passes
+                noFooter and would otherwise have no path to them at all. */}
+            <ul
+              role="list"
               class="absolute right-0 z-50 mt-1 min-w-[200px] rounded-lg border border-gray-200 bg-white py-1 text-sm shadow-lg dark:border-gray-700 dark:bg-gray-900"
             >
-              <a
-                role="menuitem"
-                href={base}
-                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
-                data-i18n-en="Home"
-                >Inicio</a
-              >
-              <a
-                role="menuitem"
-                href={`${base}mapa`}
-                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
-                data-i18n-en="Map"
-                >Mapa</a
-              >
-              <a
-                role="menuitem"
-                href={`${base}clima/`}
-                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
-                data-i18n-en="Cities"
-                >Ciudades</a
-              >
-              <a
-                role="menuitem"
-                href={`${base}playa/`}
-                aria-label="Playas"
-                data-i18n-en-aria-label="Beaches"
-                class="block px-3 py-2 text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-cyan-400"
-                ><span aria-hidden="true">🌊</span>
-                <span data-i18n-en="Beaches">Playas</span></a
-              >
-              <a
-                role="menuitem"
-                href={`${base}estado/`}
-                class="block px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-400"
-                data-i18n-en="States"
-                >Estados</a
-              >
-              <a
-                role="menuitem"
-                href={`${base}volcan/`}
-                aria-label="Volcanes"
-                data-i18n-en-aria-label="Volcanoes"
-                class="block px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-orange-400"
-                ><span aria-hidden="true">🌋</span>
-                <span data-i18n-en="Volcanoes">Volcanes</span></a
-              >
-              <a
-                role="menuitem"
-                href={`${base}pregunta`}
-                class="block px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
-                data-i18n-en="Ask"
-                >Pregunta</a
-              >
-            </div>
+              <li>
+                <a
+                  href={base}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Home"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}mapa`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Map"
+                  >Mapa</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}clima/`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Cities"
+                  >Ciudades</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}playa/`}
+                  aria-label="Playas"
+                  data-i18n-en-aria-label="Beaches"
+                  class="flex min-h-[44px] items-center gap-1.5 px-3 py-2 text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-cyan-400"
+                  ><span aria-hidden="true">🌊</span>
+                  <span data-i18n-en="Beaches">Playas</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}estado/`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-red-400"
+                  data-i18n-en="States"
+                  >Estados</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}volcan/`}
+                  aria-label="Volcanes"
+                  data-i18n-en-aria-label="Volcanoes"
+                  class="flex min-h-[44px] items-center gap-1.5 px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-orange-400"
+                  ><span aria-hidden="true">🌋</span>
+                  <span data-i18n-en="Volcanoes">Volcanes</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}pregunta`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Ask"
+                  >Pregunta</a
+                >
+              </li>
+              <li aria-hidden="true">
+                <hr class="my-1 border-gray-200 dark:border-gray-700" />
+              </li>
+              <li>
+                <a
+                  href={`${base}compara/`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Compare"
+                  >Comparar</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}huracanes/`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Hurricanes"
+                  >Huracanes</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}privacidad/`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Privacy"
+                  >Privacidad</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${base}rss.xml`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="RSS feed"
+                  >Feed RSS</a
+                >
+              </li>
+            </ul>
           </details>
         </div>
       </div>
@@ -561,6 +618,20 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
               var s = dd.querySelector('summary');
               if (s) s.focus();
             }
+          });
+        });
+        // Tab-out closes. Deliberately no focus restore here: the user
+        // moved focus away on purpose, and pulling it back would trap
+        // them. Escape is the path that restores focus.
+        dds.forEach(function (dd) {
+          dd.addEventListener('focusout', function (e) {
+            if (!dd.hasAttribute('open')) return;
+            var to = e.relatedTarget;
+            // relatedTarget is null when focus goes nowhere (e.g. a click on
+            // a non-focusable spot inside the panel) — keep it open then;
+            // the outside-click handler above covers that case.
+            if (!to || dd.contains(to)) return;
+            dd.removeAttribute('open');
           });
         });
       })();
