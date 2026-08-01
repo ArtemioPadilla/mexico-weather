@@ -5,44 +5,52 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 31 Jul 2026 23:18:21 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2026 03:55:18 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Puebla, Veracruz, Tabasco y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa Nayarit, Puebla, Estado de México, Veracruz, Tabasco y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Puebla, Veracruz, Tabasco y Chiapas.]]></description>
-      <pubDate>Fri, 31 Jul 2026 17:18:10 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-07-31-58e6</guid>
+      <description><![CDATA[Rachas de viento de 40 a 60 km/h: Chihuahua, Coahuila, Nuevo León, Tamaulipas, Durango, Aguascalientes, Zacatecas, San Luis Potosí, Oaxaca (istmo de Tehuantepec),...]]></description>
+      <pubDate>Fri, 31 Jul 2026 21:55:09 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-07-31-295e</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 423 | 31 de Julio del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 31 JUL 2026: Para esta noche se prevén lluvias muy fuertes en Sinaloa y zonas de Nayarit, Puebla, Estado de México, Veracruz, Tabas...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_31.pdf</link>
+      <description><![CDATA[Para esta noche se prevén lluvias muy fuertes en Sinaloa y zonas de Nayarit, Puebla, Estado de México, Veracruz, Tabas... — Reporte Vespertino del 31 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_31.pdf]]></description>
+      <pubDate>Fri, 31 Jul 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_31</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 424 | 31 de Julio del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE MORELOS, PUEBLA Y OAXACA
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, PUEBLA, VERACRUZ, TABASCO Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 423
+No. Aviso: 424
 Ciudad de México a 31 de Julio del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE MORELOS, PUEBLA Y OAXACA
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, PUEBLA, VERACRUZ, TABASCO Y CHIAPAS
 
  
 
-Para hoy, el monzón mexicano en el noroeste del país, en interacción con inestabilidad atmosférica, ocasionarán lluvias puntuales fuertes con descargas eléctricas en Baja California Sur (sur), Sonora (este y sureste), Sinaloa (norte y sur), Chihuahua (oeste y suroeste), Durango (sur) y Nayarit (norte). A su vez, circulación ciclónica en altura, sobre el sur, sureste, oriente y centro del territorio nacional, así como vaguadas en niveles medios y altos de la atmósfera y canales de baja presión sobre el interior del país, además de la onda tropical núm.…]]></description>
+Durante esta noche y madrugada del sábado, el monzón mexicano sobre el noroeste del país, en combinación con inestabilidad en altura, generará lluvias puntuales muy fuertes en Sinaloa y Nayarit (norte), así como lluvias fuertes en Sonora (este y sureste), Chihuahua (oeste y suroeste) y Durango (oeste y sur).…]]></description>
       <pubDate>Fri, 31 Jul 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-07-31-423</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-07-31-424</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de julio del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de julio del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 31 de julio del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 31 Jul 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-07-31-12</guid>
@@ -78,14 +86,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas en zonas de Sonora, Chihuahua y Nayarit — Reporte Vespertino del 29 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_29.pdf]]></description>
       <pubDate>Wed, 29 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_29</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 29 JUL 2026: Se pronostican lluvias de fuertes a muy fuertes en regiones de 19 estados de la República Mexicana</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_29.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de fuertes a muy fuertes en regiones de 19 estados de la República Mexicana — Reporte Matutino del 29 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_29.pdf]]></description>
-      <pubDate>Wed, 29 Jul 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_29</guid>
       <category>Comunicado</category>
     </item>
   </channel>
