@@ -454,7 +454,7 @@ const base = siteBase();
                   <text x="12" y="56" text-anchor="middle" font-size="9" fill="currentColor" class="text-gray-600 dark:text-gray-400">${esc(timeOnly(sr))}</text>
                   <text x="180" y="56" text-anchor="middle" font-size="9" fill="currentColor" class="text-gray-600 dark:text-gray-400">${esc(timeOnly(ss))}</text>
                 </svg>
-                <p class="text-xs text-gray-600 dark:text-gray-500" aria-label="${esc(t.sunrise)} ${esc(timeOnly(sr))} y ${esc(t.sunset)} ${esc(timeOnly(ss))}">
+                <p class="text-xs text-gray-600 dark:text-gray-500">
                   ${esc(t.sunrise)} <span class="font-semibold">${esc(timeOnly(sr))}</span><br />
                   ${esc(t.sunset)} <span class="font-semibold">${esc(timeOnly(ss))}</span>
                 </p>
@@ -483,7 +483,7 @@ const base = siteBase();
               <ul id="fc-alert-list" class="mt-2 space-y-1 text-xs"></ul>
               <p class="mt-1 text-[11px] text-blue-700/70 dark:text-blue-300/70">Las alertas se guardan solo en tu navegador. Se evalúan al cargar esta página contra el pronóstico de 24 h.</p>
             </div>
-            <div class="fc-map-wrap mt-3" aria-label="Mapa interactivo">
+            <div class="fc-map-wrap mt-3" role="region" aria-label="Mapa interactivo">
               <div id="fc-map" class="h-full w-full"></div>
             </div>
             <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
