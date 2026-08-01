@@ -26,6 +26,12 @@ interface Features {
   locateButton?: boolean;
   presetPins?: boolean;
   backLink?: boolean;
+  /** Below sm, reveal the rail's opacity slider, the overlays accordion,
+   *  the model toggle and the measure/snapshot tools behind one trigger
+   *  (Story 11.3). Deliberately NOT keyed off layerRail: the homepage
+   *  teaser sets that too, and a 400px embed has no room for the panel.
+   *  Only the full-page /mapa should set this. */
+  mobileControls?: boolean;
 }
 
 interface Props {
@@ -90,6 +96,8 @@ const ids = {
   loc: mapId === 'map' ? 'maploc' : `${mapId}-loc`,
   layerBtns: mapId === 'map' ? 'layerbtns' : `${mapId}-layerbtns`,
   overlayBtns: mapId === 'map' ? 'layerbtns-overlays' : `${mapId}-layerbtns-overlays`,
+  overlaysPanel: mapId === 'map' ? 'mw-overlays' : `${mapId}-mw-overlays`,
+  controlsToggle: mapId === 'map' ? 'mw-controls-toggle' : `${mapId}-controls-toggle`,
   opacityWrap: mapId === 'map' ? 'opacitywrap' : `${mapId}-opacitywrap`,
   opacity: mapId === 'map' ? 'opacity' : `${mapId}-opacity`,
   legend: mapId === 'map' ? 'legend' : `${mapId}-legend`,
@@ -123,7 +131,10 @@ const cfg = JSON.stringify({
 <div
   id={ids.root}
   class:list={[
-    'im-root relative w-full overflow-hidden bg-gray-100 dark:bg-gray-950',
+    // group/chrome: lets the mobile-controls trigger (Story 11.3) reveal
+    // controls that are absolutely-positioned siblings of the rail, not
+    // just its children, via group-data-[controls=open]/chrome variants.
+    'im-root group/chrome relative w-full overflow-hidden bg-gray-100 dark:bg-gray-950',
     className,
   ]}
   style={`height:${height};`}
@@ -190,13 +201,13 @@ const cfg = JSON.stringify({
 
   {features.layerRail && (
     <div
-      class="im-rail absolute left-3 top-14 z-10 w-auto sm:w-44 max-w-[calc(100vw-1.5rem)] space-y-2 rounded-lg bg-white/95 p-2 sm:p-3 text-sm shadow dark:bg-gray-900/95"
+      class="im-rail absolute left-3 top-14 z-10 w-auto sm:w-44 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg bg-white/95 p-2 sm:p-3 text-sm shadow dark:bg-gray-900/95"
       aria-label={t.map_layers}
       role="group"
     >
       <p class="hidden sm:block font-semibold text-gray-700 dark:text-gray-200">{t.map_layers}</p>
       <div id={ids.layerBtns} class="flex flex-col gap-1"></div>
-      <div id={ids.opacityWrap} class="hidden sm:block pt-1">
+      <div id={ids.opacityWrap} class="hidden group-data-[controls=open]/chrome:block sm:block pt-1">
         <label for={ids.opacity} class="block text-xs text-gray-600 dark:text-gray-400"
           >{t.map_opacity}</label
         >
@@ -225,7 +236,7 @@ const cfg = JSON.stringify({
         Hidden on mobile to keep the rail compact; keyboard shortcuts
         still toggle the overlays.
       */}
-      <details class="hidden sm:block pt-2 text-xs">
+      <details id={ids.overlaysPanel} class="hidden group-data-[controls=open]/chrome:block sm:block pt-2 text-xs">
         <summary class="cursor-pointer select-none font-semibold text-gray-700 dark:text-gray-200">
           Superposiciones
         </summary>
@@ -240,6 +251,29 @@ const cfg = JSON.stringify({
     class="absolute bottom-20 left-1/2 z-10 hidden -translate-x-1/2 rounded-lg bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow dark:bg-gray-900/95 dark:text-gray-300"
   >
   </p>
+
+  {/* Mobile controls trigger (Story 11.3). Below sm, the opacity slider,
+      overlays accordion, model toggle and measure/snapshot tools are all
+      `hidden sm:*`, i.e. unreachable on a phone. This reveals them in
+      place via data-controls on the map root — no DOM moves, since every
+      one of those controls is wired by id from interactive-map.ts and
+      three of them are absolutely-positioned siblings of the rail.
+      Sits *above* the timeline, not beside it: the centred pill is 280px
+      wide at 360px (x=40..320), leaving only 40px of gutter — less than a
+      44px target plus its margin, so a bottom-3 trigger would be partly
+      covered by the pill. Measured, not assumed. */}
+  {features.mobileControls && (
+    <button
+      id={ids.controlsToggle}
+      type="button"
+      aria-expanded="false"
+      aria-label="Controles del mapa"
+      data-i18n-en-aria-label="Map controls"
+      title="Controles del mapa"
+      class="absolute bottom-[4.5rem] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-gray-900/85 text-base text-white shadow-lg backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
+      >⚙</button
+    >
+  )}
 
   {features.timeline && (
     <div
@@ -373,7 +407,7 @@ const cfg = JSON.stringify({
   {features.layerRail && (
     <div
       id="mw-model-toggle"
-      class="absolute bottom-9 right-2 z-10 hidden items-center gap-1 rounded-full bg-gray-900/80 px-1 py-0.5 text-[10px] font-mono tabular-nums text-gray-300 backdrop-blur-sm sm:inline-flex"
+      class="absolute bottom-9 max-sm:group-data-[controls=open]/chrome:bottom-[4.5rem] right-2 z-10 hidden items-center gap-1 rounded-full bg-gray-900/80 px-1 py-0.5 text-[10px] font-mono tabular-nums text-gray-300 backdrop-blur-sm group-data-[controls=open]/chrome:inline-flex sm:inline-flex"
       aria-label="Modelo de pronóstico Open-Meteo"
     >
       {[
@@ -391,7 +425,7 @@ const cfg = JSON.stringify({
           type="button"
           data-model={m.id}
           aria-pressed={m.id === 'best_match' ? 'true' : 'false'}
-          class="mw-model-btn inline-flex min-h-[24px] items-center rounded-full px-2 hover:bg-white/10 aria-pressed:bg-blue-500/30 aria-pressed:text-white aria-pressed:font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+          class="mw-model-btn inline-flex min-h-[24px] group-data-[controls=open]/chrome:min-h-[44px] sm:min-h-[24px] items-center rounded-full px-2 hover:bg-white/10 aria-pressed:bg-blue-500/30 aria-pressed:text-white aria-pressed:font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
         >{m.label}</button>
       ))}
     </div>
@@ -402,7 +436,7 @@ const cfg = JSON.stringify({
   {features.layerRail && (
     <div
       id="mw-snapshot-wrap"
-      class="absolute bottom-20 right-2 z-10 hidden flex-col items-stretch gap-1 text-xs sm:flex"
+      class="absolute bottom-20 max-sm:group-data-[controls=open]/chrome:bottom-[8rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
     >
       <button
         id="mw-snapshot-capture"
@@ -431,7 +465,7 @@ const cfg = JSON.stringify({
   {features.layerRail && (
     <div
       id="mw-measure-wrap"
-      class="absolute bottom-[10.5rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs sm:flex"
+      class="absolute bottom-[10.5rem] max-sm:group-data-[controls=open]/chrome:bottom-[11.5rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
     >
       <button
         id="mw-measure-distance"
@@ -726,6 +760,41 @@ const cfg = JSON.stringify({
         window.setTimeout(boot, 0);
       }
     });
+  }
+
+  // Story 11.3 — mobile controls trigger. Flips data-controls on the map
+  // root; the group-data-[controls=open]/chrome:* variants on the hidden
+  // controls do the revealing. Pure CSS reveal, no DOM moves.
+  function wireMobileControls(): void {
+    const toggles = document.querySelectorAll<HTMLButtonElement>(
+      'button[id$="controls-toggle"]',
+    );
+    toggles.forEach((toggle) => {
+      const root = toggle.closest('.im-root') as HTMLElement | null;
+      if (!root) return;
+      const setOpen = (open: boolean): void => {
+        if (open) root.dataset.controls = 'open';
+        else delete root.dataset.controls;
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
+      toggle.addEventListener('click', () => {
+        setOpen(root.dataset.controls !== 'open');
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        // interactive-map.ts binds Escape on the search input and the
+        // autocomplete list and calls preventDefault() there; don't
+        // double-handle when one of those already consumed the key.
+        if (e.defaultPrevented) return;
+        if (root.dataset.controls === 'open') setOpen(false);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireMobileControls);
+  } else {
+    wireMobileControls();
   }
 
   if (document.readyState === 'loading') {
