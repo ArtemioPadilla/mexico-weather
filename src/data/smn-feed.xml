@@ -5,19 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 02 Aug 2026 11:37:31 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2026 15:32:29 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 427 | 02 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO Y NAYARIT • Y LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, ZACATECAS, JALISCO, COLIMA, GUERRERO Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 427
+Ciudad de México a 02 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO Y NAYARIT; Y LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, ZACATECAS, JALISCO, COLIMA, GUERRERO Y CHIAPAS
+
+Para hoy, el monzón mexicano ocasionará lluvias puntuales intensas y vientos con rachas fuertes en zonas de Sinaloa (centro y sur), Chihuahua (sur), Durango (oeste y sur) y Nayarit (norte); puntuales muy fuertes en Sonora (sur); intervalos de chubascos en Baja California Sur; y lluvias aisladas en zonas de Baja California. Por otro lado, un frente frío cerca de la frontera norte de México, en interacción con un canal de baja presión e inestabilidad atmosférica, generarán lluvias puntuales fuertes con rachas de viento de 50 a 70 km/h en Coahuila, Nuevo León (oeste y norte) y Tamaulipas (norte). De igual forma, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, junto con el avance de la onda tropical núm.…]]></description>
+      <pubDate>Sun, 02 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-02-427</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de agosto del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 02 de agosto del 2026
-Emisión: 03:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 02 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-02-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Chihuahua, Durango y Nayarit.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Chihuahua, Durango y Nayarit.]]></description>
+      <pubDate>Sun, 02 Aug 2026 09:32:20 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-02-c004</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 01 AUG 2026: Hoy, la onda tropical número 23 generará lluvias intensas en el este y sur de Guerrero</title>
@@ -26,35 +53,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sun, 02 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_1</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guerrero (este y sur).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guerrero (este y sur).]]></description>
-      <pubDate>Sun, 02 Aug 2026 05:37:22 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-02-bb63</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 426 | 01 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN GUERRERO Y LLUVIAS MUY FUERTES EN ZONAS DE SONORA, SINALOA, CHIHUAHUA, DURANGO, ZACATECAS Y NAYARIT
-
----
-Pronóstico Meteorológico General
-No. Aviso: 426
-Ciudad de México a 01 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN GUERRERO Y LLUVIAS MUY FUERTES EN ZONAS DE SONORA, SINALOA, CHIHUAHUA, DURANGO, ZACATECAS Y NAYARIT
-
- 
-
-Durante la noche y madrugada del domingo; los efectos del monzón mexicano mantendrán probabilidad de lluvias fuertes con puntuales muy fuertes en Sonora (norte y este), Sinaloa (centro y sur), Chihuahua (oeste), Durango (oeste), Zacatecas (sur) y Nayarit (norte y oeste), así como lluvias con intervalos de chubascos en Baja California Sur. Por otro lado, un sistema frontal extendido cerca de la frontera norte de México en combinación con un canal de baja presión en el interior del país, mantienen vientos con rachas entre 40 y 60 km/h; lluvias con chubascos y descargas eléctricas en Coahuila, Nuevo León, Tamaulipas y San Luis Potosí. De igual forma el desplazamiento de la onda tropical núm.…]]></description>
-      <pubDate>Sat, 01 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-01-426</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 31 JUL 2026: Para esta noche se prevén lluvias muy fuertes en Sinaloa y zonas de Nayarit, Puebla, Estado de México, Veracruz, Tabas...</title>
