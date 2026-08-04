@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 04 Aug 2026 10:01:32 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 04 Aug 2026 12:21:33 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -17,11 +17,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 431 | 04 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, DURANGO, ZACATECAS, JALISCO, MICHOACÁN Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 431
+Ciudad de México a 04 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, DURANGO, ZACATECAS, JALISCO, MICHOACÁN Y CHIAPAS
+
+Para hoy, el monzón mexicano sobre el noroeste del territorio nacional y una circulación ciclónica en niveles medios de la atmósfera frente a la costa occidental de Baja California Sur, ocasionarán lluvias puntuales muy fuertes en Sonora (norte y centro), Chihuahua (suroeste) y Durango (oeste); puntuales fuertes en Baja California Sur (sur) y Sinaloa (este); e intervalos de chubascos en Baja California, además de rachas de viento de hasta 60 km/h en dichas entidades. A su vez, circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera frente a costas del Pacifico central mexicano y sobre el sureste del país, así como un canal de baja presión e inestabilidad atmosférica en el noreste de México, además de la onda tropical núm.…]]></description>
+      <pubDate>Tue, 04 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-04-431</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 04 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 04 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-04-12</guid>
@@ -52,37 +71,12 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Chihuahua (suroeste), Durango (oeste) y Sinaloa (norte y centro).</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Chihuahua, Durango, Zacatecas, Jalisco, Michoacán y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Chihuahua (suroeste), Durango (oeste) y Sinaloa (norte y centro).]]></description>
-      <pubDate>Tue, 04 Aug 2026 04:01:23 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-04-32b6</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Chihuahua, Durango, Zacatecas, Jalisco, Michoacán y Chiapas.]]></description>
+      <pubDate>Tue, 04 Aug 2026 06:21:25 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-04-2bbf</guid>
       <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 430 | 03 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, DURANGO Y SINALOA • Y LLUVIAS MUY FUERTES EN SONORA, NAYARIT Y SAN LUIS POTOSÍ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 430
-Ciudad de México a 03 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, DURANGO Y SINALOA; Y LLUVIAS MUY FUERTES EN SONORA, NAYARIT Y SAN LUIS POTOSÍ
-
- 
-
-Durante esta noche y la madrugada del martes, el monzón mexicano ocasionará lluvias puntuales intensas y vientos con rachas fuertes en zonas de Chihuahua (suroeste), Durango (oeste) y Sinaloa (norte y centro); muy fuertes en Sonora (norte y sureste) y Nayarit (sur); lluvias fuertes en Baja California Sur (sur); y lluvias aisladas en Baja California. Por otro lado, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión en el interior del país, inestabilidad atmosférica y la onda tropical núm. 24 que se aproximará al sureste de México, generarán chubascos y lluvias fuertes en el occidente, centro, noreste, este, sur y sureste del territorio nacional, incluyendo el Valle de México y la península de Yucatán, con lluvias puntuales muy fuertes en San Luis Potosí.
-
-…]]></description>
-      <pubDate>Mon, 03 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-03-430</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 31 JUL 2026: Para esta noche se prevén lluvias muy fuertes en Sinaloa y zonas de Nayarit, Puebla, Estado de México, Veracruz, Tabas...</title>
