@@ -5,43 +5,56 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 03 Aug 2026 23:30:25 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 04 Aug 2026 03:43:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Sinaloa y Durango.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Chihuahua (suroeste), Durango (oeste) y Sinaloa (norte y centro).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Sinaloa y Durango.]]></description>
-      <pubDate>Mon, 03 Aug 2026 17:30:14 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-03-0b88</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Chihuahua (suroeste), Durango (oeste) y Sinaloa (norte y centro).]]></description>
+      <pubDate>Mon, 03 Aug 2026 21:42:59 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-03-32b6</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 429 | 03 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 03 AUG 2026: Se prevén lluvias de muy fuertes a intensas en zonas de Sonora, Nayarit, San Luis Potosí, Chihuahua, Durango y Sinaloa</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_03.pdf</link>
+      <description><![CDATA[Se prevén lluvias de muy fuertes a intensas en zonas de Sonora, Nayarit, San Luis Potosí, Chihuahua, Durango y Sinaloa — Reporte Vespertino del 03 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_03.pdf]]></description>
+      <pubDate>Mon, 03 Aug 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_03</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 430 | 03 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, SINALOA, DURANGO Y NAYARIT
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, DURANGO Y SINALOA • Y LLUVIAS MUY FUERTES EN SONORA, NAYARIT Y SAN LUIS POTOSÍ
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 429
+No. Aviso: 430
 Ciudad de México a 03 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
+ 
 
-LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, SINALOA, DURANGO Y NAYARIT
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, DURANGO Y SINALOA; Y LLUVIAS MUY FUERTES EN SONORA, NAYARIT Y SAN LUIS POTOSÍ
 
-Este día, los efectos del monzón mexicano, ocasionarán lluvias puntuales intensas en Chihuahua (sur y suroeste), Sinaloa (norte y centro), Durango (oeste) y Nayarit (sur); lluvias muy fuertes en Sonora (norte y sureste); lluvias fuertes en Zacatecas (sur), y chubascos en Baja California Sur; así como rachas de viento en dichas entidades. Simultáneamente, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, el desplazamiento de la onda tropical núm. 23 al sur de Michoacán y Jalisco, además de un canal de baja presión en el noreste del país, inestabilidad atmosférica y la onda tropical núm. 24 que se desplazará sobre la península de Yucatán, propiciarán chubascos y lluvias fuertes a muy fuertes en estados del occidente, centro, noreste, oriente, sur y sureste del territorio nacional, incluida la península de Yucatán.…]]></description>
+ 
+
+Durante esta noche y la madrugada del martes, el monzón mexicano ocasionará lluvias puntuales intensas y vientos con rachas fuertes en zonas de Chihuahua (suroeste), Durango (oeste) y Sinaloa (norte y centro); muy fuertes en Sonora (norte y sureste) y Nayarit (sur); lluvias fuertes en Baja California Sur (sur); y lluvias aisladas en Baja California. Por otro lado, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión en el interior del país, inestabilidad atmosférica y la onda tropical núm. 24 que se aproximará al sureste de México, generarán chubascos y lluvias fuertes en el occidente, centro, noreste, este, sur y sureste del territorio nacional, incluyendo el Valle de México y la península de Yucatán, con lluvias puntuales muy fuertes en San Luis Potosí.
+
+…]]></description>
       <pubDate>Mon, 03 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-03-429</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-03-430</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de agosto del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de agosto del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 03 de agosto del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 03 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-03-12</guid>
@@ -77,14 +90,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Para esta noche se prevén lluvias muy fuertes en Sinaloa y zonas de Nayarit, Puebla, Estado de México, Veracruz, Tabas... — Reporte Vespertino del 31 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_07_31.pdf]]></description>
       <pubDate>Fri, 31 Jul 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_07_31</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 31 JUL 2026: Se pronostican lluvias muy fuertes en regiones de Morelos, Puebla y Oaxaca, y fuertes en otros 20 estados de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_31.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Morelos, Puebla y Oaxaca, y fuertes en otros 20 estados de México — Reporte Matutino del 31 JUL 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_07_31.pdf]]></description>
-      <pubDate>Fri, 31 Jul 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_07_31</guid>
       <category>Comunicado</category>
     </item>
   </channel>
