@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 05 Aug 2026 12:19:49 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 15:32:06 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -48,15 +48,31 @@ Este día, el monzón mexicano en el noroeste de la República Mexicana, en in
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de agosto del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de agosto del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de agosto del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 05 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-05-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Chihuahua, Sinaloa, Durango, Nayarit, Jalisco, Guerrero, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Chihuahua, Sinaloa, Durango, Nayarit, Jalisco, Guerrero, Oaxaca y Chiapas.]]></description>
+      <pubDate>Wed, 05 Aug 2026 09:31:55 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-05-9fa5</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 05 AUG 2026: Se pronostican lluvias muy fuertes para regiones de Chihuahua, Sinaloa, Durango, Nayarit, Jalisco, Guerrero, Oaxaca y Ch...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_5.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes para regiones de Chihuahua, Sinaloa, Durango, Nayarit, Jalisco, Guerrero, Oaxaca y Ch... — Reporte Matutino del 05 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_5.pdf]]></description>
+      <pubDate>Wed, 05 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_5</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 04 AUG 2026: Se pronostican lluvias de fuertes a muy fuertes en zonas de 18 entidades de México</title>
@@ -73,22 +89,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 05 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_03</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 02 AUG 2026: Se pronostican lluvias intensas para regiones de Sinaloa, Chihuahua, Durango y Nayarit</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_2.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas para regiones de Sinaloa, Chihuahua, Durango y Nayarit — Reporte Matutino del 02 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_2.pdf]]></description>
-      <pubDate>Wed, 05 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_2</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Chihuahua, Sinaloa, Durango, Nayarit, Jalisco, Guerrero, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Chihuahua, Sinaloa, Durango, Nayarit, Jalisco, Guerrero, Oaxaca y Chiapas.]]></description>
-      <pubDate>Wed, 05 Aug 2026 06:19:41 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-05-9fa5</guid>
-      <category>Alerta</category>
     </item>
   </channel>
 </rss>
