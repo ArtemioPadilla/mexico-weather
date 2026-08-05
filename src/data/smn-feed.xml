@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 05 Aug 2026 06:46:15 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 10:00:18 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -25,11 +25,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de agosto del 2026 | Emisión 00:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de agosto del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de agosto del 2026
-Emisión: 00:00
+Emisión: 03:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 05 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-05-12</guid>
@@ -63,7 +63,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chiapas (norte y sur).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chiapas (norte y sur).]]></description>
-      <pubDate>Wed, 05 Aug 2026 00:45:58 -0600</pubDate>
+      <pubDate>Wed, 05 Aug 2026 04:00:08 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-05-4537</guid>
       <category>Alerta</category>
     </item>
