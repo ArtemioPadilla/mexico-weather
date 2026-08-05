@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 05 Aug 2026 10:00:18 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 12:19:49 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -25,11 +25,34 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 433 | 05 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DEL NORTE DEL PAÍS Y EL LITORAL DEL PACÍFICO MEXICANO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 433
+Ciudad de México a 05 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DEL NORTE DEL PAÍS Y EL LITORAL DEL PACÍFICO MEXICANO
+
+ 
+
+Este día, el monzón mexicano en el noroeste de la República Mexicana, en interacción con inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en zonas de Chihuahua, Durango, Sinaloa y Nayarit; así como lluvias fuertes en Sonora y Baja California Sur. Simultáneamente, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, en combinación con canales de baja presión al interior del país y la onda tropical núm. 24, que se desplazará sobre el sur del territorio nacional, propiciarán lluvias muy fuertes en zonas de Jalisco, Guerrero, Oaxaca y Chiapas; así como chubascos y lluvias fuertes en el noreste, occidente, centro, oriente, sur y sureste del territorio mexicano, incluidos la península de Yucatán y el Valle de México.…]]></description>
+      <pubDate>Wed, 05 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-05-433</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 05 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-05-12</guid>
@@ -60,32 +83,12 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chiapas (norte y sur).</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Chihuahua, Sinaloa, Durango, Nayarit, Jalisco, Guerrero, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chiapas (norte y sur).]]></description>
-      <pubDate>Wed, 05 Aug 2026 04:00:08 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-05-4537</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Chihuahua, Sinaloa, Durango, Nayarit, Jalisco, Guerrero, Oaxaca y Chiapas.]]></description>
+      <pubDate>Wed, 05 Aug 2026 06:19:41 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-05-9fa5</guid>
       <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 432 | 04 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 432
-Ciudad de México a 04 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN CHIAPAS
-
-Durante esta noche y madrugada del miércoles, el paso de la onda tropical núm. 24 sobre el sureste mexicano, en interacción con un canal de baja presión sobre la Sonda de Campeche y una circulación ciclónica en niveles altos de la atmósfera, originarán lluvias puntuales intensas en Chiapas (norte y sur); lluvias muy fuertes en Tabasco (sur); lluvias fuertes en Guerrero (norte), Oaxaca (este), Veracruz (sur), Campeche (norte, centro y sur) y Yucatán (noreste, centro y sur), así como chubascos en Quintana Roo.…]]></description>
-      <pubDate>Tue, 04 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-04-432</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
