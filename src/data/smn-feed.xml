@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 06 Aug 2026 10:02:22 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 06 Aug 2026 12:21:54 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -33,11 +33,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 435 | 06 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA Y PUNTUALES MUY FUERTES EN ZONAS DE SONORA, SINALOA, CHIHUAHUA, NAYARIT, JALISCO, COLIMA, MICHOACÁN, PUEBLA, GUERRERO, VERACRUZ Y YUCATÁN
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 435
+Ciudad de México a 06 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA Y PUNTUALES MUY FUERTES EN ZONAS DE SONORA, SINALOA, CHIHUAHUA, NAYARIT, JALISCO, COLIMA, MICHOACÁN, PUEBLA, GUERRERO, VERACRUZ Y YUCATÁN
+
+Para hoy, el monzón mexicano sobre el noroeste del territorio nacional e inestabilidad atmosférica ocasionarán lluvias puntuales muy fuertes en Sonora (este), Chihuahua (oeste) y Sinaloa (norte y centro); puntuales fuertes en Durango (oeste); y chubascos en Baja California y Baja California Sur. A su vez, una vaguada en niveles altos de la atmósfera sobre el noreste del país, así como un canal de baja presión e inestabilidad atmosférica en el interior del territorio nacional, originarán lluvias puntuales muy fuertes en Nayarit (norte, este y sur), Jalisco (oeste), Colima y Michoacán (centro y sur); intervalos de chubascos en Coahuila, Nuevo León, Zacatecas, San Luis Potosí y Tamaulipas; y lluvias aisladas en zonas de Aguascalientes.…]]></description>
+      <pubDate>Thu, 06 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-06-435</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 06 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 06 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-06-12</guid>
@@ -63,29 +82,9 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca (oeste y suroeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca (oeste y suroeste).]]></description>
-      <pubDate>Thu, 06 Aug 2026 04:02:12 -0600</pubDate>
+      <pubDate>Thu, 06 Aug 2026 06:21:45 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-06-8bf9</guid>
       <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 434 | 05 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN OAXACA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 434
-Ciudad de México a 05 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN OAXACA
-
-Durante esta noche y madrugada del jueves, se pronostican lluvias muy fuertes en Chihuahua (sur y suroeste), Durango (noroeste, oeste y centro) y Nayarit (sur), lluvias fuertes en Sinaloa (noreste y este) y Sonora (norte, centro y sureste), y chubascos en la península de Baja California; condiciones generadas por el monzón mexicano e inestabilidad atmosférica. Asimismo, una circulación ciclónica en niveles altos de la atmósfera centrada sobre el sureste del territorio nacional, en combinación con canales de baja presión en el interior del país y la onda tropical núm.…]]></description>
-      <pubDate>Wed, 05 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-05-434</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
