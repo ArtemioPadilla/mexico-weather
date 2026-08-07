@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 07 Aug 2026 11:10:48 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2026 12:00:40 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -33,11 +33,36 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 437 | 07 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN NAYARIT Y JALISCO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 437
+Ciudad de México a 07 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN NAYARIT Y JALISCO
+
+Este día, el monzón mexicano sobre el noroeste de la República Mexicana, canales de baja presión sobre el occidente y sureste del país, una circulación ciclónica en niveles altos de la atmósfera, inestabilidad atmosférica y el desplazamiento de la onda tropical núm. 25 sobre el sur y occidente del territorio nacional, propiciarán lluvias puntuales intensas en zonas de Nayarit y Jalisco; así como chubascos y lluvias fuertes a muy fuertes en la mayor parte de la República Mexicana; con posible caída de granizo en estados del occidente y centro del país. Finalmente, un anticiclón en niveles medios de la atmósfera mantendrá el ambiente caluroso a muy caluroso en zonas del norte del territorio mexicano, con temperaturas superiores a 45 °C en Baja California (noreste). Asimismo, prevalecerá la onda de calor en Baja California (noreste), Chihuahua (noreste), Nuevo León (centro y este) y Tamaulipas (oeste).
+
+
+
+ 
+…]]></description>
+      <pubDate>Fri, 07 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-07-437</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 07 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 07 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-07-12</guid>
@@ -63,28 +88,9 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Sinaloa, Chihuahua, Nayarit, Jalisco, Colima, Michoacán, Oaxaca, Guerrero, Puebla, Veracruz y Yucatán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento con rachas de 50 a 70 km/h: Sonora, Chihuahua, Nuevo León, Campeche y Yucatán.]]></description>
-      <pubDate>Fri, 07 Aug 2026 05:10:39 -0600</pubDate>
+      <pubDate>Fri, 07 Aug 2026 06:00:31 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-07-46f3</guid>
       <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 436 | 06 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS FUERTES A MUY FUERTES EN GRAN PARTE DEL TERRITORIO NACIONAL
-
----
-Pronóstico Meteorológico General
-No. Aviso: 436
-Ciudad de México a 06 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS FUERTES A MUY FUERTES EN GRAN PARTE DEL TERRITORIO NACIONAL
-
-Para esta noche y madrugada del viernes, el monzón mexicano en el noroeste de México, en interacción con un canal de baja presión sobre el occidente del país e inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en Sonora (norte, este y noreste), Sinaloa (norte y centro), Chihuahua (oeste), Nayarit (norte y sur), Jalisco (oeste), Colima y Michoacán (centro y sur); lluvias fuertes en Durango (oeste), así como intervalos de chubascos en Baja California y Baja California Sur. Por su parte, una circulación ciclónica y una vaguada en niveles altos de la atmósfera propiciarán intervalos de chubascos en Coahuila, Nuevo León, Tamaulipas, San Luis Potosí y Zacatecas. Canales de baja presión sobre el centro y oriente del territorio nacional, en interacción con una circulación ciclónica en niveles altos de la atmósfera y el desplazamiento de la onda tropical núm.…]]></description>
-      <pubDate>Thu, 06 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-06-436</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
