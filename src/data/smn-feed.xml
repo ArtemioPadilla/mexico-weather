@@ -5,22 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 08 Aug 2026 05:59:50 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2026 07:19:51 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero.]]></description>
-      <pubDate>Fri, 07 Aug 2026 23:59:41 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-07-4171</guid>
-      <category>Alerta</category>
-    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 07 AUG 2026: Se pronostican lluvias intensas en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_07.pdf</link>
       <description><![CDATA[Se pronostican lluvias intensas en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero — Reporte Vespertino del 07 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_07.pdf]]></description>
-      <pubDate>Fri, 07 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Sat, 08 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_07</guid>
       <category>Comunicado</category>
     </item>
@@ -28,7 +20,7 @@
       <title>📋 SMN Reporte Vespertino 06 AUG 2026: Se prevén lluvias de fuertes a muy fuertes en gran parte de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_06.pdf</link>
       <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en gran parte de México — Reporte Vespertino del 06 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_06.pdf]]></description>
-      <pubDate>Fri, 07 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Sat, 08 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_06</guid>
       <category>Comunicado</category>
     </item>
@@ -36,9 +28,44 @@
       <title>📋 SMN Reporte Vespertino 05 AUG 2026: Se pronostican lluvias intensas en regiones de Oaxaca, y muy fuertes en otros diez estados de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_05.pdf</link>
       <description><![CDATA[Se pronostican lluvias intensas en regiones de Oaxaca, y muy fuertes en otros diez estados de México — Reporte Vespertino del 05 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_05.pdf]]></description>
-      <pubDate>Fri, 07 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Sat, 08 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_05</guid>
       <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de agosto del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 08 de agosto del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sat, 08 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-08-08-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 07 AUG 2026: Se pronostican lluvias intensas en zonas de Nayarit y Jalisco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_07.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Nayarit y Jalisco — Reporte Matutino del 07 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_07.pdf]]></description>
+      <pubDate>Sat, 08 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_07</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 06 AUG 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 12 entidades de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_06.pdf</link>
+      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 12 entidades de México — Reporte Matutino del 06 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_06.pdf]]></description>
+      <pubDate>Sat, 08 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_06</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero.]]></description>
+      <pubDate>Sat, 08 Aug 2026 01:19:42 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-08-4171</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 438 | 07 de Agosto del 2026 | Emisión 18:00h</title>
@@ -59,33 +86,6 @@ Durante esta noche y madrugada del sábado, el monzón mexicano sobre el noroe
       <pubDate>Fri, 07 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-08-07-438</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de agosto del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 07 de agosto del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Fri, 07 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-08-07-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 07 AUG 2026: Se pronostican lluvias intensas en zonas de Nayarit y Jalisco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_07.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Nayarit y Jalisco — Reporte Matutino del 07 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_07.pdf]]></description>
-      <pubDate>Fri, 07 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_07</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 06 AUG 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 12 entidades de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_06.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 12 entidades de México — Reporte Matutino del 06 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_06.pdf]]></description>
-      <pubDate>Fri, 07 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_06</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
