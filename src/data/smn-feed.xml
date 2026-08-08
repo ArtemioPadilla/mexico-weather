@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 08 Aug 2026 11:47:57 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2026 13:15:36 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -33,15 +33,42 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 439 | 08 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA Y NAYARIT • Y PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, DURANGO, JALISCO, MICHOACÁN, ESTADO DE MÉXICO, VERACRUZ Y OAXACA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 439
+Ciudad de México a 08 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA Y NAYARIT; Y PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, DURANGO, JALISCO, MICHOACÁN, ESTADO DE MÉXICO, VERACRUZ Y OAXACA
+
+Para hoy, el monzón mexicano sobre el noroeste del territorio nacional, en combinación con inestabilidad atmosférica, originará lluvias puntuales intensas en Sinaloa (norte, centro y sur), muy fuertes en Sonora (este y sur), Chihuahua (suroeste) y Durango (oeste); puntuales fuertes en Baja California Sur (sur); y chubascos en Baja California. Por su parte, canales de baja presión sobre el interior del país, en interacción con una circulación ciclónica en niveles altos de la atmósfera, así como el desplazamiento de la onda tropical núm.…]]></description>
+      <pubDate>Sat, 08 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-08-439</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 08 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-08-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.]]></description>
+      <pubDate>Sat, 08 Aug 2026 07:15:27 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-08-d7cc</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 07 AUG 2026: Se pronostican lluvias intensas en zonas de Nayarit y Jalisco</title>
@@ -58,34 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sat, 08 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_06</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero.]]></description>
-      <pubDate>Sat, 08 Aug 2026 05:47:48 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-08-4171</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 438 | 07 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERRO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 438
-Ciudad de México a 07 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-LLUVIAS PUNTUALES INTENSAS EN NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERRO
-
-Durante esta noche y madrugada del sábado, el monzón mexicano sobre el noroeste del país, en interacción con un canal de baja presión extendido a lo largo de la Sierra Madre Occidental, ocasionarán lluvias puntuales muy fuertes en Sonora (norte y este), Chihuahua (oeste y suroeste) y Sinaloa (norte); lluvias fuertes en Durango (oeste), chubascos en Baja California Sur y lluvias aisladas en Baja California. A su vez, una circulación ciclónica en niveles altos de la atmósfera sobre la Mesa del Centro, en interacción con canales de baja presión sobre el noreste, occidente y centro del país, inestabilidad atmosférica y el desplazamiento de la onda tropical núm.…]]></description>
-      <pubDate>Fri, 07 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-07-438</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
