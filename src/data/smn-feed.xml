@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 08 Aug 2026 23:48:56 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 09 Aug 2026 02:32:13 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.]]></description>
-      <pubDate>Sat, 08 Aug 2026 17:48:47 -0600</pubDate>
+      <pubDate>Sat, 08 Aug 2026 20:32:04 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-08-396a</guid>
       <category>Alerta</category>
     </item>
@@ -33,30 +33,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 439 | 08 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 440 | 08 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA Y NAYARIT • Y PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, DURANGO, JALISCO, MICHOACÁN, ESTADO DE MÉXICO, VERACRUZ Y OAXACA
+      <description><![CDATA[DURANTE ESTA NOCHE Y MADRUGADA SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, SINALOA Y NAYARIT • Y PUNTUALES MUY FUERTES EN CHIHUAHUA, DURANGO, JALISCO, MICHOACÁN, ESTADO DE MÉXICO, VERACRUZ Y OAXACA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 439
+No. Aviso: 440
 Ciudad de México a 08 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA Y NAYARIT; Y PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, DURANGO, JALISCO, MICHOACÁN, ESTADO DE MÉXICO, VERACRUZ Y OAXACA
+DURANTE ESTA NOCHE Y MADRUGADA SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, SINALOA Y NAYARIT; Y PUNTUALES MUY FUERTES EN CHIHUAHUA, DURANGO, JALISCO, MICHOACÁN, ESTADO DE MÉXICO, VERACRUZ Y OAXACA
 
-Para hoy, el monzón mexicano sobre el noroeste del territorio nacional, en combinación con inestabilidad atmosférica, originará lluvias puntuales intensas en Sinaloa (norte, centro y sur), muy fuertes en Sonora (este y sur), Chihuahua (suroeste) y Durango (oeste); puntuales fuertes en Baja California Sur (sur); y chubascos en Baja California. Por su parte, canales de baja presión sobre el interior del país, en interacción con una circulación ciclónica en niveles altos de la atmósfera, así como el desplazamiento de la onda tropical núm.…]]></description>
+Durante esta noche y la madrugada del domingo, el monzón mexicano ocasionará lluvias puntuales intensas y vientos con rachas fuertes en zonas de Sonora (sur), Sinaloa (norte, centro y sur) y Nayarit (norte); muy fuertes en Chihuahua (suroeste) y Durango (oeste y sur); fuertes en Baja California Sur; y chubascos en Baja California.…]]></description>
       <pubDate>Sat, 08 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-08-439</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-08-440</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de agosto del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de agosto del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 08 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-08-12</guid>
