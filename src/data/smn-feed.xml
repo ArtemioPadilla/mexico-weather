@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 09 Aug 2026 22:54:04 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 09 Aug 2026 23:51:15 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
+      <pubDate>Sun, 09 Aug 2026 17:51:06 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-09-76bc</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 07 AUG 2026: Se pronostican lluvias intensas en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_07.pdf</link>
@@ -23,14 +31,6 @@
       <pubDate>Sun, 09 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_06</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Sun, 09 Aug 2026 16:53:54 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-09-76bc</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 441 | 09 de Agosto del 2026 | Emisión 06:00h</title>
