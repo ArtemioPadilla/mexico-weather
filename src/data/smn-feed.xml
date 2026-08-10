@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 10 Aug 2026 17:12:52 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 18:06:20 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -15,6 +15,14 @@
       <pubDate>Mon, 10 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_07</guid>
       <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango y Sinaloa.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango y Sinaloa.]]></description>
+      <pubDate>Mon, 10 Aug 2026 12:06:11 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-10-9083</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 443 | 10 de Agosto del 2026 | Emisión 06:00h</title>
@@ -38,23 +46,15 @@ Para hoy, el monzón mexicano en el noroeste del país y una circulación cic
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de agosto del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de agosto del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 10 de agosto del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 10 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-10-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango y Sinaloa.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango y Sinaloa.]]></description>
-      <pubDate>Mon, 10 Aug 2026 11:12:42 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-10-9083</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 10 AUG 2026: Se prevén lluvias intensas para el suroeste de Chihuahua, oeste de Durango y el centro de Sinaloa</title>
