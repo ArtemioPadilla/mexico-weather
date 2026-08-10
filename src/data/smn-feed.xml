@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 10 Aug 2026 12:02:50 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 13:48:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -17,12 +17,25 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Vespertino 06 AUG 2026: Se prevén lluvias de fuertes a muy fuertes en gran parte de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_06.pdf</link>
-      <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en gran parte de México — Reporte Vespertino del 06 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_06.pdf]]></description>
-      <pubDate>Mon, 10 Aug 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_06</guid>
-      <category>Comunicado</category>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 443 | 10 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[DURANTE ESTE DIA SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, DURANGO Y SINALOA, ADEMÁS PREVALECERÁ LA ONDA DE CALOR EN BAJA CALIFORNIA SUR, CHIHUAHUA, NUEVO LEÓN Y TAMAULIPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 443
+Ciudad de México a 10 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+DURANTE ESTE DIA SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, DURANGO Y SINALOA, ADEMÁS PREVALECERÁ LA ONDA DE CALOR EN BAJA CALIFORNIA SUR, CHIHUAHUA, NUEVO LEÓN Y TAMAULIPAS.
+
+Para hoy, el monzón mexicano en el noroeste del país y una circulación ciclónica en niveles altos de la atmósfera sobre el occidente de México, propiciarán lluvias puntuales intensas en zonas de Chihuahua (suroeste), Durango (oeste) y Sinaloa (centro); lluvias puntuales muy fuertes en el occidente de México y Sonora (noroeste y sur) y lluvias puntuales fuertes en Baja California Sur, Zacatecas, Aguascalientes y Colima.…]]></description>
+      <pubDate>Mon, 10 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-10-443</guid>
+      <category>Pronóstico General</category>
     </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de agosto del 2026 | Emisión 06:00h</title>
@@ -34,6 +47,22 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 10 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-10-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango y Sinaloa.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango y Sinaloa.]]></description>
+      <pubDate>Mon, 10 Aug 2026 07:48:39 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-10-9083</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 10 AUG 2026: Se prevén lluvias intensas para el suroeste de Chihuahua, oeste de Durango y el centro de Sinaloa</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_10.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas para el suroeste de Chihuahua, oeste de Durango y el centro de Sinaloa — Reporte Matutino del 10 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_10.pdf]]></description>
+      <pubDate>Mon, 10 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_10</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 09 AUG 2026: Se esperan lluvias de fuertes a muy fuertes en regiones de 23 estados de México</title>
@@ -58,35 +87,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 10 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_07</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Mon, 10 Aug 2026 06:02:40 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-10-7d1e</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 442 | 09 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[ESTA NOCHE, SE PREVÉN LLUVIAS MUY FUERTES EN EL NOROESTE, OCCIDENTE, NORTE Y SUR DEL PAÍS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 442
-Ciudad de México a 09 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-ESTA NOCHE, SE PREVÉN LLUVIAS MUY FUERTES EN EL NOROESTE, OCCIDENTE, NORTE Y SUR DEL PAÍS
-
-Se prevé que, en el transcurso de esta noche y madrugada del lunes, el monzón mexicano en el noroeste del país en interacción con una circulación ciclónica en niveles altos de la atmósfera sobre el occidente de México, ocasionarán la probabilidad de lluvias muy fuertes en Sonora (sur), Chihuahua (suroeste), Durango (oeste y sur), Sinaloa (norte y centro), Nayarit (norte), Jalisco (este y oeste) y Michoacán (noroeste); lluvias fuertes en Baja California Sur (centro y sur), Zacatecas (oeste y sur) y Colima; así como chubascos en Baja California y Aguascalientes.…]]></description>
-      <pubDate>Sun, 09 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-09-442</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
