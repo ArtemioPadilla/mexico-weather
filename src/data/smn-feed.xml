@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 09 Aug 2026 23:51:15 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 02:37:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Sun, 09 Aug 2026 17:51:06 -0600</pubDate>
+      <pubDate>Sun, 09 Aug 2026 20:37:37 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-09-76bc</guid>
       <category>Alerta</category>
     </item>
@@ -33,32 +33,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 441 | 09 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 442 | 09 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES SOBRE EL NOROESTE Y OCCIDENTE DE MÉXICO
+      <description><![CDATA[ESTA NOCHE, SE PREVÉN LLUVIAS MUY FUERTES EN EL NOROESTE, OCCIDENTE, NORTE Y SUR DEL PAÍS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 441
+No. Aviso: 442
 Ciudad de México a 09 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-LLUVIAS PUNTUALES MUY FUERTES SOBRE EL NOROESTE Y OCCIDENTE DE MÉXICO
+ESTA NOCHE, SE PREVÉN LLUVIAS MUY FUERTES EN EL NOROESTE, OCCIDENTE, NORTE Y SUR DEL PAÍS
 
-Este día, el monzón mexicano sobre el noroeste de la República Mexicana, ocasionará lluvias puntuales muy fuertes en Sonora (sur), Chihuahua (suroeste), Durango (oeste y sur), Sinaloa (norte y centro) y Nayarit (este); lluvias fuertes en Baja California Sur (centro y sur) y chubascos en Baja California; además de rachas de viento en dichas entidades. Así mismo, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, canales de baja presión al interior del país e inestabilidad atmosférica, generarán chubascos y lluvias fuertes a muy fuertes en estados del occidente, centro, noreste, oriente, sur y sureste mexicano. Por otra parte, un anticiclón en niveles medios de la atmósfera, mantendrá el ambiente caluroso a muy caluroso en zonas del norte de México, así como extremadamente caluroso con temperaturas superiores a 45 °C en el noreste de Baja California.…]]></description>
+Se prevé que, en el transcurso de esta noche y madrugada del lunes, el monzón mexicano en el noroeste del país en interacción con una circulación ciclónica en niveles altos de la atmósfera sobre el occidente de México, ocasionarán la probabilidad de lluvias muy fuertes en Sonora (sur), Chihuahua (suroeste), Durango (oeste y sur), Sinaloa (norte y centro), Nayarit (norte), Jalisco (este y oeste) y Michoacán (noroeste); lluvias fuertes en Baja California Sur (centro y sur), Zacatecas (oeste y sur) y Colima; así como chubascos en Baja California y Aguascalientes.…]]></description>
       <pubDate>Sun, 09 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-09-441</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-09-442</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de agosto del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 09 de agosto del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 09 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-09-12</guid>
