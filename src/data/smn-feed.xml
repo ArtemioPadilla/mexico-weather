@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 10 Aug 2026 08:53:45 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 10:38:44 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -25,11 +25,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de agosto del 2026 | Emisión 00:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de agosto del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 10 de agosto del 2026
-Emisión: 00:00
+Emisión: 03:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 10 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-10-12</guid>
@@ -63,7 +63,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de: Sonora, Chihuahua, Durango, Sinaloa, Nayarit, Jalisco, Michoacán, Guerrero, Oaxaca y Veracruz.]]></description>
-      <pubDate>Mon, 10 Aug 2026 02:53:36 -0600</pubDate>
+      <pubDate>Mon, 10 Aug 2026 04:38:36 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-10-7d1e</guid>
       <category>Alerta</category>
     </item>
