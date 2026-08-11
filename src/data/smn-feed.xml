@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 11 Aug 2026 12:01:06 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2026 13:47:06 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -14,14 +14,6 @@
       <description><![CDATA[Para esta noche se pronostican lluvias intensas en regiones de Chihuahua, Durango y Sinaloa — Reporte Vespertino del 10 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_10.pdf]]></description>
       <pubDate>Tue, 11 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_10</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 07 AUG 2026: Se pronostican lluvias intensas en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_07.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero — Reporte Vespertino del 07 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_07.pdf]]></description>
-      <pubDate>Tue, 11 Aug 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_07</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -67,6 +59,22 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sonora.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California, Sonora, Chihuahua, Coahuila, Nuevo León, Tamaulipas, Colima, Michoacán, Guerrero y Oaxaca.]]></description>
+      <pubDate>Tue, 11 Aug 2026 07:46:57 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-11-3dac</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 11 AUG 2026: Se prevén lluvias intensas en Sonora y muy fuertes en Chihuahua, Durango, Sinaloa, Veracruz, Oaxaca, Chiapas y Campeche</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_11.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas en Sonora y muy fuertes en Chihuahua, Durango, Sinaloa, Veracruz, Oaxaca, Chiapas y Campeche — Reporte Matutino del 11 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_11.pdf]]></description>
+      <pubDate>Tue, 11 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_11</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
       <title>📋 SMN Reporte Matutino 10 AUG 2026: Se prevén lluvias intensas para el suroeste de Chihuahua, oeste de Durango y el centro de Sinaloa</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_10.pdf</link>
       <description><![CDATA[Se prevén lluvias intensas para el suroeste de Chihuahua, oeste de Durango y el centro de Sinaloa — Reporte Matutino del 10 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_10.pdf]]></description>
@@ -89,14 +97,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 11 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_08</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango y Sinaloa.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango y Sinaloa.]]></description>
-      <pubDate>Tue, 11 Aug 2026 06:00:58 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-11-48b9</guid>
-      <category>Alerta</category>
     </item>
   </channel>
 </rss>
