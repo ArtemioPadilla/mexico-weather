@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 11 Aug 2026 17:16:17 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2026 18:11:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -15,6 +15,14 @@
       <pubDate>Tue, 11 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_10</guid>
       <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chiapas (norte y sur).</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chiapas (norte y sur).]]></description>
+      <pubDate>Tue, 11 Aug 2026 12:11:31 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-11-4537</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 445 | 11 de Agosto del 2026 | Emisión 06:00h</title>
@@ -48,23 +56,15 @@ Este día, el monzón mexicano en combinación con inestabilidad atmosférica
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de agosto del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de agosto del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 11 de agosto del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 11 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-11-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chiapas (norte y sur).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chiapas (norte y sur).]]></description>
-      <pubDate>Tue, 11 Aug 2026 11:16:06 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-11-4537</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 11 AUG 2026: Se prevén lluvias intensas en Sonora y muy fuertes en Chihuahua, Durango, Sinaloa, Veracruz, Oaxaca, Chiapas y Campeche</title>
