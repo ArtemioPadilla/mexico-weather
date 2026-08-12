@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 12 Aug 2026 00:02:40 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2026 02:48:43 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de Sonora.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en zonas de Sonora.]]></description>
-      <pubDate>Tue, 11 Aug 2026 18:02:31 -0600</pubDate>
+      <pubDate>Tue, 11 Aug 2026 20:48:34 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-11-8f94</guid>
       <category>Alerta</category>
     </item>
@@ -25,34 +25,24 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 445 | 11 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 446 | 11 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[Pronóstico Meteorológico General
-No. Aviso: 445
-Ciudad de México a 11 de Agosto del 2026.
-Emisión: 06:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS PUNTUALES INTENSAS EN SONORA
-
-Este día, el monzón mexicano en combinación con inesta
+      <description><![CDATA[PREVALECERÁN LAS CONDICIONES PARA LLUVIAS PUNTUALES INTENSAS EN REGIONES DE SONORA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 445
+No. Aviso: 446
 Ciudad de México a 11 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-LLUVIAS PUNTUALES INTENSAS EN SONORA
+PREVALECERÁN LAS CONDICIONES PARA LLUVIAS PUNTUALES INTENSAS EN REGIONES DE SONORA
 
-Este día, el monzón mexicano en combinación con inestabilidad atmosférica, mantendrá las condiciones para lluvias puntuales intensas en Sonora (este) y lluvias fuertes a muy fuertes, descargas eléctricas y posible caída de granizo en el noroeste de la República Mexicana. Simultáneamente, canales de baja presión al interior del país y circulaciones ciclónicas en niveles altos de la atmósfera sobre el suroeste y sur del golfo de México, propiciarán lluvias puntuales muy fuertes en Veracruz (sur), Oaxaca (este), Chiapas (este) y Campeche (norte); además de chubascos y lluvias fuertes en gran parte del territorio nacional. Finalmente, una circulación anticiclónica en niveles medios de la atmósfera, sobre el sur de Estados Unidos, ocasionará ambiente caluroso a muy caluroso en entidades del norte del territorio mexicano, prevaleciendo la onda de calor en Baja California Sur (centro), Chihuahua (noreste), Nuevo León (centro y este) y Tamaulipas (…]]></description>
+Durante esta noche y madrugada del miércoles, el monzón mexicano en interacción con un canal de baja presión e inestabilidad atmosférica ocasionarán lluvias puntuales intensas en Sonora (norte y este); muy fuertes en Chihuahua (oeste y suroeste), Durango (oeste y noroeste) y Sinaloa (norte y este), así como lluvias puntuales fuertes en Baja California (norte y centro) y Baja California Sur (sur). Simultáneamente, canales de baja presión al interior del país, circulaciones ciclónicas y una vaguada en niveles altos de la atmósfera sobre el suroeste y sur del golfo de México, el ingreso de humedad y la aproximación de la onda tropical núm.…]]></description>
       <pubDate>Tue, 11 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-11-445</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-11-446</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
@@ -67,11 +57,19 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 11 AUG 2026: Se prevén lluvias intensas en Sonora y muy fuertes en Chihuahua, Durango, Sinaloa, Veracruz, Oaxaca, Chiapas y Campeche</title>
+      <title>📋 SMN Reporte Matutino 11 AUG 2026: Se prevén lluvias intensas en regiones de Sonora</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_04.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas en Sonora y muy fuertes en Chihuahua, Durango, Sinaloa, Veracruz, Oaxaca, Chiapas y Campeche — Reporte Matutino del 11 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_04.pdf]]></description>
+      <description><![CDATA[Se prevén lluvias intensas en regiones de Sonora — Reporte Matutino del 11 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_04.pdf]]></description>
       <pubDate>Tue, 11 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_04</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 11 AUG 2026: Se prevén lluvias intensas en Sonora y muy fuertes en Chihuahua, Durango, Sinaloa, Veracruz, Oaxaca, Chiapas y Campeche</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_11.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas en Sonora y muy fuertes en Chihuahua, Durango, Sinaloa, Veracruz, Oaxaca, Chiapas y Campeche — Reporte Matutino del 11 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_11.pdf]]></description>
+      <pubDate>Tue, 11 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_11</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -88,14 +86,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se esperan lluvias de fuertes a muy fuertes en regiones de 23 estados de México — Reporte Matutino del 09 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_09.pdf]]></description>
       <pubDate>Tue, 11 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_09</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 08 AUG 2026: Para este día se prevén lluvias de fuertes a intensas en regiones de 23 estados de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_08.pdf</link>
-      <description><![CDATA[Para este día se prevén lluvias de fuertes a intensas en regiones de 23 estados de México — Reporte Matutino del 08 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_08.pdf]]></description>
-      <pubDate>Tue, 11 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_08</guid>
       <category>Comunicado</category>
     </item>
   </channel>
