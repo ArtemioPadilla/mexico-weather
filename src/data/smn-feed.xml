@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 13 Aug 2026 08:46:27 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2026 10:31:12 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -33,11 +33,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de agosto del 2026 | Emisión 00:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de agosto del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de agosto del 2026
-Emisión: 00:00
+Emisión: 03:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 13 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-13-12</guid>
@@ -63,7 +63,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Veracruz, Chiapas, Tabasco, Yucatán y Campeche.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Veracruz, Chiapas, Tabasco, Yucatán y Campeche.]]></description>
-      <pubDate>Thu, 13 Aug 2026 02:46:17 -0600</pubDate>
+      <pubDate>Thu, 13 Aug 2026 04:31:02 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-13-6c66</guid>
       <category>Alerta</category>
     </item>
