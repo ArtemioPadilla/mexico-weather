@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 13 Aug 2026 10:31:12 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2026 12:02:41 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -33,11 +33,34 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 449 | 13 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN DURANGO, SINALOA, JALISCO, GUERRERO Y OAXACA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 449
+Ciudad de México a 13 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES MUY FUERTES EN DURANGO, SINALOA, JALISCO, GUERRERO Y OAXACA
+
+ 
+
+Este día, el monzón mexicano en interacción con inestabilidad atmosférica, ocasionará lluvias puntuales muy fuertes en Durango y Sinaloa, así como lluvias fuertes en Baja California Sur, Sonora y Chihuahua; dichas lluvias estarán acompañadas con descargas eléctricas y rachas de viento. Canales de baja presión al interior del territorio mexicano en interacción con una circulación ciclónica en altura, una vaguada en niveles medios de la atmósfera y el desplazamiento de la onda tropical núm. 26 sobre el sur del país, originarán lluvias puntuales muy fuertes en el occidente y sur de México; así como chubascos y lluvias puntuales fuertes en el noreste, oriente y centro de la República Mexicana, además de la península de Yucatán.…]]></description>
+      <pubDate>Thu, 13 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-13-449</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 13 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-13-12</guid>
@@ -60,35 +83,12 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Veracruz, Chiapas, Tabasco, Yucatán y Campeche.</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Durango, Sinaloa, Jalisco, Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Veracruz, Chiapas, Tabasco, Yucatán y Campeche.]]></description>
-      <pubDate>Thu, 13 Aug 2026 04:31:02 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-13-6c66</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Durango, Sinaloa, Jalisco, Guerrero y Oaxaca.]]></description>
+      <pubDate>Thu, 13 Aug 2026 06:02:31 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-13-2eef</guid>
       <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 448 | 12 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE JALISCO, COLIMA, VERACRUZ, CHIAPAS, TABASCO, CAMPECHE Y YUCATÁN
-
----
-Pronóstico Meteorológico General
-No. Aviso: 448
-Ciudad de México a 12 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE JALISCO, COLIMA, VERACRUZ, CHIAPAS, TABASCO, CAMPECHE Y YUCATÁN
-
- 
-
-Durante esta noche y madrugada del jueves, el monzón mexicano, en interacción con divergencia en altura, ocasionarán lluvias puntuales muy fuertes en Sinaloa (noreste), Durango (noroeste), Chihuahua (suroeste), lluvias puntuales fuertes en Baja California Sur (sur) y Sonora, así como chubascos en Baja California; dichas lluvias estarán acompañadas con descargas eléctricas y fuertes rachas de viento. Por otro lado, canales de baja presión en el interior de la República Mexicana, en interacción con una circulación ciclónica en altura, una vaguada en niveles medios de la atmósfera, inestabilidad atmosférica y el paso de la onda tropical núm.…]]></description>
-      <pubDate>Wed, 12 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-12-448</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
