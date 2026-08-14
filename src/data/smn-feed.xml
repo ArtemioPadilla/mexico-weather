@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 14 Aug 2026 12:00:22 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 13:48:07 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -25,12 +25,25 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Vespertino 11 AUG 2026: Se prevén lluvias intensas en regiones de Sonora</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_11.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas en regiones de Sonora — Reporte Vespertino del 11 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_11.pdf]]></description>
-      <pubDate>Fri, 14 Aug 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_11</guid>
-      <category>Comunicado</category>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 451 | 14 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, SAN LUIS POTOSÍ, MICHOACÁN, QUERÉTARO, HIDALGO, ESTADO DE MÉXICO, TLAXCALA, PUEBLA, GUERRERO Y VERACRUZ
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 451
+Ciudad de México a 14 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, SAN LUIS POTOSÍ, MICHOACÁN, QUERÉTARO, HIDALGO, ESTADO DE MÉXICO, TLAXCALA, PUEBLA, GUERRERO Y VERACRUZ.
+
+Hoy, el monzón mexicano e inestabilidad atmosférica sobre el noroeste de México ocasionarán lluvias puntuales muy fuertes en zonas de Chihuahua y Durango; así como lluvias fuertes en zonas de Sonora, Sinaloa y Nayarit; dichas lluvias estarán acompañadas con descargas eléctricas y fuertes rachas de viento. Por otra parte, canales de baja presión en el interior del territorio mexicano en interacción con una circulación ciclónica y una vaguada en altura, además de la aproximación de la onda tropical núm. 27 a la península de Yucatán, propiciarán lluvias puntuales muy fuertes en zonas de San Luis Potosí, Michoacán, Querétaro, Hidalgo, Estado de México, Tlaxcala, Puebla, Guerrero y Veracruz; lluvias puntuales fuertes en zonas del noreste, occidente, centro y sur de México, además de la Península de Yucatán.…]]></description>
+      <pubDate>Fri, 14 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-14-451</guid>
+      <category>Pronóstico General</category>
     </item>
     <item>
       <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de agosto del 2026 | Emisión 06:00h</title>
@@ -42,6 +55,22 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 14 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-14-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Chih, Dgo, SLP, Mich, Qro, Hgo, EdoMéx, Tlax, Pue, Gro y Ver.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Chih, Dgo, SLP, Mich, Qro, Hgo, EdoMéx, Tlax, Pue, Gro y Ver.]]></description>
+      <pubDate>Fri, 14 Aug 2026 07:47:55 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-14-b800</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 14 AUG 2026: Se pronostican lluvias muy fuertes en zonas de 11 estados del país</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_14.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de 11 estados del país — Reporte Matutino del 14 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_14.pdf]]></description>
+      <pubDate>Fri, 14 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_14</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 13 AUG 2026: Para este jueves se pronostican lluvias muy fuertes en regiones de Durango, Sinaloa, Jalisco, Guerrero y Oaxaca</title>
@@ -58,37 +87,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 14 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_12</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Jalisco, Guerrero, Estado de México, Ciudad de México, Puebla, Chiapas y Oaxaca..</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento con rachas de 50 a 70 km/h: en zonas de Chihuahua, Coahuila, Nuevo León, Tamaulipas y San Luis Potosí.]]></description>
-      <pubDate>Fri, 14 Aug 2026 06:00:13 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-14-3cee</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 450 | 13 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA, SINALOA Y DURANGO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 450
-Ciudad de México a 13 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PREVÉN LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA, SINALOA Y DURANGO
-
- 
-
-Durante esta tarde y noche, el monzón mexicano en el noroeste del territorio mexicano, en interacción con inestabilidad atmosférica ocasionarán lluvias puntuales muy fuertes en Chihuahua (oeste y suroeste), Durango (oeste y noroeste), Sinaloa (norte y centro), además de lluvias fuertes en Baja California Sur, Sonora y Nayarit, y lluvia aisladas en Baja California; todas estarán acompañadas con descargas eléctricas, además de vientos de 20 a 30 km/h con rachas de 40 a 60 km/h, y de hasta 70 km/h en Chihuahua. Canales de baja presión en el interior del país en interacción con una circulación ciclónica en altura, una vaguada en niveles medios de la atmósfera y el paso de la onda tropical núm.…]]></description>
-      <pubDate>Thu, 13 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-13-450</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
