@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 14 Aug 2026 17:15:32 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 18:10:14 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -23,6 +23,14 @@
       <pubDate>Fri, 14 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_12</guid>
       <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Chih, Dgo, SLP, Mich, Qro, Hgo, EdoMéx, Tlax, Pue, Gro y Ver.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Chih, Dgo, SLP, Mich, Qro, Hgo, EdoMéx, Tlax, Pue, Gro y Ver.]]></description>
+      <pubDate>Fri, 14 Aug 2026 12:10:05 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-14-b800</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 451 | 14 de Agosto del 2026 | Emisión 06:00h</title>
@@ -46,23 +54,15 @@ Hoy, el monzón mexicano e inestabilidad atmosférica sobre el noroeste de Méxi
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de agosto del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de agosto del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 14 de agosto del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 14 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-14-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Chih, Dgo, SLP, Mich, Qro, Hgo, EdoMéx, Tlax, Pue, Gro y Ver.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm) en zonas de Chih, Dgo, SLP, Mich, Qro, Hgo, EdoMéx, Tlax, Pue, Gro y Ver.]]></description>
-      <pubDate>Fri, 14 Aug 2026 11:15:07 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-14-b800</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 14 AUG 2026: Se pronostican lluvias muy fuertes en zonas de 11 estados del país</title>
