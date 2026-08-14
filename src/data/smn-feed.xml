@@ -5,22 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 14 Aug 2026 05:09:07 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 06:47:21 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Jalisco, Guerrero, Estado de México, Ciudad de México, Puebla, Chiapas y Oaxaca..</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento con rachas de 50 a 70 km/h: en zonas de Chihuahua, Coahuila, Nuevo León, Tamaulipas y San Luis Potosí.]]></description>
-      <pubDate>Thu, 13 Aug 2026 23:08:49 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-13-3cee</guid>
-      <category>Alerta</category>
-    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 13 AUG 2026: Se prevén lluvias muy fuertes en zonas de Chihuahua, Sinaloa y Durango</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_13.pdf</link>
       <description><![CDATA[Se prevén lluvias muy fuertes en zonas de Chihuahua, Sinaloa y Durango — Reporte Vespertino del 13 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_13.pdf]]></description>
-      <pubDate>Thu, 13 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Fri, 14 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_13</guid>
       <category>Comunicado</category>
     </item>
@@ -28,7 +20,7 @@
       <title>📋 SMN Reporte Vespertino 12 AUG 2026: Se pronostican lluvias intensas para regiones de Jalisco, Colima, Veracruz, Tabasco, Chiapas, Campeche y Yucatán</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_12.pdf</link>
       <description><![CDATA[Se pronostican lluvias intensas para regiones de Jalisco, Colima, Veracruz, Tabasco, Chiapas, Campeche y Yucatán — Reporte Vespertino del 12 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_12.pdf]]></description>
-      <pubDate>Thu, 13 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Fri, 14 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_12</guid>
       <category>Comunicado</category>
     </item>
@@ -36,9 +28,44 @@
       <title>📋 SMN Reporte Vespertino 11 AUG 2026: Se prevén lluvias intensas en regiones de Sonora</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_11.pdf</link>
       <description><![CDATA[Se prevén lluvias intensas en regiones de Sonora — Reporte Vespertino del 11 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_11.pdf]]></description>
-      <pubDate>Thu, 13 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Fri, 14 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_11</guid>
       <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de agosto del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 14 de agosto del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 14 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-08-14-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 13 AUG 2026: Para este jueves se pronostican lluvias muy fuertes en regiones de Durango, Sinaloa, Jalisco, Guerrero y Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_13.pdf</link>
+      <description><![CDATA[Para este jueves se pronostican lluvias muy fuertes en regiones de Durango, Sinaloa, Jalisco, Guerrero y Oaxaca — Reporte Matutino del 13 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_13.pdf]]></description>
+      <pubDate>Fri, 14 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_13</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 12 AUG 2026: Se prevén lluvias intensas para zonas de Jalisco, Veracruz, Chiapas, Campeche y Yucatán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_12.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas para zonas de Jalisco, Veracruz, Chiapas, Campeche y Yucatán — Reporte Matutino del 12 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_12.pdf]]></description>
+      <pubDate>Fri, 14 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_12</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, Sinaloa, Jalisco, Guerrero, Estado de México, Ciudad de México, Puebla, Chiapas y Oaxaca..</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Viento con rachas de 50 a 70 km/h: en zonas de Chihuahua, Coahuila, Nuevo León, Tamaulipas y San Luis Potosí.]]></description>
+      <pubDate>Fri, 14 Aug 2026 00:47:12 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-14-3cee</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 450 | 13 de Agosto del 2026 | Emisión 18:00h</title>
@@ -62,33 +89,6 @@ Durante esta tarde y noche, el monzón mexicano en el noroeste del territorio me
       <pubDate>Thu, 13 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-08-13-450</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de agosto del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 13 de agosto del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Thu, 13 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-08-13-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 13 AUG 2026: Para este jueves se pronostican lluvias muy fuertes en regiones de Durango, Sinaloa, Jalisco, Guerrero y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_13.pdf</link>
-      <description><![CDATA[Para este jueves se pronostican lluvias muy fuertes en regiones de Durango, Sinaloa, Jalisco, Guerrero y Oaxaca — Reporte Matutino del 13 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_13.pdf]]></description>
-      <pubDate>Thu, 13 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_13</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 12 AUG 2026: Se prevén lluvias intensas para zonas de Jalisco, Veracruz, Chiapas, Campeche y Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_12.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas para zonas de Jalisco, Veracruz, Chiapas, Campeche y Yucatán — Reporte Matutino del 12 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_12.pdf]]></description>
-      <pubDate>Thu, 13 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_12</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
