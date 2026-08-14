@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 14 Aug 2026 20:00:27 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 20:49:13 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -28,7 +28,7 @@
       <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, San Luis Potosí,Michoacán, Querétaro, Hidalgo, Estado de México, Tlaxcala, Puebla, Guerrero y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Chihuahua, Durango, San Luis Potosí,Michoacán, Querétaro, Hidalgo, Estado de México, Tlaxcala, Puebla, Guerrero y Veracruz.]]></description>
-      <pubDate>Fri, 14 Aug 2026 14:00:16 -0600</pubDate>
+      <pubDate>Fri, 14 Aug 2026 14:49:02 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-14-4076</guid>
       <category>Alerta</category>
     </item>
