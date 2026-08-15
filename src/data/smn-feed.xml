@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 15 Aug 2026 16:44:15 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 15 Aug 2026 17:39:37 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -22,14 +22,6 @@
       <description><![CDATA[Se prevén lluvias muy fuertes en zonas de Chihuahua, Sinaloa y Durango — Reporte Vespertino del 13 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_13.pdf]]></description>
       <pubDate>Sat, 15 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_13</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 12 AUG 2026: Se pronostican lluvias intensas para regiones de Jalisco, Colima, Veracruz, Tabasco, Chiapas, Campeche y Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_12.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas para regiones de Jalisco, Colima, Veracruz, Tabasco, Chiapas, Campeche y Yucatán — Reporte Vespertino del 12 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_12.pdf]]></description>
-      <pubDate>Sat, 15 Aug 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_12</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -78,9 +70,17 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California, Baja California Sur, Sonora, Sinaloa, Chihuahua, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Sat, 15 Aug 2026 10:44:06 -0600</pubDate>
+      <pubDate>Sat, 15 Aug 2026 11:39:27 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-15-fe6c</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 15 AUG 2026: Para este día, se pronostican lluvias intensas en regiones de Oaxaca y muy fuertes en zonas de 12 entidades de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_15.pdf</link>
+      <description><![CDATA[Para este día, se pronostican lluvias intensas en regiones de Oaxaca y muy fuertes en zonas de 12 entidades de México — Reporte Matutino del 15 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_15.pdf]]></description>
+      <pubDate>Sat, 15 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_15</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 14 AUG 2026: Se pronostican lluvias muy fuertes en zonas de 11 estados del país</title>
