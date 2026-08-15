@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 15 Aug 2026 11:38:25 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 15 Aug 2026 13:02:26 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -33,15 +33,54 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 453 | 15 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[Pronóstico Meteorológico General
+No. Aviso: 453
+Ciudad de México a 15 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES INTENSAS EN OAXACA
+
+Este día, el monzón mexicano, la corriente en chorro s
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 453
+Ciudad de México a 15 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES INTENSAS EN OAXACA
+
+Este día, el monzón mexicano, la corriente en chorro subtropical e inestabilidad atmosférica sobre el noroeste de México, ocasionarán lluvias puntuales muy fuertes en Chihuahua, Durango, Sonora, Sinaloa y Nayarit, mismas que estarán acompañadas con descargas eléctricas y rachas de viento de 40 a 60 km/h; además de intervalos de chubascos en la península de Baja California. Por otra parte, canales de baja presión al interior del país, en interacción con circulaciones ciclónicas en altura, una vaguada en niveles medios de la atmósfera y con la onda tropical núm. 27 sobre el sureste mexicano, originarán lluvias puntuales intensas en Oaxaca, lluvias puntuales muy fuertes en Jalisco, Colima, Michoacán, Puebla, Guerrero, Veracruz y Chiapas; así como chubascos y lluvias puntuales fuertes en el occidente, noreste, centro, sur y sureste de la República Mexicana; además de la península de Yucatán. Simultáneamente, una nueva onda tropical (núm.…]]></description>
+      <pubDate>Sat, 15 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-15-453</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 15 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 15 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-15-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Oaxaca.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Baja California, Baja California Sur, Sonora, Sinaloa, Chihuahua, Nuevo León y Tamaulipas.]]></description>
+      <pubDate>Sat, 15 Aug 2026 07:02:18 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-15-fe6c</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 14 AUG 2026: Se pronostican lluvias muy fuertes en zonas de 11 estados del país</title>
@@ -58,35 +97,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sat, 15 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_13</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chih, Dgo, SLP, Mich, Qro, Hgo, EdoMéx, Tlax, Pue, Gro y Ver.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Chih, Dgo, SLP, Mich, Qro, Hgo, EdoMéx, Tlax, Pue, Gro y Ver.]]></description>
-      <pubDate>Sat, 15 Aug 2026 05:38:17 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-15-3892</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 452 | 14 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[HOY SE PREVÉN LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, SAN LUIS POTOSÍ, MICHOACÁN, QUERÉTARO, HIDALGO, ESTADO DE MÉXICO, TLAXCALA, PUEBLA, GUERRERO Y VERACRUZ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 452
-Ciudad de México a 14 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-HOY SE PREVÉN LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, SAN LUIS POTOSÍ, MICHOACÁN, QUERÉTARO, HIDALGO, ESTADO DE MÉXICO, TLAXCALA, PUEBLA, GUERRERO Y VERACRUZ
-
-Durante esta tarde y noche, el monzón mexicano en interacción con inestabilidad atmosférica sobre el noroeste de México, y el paso de la corriente en chorro subtropical, ocasionarán lluvias puntuales muy fuertes en Chihuahua (oeste y suroeste) y Durango (noroeste y oeste), lluvias fuertes en Sonora (este y sureste), Sinaloa (centro) y Nayarit (centro y este) e intervalos de chubascos en Baja California. Todas estarán acompañadas con descargas eléctricas y fuertes rachas de viento de 40 a 60 km/h. Por otra parte, el desplazamiento de la onda tropical núm.…]]></description>
-      <pubDate>Fri, 14 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-14-452</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
