@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 16 Aug 2026 11:39:02 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Aug 2026 13:04:05 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -25,15 +25,44 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 455 | 16 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, SINALOA, DURANGO, JALISCO, GUERRERO, OAXACA, PUEBLA Y VERACRUZ, CON PUNTUALES INTENSAS EN MICHOACÁN
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 455
+Ciudad de México a 16 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, SINALOA, DURANGO, JALISCO, GUERRERO, OAXACA, PUEBLA Y VERACRUZ, CON PUNTUALES INTENSAS EN MICHOACÁN
+
+Hoy, el monzón mexicano sobre el noroeste de México, aunado a inestabilidad atmosférica, ocasionarán lluvias muy fuertes en zonas de Chihuahua, Sinaloa y Durango; lluvias fuertes en Sonora y chubascos en Baja California Sur, dichas lluvias estarán acompañadas con descargas eléctricas y fuertes rachas de viento. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica y vaguada en niveles medios y altos de la atmósfera, además de las ondas tropicales núm.…]]></description>
+      <pubDate>Sun, 16 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-16-455</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 16 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-16-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca.]]></description>
+      <pubDate>Sun, 16 Aug 2026 07:03:57 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-16-8f66</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 15 AUG 2026: Para este día, se pronostican lluvias intensas en regiones de Oaxaca y muy fuertes en zonas de 12 entidades de México</title>
@@ -58,45 +87,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sun, 16 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_13</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca.]]></description>
-      <pubDate>Sun, 16 Aug 2026 05:38:51 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-16-8f66</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 454 | 15 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[Pronóstico Meteorológico General
-No. Aviso: 454
-Ciudad de México a 15 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PREVÉN LLUVIAS INTENSAS EN OAXACA
-
-Durante esta tarde y noche, el monzón mexicano y la co
-
----
-Pronóstico Meteorológico General
-No. Aviso: 454
-Ciudad de México a 15 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PREVÉN LLUVIAS INTENSAS EN OAXACA
-
-Durante esta tarde y noche, el monzón mexicano y la corriente en chorro subtropical sobre el noroeste de México, en interacción con inestabilidad atmosférica, ocasionarán lluvias fuertes a muy fuertes en Sonora (este y sureste), Chihuahua (oeste y suroeste), Durango (noroeste y oeste), Sinaloa (norte y centro) y Nayarit (norte y centro), así como intervalos de chubascos en la península de Baja California. Dichas lluvias estarán acompañadas con descargas eléctricas y fuertes rachas de viento. Por otro lado, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica en altura, vaguadas en niveles medios de la atmósfera, además del paso de la onda tropical núm.…]]></description>
-      <pubDate>Sat, 15 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-15-454</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
