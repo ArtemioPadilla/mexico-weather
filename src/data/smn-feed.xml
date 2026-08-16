@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 16 Aug 2026 20:42:11 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Aug 2026 21:37:40 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -28,7 +28,7 @@
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Michoacán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Michoacán.]]></description>
-      <pubDate>Sun, 16 Aug 2026 14:42:02 -0600</pubDate>
+      <pubDate>Sun, 16 Aug 2026 15:37:31 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-16-f2e3</guid>
       <category>Alerta</category>
     </item>
@@ -54,11 +54,11 @@ Hoy, el monzón mexicano sobre el noroeste de México, aunado a inestabilidad at
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de agosto del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de agosto del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de agosto del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 16 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-16-12</guid>
