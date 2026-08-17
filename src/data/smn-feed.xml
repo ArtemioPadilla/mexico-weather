@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 16 Aug 2026 23:37:21 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 01:57:52 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Michoacán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Michoacán.]]></description>
-      <pubDate>Sun, 16 Aug 2026 17:37:12 -0600</pubDate>
+      <pubDate>Sun, 16 Aug 2026 19:57:43 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-16-f2e3</guid>
       <category>Alerta</category>
     </item>
@@ -33,32 +33,42 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 455 | 16 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 456 | 16 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, SINALOA, DURANGO, JALISCO, GUERRERO, OAXACA, PUEBLA Y VERACRUZ, CON PUNTUALES INTENSAS EN MICHOACÁN
-
----
-Pronóstico Meteorológico General
-No. Aviso: 455
+      <description><![CDATA[Pronóstico Meteorológico General
+No. Aviso: 456
 Ciudad de México a 16 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, SINALOA, DURANGO, JALISCO, GUERRERO, OAXACA, PUEBLA Y VERACRUZ, CON PUNTUALES INTENSAS EN MICHOACÁN
+SE PREVÉN LLUVIAS INTENSAS EN MICHOACÁN
 
-Hoy, el monzón mexicano sobre el noroeste de México, aunado a inestabilidad atmosférica, ocasionarán lluvias muy fuertes en zonas de Chihuahua, Sinaloa y Durango; lluvias fuertes en Sonora y chubascos en Baja California Sur, dichas lluvias estarán acompañadas con descargas eléctricas y fuertes rachas de viento. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica y vaguada en niveles medios y altos de la atmósfera, además de las ondas tropicales núm.…]]></description>
+Durante esta tarde y noche, el monzón mexicano sobr
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 456
+Ciudad de México a 16 de Agosto del 2026.
+Emisión: 18:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+SE PREVÉN LLUVIAS INTENSAS EN MICHOACÁN
+
+Durante esta tarde y noche, el monzón mexicano sobre el noroeste de México aunado a inestabilidad atmosférica, ocasionarán lluvias muy fuertes en Chihuahua (suroeste) y Durango (noroeste), lluvias fuertes en Sonora (este y sureste), Sinaloa (centro) y Nayarit (norte y sur) así como chubascos en Baja California Sur. Dichas lluvias estarán acompañadas con descargas eléctricas y fuertes rachas de viento. Por otra parte, sobre el interior de la República Mexicana, canales de baja presión en interacción con circulaciones ciclónicas en altura y vaguadas en niveles medios de la atmósfera, además de la onda tropical núm.…]]></description>
       <pubDate>Sun, 16 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-16-455</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-16-456</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de agosto del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de agosto del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 16 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-16-12</guid>
