@@ -5,15 +5,15 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 17 Aug 2026 04:07:43 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 05:01:36 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Michoacán.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Michoacán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Michoacán.]]></description>
-      <pubDate>Sun, 16 Aug 2026 22:07:33 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-16-f2e3</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Michoacán.]]></description>
+      <pubDate>Sun, 16 Aug 2026 23:01:27 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-16-8efc</guid>
       <category>Alerta</category>
     </item>
     <item>
