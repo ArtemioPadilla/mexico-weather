@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 17 Aug 2026 11:44:35 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 13:10:20 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -17,23 +17,52 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Vespertino 13 AUG 2026: Se prevén lluvias muy fuertes en zonas de Chihuahua, Sinaloa y Durango</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_13.pdf</link>
-      <description><![CDATA[Se prevén lluvias muy fuertes en zonas de Chihuahua, Sinaloa y Durango — Reporte Vespertino del 13 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_13.pdf]]></description>
-      <pubDate>Mon, 17 Aug 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_13</guid>
-      <category>Comunicado</category>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 457 | 17 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS INTENSAS EN SINALOA Y NAYARIT
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 457
+Ciudad de México a 17 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+SE PREVÉN LLUVIAS INTENSAS EN SINALOA Y NAYARIT
+
+Este día, el monzón mexicano sobre el noroeste del territorio mexicano e inestabilidad atmosférica, generarán lluvias puntuales intensas en zonas de Sinaloa y Nayarit, así como lluvias fuertes a muy fuertes en Baja California Sur, Sonora, Chihuahua y Durango. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con circulaciones ciclónicas en altura, vaguadas en niveles medios de la atmósfera y la onda tropical núm. 28 sobre el sur del país, originarán lluvias muy fuertes en zonas de Veracruz, Oaxaca y Puebla, así como chubascos y lluvias fuertes acompañadas con descargas eléctricas en el noreste, oriente, sur y sureste mexicano, además de la península de Yucatán; con posible caída de granizo en estados del centro y occidente de México.…]]></description>
+      <pubDate>Mon, 17 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-17-457</guid>
+      <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de agosto del 2026 | Emisión 03:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 17 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 17 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-17-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa y Nayarit.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa y Nayarit.]]></description>
+      <pubDate>Mon, 17 Aug 2026 07:10:11 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-17-0c8e</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 17 AUG 2026: Se pronostican lluvias intensas en zonas de Sinaloa y Nayarit</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_17.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Sinaloa y Nayarit — Reporte Matutino del 17 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_17.pdf]]></description>
+      <pubDate>Mon, 17 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_17</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 16 AUG 2026: Hoy, se pronostican lluvias intensas en regiones de Michoacán y muy fuertes en otras ocho entidades de México</title>
@@ -58,45 +87,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 17 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_14</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Michoacán.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Michoacán.]]></description>
-      <pubDate>Mon, 17 Aug 2026 05:44:24 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-17-8efc</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 456 | 16 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[Pronóstico Meteorológico General
-No. Aviso: 456
-Ciudad de México a 16 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PREVÉN LLUVIAS INTENSAS EN MICHOACÁN
-
-Durante esta tarde y noche, el monzón mexicano sobr
-
----
-Pronóstico Meteorológico General
-No. Aviso: 456
-Ciudad de México a 16 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PREVÉN LLUVIAS INTENSAS EN MICHOACÁN
-
-Durante esta tarde y noche, el monzón mexicano sobre el noroeste de México aunado a inestabilidad atmosférica, ocasionarán lluvias muy fuertes en Chihuahua (suroeste) y Durango (noroeste), lluvias fuertes en Sonora (este y sureste), Sinaloa (centro) y Nayarit (norte y sur) así como chubascos en Baja California Sur. Dichas lluvias estarán acompañadas con descargas eléctricas y fuertes rachas de viento. Por otra parte, sobre el interior de la República Mexicana, canales de baja presión en interacción con circulaciones ciclónicas en altura y vaguadas en niveles medios de la atmósfera, además de la onda tropical núm.…]]></description>
-      <pubDate>Sun, 16 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-16-456</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
