@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 18 Aug 2026 11:44:45 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 13:12:36 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -17,23 +17,52 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Vespertino 14 AUG 2026: Se pronostican lluvias muy fuertes para regiones de 11 estados de la República Mexicana</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_14.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes para regiones de 11 estados de la República Mexicana — Reporte Vespertino del 14 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_14.pdf]]></description>
-      <pubDate>Tue, 18 Aug 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_14</guid>
-      <category>Comunicado</category>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 459 | 18 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE BAJA CALIFORNIA SUR, VERACRUZ, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 459
+Ciudad de México a 18 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES INTENSAS EN ZONAS DE BAJA CALIFORNIA SUR, VERACRUZ, OAXACA Y CHIAPAS
+
+El monzón mexicano sobre el noroeste de México, una circulación ciclónica en niveles medios de la atmósfera sobre la península de Baja California e inestabilidad atmosférica, generarán lluvias puntuales intensas en zonas de Baja California Sur; así como lluvias fuertes a muy fuertes en Sonora, Chihuahua, Durango, Sinaloa y Nayarit; dichas lluvias estarán acompañadas con descargas eléctricas y fuertes rachas de viento. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con circulaciones ciclónicas en altura y una vaguada en niveles medios y altos de la atmósfera, además del desplazamiento de la onda tropical núm.…]]></description>
+      <pubDate>Tue, 18 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-18-459</guid>
+      <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de agosto del 2026 | Emisión 03:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 18 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-18-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Veracruz, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Veracruz, Oaxaca y Chiapas.]]></description>
+      <pubDate>Tue, 18 Aug 2026 07:12:27 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-18-3009</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 18 AUG 2026: Se prevén lluvias intensas para este martes en regiones de Baja California Sur, Veracruz, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_18.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas para este martes en regiones de Baja California Sur, Veracruz, Oaxaca y Chiapas — Reporte Matutino del 18 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_18.pdf]]></description>
+      <pubDate>Tue, 18 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_18</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 17 AUG 2026: Se pronostican lluvias intensas en zonas de Sinaloa y Nayarit</title>
@@ -58,35 +87,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 18 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_15</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.]]></description>
-      <pubDate>Tue, 18 Aug 2026 05:44:35 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-18-396a</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 458 | 17 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA Y NAYARIT
-
----
-Pronóstico Meteorológico General
-No. Aviso: 458
-Ciudad de México a 17 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA Y NAYARIT
-
-Durante esta noche y madrugada del martes, el monzón mexicano sobre el noroeste de México en combinación con inestabilidad atmosférica, generará lluvias puntuales intensas en Sinaloa (norte, centro y sur) y Nayarit (norte y costa), así como lluvias muy fuertes en Sonora (sureste), Chihuahua (suroeste) y Durango (noroeste), lluvias fuertes en Baja California Sur (sur) y lluvias aisladas en Baja California. Por otro lado, canales de baja presión sobre el interior de la República Mexicana en interacción con circulaciones ciclónicas en altura, vaguadas en niveles medios y altos de la atmósfera, inestabilidad atmosférica, además del paso de la onda tropical núm.…]]></description>
-      <pubDate>Mon, 17 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-17-458</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
