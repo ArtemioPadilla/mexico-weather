@@ -5,22 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 18 Aug 2026 05:48:37 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 07:08:33 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.]]></description>
-      <pubDate>Mon, 17 Aug 2026 23:48:27 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-17-396a</guid>
-      <category>Alerta</category>
-    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 17 AUG 2026: Continúa el pronóstico de lluvias intensas en regiones de Sinaloa y Nayarit</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_17.pdf</link>
       <description><![CDATA[Continúa el pronóstico de lluvias intensas en regiones de Sinaloa y Nayarit — Reporte Vespertino del 17 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_17.pdf]]></description>
-      <pubDate>Mon, 17 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Tue, 18 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_17</guid>
       <category>Comunicado</category>
     </item>
@@ -28,9 +20,52 @@
       <title>📋 SMN Reporte Vespertino 14 AUG 2026: Se pronostican lluvias muy fuertes para regiones de 11 estados de la República Mexicana</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_14.pdf</link>
       <description><![CDATA[Se pronostican lluvias muy fuertes para regiones de 11 estados de la República Mexicana — Reporte Vespertino del 14 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_14.pdf]]></description>
-      <pubDate>Mon, 17 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Tue, 18 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_14</guid>
       <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de agosto del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 18 de agosto del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Tue, 18 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-08-18-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 17 AUG 2026: Se pronostican lluvias intensas en zonas de Sinaloa y Nayarit</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_17.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Sinaloa y Nayarit — Reporte Matutino del 17 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_17.pdf]]></description>
+      <pubDate>Tue, 18 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_17</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 16 AUG 2026: Hoy, se pronostican lluvias intensas en regiones de Michoacán y muy fuertes en otras ocho entidades de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_16.pdf</link>
+      <description><![CDATA[Hoy, se pronostican lluvias intensas en regiones de Michoacán y muy fuertes en otras ocho entidades de México — Reporte Matutino del 16 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_16.pdf]]></description>
+      <pubDate>Tue, 18 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_16</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 15 AUG 2026: Para este día, se pronostican lluvias intensas en regiones de Oaxaca y muy fuertes en zonas de 12 entidades de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_15.pdf</link>
+      <description><![CDATA[Para este día, se pronostican lluvias intensas en regiones de Oaxaca y muy fuertes en zonas de 12 entidades de México — Reporte Matutino del 15 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_15.pdf]]></description>
+      <pubDate>Tue, 18 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_15</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Nayarit.]]></description>
+      <pubDate>Tue, 18 Aug 2026 01:08:24 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-18-396a</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 458 | 17 de Agosto del 2026 | Emisión 18:00h</title>
@@ -52,41 +87,6 @@ Durante esta noche y madrugada del martes, el monzón mexicano sobre el noroes
       <pubDate>Mon, 17 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-08-17-458</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de agosto del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 17 de agosto del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Mon, 17 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-08-17-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 17 AUG 2026: Se pronostican lluvias intensas en zonas de Sinaloa y Nayarit</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_17.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Sinaloa y Nayarit — Reporte Matutino del 17 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_17.pdf]]></description>
-      <pubDate>Mon, 17 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_17</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 16 AUG 2026: Hoy, se pronostican lluvias intensas en regiones de Michoacán y muy fuertes en otras ocho entidades de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_16.pdf</link>
-      <description><![CDATA[Hoy, se pronostican lluvias intensas en regiones de Michoacán y muy fuertes en otras ocho entidades de México — Reporte Matutino del 16 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_16.pdf]]></description>
-      <pubDate>Mon, 17 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_16</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 15 AUG 2026: Para este día, se pronostican lluvias intensas en regiones de Oaxaca y muy fuertes en zonas de 12 entidades de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_15.pdf</link>
-      <description><![CDATA[Para este día, se pronostican lluvias intensas en regiones de Oaxaca y muy fuertes en zonas de 12 entidades de México — Reporte Matutino del 15 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_15.pdf]]></description>
-      <pubDate>Mon, 17 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_15</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
