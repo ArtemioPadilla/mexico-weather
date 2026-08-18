@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 18 Aug 2026 22:44:37 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 23:41:04 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Veracruz, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Veracruz, Oaxaca y Chiapas.]]></description>
+      <pubDate>Tue, 18 Aug 2026 17:40:54 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-18-3009</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 17 AUG 2026: Continúa el pronóstico de lluvias intensas en regiones de Sinaloa y Nayarit</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_17.pdf</link>
@@ -15,14 +23,6 @@
       <pubDate>Tue, 18 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_17</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Veracruz, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Veracruz, Oaxaca y Chiapas.]]></description>
-      <pubDate>Tue, 18 Aug 2026 16:44:28 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-18-3009</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 459 | 18 de Agosto del 2026 | Emisión 06:00h</title>
