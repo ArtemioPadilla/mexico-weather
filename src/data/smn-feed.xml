@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 19 Aug 2026 22:45:21 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2026 23:41:19 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Guerrero y Oaxaca.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Guerrero y Oaxaca.]]></description>
+      <pubDate>Wed, 19 Aug 2026 17:41:11 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-19-6a8d</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 18 AUG 2026: Hoy, se pronostican lluvias puntuales intensas en regiones de Baja California Sur, Veracruz, Oaxaca y Chiapas</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_18.pdf</link>
@@ -23,14 +31,6 @@
       <pubDate>Wed, 19 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_17</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Guerrero y Oaxaca.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Guerrero y Oaxaca.]]></description>
-      <pubDate>Wed, 19 Aug 2026 16:45:12 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-19-6a8d</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 461 | 19 de Agosto del 2026 | Emisión 06:00h</title>
