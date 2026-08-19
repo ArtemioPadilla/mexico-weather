@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 18 Aug 2026 23:41:04 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2026 01:56:09 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Veracruz, Oaxaca y Chiapas.]]></description>
-      <pubDate>Tue, 18 Aug 2026 17:40:54 -0600</pubDate>
+      <pubDate>Tue, 18 Aug 2026 19:55:59 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-18-3009</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 18 AUG 2026: Hoy, se pronostican lluvias puntuales intensas en regiones de Baja California Sur, Veracruz, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_18.pdf</link>
+      <description><![CDATA[Hoy, se pronostican lluvias puntuales intensas en regiones de Baja California Sur, Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 18 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_18.pdf]]></description>
+      <pubDate>Tue, 18 Aug 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_18</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 17 AUG 2026: Continúa el pronóstico de lluvias intensas en regiones de Sinaloa y Nayarit</title>
@@ -25,32 +33,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 459 | 18 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 460 | 18 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
       <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE BAJA CALIFORNIA SUR, VERACRUZ, OAXACA Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 459
+No. Aviso: 460
 Ciudad de México a 18 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
 LLUVIAS PUNTUALES INTENSAS EN ZONAS DE BAJA CALIFORNIA SUR, VERACRUZ, OAXACA Y CHIAPAS
 
-El monzón mexicano sobre el noroeste de México, una circulación ciclónica en niveles medios de la atmósfera sobre la península de Baja California e inestabilidad atmosférica, generarán lluvias puntuales intensas en zonas de Baja California Sur; así como lluvias fuertes a muy fuertes en Sonora, Chihuahua, Durango, Sinaloa y Nayarit; dichas lluvias estarán acompañadas con descargas eléctricas y fuertes rachas de viento. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con circulaciones ciclónicas en altura y una vaguada en niveles medios y altos de la atmósfera, además del desplazamiento de la onda tropical núm.…]]></description>
+Durante esta noche y la madrugada del miércoles, los efectos del monzón mexicano, una circulación ciclónica en niveles medios de la atmósfera sobre la península de Baja California e inestabilidad atmosférica mantendrán la probabilidad de lluvias puntuales intensas en Baja California Sur (centro y sur). Asimismo, se prevén lluvias fuertes a muy fuertes con descargas eléctricas y rachas de viento en Sonora (centro y este), Chihuahua (suroeste), Durango (oeste y noroeste), Sinaloa (centro y sur) y Nayarit (norte y sur). Por otra parte, canales de baja presión al interior del país en interacción con circulaciones ciclónicas en altura, vaguadas en niveles medios y altos de la atmósfera e inestabilidad atmosférica, junto con el paso de la onda tropical núm.…]]></description>
       <pubDate>Tue, 18 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-18-459</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-18-460</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de agosto del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de agosto del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 18 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-18-12</guid>
@@ -78,14 +86,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Hoy, se pronostican lluvias intensas en regiones de Michoacán y muy fuertes en otras ocho entidades de México — Reporte Matutino del 16 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_16.pdf]]></description>
       <pubDate>Tue, 18 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_16</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 15 AUG 2026: Para este día, se pronostican lluvias intensas en regiones de Oaxaca y muy fuertes en zonas de 12 entidades de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_15.pdf</link>
-      <description><![CDATA[Para este día, se pronostican lluvias intensas en regiones de Oaxaca y muy fuertes en zonas de 12 entidades de México — Reporte Matutino del 15 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_15.pdf]]></description>
-      <pubDate>Tue, 18 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_15</guid>
       <category>Comunicado</category>
     </item>
   </channel>
