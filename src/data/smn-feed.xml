@@ -5,13 +5,13 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 20 Aug 2026 11:47:04 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Aug 2026 13:15:14 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>📋 SMN Reporte Vespertino 19 AUG 2026: Se prevén lluvias intensas en regiones de Guerrero, Oaxaca y Veracruz</title>
+      <title>📋 SMN Reporte Vespertino 20 AUG 2026: Para este jueves prevén lluvias intensas en regiones de Jalisco, y muy fuertes en zonas de Colima, Michoacán y Guerrer...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_19.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas en regiones de Guerrero, Oaxaca y Veracruz — Reporte Vespertino del 19 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_19.pdf]]></description>
+      <description><![CDATA[Para este jueves prevén lluvias intensas en regiones de Jalisco, y muy fuertes en zonas de Colima, Michoacán y Guerrer... — Reporte Vespertino del 20 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_19.pdf]]></description>
       <pubDate>Thu, 20 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_19</guid>
       <category>Comunicado</category>
@@ -25,23 +25,44 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Vespertino 17 AUG 2026: Continúa el pronóstico de lluvias intensas en regiones de Sinaloa y Nayarit</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_17.pdf</link>
-      <description><![CDATA[Continúa el pronóstico de lluvias intensas en regiones de Sinaloa y Nayarit — Reporte Vespertino del 17 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_17.pdf]]></description>
-      <pubDate>Thu, 20 Aug 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_17</guid>
-      <category>Comunicado</category>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 463 | 20 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE JALISCO Y PUNTUALES MUY FUERTES EN COLIMA, MICHOACÁN Y GUERRERO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 463
+Ciudad de México a 20 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE JALISCO Y PUNTUALES MUY FUERTES EN COLIMA, MICHOACÁN Y GUERRERO
+
+
+
+Para este día, el monzón mexicano generará lluvias y chubascos con descargas eléctricas y posible caída de granizo en el noroeste del territorio nacional, con lluvias puntuales fuertes en zonas de Sonora. Por otra parte, canales de baja presión en el interior del país, en combinación con una circulación ciclónica en altura sobre el noreste de México y la onda tropical núm. 29, que recorrerá el sur de México, generarán chubascos con lluvias fuertes a puntuales muy fuertes en la mayor parte de la República Mexicana, pronosticándose lluvias puntuales intensas en zonas de Jalisco.…]]></description>
+      <pubDate>Thu, 20 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-20-463</guid>
+      <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de agosto del 2026 | Emisión 03:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 20 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 20 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-20-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco.]]></description>
+      <pubDate>Thu, 20 Aug 2026 07:15:03 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-20-2946</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 19 AUG 2026: Se pronostican lluvias intensas en zonas de Guerrero y Oaxaca</title>
@@ -58,35 +79,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Thu, 20 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_18</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guerrero y Oaxaca y Veracruz.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guerrero y Oaxaca y Veracruz.]]></description>
-      <pubDate>Thu, 20 Aug 2026 05:46:54 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-20-3883</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 462 | 19 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO, OAXACA Y VERACRUZ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 462
-Ciudad de México a 19 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO, OAXACA Y VERACRUZ
-
-Durante esta noche y madrugada del jueves, el monzón mexicano, una circulación ciclónica en niveles altos de la atmósfera e inestabilidad atmosférica sobre el noroeste del país, propiciarán lluvias muy fuertes en Nayarit (sur), lluvias fuertes en Baja California Sur (sur), Sonora (norte), Chihuahua (suroeste), Sinaloa (norte y centro) y Durango (noroeste y oeste), además de lluvias aisladas en Baja California. Por otra parte, canales de baja presión en el interior del territorio nacional, otra circulación ciclónica en niveles altos, el ingreso de humedad del océano Pacífico y el desplazamiento de la onda tropical núm.…]]></description>
-      <pubDate>Wed, 19 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-19-462</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
