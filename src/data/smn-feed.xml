@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 21 Aug 2026 11:46:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Aug 2026 13:14:57 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -25,23 +25,52 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Vespertino 18 AUG 2026: Hoy, se pronostican lluvias puntuales intensas en regiones de Baja California Sur, Veracruz, Oaxaca y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_18.pdf</link>
-      <description><![CDATA[Hoy, se pronostican lluvias puntuales intensas en regiones de Baja California Sur, Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 18 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_18.pdf]]></description>
-      <pubDate>Fri, 21 Aug 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_18</guid>
-      <category>Comunicado</category>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 465 | 21 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN DURANGO, NAYARIT Y JALISCO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 465
+Ciudad de México a 21 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN DURANGO, NAYARIT Y JALISCO
+
+
+Este día, el monzón mexicano sobre el noroeste del territorio nacional en combinación con inestabilidad atmosférica, propiciarán lluvias puntuales intensas en zonas de Durango y Nayarit; muy fuertes en Sinaloa; fuertes en Chihuahua y lluvias aisladas en la península de Baja California. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica en altura, el ingreso de humedad del océano Pacífico, la onda tropical núm. 29 al sur de Colima y Jalisco, así como la nueva onda tropical núm. 30 al sur de la península de Yucatán, originarán lluvias puntuales intensas en zonas de Jalisco; lluvias puntuales muy fuertes en Michoacán y Guanajuato; así como chubascos y lluvias fuertes en el occidente, noreste, oriente, sur y sureste del país, además de la península de Yucatán.…]]></description>
+      <pubDate>Fri, 21 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-21-465</guid>
+      <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de agosto del 2026 | Emisión 03:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 21 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 21 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-21-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Nayarit y Jalisco</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Nayarit y Jalisco]]></description>
+      <pubDate>Fri, 21 Aug 2026 07:14:47 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-21-1da1</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 21 AUG 2026: Se pronostican lluvias intensas en zonas de Durango, Nayarit y Jalisco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_21.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Durango, Nayarit y Jalisco — Reporte Matutino del 21 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_21.pdf]]></description>
+      <pubDate>Fri, 21 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_21</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 20 AUG 2026: Para este jueves prevén lluvias intensas en regiones de Jalisco, y muy fuertes en zonas de Colima, Michoacán y Guerrer...</title>
@@ -58,35 +87,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 21 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_19</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco.]]></description>
-      <pubDate>Fri, 21 Aug 2026 05:45:52 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-21-2946</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 464 | 20 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[HOY SE PREVÉN LLUVIAS INTENSAS EN JALISCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 464
-Ciudad de México a 20 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-HOY SE PREVÉN LLUVIAS INTENSAS EN JALISCO
-
-
-Durante esta tarde y noche, el monzón mexicano sobre el noroeste de país, aunado a inestabilidad atmosférica, generará lluvias y chubascos en Chihuahua, Durango, Sinaloa, con lluvias puntuales fuertes en zonas de Sonora (este) y Nayarit. Por otro lado, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica en altura en el norte del país, el ingreso de humedad del océano Pacífico, además del desplazamiento de la onda tropical núm.…]]></description>
-      <pubDate>Thu, 20 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-20-464</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
