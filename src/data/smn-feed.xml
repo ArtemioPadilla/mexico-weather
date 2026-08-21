@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 21 Aug 2026 22:45:10 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Aug 2026 23:43:07 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nayarit y Jalisco</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nayarit y Jalisco]]></description>
+      <pubDate>Fri, 21 Aug 2026 17:42:56 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-21-bb44</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 20 AUG 2026: Se pronostican lluvias intensas en el oeste de Jalisco y muy fuertes en regiones de Colima, Michoacán y Guerrero</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_20.pdf</link>
@@ -23,14 +31,6 @@
       <pubDate>Fri, 21 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_19</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nayarit y Jalisco</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nayarit y Jalisco]]></description>
-      <pubDate>Fri, 21 Aug 2026 16:45:01 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-21-bb44</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 465 | 21 de Agosto del 2026 | Emisión 06:00h</title>
