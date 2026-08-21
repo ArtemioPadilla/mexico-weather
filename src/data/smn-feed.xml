@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 21 Aug 2026 15:51:40 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Aug 2026 16:55:06 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -60,7 +60,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Nayarit y Jalisco</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Nayarit y Jalisco]]></description>
-      <pubDate>Fri, 21 Aug 2026 09:51:30 -0600</pubDate>
+      <pubDate>Fri, 21 Aug 2026 10:54:59 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-21-1da1</guid>
       <category>Alerta</category>
     </item>
