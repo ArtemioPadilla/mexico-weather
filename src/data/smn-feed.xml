@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 22 Aug 2026 11:40:04 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Aug 2026 13:04:09 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -33,15 +33,46 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 467 | 22 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[HOY SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE SINALOA, NAYARIT, JALISCO Y MICHOACÁN
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 467
+Ciudad de México a 22 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+HOY SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE SINALOA, NAYARIT, JALISCO Y MICHOACÁN
+
+ 
+
+Para este día, el monzón mexicano sobre el noroeste del territorio nacional en combinación con inestabilidad atmosférica, generarán lluvias puntuales intensas en zonas de Sinaloa y Nayarit y muy fuertes en Chihuahua y Durango. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica en niveles medios y altos de la atmósfera, además del paso de la onda tropical núm. 30 sobre el istmo de Tehuantepec, originarán lluvias fuertes a muy fuertes en el occidente, centro, oriente, sur y sureste del territorio nacional, incluido el Valle de México y la península de Yucatán; pronosticándose lluvias puntuales intensas en zonas de Jalisco y Michoacán.…]]></description>
+      <pubDate>Sat, 22 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-22-467</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 22 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 22 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-22-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en el oeste de Jalisco.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en el oeste de Jalisco.]]></description>
+      <pubDate>Sat, 22 Aug 2026 07:04:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-22-fc3b</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 21 AUG 2026: Se pronostican lluvias intensas en zonas de Durango, Nayarit y Jalisco</title>
@@ -58,37 +89,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sat, 22 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_20</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit y Jalisco.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit y Jalisco.]]></description>
-      <pubDate>Sat, 22 Aug 2026 05:39:54 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-22-2507</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 466 | 21 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[HOY SE PREVÉN LLUVIAS INTENSAS EN SINALOA, NAYARIT Y JALISCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 466
-Ciudad de México a 21 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-HOY SE PREVÉN LLUVIAS INTENSAS EN SINALOA, NAYARIT Y JALISCO
-
- 
-
-Durante esta tarde y noche, el monzón mexicano sobre el noroeste del país e inestabilidad atmosférica, generarán lluvias puntuales intensas en Sinaloa (sur) y Nayarit; fuertes en Sonora (sureste), Chihuahua (suroeste) y Durango (sur y oeste), y lluvias aisladas en la península de Baja California. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica en altura, el ingreso de humedad del océano Pacífico, la onda tropical núm. 29 al sur de Colima y Jalisco, así como la onda tropical núm.…]]></description>
-      <pubDate>Fri, 21 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-21-466</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
