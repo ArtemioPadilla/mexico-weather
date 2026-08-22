@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 22 Aug 2026 18:52:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Aug 2026 19:40:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -28,7 +28,7 @@
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en el oeste de Jalisco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en el oeste de Jalisco.]]></description>
-      <pubDate>Sat, 22 Aug 2026 12:51:51 -0600</pubDate>
+      <pubDate>Sat, 22 Aug 2026 13:40:20 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-22-fc3b</guid>
       <category>Alerta</category>
     </item>
