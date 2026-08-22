@@ -1,1 +1,1 @@
-{"updated":"2026-08-22T14:12:45Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Lala","lat":30.3,"lng":-172.0,"classification":"HU","intensityKt":75.0},{"name":"Moke","lat":14.4,"lng":-149.0,"classification":"TS","intensityKt":40.0}]}
+{"updated":"2026-08-22T14:37:11Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Lala","lat":30.5,"lng":-172.4,"classification":"HU","intensityKt":70.0},{"name":"Moke","lat":14.8,"lng":-150.2,"classification":"TS","intensityKt":45.0}]}
