@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 22 Aug 2026 23:39:17 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2026 02:02:36 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Jalisco, Colima, Michoacán y Yucatán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): zonas de Jalisco, Colima, Michoacán y Yucatán.]]></description>
-      <pubDate>Sat, 22 Aug 2026 17:39:08 -0600</pubDate>
+      <pubDate>Sat, 22 Aug 2026 20:02:27 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-22-707d</guid>
       <category>Alerta</category>
     </item>
@@ -41,34 +41,34 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 467 | 22 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 468 | 22 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[HOY SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE SINALOA, NAYARIT, JALISCO Y MICHOACÁN
+      <description><![CDATA[PERSISTEN LAS CONDICIONES PARA LLUVIAS INTENSAS EN ZONAS DE JALISCO, COLIMA, MICHOACÁN Y YUCATÁN
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 467
+No. Aviso: 468
 Ciudad de México a 22 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-HOY SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE SINALOA, NAYARIT, JALISCO Y MICHOACÁN
+PERSISTEN LAS CONDICIONES PARA LLUVIAS INTENSAS EN ZONAS DE JALISCO, COLIMA, MICHOACÁN Y YUCATÁN
 
  
 
-Para este día, el monzón mexicano sobre el noroeste del territorio nacional en combinación con inestabilidad atmosférica, generarán lluvias puntuales intensas en zonas de Sinaloa y Nayarit y muy fuertes en Chihuahua y Durango. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica en niveles medios y altos de la atmósfera, además del paso de la onda tropical núm. 30 sobre el istmo de Tehuantepec, originarán lluvias fuertes a muy fuertes en el occidente, centro, oriente, sur y sureste del territorio nacional, incluido el Valle de México y la península de Yucatán; pronosticándose lluvias puntuales intensas en zonas de Jalisco y Michoacán.…]]></description>
+Durante esta noche y madrugada del domingo, el monzón mexicano, en interacción con inestabilidad atmosférica, generará lluvias puntuales muy fuertes en Baja California Sur (sur), Sonora (este y sureste), Chihuahua (suroeste), Durango (oeste), Sinaloa (norte) y Nayarit (norte y sur), además de chubascos en Baja California. A su vez, la onda tropical núm. 30 continuará su desplazamiento sobre el sureste y gradualmente el sur del territorio nacional, ocasionando lluvias puntuales muy fuertes en Guerrero (este y suroeste), Oaxaca (este), Veracruz (sur) y Chiapas (norte, este y sur), así como lluvias puntuales fuertes en Morelos, Puebla (norte y oeste) y Tabasco (oeste).…]]></description>
       <pubDate>Sat, 22 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-22-467</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-22-468</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de agosto del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 22 de agosto del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 22 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-22-12</guid>
