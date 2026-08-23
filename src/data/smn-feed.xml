@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 23 Aug 2026 02:02:36 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2026 03:18:20 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Jalisco, Colima, Michoacán y Yucatán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): zonas de Jalisco, Colima, Michoacán y Yucatán.]]></description>
-      <pubDate>Sat, 22 Aug 2026 20:02:27 -0600</pubDate>
+      <pubDate>Sat, 22 Aug 2026 21:18:11 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-22-707d</guid>
       <category>Alerta</category>
     </item>
@@ -64,11 +64,11 @@ Durante esta noche y madrugada del domingo, el monzón mexicano, en interacci�
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de agosto del 2026 | Emisión 18:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de agosto del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 22 de agosto del 2026
-Emisión: 18:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 22 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-22-12</guid>
