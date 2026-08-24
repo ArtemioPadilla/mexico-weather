@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 23 Aug 2026 23:39:31 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Aug 2026 02:00:34 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Veracruz, Oaxaca, Campeche y Yucatán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): zonas de Veracruz, Oaxaca, Campeche y Yucatán.]]></description>
-      <pubDate>Sun, 23 Aug 2026 17:39:22 -0600</pubDate>
+      <pubDate>Sun, 23 Aug 2026 20:00:25 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-23-7467</guid>
       <category>Alerta</category>
     </item>
@@ -49,34 +49,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 469 | 23 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 470 | 23 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, OAXACA Y YUCATÁN
+      <description><![CDATA[PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, OAXACA, CAMPECHE Y YUCATÁN
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 469
+No. Aviso: 470
 Ciudad de México a 23 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, OAXACA Y YUCATÁN
+PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, OAXACA, CAMPECHE Y YUCATÁN
 
- 
-
-Este día, el monzón mexicano, en combinación con inestabilidad atmosférica, ocasionará lluvias fuertes con descargas eléctricas en Sonora, Chihuahua, Durango, Sinaloa y Nayarit, así como chubascos en la península de Baja California. Por otra parte, canales de baja presión al interior de México, la onda tropical núm. 30 sobre el occidente del país y una circulación ciclónica en niveles medios y altos de la atmósfera, propiciarán lluvias puntuales intensas en regiones de Veracruz y Oaxaca; lluvias muy fuertes en Guerrero, Puebla y Chiapas, así como chubascos y lluvias fuertes en el occidente, centro, sur y sureste del territorio nacional, incluido el Valle de México. Todas las lluvias con descargas eléctricas y posible caída de granizo. Simultáneamente, la nueva onda tropical núm. 31 ingresará a la península de Yucatán y originará lluvias fuertes a intensas en dicha península.…]]></description>
+Durante esa noche y madrugada del lunes, el monzón mexicano e inestabilidad atmosférica ocasionarán lluvias puntuales muy fuertes en Sonora (centro y este), lluvias fuertes en Baja California Sur (norte, centro y sur), Chihuahua (oeste y suroeste), Sinaloa (centro y sur), Durango (oeste) y Nayarit (norte y sur), así como chubascos en Baja California. Por otra parte, canales de baja presión en el interior del país, la onda tropical núm. 30 sobre los estados del sur y gradualmente el occidente de México, una circulación ciclónica en niveles altos de la atmósfera, el ingreso de humedad del océano Pacífico y el desplazamiento de la onda tropical núm.…]]></description>
       <pubDate>Sun, 23 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-23-469</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-23-470</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de agosto del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 23 de agosto del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 23 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-23-12</guid>
