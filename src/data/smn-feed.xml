@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 25 Aug 2026 04:05:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2026 05:51:11 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guerrero (oeste, suroeste, sur y sureste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guerrero (oeste, suroeste, sur y sureste).]]></description>
-      <pubDate>Mon, 24 Aug 2026 22:04:50 -0600</pubDate>
+      <pubDate>Mon, 24 Aug 2026 23:51:01 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-24-a3b1</guid>
       <category>Alerta</category>
     </item>
