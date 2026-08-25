@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 25 Aug 2026 11:47:56 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2026 13:15:05 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -14,14 +14,6 @@
       <description><![CDATA[Se pronostican lluvias intensas en regiones de Guerrero y muy fuertes en zonas de seis entidades de México — Reporte Vespertino del 24 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_24.pdf]]></description>
       <pubDate>Tue, 25 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_24</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 21 AUG 2026: Durante esta tarde se prevén lluvias intensas en regiones de Sinaloa, Nayarit y Jalisco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_21.pdf</link>
-      <description><![CDATA[Durante esta tarde se prevén lluvias intensas en regiones de Sinaloa, Nayarit y Jalisco — Reporte Vespertino del 21 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_21.pdf]]></description>
-      <pubDate>Tue, 25 Aug 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_21</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -41,15 +33,52 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 473 | 25 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 473
+Ciudad de México a 25 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
+
+Este día, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del territorio nacional propiciarán lluvias puntuales muy fuertes en Nayarit; así como chubascos y lluvias fuertes con descargas eléctricas en la península de Baja California, Sonora, Chihuahua, Durango y Sinaloa. Por otra parte, canales de baja presión al interior del país, en interacción con una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera; así como la onda tropical núm. 31 asociada con una zona de baja presión con probabilidad para desarrollo ciclónico en el Pacífico sur mexicano, ocasionarán lluvias puntuales muy fuertes en Jalisco, Colima, Michoacán y Guerrero, además de chubascos y lluvias fuertes con descargas eléctricas en el oriente, sur y sureste de la República Mexicana, incluida la península de Yucatán; y posible caída de granizo en estados del occidente y centro de México.…]]></description>
+      <pubDate>Tue, 25 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-25-473</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 25 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 25 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-25-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Zonas de Nayarit, Jalisco, Colima, Michoacán y Guerrero]]></description>
+      <pubDate>Tue, 25 Aug 2026 07:14:56 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-25-3d2e</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 25 AUG 2026: Se prevén lluvias muy fuertes para este martes en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_25.pdf</link>
+      <description><![CDATA[Se prevén lluvias muy fuertes para este martes en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero — Reporte Matutino del 25 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_25.pdf]]></description>
+      <pubDate>Tue, 25 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_25</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 24 AUG 2026: Para este lunes se prevén lluvias muy fuertes en regiones de Nayarit, Jalisco, Colima y Michoacán</title>
@@ -58,39 +87,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 25 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_24</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guerrero (oeste, suroeste, sur y sureste).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Guerrero (oeste, suroeste, sur y sureste).]]></description>
-      <pubDate>Tue, 25 Aug 2026 05:47:46 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-25-a3b1</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 472 | 24 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN GUERRERO Y MUY FUERTES EN NAYARIT, JALISCO, COLIMA, MICHOACÁN, PUEBLA Y VERACRUZ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 472
-Ciudad de México a 24 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-PRONÓSTICO DE LLUVIAS PUNTUALES INTENSAS EN GUERRERO Y MUY FUERTES EN NAYARIT, JALISCO, COLIMA, MICHOACÁN, PUEBLA Y VERACRUZ
-
-
-
-
-
-Durante esta noche y la madrugada del martes, el monzón mexicano sobre el noroeste del país e inestabilidad atmosférica generarán lluvias muy fuertes en Nayarit (sur); lluvias fuertes en Durango (sur) y Sinaloa (norte, centro y sur); así como chubascos en Baja California, Baja California Sur, Sonora y Chihuahua. Por otra parte canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica en niveles medios y altos de la atmósfera, inestabilidad atmosférica, el paso de la onda tropical núm.…]]></description>
-      <pubDate>Mon, 24 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-24-472</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
