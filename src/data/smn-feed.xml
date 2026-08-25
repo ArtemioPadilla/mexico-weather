@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 25 Aug 2026 22:48:30 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2026 23:42:43 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Michoacán.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Baja California Sur, Colima, Guanajuato y Guerrero.]]></description>
+      <pubDate>Tue, 25 Aug 2026 17:42:34 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-25-398a</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 24 AUG 2026: Se pronostican lluvias intensas en regiones de Guerrero y muy fuertes en zonas de seis entidades de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_24.pdf</link>
@@ -15,14 +23,6 @@
       <pubDate>Tue, 25 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_24</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Michoacán.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Baja California Sur, Colima, Guanajuato y Guerrero.]]></description>
-      <pubDate>Tue, 25 Aug 2026 16:48:20 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-25-398a</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 23 AUG 2026: Se pronostican lluvias intensas en zonas de Veracruz, Oaxaca, Campeche y Yucatán</title>
