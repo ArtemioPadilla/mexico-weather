@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 25 Aug 2026 23:42:43 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 02:01:53 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Michoacán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Baja California Sur, Colima, Guanajuato y Guerrero.]]></description>
-      <pubDate>Tue, 25 Aug 2026 17:42:34 -0600</pubDate>
+      <pubDate>Tue, 25 Aug 2026 20:01:43 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-08-25-398a</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 25 AUG 2026: Durante esta tarde se prevén lluvias intensas en regiones de Nayarit, Jalisco y Michoacán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_25.pdf</link>
+      <description><![CDATA[Durante esta tarde se prevén lluvias intensas en regiones de Nayarit, Jalisco y Michoacán — Reporte Vespertino del 25 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_25.pdf]]></description>
+      <pubDate>Tue, 25 Aug 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_25</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 24 AUG 2026: Se pronostican lluvias intensas en regiones de Guerrero y muy fuertes en zonas de seis entidades de México</title>
@@ -33,40 +41,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 22 AUG 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 16 estados de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_08_22.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 16 estados de México — Comunicado del 22 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_08_22.pdf]]></description>
-      <pubDate>Tue, 25 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_08_22</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 473 | 25 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 474 | 25 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE NAYARIT, JALISCO Y MICHOACÁN
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 473
+No. Aviso: 474
 Ciudad de México a 25 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
+LLUVIAS PUNTUALES INTENSAS EN ZONAS DE NAYARIT, JALISCO Y MICHOACÁN
 
-Este día, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del territorio nacional propiciarán lluvias puntuales muy fuertes en Nayarit; así como chubascos y lluvias fuertes con descargas eléctricas en la península de Baja California, Sonora, Chihuahua, Durango y Sinaloa. Por otra parte, canales de baja presión al interior del país, en interacción con una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera; así como la onda tropical núm. 31 asociada con una zona de baja presión con probabilidad para desarrollo ciclónico en el Pacífico sur mexicano, ocasionarán lluvias puntuales muy fuertes en Jalisco, Colima, Michoacán y Guerrero, además de chubascos y lluvias fuertes con descargas eléctricas en el oriente, sur y sureste de la República Mexicana, incluida la península de Yucatán; y posible caída de granizo en estados del occidente y centro de México.…]]></description>
+Durante esta noche y madrugada del miércoles, el monzón mexicano e inestabilidad atmosférica, generará lluvias puntuales intensas en Nayarit (centro y sur), lluvias puntuales muy fuertes en Baja California Sur (sur), lluvias puntuales fuertes en Sinaloa (centro y sur) y Durango (oeste y sur), así como intervalos de chubascos en Baja California, Chihuahua y Sonora. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera, inestabilidad atmosférica, además del paso de la onda tropical núm.…]]></description>
       <pubDate>Tue, 25 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-25-473</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-25-474</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de agosto del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 25 de agosto del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 25 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-25-12</guid>
