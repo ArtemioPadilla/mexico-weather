@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 26 Aug 2026 11:49:37 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 13:26:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -25,23 +25,50 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 23 AUG 2026: Se pronostican lluvias intensas en zonas de Veracruz, Oaxaca, Campeche y Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_08_23.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Veracruz, Oaxaca, Campeche y Yucatán — Comunicado del 23 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_08_23.pdf]]></description>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 475 | 26 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE NAYARIT, JALISCO Y COLIMA • Y PUNTUALES MUY FUERTES EN ZONAS DE MICHOACÁN, VERCRUZ, GUERRERO, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 475
+Ciudad de México a 26 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE NAYARIT, JALISCO Y COLIMA; Y PUNTUALES MUY FUERTES EN ZONAS DE MICHOACÁN, VERCRUZ, GUERRERO, OAXACA Y CHIAPAS.
+
+Para hoy, el monzón mexicano sobre el noroeste de México e inestabilidad atmosférica, ocasionarán lluvias puntuales intensas en zonas de Nayarit; puntuales fuertes en zonas de Baja California Sur y Sinaloa; y lluvias con intervalos de chubascos en Baja California, Sonora, Chihuahua y Durango, las cuales se acompañarán con descargas eléctricas y rachas fuertes de viento.…]]></description>
       <pubDate>Wed, 26 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_08_23</guid>
-      <category>Comunicado</category>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-26-475</guid>
+      <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de agosto del 2026 | Emisión 03:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 26 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-26-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Colima.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Colima.]]></description>
+      <pubDate>Wed, 26 Aug 2026 07:26:32 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-26-2e83</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 26 AUG 2026: Se pronostican lluvias intensas en zonas de Nayarit, Jalisco y Colima</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_26.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Nayarit, Jalisco y Colima — Reporte Matutino del 26 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_26.pdf]]></description>
+      <pubDate>Wed, 26 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 25 AUG 2026: Se prevén lluvias muy fuertes para este martes en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero</title>
@@ -58,35 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 26 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_24</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Michoacán.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Michoacán.]]></description>
-      <pubDate>Wed, 26 Aug 2026 05:49:28 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-26-ff76</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 474 | 25 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE NAYARIT, JALISCO Y MICHOACÁN
-
----
-Pronóstico Meteorológico General
-No. Aviso: 474
-Ciudad de México a 25 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE NAYARIT, JALISCO Y MICHOACÁN
-
-Durante esta noche y madrugada del miércoles, el monzón mexicano e inestabilidad atmosférica, generará lluvias puntuales intensas en Nayarit (centro y sur), lluvias puntuales muy fuertes en Baja California Sur (sur), lluvias puntuales fuertes en Sinaloa (centro y sur) y Durango (oeste y sur), así como intervalos de chubascos en Baja California, Chihuahua y Sonora. Por otra parte, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera, inestabilidad atmosférica, además del paso de la onda tropical núm.…]]></description>
-      <pubDate>Tue, 25 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-25-474</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
