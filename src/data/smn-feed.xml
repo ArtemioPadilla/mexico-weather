@@ -5,22 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 26 Aug 2026 05:54:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 07:12:23 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Michoacán.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Michoacán.]]></description>
-      <pubDate>Tue, 25 Aug 2026 23:53:50 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-25-ff76</guid>
-      <category>Alerta</category>
-    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 25 AUG 2026: Durante esta tarde se prevén lluvias intensas en regiones de Nayarit, Jalisco y Michoacán</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_25.pdf</link>
       <description><![CDATA[Durante esta tarde se prevén lluvias intensas en regiones de Nayarit, Jalisco y Michoacán — Reporte Vespertino del 25 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_25.pdf]]></description>
-      <pubDate>Tue, 25 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Wed, 26 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_25</guid>
       <category>Comunicado</category>
     </item>
@@ -28,7 +20,7 @@
       <title>📋 SMN Reporte Vespertino 24 AUG 2026: Se pronostican lluvias intensas en regiones de Guerrero y muy fuertes en zonas de seis entidades de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_24.pdf</link>
       <description><![CDATA[Se pronostican lluvias intensas en regiones de Guerrero y muy fuertes en zonas de seis entidades de México — Reporte Vespertino del 24 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_24.pdf]]></description>
-      <pubDate>Tue, 25 Aug 2026 17:00:00 -0600</pubDate>
+      <pubDate>Wed, 26 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_24</guid>
       <category>Comunicado</category>
     </item>
@@ -36,9 +28,44 @@
       <title>📋 SMN Comunicado 23 AUG 2026: Se pronostican lluvias intensas en zonas de Veracruz, Oaxaca, Campeche y Yucatán</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_08_23.pdf</link>
       <description><![CDATA[Se pronostican lluvias intensas en zonas de Veracruz, Oaxaca, Campeche y Yucatán — Comunicado del 23 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_08_23.pdf]]></description>
-      <pubDate>Tue, 25 Aug 2026 12:00:00 -0600</pubDate>
+      <pubDate>Wed, 26 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_08_23</guid>
       <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de agosto del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 26 de agosto del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 26 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-08-26-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 25 AUG 2026: Se prevén lluvias muy fuertes para este martes en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_25.pdf</link>
+      <description><![CDATA[Se prevén lluvias muy fuertes para este martes en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero — Reporte Matutino del 25 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_25.pdf]]></description>
+      <pubDate>Wed, 26 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_25</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 24 AUG 2026: Para este lunes se prevén lluvias muy fuertes en regiones de Nayarit, Jalisco, Colima y Michoacán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_24.pdf</link>
+      <description><![CDATA[Para este lunes se prevén lluvias muy fuertes en regiones de Nayarit, Jalisco, Colima y Michoacán — Reporte Matutino del 24 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_24.pdf]]></description>
+      <pubDate>Wed, 26 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_24</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Michoacán.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Jalisco y Michoacán.]]></description>
+      <pubDate>Wed, 26 Aug 2026 01:12:12 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-26-ff76</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 474 | 25 de Agosto del 2026 | Emisión 18:00h</title>
@@ -60,33 +87,6 @@ Durante esta noche y madrugada del miércoles, el monzón mexicano e inestabili
       <pubDate>Tue, 25 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-08-25-474</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de agosto del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 25 de agosto del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 25 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-08-25-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 25 AUG 2026: Se prevén lluvias muy fuertes para este martes en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_25.pdf</link>
-      <description><![CDATA[Se prevén lluvias muy fuertes para este martes en regiones de Nayarit, Jalisco, Colima, Michoacán y Guerrero — Reporte Matutino del 25 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_25.pdf]]></description>
-      <pubDate>Tue, 25 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_25</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 24 AUG 2026: Para este lunes se prevén lluvias muy fuertes en regiones de Nayarit, Jalisco, Colima y Michoacán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_24.pdf</link>
-      <description><![CDATA[Para este lunes se prevén lluvias muy fuertes en regiones de Nayarit, Jalisco, Colima y Michoacán — Reporte Matutino del 24 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_24.pdf]]></description>
-      <pubDate>Tue, 25 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_24</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
