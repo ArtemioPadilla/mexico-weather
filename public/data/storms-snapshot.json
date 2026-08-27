@@ -1,1 +1,1 @@
-{"updated":"2026-08-26T23:53:14Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Iselle","lat":22.7,"lng":-124.9,"classification":"TS","intensityKt":35.0},{"name":"Lala","lat":36.1,"lng":-178.3,"classification":"TS","intensityKt":40.0}]}
+{"updated":"2026-08-27T06:18:33Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Iselle","lat":23.0,"lng":-125.9,"classification":"PTC","intensityKt":30.0},{"name":"Lala","lat":36.4,"lng":-178.5,"classification":"TS","intensityKt":40.0}]}
