@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 29 Aug 2026 09:11:29 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2026 14:33:43 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -33,15 +33,46 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de agosto del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 481 | 29 de Agosto del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN LOS ESTADOS DEL NORTE DE MÉXICO, ASÍ COMO EN LITORAL DEL PACÍFICO Y DEL GOLFO DE MÉXICO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 481
+Ciudad de México a 29 de Agosto del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES MUY FUERTES EN LOS ESTADOS DEL NORTE DE MÉXICO, ASÍ COMO EN LITORAL DEL PACÍFICO Y DEL GOLFO DE MÉXICO
+
+ 
+
+Este día, el monzón mexicano sobre el noroeste del país, canales de baja presión al interior de la República Mexicana, una vaguada en niveles altos de la atmósfera, inestabilidad atmosférica y la onda tropical núm. 33 sobre el sur del territorio nacional, propiciarán chubascos y lluvias fuertes a muy fuertes con descargas eléctricas en el noroeste, norte, noreste, sur y sureste de México, además de la península de Yucatán; y con posible caída de granizo en el occidente y centro del país, incluido el Valle de México.…]]></description>
+      <pubDate>Sat, 29 Aug 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-29-481</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de agosto del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 29 de agosto del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 29 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-29-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Sonora, Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chihuahua, Durango, Veracruz, Campeche y Yucatán.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Sonora, Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chihuahua, Durango, Veracruz, Campeche y Yucatán.]]></description>
+      <pubDate>Sat, 29 Aug 2026 08:33:32 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-29-e60d</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 28 AUG 2026: Para este viernes se prevén lluvias intensas en regiones de Guerrero</title>
@@ -58,33 +89,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sat, 29 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_27</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco y Guerrero.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco y Guerrero.]]></description>
-      <pubDate>Sat, 29 Aug 2026 03:11:19 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-29-0917</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 480 | 28 de Agosto del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO Y JALISCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 480
-Ciudad de México a 28 de Agosto del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO Y JALISCO
-
-Durante esta tarde y noche, el monzón mexicano sobre el noroeste del país e inestabilidad atmosférica ocasionarán lluvias puntuales muy fuertes en Sinaloa (centro y sur), lluvias puntuales fuertes en Baja California Sur (sur), Sonora (este y sur), Durango (oeste y sur), chubascos en Chihuahua, Baja California y Zacatecas, así como lluvias aisladas en Aguascalientes. Por otro lado, la onda tropical núm. 32 al suroeste de Jalisco, en interacción con la humedad proveniente del océano Pacífico e inestabilidad en altura, originará lluvias puntuales intensas en Jalisco (oeste), lluvias puntuales muy fuertes en Colima y Michoacán (norte, oeste, centro y sur) y lluvias puntuales fuertes en Nayarit (centro y sur). Se prevé que al final del periodo de pronóstico, la onda tropical núm. 32 deje de afectar al territorio nacional.…]]></description>
-      <pubDate>Fri, 28 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-28-480</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
