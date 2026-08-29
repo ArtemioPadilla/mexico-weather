@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 29 Aug 2026 18:37:17 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2026 21:48:25 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -25,11 +25,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Sonora, Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chihuahua, Durango, Veracruz, Campeche y Yucatán.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit y Jalisco (noroeste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Sonora, Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chihuahua, Durango, Veracruz, Campeche y Yucatán.]]></description>
-      <pubDate>Sat, 29 Aug 2026 12:37:09 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-29-e60d</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit y Jalisco (noroeste).]]></description>
+      <pubDate>Sat, 29 Aug 2026 15:48:15 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-29-9ba4</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -56,11 +56,11 @@ Este día, el monzón mexicano sobre el noroeste del país, canales de baja p
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de agosto del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de agosto del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 29 de agosto del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 29 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-29-12</guid>
