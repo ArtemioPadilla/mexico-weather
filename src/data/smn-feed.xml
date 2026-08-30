@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 30 Aug 2026 17:35:10 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2026 21:13:34 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -23,6 +23,14 @@
       <pubDate>Sun, 30 Aug 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_08_27</guid>
       <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): zonas de Sonora, Sinaloa, Chihuahua Coahuila, Durango, Zacatecas, Aguascalientes, Guanajuato, Veracruz, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): zonas de Sonora, Sinaloa, Chihuahua Coahuila, Durango, Zacatecas, Aguascalientes, Guanajuato, Veracruz, Oaxaca y Chiapas.]]></description>
+      <pubDate>Sun, 30 Aug 2026 15:13:23 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-30-ef85</guid>
+      <category>Alerta</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 483 | 30 de Agosto del 2026 | Emisión 06:00h</title>
@@ -44,23 +52,23 @@ Para hoy, el monzón mexicano en combinación con inestabilidad atmosférica so
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de agosto del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de agosto del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 30 de agosto del 2026
-Emisión: 09:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 30 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-30-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Sinaloa, Coahuila, Durango, Zacatecas, Aguascalientes, Guanajuato, Veracruz, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Sinaloa, Coahuila, Durango, Zacatecas, Aguascalientes, Guanajuato, Veracruz, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 30 Aug 2026 11:34:59 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-30-61e1</guid>
-      <category>Alerta</category>
+      <title>📋 SMN Reporte Matutino 30 AUG 2026: Se prevén lluvias muy fuertes para este domingo en regiones de 11 estados de la República Mexicana</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_30.pdf</link>
+      <description><![CDATA[Se prevén lluvias muy fuertes para este domingo en regiones de 11 estados de la República Mexicana — Reporte Matutino del 30 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_30.pdf]]></description>
+      <pubDate>Sun, 30 Aug 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_30</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 29 AUG 2026: Se prevén para hoy, sábado, lluvias intensas en Nayarit y el noroeste de Jalisco</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Para este viernes se prevén lluvias intensas en regiones de Guerrero — Reporte Matutino del 28 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_28.pdf]]></description>
       <pubDate>Sun, 30 Aug 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_28</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 27 AUG 2026: Se prevén lluvias de fuertes a muy fuertes para este jueves en 15 estados de la República Mexicana</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_27.pdf</link>
-      <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes para este jueves en 15 estados de la República Mexicana — Reporte Matutino del 27 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_27.pdf]]></description>
-      <pubDate>Sun, 30 Aug 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_27</guid>
       <category>Comunicado</category>
     </item>
   </channel>
