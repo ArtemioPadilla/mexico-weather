@@ -5,15 +5,15 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 30 Aug 2026 23:35:23 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2026 05:45:35 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): zonas de Sonora, Sinaloa, Chihuahua Coahuila, Durango, Zacatecas, Aguascalientes, Guanajuato, Veracruz, Oaxaca y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Sinaloa, Chihuahua Coahuila, Durango, Zacatecas, Aguascalientes, Guanajuato, Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): zonas de Sonora, Sinaloa, Chihuahua Coahuila, Durango, Zacatecas, Aguascalientes, Guanajuato, Veracruz, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 30 Aug 2026 17:35:15 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-08-30-ef85</guid>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Sinaloa, Chihuahua Coahuila, Durango, Zacatecas, Aguascalientes, Guanajuato, Veracruz, Oaxaca y Chiapas.]]></description>
+      <pubDate>Sun, 30 Aug 2026 23:45:26 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-08-30-348c</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -33,30 +33,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 483 | 30 de Agosto del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 484 | 30 de Agosto del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, SINALOA, CHIHUAHUA, DURANGO, ZACATECAS, AGUASCALIENTES, GUANAJUATO, VERACRUZ, OAXACA Y CHIAPAS
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, SINALOA, COAHUILA, DURANGO, ZACATECAS, AGUASCALIENTES, GUANAJUATO, VERACRUZ, OAXACA Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 483
+No. Aviso: 484
 Ciudad de México a 30 de Agosto del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, SINALOA, CHIHUAHUA, DURANGO, ZACATECAS, AGUASCALIENTES, GUANAJUATO, VERACRUZ, OAXACA Y CHIAPAS
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, SINALOA, COAHUILA, DURANGO, ZACATECAS, AGUASCALIENTES, GUANAJUATO, VERACRUZ, OAXACA Y CHIAPAS
 
-Para hoy, el monzón mexicano en combinación con inestabilidad atmosférica sobre el noroeste de México, originarán lluvias puntuales muy fuertes en zonas de Sonora, Sinaloa y Durango; y puntuales fuertes en zonas de Baja California Sur, Chihuahua y Nayarit, acompañadas con descargas y posible caída de granizo; además de lluvias aisladas en Baja California. Una circulación ciclónica en altura en el norte y noreste del país, una vaguada en niveles altos sobe el occidente y sur del golfo de México, así como canales de baja presión en el interior del país y el avance de la onda tropical núm.…]]></description>
+Durante esta noche y la madrugada del lunes, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país, originarán lluvias puntuales muy fuertes en zonas de Sonora (norte, centro y este), Chihuahua (oeste y suroeste), Durango (oeste y sur) y Sinaloa (norte y sur); y lluvias fuertes en zonas de Baja California Sur (sur) y Nayarit (norte y centro), las cuales se acompañarán con descargas eléctricas y rachas fuertes de viento; además de lluvias aisladas en Baja California. Por otra parte, una circulación ciclónica y una vaguada en altura en el norte y noreste de México, la onda tropical núm. 34 que se desplazará sobre la península de Yucatán y el sureste mexicano, canales de baja presión en el interior del territorio nacional, inestabilidad atmosférica y la onda tropical núm.…]]></description>
       <pubDate>Sun, 30 Aug 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-08-30-483</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-08-30-484</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de agosto del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de agosto del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 30 de agosto del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 30 Aug 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-08-30-12</guid>
