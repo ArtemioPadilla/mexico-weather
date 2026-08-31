@@ -1,1 +1,1 @@
-{"updated":"2026-08-30T22:15:25Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Karina","lat":17.2,"lng":-123.2,"classification":"HU","intensityKt":80.0},{"name":"Lowell","lat":13.3,"lng":-141.8,"classification":"TS","intensityKt":45.0}]}
+{"updated":"2026-08-31T00:41:14Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Karina","lat":17.2,"lng":-123.4,"classification":"HU","intensityKt":110.0},{"name":"Lowell","lat":13.3,"lng":-141.8,"classification":"TS","intensityKt":45.0}]}
