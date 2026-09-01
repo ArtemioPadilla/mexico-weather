@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 01 Sep 2026 19:58:22 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2026 22:39:03 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -17,11 +17,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): BCS, Son, Sin, Chih, Dgo, Zac, Nay, Jal, Gto, Hgo, EdoMéx, Gro y Oax.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): BCS, Son, Chih, Sin, Dgo, Zac, Nay, Jal, Mich, Gto, Qro, Hgo, EdoMex, Gro, Oax y Chis.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): BCS, Son, Sin, Chih, Dgo, Zac, Nay, Jal, Gto, Hgo, EdoMéx, Gro y Oax.]]></description>
-      <pubDate>Tue, 01 Sep 2026 13:58:13 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-01-3619</guid>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): BCS, Son, Chih, Sin, Dgo, Zac, Nay, Jal, Mich, Gto, Qro, Hgo, EdoMex, Gro, Oax y Chis.]]></description>
+      <pubDate>Tue, 01 Sep 2026 16:38:52 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-01-de5e</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -44,11 +44,11 @@ Para hoy, el monzón mexicano sobre el noroeste del territorio nacional e inesta
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de septiembre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de septiembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 01 de septiembre del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 01 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-01-12</guid>
