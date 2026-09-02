@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 01 Sep 2026 22:39:03 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2026 01:04:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): BCS, Son, Chih, Sin, Dgo, Zac, Nay, Jal, Mich, Gto, Qro, Hgo, EdoMex, Gro, Oax y Chis.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): BCS, Son, Chih, Sin, Dgo, Zac, Nay, Jal, Mich, Gto, Qro, Hgo, EdoMex, Gro, Oax y Chis.]]></description>
+      <pubDate>Tue, 01 Sep 2026 19:04:33 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-01-de5e</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 31 AUG 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 26 estados del país</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_31.pdf</link>
@@ -17,38 +25,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): BCS, Son, Chih, Sin, Dgo, Zac, Nay, Jal, Mich, Gto, Qro, Hgo, EdoMex, Gro, Oax y Chis.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): BCS, Son, Chih, Sin, Dgo, Zac, Nay, Jal, Mich, Gto, Qro, Hgo, EdoMex, Gro, Oax y Chis.]]></description>
-      <pubDate>Tue, 01 Sep 2026 16:38:52 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-01-de5e</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 487 | 01 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 488 | 01 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[ESTE DÍA SE PRONOSTICAN LLUVIAS FUERTES A MUY FUERTES EN
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE BAJA CALIFORNIA SUR
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 487
+No. Aviso: 488
 Ciudad de México a 01 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-ESTE DÍA SE PRONOSTICAN LLUVIAS FUERTES A MUY FUERTES EN 26 ENTIDADES DE LA REPÚBLICA MEXICANA
+ SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE BAJA CALIFORNIA SUR  
 
-Para hoy, el monzón mexicano sobre el noroeste del territorio nacional e inestabilidad atmosférica mantendrán las condiciones para lluvias puntuales muy fuertes en zonas de Baja California Sur, Sonora, Chihuahua, Durango, Sinaloa y Nayarit; y lluvias aisladas en Baja California. A su vez, canales de baja presión en el interior del país, circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera, así como el desplazamiento de la onda tropical núm. 35 sobre el sureste del territorio nacional, y de la onda tropical núm.…]]></description>
+Esta tarde y noche, continuarán los efectos del monzón mexicano sobre el noroeste del país que, aunado a inestabilidad atmosférica, originará lluvias puntuales intensas en Baja California Sur (centro y sur), lluvias muy fuertes en Sonora (este y sur), Chihuahua (oeste), Sinaloa (centro y sur), Durango (oeste y sur) y Nayarit (este y sur) y lluvias aisladas en Baja california, las cuales estarán acompañadas con descargas eléctricas y rachas de viento. Simultáneamente, canales de baja presión sobre el interior de la República Mexicana en interacción con circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera, los desprendimientos nubosos de la tormenta tropical Marie, ubicado al suroeste de las costas de Jalisco y la onda tropical núm.…]]></description>
       <pubDate>Tue, 01 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-01-487</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-01-488</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 01 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 01 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-01-12</guid>
