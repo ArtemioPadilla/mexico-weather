@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 02 Sep 2026 22:42:43 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 03 Sep 2026 01:10:46 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales intensas (75 a 150 mm): zonas de Baja California Sur.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias fuertes con puntuales intensas (75 a 150 mm): zonas de Baja California Sur.]]></description>
+      <pubDate>Wed, 02 Sep 2026 19:10:37 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-02-d547</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 31 AUG 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 26 estados del país</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_08_31.pdf</link>
@@ -17,58 +25,42 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales intensas (75 a 150 mm): zonas de Baja California Sur.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales intensas (75 a 150 mm): zonas de Baja California Sur.]]></description>
-      <pubDate>Wed, 02 Sep 2026 16:42:34 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-02-d547</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 489 | 02 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 490 | 02 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN BAJA CALIFORNIA SUR, SONORA, CHIHUAHUA, NAYARIT Y MICHOACÁN
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN BAJA CALIFORNIA SUR
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 489
+No. Aviso: 490
 Ciudad de México a 02 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES MUY FUERTES EN BAJA CALIFORNIA SUR, SONORA, CHIHUAHUA, NAYARIT Y MICHOACÁN
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN BAJA CALIFORNIA SUR
 
-Este día, el monzón mexicano sobre el noroeste de México e inestabilidad atmosférica, propiciarán lluvias fuertes a muy fuertes, descargas eléctricas y rachas de viento en dicha región. Por otra parte, la tormenta tropical Marie podría intensificarse a huracán durante este día en el océano Pacífico, desplazándose al suroeste de Baja California Sur; su extensa circulación originará oleaje elevado en la península de Baja California y las costas de Pacífico Central mexicano, así como reforzar la presencia de lluvias fuertes a muy fuertes en Baja California Sur y el occidente del territorio nacional. Simultáneamente, canales de baja presión sobre el interior de la República Mexicana, en interacción con circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera, además del paso de la onda tropical núm.…]]></description>
+Durante esta noche y madrugada del jueves, el monzón mexicano sobre el noroeste del país e inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en Sonora (este, norte y centro), Chihuahua (oeste y sur), Nayarit (este y sur) y Durango (oeste y sur), lluvias puntuales fuertes en Sinaloa (norte y centro), así como lluvias aisladas en Baja California. Por otro lado, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica y una vaguada en niveles altos de la atmósfera, la onda tropical núm. 35 al sur de México y la onda tropical núm.…]]></description>
       <pubDate>Wed, 02 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-02-489</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-02-490</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 02 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 02 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-02-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 02 SEP 2026: Hoy se esperan lluvias muy fuertes en regiones de Baja California Sur, Sonora, Chihuahua, Nayarit y Michoacán</title>
+      <title>📋 SMN Reporte Matutino 02 SEP 2026: Por la tormenta tropical Marie se pronostican lluvias intensas en Baja California Sur</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_02.pdf</link>
-      <description><![CDATA[Hoy se esperan lluvias muy fuertes en regiones de Baja California Sur, Sonora, Chihuahua, Nayarit y Michoacán — Reporte Matutino del 02 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_02.pdf]]></description>
+      <description><![CDATA[Por la tormenta tropical Marie se pronostican lluvias intensas en Baja California Sur — Reporte Matutino del 02 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_02.pdf]]></description>
       <pubDate>Wed, 02 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_02</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 31 AUG 2026: Se esperan lluvias muy fuertes en estados del norte, occidente, centro, oriente, sur y sureste de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_31.pdf</link>
-      <description><![CDATA[Se esperan lluvias muy fuertes en estados del norte, occidente, centro, oriente, sur y sureste de México — Reporte Matutino del 31 AUG 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_08_31.pdf]]></description>
-      <pubDate>Wed, 02 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_08_31</guid>
       <category>Comunicado</category>
     </item>
     <item>
