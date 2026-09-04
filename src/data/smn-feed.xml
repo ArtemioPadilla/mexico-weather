@@ -5,51 +5,54 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 03 Sep 2026 22:39:02 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 04 Sep 2026 01:03:25 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur y Chiapas.]]></description>
-      <pubDate>Thu, 03 Sep 2026 16:38:52 -0600</pubDate>
+      <pubDate>Thu, 03 Sep 2026 19:03:15 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-03-a966</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 491 | 03 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 492 | 03 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS INTENSAS EN BAJA CALIFORNIA SUR Y MUY FUERTES EN SONORA, SINALOA, CHIHUAHUA, DURANGO, ZACATECAS, NAYARIT, JALISCO, GUERRERO, OAXACA Y CHIAPAS
+      <description><![CDATA[SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE BAJA CALIFORIA SUR Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 491
+No. Aviso: 492
 Ciudad de México a 03 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS INTENSAS EN BAJA CALIFORNIA SUR Y MUY FUERTES EN SONORA, SINALOA, CHIHUAHUA, DURANGO, ZACATECAS, NAYARIT, JALISCO, GUERRERO, OAXACA Y CHIAPAS
 
-Para hoy, el monzón mexicano sobre el noroeste de México e inestabilidad atmosférica, originarán lluvias puntuales muy fuertes acompañadas con descargas eléctricas y rachas de viento en zonas de Sonora, Sinaloa, Chihuahua, Durango y Nayarit. Por otro lado, la extensa circulación del ciclón tropical Marie en el océano Pacífico, generará fuertes rachas de viento y oleaje elevado en costas de la península de Baja California, además reforzará la probabilidad de lluvias puntuales intensas en Baja California Sur y lluvias escasas en Baja California. A su vez, canales de baja presión sobre el interior de la República Mexicana en interacción con circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera, además de la onda tropical núm. 35 que se desplazará sobre el occidente de México y de la onda tropical núm.…]]></description>
+SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE BAJA CALIFORIA SUR Y CHIAPAS
+
+
+
+El monzón mexicano sobre el noroeste del país e inestabilidad atmosférica generarán lluvias muy fuertes con descargas eléctricas y rachas de viento en Sonora (este y sur), Sinaloa (norte y centro), Chihuahua (oeste y suroeste), Durango (oeste y noroeste) y Nayarit (sur y este), y lluvias aisladas en Baja California. Por su parte, el huracán Marie se desplazará gradualmente al suroeste de las costas de Baja California Sur, su extensa circulación ocasionará fuertes rachas de viento de 50 a 70 km/h y oleaje elevado de 1.5 a 2.5 metros de altura en la costa occidental de la península de Baja California, además de reforzar la probabilidad de lluvias puntuales intensas en Baja California Sur (centro y sur). Por otro lado, canales de baja presión sobre el interior de la República Mexicana en interacción con una circulación ciclónica y una vaguada en niveles altos de la atmósfera, además de la onda tropical núm.…]]></description>
       <pubDate>Thu, 03 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-03-491</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-03-492</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 03 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 03 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-03-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 03 SEP 2026: Se pronostican lluvias intensas en regiones de Baja California Sur y muy fuertes en otras 10 entidades de México</title>
+      <title>📋 SMN Reporte Matutino 03 SEP 2026: Debido al huracán Marie, se prevén para esta noche lluvias intensas en Baja California Sur</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_03.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en regiones de Baja California Sur y muy fuertes en otras 10 entidades de México — Reporte Matutino del 03 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_03.pdf]]></description>
+      <description><![CDATA[Debido al huracán Marie, se prevén para esta noche lluvias intensas en Baja California Sur — Reporte Matutino del 03 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_03.pdf]]></description>
       <pubDate>Thu, 03 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_03</guid>
       <category>Comunicado</category>
@@ -76,14 +79,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Para esta noche se prevén lluvias intensas en el centro y sur de Baja California Sur — Reporte Vespertino del 01 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_1.pdf]]></description>
       <pubDate>Tue, 01 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_1</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 01 SEP 2026: Para este día, se pronostican lluvias de lluvias fuertes a muy fuertes en regiones de 26 estados de la República Mexic...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_01.pdf</link>
-      <description><![CDATA[Para este día, se pronostican lluvias de lluvias fuertes a muy fuertes en regiones de 26 estados de la República Mexic... — Reporte Matutino del 01 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_01.pdf]]></description>
-      <pubDate>Tue, 01 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_01</guid>
       <category>Comunicado</category>
     </item>
   </channel>
