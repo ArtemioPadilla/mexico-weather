@@ -5,16 +5,35 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 04 Sep 2026 01:03:25 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 04 Sep 2026 05:59:56 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur y Chiapas.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de septiembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 04 de septiembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 04 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-04-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Baja California Sur y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur y Chiapas.]]></description>
-      <pubDate>Thu, 03 Sep 2026 19:03:15 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-03-a966</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Baja California Sur y Chiapas.]]></description>
+      <pubDate>Thu, 03 Sep 2026 23:59:46 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-03-4458</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 03 SEP 2026: Debido al huracán Marie, se prevén para esta noche lluvias intensas en Baja California Sur</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_3.pdf</link>
+      <description><![CDATA[Debido al huracán Marie, se prevén para esta noche lluvias intensas en Baja California Sur — Reporte Vespertino del 03 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_3.pdf]]></description>
+      <pubDate>Thu, 03 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_3</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 492 | 03 de Septiembre del 2026 | Emisión 18:00h</title>
@@ -39,20 +58,9 @@ El monzón mexicano sobre el noroeste del país e inestabilidad atmosférica ge
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 03 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Thu, 03 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-03-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 03 SEP 2026: Debido al huracán Marie, se prevén para esta noche lluvias intensas en Baja California Sur</title>
+      <title>📋 SMN Reporte Matutino 03 SEP 2026: Se pronostican lluvias intensas en regiones de Baja California Sur y muy fuertes en otras 10 entidades de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_03.pdf</link>
-      <description><![CDATA[Debido al huracán Marie, se prevén para esta noche lluvias intensas en Baja California Sur — Reporte Matutino del 03 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_03.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias intensas en regiones de Baja California Sur y muy fuertes en otras 10 entidades de México — Reporte Matutino del 03 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_03.pdf]]></description>
       <pubDate>Thu, 03 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_03</guid>
       <category>Comunicado</category>
