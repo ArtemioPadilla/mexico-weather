@@ -5,50 +5,53 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 04 Sep 2026 22:24:33 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 01:03:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.]]></description>
-      <pubDate>Fri, 04 Sep 2026 16:24:23 -0600</pubDate>
+      <pubDate>Fri, 04 Sep 2026 19:03:33 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-04-bbfd</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 04 SEP 2026: Se pronostica el ingreso de 56 frentes fríos a México, durante la temporada 2026-2027</title>
+      <title>📋 SMN Comunicado 04 SEP 2026: Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de prensa 125-26.pdf</link>
-      <description><![CDATA[Se pronostica el ingreso de 56 frentes fríos a México, durante la temporada 2026-2027 — Comunicado del 04 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de prensa 125-26.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco — Comunicado del 04 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de prensa 125-26.pdf]]></description>
       <pubDate>Fri, 04 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Comunicado de prensa 125-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 493 | 04 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 494 | 04 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+      <description><![CDATA[SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 493
+No. Aviso: 494
 Ciudad de México a 04 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
 
-Este día, el monzón mexicano sobre el noroeste del territorio nacional e inestabilidad atmosférica, propiciarán lluvias fuertes a muy fuertes acompañadas con descargas eléctricas y rachas de viento en Sonora, Sinaloa, Chihuahua, Durango y Nayarit. Por otra parte, el huracán Marie se desplazará gradualmente al suroeste de las costas de Baja California Sur; sin embargo, su extensa circulación generará rachas de viento y oleaje elevado en la costa occidental de la península de Baja California, además de la ocurrencia de lluvias puntuales muy fuertes en Baja California Sur. Simultáneamente, canales de baja presión al interior de la República Mexicana en interacción con circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera; además de la onda tropical núm.…]]></description>
+SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+
+
+
+Durante esta tarde y noche, el monzón mexicano sobre el noroeste del territorio nacional e inestabilidad atmosférica generarán lluvias muy fuertes en Sinaloa (sur), Chihuahua (oeste y suroeste), Durango (oeste y sur) y Nayarit (norte), lluvias fuertes en Sonora (este y sur) e intervalos de chubascos en Baja California; todas con descargas eléctricas. Por su parte, la amplia circulación del huracán Marie de categoría 2 en la escala Saffir-Simpson mantendrá el oleaje elevado de 2.0 a 3.0 metros de altura en la costa occidental de la península de Baja California, además de reforzar la probabilidad de lluvias fuertes en Baja California Sur (sur). Por otro lado, canales de baja presión, circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera, además de la onda tropical núm.…]]></description>
       <pubDate>Fri, 04 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-04-493</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-04-494</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 04 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 04 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-04-12</guid>
@@ -76,14 +79,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas en regiones de Baja California Sur y muy fuertes en otras 10 entidades de México — Reporte Matutino del 03 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_03.pdf]]></description>
       <pubDate>Thu, 03 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_03</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 02 SEP 2026: Por la tormenta tropical Marie se pronostican lluvias intensas en Baja California Sur</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_02.pdf</link>
-      <description><![CDATA[Por la tormenta tropical Marie se pronostican lluvias intensas en Baja California Sur — Reporte Vespertino del 02 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_02.pdf]]></description>
-      <pubDate>Wed, 02 Sep 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_02</guid>
       <category>Comunicado</category>
     </item>
   </channel>
