@@ -5,26 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 05 Sep 2026 10:43:24 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 13:54:26 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de septiembre del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 495 | 05 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS MUY FUERTES A INTENSAS EN
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 495
+Ciudad de México a 05 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS MUY FUERTES A INTENSAS EN 17 ENTIDADES DE LA REPÚBLICA MEXICANA
+
+Para hoy, el monzón mexicano sobre el noroeste del país, en interacción con inestabilidad atmosférica, propiciarán lluvias puntuales intensas en zonas de Sinaloa; puntuales muy fuertes en zonas de Durango, Chihuahua, Sonora y Baja California Sur; y puntuales fuertes en zonas de Baja California, las cuales estarán acompañadas con descargas eléctricas y rachas de viento.…]]></description>
+      <pubDate>Sat, 05 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-05-495</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de septiembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de septiembre del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 05 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-05-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Veracruz y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.]]></description>
-      <pubDate>Sat, 05 Sep 2026 04:43:14 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-05-f197</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Veracruz y Oaxaca.]]></description>
+      <pubDate>Sat, 05 Sep 2026 07:54:16 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-05-223d</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -42,28 +61,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 04 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Comunicado de prensa 125-26</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 494 | 04 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 494
-Ciudad de México a 04 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
-
-
-Durante esta tarde y noche, el monzón mexicano sobre el noroeste del territorio nacional e inestabilidad atmosférica generarán lluvias muy fuertes en Sinaloa (sur), Chihuahua (oeste y suroeste), Durango (oeste y sur) y Nayarit (norte), lluvias fuertes en Sonora (este y sur) e intervalos de chubascos en Baja California; todas con descargas eléctricas. Por su parte, la amplia circulación del huracán Marie de categoría 2 en la escala Saffir-Simpson mantendrá el oleaje elevado de 2.0 a 3.0 metros de altura en la costa occidental de la península de Baja California, además de reforzar la probabilidad de lluvias fuertes en Baja California Sur (sur). Por otro lado, canales de baja presión, circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera, además de la onda tropical núm.…]]></description>
-      <pubDate>Fri, 04 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-04-494</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 04 SEP 2026: Hoy se esperan lluvias intensas en regiones de Veracruz, Oaxaca, Chiapas y Tabasco</title>
