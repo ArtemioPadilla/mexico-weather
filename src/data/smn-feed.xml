@@ -5,21 +5,29 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 05 Sep 2026 01:03:42 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 05:50:42 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.]]></description>
-      <pubDate>Fri, 04 Sep 2026 19:03:33 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-04-bbfd</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.]]></description>
+      <pubDate>Fri, 04 Sep 2026 23:50:33 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-04-f197</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 04 SEP 2026: Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <title>📋 SMN Reporte Vespertino 04 SEP 2026: Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_04.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Vespertino del 04 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_04.pdf]]></description>
+      <pubDate>Fri, 04 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_04</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 04 SEP 2026: Se pronostica el ingreso de 56 frentes fríos a México, durante la temporada 2026-2027</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de prensa 125-26.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco — Comunicado del 04 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de prensa 125-26.pdf]]></description>
+      <description><![CDATA[Se pronostica el ingreso de 56 frentes fríos a México, durante la temporada 2026-2027 — Comunicado del 04 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de prensa 125-26.pdf]]></description>
       <pubDate>Fri, 04 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Comunicado de prensa 125-26</guid>
       <category>Comunicado</category>
@@ -47,11 +55,11 @@ Durante esta tarde y noche, el monzón mexicano sobre el noroeste del territorio
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de septiembre del 2026 | Emisión 18:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de septiembre del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 04 de septiembre del 2026
-Emisión: 18:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 04 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-04-12</guid>
