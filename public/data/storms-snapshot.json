@@ -1,1 +1,1 @@
-{"updated":"2026-09-08T04:56:01Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Marie","lat":25.1,"lng":-125.9,"classification":"TS","intensityKt":45.0},{"name":"Lowell","lat":20.3,"lng":-161.3,"classification":"HU","intensityKt":95.0}]}
+{"updated":"2026-09-08T09:18:10Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Marie","lat":25.5,"lng":-126.6,"classification":"TS","intensityKt":40.0},{"name":"Lowell","lat":21.9,"lng":-160.8,"classification":"HU","intensityKt":95.0}]}
