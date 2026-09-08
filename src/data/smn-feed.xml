@@ -5,42 +5,50 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 07 Sep 2026 23:34:19 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 04:48:15 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua.]]></description>
-      <pubDate>Mon, 07 Sep 2026 17:34:09 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-07-fccc</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua]]></description>
+      <pubDate>Mon, 07 Sep 2026 22:48:06 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-07-35b7</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 499 | 07 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 07 SEP 2026: Se pronostican lluvias intensas en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_07.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua — Reporte Vespertino del 07 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_07.pdf]]></description>
+      <pubDate>Mon, 07 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_07</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 500 | 07 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES DE MUY FUERTES A INTENSAS EN • ENTIDADES DE LA REPÚBLICA MEXICANA Y PUNTUALES FUERTES EN BAJA CALIFORNIA, COAHUILA, NUEVO LEÓN, TAMAULIPAS, ESTADO DE MÉXICO, CIUDAD DE MÉXICO, TLAXCALA, TABASCO, YUCATÁN Y QUINTANA ROO
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS BAJA CALIFORNIA SUR, SONORA, SINALOA Y CHIHUAHUA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 499
+No. Aviso: 500
 Ciudad de México a 07 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES DE MUY FUERTES A INTENSAS EN 21 ENTIDADES DE LA REPÚBLICA MEXICANA Y PUNTUALES FUERTES EN BAJA CALIFORNIA, COAHUILA, NUEVO LEÓN, TAMAULIPAS, ESTADO DE MÉXICO, CIUDAD DE MÉXICO, TLAXCALA, TABASCO, YUCATÁN Y QUINTANA ROO
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS BAJA CALIFORNIA SUR, SONORA, SINALOA Y CHIHUAHUA
 
-Para hoy, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del territorio nacional, ocasionarán lluvias puntuales intensas en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua; puntuales muy fuertes en zonas de Durango; y puntuales fuertes en zonas de Baja California, las cuales se acompañarán con descargas eléctricas y fuertes rachas de viento. A su vez, una circulación ciclónica y vaguadas en niveles medios y altos de la atmósfera en el interior del país, inestabilidad atmosférica y un canal de baja presión en el sureste mexicano, además de una nueva onda tropical (núm.…]]></description>
+Durante esta noche y la madrugada del martes, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país, originarán lluvias puntuales intensas en zonas de Baja California Sur (centro y sur), Sonora (centro, este y sur), Sinaloa (norte y centro) y Chihuahua (suroeste); lluvias muy fuertes en Durango (oeste y noroeste); así como lluvias fuertes en Baja California (sur). Por otra parte, canales de baja presión, una circulación ciclónica y vaguadas en niveles medios y altos de la atmósfera en el interior de la República Mexicana, inestabilidad atmosférica, además de la onda tropical núm.…]]></description>
       <pubDate>Mon, 07 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-07-499</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-07-500</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de septiembre del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 07 de septiembre del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 07 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-07-12</guid>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Vespertino del 04 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_04.pdf]]></description>
       <pubDate>Fri, 04 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_04</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 04 SEP 2026: Se pronostica el ingreso de 56 frentes fríos a México, durante la temporada 2026-2027</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de prensa 125-26.pdf</link>
-      <description><![CDATA[Se pronostica el ingreso de 56 frentes fríos a México, durante la temporada 2026-2027 — Comunicado del 04 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de prensa 125-26.pdf]]></description>
-      <pubDate>Fri, 04 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Comunicado de prensa 125-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
