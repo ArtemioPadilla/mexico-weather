@@ -5,27 +5,55 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 08 Sep 2026 09:49:03 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 14:37:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de septiembre del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 501 | 08 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 501
+Ciudad de México a 08 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO
+
+Este día, el monzón mexicano e inestabilidad atmosférica sobre el noroeste de la República Mexicana, propiciarán lluvias fuertes a muy fuertes acompañadas con descargas eléctricas y rachas de viento en Baja California, Baja California Sur, Sonora, Chihuahua, Durango y Sinaloa. Por otra parte, una circulación ciclónica y vaguadas en niveles medios y altos de la atmósfera al interior del país; además de la onda tropical núm. 37 que se desplazará sobre el sureste mexicano, ocasionarán lluvias puntuales intensas en Guanajuato (sur y sureste), así como chubascos y lluvias fuertes a muy fuertes acompañadas con descargas eléctricas en el occidente, centro, noreste, oriente, sur y sureste de México, incluida la península de Yucatán.…]]></description>
+      <pubDate>Tue, 08 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-08-501</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de septiembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de septiembre del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 08 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-08-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Guanajuato.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua]]></description>
-      <pubDate>Tue, 08 Sep 2026 03:48:55 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-08-35b7</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: zonas de Baja California, Sonora, Chihuahua, Coahuila, Nuevo León y Tamaulipas.]]></description>
+      <pubDate>Tue, 08 Sep 2026 08:37:38 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-08-161b</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 08 SEP 2026: Se prevén lluvias intensas en regiones de Guanajuato, y de fuertes a muy fuertes en otras 24 entidades de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_08.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas en regiones de Guanajuato, y de fuertes a muy fuertes en otras 24 entidades de México — Reporte Matutino del 08 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_08.pdf]]></description>
+      <pubDate>Tue, 08 Sep 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_08</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 07 SEP 2026: Se pronostican lluvias intensas en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua</title>
@@ -34,25 +62,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Mon, 07 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_07</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 500 | 07 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS BAJA CALIFORNIA SUR, SONORA, SINALOA Y CHIHUAHUA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 500
-Ciudad de México a 07 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS BAJA CALIFORNIA SUR, SONORA, SINALOA Y CHIHUAHUA
-
-Durante esta noche y la madrugada del martes, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país, originarán lluvias puntuales intensas en zonas de Baja California Sur (centro y sur), Sonora (centro, este y sur), Sinaloa (norte y centro) y Chihuahua (suroeste); lluvias muy fuertes en Durango (oeste y noroeste); así como lluvias fuertes en Baja California (sur). Por otra parte, canales de baja presión, una circulación ciclónica y vaguadas en niveles medios y altos de la atmósfera en el interior de la República Mexicana, inestabilidad atmosférica, además de la onda tropical núm.…]]></description>
-      <pubDate>Mon, 07 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-07-500</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 07 SEP 2026: Se prevén lluvias intensas en regiones de Baja California Sur, Sonora, Sinaloa y Chihuahua, y muy fuertes en otras 17 e...</title>
@@ -76,14 +85,6 @@ Durante esta noche y la madrugada del martes, el monzón mexicano e inestabili
       <description><![CDATA[Hoy se esperan lluvias intensas en regiones de Baja California Sur, Sonora, Sinaloa, Chihuahua, Veracruz, Oaxaca y Chiap... — Reporte Matutino del 05 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_05.pdf]]></description>
       <pubDate>Sat, 05 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_05</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 04 SEP 2026: Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_04.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Vespertino del 04 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_04.pdf]]></description>
-      <pubDate>Fri, 04 Sep 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_04</guid>
       <category>Comunicado</category>
     </item>
   </channel>
