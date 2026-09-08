@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 08 Sep 2026 04:48:15 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 09:49:03 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de septiembre del 2026 | Emisión 03:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 08 de septiembre del 2026
+Emisión: 03:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Tue, 08 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-08-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Baja California Sur, Sonora, Sinaloa y Chihuahua]]></description>
-      <pubDate>Mon, 07 Sep 2026 22:48:06 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-07-35b7</guid>
+      <pubDate>Tue, 08 Sep 2026 03:48:55 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-08-35b7</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -42,17 +53,6 @@ Durante esta noche y la madrugada del martes, el monzón mexicano e inestabili
       <pubDate>Mon, 07 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-09-07-500</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de septiembre del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 07 de septiembre del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Mon, 07 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-07-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 07 SEP 2026: Se prevén lluvias intensas en regiones de Baja California Sur, Sonora, Sinaloa y Chihuahua, y muy fuertes en otras 17 e...</title>
