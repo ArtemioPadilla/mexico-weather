@@ -5,27 +5,56 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 09 Sep 2026 11:33:02 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2026 16:44:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de septiembre del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 503 | 09 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA, NAYARIT, MICHOACÁN Y GUERRERO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 503
+Ciudad de México a 09 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA, NAYARIT, MICHOACÁN Y GUERRERO
+
+ 
+
+Para hoy, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del territorio nacional, ocasionarán lluvias puntuales intensas en zonas de Sinaloa y Nayarit; puntuales muy fuertes en zonas de Sonora y Durango, y puntuales fuertes en Baja California, Baja California Sur y Chihuahua; todas acompañadas con descargas eléctricas y fuertes rachas de viento. A su vez, canales de baja presión, circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera en el interior del país, e inestabilidad atmosférica, así como el desplazamiento de la onda tropical núm. 37 sobre el sur del territorio mexicano, además de una nueva onda tropical (núm.…]]></description>
+      <pubDate>Wed, 09 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-09-503</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de septiembre del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 09 de septiembre del 2026
-Emisión: 03:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 09 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-09-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Tamaulipas, Guanajuato, Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): Sinaloa, Nayarit, Michoacán y Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Tamaulipas, Guanajuato, Veracruz, Oaxaca, Chiapas y Tabasco]]></description>
-      <pubDate>Wed, 09 Sep 2026 05:32:53 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-09-dee6</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): Sinaloa, Nayarit, Michoacán y Guerrero.]]></description>
+      <pubDate>Wed, 09 Sep 2026 10:44:38 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-09-6c0d</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 09 SEP 2026: Hoy se esperan lluvias intensas en regiones de Sinaloa, Nayarit, Michoacán y Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_09.pdf</link>
+      <description><![CDATA[Hoy se esperan lluvias intensas en regiones de Sinaloa, Nayarit, Michoacán y Guerrero — Reporte Matutino del 09 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_09.pdf]]></description>
+      <pubDate>Wed, 09 Sep 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_09</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 08 SEP 2026: Para esta noche se prevén lluvias intensas en regiones de Guanajuato, Tamaulipas, Veracruz, Oaxaca, Chiapas y Tabasco</title>
@@ -34,27 +63,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 08 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_8</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 502 | 08 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO, TAMAULIPAS, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 502
-Ciudad de México a 08 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO, TAMAULIPAS, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
-
-Durante esta noche y la madrugada del miércoles, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país, originarán lluvias puntuales muy fuertes en zonas de Baja California Sur (norte y centro), Sonora (norte y este), Chihuahua (oeste y suroeste), Durango (oeste y sur), Sinaloa (este) y Nayarit (norte, centro y este); así como lluvias fuertes en Baja California (centro y sur). Por otra parte, canales de baja presión, una circulación ciclónica y una vaguada en niveles altos de la atmósfera e inestabilidad atmosférica, además de la onda tropical núm.…]]></description>
-      <pubDate>Tue, 08 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-08-502</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 08 SEP 2026: Se prevén lluvias intensas en regiones de Guanajuato, y de fuertes a muy fuertes en otras 24 entidades de México</title>
@@ -78,14 +86,6 @@ Durante esta noche y la madrugada del miércoles, el monzón mexicano e inesta
       <description><![CDATA[Se prevén lluvias intensas en regiones de Baja California Sur, Sonora, Sinaloa y Chihuahua, y muy fuertes en otras 17 e... — Reporte Matutino del 07 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_07.pdf]]></description>
       <pubDate>Mon, 07 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_07</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 06 SEP 2026: Hoy se esperan lluvias intensas en regiones de Baja California Sur, Sonora, Sinaloa, Nayarit, Veracruz, Puebla y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_06.pdf</link>
-      <description><![CDATA[Hoy se esperan lluvias intensas en regiones de Baja California Sur, Sonora, Sinaloa, Nayarit, Veracruz, Puebla y Oaxaca — Reporte Matutino del 06 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_06.pdf]]></description>
-      <pubDate>Sun, 06 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_06</guid>
       <category>Comunicado</category>
     </item>
   </channel>
