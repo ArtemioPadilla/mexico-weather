@@ -5,43 +5,44 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 08 Sep 2026 21:55:24 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2026 00:20:38 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de Tamaulipas, Guanajuato, Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas de 40 a 45 °C en zonas de Baja California, Sonora, Chihuahua, Coahuila, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Tue, 08 Sep 2026 15:55:15 -0600</pubDate>
+      <pubDate>Tue, 08 Sep 2026 18:20:28 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-08-4071</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 501 | 08 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 502 | 08 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO, TAMAULIPAS, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 501
+No. Aviso: 502
 Ciudad de México a 08 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUANAJUATO, TAMAULIPAS, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
 
-Este día, el monzón mexicano e inestabilidad atmosférica sobre el noroeste de la República Mexicana, propiciarán lluvias fuertes a muy fuertes acompañadas con descargas eléctricas y rachas de viento en Baja California, Baja California Sur, Sonora, Chihuahua, Durango y Sinaloa. Por otra parte, una circulación ciclónica y vaguadas en niveles medios y altos de la atmósfera al interior del país; además de la onda tropical núm. 37 que se desplazará sobre el sureste mexicano, ocasionarán lluvias puntuales intensas en Guanajuato (sur y sureste), así como chubascos y lluvias fuertes a muy fuertes acompañadas con descargas eléctricas en el occidente, centro, noreste, oriente, sur y sureste de México, incluida la península de Yucatán.…]]></description>
+
+Durante esta noche y la madrugada del miércoles, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país, originarán lluvias puntuales muy fuertes en zonas de Baja California Sur (norte y centro), Sonora (norte y este), Chihuahua (oeste y suroeste), Durango (oeste y sur), Sinaloa (este) y Nayarit (norte, centro y este); así como lluvias fuertes en Baja California (centro y sur). Por otra parte, canales de baja presión, una circulación ciclónica y una vaguada en niveles altos de la atmósfera e inestabilidad atmosférica, además de la onda tropical núm.…]]></description>
       <pubDate>Tue, 08 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-08-501</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-08-502</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 08 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-08-12</guid>
