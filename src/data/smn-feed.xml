@@ -5,16 +5,35 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 10 Sep 2026 01:09:38 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 06:03:49 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nayarit, Jalisco, Michoacán, Puebla y Veracruz.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de septiembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 10 de septiembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Thu, 10 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-10-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit, Jalisco, Michoacán, Puebla y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nayarit, Jalisco, Michoacán, Puebla y Veracruz.]]></description>
-      <pubDate>Wed, 09 Sep 2026 19:09:29 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-09-920e</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit, Jalisco, Michoacán, Puebla y Veracruz.]]></description>
+      <pubDate>Thu, 10 Sep 2026 00:03:39 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-10-35a0</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 09 SEP 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 18 estados del país</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_09.pdf</link>
+      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 18 estados del país — Reporte Vespertino del 09 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_09.pdf]]></description>
+      <pubDate>Wed, 09 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_09</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 504 | 09 de Septiembre del 2026 | Emisión 18:00h</title>
@@ -38,20 +57,9 @@ Para esta tarde y noche continuarán los efectos del monzón mexicano e inestab
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 09 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Wed, 09 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-09-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 09 SEP 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 18 estados del país</title>
+      <title>📋 SMN Reporte Matutino 09 SEP 2026: Hoy se esperan lluvias intensas en regiones de Sinaloa, Nayarit, Michoacán y Guerrero</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_09.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 18 estados del país — Reporte Matutino del 09 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_09.pdf]]></description>
+      <description><![CDATA[Hoy se esperan lluvias intensas en regiones de Sinaloa, Nayarit, Michoacán y Guerrero — Reporte Matutino del 09 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_09.pdf]]></description>
       <pubDate>Wed, 09 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_09</guid>
       <category>Comunicado</category>
