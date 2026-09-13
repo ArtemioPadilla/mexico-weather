@@ -5,9 +5,25 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 13 Sep 2026 16:26:08 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2026 19:31:27 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit, Jalisco, Colima, Veracruz, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit, Jalisco, Colima, Veracruz, Oaxaca y Chiapas.]]></description>
+      <pubDate>Sun, 13 Sep 2026 13:31:19 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-13-a57f</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 13 SEP 2026: Se pronostican lluvias intensas en zonas de Sinaloa, Nayarit, Jalisco, Colima, Veracruz y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_13.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Sinaloa, Nayarit, Jalisco, Colima, Veracruz y Chiapas — Comunicado del 13 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_13.pdf]]></description>
+      <pubDate>Sun, 13 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_09_13</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 511 | 13 de Septiembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -28,23 +44,15 @@ Para hoy, el monzón mexicano e inestabilidad atmosférica en el noroeste del pa
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de septiembre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de septiembre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de septiembre del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 13 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-13-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit, Veracruz, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit, Veracruz, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 13 Sep 2026 10:25:59 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-13-bab6</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 12 SEP 2026: Para este sábado se pronostican lluvias intensas en zonas de Jalisco y Michoacán</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias intensas durante la noche de hoy en regiones de Sonora, Chihuahua y Sinaloa — Reporte Vespertino del 10 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_10.pdf]]></description>
       <pubDate>Thu, 10 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_10</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 10 SEP 2026: Se pronostican lluvias intensas en Sonora, Chihuahua y Sinaloa, y muy fuertes en Baja California Sur, Durango y Jalisco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_10.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en Sonora, Chihuahua y Sinaloa, y muy fuertes en Baja California Sur, Durango y Jalisco — Reporte Matutino del 10 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_10.pdf]]></description>
-      <pubDate>Thu, 10 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_10</guid>
       <category>Comunicado</category>
     </item>
   </channel>
