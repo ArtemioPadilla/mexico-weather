@@ -1,1 +1,1 @@
-{"updated":"2026-09-13T18:16:23Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Norbert","lat":18.2,"lng":-132.7,"classification":"TS","intensityKt":45.0}]}
+{"updated":"2026-09-13T20:59:17Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Norbert","lat":18.8,"lng":-134.0,"classification":"TS","intensityKt":40.0},{"name":"Fifteen-E","lat":17.2,"lng":-117.2,"classification":"TD","intensityKt":30.0}]}
