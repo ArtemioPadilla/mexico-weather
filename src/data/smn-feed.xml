@@ -5,15 +5,34 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 13 Sep 2026 06:17:56 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2026 12:07:09 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de septiembre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 511 | 13 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN SINALOA, NAYARIT, VERACRUZ, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 511
+Ciudad de México a 13 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN SINALOA, NAYARIT, VERACRUZ, OAXACA Y CHIAPAS
+
+Para hoy, el monzón mexicano e inestabilidad atmosférica en el noroeste del país mantendrán las condiciones para lluvias puntuales intensas en zonas de Sinaloa; puntuales muy fuertes en zonas de Chihuahua y Durango; puntuales fuertes en zonas de Sonora; y lluvias con intervalos de chubascos en Baja California Sur, todas con descargas eléctricas y rachas de viento; así como lluvias aisladas en Baja California. Por otro lado, canales de baja presión en el interior de la República Mexicana, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, e inestabilidad atmosférica, así como la onda tropical núm.…]]></description>
+      <pubDate>Sun, 13 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-13-511</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de septiembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de septiembre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 13 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-13-12</guid>
@@ -23,7 +42,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco y Michoacán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco y Michoacán.]]></description>
-      <pubDate>Sun, 13 Sep 2026 00:17:34 -0600</pubDate>
+      <pubDate>Sun, 13 Sep 2026 06:07:01 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-13-3a4e</guid>
       <category>Alerta</category>
     </item>
@@ -34,29 +53,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sat, 12 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_12</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 510 | 12 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN JALISCO Y MICHOACÁN
-
----
-Pronóstico Meteorológico General
-No. Aviso: 510
-Ciudad de México a 12 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN JALISCO Y MICHOACÁN 
-
-
-
-Durante esta tarde y noche, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país ocasionarán lluvias muy fuertes en Sonora (este), Chihuahua (oeste y suroeste) y Nayarit (norte, este y sur), lluvias fuertes en Baja California Sur (sur), Durango (sur) y Sinaloa (norte y sur) e intervalos de chubascos en Baja California. Por otra parte, canales de baja presión en el interior de la República Mexicana, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, así como el paso de la onda tropical núm.…]]></description>
-      <pubDate>Sat, 12 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-12-510</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 11 SEP 2026: Se pronostican lluvias intensas en zonas de Baja California Sur, Chihuahua, Sonora, Sinaloa y Durango</title>
