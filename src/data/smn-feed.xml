@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 13 Sep 2026 22:28:44 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Sep 2026 01:12:52 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit, Jalisco, Colima, Veracruz, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Sinaloa, Nayarit, Jalisco, Colima, Veracruz, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 13 Sep 2026 16:28:35 -0600</pubDate>
+      <pubDate>Sun, 13 Sep 2026 19:12:44 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-13-a57f</guid>
       <category>Alerta</category>
     </item>
@@ -25,30 +25,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 511 | 13 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 512 | 13 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN SINALOA, NAYARIT, VERACRUZ, OAXACA Y CHIAPAS
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE SINALOA, NAYARIT, JALISCO, COLIMA, VERACRUZ, OAXACA Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 511
+No. Aviso: 512
 Ciudad de México a 13 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN SINALOA, NAYARIT, VERACRUZ, OAXACA Y CHIAPAS
 
-Para hoy, el monzón mexicano e inestabilidad atmosférica en el noroeste del país mantendrán las condiciones para lluvias puntuales intensas en zonas de Sinaloa; puntuales muy fuertes en zonas de Chihuahua y Durango; puntuales fuertes en zonas de Sonora; y lluvias con intervalos de chubascos en Baja California Sur, todas con descargas eléctricas y rachas de viento; así como lluvias aisladas en Baja California. Por otro lado, canales de baja presión en el interior de la República Mexicana, circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, e inestabilidad atmosférica, así como la onda tropical núm.…]]></description>
+
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE SINALOA, NAYARIT, JALISCO, COLIMA, VERACRUZ, OAXACA Y CHIAPAS
+
+Durante esta tarde y noche, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país ocasionarán lluvias puntuales intensas en Sinaloa (centro y sur) y Nayarit (norte, este y sur), lluvias muy fuertes en Chihuahua (oeste y suroeste) y Durango (oeste y suroeste), lluvias fuertes en Sonora (este y sur), lluvias con intervalos de chubascos en Baja California Sur y lluvias aisladas en Baja California; todas con descargas eléctricas y fuertes rachas de viento. Por otro lado, canales de baja presión en el interior de la República Mexicana, aunados a circulaciones ciclónicas y vaguadas en niveles altos de la atmósfera, inestabilidad atmosférica y la onda tropical núm.…]]></description>
       <pubDate>Sun, 13 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-13-511</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-13-512</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 13 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-13-12</guid>
