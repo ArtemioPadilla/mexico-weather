@@ -315,7 +315,7 @@ test.describe('mapa page', () => {
     await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
       route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
     );
-    await page.route('**/tile.openstreetmap.org/**', (route) =>
+    await page.route('**/*.arcgisonline.com/**', (route) =>
       route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
     );
 

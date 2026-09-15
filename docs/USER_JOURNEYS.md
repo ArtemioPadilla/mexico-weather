@@ -21,7 +21,7 @@ Every endpoint must be mocked in tests via `page.route(...)` for determinism. No
 | `https://api.open-meteo.com/v1/forecast?...` | City cards, `/forecast` detail, field layers (temp/humidity/pressure), wind layer | `**://api.open-meteo.com/**` (catch-all) or `**/api.open-meteo.com/v1/forecast**` (path) or `/api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/` (wind-only regex) |
 | `https://api.rainviewer.com/public/weather-maps.json` | Map: radar + satellite manifest | `**/api.rainviewer.com/public/weather-maps.json` |
 | `https://tilecache.rainviewer.com/**` | Map: radar + satellite tile fetches | `**/tilecache.rainviewer.com/**` — fulfill with a 1×1 transparent PNG |
-| `https://tile.openstreetmap.org/{z}/{x}/{y}.png` | Map: basemap tiles | `**/tile.openstreetmap.org/**` — fulfill with a transparent PNG (or let through; tile failure is non-blocking) |
+| `https://server{,2}.arcgisonline.com/ArcGIS/rest/services/Canvas/World_{Light,Dark}_Gray_{Base,Reference}/MapServer/tile/{z}/{y}/{x}` | Map: basemap tiles (base + labels) | `**/*.arcgisonline.com/**` — fulfill with a transparent PNG (or let through; tile failure is non-blocking) |
 | `navigator.geolocation` (browser API) | Search-or-locate, map locate | Use Playwright `context.grantPermissions(['geolocation'])` + `context.setGeolocation({...})`, or stub `geolocation.getCurrentPosition` via `addInitScript` |
 
 Reusable fixtures in `e2e/fixtures/`: `geocode.cdmx.json`, `forecast.cdmx.json` (Open-Meteo replies for CDMX). New layer tests typically inline-define their mocks — see existing `e2e/mapa.spec.ts` for the pattern.
@@ -387,7 +387,7 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
 
 ### `forecast-7` — Embedded interactive map + deep-link to `/mapa`
 - **Goal**: `/forecast?lat=…&lng=…` shows an embedded **interactive** MapLibre map (~320–360 px tall) in the hero, centered on the URL coords with a blue marker + popup linking back to the canonical forecast URL. A "Abrir mapa a pantalla completa →" link below the embed (`#fc-map-link`) deep-links to `/mapa#view=<lat>,<lng>,9z`.
-- **Preconditions**: `mockOpenMeteo(page)` so the forecast renders; OSM / CartoDB tiles can be mocked to a transparent PNG to keep the test deterministic.
+- **Preconditions**: `mockOpenMeteo(page)` so the forecast renders; Esri basemap tiles (`**/*.arcgisonline.com/**`) can be mocked to a transparent PNG to keep the test deterministic.
 - **Steps**:
   1. `await page.goto('forecast/?lat=19.43&lng=-99.13&tz=America%2FMexico_City&name=Ciudad%20de%20M%C3%A9xico')`
   2. `await expect(page.locator('#fc-root')).toBeVisible()` (forecast has rendered)
@@ -399,7 +399,7 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
 - **Reserved-height check (no CLS)**:
   - The `.fc-map-wrap` reserves height ≥ 320 px (mobile) or ≥ 360 px (`width ≥ 640`) before MapLibre mounts.
 - **Theme sync**:
-  - With `html.dark` set, the map tiles request URLs match `basemaps.cartocdn.com/dark_all/`; with light, they match `tile.openstreetmap.org`.
+  - With `html.dark` set, the map tiles request URLs match `Canvas/World_Dark_Gray_Base`; with light, they match `Canvas/World_Light_Gray_Base`.
 - **NOT YET COVERED**.
 
 ### `forecast-6` — `&admin` query param renders an XSS-escaped subheading

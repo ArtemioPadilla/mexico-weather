@@ -1,0 +1,57 @@
+name: Basemap canary
+
+# Nightly network check on the Esri Canvas tile hosts the map depends on
+# (src/lib/map/chrome/basemap-theme.ts). The previous provider (CARTO)
+# silently started watermarking anonymous tiles while still answering
+# HTTP 200 — a failure no unit test on URL templates can see. This job
+# downloads one sample tile per host/service and fails if it stops
+# looking like a real map tile. It is deliberately NOT part of the PR
+# pipeline: a provider outage must not block unrelated merges.
+
+on:
+  schedule:
+    # Daily at 05:23 UTC (23:23 CDMX).
+    - cron: '23 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    name: Probe Esri Canvas tiles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Download + validate one tile per host/service
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Tile 5/13/7 covers northern Mexico + Gulf: a known-good sample.
+          TILE='5/13/7'
+          # Reference tiles are transparent PNGs with sparse labels, so
+          # they are legitimately small; base tiles are opaque JPEGs.
+          MIN_BYTES_BASE=2000
+          MIN_BYTES_REFERENCE=300
+          fail=0
+          for host in server server2; do
+            for svc in World_Dark_Gray_Base World_Dark_Gray_Reference World_Light_Gray_Base World_Light_Gray_Reference; do
+              url="https://${host}.arcgisonline.com/ArcGIS/rest/services/Canvas/${svc}/MapServer/tile/${TILE}"
+              out="tile-${host}-${svc}.bin"
+              code=$(curl -sS --retry 3 --retry-delay 5 --max-time 30 -o "$out" -w '%{http_code}' "$url" || echo 000)
+              size=$(stat -c %s "$out" 2>/dev/null || echo 0)
+              type=$(file -b --mime-type "$out" 2>/dev/null || echo unknown)
+              case "$svc" in *_Reference) min=$MIN_BYTES_REFERENCE;; *) min=$MIN_BYTES_BASE;; esac
+              status=ok
+              if [ "$code" != "200" ]; then status="http $code"; fi
+              if [ "$size" -lt "$min" ]; then status="too small ($size B)"; fi
+              case "$type" in image/jpeg|image/png) ;; *) status="not an image ($type)";; esac
+              echo "${status}	${host}	${svc}	${code}	${type}	${size}B"
+              [ "$status" = ok ] || fail=1
+            done
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo '::error::At least one Esri Canvas tile host is not serving valid tiles. See src/lib/map/chrome/basemap-theme.ts for the fallback plan (OpenFreeMap vector styles).'
+            exit 1
+          fi

@@ -65,7 +65,7 @@ src/lib/map/
 │
 ├── plugins/
 │   ├── base-layers/               # mutually exclusive
-│   │   ├── basemap.ts             # CARTO Dark Matter / OSM
+│   │   ├── basemap.ts             # Esri Canvas Light/Dark Gray
 │   │   ├── radar.ts               # RainViewer
 │   │   ├── satellite.ts           # RainViewer IR (later: NASA GIBS GOES)
 │   │   ├── temperature.ts         # Open-Meteo + sub-opts actual/aparente

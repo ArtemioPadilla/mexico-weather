@@ -62,7 +62,7 @@ slice plans and the P-series UX PRs.
 
 ### Map capability inventory (in `src/lib/map/`)
 
-- **Base layers**: basemap (CARTO Dark/OSM), radar, satellite (GIBS),
+- **Base layers**: basemap (Esri Canvas Light/Dark Gray), radar, satellite (GIBS),
   temperature, humidity, pressure, wind (WebGL particles), sunlight.
 - **Overlays** (17): aqi, borders, city-values, clouds, fires, graticule,
   hist-storms, lakes, marine, night-lights, night-line, quakes,

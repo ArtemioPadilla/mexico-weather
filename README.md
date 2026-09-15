@@ -52,14 +52,13 @@ Todas las fuentes son públicas y CORS-enabled:
 
 - **Open-Meteo** (gridded forecast: temperatura, humedad, presión, viento)
 - **RainViewer** (radar + satélite-IR)
-- **CARTO Positron** (basemap claro, derivado de OSM)
-- **CartoDB Dark Matter** (basemap oscuro)
+- **Esri Canvas Light/Dark Gray** (basemap claro y oscuro, capa base + capa de etiquetas; sin llave)
 - **SMN / CONAGUA** (avisos meteorológicos vía RSS, refrescado por GitHub Actions)
 
 ### 🎨 Detalles de UX
 
 - **Sticky topbar** con brand 🇲🇽 + nav + theme toggle (Sistema/Claro/Oscuro).
-- **Dark basemap automático** — CartoDB Dark Matter en tema oscuro, CARTO Positron en claro, con swap dinámico via `MutationObserver`.
+- **Dark basemap automático** — Esri Dark Gray en tema oscuro, Esri Light Gray en claro, con swap dinámico via `MutationObserver`.
 - **Cache compartida** in-memory con TTL de 10 min + request coalescing para no saturar Open-Meteo.
 - **Skeleton states** con `animate-pulse` mientras carga.
 - **Favorites dedupe** — un preset que ya está en favoritos no se duplica.

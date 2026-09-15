@@ -677,12 +677,12 @@ junto con medición + locate.
 
 #### Síntoma
 
-Carto raster tiles a zoom 5 muestran ~30 labels con colisiones; zoom.earth
+Los tiles raster del basemap (Esri Canvas) a zoom 5 muestran ~30 labels con colisiones; zoom.earth
 ~12 sin colisiones (raster también pero con mejor selección).
 
 #### Análisis
 
-Carto Dark Matter and Voyager tiles son los más limpios. Verificar que
+Esri Dark Gray Canvas es el más limpio. Verificar que
 estamos usando `dark_all` (con labels) y no `dark_nolabels`. En light,
 `voyager` da mejor jerarquía que `light_all`.
 
@@ -823,7 +823,7 @@ Post-P2: paridad en chrome/UX, **superioridad absoluta en features**.
 
 ## Notas de arquitectura
 
-- **No añadir API keys.** Open-Meteo / Carto / GIBS / RainViewer siguen
+- **No añadir API keys.** Open-Meteo / Esri Canvas / GIBS / RainViewer siguen
   siendo el stack. MapTiler sigue descartado.
 - **No introducir backend.** Todo client-side; localStorage para
   preferencias.
@@ -841,7 +841,7 @@ Post-P2: paridad en chrome/UX, **superioridad absoluta en features**.
 Capturas tomadas 2026-05-24 durante el review inicial:
 
 - Nuestro `/mapa` zoom 5: layer rail + 16 overlays visible, basemap dark
-  Carto, sin field de temperatura pintado, sin timeline visible.
+  basemap gris, sin field de temperatura pintado, sin timeline visible.
 - zoom.earth `/maps/temperature/` zoom 5: temperature field continuo
   cubriendo MX-Texas-Caribe, timeline centrada abajo, leyenda
   horizontal abajo-izquierda, badge ICON/GFS abajo-derecha.
@@ -922,9 +922,9 @@ Side-by-side comparison en Chrome contra `https://zoom.earth/maps/temperature/`:
 ### Limitaciones del entorno de verificación
 
 El MCP browser session usado para el side-by-side review bloquea
-fetches a APIs externas (Open-Meteo, Carto/OSM tiles, GIBS, NHC,
+fetches a APIs externas (Open-Meteo, Esri tiles, GIBS, NHC,
 USGS, RainViewer). Esto hace que en esa sesión específica:
-- El basemap (tiles Carto/OSM) no carga
+- El basemap (tiles Esri Canvas) no carga
 - Los field rasters (Open-Meteo bulk) no cargan
 - El multi-model disagreement chip (Open-Meteo /v1/forecast) queda vacío
 - El mini-mapa embebido en `/forecast/` queda negro

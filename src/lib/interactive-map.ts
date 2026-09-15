@@ -156,16 +156,16 @@ import { createNightLightsOverlay } from './map/overlays/night-lights';
 import { createTropicalStormsOverlay } from './map/overlays/tropical-storms';
 import {
   createBasemapThemeController,
-  CARTO_LIGHT_TILES as BASEMAP_LIGHT_TILES,
-  CARTO_DARK_TILES as BASEMAP_CARTO_DARK_TILES,
+  pickBasemapTiles,
+  BASEMAP_ATTRIBUTION,
+  ESRI_CANVAS_MAX_ZOOM,
+  DEFAULT_BASE_SOURCE_ID as BASEMAP_SOURCE_ID,
+  DEFAULT_REFERENCE_SOURCE_ID as BASEMAP_REFERENCE_SOURCE_ID,
+  DEFAULT_REFERENCE_LAYER_ID as BASEMAP_REFERENCE_LAYER_ID,
 } from './map/chrome/basemap-theme';
 import { createSunLayer } from './map/layers/sun-layer';
 import { createWeatherRaster } from './map/layers/weather-raster';
-import {
-  type MapSettings,
-  readSettings,
-  writeSettings,
-} from './map/settings';
+import { type MapSettings, readSettings, writeSettings } from './map/settings';
 import { createAutocompleteController } from './map/chrome/autocomplete';
 import { createSnapshotCompare } from './map/chrome/snapshot-compare';
 import { createModelToggle } from './map/chrome/model-toggle';
@@ -219,7 +219,7 @@ export interface MapHandle {
  * pages currently unmount, but the contract is clean).
  */
 export async function initInteractiveMap(
-  opts: InteractiveMapOptions,
+  opts: InteractiveMapOptions
 ): Promise<MapHandle> {
   const lang = opts.lang ?? 'es';
   const t = ui[lang];
@@ -256,12 +256,11 @@ export async function initInteractiveMap(
     maplibreModule as unknown as typeof maplibregl,
   ];
   const maplibre = candidates.find(
-    (c): c is typeof maplibregl =>
-      !!(c as { Map?: unknown } | undefined)?.Map,
+    (c): c is typeof maplibregl => !!(c as { Map?: unknown } | undefined)?.Map
   );
   if (!maplibre) {
     throw new Error(
-      'maplibre-gl module did not expose a Map constructor in any known shape',
+      'maplibre-gl module did not expose a Map constructor in any known shape'
     );
   }
 
@@ -318,8 +317,7 @@ export async function initInteractiveMap(
   // Initial tile arrays — sourced from the shared basemap-theme module
   // to keep the single source of truth (no diverging URL lists between
   // the map construction and the runtime theme controller).
-  const LIGHT_TILES_INIT = BASEMAP_LIGHT_TILES;
-  const CARTO_DARK_TILES_INIT = BASEMAP_CARTO_DARK_TILES;
+  const BASEMAP_TILES_INIT = pickBasemapTiles(initialDark);
 
   // A11Y-3 — translate MapLibre's built-in control strings (zoom
   // buttons, compass) when the document language is Spanish. MapLibre
@@ -356,19 +354,38 @@ export async function initInteractiveMap(
       // Symbol layers (e.g. city value pills) need a glyphs URL to render
       // text. MapLibre's demotiles host serves a stable Noto/Open Sans
       // stack with no API key required.
-      glyphs:
-        'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+      glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
       sources: {
-        osm: {
+        // Esri Canvas gray basemap (no key, no watermark). The source id
+        // keeps its legacy name 'osm' because several call-sites and the
+        // e2e suite reference the 'osm' layer by id.
+        [BASEMAP_SOURCE_ID]: {
           type: 'raster',
-          tiles: initialDark ? CARTO_DARK_TILES_INIT : LIGHT_TILES_INIT,
+          tiles: BASEMAP_TILES_INIT.base,
           tileSize: 256,
-          // Both light (Positron) and dark (Dark Matter) basemaps are
-          // CARTO, OSM-derived.
-          attribution: '© OpenStreetMap contributors © CARTO',
+          maxzoom: ESRI_CANVAS_MAX_ZOOM,
+          attribution: BASEMAP_ATTRIBUTION,
+        },
+        // Labels + boundaries live in a separate Esri "Reference"
+        // service; the theme controller toggles this layer's visibility
+        // below LABEL_ZOOM_THRESHOLD instead of swapping to a
+        // `_nolabels` URL variant.
+        [BASEMAP_REFERENCE_SOURCE_ID]: {
+          type: 'raster',
+          tiles: BASEMAP_TILES_INIT.reference,
+          tileSize: 256,
+          maxzoom: ESRI_CANVAS_MAX_ZOOM,
+          attribution: BASEMAP_ATTRIBUTION,
         },
       },
-      layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
+      layers: [
+        { id: BASEMAP_SOURCE_ID, type: 'raster', source: BASEMAP_SOURCE_ID },
+        {
+          id: BASEMAP_REFERENCE_LAYER_ID,
+          type: 'raster',
+          source: BASEMAP_REFERENCE_SOURCE_ID,
+        },
+      ],
     },
   });
 
@@ -378,7 +395,7 @@ export async function initInteractiveMap(
     // with zoom (e.g. "200 km" at z=6, "10 km" at z=12).
     map.addControl(
       new maplibre.ScaleControl({ unit: 'metric', maxWidth: 120 }),
-      'bottom-right',
+      'bottom-right'
     );
   }
 
@@ -422,7 +439,7 @@ export async function initInteractiveMap(
   const pinManager = createPinManager(
     map,
     features.presetPins ? presetPins(cities) : [],
-    { maplibre, popupHtml, enablePopups: !!markerPopups },
+    { maplibre, popupHtml, enablePopups: !!markerPopups }
   );
   // Aliases kept so the rest of the file's wiring stays unchanged.
   const renderPins = (): void => pinManager.render();
@@ -430,7 +447,7 @@ export async function initInteractiveMap(
     name: string,
     lat: number,
     lng: number,
-    kind: 'search' | 'geo',
+    kind: 'search' | 'geo'
   ): void => {
     pinManager.setUserPin({ name, lat, lng, kind });
   };
@@ -555,18 +572,24 @@ export async function initInteractiveMap(
             pointerType: 'mouse',
             clientX: x,
             clientY: y,
-          }),
+          })
         );
         canvas.dispatchEvent(
-          new MouseEvent(type === 'pointerdown' ? 'mousedown'
-            : type === 'pointerup' ? 'mouseup'
-            : type === 'pointermove' ? 'mousemove'
-            : type, {
-            bubbles: true,
-            cancelable: true,
-            clientX: x,
-            clientY: y,
-          }),
+          new MouseEvent(
+            type === 'pointerdown'
+              ? 'mousedown'
+              : type === 'pointerup'
+                ? 'mouseup'
+                : type === 'pointermove'
+                  ? 'mousemove'
+                  : type,
+            {
+              bubbles: true,
+              cancelable: true,
+              clientX: x,
+              clientY: y,
+            }
+          )
         );
       };
       dispatch('pointermove', cx, cy);
@@ -629,7 +652,7 @@ export async function initInteractiveMap(
     void (async () => {
       try {
         const res = await deps.fetch(
-          'https://api.rainviewer.com/public/weather-maps.json',
+          'https://api.rainviewer.com/public/weather-maps.json'
         );
         rvData = parseRainviewerManifest(await res.json());
       } catch {
@@ -665,9 +688,7 @@ export async function initInteractiveMap(
           const delays = [0, 250, 600, 1300, 2800]; // ~4.9 s total
           for (let i = 0; i < delays.length; i++) {
             if (delays[i] > 0) {
-              await new Promise<void>((r) =>
-                window.setTimeout(r, delays[i]),
-              );
+              await new Promise<void>((r) => window.setTimeout(r, delays[i]));
             }
             try {
               await setActiveLayer(wanted);
@@ -700,10 +721,13 @@ export async function initInteractiveMap(
 
   // Basemap theme + label-density controller — extracted to
   // src/lib/map/chrome/basemap-theme.ts. Watches the html.dark class
-  // and the map's zoom level; swaps the 'osm' source tiles when
-  // either crosses a boundary.
+  // and the map's zoom level; swaps both raster sources' tiles on a
+  // theme change and flips the reference (labels) layer visibility
+  // when the zoom crosses LABEL_ZOOM_THRESHOLD.
   const basemapTheme = createBasemapThemeController(map, {
-    sourceId: 'osm',
+    baseSourceId: BASEMAP_SOURCE_ID,
+    referenceSourceId: BASEMAP_REFERENCE_SOURCE_ID,
+    referenceLayerId: BASEMAP_REFERENCE_LAYER_ID,
     initialDark,
   });
   map.on('zoomend', () => basemapTheme.sync());
@@ -724,8 +748,8 @@ export async function initInteractiveMap(
   // ------------------------------------------------------------------
   // Search autocomplete (scoped to the supplied els.search / els.acList).
   // ------------------------------------------------------------------
-  const q = features.search ? opts.els.search ?? null : null;
-  const acList = features.search ? opts.els.acList ?? null : null;
+  const q = features.search ? (opts.els.search ?? null) : null;
+  const acList = features.search ? (opts.els.acList ?? null) : null;
   let qTimer = 0;
   let searchGen = 0;
 
@@ -742,7 +766,7 @@ export async function initInteractiveMap(
             hideMsg();
             ac?.close();
             setUserPin(r.name, r.lat, r.lng, 'search');
-          },
+          }
         )
       : null;
   // Thin wrappers preserve the historical names used by existing call
@@ -917,12 +941,29 @@ export async function initInteractiveMap(
       : 'relative_humidity_2m';
   }
   function pressureHourlyVar(): string {
-    return pressureSubOption === 'surface' ? 'surface_pressure' : 'pressure_msl';
+    return pressureSubOption === 'surface'
+      ? 'surface_pressure'
+      : 'pressure_msl';
   }
   const FIELD_CONFIGS: Record<string, FieldConfig> = {
-    temperature: { get hourlyVar() { return tempHourlyVar(); }, color: tempColor },
-    humidity: { get hourlyVar() { return humidityHourlyVar(); }, color: humidityColor },
-    pressure: { get hourlyVar() { return pressureHourlyVar(); }, color: pressureColor },
+    temperature: {
+      get hourlyVar() {
+        return tempHourlyVar();
+      },
+      color: tempColor,
+    },
+    humidity: {
+      get hourlyVar() {
+        return humidityHourlyVar();
+      },
+      color: humidityColor,
+    },
+    pressure: {
+      get hourlyVar() {
+        return pressureHourlyVar();
+      },
+      color: pressureColor,
+    },
   } as unknown as Record<string, FieldConfig>;
   let fieldAbort: AbortController | null = null;
 
@@ -984,7 +1025,7 @@ export async function initInteractiveMap(
         north: b.getNorth(),
       },
       8,
-      6,
+      6
     );
     const speedVar =
       windSubOption === 'rachas' ? 'wind_gusts_10m' : 'wind_speed_10m';
@@ -998,7 +1039,7 @@ export async function initInteractiveMap(
       windTexDirty = true;
       const h = Math.max(
         0,
-        Math.min(wg.times.length - 1, frameIndex >= 0 ? frameIndex : 0),
+        Math.min(wg.times.length - 1, frameIndex >= 0 ? frameIndex : 0)
       );
       showWindFrame(h);
     } catch {
@@ -1042,8 +1083,7 @@ export async function initInteractiveMap(
     if (isReducedMotion()) {
       const data = windCircleGeoJSON(windGrid, h);
       const src = map.getSource(WIND_CIRCLE_SOURCE) as
-        | maplibregl.GeoJSONSource
-        | undefined;
+        maplibregl.GeoJSONSource | undefined;
       if (src) {
         src.setData(data);
       } else {
@@ -1073,13 +1113,12 @@ export async function initInteractiveMap(
           onTick: (id) => {
             windRaf = id;
           },
-        }),
+        })
       );
     }
     // City value pills for wind (e.g. "12 km/h ↑").
     refreshCityValues();
   }
-
 
   function revokeFieldBlob(): void {
     if (fieldBlobUrl) {
@@ -1197,7 +1236,6 @@ export async function initInteractiveMap(
     base,
   });
 
-
   // Tropical storms overlay — extracted to src/lib/map/overlays/tropical-storms.ts.
   // The factory takes the NHC source and an onEmpty callback so it
   // can auto-disable the checkbox when there are no active systems.
@@ -1207,7 +1245,7 @@ export async function initInteractiveMap(
     () => {
       tropicalEnabled = false;
       refreshOverlayCheckboxes();
-    },
+    }
   );
   // Backwards-compat alias used by callers below (refreshTropicalStorms
   // is invoked from the map's 'load' handler).
@@ -1270,7 +1308,7 @@ export async function initInteractiveMap(
       fieldBounds,
       hourIndex,
       cfg.color,
-      { width: FIELD_RASTER_W, height: FIELD_RASTER_H },
+      { width: FIELD_RASTER_W, height: FIELD_RASTER_H }
     );
     if (!render) return;
     // Activelayer may have flipped while the canvas blob was settling.
@@ -1369,7 +1407,7 @@ export async function initInteractiveMap(
       try {
         const r = await deps.fetch(
           `${base}data/field-grids/${cfg.hourlyVar}.json`,
-          { signal: ac.signal },
+          { signal: ac.signal }
         );
         if (!ac.signal.aborted && r.ok) {
           const snap = (await r.json()) as FieldGrid | null;
@@ -1448,20 +1486,16 @@ export async function initInteractiveMap(
   });
   const removeWeatherRaster = (): void => weatherRaster.remove();
   const showWeatherFrame = (layerId: string, frame: RadarFrame): void => {
-    weatherRaster.show(
-      layerId === 'satellite' ? 'satellite' : 'radar',
-      frame,
-      {
-        rvData,
-        satelliteSubOption,
-        opacity: rvOpacity,
-        currentZoom: map.getZoom(),
-      },
-    );
+    weatherRaster.show(layerId === 'satellite' ? 'satellite' : 'radar', frame, {
+      rvData,
+      satelliteSubOption,
+      opacity: rvOpacity,
+      currentZoom: map.getZoom(),
+    });
   };
 
   function renderLegend(
-    kind: 'radar' | 'temperature' | 'humidity' | 'pressure' | 'wind' | null,
+    kind: 'radar' | 'temperature' | 'humidity' | 'pressure' | 'wind' | null
   ): void {
     const el = opts.els.legend;
     const bar = document.getElementById('legend-bar');
@@ -1497,8 +1531,8 @@ export async function initInteractiveMap(
       .map(
         (s) =>
           `<li class="flex flex-col items-center gap-0.5 leading-none"><span class="inline-block h-2.5 w-7" style="background:${esc(
-            s.color,
-          )}"></span><span class="text-[10px] tabular-nums">${esc(s.label)}</span></li>`,
+            s.color
+          )}"></span><span class="text-[10px] tabular-nums">${esc(s.label)}</span></li>`
       )
       .join('');
     // Unit label varies per layer kind. zoom.earth shows °C for the
@@ -1543,7 +1577,7 @@ export async function initInteractiveMap(
       akind !== 'raster-tile' &&
         akind !== 'field' &&
         akind !== 'particles' &&
-        akind !== 'overlay',
+        akind !== 'overlay'
     );
     const kindForLegend =
       activeLayer === 'radar'
@@ -1630,7 +1664,7 @@ export async function initInteractiveMap(
               bounds,
               lat,
               lng,
-              frameIndex,
+              frameIndex
             )
           : null;
 
@@ -1660,7 +1694,7 @@ export async function initInteractiveMap(
             fieldBounds,
             lat,
             lng,
-            frameIndex,
+            frameIndex
           );
           if (v === null) return null;
           if (activeLayer === 'temperature') return `${Math.round(v)}°`;
@@ -1721,9 +1755,16 @@ export async function initInteractiveMap(
         const v01 = p01?.v[h];
         const v11 = p11?.v[h];
         if (
-          u00 == null || u10 == null || u01 == null || u11 == null ||
-          v00 == null || v10 == null || v01 == null || v11 == null
-        ) return null;
+          u00 == null ||
+          u10 == null ||
+          u01 == null ||
+          u11 == null ||
+          v00 == null ||
+          v10 == null ||
+          v01 == null ||
+          v11 == null
+        )
+          return null;
         const au = u00 * (1 - tx) + u10 * tx;
         const bu = u01 * (1 - tx) + u11 * tx;
         const av = v00 * (1 - tx) + v10 * tx;
@@ -1754,7 +1795,7 @@ export async function initInteractiveMap(
               wb,
               lat,
               lng,
-              frameIndex,
+              frameIndex
             )
           : null;
       const tV = sample(lastTempGrid);
@@ -1786,7 +1827,7 @@ export async function initInteractiveMap(
     lng: number,
     lat: number,
     pointX: number,
-    pointY: number,
+    pointY: number
   ): void {
     if (!tooltipEl) return;
     const text = tooltipValueAt(lng, lat);
@@ -1850,7 +1891,7 @@ export async function initInteractiveMap(
     let seen: Record<string, true>;
     try {
       seen = JSON.parse(
-        window.localStorage.getItem('mw:seen-layer-explainer') ?? '{}',
+        window.localStorage.getItem('mw:seen-layer-explainer') ?? '{}'
       ) as Record<string, true>;
     } catch {
       seen = {};
@@ -1860,7 +1901,7 @@ export async function initInteractiveMap(
     try {
       window.localStorage.setItem(
         'mw:seen-layer-explainer',
-        JSON.stringify(seen),
+        JSON.stringify(seen)
       );
     } catch {
       /* private mode — fall through */
@@ -1889,15 +1930,14 @@ export async function initInteractiveMap(
           north: b.getNorth(),
         },
         8,
-        6,
+        6
       );
       fieldAbort?.abort();
       const ac = new AbortController();
       fieldAbort = ac;
       try {
-        const speedVar = windSubOption === 'rachas'
-          ? 'wind_gusts_10m'
-          : 'wind_speed_10m';
+        const speedVar =
+          windSubOption === 'rachas' ? 'wind_gusts_10m' : 'wind_speed_10m';
         // Cold-load resilience: same retry pattern as loadFieldGrid (#164).
         // Wind layer activation from a fresh URL hash like ?layer=wind
         // sometimes hit TypeError: Failed to fetch on first try and fell
@@ -1962,7 +2002,7 @@ export async function initInteractiveMap(
       activeLayer = id;
       tlFrames = windGrid.times.map((iso) => ({
         time: Math.floor(
-          Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000,
+          Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000
         ),
         path: '',
       }));
@@ -2014,7 +2054,7 @@ export async function initInteractiveMap(
       activeLayer = id;
       tlFrames = fieldGrid.times.map((iso) => ({
         time: Math.floor(
-          Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000,
+          Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000
         ),
         path: '',
       }));
@@ -2103,7 +2143,7 @@ export async function initInteractiveMap(
       if (!btn.getAttribute('aria-label')) {
         btn.setAttribute(
           'aria-label',
-          t[def.labelKey as keyof typeof t] ?? def.id,
+          t[def.labelKey as keyof typeof t] ?? def.id
         );
       }
       // Keyboard shortcut hint as a tiny trailing chip on desktop. Hidden
@@ -2142,7 +2182,7 @@ export async function initInteractiveMap(
       .forEach((b) => {
         b.setAttribute(
           'aria-pressed',
-          String(b.dataset.val === cur.hourFormat),
+          String(b.dataset.val === cur.hourFormat)
         );
       });
   }
@@ -2184,20 +2224,23 @@ export async function initInteractiveMap(
   // factory (createSubOptionsGroup) replaces five near-identical
   // copies — see src/lib/map/chrome/sub-options.ts.
   // ----------------------------------------------------------------
-  const tempSub = createSubOptionsGroup<TempSubOption>(opts.els.layerBtns ?? null, {
-    containerId: 'temp-sub-options',
-    getActive: () => tempSubOption,
-    onSelect: (id) => {
-      tempSubOption = id;
-      void setActiveLayer('temperature');
-    },
-    isVisible: () => activeLayer === 'temperature',
-    options: [
-      { id: 'actual', label: 'Actual' },
-      { id: 'aparente', label: 'Aparente' },
-      { id: 'bulbo', label: 'Bulbo húmedo' },
-    ],
-  });
+  const tempSub = createSubOptionsGroup<TempSubOption>(
+    opts.els.layerBtns ?? null,
+    {
+      containerId: 'temp-sub-options',
+      getActive: () => tempSubOption,
+      onSelect: (id) => {
+        tempSubOption = id;
+        void setActiveLayer('temperature');
+      },
+      isVisible: () => activeLayer === 'temperature',
+      options: [
+        { id: 'actual', label: 'Actual' },
+        { id: 'aparente', label: 'Aparente' },
+        { id: 'bulbo', label: 'Bulbo húmedo' },
+      ],
+    }
+  );
   const refreshTempSubOptions = (): void => tempSub.refresh();
 
   const humiditySub = createSubOptionsGroup<HumiditySubOption>(
@@ -2214,7 +2257,7 @@ export async function initInteractiveMap(
         { id: 'relativa', label: 'Relativa' },
         { id: 'rocio', label: 'Punto de rocío' },
       ],
-    },
+    }
   );
   const refreshHumiditySubOptions = (): void => humiditySub.refresh();
 
@@ -2232,23 +2275,26 @@ export async function initInteractiveMap(
         { id: 'msl', label: 'Nivel del mar' },
         { id: 'surface', label: 'Superficie' },
       ],
-    },
+    }
   );
   const refreshPressureSubOptions = (): void => pressureSub.refresh();
 
-  const windSub = createSubOptionsGroup<WindSubOption>(opts.els.layerBtns ?? null, {
-    containerId: 'wind-sub-options',
-    getActive: () => windSubOption,
-    onSelect: (id) => {
-      windSubOption = id;
-      void setActiveLayer('wind');
-    },
-    isVisible: () => activeLayer === 'wind',
-    options: [
-      { id: 'velocidad', label: 'Velocidad' },
-      { id: 'rachas', label: 'Rachas' },
-    ],
-  });
+  const windSub = createSubOptionsGroup<WindSubOption>(
+    opts.els.layerBtns ?? null,
+    {
+      containerId: 'wind-sub-options',
+      getActive: () => windSubOption,
+      onSelect: (id) => {
+        windSubOption = id;
+        void setActiveLayer('wind');
+      },
+      isVisible: () => activeLayer === 'wind',
+      options: [
+        { id: 'velocidad', label: 'Velocidad' },
+        { id: 'rachas', label: 'Rachas' },
+      ],
+    }
+  );
   const refreshWindSubOptions = (): void => windSub.refresh();
 
   const satelliteSub = createSubOptionsGroup<SatelliteSubOption>(
@@ -2266,7 +2312,7 @@ export async function initInteractiveMap(
         { id: 'ir', label: 'Infrarrojo' },
         { id: 'truecolor', label: 'Color real' },
       ],
-    },
+    }
   );
   const refreshSatelliteSubOptions = (): void => satelliteSub.refresh();
 
@@ -2475,14 +2521,14 @@ export async function initInteractiveMap(
   // Overlay registry — extracted to chrome/overlay-registry.ts. Owns
   // the Superposiciones panel build + the global keyboard shortcuts.
   const overlayRegistry = createOverlayRegistry(
-    { wrap: features.layerRail ? opts.els.overlayBtns ?? null : null },
+    { wrap: features.layerRail ? (opts.els.overlayBtns ?? null) : null },
     overlayDefs,
     {
       layers: LAYERS.filter(
-        (l): l is typeof l & { shortcut: string } => !!l.shortcut,
+        (l): l is typeof l & { shortcut: string } => !!l.shortcut
       ).map((l) => ({ shortcut: l.shortcut, id: l.id })),
       onLayerShortcut: (id) => void setActiveLayer(id),
-    },
+    }
   );
   overlayRegistry.build();
   const refreshOverlayCheckboxes = (): void => overlayRegistry.refresh();
@@ -2494,7 +2540,7 @@ export async function initInteractiveMap(
     ).installShortcuts();
   }
 
-  const opacityEl = features.layerRail ? opts.els.opacity ?? null : null;
+  const opacityEl = features.layerRail ? (opts.els.opacity ?? null) : null;
   if (opacityEl) {
     opacityEl.value = String(Math.round(rvOpacity * 100));
     opacityEl.addEventListener('input', () => {
@@ -2521,7 +2567,7 @@ export async function initInteractiveMap(
     { play: t.timeline_play, pause: t.timeline_pause },
     () => tlFrames.length,
     () => frameIndex,
-    (i) => applyFrame(i),
+    (i) => applyFrame(i)
   );
   const tlStop = (): void => tlPlayer.stop();
   const tlStart = (): void => tlPlayer.start();
@@ -2612,7 +2658,7 @@ export async function initInteractiveMap(
     surfaceInterval = window.setInterval(surfaceWideControls, 1500);
     surfaceTimeout = window.setTimeout(
       () => window.clearInterval(surfaceInterval),
-      30000,
+      30000
     );
   }
 
@@ -2626,7 +2672,11 @@ export async function initInteractiveMap(
     function expandSearch(): void {
       q?.classList.remove('hidden');
       searchToggle?.setAttribute('aria-expanded', 'true');
-      try { q?.focus(); } catch { /* ignore */ }
+      try {
+        q?.focus();
+      } catch {
+        /* ignore */
+      }
     }
     function collapseSearch(): void {
       if (!q || q.value.trim().length > 0) return;
@@ -2721,10 +2771,10 @@ export async function initInteractiveMap(
             t.map_locate,
             pos.coords.latitude,
             pos.coords.longitude,
-            'geo',
+            'geo'
           ),
         () => showMsg(t.geo_denied),
-        { timeout: 10000 },
+        { timeout: 10000 }
       );
     });
   }
@@ -2786,8 +2836,7 @@ export async function initInteractiveMap(
     function refreshMeasureGeometry(): void {
       ensureMeasureLayers();
       const src = map.getSource(MEASURE_SOURCE) as
-        | maplibregl.GeoJSONSource
-        | undefined;
+        maplibregl.GeoJSONSource | undefined;
       if (!src) return;
       const features: Feature[] = measurePts.map((p) => ({
         type: 'Feature',
@@ -2896,7 +2945,7 @@ export async function initInteractiveMap(
           void setActiveLayer(activeLayer);
         }
         syncHash();
-      },
+      }
     );
   }
 
@@ -2913,7 +2962,7 @@ export async function initInteractiveMap(
       toggleBtn: document.getElementById('mw-snapshot-toggle'),
       clearBtn: document.getElementById('mw-snapshot-clear'),
       imgEl: document.getElementById(
-        'mw-snapshot-img',
+        'mw-snapshot-img'
       ) as HTMLImageElement | null,
     }).refresh();
   }

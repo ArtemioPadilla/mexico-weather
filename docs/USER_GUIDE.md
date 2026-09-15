@@ -93,7 +93,7 @@ The site is mobile-first and tested at four representative breakpoints. There ar
   - 48-h hourly row is always `overflow-x: auto`; the row keeps a fixed card height and never wraps. The temperature sparkline lives **inside** the same scroll container as the cards, sized to the cards' total width — so hour N on a card and x position N on the sparkline scroll together (no more visual drift).
   - 7-day rows are full-width; the gradient temperature bar reflows to the full container width so it always reads at a glance. An axis row above the days shows `<minWeek>° / <midWeek>° / <maxWeek>°` with 25/50/75 % tick marks, and the "Hoy" row carries a small vertical "current temperature" marker positioned within the week's min/max range.
   - "Detalle" panels: stack vertically on mobile, then `grid-cols-3` from `md:` upward.
-  - An **embedded interactive map** (~320 px tall on mobile, ~360 px on desktop) sits in the hero between the sunrise/sunset line and the hourly cards. Same MapLibre stack as `/mapa`, configured here for a single location: full pan/zoom, a blue marker at the URL's `lat,lng` with a popup that links back to the canonical forecast URL, and theme-synced OSM/CartoDB Dark basemap. Layer rail, search, and timeline are off — users who want layers/timeline tap "Abrir mapa a pantalla completa →" below the embed, which deep-links to `/mapa#view=<lat>,<lng>,9z`. MapLibre is shared with the home map via the `src/lib/interactive-map.ts` factory; height is reserved before init to prevent CLS.
+  - An **embedded interactive map** (~320 px tall on mobile, ~360 px on desktop) sits in the hero between the sunrise/sunset line and the hourly cards. Same MapLibre stack as `/mapa`, configured here for a single location: full pan/zoom, a blue marker at the URL's `lat,lng` with a popup that links back to the canonical forecast URL, and theme-synced Esri Light/Dark Gray basemap. Layer rail, search, and timeline are off — users who want layers/timeline tap "Abrir mapa a pantalla completa →" below the embed, which deep-links to `/mapa#view=<lat>,<lng>,9z`. MapLibre is shared with the home map via the `src/lib/interactive-map.ts` factory; height is reserved before init to prevent CLS.
 - **`/mapa`**
   - The MapLibre canvas always fills 100 % of the viewport behind the absolute-positioned controls.
   - Layer rail keeps the same vertical layout from mobile to desktop; mobile users tap, desktop users hover-then-click. No collapse-to-burger.
@@ -122,8 +122,8 @@ The site is mobile-first and tested at four representative breakpoints. There ar
 
 ## Data sources & attributions
 
-- **CARTO Positron** — basemap raster tiles when the UI is in the light theme (derived from OSM data). © OpenStreetMap contributors © CARTO.
-- **CartoDB Dark Matter** — basemap raster tiles when the UI is in the dark theme (resolved from explicit "Oscuro" or "Sistema → dark"). The map swaps the tile source live; the MapLibre instance is not recreated. © OpenStreetMap contributors © CARTO.
+- **Esri World Light Gray Canvas** — basemap raster tiles (base + reference/labels services) when the UI is in the light theme. No API key. Esri, HERE, Garmin, © OpenStreetMap contributors.
+- **Esri World Dark Gray Canvas** — basemap raster tiles when the UI is in the dark theme (resolved from explicit "Oscuro" or "Sistema → dark"). The map swaps both tile sources live; the MapLibre instance is not recreated. Labels (the reference service) are hidden below zoom 5. Esri, HERE, Garmin, © OpenStreetMap contributors.
 - **RainViewer** — radar + satellite-IR frames and tiles. © RainViewer.
 - **Open-Meteo** — keyless gridded forecast (temperature, humidity, pressure, wind). © Open-Meteo.
 - **SMN / CONAGUA** — weather advisory RSS used for the build-time alert feed at `/rss.xml`.

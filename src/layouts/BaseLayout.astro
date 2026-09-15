@@ -81,6 +81,11 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="apple-touch-icon" href={`${base}favicon.svg`} />
     <link rel="manifest" href={`${base}manifest.webmanifest`} />
+    {/* Basemap tile hosts (Esri Canvas, two shards — see
+        src/lib/map/chrome/basemap-theme.ts). Pages with a map above
+        the fold save a TLS handshake per host on first paint. */}
+    <link rel="preconnect" href="https://server.arcgisonline.com" crossorigin />
+    <link rel="preconnect" href="https://server2.arcgisonline.com" crossorigin />
     <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
