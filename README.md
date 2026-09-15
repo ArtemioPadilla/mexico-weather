@@ -24,7 +24,7 @@ Un dashboard del clima enfocado en México con tres páginas y cero servidor:
 
 | Página | Qué muestra |
 |---|---|
-| **`/`** Inicio | Mapa interactivo embebido (400 px) · 5 tarjetas preset de ciudades (CDMX, GDL, MTY, PV, Oaxaca) · favoritos · búsqueda + geolocalización · feed RSS de avisos del SMN. |
+| **`/`** Inicio | Map-first: mapa interactivo a pantalla completa (radar por defecto, rail de 5 capas + timeline) con "Mostrar mi clima" y búsqueda flotando encima · 5 tarjetas preset de ciudades (CDMX, GDL, MTY, PV, Oaxaca) · favoritos · feed RSS de avisos del SMN. |
 | **`/forecast`** Detalle | Pronóstico actual + 48 h por hora + 7 días + paneles (viento, UV, cielo y aire) · mapa embebido centrado en la ubicación con capa Temperatura activa · botón `Compartir` (Web Share API + clipboard fallback) · favoritos. |
 | **`/mapa`** Mapa completo | MapLibre full-screen · 7 capas (mapa base, radar, satélite, temperatura, humedad, presión, viento, sol) · slider de opacidad · timeline scrubber · search con autocompletado MX-aware. |
 

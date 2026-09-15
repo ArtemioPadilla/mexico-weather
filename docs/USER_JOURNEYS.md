@@ -30,7 +30,7 @@ Reusable fixtures in `e2e/fixtures/`: `geocode.cdmx.json`, `forecast.cdmx.json` 
 
 | Route | File | Description |
 |---|---|---|
-| `/` | `src/pages/index.astro` | Home — preset city cards, search, geolocate, favorites, **embedded interactive map** (400 px, layer rail + timeline + preset pins), alerts, feedback FAB |
+| `/` | `src/pages/index.astro` | Home — **map-first interactive map** (viewport-tall, radar default, 5-layer rail + timeline + preset pins) with the geolocate CTA + search floating on top; preset city cards, favorites, alerts and the footer feedback button below |
 | `/forecast/?lat=&lng=&name=&tz=` | `src/pages/forecast.astro` | Shareable forecast detail; client-rendered from URL params |
 | `/mapa/` | `src/pages/mapa.astro` | Interactive weather map (MapLibre + 8 layers + timeline) |
 | `/privacidad/` | `src/pages/privacidad.astro` | Privacy/legal page |
@@ -266,12 +266,12 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
 - **NOT YET COVERED** (the bare "5 cards present" test exists; the peek/expand flow does not).
 
 ### `home-7` — Embedded map on home + deep-link to `/mapa`
-- **Goal**: home page embeds the full interactive map (~400 px) with the layer rail + timeline + preset pins; a small "Abrir mapa a pantalla completa →" link below deep-links to the full-screen `/mapa`.
+- **Goal**: the home is map-first — the interactive map fills the viewport below the nav (radar default, trimmed rail + timeline + preset pins), not lazy; a "Ver mapa interactivo →" chip in the overlay deep-links to the full-screen `/mapa`.
 - **Steps**:
   1. `await page.goto('')`.
   2. Locate the embedded map container: `page.locator('#home-map')` (the home embed uses the `home-map` id; `/mapa` still uses `#map`).
-  3. Scroll it into view so the IntersectionObserver fires.
-  4. `await expect(page.locator('#home-map-root .maplibregl-canvas')).toBeVisible()` — MapLibre canvas mounted (lazy dynamic-import).
+  3. No scrolling needed: the map is above the fold and boots immediately (`lazy={false}`).
+  4. `await expect(page.locator('#home-map-root .maplibregl-canvas')).toBeVisible()` — MapLibre canvas mounted.
   5. Layer rail buttons are present: `await expect(page.locator('#layerbtn-radar')).toBeVisible()` etc. (the home embed still uses the stable `layerbtn-*` IDs).
   6. The "Abrir mapa a pantalla completa →" link below the embed navigates to `/mapa/`.
 - **NOT YET COVERED**.

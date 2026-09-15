@@ -6,7 +6,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 
 | Route | What it is |
 |---|---|
-| `/` | **Home** — preset Mexican-city forecast cards, search box, "use my location", and an **embedded interactive map** (full MapLibre instance, ~400 px tall, with the layer rail + timeline + preset pins; deep-link to the full-screen `/mapa` underneath). |
+| `/` | **Home** — map-first: the interactive map fills the viewport below the nav (radar on by default, trimmed 5-layer rail + timeline + preset pins) with the "Mostrar mi clima" CTA and the search box floating on top; preset city cards, favorites and SMN alerts follow below the fold. |
 | `/forecast` | **Forecast detail** — shareable, client-rendered detail page driven by URL query params. |
 | `/mapa` | **Interactive weather map** — MapLibre GL basemap, location pins, layer rail, opacity slider, legend, timeline scrubber + playback, shareable view state. |
 | `/privacidad` | **Privacy/legal**. |
@@ -77,7 +77,7 @@ The site is mobile-first and tested at four representative breakpoints. There ar
 
 | Breakpoint | Width | Reference device | Layout traits |
 |---|---|---|---|
-| **mobile** | 375–640 px | iPhone SE, modern Android phones in portrait | 1-column card grid; search input + "Mi ubicación" stack vertically on the narrowest widths; hero typography scales down (`text-5xl → text-4xl`); a slim 48 px sticky topbar (`aria-label="Principal"`) holds the brand, `Inicio` / `Mapa` nav and the theme toggle; feedback FAB floats bottom-right. |
+| **mobile** | 375–640 px | iPhone SE, modern Android phones in portrait | 1-column card grid; search input + "Mi ubicación" stack vertically on the narrowest widths; hero typography scales down (`text-5xl → text-4xl`); a slim 48 px sticky topbar (`aria-label="Principal"`) holds the brand, `Inicio` / `Mapa` nav and the theme toggle; feedback FAB floats bottom-right (on the home it lives in the footer instead, so it never covers the map). |
 | **tablet** | 641–1023 px | iPad portrait, Surface Go | 2-column card grid; search + "Mi ubicación" share a single row; the `/mapa` layer rail remains a vertical sidebar but takes less horizontal share of the viewport; hourly cards on `/forecast` scroll horizontally with a visible scrollbar. |
 | **laptop** | 1024–1535 px | most laptops | 3-column card grid; map page uses the full viewport for the canvas with sidebar rail; forecast detail panels (Viento / Índice UV / Cielo y aire) align side-by-side. |
 | **desktop** | ≥ 1536 px | external monitors | Same as laptop with a wider content `max-width` cap on `/` and `/forecast` (centered with side gutters); `/mapa` continues to occupy the full width because the map IS the page. |
@@ -88,7 +88,7 @@ The site is mobile-first and tested at four representative breakpoints. There ar
   - Card grid: `grid-cols-1` (mobile) → `grid-cols-2` (≥ `sm`) → `grid-cols-3` (≥ `lg`).
   - The 6th tile is always the "Más ciudades próximamente / Sugerir ciudad →" placeholder; it stays in flow at every breakpoint.
   - "Tus lugares" only renders when the user has favorites; on mobile it sits between the SMN alerts banner and the preset grid.
-  - The home now embeds the **full interactive map** (~400 px tall) instead of the old SVG teaser — same MapLibre stack as `/mapa`, with the layer rail, timeline scrubber, and preset city pins enabled. Search + "Mi ubicación" stay above (the page already has them next to the hero), and the back-link is hidden (we're already at home). A small "Abrir mapa a pantalla completa →" link below the embed deep-links to `/mapa`. MapLibre is lazy-loaded via `IntersectionObserver` so users who never scroll into the map don't pay the JS cost.
+  - The home is **map-first**: the interactive map fills `100dvh` minus the nav and a 2.5 rem "peek" strip (the next section's heading shows at the bottom edge), radar layer on by default, with a trimmed 5-layer rail (base, radar, temperature, wind, sun), the timeline scrubber and the preset city pins. The power-user chrome of `/mapa` (measure, snapshot, settings, info, model toggle, coords, legend bar) is off here. The "Mostrar mi clima" CTA and the search combobox float over the top of the map (same ids and behaviour as before — story 2.1 still navigates to `/clima/<slug>/` or `/forecast/`); a "Ver mapa interactivo →" chip deep-links to `/mapa`. The map is not lazy any more (it is the LCP element), so `e2e/map-first-paint.spec.ts` has a home target.
 - **`/forecast`**
   - 48-h hourly row is always `overflow-x: auto`; the row keeps a fixed card height and never wraps. The temperature sparkline lives **inside** the same scroll container as the cards, sized to the cards' total width — so hour N on a card and x position N on the sparkline scroll together (no more visual drift).
   - 7-day rows are full-width; the gradient temperature bar reflows to the full container width so it always reads at a glance. An axis row above the days shows `<minWeek>° / <midWeek>° / <maxWeek>°` with 25/50/75 % tick marks, and the "Hoy" row carries a small vertical "current temperature" marker positioned within the week's min/max range.

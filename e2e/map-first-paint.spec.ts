@@ -22,9 +22,13 @@ import type { Page } from '@playwright/test';
 // forecast embed (temperature field, z9 over CDMX) is nearly uniform and
 // sits ~3x above its floor — one global constant would make the weakest
 // target the flakiest.
+// '/ (home)': radar over the gray basemap at z4.5, non-lazy since the
+// map-first redesign (plan phase 2). Floor calibrated conservatively at
+// the forecast-embed level; raise once CI has a few runs on main.
 const PAINT_VARIANCE_FLOOR: Record<string, number> = {
   '/mapa': 40,
   '/forecast embed': 15,
+  '/ (home)': 15,
 };
 
 async function sampleCanvas(page: Page) {
@@ -53,6 +57,7 @@ async function sampleCanvas(page: Page) {
 }
 
 const TARGETS = [
+  { name: '/ (home)', url: '' },
   { name: '/mapa', url: 'mapa#view=23.6,-102.5,5z&layer=temperature' },
   {
     name: '/forecast embed',

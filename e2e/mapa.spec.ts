@@ -295,6 +295,30 @@ test.describe('mapa page', () => {
     await expect(page.locator('#tl-time')).toHaveText('—');
   });
 
+  test('locate button drops a pin on /mapa and never navigates away', async ({
+    page,
+    context,
+  }) => {
+    // The home CTA (#geo) NAVIGATES after a fix; the map's locate button
+    // shares the flow (src/lib/locate-flow.ts) but its final action is a
+    // PIN. Guard that the two never get merged (plan home map-first, phase 2).
+    await context.grantPermissions(['geolocation']);
+    await context.setGeolocation({ latitude: 19.43, longitude: -99.13 });
+    await mockOpenMeteo(page);
+    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    );
+    await page.route('**/*.arcgisonline.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+    );
+    await page.goto('mapa/');
+    await expect(page.locator('.maplibregl-marker')).toHaveCount(5);
+    await page.locator('#maploc').click();
+    await expect(page.locator('.maplibregl-marker')).toHaveCount(6);
+    await page.waitForTimeout(500);
+    expect(new URL(page.url()).pathname).toMatch(/\/mapa\/$/);
+  });
+
   test('search input shows an autocomplete listbox with multiple options before fly', async ({
     page,
   }) => {

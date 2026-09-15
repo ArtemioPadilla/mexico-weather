@@ -59,6 +59,10 @@ interface Props {
   lazy?: boolean;
   /** Tailwind classes for the outer wrapper. */
   class?: string;
+  /** Top offset of the layer rail (CSS length). /mapa keeps the default
+   *  3.5rem (below its search row); the home overlays its CTA + search
+   *  on the map and pushes the rail down past them. */
+  railOffsetTop?: string;
   lang?: 'es' | 'en';
 }
 
@@ -92,6 +96,7 @@ const {
   lazy = true,
   class: className = '',
   lang = 'es' as const,
+  railOffsetTop = '3.5rem',
 } = Astro.props;
 
 const t = ui[lang];
@@ -146,7 +151,7 @@ const cfg = JSON.stringify({
     'im-root group/chrome relative w-full overflow-hidden bg-gray-100 dark:bg-gray-950',
     className,
   ]}
-  style={`height:${height};`}
+  style={`height:${height};--im-rail-top:${railOffsetTop};`}
   data-im-config={cfg}
 >
   {features.backLink && (
@@ -210,7 +215,7 @@ const cfg = JSON.stringify({
 
   {features.layerRail && (
     <div
-      class="im-rail absolute left-3 top-14 z-10 w-auto sm:w-44 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg bg-white/95 p-2 sm:p-3 text-sm shadow dark:bg-gray-900/95"
+      class="im-rail absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-44 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg bg-white/95 p-2 sm:p-3 text-sm shadow dark:bg-gray-900/95"
       aria-label={t.map_layers}
       role="group"
     >

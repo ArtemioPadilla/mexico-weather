@@ -9,90 +9,82 @@ const t = ui.es;
 const base = siteBase();
 ---
 
-<BaseLayout title="Clima México 🇲🇽" description="Alertas y pronósticos meteorológicas para México" lang="es" feedbackPlacement="inline">
-  <main class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
-    <!-- Hero -->
-    <div class="max-w-5xl mx-auto px-4 py-12 space-y-10">
-      <div class="text-center space-y-4">
-        <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/40 bg-blue-500/10 px-4 py-1.5 text-sm font-medium text-blue-600 dark:border-blue-500/30 dark:text-blue-400">
-          <span class="h-2 w-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-pulse"></span>
-          <span data-i18n-en="Updated every 10 minutes">Actualizado cada 10 minutos</span>
-        </div>
-        <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">
-          Clima México 🇲🇽
-        </h1>
-        <p
-          class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed"
-          data-i18n-en="SMN + Open-Meteo forecasts and alerts for major Mexican cities."
-        >
-          Pronósticos y alertas meteorológicas del SMN + Open-Meteo para las principales ciudades de México.
-        </p>
-        <div class="max-w-xl mx-auto mt-6 space-y-2">
-          {/* Primary CTA — geolocation is the fastest path to a local
-              forecast. Above the search bar by design (story 2.1) so
-              first-time visitors hit it before scanning the rest of
-              the page. */}
-          <button
-            id="geo"
-            type="button"
-            class="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-60 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
-          >
-            <span aria-hidden="true" class="text-xl leading-none">📍</span>
-            <span id="geo-label" data-i18n-en="Show my weather">Mostrar mi clima</span>
-          </button>
-          {/* Secondary path: search by name. Kept full-width below
-              the primary CTA so the search input is wider + thumb-
-              reachable on mobile. */}
-          <div class="relative">
-            <input id="q" type="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-autocomplete="list" aria-label={t.search_placeholder} data-i18n-en-aria-label={ui.en.search_placeholder} placeholder={`O busca otra ubicación: ${t.search_placeholder}`} data-i18n-en-placeholder={`Or search another location: ${ui.en.search_placeholder}`} class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100" />
-          </div>
-          <ul id="ac" role="listbox" class="hidden mt-1 text-start bg-white border border-gray-300 rounded-lg overflow-hidden dark:bg-gray-900 dark:border-gray-700"></ul>
-          <p id="qmsg" class="hidden mt-1 text-xs text-gray-600 dark:text-gray-500" aria-live="polite"></p>
-        </div>
-        <p id="js-updated-at" class="text-xs text-gray-600 dark:text-gray-500" aria-live="polite" data-i18n-en="Loading latest data...">Cargando datos más recientes...</p>
-      </div>
+<BaseLayout title="Clima México 🇲🇽" description="Pronósticos y alertas meteorológicas del SMN + Open-Meteo para las principales ciudades de México. Mapa interactivo con radar, temperatura y viento." lang="es" feedbackPlacement="inline">
+  <main class="bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+    <!-- Map-first hero (plan home map-first, phase 2). The map fills the
+         viewport below the nav minus a 2.5rem strip so the next section
+         "peeks" in and stays discoverable. The CTA + search float over
+         the map instead of pushing it below the fold; they keep their
+         ids (#geo, #q, #ac, #qmsg) and behaviour (story 2.1: navigate
+         to /clima/<slug>/ or /forecast/). -->
+    <section
+      class="relative h-[calc(100dvh-3rem-2.5rem)] min-h-[420px] sm:h-[calc(100dvh-3.5rem-2.5rem)]"
+      aria-labelledby="home-map-heading"
+    >
+      <h1 class="sr-only">Clima México 🇲🇽</h1>
+      <h2 id="home-map-heading" class="sr-only" data-i18n-en={ui.en.map_teaser_heading}>
+        {t.map_teaser_heading}
+      </h2>
+      <InteractiveMap
+        mapId="home-map"
+        height="100%"
+        initialView={{ lat: 23.6, lng: -102.5, zoom: 4.5 }}
+        initialLayer="radar"
+        railOffsetTop="9.5rem"
+        features={{
+          layerRail: true,
+          railLayers: ['base', 'radar', 'temperature', 'wind', 'sunlight'],
+          timeline: true,
+          search: false,
+          locateButton: false,
+          presetPins: true,
+          backLink: false,
+          tools: false,
+          settings: false,
+          info: false,
+          modelToggle: false,
+          coords: false,
+          legend: false,
+        }}
+        lazy={false}
+      />
 
-      <!-- Embedded interactive map (replaces the old SVG teaser).
-           A trimmed layer rail (5 layers) + timeline are enabled so users
-           can radar/temp/wind/sun the map right from the home page. The
-           power-user chrome (measure, snapshot, settings, info, model
-           toggle, coords, legend bar) stays off: on a small embed it
-           stacked ~17 tap targets over the map. Search + locate are
-           disabled here (the page already has its own #q + #geo above
-           the fold) and the back-link is off (we're already at "home"). -->
-      <section class="space-y-3" aria-labelledby="home-map-heading">
-        <h2 id="home-map-heading" class="text-xl font-semibold text-gray-800 dark:text-gray-200" data-i18n-en={ui.en.map_teaser_heading}>
-          {t.map_teaser_heading}
-        </h2>
-        <div class="overflow-hidden rounded-xl border border-blue-500/40 dark:border-blue-500/30">
-          <InteractiveMap
-            mapId="home-map"
-            height="min(70dvh, 560px)"
-            initialView={{ lat: 23.6, lng: -102.5, zoom: 4.5 }}
-            features={{
-              layerRail: true,
-              railLayers: ['base', 'radar', 'temperature', 'wind', 'sunlight'],
-              timeline: true,
-              search: false,
-              locateButton: false,
-              presetPins: true,
-              backLink: false,
-              tools: false,
-              settings: false,
-              info: false,
-              modelToggle: false,
-              coords: false,
-              legend: false,
-            }}
-            lazy={true}
-          />
+      {/* Overlay: primary CTA + search. pointer-events-none on the
+          wrapper so the map still pans in the gaps; each control opts
+          back in. */}
+      <div class="pointer-events-none absolute inset-x-3 top-3 z-20 mx-auto max-w-xl space-y-2">
+        <button
+          id="geo"
+          type="button"
+          class="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 text-base font-semibold text-white shadow-lg transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-60 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
+        >
+          <span aria-hidden="true" class="text-xl leading-none">📍</span>
+          <span id="geo-label" data-i18n-en="Show my weather">Mostrar mi clima</span>
+        </button>
+        <div class="pointer-events-auto relative">
+          <input id="q" type="text" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ac" aria-autocomplete="list" aria-label={t.search_placeholder} data-i18n-en-aria-label={ui.en.search_placeholder} placeholder={`O busca otra ubicación: ${t.search_placeholder}`} data-i18n-en-placeholder={`Or search another location: ${ui.en.search_placeholder}`} class="w-full rounded-lg border border-gray-300 bg-white/95 px-3 py-2.5 text-sm text-gray-900 shadow backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/95 dark:text-gray-100" />
         </div>
-        <p class="text-sm text-gray-500 dark:text-gray-500">
-          <a href={`${base}mapa/`} class="text-blue-600 hover:underline dark:text-blue-400">
+        <ul id="ac" role="listbox" class="pointer-events-auto hidden text-start bg-white border border-gray-300 rounded-lg overflow-hidden shadow dark:bg-gray-900 dark:border-gray-700"></ul>
+        <p id="qmsg" class="pointer-events-auto hidden rounded bg-white/90 px-2 py-1 text-xs text-gray-700 dark:bg-gray-900/90 dark:text-gray-300" aria-live="polite"></p>
+        <div class="flex items-center justify-between gap-2">
+          <p id="js-updated-at" class="rounded bg-white/80 px-2 py-0.5 text-[11px] text-gray-600 backdrop-blur-sm dark:bg-gray-900/80 dark:text-gray-400" aria-live="polite" data-i18n-en="Loading latest data...">Cargando datos más recientes...</p>
+          <a
+            href={`${base}mapa/`}
+            class="pointer-events-auto inline-flex min-h-[44px] items-center rounded-full bg-white/90 px-3 text-xs font-medium text-blue-700 shadow backdrop-blur-sm hover:bg-white dark:bg-gray-900/90 dark:text-blue-300 dark:hover:bg-gray-900"
+            data-i18n-en={`${ui.en.map_teaser_cta} →`}
+          >
             {t.map_teaser_cta} →
           </a>
-        </p>
-      </section>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+      {/* Peek handle: sits in the 2.5rem strip that the hero leaves
+          visible, so first-time visitors know there is more below. */}
+      <p class="text-center text-xs text-gray-500 dark:text-gray-400" aria-hidden="true">
+        <span data-i18n-en="Cities, favorites and alerts ↓">Ciudades, favoritos y alertas ↓</span>
+      </p>
 
       <!-- Alertas activas -->
       <div class="rounded-xl border border-yellow-500/40 bg-yellow-500/10 p-5 space-y-3 dark:border-yellow-500/30">
@@ -203,6 +195,7 @@ const base = siteBase();
       type CitySnapshot,
     } from '../lib/city-snapshot';
     import { resolveStateByCoords } from '../lib/state-by-coords';
+    import { runLocateFlow, failureMessageKey } from '../lib/locate-flow';
     import { avisosForState, loadSmnAvisos } from '../lib/smn-avisos';
     // Story 2.1 — used to confirm the resolved coords are inside MX
     // (polygon lookup returns null for points outside any state).
@@ -1114,59 +1107,29 @@ const base = siteBase();
       geoBtn.addEventListener('click', () => {
         setBusy(true);
         showMsg(t.searching);
-        navigator.geolocation.getCurrentPosition(
-          async (pos) => {
-            const { latitude, longitude } = pos.coords;
-            // Resolve to MX state first so we can reject coords
-            // outside the country before redirecting anywhere. The
-            // polygon file gets cached as a side-effect, paying for
-            // itself on the next SMN ribbon load.
-            const stateSlug = await resolveStateByCoords(
-              latitude,
-              longitude,
-              base + '/',
-              window.fetch.bind(window),
-            );
-            if (!stateSlug) {
-              setBusy(false);
-              showMsg(t.geo_outside_mx);
-              return;
-            }
-            // Inside MX — funnel into the curated /clima/<slug>/ page
-            // when coords match a TOP_CITIES entry, else the URL-param
-            // /forecast/ route (fullHref handles both).
-            location.href = fullHref(
-              String(latitude),
-              String(longitude),
-              'auto',
-              'Tu ubicación',
-            );
+        // Shared flow with the map's locate button (src/lib/locate-flow.ts).
+        // Here the final action NAVIGATES: story 2.1 funnels into the
+        // curated /clima/<slug>/ page when coords match a TOP_CITIES
+        // entry, else the URL-param /forecast/ route (fullHref handles
+        // both). The accept() gate resolves the MX state first so we
+        // reject coords outside the country before redirecting; the
+        // polygon file gets cached as a side-effect, paying for itself
+        // on the next SMN ribbon load.
+        void runLocateFlow({
+          accept: async (lat, lng) =>
+            !!(await resolveStateByCoords(lat, lng, base + '/', window.fetch.bind(window))),
+          onResolved: (lat, lng) => {
+            location.href = fullHref(String(lat), String(lng), 'auto', 'Tu ubicación');
           },
-          (err) => {
+          onRejected: () => {
             setBusy(false);
-            // GeolocationPositionError.code: 1=PERMISSION_DENIED,
-            // 2=POSITION_UNAVAILABLE, 3=TIMEOUT. Surface a useful
-            // distinction so users know which to fix.
-            if (err.code === 1) {
-              showMsg(t.geo_denied);
-            } else if (err.code === 3) {
-              showMsg(t.geo_timeout);
-            } else {
-              showMsg(t.geo_denied);
-            }
+            showMsg(t.geo_outside_mx);
           },
-          // 8 s timeout — long enough for cellular cold-start GPS,
-          // short enough that users don't think the page hung.
-          // maximumAge: 10 min — re-use a recent fix if the browser
-          // has one, otherwise force a fresh one. enableHighAccuracy
-          // false = save battery, indoor accuracy is fine for state
-          // resolution.
-          {
-            enableHighAccuracy: false,
-            timeout: 8000,
-            maximumAge: 600000,
+          onError: (reason) => {
+            setBusy(false);
+            showMsg(t[failureMessageKey(reason)]);
           },
-        );
+        });
       });
     }
 

@@ -71,6 +71,7 @@ import { terminatorPolygon, solarPosition } from './mapsun';
 import { presetPins, withUserPin, type MapPin } from './mappins';
 import { cities } from '../data/cities';
 import { geocode } from './geocode';
+import { runLocateFlow, failureMessageKey } from './locate-flow';
 import { ui } from '../i18n/ui';
 import { siteBase } from '../utils/paths';
 import {
@@ -2777,22 +2778,13 @@ export async function initInteractiveMap(
   }
 
   if (features.locateButton && opts.els.locate) {
+    // Shared flow with the home CTA (src/lib/locate-flow.ts). Here the
+    // final action is a PIN — the map never navigates away.
     opts.els.locate.addEventListener('click', () => {
-      if (!('geolocation' in navigator)) {
-        showMsg(t.geo_denied);
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(
-        (pos) =>
-          setUserPin(
-            t.map_locate,
-            pos.coords.latitude,
-            pos.coords.longitude,
-            'geo'
-          ),
-        () => showMsg(t.geo_denied),
-        { timeout: 10000 }
-      );
+      void runLocateFlow({
+        onResolved: (lat, lng) => setUserPin(t.map_locate, lat, lng, 'geo'),
+        onError: (reason) => showMsg(t[failureMessageKey(reason)]),
+      });
     });
   }
 
