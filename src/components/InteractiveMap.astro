@@ -18,13 +18,12 @@
  * stable for /mapa to preserve e2e selectors and the ?e2e=1 affordance).
  */
 import { ui } from '../i18n/ui';
+import type { InteractiveMapFeatures } from '../lib/interactive-map';
 
-interface Features {
-  layerRail?: boolean;
-  timeline?: boolean;
-  search?: boolean;
-  locateButton?: boolean;
-  presetPins?: boolean;
+/** Single source of truth for the feature flags lives in
+ *  src/lib/interactive-map.ts (InteractiveMapFeatures). This Astro
+ *  wrapper only adds the two flags that are pure markup here. */
+interface Features extends InteractiveMapFeatures {
   backLink?: boolean;
   /** Below sm, reveal the rail's opacity slider, the overlays accordion,
    *  the model toggle and the measure/snapshot tools behind one trigger
@@ -68,6 +67,10 @@ const {
   height = '100vh',
   initialView = { lat: 23.6, lng: -102.5, zoom: 4.5 },
   initialLayer,
+  // NOTE: this default only applies when the `features` prop is omitted
+  // entirely — there is no per-key merge. Every call-site passes an
+  // explicit object, so list every flag you want there (see mapa.astro
+  // for the "all on" set).
   features = {
     layerRail: true,
     timeline: true,
@@ -75,6 +78,12 @@ const {
     locateButton: true,
     presetPins: true,
     backLink: true,
+    tools: true,
+    settings: true,
+    info: true,
+    modelToggle: true,
+    coords: true,
+    legend: true,
   },
   useHash = false,
   exposeE2eHook = false,
@@ -372,7 +381,7 @@ const cfg = JSON.stringify({
     on embeds where the corner is too cramped — only the full /mapa page
     passes a non-null `coords` element to initInteractiveMap.
   */}
-  {features.layerRail && (
+  {features.coords && (
     <div
       id={ids.coords}
       class="pointer-events-none absolute bottom-2 left-2 z-10 rounded bg-gray-900/70 px-2 py-1 text-xs font-mono tabular-nums text-gray-200 backdrop-blur-sm hidden sm:inline-block"
@@ -386,7 +395,7 @@ const cfg = JSON.stringify({
     cursor coords badge. Stays visible even when the layer rail is
     collapsed. Hidden on mobile to keep the corner uncluttered.
   */}
-  {features.layerRail && (
+  {features.legend && (
     <div
       id="legend-bar"
       class="pointer-events-none absolute bottom-10 left-2 z-10 sm:flex items-center gap-2 rounded bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow backdrop-blur-sm dark:bg-gray-900/95 dark:text-gray-200"
@@ -404,7 +413,7 @@ const cfg = JSON.stringify({
     highest-resolution model per location (ECMWF in MX = ~9 km, ICON
     ~13 km global fallback). Static label; no JS needed.
   */}
-  {features.layerRail && (
+  {features.modelToggle && (
     <div
       id="mw-model-toggle"
       class="absolute bottom-9 max-sm:group-data-[controls=open]/chrome:bottom-[4.5rem] right-2 z-10 hidden items-center gap-1 rounded-full bg-gray-900/80 px-1 py-0.5 text-[10px] font-mono tabular-nums text-gray-300 backdrop-blur-sm group-data-[controls=open]/chrome:inline-flex sm:inline-flex"
@@ -433,7 +442,7 @@ const cfg = JSON.stringify({
 
   {/* Snapshot compare tools (plan P2.4 — moved out of the layer rail).
       Right edge column above the model toggle. */}
-  {features.layerRail && (
+  {features.tools && (
     <div
       id="mw-snapshot-wrap"
       class="absolute bottom-20 max-sm:group-data-[controls=open]/chrome:bottom-[8rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
@@ -462,7 +471,7 @@ const cfg = JSON.stringify({
   {/* Measure tools (plan P2.1). Two pills above the snapshot column —
       click activates the mode, click acumulating points, ESC clears.
       Read-only pill at bottom shows the running total. */}
-  {features.layerRail && (
+  {features.tools && (
     <div
       id="mw-measure-wrap"
       class="absolute bottom-[10.5rem] max-sm:group-data-[controls=open]/chrome:bottom-[11.5rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
@@ -485,7 +494,7 @@ const cfg = JSON.stringify({
       >📐 Área</button>
     </div>
   )}
-  {features.layerRail && (
+  {features.tools && (
     <div
       id="mw-measure-result"
       class="pointer-events-none absolute bottom-3 right-2 z-10 hidden rounded-full bg-blue-600/90 px-3 py-1.5 text-xs font-semibold text-white shadow sm:inline-block"
@@ -499,7 +508,7 @@ const cfg = JSON.stringify({
     its summary and extends to the left so it doesn't escape the
     viewport.
   */}
-  {features.layerRail && (
+  {features.settings && (
     <details
       id="mw-settings"
       class="absolute right-3 top-[7.25rem] z-20 text-xs [&[open]>summary]:bg-blue-500/15 [&[open]>div]:block"
@@ -536,7 +545,7 @@ const cfg = JSON.stringify({
     Info panel (zoom.earth-style ℹ️). Compact icon (plan P1.6) — open
     expands to the left as a popover.
   */}
-  {features.layerRail && (
+  {features.info && (
     <details
       id="mw-info"
       class="absolute right-3 top-16 z-20 text-xs [&[open]>summary]:bg-blue-500/15 [&[open]>div]:block"
@@ -643,21 +652,17 @@ const cfg = JSON.stringify({
 </style>
 
 <script>
-  import { initInteractiveMap } from '../lib/interactive-map';
+  import {
+    initInteractiveMap,
+    type InteractiveMapFeatures,
+  } from '../lib/interactive-map';
 
   type ImCfg = {
     mapId: string;
     ids: Record<string, string>;
     initialView: { lat: number; lng: number; zoom: number };
     initialLayer?: string;
-    features: {
-      layerRail?: boolean;
-      timeline?: boolean;
-      search?: boolean;
-      locateButton?: boolean;
-      presetPins?: boolean;
-      backLink?: boolean;
-    };
+    features: InteractiveMapFeatures;
     useHash: boolean;
     exposeE2eHook: boolean;
     interactive: boolean;

@@ -119,11 +119,26 @@ export interface InteractiveMapElements {
 }
 
 export interface InteractiveMapFeatures {
+  /** Layer rail (base/radar/temp/… buttons + opacity + overlays). */
   layerRail?: boolean;
+  /** Restrict the rail to this subset of LAYER_IDS (embeds). Omit for all. */
+  railLayers?: string[];
   timeline?: boolean;
   search?: boolean;
   locateButton?: boolean;
   presetPins?: boolean;
+  /** Measure (distance/area) + snapshot-compare tools. */
+  tools?: boolean;
+  /** ⚙️ settings popover (timezone, hour format). */
+  settings?: boolean;
+  /** ℹ️ info/sources popover. Markup-only. */
+  info?: boolean;
+  /** NWP model toggle pills (Auto/ICON/GFS/…). */
+  modelToggle?: boolean;
+  /** Cursor coordinates badge. Markup-only. */
+  coords?: boolean;
+  /** Floating colour-scale legend bar. Markup-only. */
+  legend?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -2115,7 +2130,9 @@ export async function initInteractiveMap(
   function buildLayerButtons(): void {
     const wrap = opts.els.layerBtns;
     if (!wrap || !features.layerRail) return;
+    const allowed = features.railLayers ? new Set(features.railLayers) : null;
     for (const def of LAYERS) {
+      if (allowed && !allowed.has(def.id)) continue;
       const btn = document.createElement('button');
       btn.id = `layerbtn-${def.id}`;
       btn.type = 'button';
@@ -2170,7 +2187,7 @@ export async function initInteractiveMap(
   // effect immediately.
   // ----------------------------------------------------------------
   function refreshSettingsButtons(): void {
-    if (!features.layerRail) return;
+    if (!features.settings) return;
     const cur = readSettings();
     document
       .querySelectorAll<HTMLButtonElement>('[data-mw-tz] button')
@@ -2187,7 +2204,7 @@ export async function initInteractiveMap(
       });
   }
   function bindSettingsButtons(): void {
-    if (!features.layerRail) return;
+    if (!features.settings) return;
     document
       .querySelectorAll<HTMLButtonElement>('[data-mw-tz] button')
       .forEach((b) => {
@@ -2787,7 +2804,7 @@ export async function initInteractiveMap(
   // Measure-ESC keydown handler (set inside the block below), hoisted
   // so destroy() can remove the document listener.
   let measureEscHandler: ((e: KeyboardEvent) => void) | null = null;
-  if (features.layerRail) {
+  if (features.tools) {
     const MEASURE_SOURCE = 'mw-measure-src';
     const MEASURE_LINE_LAYER = 'mw-measure-line';
     const MEASURE_POINTS_LAYER = 'mw-measure-points';
@@ -2921,7 +2938,7 @@ export async function initInteractiveMap(
   // NWP model. State is mirrored into the URL hash so #model=icon_seamless
   // round-trips. Changing model invalidates the cached grids and forces
   // a refetch via setActiveLayer.
-  if (features.layerRail) {
+  if (features.modelToggle) {
     // Model toggle pills (plan P1.1) — DOM wiring extracted to
     // src/lib/map/chrome/model-toggle.ts. The caller still owns the
     // activeModel variable + the cache-invalidation side-effects.
@@ -2954,7 +2971,7 @@ export async function initInteractiveMap(
   // layers and visually diff "antes" vs "ahora". Doesn't require any
   // extra network fetches — pure client-side canvas → data URL.
   // ----------------------------------------------------------------
-  if (features.layerRail) {
+  if (features.tools) {
     // Snapshot compare tool — extracted to chrome/snapshot-compare.ts.
     createSnapshotCompare({
       map,

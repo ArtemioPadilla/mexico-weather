@@ -23,7 +23,7 @@ test.describe('homepage', () => {
     const res = await page.goto('');
     expect(res?.status()).toBe(200);
     await expect(
-      page.getByRole('heading', { level: 1, name: /Clima México/ }),
+      page.getByRole('heading', { level: 1, name: /Clima México/ })
     ).toBeVisible();
   });
 
@@ -38,9 +38,7 @@ test.describe('homepage', () => {
       'Monterrey',
       'Guadalajara',
     ]) {
-      await expect(
-        page.getByRole('heading', { level: 3, name }),
-      ).toBeVisible();
+      await expect(page.getByRole('heading', { level: 3, name })).toBeVisible();
     }
   });
 
@@ -61,7 +59,7 @@ test.describe('homepage', () => {
             tz: 'America/Mexico_City',
             addedAt: Date.now(),
           },
-        ]),
+        ])
       );
     });
 
@@ -75,13 +73,13 @@ test.describe('homepage', () => {
     const presetCards = page.locator('#preset-grid [data-city-card]');
     await expect(presetCards).toHaveCount(4);
     await expect(
-      presetCards.filter({ hasText: 'Ciudad de México' }),
+      presetCards.filter({ hasText: 'Ciudad de México' })
     ).toHaveCount(0);
 
     // The "+ Más ciudades" placeholder still anchors the end of the grid.
     await expect(page.getByText('Más ciudades próximamente')).toBeVisible();
     await expect(
-      page.getByRole('link', { name: /Sugerir ciudad/ }),
+      page.getByRole('link', { name: /Sugerir ciudad/ })
     ).toBeVisible();
   });
 
@@ -97,5 +95,44 @@ test.describe('homepage', () => {
     const privacy = page.getByRole('link', { name: 'Privacidad', exact: true });
     await expect(privacy).toBeVisible();
     await expect(privacy).toHaveAttribute('href', /\/privacidad\/$/);
+  });
+
+  // Granular map-chrome flags (plan home map-first, phase 1a): the home
+  // embed keeps the layer rail + timeline but none of the power-user
+  // chrome that /mapa renders. These ids are literal (not derived from
+  // mapId), so scope the lookups to the embed's root.
+  const POWER_CHROME = [
+    '#mw-measure-wrap',
+    '#mw-settings',
+    '#mw-info',
+    '#mw-model-toggle',
+    '#legend-bar',
+    '#home-map-coords',
+  ];
+
+  test('home map embed renders none of the /mapa power-user chrome', async ({
+    page,
+  }) => {
+    await page.goto('');
+    const root = page.locator('#home-map-root');
+    await expect(root).toBeVisible();
+    for (const sel of POWER_CHROME) {
+      await expect(root.locator(sel), sel).toHaveCount(0);
+    }
+    // The rail itself is still there, trimmed to 5 layers.
+    await root.scrollIntoViewIfNeeded();
+    await expect(root.locator('#layerbtn-base')).toBeVisible();
+    await expect(root.locator('[id^="layerbtn-"]')).toHaveCount(5);
+    await expect(root.locator('#layerbtn-humidity')).toHaveCount(0);
+  });
+
+  test('/mapa still renders the full chrome the home embed drops', async ({
+    page,
+  }) => {
+    await page.goto('mapa/');
+    for (const sel of POWER_CHROME) {
+      const mapaSel = sel === '#home-map-coords' ? '#mapCoords' : sel;
+      await expect(page.locator(mapaSel), mapaSel).toHaveCount(1);
+    }
   });
 });

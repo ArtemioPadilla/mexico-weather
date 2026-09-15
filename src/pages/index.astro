@@ -53,10 +53,13 @@ const base = siteBase();
       </div>
 
       <!-- Embedded interactive map (replaces the old SVG teaser).
-           Layer rail + timeline are enabled so users can radar/temp/wind/sun
-           the map right from the home page; search + locate are disabled
-           here (the page already has its own #q + #geo above the fold) and
-           the back-link is off (we're already at "home"). -->
+           A trimmed layer rail (5 layers) + timeline are enabled so users
+           can radar/temp/wind/sun the map right from the home page. The
+           power-user chrome (measure, snapshot, settings, info, model
+           toggle, coords, legend bar) stays off: on a small embed it
+           stacked ~17 tap targets over the map. Search + locate are
+           disabled here (the page already has its own #q + #geo above
+           the fold) and the back-link is off (we're already at "home"). -->
       <section class="space-y-3" aria-labelledby="home-map-heading">
         <h2 id="home-map-heading" class="text-xl font-semibold text-gray-800 dark:text-gray-200" data-i18n-en={ui.en.map_teaser_heading}>
           {t.map_teaser_heading}
@@ -68,11 +71,18 @@ const base = siteBase();
             initialView={{ lat: 23.6, lng: -102.5, zoom: 4.5 }}
             features={{
               layerRail: true,
+              railLayers: ['base', 'radar', 'temperature', 'wind', 'sunlight'],
               timeline: true,
               search: false,
               locateButton: false,
               presetPins: true,
               backLink: false,
+              tools: false,
+              settings: false,
+              info: false,
+              modelToggle: false,
+              coords: false,
+              legend: false,
             }}
             lazy={true}
           />

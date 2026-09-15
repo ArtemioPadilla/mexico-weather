@@ -51,6 +51,14 @@ const t = ui[lang];
            homepage teaser sets layerRail too, and a 400px embed has no
            room for it (Story 11.3). */
         mobileControls: true,
+        /* Granular chrome flags — /mapa is the "all on" consumer. The
+           home embed leaves these off (see index.astro). */
+        tools: true,
+        settings: true,
+        info: true,
+        modelToggle: true,
+        coords: true,
+        legend: true,
       }}
       useHash={true}
       exposeE2eHook={true}
