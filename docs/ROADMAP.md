@@ -15,6 +15,7 @@ messages, and breaks the remaining work into a prioritized
 | **ROADMAP.md** (this file) | Source of truth for status + priorities. Start here. |
 | [PLAN_SUPERIORITY.md](./PLAN_SUPERIORITY.md) | Detailed feature ideas vs zoom.earth (2026-05-24). **~65% shipped** — see reconciliation below. Treat as an idea backlog, not current status. |
 | [PLAN_UX_PARITY.md](./PLAN_UX_PARITY.md) | 14 map-polish gaps vs zoom.earth (2026-05-24). **P0–P2 mostly shipped** as the P-series PRs. The P0.1 root-cause analysis is superseded — see "Map first paint" below. |
+| [PLAN_HOME_MAP_FIRST.md](./PLAN_HOME_MAP_FIRST.md) | Home redesign: keyless Esri basemap, granular map-chrome flags, map-first hero, sprite icons + one chip spec (2026-09-15). **Phases 0–3 shipped**; phase 4 (legend strip on mobile, tap-to-forecast card, timeline layout) open. |
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | Map plugin-registry design. Tracks as issue [#136](https://github.com/ArtemioPadilla/mexico-weather/issues/136). |
 
 Hard product constraints (do not regress): **no tracking, no cookies, no
