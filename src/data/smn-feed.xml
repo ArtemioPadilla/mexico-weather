@@ -5,23 +5,15 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 15 Sep 2026 18:16:53 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2026 21:31:43 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>📋 SMN Reporte Vespertino 15 SEP 2026: Se pronostican lluvias muy fuertes en regiones de Baja California Sur, Sonora, Chihuahua, Sinaloa, Durango, Nayarit, Jal...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_14.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Baja California Sur, Sonora, Chihuahua, Sinaloa, Durango, Nayarit, Jal... — Reporte Vespertino del 15 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_14.pdf]]></description>
-      <pubDate>Tue, 15 Sep 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_14</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa.]]></description>
-      <pubDate>Tue, 15 Sep 2026 12:16:42 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-15-5c3d</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora.]]></description>
+      <pubDate>Tue, 15 Sep 2026 15:31:33 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-15-c5a5</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -44,15 +36,31 @@ Para este día, el monzón mexicano en interacción con inestabilidad atmosféri
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de septiembre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de septiembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 15 de septiembre del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 15 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-15-12</guid>
       <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 15 SEP 2026: Se pronostican lluvias muy fuertes en regiones de Baja California Sur, Sonora, Chihuahua, Sinaloa, Durango, Nayarit, Jal...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_15.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Baja California Sur, Sonora, Chihuahua, Sinaloa, Durango, Nayarit, Jal... — Reporte Matutino del 15 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_15.pdf]]></description>
+      <pubDate>Tue, 15 Sep 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_15</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 14 SEP 2026: Durante la noche de hoy, el monzón mexicano generará lluvias intensas en Sinaloa</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_14.pdf</link>
+      <description><![CDATA[Durante la noche de hoy, el monzón mexicano generará lluvias intensas en Sinaloa — Reporte Vespertino del 14 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_14.pdf]]></description>
+      <pubDate>Mon, 14 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_14</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 14 SEP 2026: Se pronostican lluvias intensas en el norte de Sinaloa</title>
