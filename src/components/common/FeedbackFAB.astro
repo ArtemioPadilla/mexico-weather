@@ -18,9 +18,18 @@ import { feedback } from '../../i18n/feedback';
 
 interface Props {
   lang?: 'es' | 'en';
+  /** 'fixed' (default): floating bottom-right button. 'inline': a
+   *  static button the layout places in its footer — used on pages
+   *  where a floating FAB would sit on top of an embedded map. */
+  placement?: 'fixed' | 'inline';
 }
 
-const { lang = 'es' } = Astro.props;
+const { lang = 'es', placement = 'fixed' } = Astro.props;
+
+const wrapClass =
+  placement === 'inline'
+    ? 'relative inline-flex w-12 h-12 shrink-0'
+    : 'fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] sm:bottom-6 right-5 z-50 w-12 h-12';
 
 const repoSlug = 'ArtemioPadilla/mexico-weather';
 const buildSha = import.meta.env.PUBLIC_BUILD_SHA || 'dev';
@@ -30,7 +39,7 @@ const tr = feedback[lang];
 ---
 
 <!-- FAB button -->
-<div class="fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] sm:bottom-6 right-5 z-50 w-12 h-12">
+<div class={wrapClass} data-placement={placement}>
   <button
     id="secid-report-btn"
     type="button"

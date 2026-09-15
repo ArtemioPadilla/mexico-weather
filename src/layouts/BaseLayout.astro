@@ -28,6 +28,10 @@ interface Props {
    *  sized to exactly fill the viewport below the nav (plan P2.2 —
    *  no vertical scrollbar); a footer would force page scroll. */
   noFooter?: boolean;
+  /** Where the feedback button lives. 'fixed' (default) floats bottom-
+   *  right; 'inline' renders it inside the site footer so it never
+   *  overlaps an embedded map (home). Ignored when noFooter is set. */
+  feedbackPlacement?: 'fixed' | 'inline';
 }
 
 const base = siteBase();
@@ -50,7 +54,10 @@ const {
   robots = 'index,follow',
   jsonLd,
   noFooter = false,
+  feedbackPlacement = 'fixed',
 } = Astro.props;
+
+const feedbackInline = feedbackPlacement === 'inline' && !noFooter;
 
 const jsonLdEntries = jsonLd === undefined
   ? []
@@ -707,10 +714,16 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
           class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           >GitHub</a
         >
+        {feedbackInline && (
+          <>
+            <span aria-hidden="true">•</span>
+            <FeedbackFAB lang={lang} placement="inline" />
+          </>
+        )}
       </nav>
     </footer>
     )}
-    <FeedbackFAB lang={lang} />
+    {!feedbackInline && <FeedbackFAB lang={lang} />}
     <PwaInstall />
     {
       /*

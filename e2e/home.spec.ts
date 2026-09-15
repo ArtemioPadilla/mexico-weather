@@ -126,6 +126,26 @@ test.describe('homepage', () => {
     await expect(root.locator('#layerbtn-humidity')).toHaveCount(0);
   });
 
+  test('feedback button lives in the footer and never overlaps the map embed', async ({
+    page,
+  }) => {
+    await page.goto('');
+    const fab = page.locator('#secid-report-btn');
+    await expect(fab).toBeVisible();
+    const wrap = fab.locator('xpath=..');
+    await expect(wrap).toHaveAttribute('data-placement', 'inline');
+    expect(await wrap.evaluate((el) => getComputedStyle(el).position)).not.toBe('fixed');
+    const [fabBox, mapBox] = await Promise.all([
+      fab.boundingBox(),
+      page.locator('#home-map-root').boundingBox(),
+    ]);
+    expect(fabBox).not.toBeNull();
+    expect(mapBox).not.toBeNull();
+    // The footer sits below the whole page, so the button's top edge is
+    // past the embed's bottom edge.
+    expect(fabBox!.y).toBeGreaterThan(mapBox!.y + mapBox!.height);
+  });
+
   test('/mapa still renders the full chrome the home embed drops', async ({
     page,
   }) => {
