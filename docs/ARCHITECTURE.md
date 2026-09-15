@@ -132,7 +132,7 @@ export interface BaseLayer {
   id: string;                       // 'temperature'
   kind: 'base';
   label: I18nString;
-  icon: string;                     // emoji or SVG path
+  icon: string;                     // IconSprite.astro symbol id (e.g. "radar")
   shortcut?: string;                // 'T'
 
   // sub-options like Actual/Aparente

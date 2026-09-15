@@ -88,7 +88,7 @@ export function createWebcamsOverlay(
         type: 'FeatureCollection',
         features: webcams.map((w) => ({
           type: 'Feature',
-          properties: { name: w.name, url: w.url, label: `📹 ${w.name}` },
+          properties: { name: w.name, url: w.url, label: w.name },
           geometry: { type: 'Point', coordinates: [w.lng, w.lat] },
         })),
       };

@@ -28,20 +28,29 @@ export interface SnapshotCompare {
   refresh: () => void;
 }
 
-export function createSnapshotCompare(els: SnapshotCompareEls): SnapshotCompare {
+export function createSnapshotCompare(
+  els: SnapshotCompareEls
+): SnapshotCompare {
   let visible = true;
 
   function refresh(): void {
     if (!els.imgEl) return;
     const has = !!els.imgEl.src;
-    els.captureBtn?.classList.toggle('hidden', has);
-    els.toggleBtn?.classList.toggle('hidden', !has);
-    els.clearBtn?.classList.toggle('hidden', !has);
+    // The [hidden] attribute (not the `hidden` class): the pills carry
+    // an inline-flex display utility that would tie with the class.
+    if (els.captureBtn) els.captureBtn.hidden = has;
+    if (els.toggleBtn) els.toggleBtn.hidden = !has;
+    if (els.clearBtn) els.clearBtn.hidden = !has;
     els.imgEl.classList.toggle('hidden', !has || !visible);
     if (els.toggleBtn) {
-      els.toggleBtn.textContent = visible
-        ? '👁 Ocultar comparación'
-        : '👁 Mostrar comparación';
+      // The markup ships an <svg> icon + a labelled span; only the
+      // label text changes so the icon survives.
+      const label =
+        els.toggleBtn.querySelector('[data-mw-snapshot-label]') ??
+        els.toggleBtn;
+      label.textContent = visible
+        ? 'Ocultar comparación'
+        : 'Mostrar comparación';
       els.toggleBtn.setAttribute('aria-pressed', String(visible));
     }
   }

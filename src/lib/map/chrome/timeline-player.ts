@@ -42,7 +42,7 @@ export function createTimelinePlayer(
   getFrameCount: () => number,
   getCurrentIndex: () => number,
   advanceTo: (i: number) => void,
-  opts: TimelinePlayerOpts = {},
+  opts: TimelinePlayerOpts = {}
 ): TimelinePlayer {
   let playing = false;
   let timer = 0;
@@ -55,8 +55,16 @@ export function createTimelinePlayer(
   function syncBtn(): void {
     if (!els.playBtn) return;
     els.playBtn.setAttribute('aria-pressed', String(playing));
-    els.playBtn.setAttribute('aria-label', playing ? labels.pause : labels.play);
-    els.playBtn.textContent = playing ? '⏸' : '▶';
+    els.playBtn.setAttribute(
+      'aria-label',
+      playing ? labels.pause : labels.play
+    );
+    // Sprite icons (IconSprite.astro); the play glyph used to be the
+    // '▶' text character, which iOS renders as a coloured emoji.
+    els.playBtn.innerHTML = playing
+      ? '<svg class="h-4 w-4" aria-hidden="true"><use href="#i-pause"></use></svg>'
+      : '<svg class="h-4 w-4" aria-hidden="true"><use href="#i-play"></use></svg>';
+    els.playBtn.dataset.state = playing ? 'playing' : 'paused';
   }
 
   function stop(): void {

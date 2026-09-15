@@ -2,7 +2,7 @@
  * Active volcanoes overlay — MX-unique (plan 2.4).
  *
  * Static list of currently-monitored active volcanoes in Mexico
- * (CENAPRED list). Renders as red circles + 🌋-prefixed labels.
+ * (CENAPRED list). Renders as red circles + name labels.
  * No external fetches.
  *
  * Factory pattern: `createVolcanoesOverlay(map)` returns an object
@@ -59,7 +59,7 @@ export function createVolcanoesOverlay(
         type: 'FeatureCollection',
         features: volcanoes.map((v) => ({
           type: 'Feature',
-          properties: { name: v.name, label: `🌋 ${v.name}` },
+          properties: { name: v.name, label: v.name },
           geometry: { type: 'Point', coordinates: [v.lng, v.lat] },
         })),
       };

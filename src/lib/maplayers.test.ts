@@ -1,10 +1,53 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { LAYERS, LAYER_IDS, getLayer, RADAR_LEGEND } from './maplayers';
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+
+describe('layer icons', () => {
+  it('are sprite ids (no emoji / nothing outside the BMP)', () => {
+    for (const l of LAYERS) {
+      expect(l.icon, l.id).toMatch(/^[a-z][a-z-]*$/);
+    }
+  });
+
+  it('every icon id exists in IconSprite.astro', () => {
+    const sprite = readFileSync(
+      resolve(HERE, '../components/common/IconSprite.astro'),
+      'utf-8',
+    );
+    for (const l of LAYERS) {
+      expect(sprite, `missing symbol for ${l.icon}`).toMatch(
+        new RegExp(`^\\s*'?${l.icon}'?:\\s`, 'm'),
+      );
+    }
+  });
+});
 
 describe('layer registry', () => {
   it('exposes base, radar, and satellite layers with stable ids', () => {
-    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure', 'wind', 'sunlight']);
-    expect(LAYERS.map((l) => l.id)).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure', 'wind', 'sunlight']);
+    expect(LAYER_IDS).toEqual([
+      'base',
+      'radar',
+      'satellite',
+      'temperature',
+      'humidity',
+      'pressure',
+      'wind',
+      'sunlight',
+    ]);
+    expect(LAYERS.map((l) => l.id)).toEqual([
+      'base',
+      'radar',
+      'satellite',
+      'temperature',
+      'humidity',
+      'pressure',
+      'wind',
+      'sunlight',
+    ]);
   });
 
   it('base is kind "base", radar is a raster-tile with <1 default opacity', () => {
@@ -23,7 +66,16 @@ describe('layer registry', () => {
   });
 
   it('registers a satellite raster layer with full default opacity', () => {
-    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure', 'wind', 'sunlight']);
+    expect(LAYER_IDS).toEqual([
+      'base',
+      'radar',
+      'satellite',
+      'temperature',
+      'humidity',
+      'pressure',
+      'wind',
+      'sunlight',
+    ]);
     const sat = getLayer('satellite');
     expect(sat?.kind).toBe('raster-tile');
     expect(sat?.labelKey).toBe('map_layer_satellite');
@@ -31,7 +83,16 @@ describe('layer registry', () => {
   });
 
   it('registers a temperature field layer', () => {
-    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure', 'wind', 'sunlight']);
+    expect(LAYER_IDS).toEqual([
+      'base',
+      'radar',
+      'satellite',
+      'temperature',
+      'humidity',
+      'pressure',
+      'wind',
+      'sunlight',
+    ]);
     const temp = getLayer('temperature');
     expect(temp?.kind).toBe('field');
     expect(temp?.labelKey).toBe('map_layer_temperature');
@@ -40,7 +101,16 @@ describe('layer registry', () => {
   });
 
   it('registers humidity and pressure field layers', () => {
-    expect(LAYER_IDS).toEqual(['base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure', 'wind', 'sunlight']);
+    expect(LAYER_IDS).toEqual([
+      'base',
+      'radar',
+      'satellite',
+      'temperature',
+      'humidity',
+      'pressure',
+      'wind',
+      'sunlight',
+    ]);
     const hum = getLayer('humidity');
     const pre = getLayer('pressure');
     expect(hum?.kind).toBe('field');
@@ -53,7 +123,14 @@ describe('layer registry', () => {
 
   it('registers a wind particles layer', () => {
     expect(LAYER_IDS).toEqual([
-      'base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure', 'wind', 'sunlight',
+      'base',
+      'radar',
+      'satellite',
+      'temperature',
+      'humidity',
+      'pressure',
+      'wind',
+      'sunlight',
     ]);
     const w = getLayer('wind');
     expect(w?.kind).toBe('particles');
@@ -63,7 +140,14 @@ describe('layer registry', () => {
 
   it('registers a sunlight overlay layer', () => {
     expect(LAYER_IDS).toEqual([
-      'base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure', 'wind', 'sunlight',
+      'base',
+      'radar',
+      'satellite',
+      'temperature',
+      'humidity',
+      'pressure',
+      'wind',
+      'sunlight',
     ]);
     const s = getLayer('sunlight');
     expect(s?.kind).toBe('overlay');
@@ -118,8 +202,15 @@ describe('parseRainviewerManifest', () => {
   it('returns null for malformed / empty input', () => {
     expect(parseRainviewerManifest(null)).toBeNull();
     expect(parseRainviewerManifest({})).toBeNull();
-    expect(parseRainviewerManifest({ host: 'x', radar: { past: [], nowcast: [] } })).toBeNull();
-    expect(parseRainviewerManifest({ host: 5, radar: { past: [{ time: 1, path: 'p' }] } })).toBeNull();
+    expect(
+      parseRainviewerManifest({ host: 'x', radar: { past: [], nowcast: [] } })
+    ).toBeNull();
+    expect(
+      parseRainviewerManifest({
+        host: 5,
+        radar: { past: [{ time: 1, path: 'p' }] },
+      })
+    ).toBeNull();
   });
 
   it('skips entries missing time/path', () => {
@@ -135,12 +226,17 @@ describe('rainviewerTileUrl', () => {
   const frame = { time: 1, path: '/v2/radar/aaa' };
   it('builds a default tile template with literal z/x/y placeholders', () => {
     expect(rainviewerTileUrl('https://h.com', frame)).toBe(
-      'https://h.com/v2/radar/aaa/256/{z}/{x}/{y}/4/1_1.png',
+      'https://h.com/v2/radar/aaa/256/{z}/{x}/{y}/4/1_1.png'
     );
   });
   it('honors size/color and disabling smooth/snow', () => {
     expect(
-      rainviewerTileUrl('https://h.com', frame, { size: 512, color: 2, smooth: false, snow: false }),
+      rainviewerTileUrl('https://h.com', frame, {
+        size: 512,
+        color: 2,
+        smooth: false,
+        snow: false,
+      })
     ).toBe('https://h.com/v2/radar/aaa/512/{z}/{x}/{y}/2/0_0.png');
   });
 });
@@ -171,7 +267,7 @@ describe('satellite frames', () => {
         host: 'h',
         radar: { past: [], nowcast: [] },
         satellite: { infrared: [] },
-      }),
+      })
     ).toBeNull();
     const satOnly = parseRainviewerManifest({
       host: 'h',
@@ -180,7 +276,9 @@ describe('satellite frames', () => {
     });
     expect(satOnly).not.toBeNull();
     expect(satOnly!.frames).toEqual([]);
-    expect(satOnly!.satelliteFrames).toEqual([{ time: 1, path: '/v2/satellite/s' }]);
+    expect(satOnly!.satelliteFrames).toEqual([
+      { time: 1, path: '/v2/satellite/s' },
+    ]);
   });
 
   it('defaults satelliteFrames to [] when satellite key is absent', () => {

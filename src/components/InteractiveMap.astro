@@ -157,8 +157,8 @@ const cfg = JSON.stringify({
   {features.backLink && (
     <a
       href={base}
-      class="absolute left-3 top-3 z-10 rounded-lg bg-white/90 px-3 py-1.5 text-sm text-blue-600 shadow hover:underline dark:bg-gray-900/90 dark:text-blue-400"
-      >← {t.back_home}</a
+      class="absolute left-3 top-3 z-10 inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-left"></use></svg> {t.back_home}</a
     >
   )}
   {/* Snapshot compare overlay (plan 3.3). Holds the captured canvas
@@ -177,12 +177,12 @@ const cfg = JSON.stringify({
         <button
           id="mw-search-toggle"
           type="button"
-          class="flex h-11 w-11 items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95"
+          class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
           aria-label={t.map_search_placeholder}
           aria-expanded="false"
           aria-controls={ids.q}
           title={t.map_search_placeholder}
-        >🔍</button>
+        ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-search"></use></svg></button>
         <input
           id={ids.q}
           type="text"
@@ -199,10 +199,10 @@ const cfg = JSON.stringify({
           <button
             id={ids.loc}
             type="button"
-            class="flex h-11 w-11 items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95"
+            class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
             aria-label={t.map_locate}
             title={t.map_locate}
-          >📍</button>
+          ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-locate"></use></svg></button>
         )}
       </div>
       <ul
@@ -285,7 +285,7 @@ const cfg = JSON.stringify({
       data-i18n-en-aria-label="Map controls"
       title="Controles del mapa"
       class="absolute bottom-[4.5rem] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-gray-900/85 text-base text-white shadow-lg backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
-      >⚙</button
+      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-sliders"></use></svg></button
     >
   )}
 
@@ -303,7 +303,7 @@ const cfg = JSON.stringify({
         aria-pressed="false"
         disabled
         class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/10 px-2.5 text-base leading-none hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-40"
-        >▶</button
+        ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-play"></use></svg></button
       >
       <button
         id="tl-day-prev"
@@ -455,21 +455,23 @@ const cfg = JSON.stringify({
       <button
         id="mw-snapshot-capture"
         type="button"
-        class="rounded-full bg-white/95 px-3 py-1 text-gray-700 shadow hover:bg-blue-500/10 dark:bg-gray-900/95 dark:text-gray-200"
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
         aria-label="Capturar vista actual"
         title="Capturar vista actual"
-      >📸 Capturar</button>
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-camera"></use></svg> Capturar</button>
       <button
         id="mw-snapshot-toggle"
         type="button"
-        class="hidden rounded-full bg-blue-600/90 px-3 py-1 font-semibold text-white shadow hover:bg-blue-500"
+        hidden
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
         aria-pressed="true"
-      >👁 Ocultar</button>
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-eye"></use></svg> <span data-mw-snapshot-label>Ocultar</span></button>
       <button
         id="mw-snapshot-clear"
         type="button"
-        class="hidden rounded-full bg-white/95 px-3 py-1 text-gray-600 shadow hover:bg-red-500/10 dark:bg-gray-900/95 dark:text-gray-400"
-      >✕ Limpiar</button>
+        hidden
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-x"></use></svg> Limpiar</button>
     </div>
   )}
 
@@ -479,24 +481,24 @@ const cfg = JSON.stringify({
   {features.tools && (
     <div
       id="mw-measure-wrap"
-      class="absolute bottom-[10.5rem] max-sm:group-data-[controls=open]/chrome:bottom-[11.5rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
+      class="absolute bottom-[11.5rem] max-sm:group-data-[controls=open]/chrome:bottom-[14.5rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
     >
       <button
         id="mw-measure-distance"
         type="button"
-        class="rounded-full bg-white/95 px-3 py-1 text-gray-700 shadow hover:bg-blue-500/10 aria-pressed:bg-blue-500/30 aria-pressed:text-blue-900 dark:bg-gray-900/95 dark:text-gray-200"
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
         aria-label="Medir distancia"
         title="Medir distancia"
         aria-pressed="false"
-      >📏 Distancia</button>
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-ruler"></use></svg> Distancia</button>
       <button
         id="mw-measure-area"
         type="button"
-        class="rounded-full bg-white/95 px-3 py-1 text-gray-700 shadow hover:bg-blue-500/10 aria-pressed:bg-blue-500/30 aria-pressed:text-blue-900 dark:bg-gray-900/95 dark:text-gray-200"
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
         aria-label="Medir área"
         title="Medir área"
         aria-pressed="false"
-      >📐 Área</button>
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area"></use></svg> Área</button>
     </div>
   )}
   {features.tools && (
@@ -516,13 +518,13 @@ const cfg = JSON.stringify({
   {features.settings && (
     <details
       id="mw-settings"
-      class="absolute right-3 top-[7.25rem] z-20 text-xs [&[open]>summary]:bg-blue-500/15 [&[open]>div]:block"
+      class="absolute right-3 top-[7.25rem] z-20 text-xs [&[open]>summary]:bg-blue-600/90 [&[open]>div]:block"
     >
       <summary
-        class="flex h-11 w-11 cursor-pointer select-none items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95 list-none [&::-webkit-details-marker]:hidden"
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden"
         aria-label="Configuración"
         title="Configuración"
-      >⚙️</summary>
+      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-settings"></use></svg></summary>
       <div class="hidden absolute right-11 top-0 w-56 max-w-[calc(100vw-3.5rem)] space-y-3 rounded-lg bg-white/95 px-3 py-2 text-gray-600 shadow dark:bg-gray-900/95 dark:text-gray-300">
         <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Configuración</p>
         <div>
@@ -553,13 +555,13 @@ const cfg = JSON.stringify({
   {features.info && (
     <details
       id="mw-info"
-      class="absolute right-3 top-16 z-20 text-xs [&[open]>summary]:bg-blue-500/15 [&[open]>div]:block"
+      class="absolute right-3 top-16 z-20 text-xs [&[open]>summary]:bg-blue-600/90 [&[open]>div]:block"
     >
       <summary
-        class="flex h-11 w-11 cursor-pointer select-none items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95 list-none [&::-webkit-details-marker]:hidden"
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden"
         aria-label="Información y fuentes de datos"
         title="Información y fuentes de datos"
-      >ℹ️</summary>
+      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-info"></use></svg></summary>
       <div class="hidden absolute right-11 top-0 w-64 max-w-[calc(100vw-3.5rem)] space-y-2 rounded-lg bg-white/95 px-3 py-2 text-gray-600 shadow dark:bg-gray-900/95 dark:text-gray-300">
         <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Información y fuentes</p>
         <p>

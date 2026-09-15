@@ -142,6 +142,19 @@ export interface InteractiveMapFeatures {
   legend?: boolean;
 }
 
+/** Build an <svg><use href="#i-name"/></svg> element for the inline
+ *  sprite rendered by src/components/common/IconSprite.astro. */
+export function spriteIcon(name: string, className = 'h-4 w-4'): SVGSVGElement {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('class', className);
+  svg.setAttribute('aria-hidden', 'true');
+  const use = document.createElementNS(NS, 'use');
+  use.setAttribute('href', `#i-${name}`);
+  svg.appendChild(use);
+  return svg;
+}
+
 // ---------------------------------------------------------------------------
 // Shared fetch cache + request coalescing lives in src/lib/map/utils/fetch.ts
 // (extracted in F2 of the architecture migration — see docs/ARCHITECTURE.md).
@@ -2143,11 +2156,9 @@ export async function initInteractiveMap(
       // zoom.earth-style icon prefix; falls back to text-only when LayerDef
       // has no icon glyph.
       if (def.icon) {
-        const iconSpan = document.createElement('span');
-        iconSpan.setAttribute('aria-hidden', 'true');
-        iconSpan.textContent = def.icon;
-        iconSpan.className = 'text-base leading-none';
-        btn.appendChild(iconSpan);
+        // Sprite icon (IconSprite.astro symbol) — monochrome, follows
+        // currentColor, identical on every OS unlike the emoji it replaced.
+        btn.appendChild(spriteIcon(def.icon, 'h-4 w-4 shrink-0'));
       }
       const labelSpan = document.createElement('span');
       labelSpan.textContent = t[def.labelKey as keyof typeof t];

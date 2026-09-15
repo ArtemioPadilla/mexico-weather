@@ -56,7 +56,7 @@ export function createLakesOverlay(
         type: 'FeatureCollection',
         features: lakes.map((l) => ({
           type: 'Feature',
-          properties: { name: l.name, label: `💧 ${l.name}` },
+          properties: { name: l.name, label: l.name },
           geometry: { type: 'Point', coordinates: [l.lng, l.lat] },
         })),
       };

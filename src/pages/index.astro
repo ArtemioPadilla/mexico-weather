@@ -58,7 +58,7 @@ const base = siteBase();
           type="button"
           class="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 text-base font-semibold text-white shadow-lg transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-60 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
         >
-          <span aria-hidden="true" class="text-xl leading-none">📍</span>
+          <svg class="h-5 w-5" aria-hidden="true"><use href="#i-pin"></use></svg>
           <span id="geo-label" data-i18n-en="Show my weather">Mostrar mi clima</span>
         </button>
         <div class="pointer-events-auto relative">
@@ -87,10 +87,13 @@ const base = siteBase();
       </p>
 
       <!-- Alertas activas -->
-      <div class="rounded-xl border border-yellow-500/40 bg-yellow-500/10 p-5 space-y-3 dark:border-yellow-500/30">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">⚠️</span>
-          <h2 class="text-lg font-semibold text-yellow-700 dark:text-yellow-300" data-i18n-en="Active alerts — SMN">Alertas Activas — SMN</h2>
+      {/* Neutral by design: amber is reserved for REAL active advisories
+          (the SMN badges on the city cards and the alert ribbon), so a
+          permanently yellow block would cry wolf. */}
+      <div class="rounded-xl border border-gray-200 bg-gray-50 p-5 space-y-3 dark:border-gray-800 dark:bg-gray-900/50">
+        <div class="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+          <svg class="h-5 w-5 text-gray-500 dark:text-gray-400" aria-hidden="true"><use href="#i-alert"></use></svg>
+          <h2 class="text-lg font-semibold" data-i18n-en="Active alerts — SMN">Alertas Activas — SMN</h2>
         </div>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Consulta nuestro feed RSS con avisos meteorológicos derivados de los datos oficiales del SMN:
@@ -99,7 +102,7 @@ const base = siteBase();
           href={`${base}rss.xml`}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-lg border border-yellow-500/40 bg-yellow-500/10 px-4 py-2 text-sm font-medium text-yellow-900 hover:bg-yellow-500/20 transition-colors dark:border-yellow-500/30 dark:text-yellow-100"
+          class="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-blue-700 hover:border-blue-500/50 hover:bg-blue-50 transition-colors dark:border-gray-700 dark:bg-gray-900 dark:text-blue-300 dark:hover:bg-gray-800"
         >
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
@@ -112,7 +115,7 @@ const base = siteBase();
 
       <!-- Tus lugares (favoritos, llenado por el cliente) -->
       <section id="fav-section" class="hidden mb-8" aria-label="Tus lugares" data-i18n-en-aria-label="Your places">
-        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2"><span aria-hidden="true">⭐</span> <span data-i18n-en="Your places">Tus lugares</span></h2>
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2"><svg class="h-5 w-5 text-amber-500" aria-hidden="true"><use href="#i-star"></use></svg> <span data-i18n-en="Your places">Tus lugares</span></h2>
         <div id="fav-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
       </section>
       <p id="fav-msg" class="sr-only" aria-live="polite"></p>
@@ -128,7 +131,7 @@ const base = siteBase();
           <!-- Más ciudades pronto -->
           <div class="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-5 space-y-3 flex items-center justify-center dark:border-gray-700 dark:bg-gray-900/50">
             <div class="text-center space-y-2">
-              <div class="text-2xl">➕</div>
+              <div class="flex justify-center text-gray-400"><svg class="h-6 w-6" aria-hidden="true"><use href="#i-plus"></use></svg></div>
               <p class="text-sm text-gray-600 dark:text-gray-500">Más ciudades próximamente</p>
               <a
                 href="https://github.com/ArtemioPadilla/mexico-weather-site/issues/new?template=feature_request.yml"
@@ -789,8 +792,8 @@ const base = siteBase();
             : `${stateHits} aviso${one ? '' : 's'} SMN activo${one ? '' : 's'} en ${cityName}`;
         badge.textContent =
           lang === 'en'
-            ? `⚠️ ${stateHits} ${one ? 'advisory' : 'advisories'}`
-            : `⚠️ ${stateHits} aviso${one ? '' : 's'}`;
+            ? `${stateHits} ${one ? 'advisory' : 'advisories'}`
+            : `${stateHits} aviso${one ? '' : 's'}`;
         badge.title = chipLabel;
         // Link to the curated /clima/<slug>/ page (the SmnAvisos
         // widget surfaces the full list there). Setting href first

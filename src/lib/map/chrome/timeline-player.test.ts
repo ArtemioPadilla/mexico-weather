@@ -27,7 +27,7 @@ describe('createTimelinePlayer', () => {
       (i) => {
         cur = i;
       },
-      { reducedMotion: true },
+      { reducedMotion: true }
     );
     player.start();
     vi.advanceTimersByTime(2000);
@@ -47,7 +47,7 @@ describe('createTimelinePlayer', () => {
       (i) => {
         cur = i;
       },
-      { reducedMotion: false },
+      { reducedMotion: false }
     );
     player.start();
     expect(player.isPlaying()).toBe(false);
@@ -64,12 +64,13 @@ describe('createTimelinePlayer', () => {
       (i) => {
         cur = i;
       },
-      { reducedMotion: false, intervalMs: 100 },
+      { reducedMotion: false, intervalMs: 100 }
     );
     player.start();
     expect(player.isPlaying()).toBe(true);
     expect(btn.getAttribute('aria-pressed')).toBe('true');
-    expect(btn.textContent).toBe('⏸');
+    expect(btn.dataset.state).toBe('playing');
+    expect(btn.querySelector('use')?.getAttribute('href')).toBe('#i-pause');
     vi.advanceTimersByTime(100);
     expect(cur).toBe(1);
     vi.advanceTimersByTime(100);
@@ -80,7 +81,8 @@ describe('createTimelinePlayer', () => {
     player.stop();
     expect(player.isPlaying()).toBe(false);
     expect(btn.getAttribute('aria-pressed')).toBe('false');
-    expect(btn.textContent).toBe('▶');
+    expect(btn.dataset.state).toBe('paused');
+    expect(btn.querySelector('use')?.getAttribute('href')).toBe('#i-play');
   });
 
   it('toggle alternates between start and stop', () => {
@@ -91,7 +93,7 @@ describe('createTimelinePlayer', () => {
       () => 3,
       () => 0,
       () => undefined,
-      { reducedMotion: false, intervalMs: 100 },
+      { reducedMotion: false, intervalMs: 100 }
     );
     player.toggle();
     expect(player.isPlaying()).toBe(true);
