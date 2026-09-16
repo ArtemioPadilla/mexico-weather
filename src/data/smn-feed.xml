@@ -5,42 +5,42 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 15 Sep 2026 21:31:43 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 00:27:57 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora.]]></description>
-      <pubDate>Tue, 15 Sep 2026 15:31:33 -0600</pubDate>
+      <pubDate>Tue, 15 Sep 2026 18:27:48 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-15-c5a5</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 515 | 15 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 516 | 15 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE BAJA CALIFORNIA SUR, SONORA, CHIHUAHUA, SINALOA, DURANGO, NAYARIT, JALISCO Y COLIMA
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 515
+No. Aviso: 516
 Ciudad de México a 15 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE BAJA CALIFORNIA SUR, SONORA, CHIHUAHUA, SINALOA, DURANGO, NAYARIT, JALISCO Y COLIMA
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA
 
-Para este día, el monzón mexicano en interacción con inestabilidad atmosférica sobre el noroeste de México, ocasionarán lluvias fuertes a muy fuertes acompañadas con descargas eléctricas y fuertes rachas de viento en Baja California Sur, Sonora, Chihuahua, Durango y Sinaloa. Por otra parte, canales de baja presión en el interior de la República Mexicana, así como circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera y la onda tropical núm. 39 al sur de Jalisco, provocarán chubascos con lluvias fuertes a muy fuertes y descargas eléctricas en el norte, noreste, centro, oriente, sur y sureste de México, incluida la península de Yucatán, con posible caída de granizo en estados del occidente y centro del territorio nacional; se prevé que al final del día la onda tropical núm. 39 dejará de afectar al país.…]]></description>
+Durante esta noche y madrugada del miércoles, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país, ocasionarán lluvias puntuales muy fuertes acompañadas con descargas eléctricas y rachas fuertes de viento en Chihuahua (noroeste y oeste), Durango (oeste) y Nayarit (norte, este y sur). A su vez, una zona de baja presión con potencial ciclónico en el golfo de California, generará lluvias puntuales intensas en Sonora (oeste, este y sur) y lluvias puntuales muy fuertes en Baja California Sur (norte, centro y sur) y Sinaloa (norte y centro), así como lluvias aisladas en Baja California. Por otra parte, canales de baja presión en el interior del territorio nacional aunados a circulaciones ciclónicas y vaguadas en niveles medios y altos de la atmósfera, además de la onda tropical núm.…]]></description>
       <pubDate>Tue, 15 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-15-515</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-15-516</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 15 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 15 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-15-12</guid>
