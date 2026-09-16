@@ -5,16 +5,35 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 16 Sep 2026 00:27:57 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 06:08:02 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de septiembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 16 de septiembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 16 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-16-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm):en zonas de Sonora.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora.]]></description>
-      <pubDate>Tue, 15 Sep 2026 18:27:48 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-15-c5a5</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm):en zonas de Sonora.]]></description>
+      <pubDate>Wed, 16 Sep 2026 00:07:52 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-16-a293</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 15 SEP 2026: Se pronostican lluvias intensas en zonas de Sonora</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_15.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Sonora — Reporte Vespertino del 15 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_15.pdf]]></description>
+      <pubDate>Tue, 15 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_15</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 516 | 15 de Septiembre del 2026 | Emisión 18:00h</title>
@@ -34,17 +53,6 @@ Durante esta noche y madrugada del miércoles, el monzón mexicano e inestabilid
       <pubDate>Tue, 15 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-09-15-516</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 15 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 15 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-15-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 15 SEP 2026: Se pronostican lluvias muy fuertes en regiones de Baja California Sur, Sonora, Chihuahua, Sinaloa, Durango, Nayarit, Jal...</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas en zonas de Sinaloa, Nayarit, Jalisco, Colima, Veracruz y Chiapas — Comunicado del 13 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_13.pdf]]></description>
       <pubDate>Sun, 13 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_09_13</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 12 SEP 2026: Para este sábado se pronostican lluvias intensas en zonas de Jalisco y Michoacán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_12.pdf</link>
-      <description><![CDATA[Para este sábado se pronostican lluvias intensas en zonas de Jalisco y Michoacán — Reporte Vespertino del 12 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_12.pdf]]></description>
-      <pubDate>Sat, 12 Sep 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_12</guid>
       <category>Comunicado</category>
     </item>
   </channel>
