@@ -5,49 +5,58 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 17 Sep 2026 07:47:28 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 13:34:40 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de septiembre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 519 | 17 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SAN LUIS POTOSÍ, PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 519
+Ciudad de México a 17 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SAN LUIS POTOSÍ, PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+
+ 
+
+Para este día, el monzón mexicano e inestabilidad atmosférica ocasionarán chubascos y lluvias fuertes acompañadas con descargas eléctricas y rachas de viento en Sonora, Chihuahua, Durango, Sinaloa y Nayarit. Canales de baja presión en el interior de la República Mexicana aunados a una circulación ciclónica en niveles medios y altos de la atmósfera, originarán chubascos y lluvias fuertes acompañadas con descargas eléctricas en el occidente y sur del territorio nacional. Se prevé una disminución en la probabilidad de lluvias sobre estados del norte y centro del país.…]]></description>
+      <pubDate>Thu, 17 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-17-519</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de septiembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 17 de septiembre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 17 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-17-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora, Veracruz y Oaxaca.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): San Luis Potosí, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de componente norte con rachas de 60 a 80 km/h: Oax (istmo y golfo de Tehuantepec).]]></description>
-      <pubDate>Thu, 17 Sep 2026 01:47:19 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-17-517a</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): San Luis Potosí, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.]]></description>
+      <pubDate>Thu, 17 Sep 2026 07:34:31 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-17-dcb1</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 518 | 16 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, VERACRUZ Y OAXACA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 518
-Ciudad de México a 16 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, VERACRUZ Y OAXACA
-
-
-
-Durante esta tarde y noche, el monzón mexicano e inestabilidad atmosférica sobre el noroeste de México, originarán lluvias muy fuertes acompañadas con descargas eléctricas y rachas de viento en Chihuahua (norte y oeste), lluvias fuertes en Durango (oeste) y Sinaloa (centro) e intervalos de chubascos en Baja California Sur y Nayarit. Una zona de baja presión con bajo potencial ciclónico sobre el noroeste de Sonora, generará lluvias muy fuertes a puntuales intensas en dicha entidad, se prevé que se debilite y deje de afectar al final del día a dicha entidad.…]]></description>
-      <pubDate>Wed, 16 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-16-518</guid>
-      <category>Pronóstico General</category>
+      <title>📋 SMN Reporte Matutino 17 SEP 2026: Hoy se pronostican lluvias intensas en regiones de San Luis Potosí, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_17.pdf</link>
+      <description><![CDATA[Hoy se pronostican lluvias intensas en regiones de San Luis Potosí, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Matutino del 17 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_17.pdf]]></description>
+      <pubDate>Thu, 17 Sep 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_17</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 16 SEP 2026: Se pronostican lluvias intensas en regiones de Sonora, Veracruz y Oaxaca, y muy fuertes en Chihuahua, Puebla, Chiapas y ...</title>
@@ -79,14 +88,6 @@ Durante esta tarde y noche, el monzón mexicano e inestabilidad atmosférica sob
       <description><![CDATA[Durante la noche de hoy, el monzón mexicano generará lluvias intensas en Sinaloa — Reporte Vespertino del 14 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_14.pdf]]></description>
       <pubDate>Mon, 14 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_14</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 14 SEP 2026: Se pronostican lluvias intensas en el norte de Sinaloa</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_14.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en el norte de Sinaloa — Reporte Matutino del 14 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_14.pdf]]></description>
-      <pubDate>Mon, 14 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_14</guid>
       <category>Comunicado</category>
     </item>
   </channel>
