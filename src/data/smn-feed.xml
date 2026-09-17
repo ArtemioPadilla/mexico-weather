@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 17 Sep 2026 01:30:40 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 07:47:28 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Sonora, Veracruz y Oaxaca.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de septiembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 17 de septiembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Thu, 17 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-17-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sonora, Veracruz y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): zonas de Sonora, Veracruz y Oaxaca.]]></description>
-      <pubDate>Wed, 16 Sep 2026 19:30:31 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-16-ba59</guid>
+      <description><![CDATA[Viento de componente norte con rachas de 60 a 80 km/h: Oax (istmo y golfo de Tehuantepec).]]></description>
+      <pubDate>Thu, 17 Sep 2026 01:47:19 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-17-517a</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -37,17 +48,6 @@ Durante esta tarde y noche, el monzón mexicano e inestabilidad atmosférica sob
       <pubDate>Wed, 16 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-09-16-518</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 16 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Wed, 16 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-16-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 16 SEP 2026: Se pronostican lluvias intensas en regiones de Sonora, Veracruz y Oaxaca, y muy fuertes en Chihuahua, Puebla, Chiapas y ...</title>
