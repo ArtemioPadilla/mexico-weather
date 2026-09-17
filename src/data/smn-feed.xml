@@ -5,43 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 16 Sep 2026 23:01:43 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 01:30:40 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): zonas de Sonora, Veracruz y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): zonas de Sonora, Veracruz y Oaxaca.]]></description>
-      <pubDate>Wed, 16 Sep 2026 17:01:34 -0600</pubDate>
+      <pubDate>Wed, 16 Sep 2026 19:30:31 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-16-ba59</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 517 | 16 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 518 | 16 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DEL NOROESTE, ORIENTE, SURESTE Y PENÍNSULA DE YUCATÁN
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, VERACRUZ Y OAXACA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 517
+No. Aviso: 518
 Ciudad de México a 16 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DEL NOROESTE, ORIENTE, SURESTE Y PENÍNSULA DE YUCATÁN
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SONORA, VERACRUZ Y OAXACA
 
-Este día, el monzón mexicano e inestabilidad atmosférica sobre el noroeste de México, ocasionarán chubascos y lluvias fuertes a muy fuertes acompañadas con descargas eléctricas y rachas de viento en Baja California Sur, Sonora, Chihuahua, Durango, Sinaloa y Nayarit. A su vez, una zona de baja presión con probabilidad para desarrollo ciclónico ingresará a Sonora, debilitándose gradualmente, sin embargo, originará lluvias fuertes a muy fuertes en dicha entidad. Simultáneamente, canales de baja presión al interior de la República Mexicana aunados a una circulación ciclónica en niveles medios y altos de la atmósfera, originarán chubascos y lluvias fuertes a muy fuertes con descargas eléctricas en el occidente y sur del territorio mexicano.…]]></description>
+
+
+Durante esta tarde y noche, el monzón mexicano e inestabilidad atmosférica sobre el noroeste de México, originarán lluvias muy fuertes acompañadas con descargas eléctricas y rachas de viento en Chihuahua (norte y oeste), lluvias fuertes en Durango (oeste) y Sinaloa (centro) e intervalos de chubascos en Baja California Sur y Nayarit. Una zona de baja presión con bajo potencial ciclónico sobre el noroeste de Sonora, generará lluvias muy fuertes a puntuales intensas en dicha entidad, se prevé que se debilite y deje de afectar al final del día a dicha entidad.…]]></description>
       <pubDate>Wed, 16 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-16-517</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-16-518</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 16 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-16-12</guid>
