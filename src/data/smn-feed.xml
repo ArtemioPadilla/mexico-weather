@@ -5,27 +5,58 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 18 Sep 2026 11:26:14 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 18 Sep 2026 16:31:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de septiembre del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 521 | 18 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, TABASCO, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 521
+Ciudad de México a 18 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES INTENSAS EN VERACRUZ, TABASCO, OAXACA Y CHIAPAS
+
+ 
+
+Este día, un canal de baja presión, una vaguada en niveles altos de la atmósfera y una masa de aire frío sobre el golfo de México, originarán lluvias puntuales intensas en zonas de Veracruz, Oaxaca, Tabasco y Chiapas; así como chubascos y lluvias fuertes en zonas del noreste, oriente y sureste mexicano, incluida la península de Yucatán. Así mismo, prevalecerá el viento de componente norte con rachas de 50 a 70 km/h en el istmo y golfo de Tehuantepec; al final del día, la masa de aire frío se desplazará hacia el noreste del golfo de México y dejará de afectar al país. Simultáneamente, canales de baja presión al interior de la República Mexicana, una vaguada en niveles medios y altos de la atmósfera e inestabilidad atmosférica, ocasionarán chubascos y lluvias fuertes a puntuales muy fuertes con descargas eléctricas en el occidente, centro y sur del territorio nacional.…]]></description>
+      <pubDate>Fri, 18 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-18-521</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de septiembre del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de septiembre del 2026
-Emisión: 03:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 18 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-18-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de San Luis Potosí, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Veracruz, Oaxaca, Chiapas y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de componente norte de 40 a 50 km/h con rachas de 60 a 80 km/h: Oaxaca (istmo y golfo de Tehuantepec).]]></description>
-      <pubDate>Fri, 18 Sep 2026 05:26:05 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-18-deff</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: zonas de Baja California, Sonora, Sinaloa, Durango y Chihuahua.]]></description>
+      <pubDate>Fri, 18 Sep 2026 10:31:38 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-18-e6ee</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 18 SEP 2026: Hoy se pronostican lluvias intensas en regiones de Veracruz, Tabasco, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_18.pdf</link>
+      <description><![CDATA[Hoy se pronostican lluvias intensas en regiones de Veracruz, Tabasco, Oaxaca y Chiapas — Reporte Matutino del 18 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_18.pdf]]></description>
+      <pubDate>Fri, 18 Sep 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_18</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 17 SEP 2026: Para esta noche se prevén lluvias intensas en regiones de San Luis Potosí, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco...</title>
@@ -34,28 +65,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Thu, 17 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_17</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 520 | 17 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SAN LUIS POTOSÍ, PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 520
-Ciudad de México a 17 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SAN LUIS POTOSÍ, PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
- 
-
-Durante esta tarde y noche, un canal de baja presión sobre el occidente del golfo de México, en interacción con una masa de aire frío y una circulación ciclónica en niveles altos de la atmósfera sobre la península de Yucatán, ocasionarán lluvias puntuales intensas en San Luis Potosí (este), Puebla (norte y sureste), Veracruz (norte, centro y sur), Oaxaca (norte y este), Chiapas (norte) y Tabasco (oeste y centro), lluvias muy fuertes en Hidalgo (norte y este) y Tamaulipas (oeste y sur), y lluvias fuertes en Nuevo León (este y sur), Campeche (norte, este y suroeste), Yucatán (oeste y sur) y Quintana Roo (norte y centro). A su vez, se prevé viento de componente norte con rachas de 60 a 80 km/h en el istmo y golfo de Tehuantepec.…]]></description>
-      <pubDate>Thu, 17 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-17-520</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 17 SEP 2026: Hoy se pronostican lluvias intensas en regiones de San Luis Potosí, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco</title>
@@ -79,14 +88,6 @@ Durante esta tarde y noche, un canal de baja presión sobre el occidente del gol
       <description><![CDATA[Se pronostican lluvias intensas en zonas de Sonora — Reporte Vespertino del 15 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_15.pdf]]></description>
       <pubDate>Tue, 15 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_15</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 15 SEP 2026: Se pronostican lluvias muy fuertes en regiones de Baja California Sur, Sonora, Chihuahua, Sinaloa, Durango, Nayarit, Jal...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_15.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Baja California Sur, Sonora, Chihuahua, Sinaloa, Durango, Nayarit, Jal... — Reporte Matutino del 15 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_15.pdf]]></description>
-      <pubDate>Tue, 15 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_15</guid>
       <category>Comunicado</category>
     </item>
   </channel>
