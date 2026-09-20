@@ -5,45 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 19 Sep 2026 23:13:09 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 01:17:27 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Sinaloa y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Sinaloa y Chiapas.]]></description>
-      <pubDate>Sat, 19 Sep 2026 17:13:00 -0600</pubDate>
+      <pubDate>Sat, 19 Sep 2026 19:17:18 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-19-51f1</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 523 | 19 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 524 | 19 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIAPAS
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE CHIAPAS Y SINALOA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 523
+No. Aviso: 524
 Ciudad de México a 19 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIAPAS
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE CHIAPAS Y SINALOA
 
 
 
-Para este día, el monzón mexicano, una vaguada en niveles altos de la atmósfera sobre el noroeste de México e inestabilidad atmosférica, ocasionarán lluvias muy fuertes en zonas de Chihuahua, Durango, Sinaloa y Nayarit; fuertes en Baja California Sur, así como chubascos en Sonora. Por su parte, canales de baja presión en el interior del país, aunados a vaguadas en niveles altos de la atmósfera e inestabilidad atmosférica, ocasionarán lluvias fuertes a muy fuertes con descargas eléctricas en el norte, noreste, occidente, centro, oriente, sur y sureste del territorio nacional, incluida la península de Yucatán, pronosticándose lluvias puntuales intensas en zonas de Chiapas. Se prevé que al final del día, una nueva onda tropical se aproximará a la península de Yucatán y reforzará la probabilidad de lluvias en dicha región.…]]></description>
+Durante esta noche y madrugada del domingo, el monzón mexicano y una vaguada en niveles altos de la atmósfera ocasionarán lluvias puntuales intensas en regiones de Sinaloa (norte, centro y sur); lluvias muy fuertes en Chihuahua (norte, centro y sur), Durango (oeste) y Nayarit (norte y costa), así como lluvias puntuales fuertes en Baja California Sur (sur) y Sonora (sur). Por otra parte, canales de baja presión en el interior del país, el aporte de humedad generado por una zona de baja presión con potencial ciclónico al sur de Jalisco y Colima, la onda tropical núm.…]]></description>
       <pubDate>Sat, 19 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-19-523</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-19-524</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 19 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 19 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 19 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 19 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-19-12</guid>
