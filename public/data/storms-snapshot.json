@@ -1,1 +1,1 @@
-{"updated":"2026-09-20T18:44:59Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Fay","lat":34.1,"lng":-33.0,"classification":"TS","intensityKt":50.0},{"name":"Odalys","lat":11.1,"lng":-125.5,"classification":"TS","intensityKt":40.0}]}
+{"updated":"2026-09-20T21:04:18Z","source":"NOAA NHC CurrentStorms.json","storms":[{"name":"Fay","lat":34.4,"lng":-32.7,"classification":"TS","intensityKt":55.0},{"name":"Odalys","lat":11.7,"lng":-126.6,"classification":"TS","intensityKt":45.0},{"name":"Seventeen-E","lat":14.9,"lng":-104.9,"classification":"TD","intensityKt":30.0}]}
