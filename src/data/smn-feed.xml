@@ -5,49 +5,48 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 20 Sep 2026 06:27:57 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 12:28:07 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de septiembre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 525 | 20 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN OAXACA, CHIAPAS, CAMPECHE Y YUCATÁN
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 525
+Ciudad de México a 20 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES INTENSAS EN OAXACA, CHIAPAS, CAMPECHE Y YUCATÁN
+
+Este día, una zona de baja presión con probabilidad para desarrollo ciclónico o posible ciclón tropical al sur de las costas de Jalisco, Colima y Michoacán, propiciará lluvias puntuales muy fuertes en zonas de Jalisco, Colima, Michoacán y Guerrero, así como oleaje de 1.5 a 2.5 metros de altura en la costa de dichos estados. Por otra parte, el monzón mexicano sobre el noroeste del territorio nacional, canales de baja presión, la onda tropical núm. 40 sobre el sureste del país y vaguadas en niveles medios y altos de la atmósfera, originarán lluvias puntuales intensas en zonas de Oaxaca, Chiapas, Campeche y Yucatán; así como chubascos y lluvias fuertes a muy fuertes con descargas eléctricas en el norte, noroeste, centro y sureste de la República Mexicana, incluidos el Valle de México y la península de Yucatán.…]]></description>
+      <pubDate>Sun, 20 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-20-525</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de septiembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 20 de septiembre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 20 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-20-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Oaxaca, Chiapas, Campeche y Yucatán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Chiapas.]]></description>
-      <pubDate>Sun, 20 Sep 2026 00:27:48 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-20-8409</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: zonas de Baja California, Baja California Sur y Sonora.]]></description>
+      <pubDate>Sun, 20 Sep 2026 06:27:56 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-20-1ab2</guid>
       <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 524 | 19 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE CHIAPAS Y SINALOA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 524
-Ciudad de México a 19 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN REGIONES DE CHIAPAS Y SINALOA
-
-
-
-Durante esta noche y madrugada del domingo, el monzón mexicano y una vaguada en niveles altos de la atmósfera ocasionarán lluvias puntuales intensas en regiones de Sinaloa (norte, centro y sur); lluvias muy fuertes en Chihuahua (norte, centro y sur), Durango (oeste) y Nayarit (norte y costa), así como lluvias puntuales fuertes en Baja California Sur (sur) y Sonora (sur). Por otra parte, canales de baja presión en el interior del país, el aporte de humedad generado por una zona de baja presión con potencial ciclónico al sur de Jalisco y Colima, la onda tropical núm.…]]></description>
-      <pubDate>Sat, 19 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-19-524</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 19 SEP 2026: Hoy se pronostican lluvias intensas en regiones de Sinaloa y Chiapas</title>
