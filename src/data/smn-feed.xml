@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 20 Sep 2026 01:17:27 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 06:27:57 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Sinaloa y Chiapas.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de septiembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 20 de septiembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sun, 20 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-20-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Sinaloa y Chiapas.]]></description>
-      <pubDate>Sat, 19 Sep 2026 19:17:18 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-19-51f1</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Sinaloa y Chiapas.]]></description>
+      <pubDate>Sun, 20 Sep 2026 00:27:48 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-20-8409</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -37,17 +48,6 @@ Durante esta noche y madrugada del domingo, el monzón mexicano y una vaguada e
       <pubDate>Sat, 19 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-09-19-524</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 19 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 19 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Sat, 19 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-19-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 19 SEP 2026: Hoy se pronostican lluvias intensas en regiones de Sinaloa y Chiapas</title>
