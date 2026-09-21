@@ -5,27 +5,65 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 21 Sep 2026 06:29:19 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2026 14:18:16 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de septiembre del 2026 | Emisión 00:00h</title>
+      <title>📋 SMN Comunicado 21 SEP 2026: La tormenta tropical Polo hoy ocasionará lluvias intensas en zonas de Oaxaca y muy fuertes en regiones de Michoacán y ...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso14-26.pdf</link>
+      <description><![CDATA[La tormenta tropical Polo hoy ocasionará lluvias intensas en zonas de Oaxaca y muy fuertes en regiones de Michoacán y ... — Comunicado del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso14-26.pdf]]></description>
+      <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso14-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 527 | 21 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN NAYARIT, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 527
+Ciudad de México a 21 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN NAYARIT, OAXACA Y CHIAPAS
+
+
+
+Para este día, la extensa circulación de la tormenta tropical “Polo” ocasionará lluvias fuertes a muy fuertes en el occidente y sur del país, así como oleaje elevado en las costas del Pacífico Sur y Central Mexicano; pronosticándose lluvias puntuales intensas en zonas de Oaxaca. Por otra parte, el monzón mexicano sobre el noroeste de México aunado a inestabilidad atmosférica, ocasionarán lluvias fuertes a muy fuertes en Baja California Sur, Sonora, Chihuahua, Sinaloa y Durango, pronosticándose lluvias puntuales intensas en zonas de Nayarit. Canales de baja presión en el interior del país en interacción con una vaguada en niveles medios y altos de la atmósfera y la onda tropical núm.…]]></description>
+      <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-21-527</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de septiembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 21 de septiembre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-21-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en regiones de Oaxaca y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nayarit (norte, centro y sur), Oaxaca (costa y sur) y Chiapas (centro, sur y este).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en regiones de Oaxaca y Chiapas.]]></description>
-      <pubDate>Mon, 21 Sep 2026 00:29:08 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-21-9844</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nayarit (norte, centro y sur), Oaxaca (costa y sur) y Chiapas (centro, sur y este).]]></description>
+      <pubDate>Mon, 21 Sep 2026 08:18:07 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-21-4a23</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 21 SEP 2026: Para este lunes prevén lluvias intensas en regiones de Nayarit, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_21.pdf</link>
+      <description><![CDATA[Para este lunes prevén lluvias intensas en regiones de Nayarit, Oaxaca y Chiapas — Reporte Matutino del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_21.pdf]]></description>
+      <pubDate>Mon, 21 Sep 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_21</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 20 SEP 2026: La depresión tropical diecisiete-E en el océano Pacífico se intensificó a la tormenta tropical Polo</title>
@@ -44,48 +82,11 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 526 | 20 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN OAXACA Y CHIAPAS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 526
-Ciudad de México a 20 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN OAXACA Y CHIAPAS
-
-Esta tarde se formó la depresión tropical Diecisiete-E al suroeste de las costas de Colima y Michoacán, su extensa circulación ocasionará lluvias puntuales muy fuertes en Jalisco (oeste, suroeste y centro), Colima, Michoacán (norte, centro y oeste) y Guerrero (centro, este y sur), así como mar de fondo en las costas del Pacifico Sur y Central Mexicano. Por otra parte, el monzón mexicano sobre el noroeste del país, aunado a inestabilidad atmosférica, generan lluvias puntuales muy fuertes en Chihuahua (oeste y suroeste) y lluvias puntuales fuertes en Baja California Sur (sur), Sonora (sur), Sinaloa (norte, centro y sur), Durango (norte y oeste) y Nayarit (norte y costa).…]]></description>
-      <pubDate>Sun, 20 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-20-526</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
       <title>📋 SMN Reporte Matutino 20 SEP 2026: Hoy se pronostican lluvias intensas en regiones de Oaxaca y Chiapas</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_20.pdf</link>
       <description><![CDATA[Hoy se pronostican lluvias intensas en regiones de Oaxaca y Chiapas — Reporte Matutino del 20 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_20.pdf]]></description>
       <pubDate>Sun, 20 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_20</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 19 SEP 2026: Hoy se pronostican lluvias intensas en regiones de Sinaloa y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_19.pdf</link>
-      <description><![CDATA[Hoy se pronostican lluvias intensas en regiones de Sinaloa y Chiapas — Reporte Matutino del 19 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_19.pdf]]></description>
-      <pubDate>Sat, 19 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_19</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 18 SEP 2026: Para esta noche se prevén lluvias intensas en regiones de Chiapas y Tabasco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_18.pdf</link>
-      <description><![CDATA[Para esta noche se prevén lluvias intensas en regiones de Chiapas y Tabasco — Reporte Vespertino del 18 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_18.pdf]]></description>
-      <pubDate>Fri, 18 Sep 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_18</guid>
       <category>Comunicado</category>
     </item>
   </channel>
