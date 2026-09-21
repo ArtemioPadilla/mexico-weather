@@ -5,16 +5,32 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 21 Sep 2026 20:01:30 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2026 23:22:01 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nayarit (norte, centro y sur), Oaxaca (costa y sur) y Chiapas (centro, sur y este).</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Guerrero, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Nayarit (norte, centro y sur), Oaxaca (costa y sur) y Chiapas (centro, sur y este).]]></description>
-      <pubDate>Mon, 21 Sep 2026 14:01:19 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-21-4a23</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Guerrero, Oaxaca y Chiapas.]]></description>
+      <pubDate>Mon, 21 Sep 2026 17:21:52 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-21-6365</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 21 SEP 2026: Polo se intensificó a huracán categoría 1 en la escala Saffir-Simpson</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso16-26.pdf</link>
+      <description><![CDATA[Polo se intensificó a huracán categoría 1 en la escala Saffir-Simpson — Comunicado del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso16-26.pdf]]></description>
+      <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso16-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 21 SEP 2026: La tormenta tropical Polo está a 320 km al suroeste de Zihuatanejo, Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso15-26.pdf</link>
+      <description><![CDATA[La tormenta tropical Polo está a 320 km al suroeste de Zihuatanejo, Guerrero — Comunicado del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso15-26.pdf]]></description>
+      <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso15-26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 21 SEP 2026: La tormenta tropical Polo hoy ocasionará lluvias intensas en zonas de Oaxaca y muy fuertes en regiones de Michoacán y ...</title>
@@ -47,38 +63,30 @@ Para este día, la extensa circulación de la tormenta tropical “Polo” ocasi
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de septiembre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de septiembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 21 de septiembre del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-21-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 21 SEP 2026: Polo se intensificó a huracán categoría 1 en la escala Saffir-Simpson</title>
+      <title>📋 SMN Reporte Matutino 21 SEP 2026: Para este lunes prevén lluvias intensas en regiones de Nayarit, Oaxaca y Chiapas</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_21.pdf</link>
-      <description><![CDATA[Polo se intensificó a huracán categoría 1 en la escala Saffir-Simpson — Reporte Matutino del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_21.pdf]]></description>
+      <description><![CDATA[Para este lunes prevén lluvias intensas en regiones de Nayarit, Oaxaca y Chiapas — Reporte Matutino del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_21.pdf]]></description>
       <pubDate>Mon, 21 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_21</guid>
       <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 20 SEP 2026: La depresión tropical diecisiete-E en el océano Pacífico se intensificó a la tormenta tropical Polo</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Metereológico 21H.pdf</link>
-      <description><![CDATA[La depresión tropical diecisiete-E en el océano Pacífico se intensificó a la tormenta tropical Polo — Comunicado del 20 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Metereológico 21H.pdf]]></description>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso13-26.pdf</link>
+      <description><![CDATA[La depresión tropical diecisiete-E en el océano Pacífico se intensificó a la tormenta tropical Polo — Comunicado del 20 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso13-26.pdf]]></description>
       <pubDate>Sun, 20 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Metereológico 21H</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 20 SEP 2026: La tarde de hoy se desarrolló la depresión tropical Diecisiete-E, al sur-sureste de Punta San Telmo, Michoacán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado013-26.pdf</link>
-      <description><![CDATA[La tarde de hoy se desarrolló la depresión tropical Diecisiete-E, al sur-sureste de Punta San Telmo, Michoacán — Comunicado del 20 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado013-26.pdf]]></description>
-      <pubDate>Sun, 20 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Comunicado013-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso13-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
