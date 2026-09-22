@@ -5,15 +5,34 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 22 Sep 2026 05:08:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 10:05:01 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>📋 SMN Comunicado 22 SEP 2026: Polo se intensifica rápidamente a huracán categoría 4 en la escala Saffir-Simpson</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso16-26.pdf</link>
+      <description><![CDATA[Polo se intensifica rápidamente a huracán categoría 4 en la escala Saffir-Simpson — Comunicado del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso16-26.pdf]]></description>
+      <pubDate>Tue, 22 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso16-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de septiembre del 2026 | Emisión 03:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 22 de septiembre del 2026
+Emisión: 03:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Tue, 22 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-22-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Guerrero, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Nayarit, Guerrero, Oaxaca y Chiapas.]]></description>
-      <pubDate>Mon, 21 Sep 2026 23:07:47 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-21-6365</guid>
+      <pubDate>Tue, 22 Sep 2026 04:04:51 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-22-6365</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -26,18 +45,18 @@
     </item>
     <item>
       <title>📋 SMN Comunicado 21 SEP 2026: Polo se intensificó a huracán categoría 2 en la escala Saffir-Simpson</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso16-26.pdf</link>
-      <description><![CDATA[Polo se intensificó a huracán categoría 2 en la escala Saffir-Simpson — Comunicado del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso16-26.pdf]]></description>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 17-26.pdf</link>
+      <description><![CDATA[Polo se intensificó a huracán categoría 2 en la escala Saffir-Simpson — Comunicado del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 17-26.pdf]]></description>
       <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso16-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 17-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 21 SEP 2026: La tormenta tropical Polo hoy ocasionará lluvias intensas en zonas de Oaxaca y muy fuertes en regiones de Michoacán y ...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso14-26.pdf</link>
-      <description><![CDATA[La tormenta tropical Polo hoy ocasionará lluvias intensas en zonas de Oaxaca y muy fuertes en regiones de Michoacán y ... — Comunicado del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso14-26.pdf]]></description>
+      <title>📋 SMN Comunicado 21 SEP 2026: La tormenta tropical Polo está a 320 km al suroeste de Zihuatanejo, Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso15-26.pdf</link>
+      <description><![CDATA[La tormenta tropical Polo está a 320 km al suroeste de Zihuatanejo, Guerrero — Comunicado del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso15-26.pdf]]></description>
       <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso14-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso15-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -65,25 +84,6 @@ Durante esta noche y la madrugada del martes, la circulación del huracán Polo 
       <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-09-21-528</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de septiembre del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 21 de septiembre del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Mon, 21 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-21-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 21 SEP 2026: Para este lunes prevén lluvias intensas en regiones de Nayarit, Oaxaca y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_21.pdf</link>
-      <description><![CDATA[Para este lunes prevén lluvias intensas en regiones de Nayarit, Oaxaca y Chiapas — Reporte Matutino del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_21.pdf]]></description>
-      <pubDate>Mon, 21 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_21</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
