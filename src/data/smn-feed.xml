@@ -5,13 +5,21 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 22 Sep 2026 15:01:09 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 18:59:25 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>📋 SMN Comunicado 22 SEP 2026: Para hoy se prevén lluvias intensas en regiones de Chihuahua, Durango, Colima, Michoacán, Guerrero, Oaxaca y Chiapas</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Chihuahua, Durango, Colima, Michoacán, Guerrero, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Viento de 40 a 50 km/h con rachas de 60 a 80 km/h: costas de Michoacán y Guerrero.]]></description>
+      <pubDate>Tue, 22 Sep 2026 12:59:15 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-22-274c</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 22 SEP 2026: Polo continúa como huracán categoría 5 en la escala Saffir-Simpson y se desplaza lento frente a las costas del Pacíf...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso19-26.pdf</link>
-      <description><![CDATA[Para hoy se prevén lluvias intensas en regiones de Chihuahua, Durango, Colima, Michoacán, Guerrero, Oaxaca y Chiapas — Comunicado del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso19-26.pdf]]></description>
+      <description><![CDATA[Polo continúa como huracán categoría 5 en la escala Saffir-Simpson y se desplaza lento frente a las costas del Pacíf... — Comunicado del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso19-26.pdf]]></description>
       <pubDate>Tue, 22 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso19-26</guid>
       <category>Comunicado</category>
@@ -48,30 +56,22 @@ Este día, las bandas nubosas del huracán Polo, ocasionarán lluvias muy fuerte
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de septiembre del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de septiembre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 22 de septiembre del 2026
-Emisión: 06:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 22 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-22-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Chihuahua, Durango, Colima, Michoacán, Guerrero, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 40 a 50 km/h con rachas de 60 a 80 km/h: costas de Michoacán y Guerrero.]]></description>
-      <pubDate>Tue, 22 Sep 2026 09:01:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-22-274c</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 21 SEP 2026: Se pronostican lluvias intensas en zonas de Guerrero, Oaxaca, Nayarit y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_21.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Guerrero, Oaxaca, Nayarit y Chiapas — Reporte Vespertino del 21 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_21.pdf]]></description>
-      <pubDate>Mon, 21 Sep 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_21</guid>
+      <title>📋 SMN Reporte Matutino 22 SEP 2026: Para hoy se prevén lluvias intensas en regiones de Chihuahua, Durango, Colima, Michoacán, Guerrero, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_22.pdf</link>
+      <description><![CDATA[Para hoy se prevén lluvias intensas en regiones de Chihuahua, Durango, Colima, Michoacán, Guerrero, Oaxaca y Chiapas — Reporte Matutino del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_22.pdf]]></description>
+      <pubDate>Tue, 22 Sep 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_22</guid>
       <category>Comunicado</category>
     </item>
     <item>
