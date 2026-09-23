@@ -5,23 +5,42 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 23 Sep 2026 00:44:26 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2026 06:04:54 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango, Colima, Michoacán, Guerrero, Oaxaca y Chiapas</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de septiembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 23 de septiembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 23 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-23-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Durango, Colima, Michoacán, Guerrero, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 40 a 50 km/h con rachas de 60 a 80 km/h: costas de Michoacán y Guerrero.]]></description>
-      <pubDate>Tue, 22 Sep 2026 18:44:16 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-22-274c</guid>
+      <pubDate>Wed, 23 Sep 2026 00:04:41 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-23-274c</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 22 SEP 2026: Durante esta tarde se prevén lluvias intensas en zonas de Chiapas, Chihuahua, Durango, Colima, Michoacán, Guerrero y O...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso20-26.pdf</link>
-      <description><![CDATA[Durante esta tarde se prevén lluvias intensas en zonas de Chiapas, Chihuahua, Durango, Colima, Michoacán, Guerrero y O... — Comunicado del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso20-26.pdf]]></description>
+      <title>📋 SMN Reporte Vespertino 22 SEP 2026: Durante esta tarde se prevén lluvias intensas en zonas de Chiapas, Chihuahua, Durango, Colima, Michoacán, Guerrero y O...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_22.pdf</link>
+      <description><![CDATA[Durante esta tarde se prevén lluvias intensas en zonas de Chiapas, Chihuahua, Durango, Colima, Michoacán, Guerrero y O... — Reporte Vespertino del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_22.pdf]]></description>
+      <pubDate>Tue, 22 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_22</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 22 SEP 2026: Debido a Polo, huracán categoría 5 en la escala Saffir-Simpson, continúa el pronóstico de lluvias en el occidente y ...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso22-26.pdf</link>
+      <description><![CDATA[Debido a Polo, huracán categoría 5 en la escala Saffir-Simpson, continúa el pronóstico de lluvias en el occidente y ... — Comunicado del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso22-26.pdf]]></description>
       <pubDate>Tue, 22 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso20-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso22-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -33,11 +52,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 22 SEP 2026: Polo se intensificó a huracán categoría 5 en la escala Saffir-Simpson</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso19-26.pdf</link>
-      <description><![CDATA[Polo se intensificó a huracán categoría 5 en la escala Saffir-Simpson — Comunicado del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso19-26.pdf]]></description>
+      <title>📋 SMN Comunicado 22 SEP 2026: Polo continúa como huracán categoría 5 en la escala Saffir-Simpson y se desplaza lento frente a las costas del Pacíf...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso20-26.pdf</link>
+      <description><![CDATA[Polo continúa como huracán categoría 5 en la escala Saffir-Simpson y se desplaza lento frente a las costas del Pacíf... — Comunicado del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso20-26.pdf]]></description>
       <pubDate>Tue, 22 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso19-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso20-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -62,17 +81,6 @@ Para esta noche y madrugada del miércoles, el huracán Polo de categoría 5 en 
       <pubDate>Tue, 22 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-09-22-530</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 22 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 22 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-22-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 22 SEP 2026: Para hoy se prevén lluvias intensas en regiones de Chihuahua, Durango, Colima, Michoacán, Guerrero, Oaxaca y Chiapas</title>
