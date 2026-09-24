@@ -5,58 +5,75 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 23 Sep 2026 23:46:41 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 05:01:20 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm) en zonas de Michoacán y Guerrero.</title>
+      <title>📋 SMN Comunicado 24 SEP 2026: El huracán Polo ocasionará lluvias torrenciales en zonas de Michoacán y Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 27-26.pdf</link>
+      <description><![CDATA[El huracán Polo ocasionará lluvias torrenciales en zonas de Michoacán y Guerrero — Comunicado del 24 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 27-26.pdf]]></description>
+      <pubDate>Thu, 24 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorológico 27-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 24 SEP 2026: El huracán Polo volvió alcanzar la categoría 5 en la escala Saffir-Simpson</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 26-26.pdf</link>
+      <description><![CDATA[El huracán Polo volvió alcanzar la categoría 5 en la escala Saffir-Simpson — Comunicado del 24 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 26-26.pdf]]></description>
+      <pubDate>Thu, 24 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorológico 26-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Michoacán y Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm) en zonas de Michoacán y Guerrero.]]></description>
-      <pubDate>Wed, 23 Sep 2026 17:46:31 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-23-0527</guid>
+      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Michoacán y Guerrero.]]></description>
+      <pubDate>Wed, 23 Sep 2026 23:01:12 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-23-e148</guid>
       <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 23 SEP 2026: El huracán Polo ocasionará lluvias torrenciales en zonas de Michoacán y Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 25-26.pdf</link>
+      <description><![CDATA[El huracán Polo ocasionará lluvias torrenciales en zonas de Michoacán y Guerrero — Comunicado del 23 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 25-26.pdf]]></description>
+      <pubDate>Wed, 23 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 25-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 23 SEP 2026: El huracán Polo generará lluvias torrenciales en regiones de Michoacán y Guerrero e intensas en Colima</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso24-26.pdf</link>
-      <description><![CDATA[El huracán Polo ocasionará lluvias torrenciales en zonas de Michoacán y Guerrero — Comunicado del 23 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso24-26.pdf]]></description>
+      <description><![CDATA[El huracán Polo generará lluvias torrenciales en regiones de Michoacán y Guerrero e intensas en Colima — Comunicado del 23 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso24-26.pdf]]></description>
       <pubDate>Wed, 23 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso24-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 23 SEP 2026: El huracán Polo mantiene su desplazamiento lento frente a las costas de Guerrero y Colima</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso23-26.pdf</link>
-      <description><![CDATA[El huracán Polo mantiene su desplazamiento lento frente a las costas de Guerrero y Colima — Comunicado del 23 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso23-26.pdf]]></description>
-      <pubDate>Wed, 23 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso23-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 531 | 23 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 532 | 23 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EL HURACÁN POLO ORIGINARÁ LLUVIAS PUNTUALES INTENSAS EN GUERRERO, MICHOACÁN, COLIMA Y JALISCO
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE GUERRERO Y MICHOACÁN
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 531
+No. Aviso: 532
 Ciudad de México a 23 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-EL HURACÁN POLO ORIGINARÁ LLUVIAS PUNTUALES INTENSAS EN GUERRERO, MICHOACÁN, COLIMA Y JALISCO
 
-Para hoy, Polo continuará desplazándose como huracán de categoría 4 en la escala Saffir-Simpson al sur de las costas de Guerrero y Michoacán. Su circulación mantendrá la probabilidad de lluvias puntuales intensas en zonas de Guerrero, Michoacán, Colima y Jalisco; y puntuales muy fuertes en zonas de Oaxaca, además de oleaje elevado y rachas fuertes de viento en las costas de dichos estados. A su vez, el monzón mexicano, inestabilidad atmosférica y una vaguada en altura sobre el noroeste del territorio nacional, ocasionarán lluvias puntuales muy fuertes en Chihuahua; puntuales fuertes en Durango y Sonora; y chubascos en Nayarit, Sinaloa y Baja California Sur. Por otro lado, canales de baja presión en el interior del país en interacción con inestabilidad atmosférica, así como una vaguada en altura sobre la península de Yucatán, además de la onda tropical núm.…]]></description>
+SE PREVÉN LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE GUERRERO Y MICHOACÁN
+
+Durante esta tarde y noche, el huracán Polo de categoría 4 en la escala Saffir-Simpson, continuará desplazándose al sur de las costas de Guerrero y Michoacán. Su circulación mantendrá la probabilidad de lluvias puntuales torrenciales en Michoacán (costa y este) y Guerrero (costa y oeste); lluvias puntuales intensas en Colima y lluvias puntuales muy fuertes en Jalisco (sur) y Oaxaca (oeste), además de viento de 50 a 60 km/h con rachas de 70 a 90 km/h en costas de Colima, Michoacán y Guerrero, y oleaje elevado de oleaje de 6.0 a 8.0 metros de altura, sin descartarse mayores en las costas de Colima, Michoacán y Guerrero, y oleaje de 2.0 a 3.0 metros de altura en las costas de Jalisco y Oaxaca.…]]></description>
       <pubDate>Wed, 23 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-23-531</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-23-532</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de septiembre del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 23 de septiembre del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 23 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-23-12</guid>
@@ -68,14 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas para regiones de Jalisco, Colima, Michoacán, Guerrero y Chiapas — Reporte Matutino del 23 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_23.pdf]]></description>
       <pubDate>Wed, 23 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_23</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 22 SEP 2026: Debido a Polo, huracán categoría 5 en la escala Saffir-Simpson, continúa el pronóstico de lluvias en el occidente y ...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso22-26.pdf</link>
-      <description><![CDATA[Debido a Polo, huracán categoría 5 en la escala Saffir-Simpson, continúa el pronóstico de lluvias en el occidente y ... — Comunicado del 22 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso22-26.pdf]]></description>
-      <pubDate>Tue, 22 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso22-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
