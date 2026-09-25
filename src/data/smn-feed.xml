@@ -5,27 +5,62 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 25 Sep 2026 07:57:13 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 18:42:54 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de septiembre del 2026 | Emisión 00:00h</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Veracruz, Tabasco, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Veracruz, Tabasco, Oaxaca y Chiapas.]]></description>
+      <pubDate>Fri, 25 Sep 2026 12:42:44 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-25-5c48</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 25 SEP 2026: Polo se intensificó nuevamente a huracán categoría 5 y se localiza a 430 km al sur-suroeste de Cabo Corrientes, Jalis...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso33-26.pdf</link>
+      <description><![CDATA[Polo se intensificó nuevamente a huracán categoría 5 y se localiza a 430 km al sur-suroeste de Cabo Corrientes, Jalis... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso33-26.pdf]]></description>
+      <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso33-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 535 | 25 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, TABASCO, OAXACA Y CHIAPAS, ADEMÁS DE RACHAS FUERTES DE VIENTO Y OLEAJE ELEVADO EN COSTAS DEL OCCIDENTE Y SUR DE MÉXICO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 535
+Ciudad de México a 25 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, TABASCO, OAXACA Y CHIAPAS, ADEMÁS DE RACHAS FUERTES DE VIENTO Y OLEAJE ELEVADO EN COSTAS DEL OCCIDENTE Y SUR DE MÉXICO
+
+Para hoy, el huracán de categoría mayor Polo en la escala Saffir-Simpson continuará desplazándose al suroeste de las costas de Jalisco. Su circulación mantendrá la probabilidad de lluvias puntuales muy fuertes en zonas de Jalisco, Nayarit y Sinaloa; y puntuales fuertes en zonas de Baja California Sur, Michoacán y Colima, además de oleaje elevado y rachas fuertes de viento en sus costas. Asimismo, el monzón mexicano e inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en zonas de Chihuahua; y puntuales fuertes en zonas de Durango y Sonora.…]]></description>
+      <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-25-535</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de septiembre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 25 de septiembre del 2026
-Emisión: 00:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-25-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Michoacán, Oaxaca, Chiapas y Tabasco</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Michoacán, Oaxaca, Chiapas y Tabasco]]></description>
-      <pubDate>Fri, 25 Sep 2026 01:57:03 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-25-9e7c</guid>
-      <category>Alerta</category>
+      <title>📋 SMN Reporte Matutino 25 SEP 2026: Se prevén lluvias muy fuertes en Nayarit y fuertes en Baja California Sur, Sinaloa, Jalisco, Colima y Michoacán, debid...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_25.pdf</link>
+      <description><![CDATA[Se prevén lluvias muy fuertes en Nayarit y fuertes en Baja California Sur, Sinaloa, Jalisco, Colima y Michoacán, debid... — Reporte Matutino del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_25.pdf]]></description>
+      <pubDate>Fri, 25 Sep 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_25</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 24 SEP 2026: Para este viernes se pronostican lluvias intensas en zonas de Jalisco, Oaxaca, Colima, Michoacán, Chiapas y Tabasco</title>
@@ -41,49 +76,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Debido al huracán Polo, se pronostican lluvias intensas en zonas de Jalisco, Colima y Michoacán, y muy fuertes en Naya... — Comunicado del 24 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 32-26.pdf]]></description>
       <pubDate>Thu, 24 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 32-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 24 SEP 2026: Polo generará lluvias intensas en zonas de Jalisco, Colima y Michoacán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 31-26.pdf</link>
-      <description><![CDATA[Polo generará lluvias intensas en zonas de Jalisco, Colima y Michoacán — Comunicado del 24 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 31-26.pdf]]></description>
-      <pubDate>Thu, 24 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorológico 31-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 24 SEP 2026: Polo, huracán categoría 4, está a 245 km al sur de Manzanillo, Colima</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso30-26.pdf</link>
-      <description><![CDATA[Polo, huracán categoría 4, está a 245 km al sur de Manzanillo, Colima — Comunicado del 24 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso30-26.pdf]]></description>
-      <pubDate>Thu, 24 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso30-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 534 | 24 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE MICHOACÁN, JALISCO, COLIMA, OAXACA, CHIAPAS Y TABASCO • ADEMÁS DE RACHAS FUERTES DE VIENTO Y OLEAJE ELEVADO EN COSTAS DEL OCCIDENTE Y SUR DE MÉXICO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 534
-Ciudad de México a 24 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PREVÉN LLUVIAS INTENSAS EN ZONAS DE MICHOACÁN, JALISCO, COLIMA, OAXACA, CHIAPAS Y TABASCO; ADEMÁS DE RACHAS FUERTES DE VIENTO Y OLEAJE ELEVADO EN COSTAS DEL OCCIDENTE Y SUR DE MÉXICO
-
-Durante esta tarde y noche, el huracán de categoría mayor Polo en la escala Saffir-Simpson, continuará desplazándose frente a las costas de Michoacán, Colima y Jalisco. Su circulación mantendrá la probabilidad de lluvias puntuales intensas en Jalisco (oeste, sur y costa), Colima y Michoacán (oeste y costa); lluvias muy fuertes en Nayarit (sur y costa) y lluvias fuertes en Guerrero (oeste). Además, se prevén vientos de 40 a 50 km/h con rachas de 60 a 70 km/h en costas de Colima y Michoacán, y con oleaje de 5.0 a 7.0 metros de altura en costas de Michoacán, vientos de 30 a 40 km/h con rachas de 50 a 60 km/h en costas de Jalisco y Guerrero, y oleaje de 3.0 a 5.0 metros de altura en costas de Jalisco, Colima y Guerrero; y oleaje de 2.0 a 3.0 metros de altura en la costa de Nayarit.…]]></description>
-      <pubDate>Thu, 24 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-24-534</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 24 SEP 2026: En regiones de Jalisco, Colima, Michoacán, Guerrero, Oaxaca Chiapas y Tabasco se prevén lluvias intensas este jueves</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_24.pdf</link>
-      <description><![CDATA[En regiones de Jalisco, Colima, Michoacán, Guerrero, Oaxaca Chiapas y Tabasco se prevén lluvias intensas este jueves — Reporte Matutino del 24 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_24.pdf]]></description>
-      <pubDate>Thu, 24 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_24</guid>
       <category>Comunicado</category>
     </item>
   </channel>
