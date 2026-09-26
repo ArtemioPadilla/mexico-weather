@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 26 Sep 2026 13:12:20 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 17:16:00 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -29,22 +29,22 @@ Este día, Polo se mantendrá como huracán de categoría mayor en la escala Saf
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de septiembre del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de septiembre del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de septiembre del 2026
-Emisión: 06:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-26-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Oaxaca, Chiapas, Veracruz y Tabasco.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Sinaloa, Nayarit, Oaxaca, Chiapas, Tabasco y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Oaxaca, Chiapas, Veracruz y Tabasco.]]></description>
-      <pubDate>Sat, 26 Sep 2026 07:12:10 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-26-f83c</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Sinaloa, Nayarit, Oaxaca, Chiapas, Tabasco y Veracruz.]]></description>
+      <pubDate>Sat, 26 Sep 2026 11:15:52 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-26-b8cf</guid>
       <category>Alerta</category>
     </item>
     <item>
