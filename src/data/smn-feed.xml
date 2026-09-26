@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 26 Sep 2026 19:58:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 22:57:55 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Sinaloa, Nayarit, Oaxaca, Chiapas, Tabasco y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Sinaloa, Nayarit, Oaxaca, Chiapas, Tabasco y Veracruz.]]></description>
-      <pubDate>Sat, 26 Sep 2026 13:57:51 -0600</pubDate>
+      <pubDate>Sat, 26 Sep 2026 16:57:46 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-26-b8cf</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 26 SEP 2026: Polo permanece como huracán categoría 4 en la escala Saffir-Simpson a 540 km al sur-suroeste de Cabo San Lucas, Baja C...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso37-26.pdf</link>
+      <description><![CDATA[Polo permanece como huracán categoría 4 en la escala Saffir-Simpson a 540 km al sur-suroeste de Cabo San Lucas, Baja C... — Comunicado del 26 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso37-26.pdf]]></description>
+      <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso37-26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 26 SEP 2026: Gobierno de México llama a extremar medidas de prevención ante los efectos del huracán Polo en la península de Baja ...</title>
@@ -45,11 +53,11 @@ Este día, Polo se mantendrá como huracán de categoría mayor en la escala Saf
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de septiembre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de septiembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de septiembre del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-26-12</guid>
@@ -77,14 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso35-26.pdf]]></description>
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso35-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 25 SEP 2026: Se prevén lluvias muy fuertes en Nayarit y fuertes en Baja California Sur, Sinaloa, Jalisco, Colima y Michoacán, debid...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso34-26.pdf</link>
-      <description><![CDATA[Se prevén lluvias muy fuertes en Nayarit y fuertes en Baja California Sur, Sinaloa, Jalisco, Colima y Michoacán, debid... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso34-26.pdf]]></description>
-      <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso34-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
