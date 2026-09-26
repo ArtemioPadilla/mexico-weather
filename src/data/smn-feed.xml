@@ -5,26 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 26 Sep 2026 07:50:08 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 13:12:20 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de septiembre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 537 | 26 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN OAXACA, CHIAPAS, VERACRUZ Y TABASCO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 537
+Ciudad de México a 26 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN OAXACA, CHIAPAS, VERACRUZ Y TABASCO
+
+Este día, Polo se mantendrá como huracán de categoría mayor en la escala Saffir-Simpson al suroeste de la península de Baja California. Su circulación reforzará la probabilidad de lluvias fuertes a puntuales muy fuertes en zonas de Baja California Sur, Sinaloa y Nayarit; además de oleaje elevado y rachas de viento en costas de dichos estados. Además, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país, ocasionarán lluvias muy fuertes acompañadas con descargas eléctricas en dicha región.…]]></description>
+      <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-26-537</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de septiembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de septiembre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-26-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca, Chiapas, Tabasco y Veracruz.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Oaxaca, Chiapas, Veracruz y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca, Chiapas, Tabasco y Veracruz.]]></description>
-      <pubDate>Sat, 26 Sep 2026 01:49:59 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-26-5527</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Oaxaca, Chiapas, Veracruz y Tabasco.]]></description>
+      <pubDate>Sat, 26 Sep 2026 07:12:10 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-26-f83c</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -58,25 +78,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso34-26</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 534 | 25 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA, CHIAPAS, TABASCO Y VERACRUZ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 534
-Ciudad de México a 25 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA, CHIAPAS, TABASCO Y VERACRUZ
-
-Durante esta tarde y noche, la circulación del huracán de categoría mayor Polo en la escala Saffir-Simpson al suroeste de las costas de Jalisco, mantendrá la probabilidad de lluvias puntuales muy fuertes en Nayarit (norte, costa y sur); y lluvias puntuales fuertes en Baja California Sur (sur), Sinaloa (sur), Jalisco (oeste, costa y sur), Colima y Michoacán (centro, costa y oeste), además de viento de 20 a 30 km/h con rachas de 40 a 50 km/h en la costa de Jalisco; y viento de 10 a 20 km/h con rachas de 30 a 50 km/h en Baja California Sur, Sinaloa, Nayarit, Colima y Michoacán; y oleaje de 2.0 a 3.0 metros de altura en costas de Baja California Sur, Nayarit y Jalisco; y oleaje de 1.0 a 2.0 metros de altura en costas de Sinaloa y Colima.…]]></description>
-      <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-25-534</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 25 SEP 2026: Se pronostican lluvias intensas para regiones de Veracruz, Tabasco, Oaxaca y Chiapas</title>
