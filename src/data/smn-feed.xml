@@ -5,23 +5,31 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 25 Sep 2026 22:28:38 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 01:39:34 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca, Chiapas, Tabasco y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca, Chiapas, Tabasco y Veracruz.]]></description>
-      <pubDate>Fri, 25 Sep 2026 16:28:29 -0600</pubDate>
+      <pubDate>Fri, 25 Sep 2026 19:39:25 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-25-5527</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 25 SEP 2026: Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich...</title>
+      <title>📋 SMN Comunicado 25 SEP 2026: Durante esta tarde se prevén lluvias de fuertes a intensas en zonas de 23 estados de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso34-26.pdf</link>
-      <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso34-26.pdf]]></description>
+      <description><![CDATA[Durante esta tarde se prevén lluvias de fuertes a intensas en zonas de 23 estados de México — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso34-26.pdf]]></description>
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso34-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 25 SEP 2026: Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso35-26.pdf</link>
+      <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso35-26.pdf]]></description>
+      <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso35-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -33,30 +41,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 535 | 25 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 534 | 25 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, TABASCO, OAXACA Y CHIAPAS, ADEMÁS DE RACHAS FUERTES DE VIENTO Y OLEAJE ELEVADO EN COSTAS DEL OCCIDENTE Y SUR DE MÉXICO
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA, CHIAPAS, TABASCO Y VERACRUZ
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 535
+No. Aviso: 534
 Ciudad de México a 25 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, TABASCO, OAXACA Y CHIAPAS, ADEMÁS DE RACHAS FUERTES DE VIENTO Y OLEAJE ELEVADO EN COSTAS DEL OCCIDENTE Y SUR DE MÉXICO
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA, CHIAPAS, TABASCO Y VERACRUZ
 
-Para hoy, el huracán de categoría mayor Polo en la escala Saffir-Simpson continuará desplazándose al suroeste de las costas de Jalisco. Su circulación mantendrá la probabilidad de lluvias puntuales muy fuertes en zonas de Jalisco, Nayarit y Sinaloa; y puntuales fuertes en zonas de Baja California Sur, Michoacán y Colima, además de oleaje elevado y rachas fuertes de viento en sus costas. Asimismo, el monzón mexicano e inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en zonas de Chihuahua; y puntuales fuertes en zonas de Durango y Sonora.…]]></description>
+Durante esta tarde y noche, la circulación del huracán de categoría mayor Polo en la escala Saffir-Simpson al suroeste de las costas de Jalisco, mantendrá la probabilidad de lluvias puntuales muy fuertes en Nayarit (norte, costa y sur); y lluvias puntuales fuertes en Baja California Sur (sur), Sinaloa (sur), Jalisco (oeste, costa y sur), Colima y Michoacán (centro, costa y oeste), además de viento de 20 a 30 km/h con rachas de 40 a 50 km/h en la costa de Jalisco; y viento de 10 a 20 km/h con rachas de 30 a 50 km/h en Baja California Sur, Sinaloa, Nayarit, Colima y Michoacán; y oleaje de 2.0 a 3.0 metros de altura en costas de Baja California Sur, Nayarit y Jalisco; y oleaje de 1.0 a 2.0 metros de altura en costas de Sinaloa y Colima.…]]></description>
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-25-535</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-25-534</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 25 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-25-12</guid>
@@ -68,14 +76,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas para regiones de Veracruz, Tabasco, Oaxaca y Chiapas — Reporte Matutino del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_25.pdf]]></description>
       <pubDate>Fri, 25 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_25</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 24 SEP 2026: Debido al huracán Polo, se pronostican lluvias intensas en zonas de Jalisco, Colima y Michoacán, y muy fuertes en Naya...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 32-26.pdf</link>
-      <description><![CDATA[Debido al huracán Polo, se pronostican lluvias intensas en zonas de Jalisco, Colima y Michoacán, y muy fuertes en Naya... — Comunicado del 24 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 32-26.pdf]]></description>
-      <pubDate>Thu, 24 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 32-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
