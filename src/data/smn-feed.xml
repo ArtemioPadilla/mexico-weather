@@ -5,23 +5,42 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 26 Sep 2026 01:39:34 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 07:50:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de septiembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 26 de septiembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-26-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca, Chiapas, Tabasco y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Oaxaca, Chiapas, Tabasco y Veracruz.]]></description>
-      <pubDate>Fri, 25 Sep 2026 19:39:25 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-25-5527</guid>
+      <pubDate>Sat, 26 Sep 2026 01:49:59 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-26-5527</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 25 SEP 2026: Durante esta tarde se prevén lluvias de fuertes a intensas en zonas de 23 estados de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso34-26.pdf</link>
-      <description><![CDATA[Durante esta tarde se prevén lluvias de fuertes a intensas en zonas de 23 estados de México — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso34-26.pdf]]></description>
+      <title>📋 SMN Reporte Vespertino 25 SEP 2026: Durante esta tarde se prevén lluvias de fuertes a intensas en zonas de 23 estados de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_25.pdf</link>
+      <description><![CDATA[Durante esta tarde se prevén lluvias de fuertes a intensas en zonas de 23 estados de México — Reporte Vespertino del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_25.pdf]]></description>
+      <pubDate>Fri, 25 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_25</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 25 SEP 2026: Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso36-26.pdf</link>
+      <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso36-26.pdf]]></description>
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso34-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso36-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -33,11 +52,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 25 SEP 2026: Polo se intensificó nuevamente a huracán categoría 5 y se localiza a 430 km al sur-suroeste de Cabo Corrientes, Jalis...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso33-26.pdf</link>
-      <description><![CDATA[Polo se intensificó nuevamente a huracán categoría 5 y se localiza a 430 km al sur-suroeste de Cabo Corrientes, Jalis... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso33-26.pdf]]></description>
+      <title>📋 SMN Comunicado 25 SEP 2026: Se prevén lluvias muy fuertes en Nayarit y fuertes en Baja California Sur, Sinaloa, Jalisco, Colima y Michoacán, debid...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso34-26.pdf</link>
+      <description><![CDATA[Se prevén lluvias muy fuertes en Nayarit y fuertes en Baja California Sur, Sinaloa, Jalisco, Colima y Michoacán, debid... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso34-26.pdf]]></description>
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso33-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso34-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -58,17 +77,6 @@ Durante esta tarde y noche, la circulación del huracán de categoría mayor Pol
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-09-25-534</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 25 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-25-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 25 SEP 2026: Se pronostican lluvias intensas para regiones de Veracruz, Tabasco, Oaxaca y Chiapas</title>
