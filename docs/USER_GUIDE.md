@@ -10,6 +10,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 | `/forecast` | **Forecast detail** — shareable, client-rendered detail page driven by URL query params. |
 | `/mapa` | **Interactive weather map** — MapLibre GL basemap, location pins, layer rail, opacity slider, legend, timeline scrubber + playback, shareable view state. |
 | `/privacidad` | **Privacy/legal**. |
+| `/alertas` | **Alerts on your phone** — ntfy.sh public topics (`climamx-huracanes`, `climamx-smn`, `climamx-smn-<estado>`) fed by the snapshot workflows, plus per-state RSS at `/rss/<estado>.xml` (and `/rss/nacional.xml`). No account, nothing stored. |
 | `/rss.xml` | **RSS 2.0 feed** of SMN weather alerts (regenerated hourly). |
 | `/sitemap.xml` | Sitemap. |
 

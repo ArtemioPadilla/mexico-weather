@@ -23,6 +23,7 @@ interface Page {
 
 const PAGES: Page[] = [
   { name: 'home', url: '' },
+  { name: 'alertas', url: 'alertas/' },
   { name: 'clima/cdmx', url: 'clima/cdmx/' },
   { name: 'playa/cancun', url: 'playa/cancun/' },
   { name: 'estado/jalisco', url: 'estado/jalisco/' },

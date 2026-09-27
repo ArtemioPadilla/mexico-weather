@@ -1,0 +1,96 @@
+---
+/**
+ * /alertas — how to get Clima México's alerts on your phone without an
+ * account, a backend or any data stored about you (plan PRO_GRATIS E17).
+ *
+ * Three channels, all fed by the same GitHub Actions that refresh the
+ * site's data:
+ *   1. ntfy.sh public topics (push on iOS/Android/desktop via the ntfy
+ *      app or ntfy.sh in a browser) — Stories 17.1 / 17.2.
+ *   2. RSS per state (/rss/<estado>.xml) and national (/rss.xml) —
+ *      readers, IFTTT-style automations, mail-a-feed services.
+ *   3. The site itself: /huracanes/ and /estado/<slug>/.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { MX_STATES } from '../lib/mx-states';
+import { siteBase } from '../utils/paths';
+
+const base = siteBase();
+const NTFY = 'https://ntfy.sh';
+const TOPIC_STORMS = 'climamx-huracanes';
+const TOPIC_SMN = 'climamx-smn';
+const title = 'Alertas en tu teléfono — Clima México 🇲🇽';
+const description =
+  'Recibe avisos de ciclones y alertas del SMN por estado en tu teléfono, gratis, sin cuenta y sin que guardemos nada tuyo: tópicos públicos de ntfy y feeds RSS por estado.';
+---
+
+<BaseLayout title={title} description={description} lang="es">
+  <main class="mx-auto max-w-3xl px-4 py-8 space-y-10">
+    <header class="space-y-3">
+      <h1 class="text-3xl font-bold tracking-tight" data-i18n-en="Alerts on your phone">Alertas en tu teléfono</h1>
+      <p class="text-gray-600 dark:text-gray-400" data-i18n-en="Cyclone advisories and SMN alerts by state, pushed to your phone for free. No account, no backend: we never learn who subscribes.">
+        Avisos de ciclones y alertas del SMN por estado, empujados a tu teléfono gratis. Sin cuenta y sin backend: nunca sabemos quién se suscribe.
+      </p>
+    </header>
+
+    <section aria-labelledby="how-h" class="rounded-xl border border-gray-200 bg-gray-50 p-5 space-y-3 dark:border-gray-800 dark:bg-gray-900/50">
+      <h2 id="how-h" class="text-lg font-semibold" data-i18n-en="How it works">Cómo funciona</h2>
+      <ol class="list-decimal space-y-2 pl-5 text-sm text-gray-700 dark:text-gray-300">
+        <li data-i18n-en="Install the free ntfy app (iOS / Android) or open ntfy.sh in your browser.">Instala la app gratuita <a class="text-blue-700 underline dark:text-blue-300" href="https://ntfy.sh/" rel="noopener" target="_blank">ntfy</a> (iOS / Android) o abre ntfy.sh en tu navegador.</li>
+        <li data-i18n-en="Subscribe to a topic below. That is all: the topic name is the only thing involved.">Suscríbete a un tópico de los de abajo. Eso es todo: el nombre del tópico es lo único que interviene.</li>
+        <li data-i18n-en="Our GitHub Actions publish a message when something changes (a new tropical system near Mexico, a new SMN aviso for your state). Your phone rings; our site stores nothing.">Nuestros GitHub Actions publican un mensaje cuando algo cambia (un sistema tropical nuevo cerca de México, un aviso nuevo del SMN para tu estado). Tu teléfono suena; nuestro sitio no guarda nada.</li>
+      </ol>
+      <p class="text-xs text-gray-500 dark:text-gray-400" data-i18n-en="Caveat: ntfy topics are public, so in theory anyone who knows the name can also post to them. Treat a notification as a heads-up and confirm on /huracanes/ or the state page, which only read official NHC and SMN data.">
+        Advertencia: los tópicos de ntfy son públicos, así que en teoría cualquiera que sepa el nombre también puede publicar en ellos. Toma la notificación como un aviso y confirma en <a class="underline" href={`${base}huracanes/`}>/huracanes/</a> o en la página del estado, que solo leen datos oficiales del NHC y del SMN.
+      </p>
+    </section>
+
+    <section aria-labelledby="storms-h" class="space-y-3">
+      <h2 id="storms-h" class="text-lg font-semibold" data-i18n-en="Tropical cyclones near Mexico">Ciclones tropicales cerca de México</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n-en="A notification when a system forms near Mexico, strengthens or weakens (NHC data, checked every 15 minutes).">
+        Una notificación cuando un sistema se forma cerca de México, se intensifica o se debilita (datos del NHC, revisados cada 15 minutos).
+      </p>
+      <div class="flex flex-wrap items-center gap-2">
+        <code class="rounded bg-gray-100 px-2 py-1 text-sm dark:bg-gray-800">{TOPIC_STORMS}</code>
+        <a class="inline-flex min-h-[44px] items-center rounded-lg bg-blue-600 px-4 text-sm font-semibold text-white hover:bg-blue-700" href={`${NTFY}/${TOPIC_STORMS}`} rel="noopener" target="_blank" data-i18n-en="Subscribe on ntfy.sh">Suscribirme en ntfy.sh</a>
+        <a class="inline-flex min-h-[44px] items-center rounded-lg border border-gray-300 px-4 text-sm font-medium text-gray-800 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-800" href={`ntfy://${TOPIC_STORMS}`} data-i18n-en="Open in the ntfy app">Abrir en la app ntfy</a>
+        <a class="inline-flex min-h-[44px] items-center text-sm text-blue-700 underline dark:text-blue-300" href={`${base}huracanes/`} data-i18n-en="Active systems now">Sistemas activos ahora</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="smn-h" class="space-y-3">
+      <h2 id="smn-h" class="text-lg font-semibold" data-i18n-en="SMN alerts by state">Avisos del SMN por estado</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n-en="One topic and one RSS feed per state, refreshed hourly from the Servicio Meteorológico Nacional. National avisos have their own.">
+        Un tópico y un feed RSS por estado, actualizados cada hora desde el Servicio Meteorológico Nacional. Los avisos nacionales tienen el suyo.
+      </p>
+      <ul class="divide-y divide-gray-200 rounded-xl border border-gray-200 dark:divide-gray-800 dark:border-gray-800">
+        <li id="nacional" class="flex flex-wrap items-center justify-between gap-2 px-4 py-2">
+          <span class="font-medium" data-i18n-en="National">Nacional</span>
+          <span class="flex flex-wrap items-center gap-2 text-sm">
+            <code class="rounded bg-gray-100 px-2 py-1 text-xs dark:bg-gray-800">{TOPIC_SMN}</code>
+            <a class="inline-flex min-h-[44px] items-center text-blue-700 underline dark:text-blue-300" href={`${NTFY}/${TOPIC_SMN}`} rel="noopener" target="_blank">ntfy</a>
+            <a class="inline-flex min-h-[44px] items-center text-blue-700 underline dark:text-blue-300" href={`${base}rss.xml`}>RSS</a>
+          </span>
+        </li>
+        {MX_STATES.map((s) => (
+          <li id={s.slug} class="flex flex-wrap items-center justify-between gap-2 px-4 py-2 target:bg-blue-50 dark:target:bg-blue-950/40">
+            <a class="font-medium hover:underline" href={`${base}estado/${s.slug}/`}>{s.name}</a>
+            <span class="flex flex-wrap items-center gap-2 text-sm">
+              <code class="rounded bg-gray-100 px-2 py-1 text-xs dark:bg-gray-800">{`${TOPIC_SMN}-${s.slug}`}</code>
+              <a class="inline-flex min-h-[44px] items-center text-blue-700 underline dark:text-blue-300" href={`${NTFY}/${TOPIC_SMN}-${s.slug}`} rel="noopener" target="_blank" aria-label={`ntfy ${s.name}`}>ntfy</a>
+              <a class="inline-flex min-h-[44px] items-center text-blue-700 underline dark:text-blue-300" href={`${base}rss/${s.slug}.xml`} aria-label={`RSS ${s.name}`}>RSS</a>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="privacy-h" class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+      <h2 id="privacy-h" class="text-lg font-semibold text-gray-900 dark:text-gray-100" data-i18n-en="Privacy">Privacidad</h2>
+      <p data-i18n-en="Subscribing happens between your device and ntfy.sh (or your feed reader). Clima México has no server, no accounts and keeps no list of subscribers; the only thing that leaves our side is the message itself, posted by a public GitHub Action you can audit.">
+        La suscripción ocurre entre tu dispositivo y ntfy.sh (o tu lector de feeds). Clima México no tiene servidor, ni cuentas, ni lista de suscriptores; lo único que sale de nuestro lado es el mensaje, publicado por un GitHub Action público que puedes auditar.
+      </p>
+      <p><a class="text-blue-700 underline dark:text-blue-300" href={`${base}privacidad/`} data-i18n-en="Privacy policy">Política de privacidad</a></p>
+    </section>
+  </main>
+</BaseLayout>

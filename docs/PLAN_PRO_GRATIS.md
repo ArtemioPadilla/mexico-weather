@@ -141,13 +141,13 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 2. **RSS/Atom por estado** (ya existe `/rss.xml` nacional): feeds por estado y por ciclón, para lectores y automatizaciones (IFTTT, Feedly, correo vía Blogtrottr).
 3. **Calendario (.ics)** de un ciclón activo: "Llegada estimada a costa" como evento con recordatorio; se descarga, nada se sube.
 
-**Story 17.1 — Publicador de alertas tropicales** · est 2d
+**Story 17.1 — Publicador de alertas tropicales** · est 2d · **shipped 2026-09-27** (sin QR; enlace web + deep link `ntfy://`)
 - [ ] `quakes-storms-snapshot.yml` detecta cambios de estado NHC (nuevo sistema, cambio de categoría, watch/warning para costa MX) y `curl -d` a `ntfy.sh/climamx-huracanes` con título, texto y link a `/huracanes/`.
 - [ ] Dedupe por `(stormId, advisoryNumber)` guardado en el snapshot para no repetir.
 - [ ] Página `/alertas/` explicando los tres canales, con botón "Suscribirme" (deep link `ntfy://climamx-huracanes`) y QR.
 - Acceptance: un aviso NHC nuevo produce una notificación en un teléfono suscrito en < 15 min; cero requests desde el sitio a ntfy (solo el Action).
 
-**Story 17.2 — Alertas SMN por estado** · est 1d
+**Story 17.2 — Alertas SMN por estado** · est 1d · **shipped 2026-09-27**
 - [ ] `smn-rss.yml`: diff por estado → tópico `climamx-smn-<slug>`; feed `/rss/<estado>.xml`.
 - [ ] En `/estado/<slug>` y en la tarjeta de ciudad: "Recibir avisos de <estado>" → `/alertas/#<slug>`.
 - Acceptance: cambio en `smn-by-state.json` dispara notificación al tópico correcto; RSS por estado valida contra el validador W3C.

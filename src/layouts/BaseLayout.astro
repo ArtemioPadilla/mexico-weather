@@ -599,6 +599,14 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
               </li>
               <li>
                 <a
+                  href={`${base}alertas/`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Alerts"
+                  >Alertas</a
+                >
+              </li>
+              <li>
+                <a
                   href={`${base}rss.xml`}
                   class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
                   data-i18n-en="RSS feed"
@@ -693,6 +701,13 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
           class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           data-i18n-en="Hurricanes"
           >Huracanes</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
+          href={`${base}alertas/`}
+          class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          data-i18n-en="Alerts"
+          >Alertas</a
         >
         <span aria-hidden="true">•</span>
         <a

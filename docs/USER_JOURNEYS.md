@@ -33,6 +33,8 @@ Reusable fixtures in `e2e/fixtures/`: `geocode.cdmx.json`, `forecast.cdmx.json` 
 | `/` | `src/pages/index.astro` | Home — **map-first interactive map** (viewport-tall, radar default, 5-layer rail + timeline + preset pins) with the geolocate CTA + search floating on top; preset city cards, favorites, alerts and the footer feedback button below |
 | `/forecast/?lat=&lng=&name=&tz=` | `src/pages/forecast.astro` | Shareable forecast detail; client-rendered from URL params |
 | `/mapa/` | `src/pages/mapa.astro` | Interactive weather map (MapLibre + 8 layers + timeline) |
+| `/alertas/` | `src/pages/alertas.astro` | Push alerts without a backend: ntfy topics for cyclones + SMN by state, per-state RSS links |
+| `/rss/<estado>.xml` | `src/pages/rss/[estado].xml.ts` | Per-state (and `nacional`) SMN RSS feed, prerendered from `smn-by-state.json` |
 | `/privacidad/` | `src/pages/privacidad.astro` | Privacy/legal page |
 | `/rss.xml` | `src/pages/rss.xml.ts` | Build-time SMN alerts RSS 2.0 feed |
 | `/sitemap.xml` | `src/pages/sitemap.xml.ts` | Sitemap |
