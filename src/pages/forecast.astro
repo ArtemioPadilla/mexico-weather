@@ -893,7 +893,7 @@ const base = siteBase();
                 const shown = notifyFired(
                   pending.alerts,
                   typeof Notification === 'undefined' ? undefined : Notification,
-                  `${base}favicon.svg`,
+                  `${siteBase()}favicon.svg`,
                 );
                 if (shown > 0) {
                   store.setItem(
