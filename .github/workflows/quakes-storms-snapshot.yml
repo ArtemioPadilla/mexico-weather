@@ -33,6 +33,8 @@ jobs:
         run: python3 scripts/build-quakes-snapshot.py
 
       - name: Build storms snapshot
+        # Also writes storms-gis.json (cones, tracks, watches, outlook
+        # areas — Stories 18.1 / 18.2) from NHC's KMZ files.
         run: python3 scripts/build-storms-snapshot.py
 
       - name: Publish tropical alerts to ntfy (Story 17.1)
@@ -51,7 +53,7 @@ jobs:
           # See marine-snapshot.yml — stage first so untracked snapshot
           # files register as a real diff. The old per-file
           # `git diff --quiet` skipped never-tracked files entirely.
-          for f in public/data/quakes-snapshot.json public/data/storms-snapshot.json public/data/storms-alerts.json; do
+          for f in public/data/quakes-snapshot.json public/data/storms-snapshot.json public/data/storms-alerts.json public/data/storms-gis.json; do
             git add "$f"
           done
           # `|| ( … )` instead of `if`: bash -e exempts commands inside an

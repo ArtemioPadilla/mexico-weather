@@ -5,6 +5,13 @@ NHC directly. Refresh cadence: every 15 min during hurricane season.
 
 Source: NHC CurrentStorms.json (CORS-enabled, public, refreshes a
 few times per hour). Output: public/data/storms-snapshot.json.
+
+Stories 18.1 / 18.2 add public/data/storms-gis.json: per active system
+the forecast cone, the track (line + one point per forecast hour) and
+the coastal watches/warnings, converted from NHC's KMZ files by
+scripts/nhc_kml.py; plus the Tropical Weather Outlook areas (2-day /
+7-day formation chances) for both basins. A GIS fetch that fails only
+drops that piece — the position snapshot never depends on it.
 """
 from __future__ import annotations
 
@@ -14,9 +21,17 @@ import sys
 import time
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import nhc_kml  # noqa: E402
+
 NHC_URL = 'https://www.nhc.noaa.gov/CurrentStorms.json'
 OUT_PATH = 'public/data/storms-snapshot.json'
+GIS_PATH = 'public/data/storms-gis.json'
 ALERTS_PATH = 'public/data/storms-alerts.json'
+OUTLOOK_URLS = {
+    'atl': 'https://www.nhc.noaa.gov/xgtwo/gtwo_atl.kmz',
+    'pac': 'https://www.nhc.noaa.gov/xgtwo/gtwo_pac.kmz',
+}
 ALERTS_KEEP = 50
 SITE = 'https://artemiop.com/mexico-weather'
 
@@ -114,6 +129,94 @@ def detect_events(prev: dict | None, storms: list[dict], now_iso: str) -> list[d
 
 
 
+def fetch_kmz(url: str) -> list[dict] | None:
+    """Placemarks of a KMZ, or None when it cannot be fetched/parsed."""
+    if not url:
+        return None
+    for attempt in range(2):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'mexico-weather/storms-gis'})
+            with urllib.request.urlopen(req, timeout=60) as r:  # noqa: S310
+                return nhc_kml.parse_kml(nhc_kml.kml_from_kmz(r.read()))
+        except Exception as e:  # noqa: BLE001
+            if attempt == 1:
+                print(f'  GIS skipped {url}: {e}', file=sys.stderr)
+                return None
+            time.sleep(2)
+    return None
+
+
+def storm_gis(raw: dict, summary: dict) -> dict:
+    """Cone / track / watches for one CurrentStorms entry."""
+    kmz = lambda key: ((raw.get(key) or {}).get('kmzFile') or '')  # noqa: E731
+    cone_pm = fetch_kmz(kmz('trackCone'))
+    track_pm = fetch_kmz(kmz('forecastTrack'))
+    ww_pm = fetch_kmz(kmz('windWatchesWarnings'))
+    adv = raw.get('forecastTrack') or raw.get('publicAdvisory') or {}
+    return {
+        **summary,
+        'advisoryNum': str(adv.get('advNum') or ''),
+        'advisoryTime': str(adv.get('issuance') or raw.get('lastUpdate') or ''),
+        'movementDir': raw.get('movementDir'),
+        'movementKt': raw.get('movementSpeed'),
+        'pressureHpa': _num(raw.get('pressure')),
+        'nhcUrl': str((raw.get('publicAdvisory') or {}).get('url') or 'https://www.nhc.noaa.gov/'),
+        'cone': nhc_kml.cone_polygon(cone_pm) if cone_pm else None,
+        'trackLines': nhc_kml.track_lines(track_pm) if track_pm else [],
+        'track': nhc_kml.track_points(track_pm) if track_pm else [],
+        'watches': nhc_kml.watches_warnings(ww_pm) if ww_pm else [],
+    }
+
+
+def _num(v) -> float | None:
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def gis_features(storms: list[dict], outlook: list[dict]) -> list[dict]:
+    """Flat GeoJSON features the map overlay draws, tagged by `kind`."""
+    feats: list[dict] = []
+    for s in storms:
+        base = {'stormId': s['id'], 'name': s['name'], 'classification': s['classification']}
+        if s.get('cone'):
+            feats.append({'type': 'Feature', 'properties': {**base, 'kind': 'cone'}, 'geometry': s['cone']})
+        for line in s.get('trackLines') or []:
+            feats.append({
+                'type': 'Feature',
+                'properties': {**base, 'kind': 'track-line', 'hours': line['hours']},
+                'geometry': {'type': 'LineString', 'coordinates': line['coordinates']},
+            })
+        for p in s.get('track') or []:
+            feats.append({
+                'type': 'Feature',
+                'properties': {
+                    **base, 'kind': 'track-point', 'hour': p['hour'], 'pointKind': p['kind'],
+                    'extended': p['extended'], 'windKt': p['windKt'], 'validAt': p['validAt'],
+                    'label': f"+{p['hour']} h" if p['hour'] else '',
+                },
+                'geometry': {'type': 'Point', 'coordinates': [p['lng'], p['lat']]},
+            })
+        for w in s.get('watches') or []:
+            feats.append({
+                'type': 'Feature',
+                'properties': {**base, 'kind': 'ww', 'wwType': w['type'], 'label': w['label'], 'labelEn': w['labelEn']},
+                'geometry': {'type': 'LineString', 'coordinates': w['coordinates']},
+            })
+    for o in outlook:
+        props = {
+            'kind': 'outlook', 'basin': o['basin'], 'disturbance': o['disturbance'],
+            'pct2': o['pct2'], 'pct7': o['pct7'],
+            'label': f"2 d: {o['pct2'] if o['pct2'] is not None else '?'} % · 7 d: {o['pct7'] if o['pct7'] is not None else '?'} %",
+        }
+        if o.get('area'):
+            feats.append({'type': 'Feature', 'properties': {**props, 'kind': 'outlook-area'}, 'geometry': o['area']})
+        if o.get('point'):
+            feats.append({'type': 'Feature', 'properties': {**props, 'kind': 'outlook-point'}, 'geometry': {'type': 'Point', 'coordinates': o['point']}})
+    return feats
+
+
 def main() -> None:
     for attempt in range(3):
         try:
@@ -128,6 +231,7 @@ def main() -> None:
 
     raw_storms = data.get('activeStorms') or []
     storms = []
+    raw_by_index: list[dict] = []
     for s in raw_storms:
         # Distill to only what the overlay renders. Keys taken from
         # src/lib/map/sources/nhc.ts.
@@ -146,12 +250,40 @@ def main() -> None:
         except (TypeError, ValueError):
             pass
         storms.append({
+            'id': str(s.get('id') or '').strip().lower(),
             'name': name,
             'lat': round(lat, 2),
             'lng': round(lng, 2),
             'classification': classification,
             'intensityKt': intensity_kt,
         })
+        raw_by_index.append(s)
+
+    # Stories 18.1 / 18.2 — cone, track, watches per system + outlook.
+    if os.environ.get('STORMS_GIS_DISABLED') != '1':
+        gis_storms = [storm_gis(raw, dict(summary)) for raw, summary in zip(raw_by_index, storms)]
+        outlook: list[dict] = []
+        for basin, url in OUTLOOK_URLS.items():
+            pm = fetch_kmz(url)
+            if pm:
+                outlook.extend(nhc_kml.outlook_areas(pm, basin))
+        for summary, g in zip(storms, gis_storms):
+            summary['hasDetail'] = bool(g['track'] or g['cone'])
+        gis_doc = {
+            'updated': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+            'source': 'NOAA NHC GIS (KMZ) + Tropical Weather Outlook',
+            'storms': gis_storms,
+            'outlook': outlook,
+            'features': {'type': 'FeatureCollection', 'features': gis_features(gis_storms, outlook)},
+        }
+        os.makedirs(os.path.dirname(GIS_PATH), exist_ok=True)
+        with open(GIS_PATH, 'w', encoding='utf-8') as f:
+            json.dump(gis_doc, f, separators=(',', ':'), ensure_ascii=False)
+        print(
+            f'wrote GIS for {sum(1 for g in gis_storms if g["track"])}/{len(gis_storms)} storms '
+            f'+ {len(outlook)} outlook areas to {GIS_PATH}',
+            file=sys.stderr,
+        )
 
     now_iso = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
     prev = load_json(OUT_PATH)

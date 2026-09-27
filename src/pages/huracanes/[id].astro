@@ -1,0 +1,251 @@
+---
+/**
+ * /huracanes/<id>/ — one page per active tropical system (Story 18.1,
+ * plan PRO_GRATIS E18): forecast track table, coastal watches/warnings
+ * and a deep link into the map, prerendered from
+ * public/data/storms-gis.json (refreshed every 15 min by
+ * scripts/build-storms-snapshot.py; each refresh dispatches CD, so the
+ * set of pages follows the set of active systems). Off-season this
+ * route builds zero pages; the index only links to a page when the
+ * snapshot says it was built (`hasDetail`).
+ */
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteBase } from '../../utils/paths';
+import { breadcrumbLd } from '../../lib/structured-data';
+
+export const prerender = true;
+
+interface TrackPoint {
+  hour: number;
+  kind: string;
+  extended: boolean;
+  lng: number;
+  lat: number;
+  windKt: number | null;
+  validAt: string | null;
+}
+interface Watch {
+  type: string;
+  label: string;
+  labelEn: string;
+}
+interface GisStorm {
+  id: string;
+  name: string;
+  classification: string;
+  intensityKt: number;
+  lat: number;
+  lng: number;
+  advisoryNum: string;
+  advisoryTime: string;
+  movementDir: number | null;
+  movementKt: number | null;
+  pressureHpa: number | null;
+  nhcUrl: string;
+  cone: unknown;
+  track: TrackPoint[];
+  watches: Watch[];
+}
+interface GisDoc {
+  updated?: string;
+  storms?: GisStorm[];
+}
+
+// Astro hoists getStaticPaths, so it may only reference imports —
+// the snapshot read lives inside it.
+export function getStaticPaths() {
+  let doc: GisDoc = {};
+  try {
+    const here = dirname(fileURLToPath(import.meta.url));
+    const path = resolve(here, '../../../public/data/storms-gis.json');
+    doc = JSON.parse(readFileSync(path, 'utf-8')) as GisDoc;
+  } catch {
+    doc = {};
+  }
+  return (doc.storms ?? [])
+    .filter((s) => /^[a-z]{2}\d{6}$/.test(s.id) && ((s.track ?? []).length > 0 || s.cone))
+    .map((s) => ({ params: { id: s.id }, props: { storm: s, updated: doc.updated ?? '' } }));
+}
+
+const { storm, updated } = Astro.props as { storm: GisStorm; updated: string };
+const base = siteBase();
+
+const CLASS_ES: Record<string, string> = {
+  TD: 'Depresión tropical', STD: 'Depresión subtropical', PTC: 'Ciclón tropical potencial',
+  PC: 'Ciclón post-tropical', TS: 'Tormenta tropical', STS: 'Tormenta subtropical',
+  HU: 'Huracán', MH: 'Huracán mayor',
+};
+const CLASS_EN: Record<string, string> = {
+  TD: 'Tropical depression', STD: 'Subtropical depression', PTC: 'Potential tropical cyclone',
+  PC: 'Post-tropical cyclone', TS: 'Tropical storm', STS: 'Subtropical storm',
+  HU: 'Hurricane', MH: 'Major hurricane',
+};
+function category(kt: number): number {
+  if (kt >= 137) return 5;
+  if (kt >= 113) return 4;
+  if (kt >= 96) return 3;
+  if (kt >= 83) return 2;
+  if (kt >= 64) return 1;
+  return 0;
+}
+const kt = Math.round(storm.intensityKt || 0);
+const cat = category(kt);
+const cls = CLASS_ES[storm.classification] ?? storm.classification;
+const clsEn = CLASS_EN[storm.classification] ?? storm.classification;
+const headline = cat ? `Huracán ${storm.name} (categoría ${cat})` : `${cls} ${storm.name}`;
+const headlineEn = cat ? `Hurricane ${storm.name} (category ${cat})` : `${clsEn} ${storm.name}`;
+const title = `${headline} — trayectoria y cono · Clima México`;
+const titleEn = `${headlineEn} — track and cone · Clima México`;
+const description =
+  `Trayectoria pronosticada, cono de incertidumbre y avisos costeros de ${storm.name} ` +
+  `(aviso ${storm.advisoryNum} del NHC). Vientos de ${kt} kt · ${Math.round(kt * 1.852)} km/h.`;
+const descriptionEn =
+  `Forecast track, cone of uncertainty and coastal watches for ${storm.name} ` +
+  `(NHC advisory ${storm.advisoryNum}). Winds ${kt} kt · ${Math.round(kt * 1.852)} km/h.`;
+const canonical = new URL(`${base}huracanes/${storm.id}/`, Astro.site).href;
+const homeUrl = new URL(base, Astro.site).href;
+const indexUrl = new URL(`${base}huracanes/`, Astro.site).href;
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'WebPage', name: headline, url: canonical, inLanguage: 'es-MX', description },
+  breadcrumbLd([
+    { name: 'Inicio', url: homeUrl },
+    { name: 'Huracanes', url: indexUrl },
+    { name: storm.name, url: canonical },
+  ]),
+];
+const mapHref = `${base}mapa/#view=${storm.lat.toFixed(2)},${storm.lng.toFixed(2)},5z&layer=satellite`;
+const fmtPos = (lat: number, lng: number): string =>
+  `${Math.abs(lat).toFixed(1)}°${lat >= 0 ? 'N' : 'S'} ${Math.abs(lng).toFixed(1)}°${lng < 0 ? 'O' : 'E'}`;
+const KIND_ES: Record<string, string> = {
+  initial: 'Posición actual', major: 'Huracán mayor', hurricane: 'Huracán',
+  storm: 'Tormenta tropical', depression: 'Depresión', low: 'Remanente / baja',
+};
+const advDate = storm.advisoryTime ? new Date(storm.advisoryTime) : null;
+const advLabel = advDate && !Number.isNaN(advDate.getTime())
+  ? advDate.toLocaleString('es-MX', { timeZone: 'America/Mexico_City', dateStyle: 'medium', timeStyle: 'short' }) + ' (hora del centro de México)'
+  : storm.advisoryTime;
+const track = storm.track ?? [];
+const watches = storm.watches ?? [];
+const watchTypes = [...new Set(watches.map((w) => w.type))];
+const WATCH_TONE: Record<string, string> = {
+  HWR: 'border-red-300 bg-red-50 text-red-900 dark:border-red-800 dark:bg-red-950 dark:text-red-200',
+  HWA: 'border-pink-300 bg-pink-50 text-pink-900 dark:border-pink-800 dark:bg-pink-950 dark:text-pink-200',
+  TWR: 'border-blue-300 bg-blue-50 text-blue-900 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200',
+  TWA: 'border-yellow-300 bg-yellow-50 text-yellow-900 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-200',
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  titleEn={titleEn}
+  descriptionEn={descriptionEn}
+  lang="es"
+  jsonLd={jsonLd}
+>
+  <main class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+    <div class="max-w-3xl mx-auto px-4 py-8 space-y-6">
+      <nav aria-label="breadcrumb" class="text-sm">
+        <ol class="flex flex-wrap items-center gap-1 text-gray-600 dark:text-gray-400">
+          <li><a href={base} class="inline-flex min-h-[44px] items-center underline hover:text-gray-900 dark:hover:text-gray-200" data-i18n-en="Home">Inicio</a></li>
+          <li aria-hidden="true">›</li>
+          <li><a href={`${base}huracanes/`} class="inline-flex min-h-[44px] items-center underline hover:text-gray-900 dark:hover:text-gray-200" data-i18n-en="Hurricanes">Huracanes</a></li>
+          <li aria-hidden="true">›</li>
+          <li class="text-gray-900 dark:text-gray-100" aria-current="page">{storm.name}</li>
+        </ol>
+      </nav>
+
+      <header class="space-y-2">
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl" data-i18n-en={`🌀 ${headlineEn}`}>
+          <span aria-hidden="true">🌀</span> {headline}
+        </h1>
+        <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n-en={`NHC advisory ${storm.advisoryNum} · ${advLabel}`}>
+          Aviso {storm.advisoryNum} del NHC · {advLabel}
+        </p>
+      </header>
+
+      <dl class="grid grid-cols-2 gap-3 rounded-lg border border-gray-200 p-4 text-sm sm:grid-cols-4 dark:border-gray-800">
+        <div>
+          <dt class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400" data-i18n-en="Sustained winds">Vientos sostenidos</dt>
+          <dd class="mt-0.5 font-semibold tabular-nums">{kt} kt · {Math.round(kt * 1.852)} km/h</dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400" data-i18n-en="Pressure">Presión</dt>
+          <dd class="mt-0.5 font-semibold tabular-nums">{storm.pressureHpa ? `${Math.round(storm.pressureHpa)} hPa` : '—'}</dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400" data-i18n-en="Position">Posición</dt>
+          <dd class="mt-0.5 font-mono">{fmtPos(storm.lat, storm.lng)}</dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400" data-i18n-en="Movement">Movimiento</dt>
+          <dd class="mt-0.5 font-semibold tabular-nums">
+            {storm.movementKt != null && storm.movementDir != null
+              ? `${storm.movementDir}° · ${Math.round(storm.movementKt * 1.852)} km/h`
+              : '—'}
+          </dd>
+        </div>
+      </dl>
+
+      {watchTypes.length > 0 && (
+        <section aria-labelledby="ww-h" class="space-y-2">
+          <h2 id="ww-h" class="text-lg font-semibold" data-i18n-en="Coastal watches and warnings">Vigilancias y avisos costeros</h2>
+          <ul class="flex flex-wrap gap-2 text-sm">
+            {watchTypes.map((t) => {
+              const w = watches.find((x) => x.type === t)!;
+              return (
+                <li class={`rounded-full border px-3 py-1 font-medium ${WATCH_TONE[t] ?? ''}`} data-i18n-en={w.labelEn}>{w.label}</li>
+              );
+            })}
+          </ul>
+          <p class="text-xs text-gray-600 dark:text-gray-400" data-i18n-en="The affected coastline is drawn on the map (Tropical systems layer). Follow SMN / Protección Civil for local instructions.">
+            El tramo de costa afectado se dibuja en el mapa (capa Sistemas tropicales). Sigue al SMN y a Protección Civil para instrucciones locales.
+          </p>
+        </section>
+      )}
+
+      <section aria-labelledby="track-h" class="space-y-2">
+        <h2 id="track-h" class="text-lg font-semibold" data-i18n-en="Forecast track">Trayectoria pronosticada</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="text-left text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+              <tr>
+                <th class="py-1 pr-3" data-i18n-en="Hour">Hora</th>
+                <th class="py-1 pr-3" data-i18n-en="Valid at (NHC)">Válido (NHC)</th>
+                <th class="py-1 pr-3" data-i18n-en="Position">Posición</th>
+                <th class="py-1 pr-3" data-i18n-en="Winds">Vientos</th>
+                <th class="py-1" data-i18n-en="Status">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {track.map((p) => (
+                <tr class={`border-t border-gray-100 dark:border-gray-800 ${p.extended ? 'text-gray-500 dark:text-gray-400' : ''}`} data-track-hour={p.hour}>
+                  <td class="py-1.5 pr-3 tabular-nums">{p.hour === 0 ? 'Ahora' : `+${p.hour} h`}</td>
+                  <td class="py-1.5 pr-3">{p.validAt ?? '—'}</td>
+                  <td class="py-1.5 pr-3 font-mono">{fmtPos(p.lat, p.lng)}</td>
+                  <td class="py-1.5 pr-3 tabular-nums">{p.windKt != null ? `${p.windKt} kt · ${Math.round(p.windKt * 1.852)} km/h` : '—'}</td>
+                  <td class="py-1.5">{KIND_ES[p.kind] ?? p.kind}{p.extended ? ' (días 4–5)' : ''}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-gray-600 dark:text-gray-400" data-i18n-en="The cone of uncertainty holds the centre about two thirds of the time; impacts (wind, rain, surge) reach well beyond it. Days 4–5 are shown dimmed.">
+          El cono de incertidumbre contiene al centro unas dos de cada tres veces; los impactos (viento, lluvia, marea) llegan mucho más allá. Los días 4–5 se muestran atenuados.
+        </p>
+      </section>
+
+      <section class="flex flex-wrap gap-3 text-sm">
+        <a href={mapHref} class="inline-flex min-h-[44px] items-center rounded-lg bg-blue-600 px-4 font-medium text-white hover:bg-blue-700" data-i18n-en="View on the map →">Ver en el mapa →</a>
+        <a href={storm.nhcUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center rounded-lg border border-gray-300 px-4 font-medium hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-900" data-i18n-en="NHC public advisory →">Aviso público del NHC →</a>
+      </section>
+
+      <p class="text-xs text-gray-500 dark:text-gray-400" data-i18n-en={`Source: NOAA National Hurricane Center (GIS KMZ). Snapshot ${updated}.`}>
+        Fuente: NOAA National Hurricane Center (GIS KMZ). Instantánea {updated}.
+      </p>
+    </div>
+  </main>
+</BaseLayout>

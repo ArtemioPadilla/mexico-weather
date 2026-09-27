@@ -111,7 +111,7 @@ export function parseNhcResponse(raw: unknown): NhcStorm[] {
  *  the caller falls through to the live NHC endpoint. */
 async function fetchStaticSnapshot(
   base: string | undefined,
-  signal: AbortSignal | undefined,
+  signal: AbortSignal | undefined
 ): Promise<NhcStorm[] | null> {
   if (!base) return null;
   try {
@@ -146,9 +146,7 @@ async function fetchStaticSnapshot(
 /** Factory: returns an nhcSource bound to a specific site base, so
  *  the static cache lookup uses the right URL. Falls through to the
  *  live endpoint when the cache is unavailable. */
-export function createNhcSource(
-  base?: string,
-): DataSource<void, NhcStorm[]> {
+export function createNhcSource(base?: string): DataSource<void, NhcStorm[]> {
   return {
     id: 'nhc-current',
     ttl: TTL_MS,
@@ -167,3 +165,39 @@ export function createNhcSource(
 /** Default singleton — no base path; only the live endpoint is hit.
  *  Kept for backwards compatibility with any existing imports. */
 export const nhcSource: DataSource<void, NhcStorm[]> = createNhcSource();
+
+/** Static GIS snapshot emitted by scripts/build-storms-snapshot.py
+ *  (Stories 18.1 / 18.2): forecast cones, tracks, watches/warnings and
+ *  Tropical Weather Outlook areas as one FeatureCollection tagged by
+ *  `properties.kind`. Snapshot-only — NHC's KMZ files are not CORS-
+ *  readable from a browser, so there is no live fallback. */
+const GIS_SNAPSHOT_PATH = 'data/storms-gis.json';
+
+export interface StormsGisSource {
+  fetch: (signal?: AbortSignal) => Promise<GeoJSON.FeatureCollection | null>;
+}
+
+export function createStormsGisSource(base?: string): StormsGisSource {
+  return {
+    async fetch(signal) {
+      if (!base) return null;
+      try {
+        const res = await cachedFetch(`${base}${GIS_SNAPSHOT_PATH}`, {
+          signal,
+        });
+        if (!res.ok) return null;
+        const doc = (await res.json()) as { features?: unknown };
+        const fc = doc?.features as GeoJSON.FeatureCollection | undefined;
+        if (
+          !fc ||
+          fc.type !== 'FeatureCollection' ||
+          !Array.isArray(fc.features)
+        )
+          return null;
+        return fc;
+      } catch {
+        return null;
+      }
+    },
+  };
+}

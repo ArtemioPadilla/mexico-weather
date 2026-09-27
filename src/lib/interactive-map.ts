@@ -99,6 +99,7 @@ import { ui } from '../i18n/ui';
 import { siteBase } from '../utils/paths';
 import {
   createNhcSource,
+  createStormsGisSource,
   type NhcStorm,
   GIBS_LAYERS,
   gibsTileUrl,
@@ -210,6 +211,7 @@ import { createRadarCoverageOverlay } from './map/overlays/radar-coverage';
 import { createNightLineOverlay } from './map/overlays/night-line';
 import { createNightLightsOverlay } from './map/overlays/night-lights';
 import { createTropicalStormsOverlay } from './map/overlays/tropical-storms';
+import { createTropicalOutlookOverlay } from './map/overlays/tropical-outlook';
 import {
   createBasemapThemeController,
   pickBasemapTiles,
@@ -1518,18 +1520,33 @@ export async function initInteractiveMap(
   // Tropical storms overlay — extracted to src/lib/map/overlays/tropical-storms.ts.
   // The factory takes the NHC source and an onEmpty callback so it
   // can auto-disable the checkbox when there are no active systems.
+  const stormsGisSource = createStormsGisSource(base);
+  const nhcSourceBound = createNhcSource(base);
   const tropicalStormsOverlay = createTropicalStormsOverlay(
     map,
-    createNhcSource(base),
+    {
+      fetch: () => nhcSourceBound.fetch(undefined, undefined),
+      // Story 18.1 — cone / track / watches from the GIS snapshot.
+      fetchGis: () => stormsGisSource.fetch(),
+    },
     () => {
       tropicalEnabled = false;
       refreshOverlayCheckboxes();
     }
   );
+  // Story 18.2 — NHC Tropical Weather Outlook areas (2 d / 7 d chance).
+  const tropicalOutlookOverlay = createTropicalOutlookOverlay(
+    map,
+    () => stormsGisSource.fetch(),
+    () => refreshOverlayCheckboxes()
+  );
   // Backwards-compat alias used by callers below (refreshTropicalStorms
   // is invoked from the map's 'load' handler).
-  const refreshTropicalStorms = (): Promise<void> =>
-    tropicalStormsOverlay.refresh();
+  const refreshTropicalStorms = async (): Promise<void> => {
+    await tropicalStormsOverlay.refresh();
+    await tropicalOutlookOverlay.refresh();
+    refreshOverlayCheckboxes();
+  };
 
   function refreshIsobars(): void {
     if (activeLayer !== 'pressure' || !fieldGrid || !fieldBounds) {
@@ -2697,7 +2714,8 @@ export async function initInteractiveMap(
       | 'webcams'
       | 'lakes'
       | 'histStorms'
-      | 'smnStateTint';
+      | 'smnStateTint'
+      | 'outlook';
     label: string;
     shortcut: string;
     isEnabled: () => boolean;
@@ -2714,6 +2732,13 @@ export async function initInteractiveMap(
         tropicalEnabled = on;
         tropicalStormsOverlay.setEnabled(on);
       },
+    },
+    {
+      id: 'outlook',
+      label: 'Posible desarrollo (2 / 7 d)',
+      shortcut: '',
+      isEnabled: () => tropicalOutlookOverlay.isEnabled(),
+      setEnabled: (on) => tropicalOutlookOverlay.setEnabled(on),
     },
     {
       id: 'graticule',

@@ -161,14 +161,14 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 
 ### E18 · Tormentas y valores en el mapa (P2)
 
-**Story 18.1 — Cono y trayectoria pronosticada de ciclones** · est 3d
-- [ ] `build-storms-snapshot.py`: por cada sistema activo en `CurrentStorms.json`, descargar el GIS de NHC (KMZ/shapefile de `forecastCone`, `forecastTrack`, `watchesWarnings`), convertir a GeoJSON (Python, `zipfile` + parser KML sin deps pesadas).
-- [ ] Overlay `tropical`: cono (fill 15 %), track con puntos por advisory (categoría por color), watches/warnings como líneas de costa.
-- [ ] `/huracanes/<id>/` prerenderizada por sistema activo: tabla de track, cono, avisos en texto, "ver en el mapa".
+**Story 18.1 — Cono y trayectoria pronosticada de ciclones** · est 3d · **shipped 2026-09-27**
+- [x] `build-storms-snapshot.py`: por cada sistema activo en `CurrentStorms.json`, descarga los KMZ `trackCone` / `forecastTrack` / `windWatchesWarnings` y los convierte con `scripts/nhc_kml.py` (zipfile + xml.etree, sin deps) a `public/data/storms-gis.json` (~230 KB con 4 sistemas; un KMZ que falla solo omite esa pieza).
+- [x] Overlay `tropical`: cono (fill 15 %), track 72 h sólido / 120 h punteado con puntos por hora de pronóstico (color por categoría, días 4–5 atenuados), watches/warnings como líneas de costa (colores NHC).
+- [x] `/huracanes/<id>/` prerenderizada por sistema activo: tabla de track, avisos costeros, "ver en el mapa"; el índice enlaza solo cuando `hasDetail`.
 - Acceptance: con un sistema activo, el cono coincide con nhc.noaa.gov; sin sistemas, la página lista "sin actividad" y el overlay se auto-oculta (ya lo hace).
 
-**Story 18.2 — Áreas de posible desarrollo (2 días / 7 días)** · est 1d
-- [ ] NHC "Tropical Weather Outlook" GIS (`gtwo_areas`) → overlay punteado con "% en 2 d / 7 d".
+**Story 18.2 — Áreas de posible desarrollo (2 días / 7 días)** · est 1d · **shipped 2026-09-27**
+- [x] NHC "Tropical Weather Outlook" GIS (`xgtwo/gtwo_atl.kmz` + `gtwo_pac.kmz`; `gtwo_areas.kmz` ya no existe) → overlay "Posible desarrollo (2 / 7 d)" con contorno punteado y etiqueta "2 d: 40 % · 7 d: 70 %", color por la probabilidad a 7 d como el gráfico del NHC; se auto-oculta sin áreas.
 - Acceptance: los porcentajes coinciden con el TWO vigente.
 
 **Story 18.3 — Isolíneas con valores y modo mira** · est 2d

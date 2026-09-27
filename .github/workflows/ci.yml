@@ -26,6 +26,9 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
+      # Stories 18.1 / 18.2 — the NHC KMZ → GeoJSON parser has its own
+      # dependency-free self-test (python3 ships on ubuntu-latest).
+      - run: python3 scripts/nhc_kml.py --selftest
         env:
           # Complete the incomplete SMN TLS chain (see src/data/smn-ca.pem)
           # so the RSS endpoint fetches real avisos; TLS stays verified.

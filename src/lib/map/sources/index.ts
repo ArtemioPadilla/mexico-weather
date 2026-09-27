@@ -24,6 +24,8 @@ export {
 
 export {
   nhcSource,
+  createStormsGisSource,
+  type StormsGisSource,
   createNhcSource,
   parseNhcResponse,
   type NhcStorm,
