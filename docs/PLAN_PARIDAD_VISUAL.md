@@ -58,10 +58,11 @@ Salvedad: la comparación es sobre DOM y capturas con red simulada (el sandbox n
 - [ ] Test: el scheduler no pide más de N frames, respeta el presupuesto y se cancela.
 - Acceptance: loop de satélite sin parpadeo a 700 ms por frame; ≤ 1 tesela nueva por frame en la 2.ª vuelta.
 
-**Story 21.4 — Sin mapa gris: skeleton hasta el primer frame** · est ½d
-- [ ] Contenedor del mapa con gradiente oscuro + shimmer (`im-root::before`) que se desvanece al primer `sourcedata` cargado; sin JS extra en el LCP.
-- [ ] Reusar en el embed del home y en las páginas por capa.
+**Story 21.4 — Sin mapa gris: skeleton hasta el primer frame** · est ½d · **shipped 2026-09-27**
+- [x] Contenedor del mapa con gradiente oscuro + shimmer (`im-root::before`) que se desvanece al primer `sourcedata` cargado; sin JS extra en el LCP.
+- [x] Reusar en el embed del home y en las páginas por capa.
 - Acceptance: nunca se ve un rectángulo gris plano; `map-first-paint.spec` sigue verde.
+- Nota (cómo quedó): CSS puro en `global.css` (`.im-root::before`: gradiente radial `#1e293b → #0a0e1a` + shimmer lineal de 1.8 s, `z-index: 5` — sobre lienzo y controles de MapLibre, bajo el chrome flotante —, `pointer-events: none`, sin animación con `prefers-reduced-motion`); se desvanece 0.5 s y pasa a `visibility: hidden` cuando el root recibe `.im-ready`. La decisión de *cuándo* vive en `src/lib/map/chrome/map-skeleton.ts` (puro, con test jsdom): primer `sourcedata` con `isSourceLoaded`, más `load` como cinturón y un tope de **8 s** como tirantes para que un mapa sin teselas (offline, CDN caído) nunca esconda su chrome; `destroy()` limpia el temporizador. Como la regla va por la clase `.im-root` del componente Astro, el embed del home, `/mapa`, las páginas por capa y el embed de `/forecast` la comparten sin tocar sus páginas. e2e (teselas retenidas y luego liberadas): el pseudo-elemento existe, opaco, `pointer-events: none`, `z-index < 10`, sin `im-ready`; al soltar las teselas el root recibe `im-ready` y la opacidad llega a 0. `map-first-paint.spec` no simula teselas (mide píxeles reales), así que los 3 tests de pintado se validan en CI; en el sandbox pasan los 3 de montaje sin rAF y, con un tablero 256×256 simulado en una copia local no versionada, también los 3 de pintado.
 
 ---
 

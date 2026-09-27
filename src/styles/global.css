@@ -53,6 +53,61 @@
 }
 
 /*
+ * Story 21.4 — no flat gray map, ever. Every map root (`.im-root`: /mapa,
+ * the home embed, the layer pages, the forecast embed) paints a dark
+ * gradient with a slow shimmer through a pseudo-element from the first
+ * HTML byte — pure CSS, nothing on the LCP path — and fades it out when
+ * interactive-map.ts adds `.im-ready` on the first loaded source (see
+ * src/lib/map/chrome/map-skeleton.ts). z-index 5 sits above the MapLibre
+ * canvas/controls (z ≤ 2) and below the floating chrome (z ≥ 10);
+ * pointer-events none so the map is draggable underneath from frame one.
+ * visibility flips after the fade so the layer is gone, not just clear.
+ */
+.im-root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background:
+    linear-gradient(
+        110deg,
+        transparent 40%,
+        rgb(255 255 255 / 0.05) 50%,
+        transparent 60%
+      )
+      0 0 / 250% 100% no-repeat,
+    radial-gradient(120% 90% at 50% 0%, #1e293b 0%, #0f172a 55%, #0a0e1a 100%);
+  animation: im-shimmer 1.8s linear infinite;
+  opacity: 1;
+  transition:
+    opacity 0.5s ease-out,
+    visibility 0s linear 0.5s;
+}
+.im-root.im-ready::before {
+  opacity: 0;
+  visibility: hidden;
+  animation: none;
+}
+@keyframes im-shimmer {
+  from {
+    background-position:
+      150% 0,
+      0 0;
+  }
+  to {
+    background-position:
+      -100% 0,
+      0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .im-root::before {
+    animation: none;
+  }
+}
+
+/*
  * Tailwind v4 changed the default border/divide color from `gray-200` to
  * `currentColor`. The markup uses many bare `border` utilities that relied on
  * the v3 gray-200 default. This is the documented v4 compatibility shim to

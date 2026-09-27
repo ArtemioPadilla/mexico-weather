@@ -230,6 +230,7 @@ import {
 } from './map/chrome/basemap-theme';
 import { createSunLayer } from './map/layers/sun-layer';
 import { createWeatherRaster } from './map/layers/weather-raster';
+import { createSkeletonReveal, findMapRoot } from './map/chrome/map-skeleton';
 import {
   type MapSettings,
   readSettings,
@@ -858,8 +859,13 @@ export async function initInteractiveMap(
   // sourcedata event that fires exactly when tiles finish decoding, then
   // schedule a paint. Cheap (the event also fires during normal panning,
   // which already triggers paints anyway, so this is a no-op there).
+  // Story 21.4 — the CSS-only loading skeleton on `.im-root::before`
+  // fades out on the first loaded source (first tiles decoded); `load`
+  // and an 8 s ceiling guarantee it never masks a map whose tiles fail.
+  const skeleton = createSkeletonReveal(findMapRoot(opts.els.container));
   map.on('sourcedata', (e: { isSourceLoaded?: boolean; sourceId?: string }) => {
     if (!e.isSourceLoaded) return;
+    skeleton.onSourceData(e);
     try {
       map.triggerRepaint();
     } catch {
@@ -882,6 +888,7 @@ export async function initInteractiveMap(
   // can clear it if the map is torn down before it self-clears.
   let repaintNudgeInterval = 0;
   map.on('load', () => {
+    skeleton.reveal();
     renderPins();
     // Fetch active NHC tropical systems once at mount. List is empty
     // outside hurricane season (Dec-May) so this is a no-op then; in
@@ -3889,6 +3896,7 @@ export async function initInteractiveMap(
       window.clearTimeout(hashTimer);
       window.clearTimeout(qTimer);
       if (repaintNudgeInterval) window.clearInterval(repaintNudgeInterval);
+      skeleton.dispose();
       if (surfaceInterval) window.clearInterval(surfaceInterval);
       if (surfaceTimeout) window.clearTimeout(surfaceTimeout);
       if (acOutsideClickHandler)

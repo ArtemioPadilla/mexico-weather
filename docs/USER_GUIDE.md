@@ -31,7 +31,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 
 ### Explore the interactive map (`/mapa`)
 
-1. The map opens centred on Mexico, with **pins** for preset cities and (after a search/geolocate) a single user pin. Click a pin → popup → "Ver pronóstico completo →" deep-link to `/forecast`.
+1. The map opens centred on Mexico, with **pins** for preset cities and (after a search/geolocate) a single user pin. Until the first tiles land, the map area shows a dark gradient with a subtle shimmer instead of a flat gray box (Story 21.4; every embed — home, `/mapa`, layer pages, `/forecast` — shares it, and it fades within ~0.5 s of the first loaded tiles, or after 8 s at most if tiles never arrive). Click a pin → popup → "Ver pronóstico completo →" deep-link to `/forecast`.
 2. Use the **layer rail** (top-left) to switch the active weather layer. Only one weather layer is active at a time; **Base** turns them all off. While **satellite** or **radar** is on screen the basemap switches to the dark gray canvas even in the light theme, and place labels / boundaries are drawn *above* the imagery at 80 % so they stay readable over cloud tops (Story 21.1); switching back to Base returns to the theme's own canvas. The rail, the timeline pill and the legend bar are dark translucent panels in both themes — content pages keep the regular light/dark look.
 3. When a weather layer is active, the **opacity slider** appears and changes the layer's transparency live. Each layer has a sensible default opacity (radar 80%, satellite 100%, temperature/humidity/pressure 65–75%).
 4. The **legend** (left rail) reflects the active layer:

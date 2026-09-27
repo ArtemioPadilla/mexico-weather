@@ -388,6 +388,73 @@ test.describe('mapa page', () => {
     expect((await probe()).refOpacity).toBe(1);
   });
 
+  // Story 21.4 — the CSS-only skeleton on `.im-root::before` is painted
+  // from the first byte and fades once the first source has loaded.
+  test('map root drops the loading skeleton once the first tiles land', async ({
+    page,
+  }) => {
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
+    );
+    // Hold the basemap tiles until we have looked at the skeleton, then
+    // release them: the fade must follow the FIRST loaded source, not
+    // the page load.
+    let releaseTiles!: () => void;
+    const gate = new Promise<void>((r) => {
+      releaseTiles = r;
+    });
+    await page.route('**/*.arcgisonline.com/**', async (route) => {
+      await gate;
+      await route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      });
+    });
+
+    await page.goto('mapa/');
+    const root = page.locator('#map-root');
+    await expect(root).toBeVisible();
+    const before = await root.evaluate((el) => {
+      const cs = getComputedStyle(el, '::before');
+      return {
+        content: cs.content,
+        position: cs.position,
+        opacity: cs.opacity,
+        pointerEvents: cs.pointerEvents,
+        zIndex: cs.zIndex,
+        ready: el.classList.contains('im-ready'),
+      };
+    });
+    // Skeleton present (a real box, not `none`), fully opaque, letting
+    // pointer events through, under the floating chrome (z ≥ 10).
+    expect(before.content).not.toBe('none');
+    expect(before.position).toBe('absolute');
+    expect(before.opacity).toBe('1');
+    expect(before.pointerEvents).toBe('none');
+    expect(Number(before.zIndex)).toBeLessThan(10);
+    expect(before.ready).toBe(false);
+
+    releaseTiles();
+    await expect(root).toHaveClass(/\bim-ready\b/);
+    await expect
+      .poll(() =>
+        root.evaluate((el) => getComputedStyle(el, '::before').opacity)
+      )
+      .toBe('0');
+    // Every embed shares the rule: the pseudo-element is keyed on the
+    // `.im-root` class the Astro component gives every map root.
+    expect(await root.evaluate((el) => el.classList.contains('im-root'))).toBe(
+      true
+    );
+  });
+
   test('timeline appears for radar and the range scrubs frames', async ({
     page,
   }) => {
