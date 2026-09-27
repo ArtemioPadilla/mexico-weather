@@ -46,6 +46,9 @@ export interface UiStrings {
   timeline_prev: string;
   timeline_next: string;
   timeline_now: string;
+  timeline_extend: string;
+  timeline_extending: string;
+  timeline_extend_failed: string;
   map_layer_temperature: string;
   map_layer_humidity: string;
   map_layer_pressure: string;
@@ -128,6 +131,9 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     timeline_prev: 'Cuadro anterior',
     timeline_next: 'Cuadro siguiente',
     timeline_now: 'Ahora',
+    timeline_extend: 'Ver 10 días',
+    timeline_extending: 'Cargando 10 días…',
+    timeline_extend_failed: 'No se pudo ampliar el pronóstico. Intenta de nuevo.',
     map_layer_temperature: 'Temperatura',
     map_layer_humidity: 'Humedad',
     map_layer_pressure: 'Presión',
@@ -207,6 +213,9 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     timeline_prev: 'Previous frame',
     timeline_next: 'Next frame',
     timeline_now: 'Now',
+    timeline_extend: 'See 10 days',
+    timeline_extending: 'Loading 10 days…',
+    timeline_extend_failed: 'Could not extend the forecast. Try again.',
     map_layer_temperature: 'Temperature',
     map_layer_humidity: 'Humidity',
     map_layer_pressure: 'Pressure',

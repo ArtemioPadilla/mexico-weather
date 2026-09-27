@@ -40,22 +40,57 @@ export function viewportGrid(b: Bounds, cols: number, rows: number): LngLat[] {
   return pts;
 }
 
+/** Time window of a field request (Story 15.1 — plan PRO_GRATIS E15).
+ *
+ *  Open-Meteo bills by call, not by payload, so a longer window costs
+ *  nothing in quota — only bytes. The default keeps the 2-day hourly
+ *  window the pre-baked snapshots use; the extended window trades
+ *  hourly for 3-hourly steps so 10 days of 768 points stays ~400 KB
+ *  per variable. */
+export interface FieldRange {
+  /** Days ahead (Open-Meteo allows up to 16). */
+  forecastDays: number;
+  /** Open-Meteo `temporal_resolution`. Omit for hourly. */
+  temporalResolution?: 'hourly_3' | 'hourly_6';
+  /** Days back (`past_days`). Omit for none. */
+  pastDays?: number;
+}
+
+/** What the snapshots bake and what a layer loads first: 48 hourly frames. */
+export const DEFAULT_FIELD_RANGE: FieldRange = { forecastDays: 2 };
+
+/** What "Ver 10 días" fetches on demand: 3-hourly to +10 d. Merged on
+ *  top of the default grid, the hourly frames win where they overlap. */
+export const EXTENDED_FIELD_RANGE: FieldRange = {
+  forecastDays: 10,
+  temporalResolution: 'hourly_3',
+};
+
+function rangeParams(range: FieldRange | undefined): string {
+  const r = range ?? DEFAULT_FIELD_RANGE;
+  let s = `&forecast_days=${r.forecastDays}`;
+  if (r.pastDays) s += `&past_days=${r.pastDays}`;
+  if (r.temporalResolution) s += `&temporal_resolution=${r.temporalResolution}`;
+  return s;
+}
+
 /** Keyless Open-Meteo bulk forecast URL for the given points + hourly
  *  variable. The optional `model` parameter routes the request to a
  *  specific NWP (e.g. 'icon_seamless'); omit it for Open-Meteo's
- *  default best_match selector. */
+ *  default best_match selector. `range` widens the time window (see
+ *  {@link FieldRange}); omitted ⇒ the 2-day default. */
 export function buildFieldUrl(
   points: LngLat[],
   hourlyVar: string,
   model?: string,
+  range?: FieldRange
 ): string {
   const lats = points.map((p) => p.lat).join(',');
   const lngs = points.map((p) => p.lng).join(',');
-  const modelParam =
-    model && model !== 'best_match' ? `&models=${model}` : '';
+  const modelParam = model && model !== 'best_match' ? `&models=${model}` : '';
   return (
     `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}` +
-    `&hourly=${hourlyVar}&forecast_days=2&timezone=UTC${modelParam}`
+    `&hourly=${hourlyVar}${rangeParams(range)}&timezone=UTC${modelParam}`
   );
 }
 
@@ -76,7 +111,7 @@ async function fetchChunks(
   buildUrl: (chunk: LngLat[]) => string,
   fetchImpl: typeof fetch,
   label: string,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ): Promise<unknown[]> {
   const jobs: Promise<unknown>[] = [];
   for (let i = 0; i < points.length; i += FIELD_CHUNK_SIZE) {
@@ -91,7 +126,7 @@ async function fetchChunks(
           throw new Error(`${label} chunk ${i} failed: HTTP ${res.status}`);
         }
         return res.json() as Promise<unknown>;
-      }),
+      })
     );
   }
   const results = await Promise.all(jobs);
@@ -112,14 +147,14 @@ export async function fetchFieldChunks(
   points: LngLat[],
   hourlyVar: string,
   fetchImpl: typeof fetch,
-  opts?: { signal?: AbortSignal; model?: string },
+  opts?: { signal?: AbortSignal; model?: string; range?: FieldRange }
 ): Promise<unknown[]> {
   return fetchChunks(
     points,
-    (chunk) => buildFieldUrl(chunk, hourlyVar, opts?.model),
+    (chunk) => buildFieldUrl(chunk, hourlyVar, opts?.model, opts?.range),
     fetchImpl,
     'field',
-    opts?.signal,
+    opts?.signal
   );
 }
 
@@ -129,14 +164,14 @@ export async function fetchWindChunks(
   points: LngLat[],
   speedVar: 'wind_speed_10m' | 'wind_gusts_10m',
   fetchImpl: typeof fetch,
-  opts?: { signal?: AbortSignal; model?: string },
+  opts?: { signal?: AbortSignal; model?: string; range?: FieldRange }
 ): Promise<unknown[]> {
   return fetchChunks(
     points,
-    (chunk) => buildWindUrl(chunk, speedVar, opts?.model),
+    (chunk) => buildWindUrl(chunk, speedVar, opts?.model, opts?.range),
     fetchImpl,
     'wind',
-    opts?.signal,
+    opts?.signal
   );
 }
 
@@ -157,7 +192,7 @@ function isNumberOrNullArray(a: unknown): a is (number | null)[] {
 export function parseFieldResponse(
   json: unknown,
   points: LngLat[],
-  hourlyVar: string,
+  hourlyVar: string
 ): FieldGrid | null {
   if (!json) return null;
   const arr = Array.isArray(json) ? json : [json];
@@ -165,9 +200,7 @@ export function parseFieldResponse(
   const first = arr[0] as { hourly?: { time?: unknown } } | undefined;
   const times = first?.hourly?.time;
   if (!Array.isArray(times) || times.length === 0) return null;
-  const pickValues = (
-    h: Record<string, unknown> | undefined,
-  ): unknown => {
+  const pickValues = (h: Record<string, unknown> | undefined): unknown => {
     if (!h) return undefined;
     if (h[hourlyVar] !== undefined) return h[hourlyVar];
     // Model-suffixed variant (e.g. temperature_2m_icon_seamless).
@@ -179,7 +212,8 @@ export function parseFieldResponse(
   };
   const out: FieldGrid['points'] = [];
   for (let i = 0; i < arr.length; i++) {
-    const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)?.hourly;
+    const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)
+      ?.hourly;
     const values = pickValues(h);
     if (!isNumberOrNullArray(values)) return null;
     out.push({ lat: points[i].lat, lng: points[i].lng, values });
@@ -188,12 +222,86 @@ export function parseFieldResponse(
 }
 
 /** Parse an ISO string as UTC: bare strings (no Z / offset) are treated as UTC per Open-Meteo. */
-function parseUtcMs(s: string): number {
+export function parseUtcMs(s: string): number {
   return /[Zz]|[+-]\d{2}:\d{2}$/.test(s) ? Date.parse(s) : Date.parse(s + 'Z');
 }
 
+/** Merge an extended (longer, coarser) grid under a base grid over the
+ *  same points. The result's `times` is the sorted union; where both
+ *  grids carry a timestamp the base (hourly) value wins. Returns null
+ *  when the point lists don't line up (different grid ⇒ can't merge). */
+export function mergeFieldGrids(
+  base: FieldGrid,
+  ext: FieldGrid
+): FieldGrid | null {
+  const n = base.points.length;
+  if (n !== ext.points.length) return null;
+  for (let i = 0; i < n; i++) {
+    if (
+      base.points[i].lat !== ext.points[i].lat ||
+      base.points[i].lng !== ext.points[i].lng
+    ) {
+      return null;
+    }
+  }
+  const baseIdx = new Map<number, number>();
+  base.times.forEach((t, i) => baseIdx.set(parseUtcMs(t), i));
+  const extIdx = new Map<number, number>();
+  ext.times.forEach((t, i) => extIdx.set(parseUtcMs(t), i));
+  const allMs = Array.from(new Set([...baseIdx.keys(), ...extIdx.keys()])).sort(
+    (a, b) => a - b
+  );
+  const times = allMs.map((ms) => {
+    const bi = baseIdx.get(ms);
+    if (bi !== undefined) return base.times[bi];
+    return ext.times[extIdx.get(ms) as number];
+  });
+  const points = base.points.map((bp, i) => {
+    const ep = ext.points[i];
+    const values = allMs.map((ms) => {
+      const bi = baseIdx.get(ms);
+      if (bi !== undefined) return bp.values[bi] ?? null;
+      const ei = extIdx.get(ms) as number;
+      return ep.values[ei] ?? null;
+    });
+    return { lat: bp.lat, lng: bp.lng, values };
+  });
+  return { times, points };
+}
+
+/** Same as {@link mergeFieldGrids} for u/v wind grids. */
+export function mergeWindGrids(base: WindGrid, ext: WindGrid): WindGrid | null {
+  const toField = (g: WindGrid, comp: 'u' | 'v'): FieldGrid => ({
+    times: g.times,
+    points: g.points.map((p) => ({ lat: p.lat, lng: p.lng, values: p[comp] })),
+  });
+  const u = mergeFieldGrids(toField(base, 'u'), toField(ext, 'u'));
+  const v = mergeFieldGrids(toField(base, 'v'), toField(ext, 'v'));
+  if (!u || !v) return null;
+  return {
+    times: u.times,
+    points: u.points.map((p, i) => ({
+      lat: p.lat,
+      lng: p.lng,
+      u: p.values,
+      v: v.points[i].values,
+    })),
+  };
+}
+
+/** True when the grid already spans more than the 2-day default window. */
+export function isExtendedGrid(g: { times: string[] }): boolean {
+  if (g.times.length < 2) return false;
+  const span = parseUtcMs(g.times[g.times.length - 1]) - parseUtcMs(g.times[0]);
+  return span > 3 * 86_400_000;
+}
+
 /** Hourly index closest to `iso`; nearest to `nowMs` if iso null/invalid; -1 if empty. */
-export function fieldFrameIndex(times: string[], iso: string | null, nowMs: number): number {
+export function fieldFrameIndex(
+  times: string[],
+  iso: string | null,
+  nowMs: number
+): number {
   if (times.length === 0) return -1;
   const ms = iso ? parseUtcMs(iso) : NaN;
   const target = Number.isFinite(ms) ? ms : nowMs;
@@ -341,7 +449,12 @@ import { windUv } from './mapwind';
 /** Wind grid: u/v per point per hour, with nulls for no-data cells. */
 export interface WindGrid {
   times: string[];
-  points: { lat: number; lng: number; u: (number | null)[]; v: (number | null)[] }[];
+  points: {
+    lat: number;
+    lng: number;
+    u: (number | null)[];
+    v: (number | null)[];
+  }[];
 }
 
 /** Keyless Open-Meteo bulk URL fetching speed + direction together.
@@ -350,14 +463,14 @@ export function buildWindUrl(
   points: LngLat[],
   speedVar: 'wind_speed_10m' | 'wind_gusts_10m' = 'wind_speed_10m',
   model?: string,
+  range?: FieldRange
 ): string {
   const lats = points.map((p) => p.lat).join(',');
   const lngs = points.map((p) => p.lng).join(',');
-  const modelParam =
-    model && model !== 'best_match' ? `&models=${model}` : '';
+  const modelParam = model && model !== 'best_match' ? `&models=${model}` : '';
   return (
     `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}` +
-    `&hourly=${speedVar},wind_direction_10m&forecast_days=2&timezone=UTC${modelParam}`
+    `&hourly=${speedVar},wind_direction_10m${rangeParams(range)}&timezone=UTC${modelParam}`
   );
 }
 
@@ -372,7 +485,7 @@ function isSpeedDirArray(a: unknown): a is (number | null)[] {
 export function parseWindResponse(
   json: unknown,
   points: LngLat[],
-  speedVar: 'wind_speed_10m' | 'wind_gusts_10m' = 'wind_speed_10m',
+  speedVar: 'wind_speed_10m' | 'wind_gusts_10m' = 'wind_speed_10m'
 ): WindGrid | null {
   if (!json) return null;
   const arr = Array.isArray(json) ? json : [json];
@@ -383,7 +496,7 @@ export function parseWindResponse(
   const out: WindGrid['points'] = [];
   const pickPrefix = (
     h: Record<string, unknown> | undefined,
-    prefix: string,
+    prefix: string
   ): unknown => {
     if (!h) return undefined;
     if (h[prefix] !== undefined) return h[prefix];
@@ -394,10 +507,16 @@ export function parseWindResponse(
     return undefined;
   };
   for (let i = 0; i < arr.length; i++) {
-    const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)?.hourly;
+    const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)
+      ?.hourly;
     const sp = pickPrefix(h, speedVar);
     const dr = pickPrefix(h, 'wind_direction_10m');
-    if (!isSpeedDirArray(sp) || !isSpeedDirArray(dr) || sp.length !== times.length || dr.length !== times.length) {
+    if (
+      !isSpeedDirArray(sp) ||
+      !isSpeedDirArray(dr) ||
+      sp.length !== times.length ||
+      dr.length !== times.length
+    ) {
       return null;
     }
     const u: (number | null)[] = [];

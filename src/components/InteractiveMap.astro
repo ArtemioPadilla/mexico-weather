@@ -351,6 +351,18 @@ const cfg = JSON.stringify({
         class="hidden rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
         >Ahora</button
       >
+      {/* Story 15.1 — on-demand 10-day window for field/wind layers.
+          Revealed by interactive-map.ts only while the active grid is
+          the 2-day default; hidden again once extended. */}
+      <button
+        id="tl-extend"
+        type="button"
+        hidden
+        class="rounded-full bg-blue-600/90 px-2.5 py-1 text-[11px] font-semibold hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-60"
+        aria-label={t.timeline_extend}
+        title={t.timeline_extend}
+        >{t.timeline_extend}</button
+      >
       <input
         id={ids.tlRange}
         type="range"

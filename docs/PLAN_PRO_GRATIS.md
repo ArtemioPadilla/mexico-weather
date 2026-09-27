@@ -67,7 +67,7 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 
 **Presupuesto de datos, antes de codear.** Open-Meteo no-comercial: 10 000 llamadas/día, con 429 por minuto observados en `build-field-grids.py`. Hoy: 4 chunks × 4 variables cada hora ≈ 400/día. Pasar `forecast_days=2→10` **no** añade llamadas, añade payload: 768 pts × 240 h × 4 vars ≈ 740 k valores ≈ 3–4 MB por snapshot. Commitearlo cada hora en `main` es inviable (ver E20). Decisión: días 0–2 horario (como hoy, baked), días 3–10 a **3 h** (`temporal_resolution=hourly_3`) y fetch **on demand** en el cliente solo cuando el usuario cruza +48 h, cacheado 10 min (`cachedFetch` ya existe).
 
-**Story 15.1 — Horizonte de 10 días en campos (temp/humedad/presión/nubes/viento)** · est 3d
+**Story 15.1 — Horizonte de 10 días en campos (temp/humedad/presión/nubes/viento)** · est 3d · **shipped 2026-09-27** (nubes queda en frame 0: el overlay es estático por diseño)
 - [ ] `src/lib/mapfields.ts`: `forecast_days` 2→10 con `temporal_resolution=hourly_3` a partir de +48 h; unificar en un eje de frames `[hourly 0–48h] + [3h 48–240h]`.
 - [ ] Timeline: escala no uniforme (ticks por día a partir de +2 d), etiqueta "Día 5 · 15:00", chip "Ahora" intacto; `t=` del hash acepta cualquier frame.
 - [ ] Carga perezosa: el primer scrub más allá de +48 h dispara el fetch 3 h; spinner en el chip del timeline, no en el mapa.

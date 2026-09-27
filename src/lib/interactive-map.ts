@@ -48,10 +48,16 @@ import {
   getTempLegend,
   setColorBlindMode,
   getColorBlindMode,
+  mergeFieldGrids,
+  mergeWindGrids,
+  isExtendedGrid,
+  parseUtcMs,
+  EXTENDED_FIELD_RANGE,
   type FieldGrid,
   type LegendStop,
   type WindGrid,
 } from './mapfields';
+import { relativeFrameLabel, needsWeekday } from './map/chrome/timeline-label';
 import {
   MAX_WIND_MPS,
   windSpeed,
@@ -715,9 +721,16 @@ export async function initInteractiveMap(
                   ? WIND_CIRCLE_LAYER
                   : null;
           const delays = [0, 250, 600, 1300, 2800]; // ~4.9 s total
+          // The hash `t=` is consumed by the first activation; a retry
+          // must re-arm it or the shared frame silently resets to "now"
+          // (and drops a Story 15.1 auto-extension already in flight).
+          const bootSeekIso = hashed?.t ?? null;
           for (let i = 0; i < delays.length; i++) {
             if (delays[i] > 0) {
               await new Promise<void>((r) => window.setTimeout(r, delays[i]));
+            }
+            if (i > 0 && bootSeekIso && !pendingSeekIso) {
+              pendingSeekIso = bootSeekIso;
             }
             try {
               await setActiveLayer(wanted);
@@ -726,8 +739,13 @@ export async function initInteractiveMap(
             }
             // Success when the expected layer exists on the map, or
             // when the layer kind has no checkable artifact (overlay).
-            if (!expectedLayerId || map.getLayer(expectedLayerId)) {
-              return;
+            // The field raster is added asynchronously (renderFieldFrame
+            // → canvas → blob → addLayer), so give it up to ~1 s before
+            // deciding the activation failed and re-running it.
+            if (!expectedLayerId) return;
+            for (let w = 0; w < 8; w++) {
+              if (map.getLayer(expectedLayerId)) return;
+              await new Promise<void>((r) => window.setTimeout(r, 125));
             }
           }
         };
@@ -819,6 +837,8 @@ export async function initInteractiveMap(
   let frameIndex = -1;
   let activeFrameIso: string | null = null;
   let pendingSeekIso: string | null = hashed?.t ?? null;
+  // Story 15.1 — one in-flight "Ver 10 días" fetch at a time.
+  let extendInFlight: Promise<boolean> | null = null;
 
   const tlEl = opts.els.timeline ?? null;
   const tlRange = opts.els.tlRange ?? null;
@@ -833,9 +853,18 @@ export async function initInteractiveMap(
       hour12: s.hourFormat === '12',
     };
     if (s.tz === 'UTC') opts.timeZone = 'UTC';
-    const clock = new Date(frame.time * 1000).toLocaleTimeString('es-MX', opts);
-    const rel =
-      off === 0 ? t.timeline_now : off < 0 ? `${off} min` : `+${off} min`;
+    const d = new Date(frame.time * 1000);
+    let clock = d.toLocaleTimeString('es-MX', opts);
+    // Frames a day or more away read ambiguously as a bare "15:00";
+    // prefix the weekday ("mié 15:00") past ±24 h (Story 15.1).
+    if (needsWeekday(off)) {
+      const wd = d.toLocaleDateString(lang === 'en' ? 'en-US' : 'es-MX', {
+        weekday: 'short',
+        ...(s.tz === 'UTC' ? { timeZone: 'UTC' } : {}),
+      });
+      clock = `${wd} ${clock}`;
+    }
+    const rel = relativeFrameLabel(off, { now: t.timeline_now });
     return `${clock}${s.tz === 'UTC' ? ' UTC' : ''} · ${rel}`;
   }
 
@@ -861,6 +890,7 @@ export async function initInteractiveMap(
       tlRange.value = String(idx);
     }
     if (tlTime) tlTime.textContent = frameLabel(fr);
+    syncExtendButton();
     syncHash();
   }
 
@@ -2036,10 +2066,12 @@ export async function initInteractiveMap(
         path: '',
       }));
       const idx = fieldFrameIndex(windGrid.times, pendingSeekIso, Date.now());
+      const seekBeyond = seekBeyondGrid(windGrid.times, pendingSeekIso);
       pendingSeekIso = null;
       showTimeline(true);
       refreshLayerButtons();
       applyFrame(idx >= 0 ? idx : 0);
+      if (seekBeyond) void extendTimeline(seekBeyond);
       return;
     }
     if (def.kind === 'overlay') {
@@ -2088,10 +2120,14 @@ export async function initInteractiveMap(
         path: '',
       }));
       const idx = fieldFrameIndex(fieldGrid.times, pendingSeekIso, Date.now());
+      const seekBeyond = seekBeyondGrid(fieldGrid.times, pendingSeekIso);
       pendingSeekIso = null;
       showTimeline(true);
       refreshLayerButtons();
       applyFrame(idx >= 0 ? idx : 0);
+      // A deep link past +48 h (e.g. a shared 9-day view) pulls the
+      // extended window automatically, then lands on the asked frame.
+      if (seekBeyond) void extendTimeline(seekBeyond);
       return;
     }
     if (def.kind === 'raster-tile') {
@@ -2603,6 +2639,111 @@ export async function initInteractiveMap(
   const tlReducedMotion = tlPlayer.reducedMotion();
   tlPlayBtn?.addEventListener('click', () => tlPlayer.toggle());
 
+  // ----------------------------------------------------------------
+  // Story 15.1 — "Ver 10 días". Field and wind layers boot on the 2-day
+  // hourly window (pre-baked snapshots, cheap). The 10-day window is
+  // fetched on demand at 3-hourly steps (EXTENDED_FIELD_RANGE) and
+  // merged under the hourly frames, so every index-aligned consumer
+  // (raster, tooltip, isobars, city pills, wind texture) keeps working
+  // unchanged — the frame axis simply gets longer. Quota: no extra
+  // calls until the user asks; cachedFetch dedupes for 10 min.
+  // ----------------------------------------------------------------
+  function framesFromTimes(times: string[]): RadarFrame[] {
+    return times.map((iso) => ({
+      time: Math.floor(parseUtcMs(iso) / 1000),
+      path: '',
+    }));
+  }
+
+  /** ISO the user asked for (hash `t=`) when it lies past the grid's
+   *  last frame — the cue to extend automatically. */
+  function seekBeyondGrid(times: string[], iso: string | null): string | null {
+    if (!iso || times.length === 0) return null;
+    const ms = parseUtcMs(iso);
+    if (!Number.isFinite(ms)) return null;
+    return ms > parseUtcMs(times[times.length - 1]) ? iso : null;
+  }
+
+  function canExtendTimeline(): boolean {
+    const kind = getLayerDef(activeLayer)?.kind;
+    if (kind === 'field') return !!fieldGrid && !isExtendedGrid(fieldGrid);
+    if (kind === 'particles') return !!windGrid && !isExtendedGrid(windGrid);
+    return false;
+  }
+
+  function syncExtendButton(): void {
+    const btn = document.getElementById(
+      'tl-extend'
+    ) as HTMLButtonElement | null;
+    if (!btn) return;
+    const busy = extendInFlight !== null;
+    btn.hidden = !busy && !canExtendTimeline();
+    btn.disabled = busy;
+    btn.textContent = busy ? t.timeline_extending : t.timeline_extend;
+  }
+
+  async function extendTimeline(
+    seekIso: string | null = null
+  ): Promise<boolean> {
+    if (extendInFlight) return extendInFlight;
+    const kind = getLayerDef(activeLayer)?.kind;
+    if (!canExtendTimeline()) return false;
+    const layerAtStart = activeLayer;
+    const keepIso = seekIso ?? activeFrameIso;
+    const run = (async (): Promise<boolean> => {
+      try {
+        let times: string[] | null = null;
+        if (kind === 'field') {
+          const cfg = FIELD_CONFIGS[activeLayer];
+          if (!fieldGrid || !cfg) return false;
+          const pts = fieldGrid.points.map((p) => ({ lat: p.lat, lng: p.lng }));
+          const json = await fetchFieldChunks(pts, cfg.hourlyVar, deps.fetch, {
+            model: activeModel,
+            range: EXTENDED_FIELD_RANGE,
+          });
+          const ext = parseFieldResponse(json, pts, cfg.hourlyVar);
+          if (!ext || activeLayer !== layerAtStart || !fieldGrid) return false;
+          const merged = mergeFieldGrids(fieldGrid, ext);
+          if (!merged) return false;
+          fieldGrid = merged;
+          if (activeLayer === 'temperature') lastTempGrid = merged;
+          else if (activeLayer === 'humidity') lastHumidityGrid = merged;
+          else if (activeLayer === 'pressure') lastPressureGrid = merged;
+          times = merged.times;
+        } else {
+          if (!windGrid) return false;
+          const pts = windGrid.points.map((p) => ({ lat: p.lat, lng: p.lng }));
+          const speedVar =
+            windSubOption === 'rachas' ? 'wind_gusts_10m' : 'wind_speed_10m';
+          const json = await fetchWindChunks(pts, speedVar, deps.fetch, {
+            model: activeModel,
+            range: EXTENDED_FIELD_RANGE,
+          });
+          const ext = parseWindResponse(json, pts, speedVar);
+          if (!ext || activeLayer !== layerAtStart || !windGrid) return false;
+          const merged = mergeWindGrids(windGrid, ext);
+          if (!merged) return false;
+          windGrid = merged;
+          windTexDirty = true;
+          times = merged.times;
+        }
+        tlFrames = framesFromTimes(times);
+        const idx = fieldFrameIndex(times, keepIso, Date.now());
+        applyFrame(idx >= 0 ? idx : 0);
+        return true;
+      } catch {
+        showMsg(t.timeline_extend_failed);
+        return false;
+      } finally {
+        extendInFlight = null;
+        syncExtendButton();
+      }
+    })();
+    extendInFlight = run;
+    syncExtendButton();
+    return run;
+  }
+
   // Wide-control surfacing timers (set inside the timeline block below),
   // hoisted so destroy() can clear them before they self-clear.
   let surfaceInterval = 0;
@@ -2617,6 +2758,14 @@ export async function initInteractiveMap(
     opts.els.tlNext?.addEventListener('click', () => {
       if (tlFrames.length) {
         tlStop();
+        if (frameIndex >= tlFrames.length - 1 && canExtendTimeline()) {
+          // Nudging past the last 2-day frame is the natural "more"
+          // gesture: pull the 10-day window, then step onto it.
+          void extendTimeline().then((ok) => {
+            if (ok) applyFrame(frameIndex + 1);
+          });
+          return;
+        }
         applyFrame(frameIndex + 1);
       }
     });
@@ -2630,26 +2779,54 @@ export async function initInteractiveMap(
     // ↑↓ keys for hour and day). We compute the day-stride dynamically
     // from the frame timestamps because raster-tile frames are usually
     // ~10 min apart (RainViewer) while field/wind frames are 1 h apart.
-    const dayStride = (): number => {
-      if (tlFrames.length < 2) return 0;
+    // Time-based rather than "24 frames": once the 10-day window is
+    // merged in, the frame stride changes from 1 h to 3 h past +48 h
+    // (Story 15.1), so a fixed frame count would skip 3 days.
+    const frameIndexShifted = (bySec: number): number => {
+      const cur = tlFrames[frameIndex]?.time;
+      if (typeof cur !== 'number') return frameIndex;
+      const target = cur + bySec;
+      let best = frameIndex;
+      let bestDelta = Infinity;
+      for (let i = 0; i < tlFrames.length; i++) {
+        const tt = tlFrames[i]?.time;
+        if (typeof tt !== 'number') continue;
+        const d = Math.abs(tt - target);
+        if (d < bestDelta) {
+          best = i;
+          bestDelta = d;
+        }
+      }
+      return best;
+    };
+    const spansDays = (): boolean => {
+      if (tlFrames.length < 2) return false;
       const a = tlFrames[0]?.time;
-      const b = tlFrames[1]?.time;
-      if (typeof a !== 'number' || typeof b !== 'number') return 0;
-      const stepSec = Math.abs(b - a);
-      if (stepSec <= 0) return 0;
-      return Math.max(1, Math.round(86400 / stepSec));
+      const b = tlFrames[tlFrames.length - 1]?.time;
+      return typeof a === 'number' && typeof b === 'number' && b - a >= 86400;
     };
     document.getElementById('tl-day-prev')?.addEventListener('click', () => {
       if (tlFrames.length) {
         tlStop();
-        applyFrame(frameIndex - dayStride());
+        applyFrame(frameIndexShifted(-86400));
       }
     });
     document.getElementById('tl-day-next')?.addEventListener('click', () => {
       if (tlFrames.length) {
         tlStop();
-        applyFrame(frameIndex + dayStride());
+        const next = frameIndexShifted(86400);
+        if (next === frameIndex && canExtendTimeline()) {
+          void extendTimeline().then((ok) => {
+            if (ok) applyFrame(frameIndexShifted(86400));
+          });
+          return;
+        }
+        applyFrame(next);
       }
+    });
+    document.getElementById('tl-extend')?.addEventListener('click', () => {
+      tlStop();
+      void extendTimeline();
     });
     document.getElementById('tl-now')?.addEventListener('click', () => {
       if (tlFrames.length) {
@@ -2676,8 +2853,8 @@ export async function initInteractiveMap(
       const dayPrev = document.getElementById('tl-day-prev');
       const dayNext = document.getElementById('tl-day-next');
       const now = document.getElementById('tl-now');
-      // Day-stride buttons only when there are ≥48 frames covered (~2 days).
-      const hasDays = dayStride() > 0 && tlFrames.length >= dayStride();
+      // Day-stride buttons only when the frames span at least a day.
+      const hasDays = spansDays();
       dayPrev?.classList.toggle('hidden', !hasDays);
       dayNext?.classList.toggle('hidden', !hasDays);
       now?.classList.toggle('hidden', false);

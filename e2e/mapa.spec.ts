@@ -46,7 +46,29 @@ function fieldResponseForUrl(url: string): string {
   // points the chunk requested. n = #commas + 1.
   const m = /[?&]latitude=([^&]+)/.exec(url);
   const n = m ? m[1]!.split(',').length : 32 * 24;
-  return JSON.stringify(Array.from({ length: n }, () => OPEN_METEO_FIELD_POINT));
+  // Story 15.1 — honour the requested window so the extended 10-day /
+  // 3-hourly fetch yields a longer frame axis than the 2-day default.
+  const days = Number(/[?&]forecast_days=(\d+)/.exec(url)?.[1] ?? 2);
+  const stepH = /temporal_resolution=hourly_3/.test(url) ? 3 : 1;
+  const t0 = Date.UTC(2026, 4, 19);
+  const time: string[] = [];
+  for (let h = 0; h < days * 24; h += stepH) {
+    time.push(new Date(t0 + h * 3_600_000).toISOString().slice(0, 16));
+  }
+  const series = (base: number) => time.map((_, i) => base + (i % 3));
+  const point = {
+    hourly: {
+      time,
+      temperature_2m: series(22),
+      relative_humidity_2m: series(60),
+      pressure_msl: series(1013),
+      surface_pressure: series(1010),
+      apparent_temperature: series(22),
+      dew_point_2m: series(15),
+      wet_bulb_temperature_2m: series(18),
+    },
+  };
+  return JSON.stringify(Array.from({ length: n }, () => point));
 }
 
 /** Minimal Open-Meteo wind bulk response: 48 points (8x6 grid), 2 hourly steps. */
@@ -216,6 +238,24 @@ test.describe('mapa page', () => {
     await expect(page.locator('#legend-bar')).toBeVisible();
     await expect(page.locator('#timeline')).toBeVisible();
     await expect(page.locator('#opacitywrap')).toBeVisible();
+
+    // Story 15.1 — the 2-day window boots first (48 hourly frames), then
+    // "Ver 10 días" pulls the 3-hourly extension on demand and the frame
+    // axis grows: 48 hourly + 64 three-hourly (days 3–10) = 112 frames.
+    await expect(page.locator('#tl-range')).toHaveAttribute('max', '47');
+    const extendBtn = page.locator('#tl-extend');
+    await expect(extendBtn).toBeVisible();
+    const extResp = page.waitForResponse(
+      (r) => r.url().includes('api.open-meteo.com') && r.url().includes('forecast_days=10'),
+    );
+    await extendBtn.click();
+    await extResp;
+    await expect(page.locator('#tl-range')).toHaveAttribute('max', '111');
+    await expect(extendBtn).toBeHidden();
+    // Day-skip is time-based now: four skips from the anchor land ~4 d
+    // ahead and the label switches to the "+N d" wording.
+    for (let i = 0; i < 4; i++) await page.locator('#tl-day-next').click();
+    await expect(page.locator('#tl-time')).toHaveText(/\+\d+(\.\d)? d$/);
 
     await page.locator('#layerbtn-base').click();
     await expect(page.locator('#legend-bar')).toBeHidden();
