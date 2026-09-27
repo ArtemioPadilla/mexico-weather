@@ -233,6 +233,13 @@ const base = siteBase();
       type AlertMetric,
       type AlertRule,
     } from '../lib/alerts';
+    import {
+      alertIcsFilename,
+      buildAlertIcs,
+      NOTIFIED_KEY,
+      notifyFired,
+      pendingNotifications,
+    } from '../lib/alert-channels';
     import { ui } from '../i18n/ui';
     import { initInteractiveMap } from '../lib/interactive-map';
     import { siteBase } from '../utils/paths';
@@ -516,6 +523,11 @@ const base = siteBase();
                 <button type="button" id="fc-alert-save" class="rounded bg-blue-600 px-2 py-1 text-xs font-semibold text-white hover:bg-blue-500">Guardar</button>
               </div>
               <ul id="fc-alert-list" class="mt-2 space-y-1 text-xs"></ul>
+              <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
+                <button type="button" id="fc-alert-notify" class="rounded border border-blue-300 px-2 py-1 hover:bg-blue-100 dark:border-blue-700 dark:hover:bg-blue-900">🔔 Avisarme con notificación del sistema</button>
+                <span id="fc-alert-notify-state" class="text-blue-800/80 dark:text-blue-300/80"></span>
+              </div>
+              <p class="mt-1 text-[11px] text-blue-800/80 dark:text-blue-300/80">Las reglas viven solo en este navegador. Con permiso, al abrir la página con una regla cumplida verás una notificación del sistema; "📅 .ics" descarga un recordatorio diario para tu calendario.</p>
               <p class="mt-1 text-[11px] text-blue-700/70 dark:text-blue-300/70">Las alertas se guardan solo en tu navegador. Se evalúan al cargar esta página contra el pronóstico de 24 h.</p>
             </div>
             <div class="fc-map-wrap mt-3" role="region" aria-label="Mapa interactivo">
@@ -798,11 +810,30 @@ const base = siteBase();
                 return (
                   `<li class="flex items-center gap-2">` +
                   `<span class="flex-1">${ml} ${esc(r.op)} ${r.threshold}${esc(u)}</span>` +
+                  `<button type="button" data-metric="${esc(r.metric)}" class="fc-alert-ics rounded border border-blue-300 px-1.5 text-[11px] hover:bg-blue-100 dark:border-blue-700 dark:hover:bg-blue-900" title="Recordatorio diario para tu calendario">📅 .ics</button>` +
                   `<button type="button" data-metric="${esc(r.metric)}" class="fc-alert-rm rounded border border-blue-300 px-1.5 text-[11px] hover:bg-blue-100 dark:border-blue-700 dark:hover:bg-blue-900">Quitar</button>` +
                   `</li>`
                 );
               })
               .join('');
+            // Story 17.3 — calendar reminder per rule (.ics download).
+            alertList.querySelectorAll('.fc-alert-ics').forEach((b) => {
+              b.addEventListener('click', () => {
+                const m = (b as HTMLElement).dataset.metric as AlertMetric | undefined;
+                const r = rules.find((x) => x.metric === m);
+                if (!r) return;
+                const ics = buildAlertIcs(r, location.href);
+                const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = alertIcsFilename(r);
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+              });
+            });
             alertList.querySelectorAll('.fc-alert-rm').forEach((b) => {
               b.addEventListener('click', () => {
                 const m = (b as HTMLElement).dataset.metric as
@@ -852,6 +883,28 @@ const base = siteBase();
               alertBanner.innerHTML = '';
               return;
             }
+            // Story 17.3 — system notification once per rule per day when
+            // the user granted permission; the banner below stays either way.
+            try {
+              const today = new Date().toISOString().slice(0, 10);
+              const notified = JSON.parse(store.getItem(NOTIFIED_KEY) ?? '[]') as string[];
+              const pending = pendingNotifications(fired, notified, today);
+              if (pending.alerts.length > 0) {
+                const shown = notifyFired(
+                  pending.alerts,
+                  typeof Notification === 'undefined' ? undefined : Notification,
+                  `${base}favicon.svg`,
+                );
+                if (shown > 0) {
+                  store.setItem(
+                    NOTIFIED_KEY,
+                    JSON.stringify([...notified, ...pending.keys].slice(-200)),
+                  );
+                }
+              }
+            } catch {
+              /* storage or Notification unavailable — banner only */
+            }
             alertBanner.innerHTML =
               '<div class="font-semibold mb-0.5">⚠️ Alertas disparadas (próximas 24 h):</div>' +
               '<ul class="space-y-0.5 text-xs">' +
@@ -867,6 +920,32 @@ const base = siteBase();
                 .join('') +
               '</ul>';
             alertBanner.classList.remove('hidden');
+          }
+
+          // Story 17.3 — permission toggle for system notifications.
+          const notifyBtn = document.getElementById('fc-alert-notify');
+          const notifyState = document.getElementById('fc-alert-notify-state');
+          const syncNotifyState = (): void => {
+            if (!notifyState || !notifyBtn) return;
+            if (typeof Notification === 'undefined') {
+              notifyState.textContent = 'No disponible en este navegador.';
+              notifyBtn.setAttribute('disabled', 'true');
+              return;
+            }
+            const p = Notification.permission;
+            notifyState.textContent =
+              p === 'granted' ? 'Activadas para este sitio.' : p === 'denied' ? 'Bloqueadas en el navegador.' : '';
+            notifyBtn.toggleAttribute('disabled', p !== 'default');
+          };
+          syncNotifyState();
+          if (notifyBtn) {
+            notifyBtn.addEventListener('click', () => {
+              if (typeof Notification === 'undefined') return;
+              void Notification.requestPermission().then(() => {
+                syncNotifyState();
+                renderAlertBanner();
+              });
+            });
           }
 
           if (alertBtn) {

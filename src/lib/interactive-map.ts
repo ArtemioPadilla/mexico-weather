@@ -32,6 +32,7 @@ import {
   clampIndex,
   frameOffsetMinutes,
   seekIndexForIso,
+  nearestFrame,
   satelliteFrames,
   satelliteFramesExtended,
   satelliteDailyFrames,
@@ -194,6 +195,7 @@ export function spriteIcon(name: string, className = 'h-4 w-4'): SVGSVGElement {
 import {
   cachedFetch,
   formatLatLngDM,
+  bearingToArrow,
   polylineLengthKm as measurePolylineLen,
   sphericalAreaKm2 as measureSphArea,
   formatArea as measureFmtArea,
@@ -718,6 +720,7 @@ export async function initInteractiveMap(
       layer: activeLayer,
       t: activeLayer === 'base' ? null : activeFrameIso,
       model: activeModel === 'best_match' ? null : activeModel,
+      mode: precipMode ? 'precip' : null,
     };
     history.replaceState(null, '', buildMapHash(state));
   }
@@ -892,7 +895,12 @@ export async function initInteractiveMap(
       // Hash layer wins over the `initialLayer` opt (so deep-links to
       // /mapa#layer=radar still activate radar even when the caller's
       // initialLayer is 'temperature').
-      const wanted = hashed?.layer ?? opts.initialLayer ?? null;
+      // Story 13.2 — a shared combined-mode link opens on satellite with
+      // clouds + radar even if the hash names another layer.
+      const wanted = precipMode
+        ? 'satellite'
+        : (hashed?.layer ?? opts.initialLayer ?? null);
+      if (precipMode) void cloudsOverlay.setEnabled(true);
       if (wanted && wanted !== 'base' && getLayerDef(wanted)) {
         // Cold-load bug (#124, P0.1 in PLAN_UX_PARITY.md): historically a
         // single setTimeout(..., 700) raced the style/source load and the
@@ -1817,7 +1825,38 @@ export async function initInteractiveMap(
       opacity: rvOpacity,
       currentZoom: map.getZoom(),
     });
+    // Story 13.2 — combined mode: the radar frame nearest to the
+    // satellite instant rides on top (RainViewer covers −2 h … +30 min,
+    // so older satellite frames simply show no radar).
+    if (precipMode && layerId === 'satellite') {
+      weatherRaster.showRadarCompanion(
+        rvData ? nearestFrame(rvData.frames, frame.time, 15 * 60) : null,
+        { rvData, opacity: Math.min(1, rvOpacity * 0.9) }
+      );
+    } else {
+      weatherRaster.removeRadarCompanion();
+    }
   };
+
+  /** Story 13.2 — zoom.earth's "Precipitación" picture in one click:
+   *  GeoColor satellite + cloud-cover overlay + radar, shareable via
+   *  `&mode=precip`. Turning it off removes radar + clouds and leaves
+   *  the satellite layer. */
+  let precipMode = hashed?.mode === 'precip';
+  function setPrecipMode(on: boolean): void {
+    precipMode = on;
+    void cloudsOverlay.setEnabled(on);
+    if (on && activeLayer !== 'satellite') {
+      void setActiveLayer('satellite');
+    } else if (frameIndex >= 0 && tlFrames[frameIndex]) {
+      applyFrame(frameIndex);
+    } else {
+      weatherRaster.removeRadarCompanion();
+    }
+    renderLegend(legendKindFor());
+    refreshOverlayCheckboxes();
+    syncHash();
+  }
 
   /** Which legend the active layer needs (null hides the bar). */
   function legendKindFor():
@@ -1830,6 +1869,8 @@ export async function initInteractiveMap(
     | null {
     const akind = getLayerDef(activeLayer)?.kind;
     if (activeLayer === 'radar') return 'radar';
+    // Combined mode reads as precipitation: the radar scale applies.
+    if (precipMode && activeLayer === 'satellite') return 'radar';
     if (akind === 'field')
       return activeLayer as
         'temperature' | 'humidity' | 'pressure' | 'precipitation';
@@ -2153,7 +2194,9 @@ export async function initInteractiveMap(
       const norm = ((bearing % 360) + 360) % 360;
       const cardinals = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
       const idx = Math.round(norm / 45) % 8;
-      const windLine = `💨 ${formatSpeed(speedMps * 3.6, U.speed)} ${cardinals[idx]}`;
+      // Story 13.1 — arrow glyph pointing where the wind blows toward
+      // (bearingToArrow expects the meteorological FROM bearing).
+      const windLine = `💨 ${formatSpeed(speedMps * 3.6, U.speed)} ${bearingToArrow((norm + 180) % 360)} ${cardinals[idx]}`;
       // Wind layer: combine with cached field grids (multi-metric).
       const fLines: string[] = [];
       const wb = fieldBounds;
@@ -2775,7 +2818,8 @@ export async function initInteractiveMap(
       | 'lakes'
       | 'histStorms'
       | 'smnStateTint'
-      | 'outlook';
+      | 'outlook'
+      | 'precipMode';
     label: string;
     shortcut: string;
     isEnabled: () => boolean;
@@ -2845,6 +2889,13 @@ export async function initInteractiveMap(
       shortcut: 'Q',
       isEnabled: () => radarCoverageOverlay.isEnabled(),
       setEnabled: (on) => radarCoverageOverlay.setEnabled(on),
+    },
+    {
+      id: 'precipMode',
+      label: 'Modo precipitación (satélite + nubes + radar)',
+      shortcut: '',
+      isEnabled: () => precipMode,
+      setEnabled: (on) => setPrecipMode(on),
     },
     {
       id: 'clouds',

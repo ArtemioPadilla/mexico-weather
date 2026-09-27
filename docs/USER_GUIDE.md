@@ -50,6 +50,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 | Param | Format | Meaning |
 |---|---|---|
 | `view` | `<lat>,<lng>,<zoom>z` (e.g. `19.43,-99.13,6.5z`) | Map centre + zoom. Validated; out-of-range values fall back to the default Mexico view. |
+| `mode` | `precip` | Combined precipitation mode (Story 13.2): GeoColor satellite + cloud overlay + the radar frame nearest the satellite instant, radar legend. Set from the Superposiciones panel; absent = off. |
 | `layer` | one of `base`, `radar`, `satellite`, `temperature`, `humidity`, `pressure`, `precipitation`, `wind`, `sunlight` (each weather layer also has its own landing page, `/mapa/radar/`, `/mapa/satelite/`, `/mapa/temperatura/`, `/mapa/humedad/`, `/mapa/presion/`, `/mapa/precipitacion/`, `/mapa/viento/`, `/mapa/sol/`, that opens the map on that layer — Story 19.1) | Active weather layer; unknown ids fall back to `base`. |
 | `t` | ISO timestamp (e.g. `2026-05-19T13:00:00.000Z`) | Selected timeline frame; the nearest frame is restored on load. Omitted when `layer=base`. |
 

@@ -152,9 +152,9 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 - [ ] En `/estado/<slug>` y en la tarjeta de ciudad: "Recibir avisos de <estado>" → `/alertas/#<slug>`.
 - Acceptance: cambio en `smn-by-state.json` dispara notificación al tópico correcto; RSS por estado valida contra el validador W3C.
 
-**Story 17.3 — Reglas personales, ahora con canal** · est 1d
-- [ ] `alerts.ts` (reglas locales) exporta la regla como URL de tópico ntfy propio del usuario (`climamx-<uuid local>`)? **No**: eso requeriría que nuestro Action conozca el uuid → dato de usuario. Alternativa que sí respeta la restricción: la regla genera un `.ics` recurrente "revisar clima" y un botón "abrir pronóstico"; y documentar que las reglas son locales por diseño.
-- [ ] Notificación **in-page** cuando la PWA está abierta (Notification API sin push: `new Notification()` al detectar regla cumplida al cargar). Sin SW push.
+**Story 17.3 — Reglas personales, ahora con canal** · est 1d · **shipped 2026-09-27** (`src/lib/alert-channels.ts`: botón "📅 .ics" por regla = recordatorio diario 07:00 con enlace al pronóstico; botón de permiso + `Notification` del sistema una vez por regla y día al abrir la página con una regla cumplida; sin permiso, el banner de siempre).
+- [x] `alerts.ts` (reglas locales) exporta la regla como URL de tópico ntfy propio del usuario (`climamx-<uuid local>`)? **No**: eso requeriría que nuestro Action conozca el uuid → dato de usuario. Alternativa que sí respeta la restricción: la regla genera un `.ics` recurrente "revisar clima" y un botón "abrir pronóstico"; y documentar que las reglas son locales por diseño.
+- [x] Notificación **in-page** cuando la PWA está abierta (Notification API sin push: `new Notification()` al detectar regla cumplida al cargar). Sin SW push.
 - Acceptance: con permiso concedido, abrir la PWA con una regla cumplida muestra notificación del sistema; sin permiso, banner como hoy.
 
 ---
@@ -217,8 +217,8 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 |---|---|
 | E10 first paint (P0) | Sigue primero; E16.1 depende de que el mapa pinte sin interacción. |
 | E11 mobile (P1) | Story 11.3 (bottom-sheet de controles) es el patrón que reusa 15.4 y 16.4. Hacer 11.3 antes de 15.4. |
-| E13.1 tooltip multi-métrica | Se completa con 18.3 (modo mira). |
-| E13.2 modo Precipitación | Necesita 15.5 (campo de precipitación) para ser real; reordenar: 15.5 → 13.2. |
+| E13.1 tooltip multi-métrica | **Hecho**: tooltip multi-métrica con flecha de viento; el "pin al tocar" lo cubren la tarjeta de lugar (15.4) y el modo mira (18.3). |
+| E13.2 modo Precipitación | **Hecho 2026-09-27**: superposición "Modo precipitación" = satélite GeoColor + nubes + radar (frame más cercano, ±15 min) con leyenda de radar y hash `&mode=precip`. |
 | E13.5 antes/después | Se vuelve trivial tras 15.2 (past_days) y 16.1/16.2. |
 | E14.1 push | Se cierra con E17 (diseño sin backend). |
 | Plan home Fase 4 | La tarjeta al tocar = 15.4; leyenda móvil y timeline = 16.4. |

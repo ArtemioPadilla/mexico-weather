@@ -1,5 +1,5 @@
 // Pure, DOM-free encode/decode + validation for the /mapa shareable URL hash.
-// Format: #view=<lat>,<lng>,<zoom>z&layer=<id>[&t=<ISO>]
+// Format: #view=<lat>,<lng>,<zoom>z&layer=<id>[&t=<ISO>][&model=<id>][&mode=precip]
 
 import { LAYER_IDS } from './maplayers';
 
@@ -11,6 +11,9 @@ export interface MapHashState {
   t: string | null;
   /** Optional Open-Meteo NWP model id; null/undefined → 'best_match'. */
   model?: string | null;
+  /** Story 13.2 — combined "precipitación" mode (satellite + clouds +
+   *  radar together); only 'precip' is defined. */
+  mode?: 'precip' | null;
 }
 
 /** Valid Open-Meteo model ids accepted in the URL hash. */
@@ -42,18 +45,26 @@ export function parseMapHash(hash: string): MapHashState {
   const view = params.get('view');
   if (!view) return { ...DEFAULT_VIEW };
 
-  const m = /^(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)z$/.exec(view);
+  const m = /^(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)z$/.exec(
+    view
+  );
   if (!m) return { ...DEFAULT_VIEW };
 
   const lat = Number(m[1]);
   const lng = Number(m[2]);
   const zoom = Number(m[3]);
-  if (!inRange(lat, -90, 90) || !inRange(lng, -180, 180) || !inRange(zoom, 0, 22)) {
+  if (
+    !inRange(lat, -90, 90) ||
+    !inRange(lng, -180, 180) ||
+    !inRange(zoom, 0, 22)
+  ) {
     return { ...DEFAULT_VIEW };
   }
 
   const rawLayer = params.get('layer') ?? 'base';
-  const layer = (LAYER_IDS as readonly string[]).includes(rawLayer) ? rawLayer : 'base';
+  const layer = (LAYER_IDS as readonly string[]).includes(rawLayer)
+    ? rawLayer
+    : 'base';
 
   const t = params.get('t');
   const rawModel = params.get('model');
@@ -68,6 +79,9 @@ export function parseMapHash(hash: string): MapHashState {
     layer,
     t: t && t.length > 0 ? t : null,
     model,
+    // Only present when set, so older callers comparing whole objects
+    // keep working (Story 13.2).
+    ...(params.get('mode') === 'precip' ? { mode: 'precip' as const } : {}),
   };
 }
 
@@ -78,5 +92,6 @@ export function buildMapHash(state: MapHashState): string {
   let s = `#view=${lat},${lng},${zoom}z&layer=${state.layer}`;
   if (state.t) s += `&t=${state.t}`;
   if (state.model && state.model !== 'best_match') s += `&model=${state.model}`;
+  if (state.mode === 'precip') s += '&mode=precip';
   return s;
 }

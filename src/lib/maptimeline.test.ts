@@ -8,6 +8,7 @@ import {
   satelliteFrames,
   satelliteFramesExtended,
   satelliteDailyFrames,
+  nearestFrame,
 } from './maptimeline';
 import type { RainviewerData } from './maplayers';
 
@@ -99,5 +100,13 @@ describe('satellite frame generators (Story 16.1)', () => {
       '2026-09-27T18:00:00.000Z'
     );
     expect(f[9].time - f[8].time).toBe(86400);
+  });
+
+  // Story 13.2
+  it('nearestFrame picks the closest frame within tolerance, else null', () => {
+    const frames = [1000, 1600, 2200].map((time) => ({ time, path: '' }));
+    expect(nearestFrame(frames, 1650, 900)?.time).toBe(1600);
+    expect(nearestFrame(frames, 5000, 900)).toBeNull();
+    expect(nearestFrame([], 1000, 900)).toBeNull();
   });
 });

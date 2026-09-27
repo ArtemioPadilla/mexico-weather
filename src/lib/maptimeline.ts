@@ -131,3 +131,23 @@ export function seekIndexForIso(
   }
   return best;
 }
+
+/** Story 13.2 — the frame closest to `timeSec` when it is within
+ *  `toleranceSec`; null otherwise (e.g. the radar archive only covers
+ *  −2 h … +30 min while the satellite axis spans 24 h). */
+export function nearestFrame(
+  frames: readonly RadarFrame[],
+  timeSec: number,
+  toleranceSec: number
+): RadarFrame | null {
+  let best: RadarFrame | null = null;
+  let bestDelta = Infinity;
+  for (const f of frames) {
+    const d = Math.abs(f.time - timeSec);
+    if (d < bestDelta) {
+      best = f;
+      bestDelta = d;
+    }
+  }
+  return best && bestDelta <= toleranceSec ? best : null;
+}

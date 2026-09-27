@@ -100,6 +100,13 @@ export interface WeatherRasterFactory {
   setOpacity: (opacity: number) => void;
   /** Story 16.4 — apply the play style's cross-fade live. */
   setFadeMs: (ms: number) => void;
+  /** Story 13.2 — radar frame over the satellite raster (combined
+   *  precipitation mode); null frame or no manifest removes it. */
+  showRadarCompanion: (
+    frame: RadarFrame | null,
+    ctx: { rvData: RainviewerData | null; opacity: number }
+  ) => void;
+  removeRadarCompanion: () => void;
 }
 
 export function createWeatherRaster(
@@ -131,9 +138,21 @@ export function createWeatherRaster(
     if (map.getSource(DIM_SOURCE)) map.removeSource(DIM_SOURCE);
   }
 
+  // Story 13.2 — radar tiles drawn ON TOP of the satellite raster in the
+  // combined precipitation mode. Own source/layer so the satellite
+  // frame swap (teardown + add) cannot bury it.
+  const COMPANION_SOURCE = 'wx-radar-companion-src';
+  const COMPANION_LAYER = 'wx-radar-companion';
+
+  function removeCompanion(): void {
+    if (map.getLayer(COMPANION_LAYER)) map.removeLayer(COMPANION_LAYER);
+    if (map.getSource(COMPANION_SOURCE)) map.removeSource(COMPANION_SOURCE);
+  }
+
   function teardownRaster(): void {
     if (map.getLayer(RV_LAYER)) map.removeLayer(RV_LAYER);
     if (map.getSource(RV_SOURCE)) map.removeSource(RV_SOURCE);
+    removeCompanion();
     removeDim();
   }
 
@@ -194,6 +213,28 @@ export function createWeatherRaster(
       });
     },
     remove: teardownRaster,
+    showRadarCompanion: (frame, ctx): void => {
+      removeCompanion();
+      if (!frame || !ctx.rvData) return;
+      map.addSource(COMPANION_SOURCE, {
+        type: 'raster',
+        tiles: [rainviewerTileUrl(ctx.rvData.host, frame, { size: 512 })],
+        tileSize: 512,
+        maxzoom: 10,
+        attribution: '© RainViewer',
+      });
+      map.addLayer({
+        id: COMPANION_LAYER,
+        type: 'raster',
+        source: COMPANION_SOURCE,
+        paint: {
+          'raster-opacity': ctx.opacity,
+          'raster-resampling': 'linear',
+          'raster-fade-duration': deps.getFadeMs?.() ?? 300,
+        },
+      });
+    },
+    removeRadarCompanion: removeCompanion,
     setFadeMs: (ms: number): void => {
       if (map.getLayer(RV_LAYER)) {
         map.setPaintProperty(RV_LAYER, 'raster-fade-duration', ms);
