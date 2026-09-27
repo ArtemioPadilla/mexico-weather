@@ -80,7 +80,7 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 - [ ] Desbloquea Story 13.5 (antes/después) sin archivo propio.
 - Acceptance: scrub a −24 h muestra el campo de ayer; snapshots de `field-grids` incluyen `past_days`.
 
-**Story 15.3 — 10 y 16 días en `/forecast`, `/clima/<slug>`, `/compara`** · est 2d
+**Story 15.3 — 10 y 16 días en `/forecast`, `/clima/<slug>`, `/compara`** · est 2d · **shipped 2026-09-27**
 - [ ] `forecast.ts` `forecast_days: '7'` → 10 por defecto; toggle "16 días" (Open-Meteo lo permite) con aviso de confianza decreciente.
 - [ ] `city-forecasts.yml` snapshot 8→10 días (mismo número de llamadas).
 - [ ] Barra de temperatura semanal → escala a 10/16 filas; chip de desacuerdo entre modelos por día (ya existe para 1 día: `DISAGREEMENT_MODELS`).

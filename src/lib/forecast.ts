@@ -95,13 +95,22 @@ const DAILY_VARS = [
   'sunset',
 ].join(',');
 
+/** Daily outlook length (Story 15.3 — plan PRO_GRATIS E15). zoom.earth
+ *  gives 5 days free and 10 to Pro; Open-Meteo serves up to 16 for the
+ *  same single call, so 10 is the default and 16 is one click away. */
+export const FORECAST_DAYS = 10;
+export const FORECAST_DAYS_MAX = 16;
+
 /** Build the Open-Meteo forecast URL with current/hourly/daily variables. */
-export function buildRichForecastUrl(loc: ForecastLocation): string {
+export function buildRichForecastUrl(
+  loc: ForecastLocation,
+  days: number = FORECAST_DAYS
+): string {
   const params = new URLSearchParams({
     latitude: String(loc.lat),
     longitude: String(loc.lng),
     timezone: loc.tz || 'auto',
-    forecast_days: '7',
+    forecast_days: String(Math.min(FORECAST_DAYS_MAX, Math.max(1, days))),
     current: CURRENT_VARS,
     hourly: HOURLY_VARS,
     daily: DAILY_VARS,
@@ -120,19 +129,21 @@ const numOrNull = (v: unknown): number | null =>
 const str = (v: unknown): string => (typeof v === 'string' ? v : '');
 
 /**
- * Fetch and parse a full forecast (current conditions, next 48 hours, 7-day
- * outlook). Throws when the response lacks a `current` block.
+ * Fetch and parse a full forecast (current conditions, next 48 hours,
+ * 10-day outlook by default — `days` up to 16). Throws when the response
+ * lacks a `current` block.
  */
 export async function getForecast(
   loc: ForecastLocation,
   deps: RequestDeps,
   retry: RetryOptions = DEFAULT_RETRY,
+  days: number = FORECAST_DAYS
 ): Promise<Forecast> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data: any = await requestJsonWithRetry(
-    buildRichForecastUrl(loc),
+    buildRichForecastUrl(loc, days),
     deps,
-    retry,
+    retry
   );
 
   if (!data || !data.current) {
@@ -173,7 +184,7 @@ export async function getForecast(
   let startIdx = 0;
   if (cHourPrefix) {
     const found = hTimes.findIndex(
-      (t) => typeof t === 'string' && t.slice(0, 13) >= cHourPrefix,
+      (t) => typeof t === 'string' && t.slice(0, 13) >= cHourPrefix
     );
     if (found > 0) {
       startIdx = found;
@@ -273,15 +284,23 @@ export interface ModelDisagreement {
   byModel: Record<DisagreementModel, number | null>;
   /** Max − min across models that returned a value; null if fewer than 2. */
   spread: number | null;
+  /** Per-day Tmax spread across models (Story 15.3): lets the daily
+   *  rows flag the days where the models diverge. Empty when the
+   *  response carried no daily block. */
+  daily: Array<{ date: string; spread: number | null }>;
 }
 
-export function buildDisagreementUrl(loc: ForecastLocation): string {
+export function buildDisagreementUrl(
+  loc: ForecastLocation,
+  days: number = FORECAST_DAYS
+): string {
   const params = new URLSearchParams({
     latitude: String(loc.lat),
     longitude: String(loc.lng),
     timezone: loc.tz || 'auto',
-    forecast_days: '1',
+    forecast_days: String(Math.min(FORECAST_DAYS_MAX, Math.max(1, days))),
     current: 'temperature_2m',
+    daily: 'temperature_2m_max',
     models: DISAGREEMENT_MODELS.join(','),
   });
   return `https://api.open-meteo.com/v1/forecast?${params.toString()}`;
@@ -308,7 +327,7 @@ export interface ClimateAnomaly {
 
 export function buildArchiveDoyUrl(
   loc: ForecastLocation,
-  monthDay: string,
+  monthDay: string
 ): string {
   // monthDay is "MM-DD". We fetch the same DOY for the last 10 years.
   const now = new Date();
@@ -351,7 +370,7 @@ let baselineCache: Promise<BaselineDoc | null> | null = null;
 
 function fetchStaticBaseline(
   deps: RequestDeps,
-  baseUrl: string,
+  baseUrl: string
 ): Promise<BaselineDoc | null> {
   if (baselineCache) return baselineCache;
   baselineCache = (async () => {
@@ -372,7 +391,7 @@ function findClosestCity(
   doc: BaselineDoc,
   lat: number,
   lng: number,
-  maxKm: number,
+  maxKm: number
 ): BaselineCity | null {
   const R = 6371;
   const d2r = Math.PI / 180;
@@ -405,7 +424,7 @@ export async function getClimateAnomaly(
   forecastTmax: number,
   monthDay: string,
   deps: ClimateAnomalyDeps,
-  retry: RetryOptions = DEFAULT_RETRY,
+  retry: RetryOptions = DEFAULT_RETRY
 ): Promise<ClimateAnomaly | null> {
   // Fast path: pre-computed baseline from the GH Action. Saves a live
   // archive fetch per visitor.
@@ -416,7 +435,7 @@ export async function getClimateAnomaly(
         doc,
         Number(loc.lat),
         Number(loc.lng),
-        100, // within 100 km of a known metro
+        100 // within 100 km of a known metro
       );
       if (closest) {
         const cityBaseline = doc.baseline[closest.key];
@@ -438,7 +457,7 @@ export async function getClimateAnomaly(
   const data: any = await requestJsonWithRetry(
     buildArchiveDoyUrl(loc, monthDay),
     deps,
-    retry,
+    retry
   );
   const dailyTimes: unknown[] = Array.isArray(data?.daily?.time)
     ? data.daily.time
@@ -473,12 +492,13 @@ export async function getModelDisagreement(
   loc: ForecastLocation,
   deps: RequestDeps,
   retry: RetryOptions = DEFAULT_RETRY,
+  days: number = FORECAST_DAYS
 ): Promise<ModelDisagreement> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data: any = await requestJsonWithRetry(
-    buildDisagreementUrl(loc),
+    buildDisagreementUrl(loc, days),
     deps,
-    retry,
+    retry
   );
   const cur = data?.current ?? {};
   const byModel: Record<DisagreementModel, number | null> = {
@@ -491,10 +511,24 @@ export async function getModelDisagreement(
     const v = cur[`temperature_2m_${m}`];
     if (typeof v === 'number' && Number.isFinite(v)) byModel[m] = v;
   }
-  const vals = Object.values(byModel).filter(
-    (v): v is number => v !== null,
-  );
+  const vals = Object.values(byModel).filter((v): v is number => v !== null);
   const spread =
     vals.length >= 2 ? Math.max(...vals) - Math.min(...vals) : null;
-  return { byModel, spread };
+  // Daily Tmax per model → per-day spread.
+  const dTimes: unknown[] = Array.isArray(data?.daily?.time)
+    ? data.daily.time
+    : [];
+  const daily = dTimes.map((date, i) => {
+    const dv: number[] = [];
+    for (const m of DISAGREEMENT_MODELS) {
+      const arr = data?.daily?.[`temperature_2m_max_${m}`];
+      const v = Array.isArray(arr) ? arr[i] : undefined;
+      if (typeof v === 'number' && Number.isFinite(v)) dv.push(v);
+    }
+    return {
+      date: String(date),
+      spread: dv.length >= 2 ? Math.max(...dv) - Math.min(...dv) : null,
+    };
+  });
+  return { byModel, spread, daily };
 }

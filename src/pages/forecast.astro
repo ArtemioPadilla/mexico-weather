@@ -73,7 +73,7 @@ const base = siteBase();
           <div class="h-9 w-full rounded bg-gray-200 dark:bg-gray-800"></div>
         </div>
 
-        {/* 7-day rows */}
+        {/* daily rows (10, or 16 on demand) */}
         <div class="space-y-1">
           <div class="h-5 w-1/4 rounded bg-gray-200 dark:bg-gray-800"></div>
           <div class="h-7 w-full rounded bg-gray-200 dark:bg-gray-800"></div>
@@ -177,7 +177,7 @@ const base = siteBase();
     @media (min-width: 640px) {
       .fc-map-wrap { height: 360px; }
     }
-    /* Issue #109 — axis tick marks + today marker for 7-day temperature bars. */
+    /* Issue #109 — axis tick marks + today marker for the daily temperature bars. */
     .fc-axis-track {
       position: relative;
       height: 14px;
@@ -221,6 +221,8 @@ const base = siteBase();
       getModelDisagreement,
       uvLabel,
       windDir,
+      FORECAST_DAYS,
+      FORECAST_DAYS_MAX
     } from '../lib/forecast';
     import { has, toggle } from '../lib/favorites';
     import {
@@ -327,7 +329,7 @@ const base = siteBase();
     }
 
     // Issue #99 — temperature → color along the same blue→yellow→orange
-    // gradient used by the 7-day bars. Returns a CSS color string.
+    // gradient used by the daily bars. Returns a CSS color string.
     // Stops: 0.0 #60a5fa (blue), 0.5 #fbbf24 (yellow), 1.0 #f97316 (orange).
     function tempTint(
       temp: number | null,
@@ -366,7 +368,19 @@ const base = siteBase();
       admin?: string;
     }
 
+    // Story 15.3 — daily outlook length. 10 by default (zoom.earth Pro
+    // parity, free); "Ver 16 días" re-renders with Open-Meteo's ceiling.
+    let forecastDays = FORECAST_DAYS;
+    let lastLoc: RenderLoc | null = null;
+    document.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement | null)?.closest('#fc-more-days');
+      if (!btn || !lastLoc) return;
+      forecastDays = forecastDays >= FORECAST_DAYS_MAX ? FORECAST_DAYS : FORECAST_DAYS_MAX;
+      void render(lastLoc);
+    });
+
     async function render(loc: RenderLoc): Promise<void> {
+      lastLoc = loc;
       try {
         const fc = await getForecast(
           { lat: loc.lat, lng: loc.lng, tz: loc.tz },
@@ -375,6 +389,8 @@ const base = siteBase();
             sleep: (ms: number) =>
               new Promise<void>((r) => setTimeout(r, ms)),
           },
+          undefined,
+          forecastDays,
         );
 
         const { current, hourly, daily } = fc;
@@ -536,8 +552,9 @@ const base = siteBase();
             </div>
           </section>`;
 
-        // 7-day temperature range bar: normalize each day's tmin–tmax
-        // against the week's overall min/max so the fill spans the row.
+        // Daily temperature range bar (10 or 16 rows): normalize each
+        // day's tmin–tmax against the window's overall min/max so the
+        // fill spans the row.
         const dMins = daily
           .map((d) => d.tmin)
           .filter((v): v is number => v !== null);
@@ -572,7 +589,9 @@ const base = siteBase();
         // precip/wind/cloud/humidity/uv are non-nullable (num()->0 in the SDK); nullable fields use fmt().
         const dayRows = daily
           .map((dw, i) => {
-            return `<div class="grid grid-cols-[5rem_1.5rem_1fr_3rem_5rem] items-center gap-2 py-1.5 border-b border-gray-200 dark:border-gray-800 text-sm">
+            // Days past 10 are lower-confidence: dim them a notch.
+            const dim = i >= FORECAST_DAYS ? ' opacity-75' : '';
+            return `<div class="grid grid-cols-[5rem_1.5rem_1fr_3rem_5rem] items-center gap-2 py-1.5 border-b border-gray-200 dark:border-gray-800 text-sm${dim}" data-fc-day="${esc(dw.date)}">
               <span class="capitalize text-gray-700 dark:text-gray-300">${esc(dayLabel(dw.date, i))}</span>
               <span class="text-center">${esc(emoji(dw.condition))}</span>
               <span class="relative h-1.5 rounded-full bg-gray-200 dark:bg-gray-800 overflow-visible">${barFill(dw.tmin, dw.tmax)}${todayMarker(i)}</span>
@@ -601,11 +620,16 @@ const base = siteBase();
             <span></span>
           </div>`;
 
+        const extended = daily.length > FORECAST_DAYS;
         const sevenHtml = `
-          <section class="space-y-1">
-            <h2 class="text-lg font-semibold">${esc(t.seven_days)}</h2>
+          <section class="space-y-1" id="fc-daily">
+            <div class="flex items-center justify-between gap-2">
+              <h2 class="text-lg font-semibold">${esc(extended ? t.sixteen_days : t.ten_days)}</h2>
+              <button id="fc-more-days" type="button" class="inline-flex min-h-[44px] items-center rounded-full border border-gray-300 px-3 text-xs font-medium text-blue-700 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-gray-700 dark:text-blue-300 dark:hover:bg-gray-800" aria-pressed="${extended ? 'true' : 'false'}">${esc(extended ? t.fewer_days : t.more_days)}</button>
+            </div>
             ${axisHtml}
             ${dayRows}
+            ${extended ? `<p class="pt-2 text-xs text-gray-500 dark:text-gray-400">${esc(t.days_caveat)}</p>` : ''}
           </section>`;
 
         const wd = windDir(current.windDir);
@@ -1029,8 +1053,28 @@ const base = siteBase();
                 sleep: (ms: number) =>
                   new Promise<void>((r) => setTimeout(r, ms)),
               },
+              undefined,
+              forecastDays,
             )
               .then((d) => {
+                // Story 15.3 — flag the days where the models' Tmax
+                // diverge by ≥2 °C, right on the daily rows.
+                for (const day of d.daily) {
+                  if (day.spread === null || day.spread < 2) continue;
+                  const row = document.querySelector<HTMLElement>(
+                    `[data-fc-day="${day.date}"] > span:last-child`,
+                  );
+                  if (!row || row.querySelector('.fc-diverge')) continue;
+                  const chip = document.createElement('span');
+                  chip.className =
+                    'fc-diverge ml-1 inline-block rounded px-1 text-[10px] font-semibold align-middle ' +
+                    (day.spread <= 3
+                      ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-200'
+                      : 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200');
+                  chip.textContent = `±${day.spread.toFixed(0)}°`;
+                  chip.title = `${t.models_diverge}: ${day.spread.toFixed(1)}°`;
+                  row.appendChild(chip);
+                }
                 const parts: string[] = [];
                 const labels: Record<string, string> = {
                   icon_seamless: 'ICON',

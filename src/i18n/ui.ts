@@ -13,7 +13,12 @@ export interface UiStrings {
   today: string;
   feels_like: string;
   hourly_48h: string;
-  seven_days: string;
+  ten_days: string;
+  sixteen_days: string;
+  more_days: string;
+  fewer_days: string;
+  days_caveat: string;
+  models_diverge: string;
   detail: string;
   wind: string;
   uv_index: string;
@@ -98,7 +103,12 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     today: 'Hoy',
     feels_like: 'sensación',
     hourly_48h: 'Por hora — hoy y mañana (48 h)',
-    seven_days: '7 días',
+    ten_days: '10 días',
+    sixteen_days: '16 días',
+    more_days: 'Ver 16 días',
+    fewer_days: 'Ver 10 días',
+    days_caveat: 'Los días 11 a 16 tienen menor confianza: úsalos como tendencia, no como pronóstico.',
+    models_diverge: 'Los modelos difieren',
     detail: 'Detalle',
     wind: 'Viento',
     uv_index: 'Índice UV',
@@ -180,7 +190,12 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     today: 'Today',
     feels_like: 'feels like',
     hourly_48h: 'Hourly — today & tomorrow (48 h)',
-    seven_days: '7 days',
+    ten_days: '10 days',
+    sixteen_days: '16 days',
+    more_days: 'See 16 days',
+    fewer_days: 'See 10 days',
+    days_caveat: 'Days 11 to 16 carry lower confidence: read them as a trend, not a forecast.',
+    models_diverge: 'Models disagree',
     detail: 'Detail',
     wind: 'Wind',
     uv_index: 'UV index',
