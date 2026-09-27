@@ -219,7 +219,8 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 | E11 mobile (P1) | Story 11.3 (bottom-sheet de controles) es el patrón que reusa 15.4 y 16.4. Hacer 11.3 antes de 15.4. |
 | E13.1 tooltip multi-métrica | **Hecho**: tooltip multi-métrica con flecha de viento; el "pin al tocar" lo cubren la tarjeta de lugar (15.4) y el modo mira (18.3). |
 | E13.2 modo Precipitación | **Hecho 2026-09-27**: superposición "Modo precipitación" = satélite GeoColor + nubes + radar (frame más cercano, ±15 min) con leyenda de radar y hash `&mode=precip`. |
-| E13.5 antes/después | Se vuelve trivial tras 15.2 (past_days) y 16.1/16.2. |
+| E13.5 antes/después | **Hecho 2026-09-27**: botón "Hace 24 h" en las herramientas de captura (congela la vista y mueve el timeline −24 h; alternar con Mostrar/Ocultar). |
+| E13.3 desacuerdo entre modelos | **Hecho 2026-09-27**: superposición "Incertidumbre" = spread ICON/GFS/ECMWF del campo activo, rampa verde→morado, "± n entre modelos" en el tooltip. |
 | E14.1 push | Se cierra con E17 (diseño sin backend). |
 | Plan home Fase 4 | La tarjeta al tocar = 15.4; leyenda móvil y timeline = 16.4. |
 | E12 registry | Cada capa nueva (15.5) nace ya como plugin (`plugins/base-layers/`), no en el monolito. |

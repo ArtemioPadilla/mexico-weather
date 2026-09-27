@@ -17,6 +17,9 @@ import {
   PRECIP_LEGEND,
   SNOW_LEGEND,
   PRECIP_PROB_LEGEND,
+  spreadFieldGrid,
+  spreadColorFor,
+  spreadLegendFor,
 } from './mapfields';
 
 describe('viewportGrid', () => {
@@ -448,5 +451,48 @@ describe('precipitation ramps (Story 15.5)', () => {
     expect(precipProbColor(100)).toBe('#0b3a99');
     expect(SNOW_LEGEND.length).toBeGreaterThan(2);
     expect(PRECIP_PROB_LEGEND[0].label).toBe('10%');
+  });
+});
+
+describe('model spread (Story 13.3)', () => {
+  const pts = [
+    { lat: 19, lng: -99 },
+    { lat: 20, lng: -100 },
+  ];
+  const mk = (times: string[], a: (number | null)[], b: (number | null)[]) => ({
+    times,
+    points: [
+      { ...pts[0], values: a },
+      { ...pts[1], values: b },
+    ],
+  });
+  it('computes max−min per point and hour, aligned on the reference times', () => {
+    const t = ['2026-09-27T00:00', '2026-09-27T01:00'];
+    const icon = mk(t, [20, 21], [10, null]);
+    const gfs = mk(t, [22, 21.5], [12, 13]);
+    const ecmwf = mk(['2026-09-27T01:00'], [24], [11]);
+    const s = spreadFieldGrid([icon, gfs, ecmwf], pts, t);
+    expect(s?.times).toEqual(t);
+    expect(s?.points[0].values).toEqual([2, 3]);
+    // Hour 1 at point 2: icon null → gfs 13 vs ecmwf 11 → 2.
+    expect(s?.points[1].values).toEqual([2, 2]);
+    expect(spreadFieldGrid([icon], pts, t)).toBeNull();
+    // A grid on another point layout does not count towards the two.
+    const elsewhere = {
+      times: t,
+      points: [{ lat: 0, lng: 0, values: [1, 2] }],
+    };
+    expect(spreadFieldGrid([icon, elsewhere], pts, t)).toBeNull();
+  });
+  it("ramps and legends follow each layer's own steps", () => {
+    const c = spreadColorFor('temperature');
+    expect(c(0.5)).toBe('#22c55e');
+    expect(c(3)).toBe('#facc15');
+    expect(c(10)).toBe('#7e22ce');
+    expect(spreadColorFor('humidity')(3)).toBe('#22c55e');
+    expect(spreadColorFor('humidity')(25)).toBe('#f97316');
+    const lg = spreadLegendFor('pressure', 'hPa');
+    expect(lg[0].label).toBe('<1');
+    expect(lg[4].label).toBe('≥6 hPa');
   });
 });

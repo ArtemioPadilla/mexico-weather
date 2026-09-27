@@ -340,7 +340,7 @@ Correction (2026-07-29): the header nav links this story originally named are
 > Outcome: move from parity to lead. Highest-ROI un-shipped ideas from
 > `PLAN_SUPERIORITY`.
 
-**Story 13.1 — Multi-metric hover tooltip** · est 1wk
+**Story 13.1 — Multi-metric hover tooltip** · est 1wk · **shipped 2026-09-27** (temp + humidity + pressure + wind with arrow; touch is covered by the tap place card and the crosshair mode of PLAN_PRO_GRATIS 18.3)
 - [ ] Extend the existing `#mapTooltip` to show temp + humidity + wind at the
       cursor in one read (currently single-metric).
 - [ ] Directional wind arrow (rotate a glyph by bearing) in the tooltip.
@@ -349,7 +349,7 @@ Correction (2026-07-29): the header nav links this story originally named are
   point; touch devices can pin/unpin; no extra network calls (reuse the
   already-loaded grids).
 
-**Story 13.2 — Combined "Precipitación" mode** · est 1wk
+**Story 13.2 — Combined "Precipitación" mode** · est 1wk · **shipped 2026-09-27** ("Modo precipitación" overlay: GeoColor + clouds + nearest radar frame, radar legend, `&mode=precip`)
 - [ ] Add a single mode toggle that activates GIBS GeoColor satellite +
       clouds overlay + radar together (GeoColor already in `nasa-gibs.ts`).
 - [ ] Tune z-order + opacity so all three read at once.
@@ -357,7 +357,7 @@ Correction (2026-07-29): the header nav links this story originally named are
 - Acceptance: one click yields the zoom.earth-equivalent "precipitation"
   picture; deep-link restores it.
 
-**Story 13.3 — Multi-model disagreement view** · est 1wk
+**Story 13.3 — Multi-model disagreement view** · est 1wk · **shipped 2026-09-27** ("Incertidumbre" overlay: ICON/GFS/ECMWF spread of the active field, own ramp + legend, ± line in the tooltip; on demand, 3 extra fetches cached per layer)
 - [ ] Surface per-model fields (ICON/GFS/ECMWF/GEM) via Open-Meteo `models=`
       — the model toggle data path already exists.
 - [ ] Compute + render a spread/disagreement field (e.g. inter-model stdev)
@@ -375,7 +375,7 @@ Correction (2026-07-29): the header nav links this story originally named are
 - Acceptance: field quality ≥ current at all zooms; render time drops;
   no visual regression in the field-grid snapshots.
 
-**Story 13.5 — Temporal before/after compare** · est 1wk
+**Story 13.5 — Temporal before/after compare** · est 1wk · **shipped 2026-09-27** ("Hace 24 h" snapshot button: freezes the current frame and moves the timeline 24 h back; toggle flips between the two)
 - [ ] Split-screen / swipe slider rendering the same view at two timestamps
       ("hace 24h vs ahora").
 - [ ] Drive both panes from one timeline + view state.

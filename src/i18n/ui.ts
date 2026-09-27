@@ -76,6 +76,9 @@ export interface UiStrings {
   welcome_locate: string;
   welcome_dismiss: string;
   layer_page_link: string;
+  confidence_loading: string;
+  confidence_failed: string;
+  confidence_between_models: string;
   layer_explainer_radar: string;
   layer_explainer_satellite: string;
   layer_explainer_temperature: string;
@@ -187,6 +190,9 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     welcome_locate: 'Ubicarme',
     welcome_dismiss: 'Ahora no',
     layer_page_link: 'Página de esta capa',
+    confidence_loading: 'Comparando modelos (ICON, GFS, ECMWF)…',
+    confidence_failed: 'No se pudo comparar modelos para esta capa.',
+    confidence_between_models: 'entre modelos',
     layer_explainer_radar: 'Radar muestra precipitación detectada (lluvia, nieve) en tiempo casi real desde RainViewer. Pulsa ▶ para animar las últimas 2 h y el nowcast.',
     layer_explainer_satellite: 'Satélite GOES-East (NASA GIBS) cada 10 min: GeoColor de día, infrarrojo de noche. El timeline recorre 24 h; "Ver 10 días" amplía. Activa N para luces nocturnas.',
     layer_explainer_temperature: 'Temperatura del aire a 2 m, gradiente continuo desde ayer hasta +10 días. Sub-opción Aparente incluye humedad y viento (sensación térmica); toca el mapa para ver tu pronóstico.',
@@ -295,6 +301,9 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     welcome_locate: 'Locate me',
     welcome_dismiss: 'Not now',
     layer_page_link: 'Page for this layer',
+    confidence_loading: 'Comparing models (ICON, GFS, ECMWF)…',
+    confidence_failed: 'Could not compare models for this layer.',
+    confidence_between_models: 'between models',
     layer_explainer_radar: 'Radar shows detected precipitation (rain, snow) in near real time from RainViewer. Press ▶ to animate the last 2 h and the nowcast.',
     layer_explainer_satellite: 'GOES-East satellite (NASA GIBS) every 10 min: GeoColor by day, infrared by night. The timeline spans 24 h; "10 days" extends it. Press N for night lights.',
     layer_explainer_temperature: 'Air temperature at 2 m, a continuous gradient from yesterday to +10 days. Feels-like adds humidity and wind; tap the map for your forecast.',

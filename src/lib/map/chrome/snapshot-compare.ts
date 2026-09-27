@@ -18,6 +18,8 @@ import type maplibregl from 'maplibre-gl';
 export interface SnapshotCompareEls {
   map: maplibregl.Map;
   captureBtn: HTMLElement | null;
+  /** Story 13.5 — "Hace 24 h" button; optional. */
+  compareBtn?: HTMLElement | null;
   toggleBtn: HTMLElement | null;
   clearBtn: HTMLElement | null;
   imgEl: HTMLImageElement | null;
@@ -28,10 +30,36 @@ export interface SnapshotCompare {
   refresh: () => void;
 }
 
+export interface SnapshotCompareDeps {
+  /** Story 13.5 — move the timeline by `bySec` (negative = past);
+   *  false when there is no time axis to move. */
+  shiftTime?: (bySec: number) => boolean;
+}
+
 export function createSnapshotCompare(
-  els: SnapshotCompareEls
+  els: SnapshotCompareEls,
+  deps: SnapshotCompareDeps = {}
 ): SnapshotCompare {
   let visible = true;
+
+  function capture(): boolean {
+    try {
+      // MapLibre needs preserveDrawingBuffer=true to read the canvas;
+      // we trigger a synchronous render first so we grab the most
+      // recent frame rather than an in-flight one.
+      els.map.triggerRepaint();
+      const url = els.map.getCanvas().toDataURL('image/png');
+      if (els.imgEl) {
+        els.imgEl.src = url;
+        visible = true;
+        refresh();
+      }
+      return true;
+    } catch {
+      /* WebGL context lost / canvas tainted — degrade silently */
+      return false;
+    }
+  }
 
   function refresh(): void {
     if (!els.imgEl) return;
@@ -39,6 +67,7 @@ export function createSnapshotCompare(
     // The [hidden] attribute (not the `hidden` class): the pills carry
     // an inline-flex display utility that would tie with the class.
     if (els.captureBtn) els.captureBtn.hidden = has;
+    if (els.compareBtn) els.compareBtn.hidden = has;
     if (els.toggleBtn) els.toggleBtn.hidden = !has;
     if (els.clearBtn) els.clearBtn.hidden = !has;
     els.imgEl.classList.toggle('hidden', !has || !visible);
@@ -56,19 +85,17 @@ export function createSnapshotCompare(
   }
 
   els.captureBtn?.addEventListener('click', () => {
-    try {
-      // MapLibre needs preserveDrawingBuffer=true to read the canvas;
-      // we trigger a synchronous render first so we grab the most
-      // recent frame rather than an in-flight one.
-      els.map.triggerRepaint();
-      const url = els.map.getCanvas().toDataURL('image/png');
-      if (els.imgEl) {
-        els.imgEl.src = url;
-        visible = true;
-        refresh();
-      }
-    } catch {
-      /* WebGL context lost / canvas tainted — degrade silently */
+    capture();
+  });
+  // Story 13.5 — temporal before/after in one click: freeze the current
+  // frame as the overlay, then move the timeline 24 h back so the
+  // toggle flips between "hace 24 h" (live) and "ahora" (captured).
+  els.compareBtn?.addEventListener('click', () => {
+    if (!deps.shiftTime) return;
+    if (!capture()) return;
+    if (!deps.shiftTime(-86400)) {
+      els.imgEl?.removeAttribute('src');
+      refresh();
     }
   });
   els.toggleBtn?.addEventListener('click', () => {

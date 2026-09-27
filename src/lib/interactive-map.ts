@@ -47,6 +47,9 @@ import {
   tempColor,
   humidityColor,
   pressureColor,
+  spreadFieldGrid,
+  spreadColorFor,
+  spreadLegendFor,
   HUMIDITY_LEGEND,
   PRESSURE_LEGEND,
   precipColor,
@@ -1235,6 +1238,15 @@ export async function initInteractiveMap(
     if (precipSubOption === 'probabilidad') return '%';
     return 'mm/h';
   }
+  /** Unit of the active field variable in the display units (Story 13.3
+   *  legend + tooltip spread). Spread stays in metric steps. */
+  function fieldUnitLabel(): string {
+    if (activeLayer === 'temperature') return '°C';
+    if (activeLayer === 'humidity') return '%';
+    if (activeLayer === 'pressure') return 'hPa';
+    if (activeLayer === 'precipitation') return precipUnit();
+    return '';
+  }
   function precipLegend(): LegendStop[] {
     if (precipSubOption === 'nieve') return SNOW_LEGEND;
     if (precipSubOption === 'probabilidad') return PRECIP_PROB_LEGEND;
@@ -1274,6 +1286,72 @@ export async function initInteractiveMap(
     },
   } as unknown as Record<string, FieldConfig>;
   let fieldAbort: AbortController | null = null;
+
+  // Story 13.3 — model disagreement ("incertidumbre"): the same
+  // variable from several NWP models, rendered as their spread.
+  const SPREAD_MODELS = ['icon_seamless', 'gfs_seamless', 'ecmwf_ifs04'];
+  let confidenceMode = false;
+  let spreadGrid: FieldGrid | null = null;
+  let spreadAbort: AbortController | null = null;
+  let spreadFor = '';
+
+  async function loadSpreadGrid(): Promise<void> {
+    const cfg = FIELD_CONFIGS[activeLayer];
+    if (!cfg || !fieldGrid || !confidenceMode) return;
+    const key = `${activeLayer}:${cfg.hourlyVar}`;
+    if (spreadGrid && spreadFor === key) return;
+    spreadAbort?.abort();
+    const ac = new AbortController();
+    spreadAbort = ac;
+    const pts = fieldGrid.points.map((p) => ({ lat: p.lat, lng: p.lng }));
+    const refTimes = fieldGrid.times;
+    showMsg(t.confidence_loading);
+    try {
+      const results = await Promise.allSettled(
+        SPREAD_MODELS.map(async (model) => {
+          const json = await fetchFieldChunks(pts, cfg.hourlyVar, deps.fetch, {
+            signal: ac.signal,
+            model,
+          });
+          return parseFieldResponse(json, pts, cfg.hourlyVar);
+        })
+      );
+      if (ac.signal.aborted) return;
+      const grids = results
+        .map((r) => (r.status === 'fulfilled' ? r.value : null))
+        .filter((g): g is FieldGrid => !!g);
+      spreadGrid = spreadFieldGrid(grids, pts, refTimes);
+      spreadFor = key;
+      hideMsg();
+      if (!spreadGrid) {
+        showMsg(t.confidence_failed);
+        window.setTimeout(hideMsg, 4000);
+        return;
+      }
+      if (getLayerDef(activeLayer)?.kind === 'field' && frameIndex >= 0) {
+        void renderFieldFrame(frameIndex);
+      }
+      renderLegend(legendKindFor());
+      refreshCityValues();
+    } finally {
+      if (spreadAbort === ac) spreadAbort = null;
+    }
+  }
+
+  function setConfidenceMode(on: boolean): void {
+    confidenceMode = on;
+    if (!on) {
+      spreadAbort?.abort();
+      spreadGrid = null;
+      spreadFor = '';
+    }
+    if (getLayerDef(activeLayer)?.kind === 'field' && frameIndex >= 0) {
+      void renderFieldFrame(frameIndex);
+    }
+    renderLegend(legendKindFor());
+    refreshCityValues();
+    if (on) void loadSpreadGrid();
+  }
 
   // Wind particles WebGL layer — shader + GPU setup extracted to
   // src/lib/map/layers/wind-particles.ts. Layer id is re-exported as
@@ -1630,13 +1708,16 @@ export async function initInteractiveMap(
     // City value pills (zoom.earth "Valores de etiquetas") follow the same
     // cadence — value sampled via tooltipValueAt() at each city.
     refreshCityValues();
+    // Story 13.3 — in confidence mode the raster shows the models'
+    // spread instead of the value (same grid layout, own ramp).
+    const useSpread = confidenceMode && !!spreadGrid;
     const render = await renderFieldRaster(
-      fieldGrid,
+      useSpread && spreadGrid ? spreadGrid : fieldGrid,
       FIELD_GRID_ROWS,
       FIELD_GRID_COLS,
       fieldBounds,
       hourIndex,
-      cfg.color,
+      useSpread ? spreadColorFor(activeLayer) : cfg.color,
       { width: FIELD_RASTER_W, height: FIELD_RASTER_H }
     );
     if (!render) return;
@@ -1796,6 +1877,10 @@ export async function initInteractiveMap(
         if (layerId === 'temperature') lastTempGrid = fieldGrid;
         else if (layerId === 'humidity') lastHumidityGrid = fieldGrid;
         else if (layerId === 'pressure') lastPressureGrid = fieldGrid;
+        if (confidenceMode) {
+          spreadGrid = null;
+          void loadSpreadGrid();
+        }
       }
     } catch {
       if (ac.signal.aborted) return false;
@@ -1865,9 +1950,11 @@ export async function initInteractiveMap(
     | 'humidity'
     | 'pressure'
     | 'precipitation'
+    | 'confidence'
     | 'wind'
     | null {
     const akind = getLayerDef(activeLayer)?.kind;
+    if (confidenceMode && spreadGrid && akind === 'field') return 'confidence';
     if (activeLayer === 'radar') return 'radar';
     // Combined mode reads as precipitation: the radar scale applies.
     if (precipMode && activeLayer === 'satellite') return 'radar';
@@ -1885,6 +1972,7 @@ export async function initInteractiveMap(
       | 'humidity'
       | 'pressure'
       | 'precipitation'
+      | 'confidence'
       | 'wind'
       | null
   ): void {
@@ -1914,10 +2002,12 @@ export async function initInteractiveMap(
               ? PRESSURE_LEGEND
               : kind === 'precipitation'
                 ? precipLegend()
-                : WIND_LEGEND.map((s) => ({
-                    label: t[s.labelKey as keyof typeof t] as string,
-                    color: s.color,
-                  }));
+                : kind === 'confidence'
+                  ? spreadLegendFor(activeLayer, fieldUnitLabel())
+                  : WIND_LEGEND.map((s) => ({
+                      label: t[s.labelKey as keyof typeof t] as string,
+                      color: s.color,
+                    }));
     // Horizontal stop layout (plan P0.2): a 28×12 swatch with the
     // label below, similar to zoom.earth's bottom-left scale.
     // Story 19.3 — temperature / pressure scales read in the chosen unit.
@@ -1938,6 +2028,7 @@ export async function initInteractiveMap(
       humidity: '%',
       pressure: PRESSURE_LABEL[U.pressure],
       precipitation: precipUnit(),
+      confidence: `± ${fieldUnitLabel()}`,
       wind: SPEED_LABEL[U.speed],
     } as Record<string, string>;
     if (unitEl) unitEl.textContent = unit[kind] ?? '';
@@ -2078,6 +2169,15 @@ export async function initInteractiveMap(
       if (activeLayer === 'precipitation') {
         const pv = sampleField(fieldGrid);
         if (pv !== null) lines.push(`🌧 ${formatPrecip(pv)}`);
+      }
+
+      // Story 13.3 — model spread at the point, when the mode is on.
+      if (confidenceMode && spreadGrid && def.kind === 'field') {
+        const sv = sampleField(spreadGrid);
+        if (sv !== null)
+          lines.push(
+            `± ${sv < 1 ? sv.toFixed(1) : Math.round(sv)} ${fieldUnitLabel()} ${t.confidence_between_models}`
+          );
       }
 
       // Temperature
@@ -2819,7 +2919,8 @@ export async function initInteractiveMap(
       | 'histStorms'
       | 'smnStateTint'
       | 'outlook'
-      | 'precipMode';
+      | 'precipMode'
+      | 'confidence';
     label: string;
     shortcut: string;
     isEnabled: () => boolean;
@@ -2896,6 +2997,13 @@ export async function initInteractiveMap(
       shortcut: '',
       isEnabled: () => precipMode,
       setEnabled: (on) => setPrecipMode(on),
+    },
+    {
+      id: 'confidence',
+      label: 'Incertidumbre (desacuerdo entre modelos)',
+      shortcut: '',
+      isEnabled: () => confidenceMode,
+      setEnabled: (on) => setConfidenceMode(on),
     },
     {
       id: 'clouds',
@@ -3680,15 +3788,42 @@ export async function initInteractiveMap(
   // ----------------------------------------------------------------
   if (features.tools) {
     // Snapshot compare tool — extracted to chrome/snapshot-compare.ts.
-    createSnapshotCompare({
-      map,
-      captureBtn: document.getElementById('mw-snapshot-capture'),
-      toggleBtn: document.getElementById('mw-snapshot-toggle'),
-      clearBtn: document.getElementById('mw-snapshot-clear'),
-      imgEl: document.getElementById(
-        'mw-snapshot-img'
-      ) as HTMLImageElement | null,
-    }).refresh();
+    createSnapshotCompare(
+      {
+        map,
+        captureBtn: document.getElementById('mw-snapshot-capture'),
+        compareBtn: document.getElementById('mw-snapshot-24h'),
+        toggleBtn: document.getElementById('mw-snapshot-toggle'),
+        clearBtn: document.getElementById('mw-snapshot-clear'),
+        imgEl: document.getElementById(
+          'mw-snapshot-img'
+        ) as HTMLImageElement | null,
+      },
+      {
+        // Story 13.5 — jump the active timeline by ±N s (nearest frame).
+        shiftTime: (bySec) => {
+          if (tlFrames.length < 2 || frameIndex < 0) {
+            showMsg(t.map_layer_unavailable);
+            window.setTimeout(hideMsg, 3000);
+            return false;
+          }
+          tlStop();
+          const target = tlFrames[frameIndex].time + bySec;
+          let best = frameIndex;
+          let bestDelta = Infinity;
+          tlFrames.forEach((f, i) => {
+            const d = Math.abs(f.time - target);
+            if (d < bestDelta) {
+              best = i;
+              bestDelta = d;
+            }
+          });
+          if (best === frameIndex) return false;
+          applyFrame(best);
+          return true;
+        },
+      }
+    ).refresh();
   }
 
   return {

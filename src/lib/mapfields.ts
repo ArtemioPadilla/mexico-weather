@@ -599,3 +599,85 @@ export function parseWindResponse(
   }
   return { times: times as string[], points: out };
 }
+
+// ---------------------------------------------------------------------
+// Story 13.3 — multi-model disagreement ("incertidumbre").
+// ---------------------------------------------------------------------
+
+/** Per-point, per-hour spread (max − min) across several model grids
+ *  for the same variable, aligned on `refTimes` (a model missing an
+ *  hour, or fewer than two models with a value, yields null). Null when
+ *  fewer than two grids share the reference point layout. */
+export function spreadFieldGrid(
+  grids: readonly FieldGrid[],
+  refPoints: readonly { lat: number; lng: number }[],
+  refTimes: readonly string[]
+): FieldGrid | null {
+  const usable = grids.filter(
+    (g) =>
+      g.points.length === refPoints.length &&
+      g.points.every(
+        (p, i) => p.lat === refPoints[i].lat && p.lng === refPoints[i].lng
+      )
+  );
+  if (usable.length < 2) return null;
+  const idx = usable.map((g) => {
+    const m = new Map<string, number>();
+    g.times.forEach((t, i) => m.set(t, i));
+    return m;
+  });
+  const points: FieldGrid['points'] = refPoints.map((p, pi) => ({
+    lat: p.lat,
+    lng: p.lng,
+    values: refTimes.map((t) => {
+      let lo = Infinity;
+      let hi = -Infinity;
+      let n = 0;
+      for (let gi = 0; gi < usable.length; gi++) {
+        const ti = idx[gi].get(t);
+        if (ti === undefined) continue;
+        const v = usable[gi].points[pi].values[ti];
+        if (typeof v !== 'number' || !Number.isFinite(v)) continue;
+        lo = Math.min(lo, v);
+        hi = Math.max(hi, v);
+        n += 1;
+      }
+      return n >= 2 ? Math.round((hi - lo) * 100) / 100 : null;
+    }),
+  }));
+  return { times: [...refTimes], points };
+}
+
+/** Spread thresholds per layer in the variable's own unit: below the
+ *  first step the models agree; past the last they clearly diverge. */
+export const SPREAD_STEPS: Record<string, [number, number, number, number]> = {
+  temperature: [1, 2, 4, 6],
+  humidity: [5, 10, 20, 30],
+  pressure: [1, 2, 4, 6],
+  precipitation: [0.5, 1, 3, 5],
+};
+
+const SPREAD_COLORS = ['#22c55e', '#a3e635', '#facc15', '#f97316', '#7e22ce'];
+
+/** Spread → colour (green = agreement … purple = strong disagreement). */
+export function spreadColorFor(layerId: string): (v: number) => string {
+  const steps = SPREAD_STEPS[layerId] ?? SPREAD_STEPS.temperature;
+  return (v: number): string => {
+    if (v < steps[0]) return SPREAD_COLORS[0];
+    if (v < steps[1]) return SPREAD_COLORS[1];
+    if (v < steps[2]) return SPREAD_COLORS[2];
+    if (v < steps[3]) return SPREAD_COLORS[3];
+    return SPREAD_COLORS[4];
+  };
+}
+
+export function spreadLegendFor(layerId: string, unit: string): LegendStop[] {
+  const steps = SPREAD_STEPS[layerId] ?? SPREAD_STEPS.temperature;
+  return [
+    { label: `<${steps[0]}`, color: SPREAD_COLORS[0] },
+    { label: `${steps[0]}`, color: SPREAD_COLORS[1] },
+    { label: `${steps[1]}`, color: SPREAD_COLORS[2] },
+    { label: `${steps[2]}`, color: SPREAD_COLORS[3] },
+    { label: `≥${steps[3]} ${unit}`.trim(), color: SPREAD_COLORS[4] },
+  ];
+}
