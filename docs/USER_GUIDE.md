@@ -8,7 +8,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 |---|---|
 | `/` | **Home** — map-first: the interactive map fills the viewport below the nav (radar on by default, trimmed 5-layer rail + timeline + preset pins) with the "Mostrar mi clima" CTA and the search box floating on top; preset city cards, favorites and SMN alerts follow below the fold. |
 | `/forecast` | **Forecast detail** — shareable, client-rendered detail page driven by URL query params. |
-| `/mapa` | **Interactive weather map** — MapLibre GL basemap, location pins, layer rail, opacity slider, legend, timeline scrubber + playback, shareable view state. |
+| `/mapa` | **Interactive weather map** — opens on the GeoColor satellite layer with the last 3 h already animating (Story 21.2), MapLibre GL basemap, location pins, layer rail, opacity slider, legend, timeline scrubber + playback, shareable view state. |
 | `/privacidad` | **Privacy/legal**. |
 | `/alertas` | **Alerts on your phone** — ntfy.sh public topics (`climamx-huracanes`, `climamx-smn`, `climamx-smn-<estado>`) fed by the snapshot workflows, plus per-state RSS at `/rss/<estado>.xml` (and `/rss/nacional.xml`). No account, nothing stored. |
 | `/rss.xml` | **RSS 2.0 feed** of SMN weather alerts (regenerated hourly). |
@@ -31,7 +31,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 
 ### Explore the interactive map (`/mapa`)
 
-1. The map opens centred on Mexico, with **pins** for preset cities and (after a search/geolocate) a single user pin. Until the first tiles land, the map area shows a dark gradient with a subtle shimmer instead of a flat gray box (Story 21.4; every embed — home, `/mapa`, layer pages, `/forecast` — shares it, and it fades within ~0.5 s of the first loaded tiles, or after 8 s at most if tiles never arrive). Click a pin → popup → "Ver pronóstico completo →" deep-link to `/forecast`.
+1. The map opens centred on Mexico **on the GeoColor satellite layer, already animating**: once the first satellite frame has its tiles, the timeline plays the **last 3 h** on its own (Story 21.2). Any interaction with the timeline (‹ / ›, the range, ▶) pauses it, exactly like pausing a manual loop; after that the loop window is the one in ⚙ (24 h by default — the boot loop never changes the setting; if you already chose a window there, it is used from the start). It does not autoplay when your system prefers reduced motion (the ▶ button is disabled), when the browser reports a data-saver connection (`navigator.connection.saveData`), or when you open a shared link with a `t=` instant. If NASA GIBS is unreachable the map opens on **radar** instead (or on **Base** if RainViewer is down too) and shows the usual "Capa no disponible" message; `/` (home) keeps opening on radar and each `/mapa/<capa>/` page on its own layer, without autoplay. The map also shows **pins** for preset cities and (after a search/geolocate) a single user pin. Until the first tiles land, the map area shows a dark gradient with a subtle shimmer instead of a flat gray box (Story 21.4; every embed — home, `/mapa`, layer pages, `/forecast` — shares it, and it fades within ~0.5 s of the first loaded tiles, or after 8 s at most if tiles never arrive). Click a pin → popup → "Ver pronóstico completo →" deep-link to `/forecast`.
 2. Use the **layer rail** (top-left) to switch the active weather layer. Only one weather layer is active at a time; **Base** turns them all off. While **satellite** or **radar** is on screen the basemap switches to the dark gray canvas even in the light theme, and place labels / boundaries are drawn *above* the imagery at 80 % so they stay readable over cloud tops (Story 21.1); switching back to Base returns to the theme's own canvas. The rail, the timeline pill and the legend bar are dark translucent panels in both themes — content pages keep the regular light/dark look.
 3. When a weather layer is active, the **opacity slider** appears and changes the layer's transparency live. Each layer has a sensible default opacity (radar 80%, satellite 100%, temperature/humidity/pressure 65–75%).
 4. The **legend** (left rail) reflects the active layer:
@@ -51,7 +51,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 |---|---|---|
 | `view` | `<lat>,<lng>,<zoom>z` (e.g. `19.43,-99.13,6.5z`) | Map centre + zoom. Validated; out-of-range values fall back to the default Mexico view. |
 | `mode` | `precip` | Combined precipitation mode (Story 13.2): GeoColor satellite + cloud overlay + the radar frame nearest the satellite instant, radar legend. Set from the Superposiciones panel; absent = off. |
-| `layer` | one of `base`, `radar`, `satellite`, `temperature`, `humidity`, `pressure`, `precipitation`, `wind`, `sunlight` (each weather layer also has its own landing page, `/mapa/radar/`, `/mapa/satelite/`, `/mapa/temperatura/`, `/mapa/humedad/`, `/mapa/presion/`, `/mapa/precipitacion/`, `/mapa/viento/`, `/mapa/sol/`, that opens the map on that layer — Story 19.1) | Active weather layer; unknown ids fall back to `base`. |
+| `layer` | one of `base`, `radar`, `satellite`, `temperature`, `humidity`, `pressure`, `precipitation`, `wind`, `sunlight` (each weather layer also has its own landing page, `/mapa/radar/`, `/mapa/satelite/`, `/mapa/temperatura/`, `/mapa/humedad/`, `/mapa/presion/`, `/mapa/precipitacion/`, `/mapa/viento/`, `/mapa/sol/`, that opens the map on that layer — Story 19.1) | Active weather layer; unknown ids fall back to `base`. **Absent** (e.g. `#view=19.43,-99.13,6.5z` alone) → the page's default layer applies: `satellite` on `/mapa`, `radar` on the home embed, each layer page its own (Story 21.2); the map then writes the layer back into the hash. |
 | `t` | ISO timestamp (e.g. `2026-05-19T13:00:00.000Z`) | Selected timeline frame; the nearest frame is restored on load. Omitted when `layer=base`. |
 
 Example: `https://artemiop.com/mexico-weather/mapa#view=19.43,-99.13,6.5z&layer=radar&t=2026-05-19T13:00:00.000Z`.
@@ -71,7 +71,7 @@ Example: `https://artemiop.com/mexico-weather/mapa#view=19.43,-99.13,6.5z&layer=
 - **Map** has `role="application"` + an `aria-label`; MapLibre's `NavigationControl` provides keyboard pan/zoom.
 - **Status messages** (`#mapmsg`) use `aria-live="polite"` so transient errors ("Capa no disponible", "No se pudo obtener tu ubicación", etc.) are announced without interrupting reading flow.
 - **Timeline timestamp** (`#tl-time`) uses `aria-live="polite"` + `aria-atomic="true"` so scrubbing announces the new frame time.
-- **`prefers-reduced-motion: reduce`** disables timeline autoplay (the ▶ button is disabled and labelled accordingly); manual prev / next / range scrubbing still works. MapLibre's `flyTo` animations are also suppressed under reduced motion.
+- **`prefers-reduced-motion: reduce`** disables timeline autoplay — the ▶ button is disabled (`data-state="paused"`) and labelled accordingly, and `/mapa` opens on a still satellite frame instead of the 3 h loop (Story 21.2); manual prev / next / range scrubbing still works. A data-saver connection (`navigator.connection.saveData`) also skips the boot loop. MapLibre's `flyTo` animations are also suppressed under reduced motion.
 - **Spanish-first**: every UI string is Spanish by default; English strings exist in the i18n table for future routing.
 - **XSS-safe**: all dynamic strings injected into popups, legends, and labels pass through an HTML-escape helper.
 
@@ -121,7 +121,8 @@ The site is mobile-first and tested at four representative breakpoints. There ar
 - **Geolocation denied / unavailable** → a small message ("No se pudo obtener tu ubicación."); search remains usable.
 - **Geocoding network failure** → in-place "Sin resultados para «…»" or generic load-error message; nothing crashes.
 - **Weather layer source unreachable** (RainViewer manifest, Open-Meteo grid, or tile fetch) → "Capa no disponible" message, layer reverts to **Base**, the rest of the map keeps working.
-- **Invalid URL hash** → silently falls back to the default view (no crash).
+- **NASA GIBS unreachable when `/mapa` opens** (Story 21.2) → one GeoColor tile is probed alongside the RainViewer manifest; on a network or HTTP failure the boot falls back to **radar**, or to **Base** when RainViewer is down too, with the same "Capa no disponible" message. A slow answer keeps satellite (late tiles beat a fallback flicker). Only the boot probes; picking satellite from the rail later behaves as before.
+- **Invalid URL hash** → silently falls back to the default view (no crash); with no usable `layer=` the page's default layer applies.
 - **Rapid pan with an active field layer** → in-flight requests are cancelled via `AbortController`; only the latest viewport's result lands.
 
 ## Data sources & attributions
@@ -194,15 +195,20 @@ overlap the map container on a cold `/mapa` load, at **1280×800** and
 attached to the HTML report). Two tests per viewport:
 
 - **baseline** — asserts the exact number measured when the story shipped
-  (**38 desktop / 26 mobile**, 2026-09-27). It fails when a PR adds a control
+  (**38 desktop / 26 mobile** on the base layer, 2026-09-27; **42 / 27**
+  since Story 21.2 boots on satellite, whose sub-options and "Ver 10 días"
+  are counted). It fails when a PR adds a control
   over the map *and* when one is removed: the story that removes it records
   the new number in `VARIANTS[].baseline` and in the "Hoy" column of
   [`PLAN_PARIDAD_VISUAL.md`](PLAN_PARIDAD_VISUAL.md) §5.
 - **budget** (≤ 8 desktop, ≤ 5 mobile, plan §1.2) — `test.fixme` until
   Stories 22.2–22.5 land; 22.5 flips it to a real test.
 
-The state measured is the one a returning visitor sees: base layer, nothing
-clicked, welcome card already dismissed. MapLibre markers/popups and the
+The state measured is the one a returning visitor sees: satellite layer
+with its loop running (the Story 21.2 boot), nothing clicked, welcome card
+already dismissed; the spec mocks GIBS too and waits for the pressed
+satellite button + the playing ▶ rather than `map.loaded()`, which never
+settles while frames animate. MapLibre markers/popups and the
 attribution link are not counted (data and legal text, not chrome); the
 MapLibre zoom/compass buttons, the feedback FAB, the back link and the SMN
 pill are. The pure decision (rects → count) is

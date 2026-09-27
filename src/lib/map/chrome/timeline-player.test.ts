@@ -16,6 +16,36 @@ describe('createTimelinePlayer', () => {
     vi.useRealTimers();
   });
 
+  // Story 21.2 — observable before any toggle.
+  it('marks the play button paused at creation (also under reduced motion)', () => {
+    const btn = mkPlayBtn();
+    createTimelinePlayer(
+      { playBtn: btn },
+      labels,
+      () => 5,
+      () => 0,
+      () => {},
+      {
+        reducedMotion: true,
+      }
+    );
+    expect(btn.dataset.state).toBe('paused');
+    const btn2 = mkPlayBtn();
+    btn2.dataset.state = 'playing';
+    createTimelinePlayer(
+      { playBtn: btn2 },
+      labels,
+      () => 5,
+      () => 0,
+      () => {},
+      {
+        reducedMotion: false,
+      }
+    );
+    // A caller-set state is left alone.
+    expect(btn2.dataset.state).toBe('playing');
+  });
+
   it('start() with reducedMotion=true is a no-op', () => {
     const btn = mkPlayBtn();
     let cur = 0;

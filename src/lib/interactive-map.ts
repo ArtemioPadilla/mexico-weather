@@ -175,6 +175,10 @@ export interface InteractiveMapFeatures {
   /** First-visit welcome card offering to locate the user (Story 19.2).
    *  Only the full-page maps set it; embeds never nag. */
   welcome?: boolean;
+  /** "Controles" trigger that reveals the `hidden sm:*` chrome on phones
+   *  (Story 11.3). Markup-only, except that with it present the opacity
+   *  wrap's visibility below `sm` is the panel's to decide. */
+  mobileControls?: boolean;
 }
 
 /** Build an <svg><use href="#i-name"/></svg> element for the inline
@@ -232,6 +236,17 @@ import { createSunLayer } from './map/layers/sun-layer';
 import { createWeatherRaster } from './map/layers/weather-raster';
 import { createSkeletonReveal, findMapRoot } from './map/chrome/map-skeleton';
 import {
+  bootLoopHours,
+  readSaveData,
+  shouldBootAutoplay,
+  whenSourceLoaded,
+} from './map/chrome/boot-autoplay';
+import {
+  bootLayerAfterProbe,
+  probeGibs,
+  type GibsProbeResult,
+} from './map/sources/gibs-probe';
+import {
   type MapSettings,
   readSettings,
   writeSettings,
@@ -241,6 +256,7 @@ import {
   unitsOf,
   PLAY_INTERVAL_MS,
   RASTER_FADE_MS,
+  SETTINGS_KEY,
 } from './map/settings';
 import {
   convertLegendStops,
@@ -294,6 +310,13 @@ export interface InteractiveMapOptions {
   /** When false, marker click does NOT show a popup with a forecast link.
    *  Defaults to true. Set false for forecast page where only one preset pin is shown. */
   markerPopups?: boolean;
+  /** Story 21.2 — when the boot layer that ends up active is satellite,
+   *  start the timeline loop (last 3 h unless the visitor stored a loop
+   *  window) once its first frame has tiles. Skipped under
+   *  prefers-reduced-motion, `navigator.connection.saveData`, or a hash
+   *  `t=`; the first interaction with the timeline pauses it. /mapa only;
+   *  embeds and layer pages default to false. */
+  bootAutoplay?: boolean;
   lang?: 'es' | 'en';
 }
 
@@ -922,6 +945,24 @@ export async function initInteractiveMap(
     syncBasemapTheme();
     observeThemeForBasemap();
     void (async () => {
+      // Hash layer wins over the `initialLayer` opt (so deep-links to
+      // /mapa#layer=radar still activate radar even when the caller's
+      // initialLayer is 'temperature'). A hash without `layer=` reads
+      // null and lets the page default through (Story 21.2).
+      // Story 13.2 — a shared combined-mode link opens on satellite with
+      // clouds + radar even if the hash names another layer.
+      const bootWanted = precipMode
+        ? 'satellite'
+        : (hashed?.layer ?? opts.initialLayer ?? null);
+      // Story 21.2 — satellite's axis is synthetic, so GIBS being down
+      // never tripped "Capa no disponible": the visitor got a dark canvas
+      // and nothing else. One GeoColor tile is probed in parallel with
+      // the manifest; on a definite failure the boot falls to radar, then
+      // base, with the usual toast. A timeout keeps satellite.
+      const gibsProbe: Promise<GibsProbeResult> =
+        bootWanted === 'satellite'
+          ? probeGibs((u, i) => fetch(u, i))
+          : Promise.resolve('ok');
       try {
         const res = await deps.fetch(
           'https://api.rainviewer.com/public/weather-maps.json'
@@ -930,14 +971,17 @@ export async function initInteractiveMap(
       } catch {
         rvData = null;
       }
-      // Hash layer wins over the `initialLayer` opt (so deep-links to
-      // /mapa#layer=radar still activate radar even when the caller's
-      // initialLayer is 'temperature').
-      // Story 13.2 — a shared combined-mode link opens on satellite with
-      // clouds + radar even if the hash names another layer.
-      const wanted = precipMode
-        ? 'satellite'
-        : (hashed?.layer ?? opts.initialLayer ?? null);
+      const wanted = bootLayerAfterProbe(bootWanted, await gibsProbe, !!rvData);
+      const fellBack = wanted !== bootWanted;
+      if (fellBack) {
+        precipMode = false;
+        if (wanted === 'base') {
+          // Nothing to activate: toast now, and back to the theme's own
+          // canvas (the dark one was chosen up-front for satellite).
+          showMsg(t.map_layer_unavailable);
+          removeWeatherRaster();
+        }
+      }
       if (precipMode) void cloudsOverlay.setEnabled(true);
       if (wanted && wanted !== 'base' && getLayerDef(wanted)) {
         // Cold-load bug (#124, P0.1 in PLAN_UX_PARITY.md): historically a
@@ -951,9 +995,9 @@ export async function initInteractiveMap(
         //   2. After activation, verify a known wx layer (RV_LAYER for
         //      raster-tile, wx-field-layer for field) actually exists.
         //      If not, retry with increasing backoff.
-        const activateWithRetry = async (): Promise<void> => {
+        const activateWithRetry = async (): Promise<boolean> => {
           const def = getLayerDef(wanted);
-          if (!def) return;
+          if (!def) return false;
           const expectedLayerId =
             def.kind === 'raster-tile'
               ? RV_LAYER
@@ -984,15 +1028,27 @@ export async function initInteractiveMap(
             // The field raster is added asynchronously (renderFieldFrame
             // → canvas → blob → addLayer), so give it up to ~1 s before
             // deciding the activation failed and re-running it.
-            if (!expectedLayerId) return;
+            if (!expectedLayerId) return true;
             for (let w = 0; w < 8; w++) {
-              if (map.getLayer(expectedLayerId)) return;
+              if (map.getLayer(expectedLayerId)) return true;
               await new Promise<void>((r) => window.setTimeout(r, 125));
             }
           }
+          return false;
+        };
+        // Story 21.2 — the boot loop starts only once the layer is
+        // verifiably on the map (the retry above may re-run activation).
+        const bootActivate = (): void => {
+          void activateWithRetry().then((ok) => {
+            // The fallback toast goes AFTER the activation so the
+            // first-time layer explainer (Story 19.2) cannot paint over
+            // the one message that explains why this is not satellite.
+            if (fellBack) showMsg(t.map_layer_unavailable);
+            if (ok) armBootAutoplay();
+          });
         };
         if (map.loaded() && map.isStyleLoaded()) {
-          void activateWithRetry();
+          bootActivate();
         } else {
           // First of: idle, load, or a 4 s timeout — a slow or failing
           // basemap CDN must not keep a shared link from activating its
@@ -1001,7 +1057,7 @@ export async function initInteractiveMap(
           const go = (): void => {
             if (started) return;
             started = true;
-            void activateWithRetry();
+            bootActivate();
           };
           map.once('idle', go);
           map.once('load', go);
@@ -2124,13 +2180,22 @@ export async function initInteractiveMap(
       }
     }
     const akind = getLayerDef(activeLayer)?.kind;
-    opts.els.opacityWrap?.classList.toggle(
-      'hidden',
-      akind !== 'raster-tile' &&
-        akind !== 'field' &&
-        akind !== 'particles' &&
-        akind !== 'overlay'
-    );
+    // The wrap is `hidden … sm:block`, so on desktop it is always shown
+    // and this toggle only ever mattered below `sm`. With the Controles
+    // panel (Story 11.3) the phone shows it through
+    // `group-data-[controls=open]`, and dropping `hidden` here leaked the
+    // slider onto the map for any active weather layer — visible from the
+    // first paint now that /mapa boots on satellite (Story 21.2). Pages
+    // without the panel (home embed) keep the old behaviour.
+    if (!features.mobileControls) {
+      opts.els.opacityWrap?.classList.toggle(
+        'hidden',
+        akind !== 'raster-tile' &&
+          akind !== 'field' &&
+          akind !== 'particles' &&
+          akind !== 'overlay'
+      );
+    }
     renderLegend(legendKindFor());
     // Hide the hover tooltip when switching to a layer that doesn't
     // expose per-pixel values (or back to base). The next mousemove
@@ -3229,15 +3294,70 @@ export async function initInteractiveMap(
       getLoopRange: () =>
         loopRange(
           tlFrames.map((f) => f.time),
-          readSettings().loopHours,
+          // Story 21.2 — the boot loop covers the last 3 h unless the
+          // visitor ever chose a window in ⚙ (read raw: readSettings()
+          // fills the 24 h default in, and "default" is what we override).
+          bootLoopActive
+            ? bootLoopHours(readRawSettings())
+            : readSettings().loopHours,
           Math.floor(Date.now() / 1000)
         ),
     }
   );
-  const tlStop = (): void => tlPlayer.stop();
+  const tlStop = (): void => {
+    // Story 21.2 — any pause (prev/next/range, layer change, tools) ends
+    // the one-shot boot loop and its 3 h window for good.
+    bootAutoplayCancelled = true;
+    bootLoopActive = false;
+    tlPlayer.stop();
+  };
   const tlStart = (): void => tlPlayer.start();
   const tlReducedMotion = tlPlayer.reducedMotion();
-  tlPlayBtn?.addEventListener('click', () => tlPlayer.toggle());
+  tlPlayBtn?.addEventListener('click', () => {
+    bootAutoplayCancelled = true;
+    bootLoopActive = false;
+    tlPlayer.toggle();
+  });
+
+  // ------------------------------------------------------------------
+  // Story 21.2 — one-shot autoplay after the boot activation. /mapa
+  // opens on GeoColor and, like zoom.earth, the clouds should already be
+  // moving: once the satellite layer is verifiably on the map and its
+  // first frame has tiles (capped), the loop starts over the last 3 h.
+  // Not under reduced motion or data saver, not for a shared `t=`, not
+  // for the radar/base fallback, and never once the visitor touched the
+  // timeline. The setting itself is untouched: the window override lives
+  // in `bootLoopActive` and dies with the first pause.
+  // ------------------------------------------------------------------
+  let bootLoopActive = false;
+  let bootAutoplayCancelled = false;
+  function readRawSettings(): string | null {
+    try {
+      return window.localStorage.getItem(SETTINGS_KEY);
+    } catch {
+      return null;
+    }
+  }
+  function armBootAutoplay(): void {
+    if (!opts.bootAutoplay || bootAutoplayCancelled) return;
+    if (
+      !shouldBootAutoplay({
+        layerId: activeLayer,
+        frameCount: tlFrames.length,
+        seekIso: hashed?.t ?? null,
+        reducedMotion: tlReducedMotion,
+        saveData: readSaveData(navigator),
+      })
+    ) {
+      return;
+    }
+    void whenSourceLoaded(map, RV_SOURCE).then(() => {
+      if (bootAutoplayCancelled || activeLayer !== 'satellite') return;
+      if (tlPlayer.isPlaying()) return;
+      bootLoopActive = true;
+      tlPlayer.start();
+    });
+  }
 
   // ----------------------------------------------------------------
   // Story 15.1 — "Ver 10 días". Field and wind layers boot on the 2-day
@@ -3483,12 +3603,15 @@ export async function initInteractiveMap(
       if (!tlFrames.length) return;
       const dayPrev = document.getElementById('tl-day-prev');
       const dayNext = document.getElementById('tl-day-next');
-      const now = document.getElementById('tl-now');
       // Day-stride buttons only when the frames span at least a day.
       const hasDays = spansDays();
       dayPrev?.classList.toggle('hidden', !hasDays);
       dayNext?.classList.toggle('hidden', !hasDays);
-      now?.classList.toggle('hidden', false);
+      // 'Ahora' is `hidden … sm:inline-flex`: always on at ≥ sm, and
+      // meant to stay off on phones (Story 23.4 owns the mobile timeline).
+      // Dropping `hidden` here only ever leaked it below `sm` for any
+      // layer with frames — from the first paint since /mapa boots on
+      // satellite (Story 21.2) — so the class is left alone.
     };
     // The frame array is rebuilt every time activeLayer changes; we re-
     // evaluate on each tick of the visibility refresh (frame change).

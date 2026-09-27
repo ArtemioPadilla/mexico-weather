@@ -53,6 +53,32 @@ describe('parseMapHash', () => {
     expect(parseMapHash('#view=0,0,3z&layer=bogus').layer).toBe('base');
   });
 
+  // Story 21.2 — a hash without `layer=` must not force base: the page
+  // default (satellite on /mapa) applies, so the layer reads null.
+  it('leaves layer null when the hash has a view but no layer param', () => {
+    expect(parseMapHash('#view=19.43,-99.13,6.5z')).toEqual({
+      lat: 19.43,
+      lng: -99.13,
+      zoom: 6.5,
+      layer: null,
+      t: null,
+      model: null,
+    });
+    expect(parseMapHash('#view=0,0,3z&t=2026-05-18T00:00:00Z')).toMatchObject({
+      layer: null,
+      t: '2026-05-18T00:00:00Z',
+    });
+    // Garbage carries no layer opinion either.
+    expect(DEFAULT_VIEW.layer).toBeNull();
+    expect(parseMapHash('#nonsense').layer).toBeNull();
+  });
+
+  it('buildMapHash writes a null layer as base', () => {
+    expect(
+      buildMapHash({ lat: 0, lng: 0, zoom: 3, layer: null, t: null })
+    ).toBe('#view=0,0,3z&layer=base');
+  });
+
   it('preserves a registry-known layer id (radar)', () => {
     expect(parseMapHash('#view=0,0,3z&layer=radar').layer).toBe('radar');
   });

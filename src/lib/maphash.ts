@@ -7,7 +7,11 @@ export interface MapHashState {
   lat: number;
   lng: number;
   zoom: number;
-  layer: string;
+  /** Active layer id. `null` when the hash carries no `layer=` (or no
+   *  usable state at all): the page's own default applies — satellite
+   *  on /mapa, radar on the home embed, each layer page its own (Story
+   *  21.2). `buildMapHash` writes such a state as `layer=base`. */
+  layer: string | null;
   t: string | null;
   /** Optional Open-Meteo NWP model id; null/undefined → 'best_match'. */
   model?: string | null;
@@ -25,12 +29,13 @@ export const MODEL_IDS = [
   'jma_seamless',
 ] as const;
 
-/** Default view: centred on Mexico, country-level zoom. */
+/** Default view: centred on Mexico, country-level zoom, no layer
+ *  opinion (the page default wins — see `MapHashState.layer`). */
 export const DEFAULT_VIEW: MapHashState = {
   lat: 23.6,
   lng: -102.5,
   zoom: 4.5,
-  layer: 'base',
+  layer: null,
   t: null,
   model: null,
 };
@@ -61,10 +66,14 @@ export function parseMapHash(hash: string): MapHashState {
     return { ...DEFAULT_VIEW };
   }
 
-  const rawLayer = params.get('layer') ?? 'base';
-  const layer = (LAYER_IDS as readonly string[]).includes(rawLayer)
-    ? rawLayer
-    : 'base';
+  // Absent → null (page default applies); present but unknown → 'base'.
+  const rawLayer = params.get('layer');
+  const layer =
+    rawLayer === null
+      ? null
+      : (LAYER_IDS as readonly string[]).includes(rawLayer)
+        ? rawLayer
+        : 'base';
 
   const t = params.get('t');
   const rawModel = params.get('model');
@@ -89,7 +98,7 @@ export function buildMapHash(state: MapHashState): string {
   const lat = Number(state.lat.toFixed(4));
   const lng = Number(state.lng.toFixed(4));
   const zoom = Number(state.zoom.toFixed(2));
-  let s = `#view=${lat},${lng},${zoom}z&layer=${state.layer}`;
+  let s = `#view=${lat},${lng},${zoom}z&layer=${state.layer ?? 'base'}`;
   if (state.t) s += `&t=${state.t}`;
   if (state.model && state.model !== 'best_match') s += `&model=${state.model}`;
   if (state.mode === 'precip') s += '&mode=precip';

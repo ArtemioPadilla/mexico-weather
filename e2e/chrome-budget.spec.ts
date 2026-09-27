@@ -37,10 +37,11 @@ import {
  *
  * State: first-visit welcome card pre-dismissed (a one-time dialog, not
  * chrome — the visual audit keeps it because it captures first impressions,
- * this test counts what stays). Base layer active, nothing clicked. Tiles are
- * mocked with the same 256×256 transparent PNG e2e/mapa.spec.ts uses so
- * MapLibre fires `load` on runners without Esri/GIBS access; the count is DOM
- * state, so tile pixels never matter.
+ * this test counts what stays). Satellite active and its loop running (the
+ * Story 21.2 boot), nothing clicked. Tiles are mocked with the same 256×256
+ * transparent PNG e2e/mapa.spec.ts uses so MapLibre fires `load` on runners
+ * without Esri/GIBS access; the count is DOM state, so tile pixels never
+ * matter.
  */
 
 const TRANSPARENT_PNG = Buffer.from(TRANSPARENT_PNG_BASE64, 'base64');
@@ -50,7 +51,8 @@ interface Variant {
   viewport: { width: number; height: number };
   mobile: boolean;
   budget: number;
-  /** Measured 2026-09-27 on this branch (Story 22.1); see the per-variant comment. */
+  /** Measured 2026-09-27 on this branch (Story 22.1, re-measured after the
+   *  Story 21.2 satellite boot); see the per-variant comment. */
   baseline: number;
 }
 
@@ -60,22 +62,27 @@ const VARIANTS: Variant[] = [
     viewport: { width: 1280, height: 800 },
     mobile: false,
     budget: CHROME_BUDGET.desktop,
-    // Back link, search, locate, 9 rail layers, opacity, overlays summary,
-    // 7 timeline controls, 3 MapLibre nav buttons, 5 model segments,
-    // 2 snapshot + 3 measure pills, ⚙, ℹ, SMN pill, feedback FAB.
-    baseline: 38,
+    // Back link, search, locate, 9 rail layers, 3 satellite sub-options
+    // (GeoColor / Infrarrojo / Color real — the active layer's, Story
+    // 21.2), opacity, overlays summary, 8 timeline controls (the 7 of the
+    // base layer + "Ver 10 días"), 3 MapLibre nav buttons, 5 model
+    // segments, 2 snapshot + 3 measure pills, ⚙, ℹ, SMN pill, feedback FAB.
+    // 38 on the base layer (Story 22.1) → 42 since /mapa boots on satellite.
+    baseline: 42,
   },
   {
     name: 'mobile',
     viewport: { width: 360, height: 640 },
     mobile: true,
     budget: CHROME_BUDGET.mobile,
-    // Same minus what `hidden sm:*` drops on a phone (opacity, overlays,
-    // model toggle, snapshot, day-skip/now/range), plus the Controles
-    // trigger. The measure/crosshair pills are still shown at 360 px: the
-    // bootstrap swaps the wrap's `hidden` for `flex` on the map's first
-    // `idle`, on every viewport (interactive-map.ts, tools wiring).
-    baseline: 26,
+    // Same minus what `hidden sm:*` drops on a phone (sub-options, opacity,
+    // overlays, model toggle, snapshot, day-skip/now/range), plus the
+    // Controles trigger and "Ver 10 días" (satellite, Story 21.2). The
+    // measure/crosshair pills are still shown at 360 px: the bootstrap
+    // swaps the wrap's `hidden` for `flex` on the map's first `idle`, on
+    // every viewport (interactive-map.ts, tools wiring). 26 on the base
+    // layer (Story 22.1) → 27 since /mapa boots on satellite.
+    baseline: 27,
   },
 ];
 
@@ -91,6 +98,10 @@ async function bootMap(page: Page): Promise<void> {
   // Chromium and the map never boots).
   await page.route('**/*.arcgisonline.com/**', png);
   await page.route('**/tilecache.rainviewer.com/**', png);
+  // Story 21.2 — /mapa boots on GeoColor: the probe and the satellite
+  // tiles must succeed here too, or the boot falls back to radar and the
+  // count would differ between a runner with and without GIBS access.
+  await page.route('**/gibs.earthdata.nasa.gov/**', png);
   await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
     route.fulfill({
       status: 200,
@@ -117,15 +128,26 @@ async function bootMap(page: Page): Promise<void> {
 
   await page.goto('mapa/?e2e=1');
   await expect(page.locator('#layerbtn-base')).toBeVisible();
-  await page.waitForFunction(
-    () => {
-      const m = (window as unknown as { __map?: { loaded(): boolean } }).__map;
-      return !!m && m.loaded();
-    },
-    undefined,
-    { timeout: 20_000 }
+  // Story 21.2 — /mapa boots on GeoColor and keeps animating, so neither
+  // `map.loaded()` nor `networkidle` marks the end of the boot any more
+  // (tiles are in flight on every frame). The cold-load state is complete
+  // once the satellite layer is pressed, its loop runs (the first frame
+  // has tiles), and the tools wrap has surfaced on the map's first idle.
+  const boot = { timeout: 20_000 };
+  await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+    boot
   );
-  await page.waitForLoadState('networkidle');
+  await expect(page.locator('#tl-play')).toHaveAttribute(
+    'data-state',
+    'playing',
+    boot
+  );
+  await expect(page.locator('#mw-measure-wrap')).toBeVisible(boot);
+  await expect(page.locator('#tl-extend')).toBeVisible();
+  // One tick of the wide-control surfacing interval (1.5 s) for margin.
+  await page.waitForTimeout(1600);
 }
 
 interface Measurement {

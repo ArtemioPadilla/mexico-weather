@@ -117,6 +117,10 @@ export function createTimelinePlayer(
   if (els.playBtn) {
     els.playBtn.disabled = reduced;
     if (reduced) els.playBtn.title = labels.play;
+    // Story 21.2 — the state is readable before the first toggle, so a
+    // boot that does NOT autoplay (reduced motion, data saver) is
+    // observable as `paused` rather than as a missing attribute.
+    if (!els.playBtn.dataset.state) els.playBtn.dataset.state = 'paused';
   }
 
   return {

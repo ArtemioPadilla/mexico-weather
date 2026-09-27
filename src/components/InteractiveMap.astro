@@ -57,6 +57,10 @@ interface Props {
   /** When true, an IntersectionObserver defers the maplibre dynamic import
    *  until the map is in viewport. Defaults true for embeds; off for /mapa. */
   lazy?: boolean;
+  /** Story 21.2 — start the timeline loop on its own when the map boots
+   *  on satellite (last 3 h; not under reduced motion / data saver).
+   *  Only /mapa sets this; embeds and layer pages stay static. */
+  bootAutoplay?: boolean;
   /** Tailwind classes for the outer wrapper. */
   class?: string;
   /** Top offset of the layer rail (CSS length). /mapa keeps the default
@@ -94,6 +98,7 @@ const {
   interactive = true,
   markerPopups = true,
   lazy = true,
+  bootAutoplay = false,
   class: className = '',
   lang = 'es' as const,
   railOffsetTop = '3.5rem',
@@ -139,6 +144,7 @@ const cfg = JSON.stringify({
   interactive,
   markerPopups,
   lazy,
+  bootAutoplay,
   lang,
 });
 ---
@@ -815,6 +821,7 @@ const cfg = JSON.stringify({
     interactive: boolean;
     markerPopups: boolean;
     lazy: boolean;
+    bootAutoplay?: boolean;
     lang: 'es' | 'en';
   };
 
@@ -873,6 +880,7 @@ const cfg = JSON.stringify({
             exposeE2eHook: cfg.exposeE2eHook,
             interactive: cfg.interactive,
             markerPopups: cfg.markerPopups,
+            bootAutoplay: cfg.bootAutoplay === true,
             lang: cfg.lang,
           }).catch((err) => {
              

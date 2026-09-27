@@ -224,7 +224,9 @@ test.describe('mapa page', () => {
       })
     );
 
-    await page.goto('mapa/');
+    // Story 21.2 — /mapa now boots on satellite (and autoplays); this
+    // test is about switching TO satellite, so start on base explicitly.
+    await page.goto('mapa/#view=23.6,-102.5,4.5z&layer=base');
 
     const satBtn = page.locator('#layerbtn-satellite');
     await expect(satBtn).toBeVisible();
@@ -318,7 +320,9 @@ test.describe('mapa page', () => {
       })
     );
 
-    await page.goto('mapa/?e2e=1');
+    // Story 21.2 — /mapa boots on satellite (dark canvas from the first
+    // tile); the light → dark transition under test starts from base.
+    await page.goto('mapa/?e2e=1#view=23.6,-102.5,4.5z&layer=base');
     await expect(page.locator('html')).not.toHaveClass(/dark/);
     await page.waitForResponse(
       '**/api.rainviewer.com/public/weather-maps.json'
@@ -475,13 +479,15 @@ test.describe('mapa page', () => {
       })
     );
 
-    await page.goto('mapa/');
+    // Story 21.2 — /mapa boots on satellite and autoplays; the manual
+    // scrub under test starts from base so no loop moves the frame.
+    await page.goto('mapa/#view=23.6,-102.5,4.5z&layer=base');
     await page.waitForResponse(
       '**/api.rainviewer.com/public/weather-maps.json'
     );
 
     // P0.3 — Timeline pill is always visible now (was conditionally
-    // 'hidden' before). Initial state is the dash placeholder.
+    // 'hidden' before). On the base layer it shows the dash placeholder.
     await expect(page.locator('#timeline')).toBeVisible();
     await expect(page.locator('#tl-time')).toHaveText('—');
 
@@ -1014,5 +1020,214 @@ test.describe('mapa page', () => {
       { timeout: 15_000 }
     );
     await expect(page.locator('#legend-bar')).toBeVisible();
+  });
+});
+
+// Story 21.2 — /mapa opens on GeoColor and the clouds are already moving
+// (plan PARIDAD_VISUAL E21). Tiles (Esri, GIBS, RainViewer) are mocked
+// with the decodable transparent PNG so MapLibre fires `load` and the
+// raster source reports loaded on any runner; the assertions are DOM
+// state only (pressed layer, play state, frame index, hash, toast).
+test.describe('Story 21.2 — /mapa boots on satellite', () => {
+  const png = (route: import('@playwright/test').Route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'image/png',
+      body: TRANSPARENT_PNG,
+    });
+
+  /** Deterministic boot network. `gibsStatus` ≠ 200 answers every GIBS
+   *  request (the boot probe included) with that HTTP error;
+   *  `manifestDown` makes the RainViewer manifest unparseable. Returns
+   *  the GIBS URLs requested, in order. */
+  async function mockBoot(
+    page: import('@playwright/test').Page,
+    opts: { gibsStatus?: number; manifestDown?: boolean } = {}
+  ): Promise<string[]> {
+    await page.route('**/*.arcgisonline.com/**', png);
+    await page.route('**/tilecache.rainviewer.com/**', png);
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        opts.manifestDown
+          ? route.fulfill({
+              status: 500,
+              contentType: 'text/plain',
+              body: 'down',
+            })
+          : route.fulfill({
+              status: 200,
+              contentType: 'application/json',
+              body: RAINVIEWER_MANIFEST,
+            })
+    );
+    const gibsUrls: string[] = [];
+    await page.route('**/gibs.earthdata.nasa.gov/**', (route) => {
+      gibsUrls.push(route.request().url());
+      if ((opts.gibsStatus ?? 200) === 200) return png(route);
+      return route.fulfill({ status: opts.gibsStatus!, body: '' });
+    });
+    // The welcome card is a one-time dialog, not part of this story.
+    await page.addInitScript(() => {
+      try {
+        localStorage.setItem('mw:welcomed', '1');
+      } catch {
+        /* private mode — the card shows; nothing below depends on it */
+      }
+    });
+    return gibsUrls;
+  }
+
+  test('a fresh /mapa opens on GeoColor and plays the last 3 h on its own', async ({
+    page,
+  }) => {
+    const gibsUrls = await mockBoot(page);
+    await page.goto('mapa/');
+
+    const satBtn = page.locator('#layerbtn-satellite');
+    await expect(satBtn).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('#layerbtn-base')).toHaveAttribute(
+      'aria-pressed',
+      'false'
+    );
+    // The 24 h GeoColor axis (Story 16.1), newest frame selected first.
+    const range = page.locator('#tl-range');
+    await expect(range).toHaveAttribute('max', '143');
+    // The boot probe asked GIBS for one GeoColor tile over central
+    // Mexico (z4 y6 x3) at the newest frame before any map tile.
+    expect(gibsUrls[0]).toMatch(
+      /GOES-East_ABI_GeoColor\/default\/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\/GoogleMapsCompatible_Level7\/4\/6\/3\.png$/
+    );
+
+    // Autoplay: no click, the loop is running …
+    const play = page.locator('#tl-play');
+    await expect(play).toHaveAttribute('data-state', 'playing');
+    await expect(play).toHaveAttribute('aria-pressed', 'true');
+    // … over the LAST 3 h only: the first tick jumps from the newest
+    // frame (143) to the start of the ±3 h window (128–129 of 143) and
+    // the index never drops into the older 21 h.
+    await expect
+      .poll(async () => Number(await range.inputValue()))
+      .toBeLessThan(143);
+    expect(Number(await range.inputValue())).toBeGreaterThanOrEqual(120);
+    await expect(page).toHaveURL(/layer=satellite/);
+
+    // The first interaction with the timeline pauses, as a manual ▶ does.
+    await page.locator('#tl-prev').click();
+    await expect(play).toHaveAttribute('data-state', 'paused');
+    await expect(play).toHaveAttribute('aria-pressed', 'false');
+    const held = await range.inputValue();
+    await page.waitForTimeout(1500);
+    expect(await range.inputValue()).toBe(held);
+  });
+
+  test('a hash with only view= keeps the satellite default and honours the view', async ({
+    page,
+  }) => {
+    await mockBoot(page);
+    await page.goto('mapa/?e2e=1#view=19.43,-99.13,6.5z');
+    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(page).toHaveURL(/layer=satellite/);
+    const zoom = await page.evaluate(() =>
+      (window as unknown as { __map: { getZoom(): number } }).__map.getZoom()
+    );
+    expect(Math.abs(zoom - 6.5)).toBeLessThan(0.05);
+  });
+
+  test('prefers-reduced-motion: satellite boots, but paused', async ({
+    page,
+  }) => {
+    await mockBoot(page);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('mapa/');
+    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    const range = page.locator('#tl-range');
+    await expect(range).toHaveAttribute('max', '143');
+    const play = page.locator('#tl-play');
+    await expect(play).toHaveAttribute('data-state', 'paused');
+    await expect(play).toBeDisabled();
+    // Still static a couple of cadences later.
+    const held = await range.inputValue();
+    await page.waitForTimeout(1500);
+    expect(await range.inputValue()).toBe(held);
+    await expect(play).toHaveAttribute('data-state', 'paused');
+  });
+
+  test('a shared instant (t=) stays put: satellite, no autoplay', async ({
+    page,
+  }) => {
+    await mockBoot(page);
+    const twoHoursAgo = new Date(Date.now() - 2 * 3600_000).toISOString();
+    await page.goto(
+      `mapa/#view=23.6,-102.5,4.5z&layer=satellite&t=${twoHoursAgo}`
+    );
+    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    const range = page.locator('#tl-range');
+    await expect(range).toHaveAttribute('max', '143');
+    // ≈ 12 ten-minute frames before the newest (143), ± the 30 min lag.
+    const idx = Number(await range.inputValue());
+    expect(idx).toBeGreaterThan(125);
+    expect(idx).toBeLessThan(140);
+    await page.waitForTimeout(1500);
+    expect(Number(await range.inputValue())).toBe(idx);
+    await expect(page.locator('#tl-play')).toHaveAttribute(
+      'data-state',
+      'paused'
+    );
+  });
+
+  test('GIBS down: the boot falls back to radar with the toast, static', async ({
+    page,
+  }) => {
+    await mockBoot(page, { gibsStatus: 503 });
+    await page.goto('mapa/');
+    await expect(page.locator('#layerbtn-radar')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+      'aria-pressed',
+      'false'
+    );
+    await expect(page.locator('#mapmsg')).toContainText('Capa no disponible');
+    // RainViewer's 4 frames (3 past + 1 nowcast), not the GeoColor axis.
+    await expect(page.locator('#tl-range')).toHaveAttribute('max', '3');
+    await expect(page).toHaveURL(/layer=radar/);
+    // The fallback is not the story: radar does not autoplay.
+    await page.waitForTimeout(1200);
+    await expect(page.locator('#tl-play')).toHaveAttribute(
+      'data-state',
+      'paused'
+    );
+  });
+
+  test('GIBS and RainViewer down: the boot falls back to base with the toast', async ({
+    page,
+  }) => {
+    await mockBoot(page, { gibsStatus: 503, manifestDown: true });
+    await page.goto('mapa/');
+    await expect(page.locator('#mapmsg')).toContainText('Capa no disponible');
+    await expect(page.locator('#layerbtn-base')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+      'aria-pressed',
+      'false'
+    );
+    await expect(page.locator('#tl-time')).toHaveText('—');
+    await expect(page.locator('#tl-play')).toHaveAttribute(
+      'data-state',
+      'paused'
+    );
   });
 });

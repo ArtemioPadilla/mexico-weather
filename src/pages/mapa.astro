@@ -10,6 +10,11 @@
  * This page is the canonical "all features on" consumer. The same component
  * is also embedded on the home and forecast pages with reduced features.
  *
+ * Story 21.2 — /mapa opens on the GeoColor satellite layer and, once the
+ * first frame has tiles, plays the last 3 h on its own (bootAutoplay); a
+ * hash `layer=` still wins, a hash without one keeps satellite. The home
+ * embed keeps radar and the /mapa/<capa>/ pages keep their own layer.
+ *
  * IDs preserved here (#map, #mapq, #mapac, #layerbtn-*, #opacity, #legend,
  * #timeline, #tl-prev/play/next/range/time, #mapmsg) — the e2e suite in
  * e2e/mapa.spec.ts depends on them, and the ?e2e=1 affordance sets
@@ -40,6 +45,8 @@ const t = ui[lang];
       mapId="map"
       height="100%"
       initialView={{ lat: 23.6, lng: -102.5, zoom: 4.5 }}
+      initialLayer="satellite"
+      bootAutoplay={true}
       features={{
         layerRail: true,
         timeline: true,
