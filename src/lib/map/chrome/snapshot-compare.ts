@@ -18,6 +18,8 @@ import type maplibregl from 'maplibre-gl';
 export interface SnapshotCompareEls {
   map: maplibregl.Map;
   captureBtn: HTMLElement | null;
+  /** Story 13.5 — "Hace 24 h" button; optional. */
+  compareBtn?: HTMLElement | null;
   toggleBtn: HTMLElement | null;
   clearBtn: HTMLElement | null;
   imgEl: HTMLImageElement | null;
@@ -28,25 +30,19 @@ export interface SnapshotCompare {
   refresh: () => void;
 }
 
-export function createSnapshotCompare(els: SnapshotCompareEls): SnapshotCompare {
+export interface SnapshotCompareDeps {
+  /** Story 13.5 — move the timeline by `bySec` (negative = past);
+   *  false when there is no time axis to move. */
+  shiftTime?: (bySec: number) => boolean;
+}
+
+export function createSnapshotCompare(
+  els: SnapshotCompareEls,
+  deps: SnapshotCompareDeps = {}
+): SnapshotCompare {
   let visible = true;
 
-  function refresh(): void {
-    if (!els.imgEl) return;
-    const has = !!els.imgEl.src;
-    els.captureBtn?.classList.toggle('hidden', has);
-    els.toggleBtn?.classList.toggle('hidden', !has);
-    els.clearBtn?.classList.toggle('hidden', !has);
-    els.imgEl.classList.toggle('hidden', !has || !visible);
-    if (els.toggleBtn) {
-      els.toggleBtn.textContent = visible
-        ? '👁 Ocultar comparación'
-        : '👁 Mostrar comparación';
-      els.toggleBtn.setAttribute('aria-pressed', String(visible));
-    }
-  }
-
-  els.captureBtn?.addEventListener('click', () => {
+  function capture(): boolean {
     try {
       // MapLibre needs preserveDrawingBuffer=true to read the canvas;
       // we trigger a synchronous render first so we grab the most
@@ -58,8 +54,48 @@ export function createSnapshotCompare(els: SnapshotCompareEls): SnapshotCompare 
         visible = true;
         refresh();
       }
+      return true;
     } catch {
       /* WebGL context lost / canvas tainted — degrade silently */
+      return false;
+    }
+  }
+
+  function refresh(): void {
+    if (!els.imgEl) return;
+    const has = !!els.imgEl.src;
+    // The [hidden] attribute (not the `hidden` class): the pills carry
+    // an inline-flex display utility that would tie with the class.
+    if (els.captureBtn) els.captureBtn.hidden = has;
+    if (els.compareBtn) els.compareBtn.hidden = has;
+    if (els.toggleBtn) els.toggleBtn.hidden = !has;
+    if (els.clearBtn) els.clearBtn.hidden = !has;
+    els.imgEl.classList.toggle('hidden', !has || !visible);
+    if (els.toggleBtn) {
+      // The markup ships an <svg> icon + a labelled span; only the
+      // label text changes so the icon survives.
+      const label =
+        els.toggleBtn.querySelector('[data-mw-snapshot-label]') ??
+        els.toggleBtn;
+      label.textContent = visible
+        ? 'Ocultar comparación'
+        : 'Mostrar comparación';
+      els.toggleBtn.setAttribute('aria-pressed', String(visible));
+    }
+  }
+
+  els.captureBtn?.addEventListener('click', () => {
+    capture();
+  });
+  // Story 13.5 — temporal before/after in one click: freeze the current
+  // frame as the overlay, then move the timeline 24 h back so the
+  // toggle flips between "hace 24 h" (live) and "ahora" (captured).
+  els.compareBtn?.addEventListener('click', () => {
+    if (!deps.shiftTime) return;
+    if (!capture()) return;
+    if (!deps.shiftTime(-86400)) {
+      els.imgEl?.removeAttribute('src');
+      refresh();
     }
   });
   els.toggleBtn?.addEventListener('click', () => {

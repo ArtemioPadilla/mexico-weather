@@ -15,6 +15,8 @@ messages, and breaks the remaining work into a prioritized
 | **ROADMAP.md** (this file) | Source of truth for status + priorities. Start here. |
 | [PLAN_SUPERIORITY.md](./PLAN_SUPERIORITY.md) | Detailed feature ideas vs zoom.earth (2026-05-24). **~65% shipped** — see reconciliation below. Treat as an idea backlog, not current status. |
 | [PLAN_UX_PARITY.md](./PLAN_UX_PARITY.md) | 14 map-polish gaps vs zoom.earth (2026-05-24). **P0–P2 mostly shipped** as the P-series PRs. The P0.1 root-cause analysis is superseded — see "Map first paint" below. |
+| [PLAN_HOME_MAP_FIRST.md](./PLAN_HOME_MAP_FIRST.md) | Home redesign: keyless Esri basemap, granular map-chrome flags, map-first hero, sprite icons + one chip spec (2026-09-15). **Phases 0–3 shipped**; phase 4 (legend strip on mobile, tap-to-forecast card, timeline layout) open. |
+| [PLAN_PRO_GRATIS.md](./PLAN_PRO_GRATIS.md) | zoom.earth's Pro tier (10-day forecast maps, 60-min nowcast, tropical push alerts, 10-day card) given away free, plus its free-tier depth we still lack (satellite/radar history). Epics **E15–E20**, 3 milestones (2026-09-27). **Proposed.** |
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | Map plugin-registry design. Tracks as issue [#136](https://github.com/ArtemioPadilla/mexico-weather/issues/136). |
 
 Hard product constraints (do not regress): **no tracking, no cookies, no
@@ -62,7 +64,7 @@ slice plans and the P-series UX PRs.
 
 ### Map capability inventory (in `src/lib/map/`)
 
-- **Base layers**: basemap (CARTO Dark/OSM), radar, satellite (GIBS),
+- **Base layers**: basemap (Esri Canvas Light/Dark Gray), radar, satellite (GIBS),
   temperature, humidity, pressure, wind (WebGL particles), sunlight.
 - **Overlays** (17): aqi, borders, city-values, clouds, fires, graticule,
   hist-storms, lakes, marine, night-lights, night-line, quakes,
@@ -338,7 +340,7 @@ Correction (2026-07-29): the header nav links this story originally named are
 > Outcome: move from parity to lead. Highest-ROI un-shipped ideas from
 > `PLAN_SUPERIORITY`.
 
-**Story 13.1 — Multi-metric hover tooltip** · est 1wk
+**Story 13.1 — Multi-metric hover tooltip** · est 1wk · **shipped 2026-09-27** (temp + humidity + pressure + wind with arrow; touch is covered by the tap place card and the crosshair mode of PLAN_PRO_GRATIS 18.3)
 - [ ] Extend the existing `#mapTooltip` to show temp + humidity + wind at the
       cursor in one read (currently single-metric).
 - [ ] Directional wind arrow (rotate a glyph by bearing) in the tooltip.
@@ -347,7 +349,7 @@ Correction (2026-07-29): the header nav links this story originally named are
   point; touch devices can pin/unpin; no extra network calls (reuse the
   already-loaded grids).
 
-**Story 13.2 — Combined "Precipitación" mode** · est 1wk
+**Story 13.2 — Combined "Precipitación" mode** · est 1wk · **shipped 2026-09-27** ("Modo precipitación" overlay: GeoColor + clouds + nearest radar frame, radar legend, `&mode=precip`)
 - [ ] Add a single mode toggle that activates GIBS GeoColor satellite +
       clouds overlay + radar together (GeoColor already in `nasa-gibs.ts`).
 - [ ] Tune z-order + opacity so all three read at once.
@@ -355,7 +357,7 @@ Correction (2026-07-29): the header nav links this story originally named are
 - Acceptance: one click yields the zoom.earth-equivalent "precipitation"
   picture; deep-link restores it.
 
-**Story 13.3 — Multi-model disagreement view** · est 1wk
+**Story 13.3 — Multi-model disagreement view** · est 1wk · **shipped 2026-09-27** ("Incertidumbre" overlay: ICON/GFS/ECMWF spread of the active field, own ramp + legend, ± line in the tooltip; on demand, 3 extra fetches cached per layer)
 - [ ] Surface per-model fields (ICON/GFS/ECMWF/GEM) via Open-Meteo `models=`
       — the model toggle data path already exists.
 - [ ] Compute + render a spread/disagreement field (e.g. inter-model stdev)
@@ -373,7 +375,7 @@ Correction (2026-07-29): the header nav links this story originally named are
 - Acceptance: field quality ≥ current at all zooms; render time drops;
   no visual regression in the field-grid snapshots.
 
-**Story 13.5 — Temporal before/after compare** · est 1wk
+**Story 13.5 — Temporal before/after compare** · est 1wk · **shipped 2026-09-27** ("Hace 24 h" snapshot button: freezes the current frame and moves the timeline 24 h back; toggle flips between the two)
 - [ ] Split-screen / swipe slider rendering the same view at two timestamps
       ("hace 24h vs ahora").
 - [ ] Drive both panes from one timeline + view state.

@@ -27,7 +27,7 @@ describe('createTimelinePlayer', () => {
       (i) => {
         cur = i;
       },
-      { reducedMotion: true },
+      { reducedMotion: true }
     );
     player.start();
     vi.advanceTimersByTime(2000);
@@ -47,7 +47,7 @@ describe('createTimelinePlayer', () => {
       (i) => {
         cur = i;
       },
-      { reducedMotion: false },
+      { reducedMotion: false }
     );
     player.start();
     expect(player.isPlaying()).toBe(false);
@@ -64,12 +64,13 @@ describe('createTimelinePlayer', () => {
       (i) => {
         cur = i;
       },
-      { reducedMotion: false, intervalMs: 100 },
+      { reducedMotion: false, intervalMs: 100 }
     );
     player.start();
     expect(player.isPlaying()).toBe(true);
     expect(btn.getAttribute('aria-pressed')).toBe('true');
-    expect(btn.textContent).toBe('⏸');
+    expect(btn.dataset.state).toBe('playing');
+    expect(btn.querySelector('use')?.getAttribute('href')).toBe('#i-pause');
     vi.advanceTimersByTime(100);
     expect(cur).toBe(1);
     vi.advanceTimersByTime(100);
@@ -80,7 +81,8 @@ describe('createTimelinePlayer', () => {
     player.stop();
     expect(player.isPlaying()).toBe(false);
     expect(btn.getAttribute('aria-pressed')).toBe('false');
-    expect(btn.textContent).toBe('▶');
+    expect(btn.dataset.state).toBe('paused');
+    expect(btn.querySelector('use')?.getAttribute('href')).toBe('#i-play');
   });
 
   it('toggle alternates between start and stop', () => {
@@ -91,11 +93,52 @@ describe('createTimelinePlayer', () => {
       () => 3,
       () => 0,
       () => undefined,
-      { reducedMotion: false, intervalMs: 100 },
+      { reducedMotion: false, intervalMs: 100 }
     );
     player.toggle();
     expect(player.isPlaying()).toBe(true);
     player.toggle();
     expect(player.isPlaying()).toBe(false);
+  });
+
+  // Story 16.4 — animation controls.
+  it('honours a live cadence getter and a loop window', () => {
+    const btn = mkPlayBtn();
+    let cur = 0;
+    let interval = 100;
+    const player = createTimelinePlayer(
+      { playBtn: btn },
+      labels,
+      () => 10,
+      () => cur,
+      (i) => {
+        cur = i;
+      },
+      {
+        reducedMotion: false,
+        getIntervalMs: () => interval,
+        getLoopRange: () => [3, 5],
+      }
+    );
+    player.start();
+    // Outside the window: first tick jumps to its start.
+    vi.advanceTimersByTime(100);
+    expect(cur).toBe(3);
+    vi.advanceTimersByTime(200);
+    expect(cur).toBe(5);
+    // End of window wraps to its start, not to frame 0.
+    vi.advanceTimersByTime(100);
+    expect(cur).toBe(3);
+    // Speed change applies to the next step without restarting.
+    interval = 1000;
+    vi.advanceTimersByTime(100);
+    expect(cur).toBe(4);
+    vi.advanceTimersByTime(500);
+    expect(cur).toBe(4);
+    vi.advanceTimersByTime(500);
+    expect(cur).toBe(5);
+    player.stop();
+    vi.advanceTimersByTime(3000);
+    expect(cur).toBe(5);
   });
 });

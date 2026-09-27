@@ -5,6 +5,8 @@ import {
   HOURLY_LIMIT,
   uvLabel,
   windDir,
+  buildDisagreementUrl,
+  getModelDisagreement,
 } from './forecast';
 
 function jsonResponse(body: unknown): Response {
@@ -76,12 +78,19 @@ describe('buildRichForecastUrl', () => {
     const url = buildRichForecastUrl(loc);
     const parsed = new URL(url);
     expect(`${parsed.origin}${parsed.pathname}`).toBe(
-      'https://api.open-meteo.com/v1/forecast',
+      'https://api.open-meteo.com/v1/forecast'
     );
     expect(parsed.searchParams.get('latitude')).toBe('19.43');
     expect(parsed.searchParams.get('longitude')).toBe('-99.13');
     expect(parsed.searchParams.get('timezone')).toBe('America/Mexico_City');
-    expect(parsed.searchParams.get('forecast_days')).toBe('7');
+    expect(parsed.searchParams.get('forecast_days')).toBe('10');
+    expect(
+      new URL(buildRichForecastUrl(loc, 16)).searchParams.get('forecast_days')
+    ).toBe('16');
+    // Clamped to Open-Meteo's ceiling.
+    expect(
+      new URL(buildRichForecastUrl(loc, 40)).searchParams.get('forecast_days')
+    ).toBe('16');
 
     const current = parsed.searchParams.get('current') ?? '';
     for (const v of [
@@ -191,13 +200,13 @@ describe('getForecast', () => {
 
   it('throws when current is missing', async () => {
     const fetchMock = vi.fn(async () =>
-      jsonResponse({ hourly: makeHours(1), daily: {} }),
+      jsonResponse({ hourly: makeHours(1), daily: {} })
     );
     await expect(
       getForecast(loc, {
         fetch: fetchMock as unknown as typeof fetch,
         sleep: async () => {},
-      }),
+      })
     ).rejects.toThrow('Invalid forecast response: missing current');
   });
 
@@ -340,7 +349,7 @@ describe('getForecast hourly anchoring', () => {
 
   it('anchors hourly[0] to the current local hour', async () => {
     const fetchMock = vi.fn(async () =>
-      jsonResponse(anchorPayload('2026-05-18T00:00', '2026-05-18T14:30')),
+      jsonResponse(anchorPayload('2026-05-18T00:00', '2026-05-18T14:30'))
     );
     const fc = await getForecast(loc, {
       fetch: fetchMock as unknown as typeof fetch,
@@ -352,7 +361,7 @@ describe('getForecast hourly anchoring', () => {
 
   it('falls back to hourly[0] = start when current.time is absent', async () => {
     const fetchMock = vi.fn(async () =>
-      jsonResponse(anchorPayload('2026-05-18T00:00')),
+      jsonResponse(anchorPayload('2026-05-18T00:00'))
     );
     const fc = await getForecast(loc, {
       fetch: fetchMock as unknown as typeof fetch,
@@ -392,5 +401,45 @@ describe('windDir', () => {
   it('normalizes negative and out-of-range degrees', () => {
     expect(windDir(-45)).toEqual({ label: 'NO', arrow: '↘' });
     expect(windDir(450)).toEqual({ label: 'E', arrow: '←' });
+  });
+});
+
+describe('model disagreement (Story 15.3 daily spread)', () => {
+  const loc = { lat: 19.43, lng: -99.13, tz: 'America/Mexico_City' };
+  it('asks for the daily Tmax of every model over the outlook window', () => {
+    const u = new URL(buildDisagreementUrl(loc));
+    expect(u.searchParams.get('daily')).toBe('temperature_2m_max');
+    expect(u.searchParams.get('forecast_days')).toBe('10');
+    expect(u.searchParams.get('models')).toContain('icon_seamless');
+  });
+  it('computes the current spread and a per-day spread', async () => {
+    const body = {
+      current: {
+        temperature_2m_icon_seamless: 20,
+        temperature_2m_gfs_seamless: 23,
+        temperature_2m_ecmwf_ifs04: 21,
+        temperature_2m_jma_seamless: null,
+      },
+      daily: {
+        time: ['2026-09-27', '2026-09-28'],
+        temperature_2m_max_icon_seamless: [30, 25],
+        temperature_2m_max_gfs_seamless: [31, 29],
+        temperature_2m_max_ecmwf_ifs04: [30.5, null],
+      },
+    };
+    const deps = {
+      fetch: async () =>
+        new Response(JSON.stringify(body), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        }),
+      sleep: async () => {},
+    };
+    const d = await getModelDisagreement(loc, deps);
+    expect(d.spread).toBe(3);
+    expect(d.daily).toEqual([
+      { date: '2026-09-27', spread: 1 },
+      { date: '2026-09-28', spread: 4 },
+    ]);
   });
 });

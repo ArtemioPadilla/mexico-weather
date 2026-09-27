@@ -9,7 +9,7 @@ import type maplibregl from 'maplibre-gl';
 import {
   ATTRIBUTION_GIBS,
   GIBS_LAYERS,
-  gibsRoundedTime,
+  gibsTimeParam,
   gibsTileUrl,
 } from '../sources/nasa-gibs';
 
@@ -22,7 +22,7 @@ export interface NightLightsOverlay {
 }
 
 export function createNightLightsOverlay(
-  map: maplibregl.Map,
+  map: maplibregl.Map
 ): NightLightsOverlay {
   return {
     isEnabled: (): boolean => !!map.getLayer(LAYER_ID),
@@ -36,7 +36,11 @@ export function createNightLightsOverlay(
       map.addSource(SOURCE_ID, {
         type: 'raster',
         tiles: [
-          gibsTileUrl(GIBS_LAYERS.viirsNightLights, gibsRoundedTime()),
+          // Daily product: yesterday's date is always processed by now.
+          gibsTileUrl(
+            GIBS_LAYERS.viirsNightLights,
+            gibsTimeParam(GIBS_LAYERS.viirsNightLights, Date.now() - 86_400_000)
+          ),
         ],
         tileSize: 256,
         maxzoom: GIBS_LAYERS.viirsNightLights.maxZoom,

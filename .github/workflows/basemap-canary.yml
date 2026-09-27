@@ -1,0 +1,119 @@
+name: Data sources canary
+
+# Nightly network check on the keyless providers the map depends on:
+# Esri Canvas basemap tiles (src/lib/map/chrome/basemap-theme.ts), NASA
+# GIBS GeoColor (Story 16.1) and, since Story 20.2, RainViewer radar and
+# Open-Meteo. The previous provider (CARTO)
+# silently started watermarking anonymous tiles while still answering
+# HTTP 200 — a failure no unit test on URL templates can see. This job
+# downloads one sample tile per host/service and fails if it stops
+# looking like a real map tile. It is deliberately NOT part of the PR
+# pipeline: a provider outage must not block unrelated merges.
+
+on:
+  schedule:
+    # Daily at 05:23 UTC (23:23 CDMX).
+    - cron: '23 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    name: Probe Esri Canvas tiles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Download + validate one tile per host/service
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Tile 5/13/7 covers northern Mexico + Gulf: a known-good sample.
+          TILE='5/13/7'
+          # Reference tiles are transparent PNGs with sparse labels, so
+          # they are legitimately small; base tiles are opaque JPEGs.
+          MIN_BYTES_BASE=2000
+          MIN_BYTES_REFERENCE=300
+          fail=0
+          for host in server server2; do
+            for svc in World_Dark_Gray_Base World_Dark_Gray_Reference World_Light_Gray_Base World_Light_Gray_Reference; do
+              url="https://${host}.arcgisonline.com/ArcGIS/rest/services/Canvas/${svc}/MapServer/tile/${TILE}"
+              out="tile-${host}-${svc}.bin"
+              code=$(curl -sS --retry 3 --retry-delay 5 --max-time 30 -o "$out" -w '%{http_code}' "$url" || echo 000)
+              size=$(stat -c %s "$out" 2>/dev/null || echo 0)
+              type=$(file -b --mime-type "$out" 2>/dev/null || echo unknown)
+              case "$svc" in *_Reference) min=$MIN_BYTES_REFERENCE;; *) min=$MIN_BYTES_BASE;; esac
+              status=ok
+              if [ "$code" != "200" ]; then status="http $code"; fi
+              if [ "$size" -lt "$min" ]; then status="too small ($size B)"; fi
+              case "$type" in image/jpeg|image/png) ;; *) status="not an image ($type)";; esac
+              echo "${status}	${host}	${svc}	${code}	${type}	${size}B"
+              [ "$status" = ok ] || fail=1
+            done
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo '::error::At least one Esri Canvas tile host is not serving valid tiles. See src/lib/map/chrome/basemap-theme.ts for the fallback plan (OpenFreeMap vector styles).'
+            exit 1
+          fi
+
+      - name: Probe NASA GIBS GeoColor (matrix set + TIME)
+        # GIBS re-published GeoColor at Level7 in 2026 and every Level6
+        # request became a 400 — nothing in CI noticed because e2e mocks
+        # the host (Story 16.1). Probe a tile 2 h old with the matrix set
+        # src/lib/map/sources/nasa-gibs.ts uses; a 400/404 here means the
+        # capabilities changed again.
+        shell: bash
+        run: |
+          set -euo pipefail
+          T=$(date -u -d '2 hours ago' +%Y-%m-%dT%H:%M:00Z | sed -E 's/:([0-5])[0-9]:00Z$/:\10:00Z/')
+          url="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/GOES-East_ABI_GeoColor/default/${T}/GoogleMapsCompatible_Level7/4/6/3.png"
+          code=$(curl -sS --retry 3 --retry-delay 5 --max-time 30 -o gibs.png -w '%{http_code}' "$url" || echo 000)
+          type=$(file -b --mime-type gibs.png 2>/dev/null || echo unknown)
+          echo "gibs GeoColor ${T}: ${code} ${type} $(stat -c %s gibs.png 2>/dev/null || echo 0)B"
+          if [ "$code" != "200" ] || [ "$type" != "image/png" ]; then
+            echo '::error::GIBS GeoColor tile probe failed — check the TileMatrixSet/TIME in WMTSCapabilities.xml and update GIBS_LAYERS.'
+            exit 1
+          fi
+
+      - name: Probe RainViewer (manifest + one radar tile)
+        # Story 20.2 — the radar layer reads weather-maps.json and then
+        # tiles under its `host`; either breaking silently would leave
+        # the default home layer blank. Same tile template as
+        # rainviewerTileUrl() in src/lib/maplayers.ts (256 px, colour 4,
+        # smooth, snow).
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sS --retry 3 --retry-delay 5 --max-time 30 -o rv.json https://api.rainviewer.com/public/weather-maps.json
+          read -r host path < <(python3 -c "
+          import json; d=json.load(open('rv.json')); p=d['radar']['past']; print(d['host'], p[-1]['path'])")
+          url="${host}${path}/256/5/7/13/4/1_1.png"
+          code=$(curl -sS --retry 3 --retry-delay 5 --max-time 30 -o rv.png -w '%{http_code}' "$url" || echo 000)
+          type=$(file -b --mime-type rv.png 2>/dev/null || echo unknown)
+          echo "rainviewer ${path}: ${code} ${type} $(stat -c %s rv.png 2>/dev/null || echo 0)B"
+          if [ "$code" != "200" ] || [ "$type" != "image/png" ]; then
+            echo '::error::RainViewer radar tile probe failed — check the manifest shape in parseRainviewerManifest() and the tile template.'
+            exit 1
+          fi
+
+      - name: Probe Open-Meteo (one forecast call, CDMX)
+        # Story 20.2 — one call/day is noise against the 10 000 budget;
+        # a non-200 or an error body here means every field layer and
+        # snapshot workflow is about to fail too.
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://api.open-meteo.com/v1/forecast?latitude=19.43&longitude=-99.13&hourly=temperature_2m&forecast_days=1&timezone=UTC'
+          code=$(curl -sS --retry 3 --retry-delay 5 --max-time 30 -o om.json -w '%{http_code}' "$url" || echo 000)
+          ok=$(python3 -c "
+          import json,sys
+          try:
+              d=json.load(open('om.json')); print('yes' if isinstance(d.get('hourly',{}).get('temperature_2m'), list) and len(d['hourly']['temperature_2m'])>=24 else 'no')
+          except Exception as e: print('no')")
+          echo "open-meteo: ${code} hourly-ok=${ok}"
+          if [ "$code" != "200" ] || [ "$ok" != "yes" ]; then
+            echo '::error::Open-Meteo forecast probe failed — check https://open-meteo.com/en/docs and the status page before the hourly snapshots pile up 429s.'
+            exit 1
+          fi

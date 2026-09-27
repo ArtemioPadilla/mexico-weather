@@ -8,7 +8,9 @@ describe('parseMapHash', () => {
   });
 
   it('parses a full valid hash', () => {
-    const s = parseMapHash('#view=19.43,-99.13,6.5z&layer=base&t=2026-05-18T00:00:00Z');
+    const s = parseMapHash(
+      '#view=19.43,-99.13,6.5z&layer=base&t=2026-05-18T00:00:00Z'
+    );
     expect(s).toEqual({
       lat: 19.43,
       lng: -99.13,
@@ -31,13 +33,15 @@ describe('parseMapHash', () => {
   });
 
   it('parses an accepted model id', () => {
-    expect(parseMapHash('#view=0,0,3z&layer=temperature&model=icon_seamless').model).toBe(
-      'icon_seamless',
-    );
+    expect(
+      parseMapHash('#view=0,0,3z&layer=temperature&model=icon_seamless').model
+    ).toBe('icon_seamless');
   });
 
   it('rejects an unknown model id (falls to null)', () => {
-    expect(parseMapHash('#view=0,0,3z&layer=temperature&model=fake').model).toBe(null);
+    expect(
+      parseMapHash('#view=0,0,3z&layer=temperature&model=fake').model
+    ).toBe(null);
   });
 
   it('falls back to default view on out-of-range coords or zoom', () => {
@@ -54,13 +58,22 @@ describe('parseMapHash', () => {
   });
 
   it('preserves a registry-known layer id (satellite)', () => {
-    expect(parseMapHash('#view=0,0,3z&layer=satellite').layer).toBe('satellite');
+    expect(parseMapHash('#view=0,0,3z&layer=satellite').layer).toBe(
+      'satellite'
+    );
   });
 });
 
 describe('buildMapHash', () => {
   it('round-trips through parseMapHash', () => {
-    const state = { lat: 25.67, lng: -100.31, zoom: 7.25, layer: 'base', t: null, model: null };
+    const state = {
+      lat: 25.67,
+      lng: -100.31,
+      zoom: 7.25,
+      layer: 'base',
+      t: null,
+      model: null,
+    };
     expect(parseMapHash(buildMapHash(state))).toEqual(state);
   });
 
@@ -78,21 +91,59 @@ describe('buildMapHash', () => {
 
   it('omits model from hash when it is null or best_match', () => {
     expect(
-      buildMapHash({ lat: 0, lng: 0, zoom: 3, layer: 'base', t: null, model: null }),
+      buildMapHash({
+        lat: 0,
+        lng: 0,
+        zoom: 3,
+        layer: 'base',
+        t: null,
+        model: null,
+      })
     ).toBe('#view=0,0,3z&layer=base');
     expect(
-      buildMapHash({ lat: 0, lng: 0, zoom: 3, layer: 'base', t: null, model: 'best_match' }),
+      buildMapHash({
+        lat: 0,
+        lng: 0,
+        zoom: 3,
+        layer: 'base',
+        t: null,
+        model: 'best_match',
+      })
     ).toBe('#view=0,0,3z&layer=base');
   });
 
   it('rounds coordinates to 4 dp and zoom to 2 dp', () => {
-    expect(buildMapHash({ lat: 1.234567, lng: -2.345678, zoom: 3.14159, layer: 'base', t: null }))
-      .toBe('#view=1.2346,-2.3457,3.14z&layer=base');
+    expect(
+      buildMapHash({
+        lat: 1.234567,
+        lng: -2.345678,
+        zoom: 3.14159,
+        layer: 'base',
+        t: null,
+      })
+    ).toBe('#view=1.2346,-2.3457,3.14z&layer=base');
   });
 
   it('includes t when present', () => {
     expect(
-      buildMapHash({ lat: 0, lng: 0, zoom: 3, layer: 'base', t: '2026-05-18T00:00:00Z' }),
+      buildMapHash({
+        lat: 0,
+        lng: 0,
+        zoom: 3,
+        layer: 'base',
+        t: '2026-05-18T00:00:00Z',
+      })
     ).toBe('#view=0,0,3z&layer=base&t=2026-05-18T00:00:00Z');
+  });
+
+  // Story 13.2 — combined precipitation mode is shareable.
+  it('round-trips mode=precip and ignores unknown modes', () => {
+    const st = parseMapHash('#view=19.4,-99.1,6z&layer=satellite&mode=precip');
+    expect(st.mode).toBe('precip');
+    expect(buildMapHash(st)).toContain('&mode=precip');
+    expect(
+      parseMapHash('#view=19.4,-99.1,6z&layer=satellite&mode=xyz').mode
+    ).toBeUndefined();
+    expect(buildMapHash({ ...st, mode: null })).not.toContain('mode=');
   });
 });

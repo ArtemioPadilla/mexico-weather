@@ -73,7 +73,7 @@ const base = siteBase();
           <div class="h-9 w-full rounded bg-gray-200 dark:bg-gray-800"></div>
         </div>
 
-        {/* 7-day rows */}
+        {/* daily rows (10, or 16 on demand) */}
         <div class="space-y-1">
           <div class="h-5 w-1/4 rounded bg-gray-200 dark:bg-gray-800"></div>
           <div class="h-7 w-full rounded bg-gray-200 dark:bg-gray-800"></div>
@@ -177,7 +177,7 @@ const base = siteBase();
     @media (min-width: 640px) {
       .fc-map-wrap { height: 360px; }
     }
-    /* Issue #109 — axis tick marks + today marker for 7-day temperature bars. */
+    /* Issue #109 — axis tick marks + today marker for the daily temperature bars. */
     .fc-axis-track {
       position: relative;
       height: 14px;
@@ -221,6 +221,8 @@ const base = siteBase();
       getModelDisagreement,
       uvLabel,
       windDir,
+      FORECAST_DAYS,
+      FORECAST_DAYS_MAX
     } from '../lib/forecast';
     import { has, toggle } from '../lib/favorites';
     import {
@@ -231,9 +233,23 @@ const base = siteBase();
       type AlertMetric,
       type AlertRule,
     } from '../lib/alerts';
+    import {
+      alertIcsFilename,
+      buildAlertIcs,
+      NOTIFIED_KEY,
+      notifyFired,
+      pendingNotifications,
+    } from '../lib/alert-channels';
     import { ui } from '../i18n/ui';
     import { initInteractiveMap } from '../lib/interactive-map';
     import { siteBase } from '../utils/paths';
+    import { readSettings, unitsOf } from '../lib/map/settings';
+    import {
+      formatDistanceKm,
+      formatPressure,
+      formatSpeed,
+      formatTemp,
+    } from '../lib/units';
 
     // Runtime language read — set by BaseLayout's pre-paint script
     // (covers sessionStorage, ?lang= URL param and navigator.language
@@ -273,6 +289,18 @@ const base = siteBase();
     function fmt(n: number | null): string {
       return n === null ? '—' : String(Math.round(n));
     }
+
+    // Story 19.3 — display units follow the map's ⚙ settings
+    // (localStorage, read on every render); data stays metric.
+    const units = () => unitsOf(readSettings());
+    const fmtT = (c: number | null): string =>
+      c === null ? '—°' : formatTemp(c, units().temp);
+    const fmtS = (kmh: number | null): string =>
+      kmh === null ? '—' : formatSpeed(kmh, units().speed);
+    const fmtP = (hpa: number | null): string =>
+      hpa === null ? '—' : formatPressure(hpa, units().pressure);
+    const fmtD = (km: number | null): string =>
+      km === null ? '—' : formatDistanceKm(km, units().distance);
 
     function hourLabel(iso: string, idx: number): string {
       return idx === 0 ? t.current : iso.slice(11, 13) + 'h';
@@ -327,7 +355,7 @@ const base = siteBase();
     }
 
     // Issue #99 — temperature → color along the same blue→yellow→orange
-    // gradient used by the 7-day bars. Returns a CSS color string.
+    // gradient used by the daily bars. Returns a CSS color string.
     // Stops: 0.0 #60a5fa (blue), 0.5 #fbbf24 (yellow), 1.0 #f97316 (orange).
     function tempTint(
       temp: number | null,
@@ -366,7 +394,19 @@ const base = siteBase();
       admin?: string;
     }
 
+    // Story 15.3 — daily outlook length. 10 by default (zoom.earth Pro
+    // parity, free); "Ver 16 días" re-renders with Open-Meteo's ceiling.
+    let forecastDays = FORECAST_DAYS;
+    let lastLoc: RenderLoc | null = null;
+    document.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement | null)?.closest('#fc-more-days');
+      if (!btn || !lastLoc) return;
+      forecastDays = forecastDays >= FORECAST_DAYS_MAX ? FORECAST_DAYS : FORECAST_DAYS_MAX;
+      void render(lastLoc);
+    });
+
     async function render(loc: RenderLoc): Promise<void> {
+      lastLoc = loc;
       try {
         const fc = await getForecast(
           { lat: loc.lat, lng: loc.lng, tz: loc.tz },
@@ -375,6 +415,8 @@ const base = siteBase();
             sleep: (ms: number) =>
               new Promise<void>((r) => setTimeout(r, ms)),
           },
+          undefined,
+          forecastDays,
         );
 
         const { current, hourly, daily } = fc;
@@ -412,8 +454,8 @@ const base = siteBase();
             </div>
             <p class="text-xs text-gray-600 dark:text-gray-500">${subLine}</p>
             <div class="flex items-end gap-3 pt-2">
-              <span class="text-6xl font-bold">${fmt(current.temperature)}°</span>
-              <span class="text-sm text-gray-600 dark:text-gray-400 pb-2">${esc(t.feels_like)} ${fmt(current.feelsLike)}°</span>
+              <span class="text-6xl font-bold">${fmtT(current.temperature)}</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 pb-2">${esc(t.feels_like)} ${fmtT(current.feelsLike)}</span>
             </div>
             <p class="text-lg text-gray-800 dark:text-gray-200">${esc(current.condition)}</p>
             ${(() => {
@@ -481,6 +523,11 @@ const base = siteBase();
                 <button type="button" id="fc-alert-save" class="rounded bg-blue-600 px-2 py-1 text-xs font-semibold text-white hover:bg-blue-500">Guardar</button>
               </div>
               <ul id="fc-alert-list" class="mt-2 space-y-1 text-xs"></ul>
+              <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
+                <button type="button" id="fc-alert-notify" class="rounded border border-blue-300 px-2 py-1 hover:bg-blue-100 dark:border-blue-700 dark:hover:bg-blue-900">🔔 Avisarme con notificación del sistema</button>
+                <span id="fc-alert-notify-state" class="text-blue-800/80 dark:text-blue-300/80"></span>
+              </div>
+              <p class="mt-1 text-[11px] text-blue-800/80 dark:text-blue-300/80">Las reglas viven solo en este navegador. Con permiso, al abrir la página con una regla cumplida verás una notificación del sistema; "📅 .ics" descarga un recordatorio diario para tu calendario.</p>
               <p class="mt-1 text-[11px] text-blue-700/70 dark:text-blue-300/70">Las alertas se guardan solo en tu navegador. Se evalúan al cargar esta página contra el pronóstico de 24 h.</p>
             </div>
             <div class="fc-map-wrap mt-3" role="region" aria-label="Mapa interactivo">
@@ -508,9 +555,9 @@ const base = siteBase();
               <i aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:2px;background:${tint}"></i>
               <div class="text-gray-600 dark:text-gray-400">${label}</div>
               <div class="text-base">${esc(emoji(hw.condition))}</div>
-              <div class="font-semibold">${fmt(hw.temperature)}°</div>
+              <div class="font-semibold">${fmtT(hw.temperature)}</div>
               <div class="text-blue-600 dark:text-blue-400">${Math.round(hw.precipProbability)}%</div>
-              <div class="text-gray-600 dark:text-gray-500">${Math.round(hw.windSpeed)} km/h</div>
+              <div class="text-gray-600 dark:text-gray-500">${fmtS(hw.windSpeed)}</div>
             </div>`;
           })
           .join('');
@@ -536,8 +583,9 @@ const base = siteBase();
             </div>
           </section>`;
 
-        // 7-day temperature range bar: normalize each day's tmin–tmax
-        // against the week's overall min/max so the fill spans the row.
+        // Daily temperature range bar (10 or 16 rows): normalize each
+        // day's tmin–tmax against the window's overall min/max so the
+        // fill spans the row.
         const dMins = daily
           .map((d) => d.tmin)
           .filter((v): v is number => v !== null);
@@ -572,12 +620,14 @@ const base = siteBase();
         // precip/wind/cloud/humidity/uv are non-nullable (num()->0 in the SDK); nullable fields use fmt().
         const dayRows = daily
           .map((dw, i) => {
-            return `<div class="grid grid-cols-[5rem_1.5rem_1fr_3rem_5rem] items-center gap-2 py-1.5 border-b border-gray-200 dark:border-gray-800 text-sm">
+            // Days past 10 are lower-confidence: dim them a notch.
+            const dim = i >= FORECAST_DAYS ? ' opacity-75' : '';
+            return `<div class="grid grid-cols-[5rem_1.5rem_1fr_3rem_5rem] items-center gap-2 py-1.5 border-b border-gray-200 dark:border-gray-800 text-sm${dim}" data-fc-day="${esc(dw.date)}">
               <span class="capitalize text-gray-700 dark:text-gray-300">${esc(dayLabel(dw.date, i))}</span>
               <span class="text-center">${esc(emoji(dw.condition))}</span>
               <span class="relative h-1.5 rounded-full bg-gray-200 dark:bg-gray-800 overflow-visible">${barFill(dw.tmin, dw.tmax)}${todayMarker(i)}</span>
               <span class="text-blue-600 dark:text-blue-400 text-right">💧${Math.round(dw.precipProbabilityMax)}%</span>
-              <span class="text-right text-gray-700 dark:text-gray-300">${fmt(dw.tmin)}° / ${fmt(dw.tmax)}°</span>
+              <span class="text-right text-gray-700 dark:text-gray-300">${fmtT(dw.tmin)} / ${fmtT(dw.tmax)}</span>
             </div>`;
           })
           .join('');
@@ -601,11 +651,16 @@ const base = siteBase();
             <span></span>
           </div>`;
 
+        const extended = daily.length > FORECAST_DAYS;
         const sevenHtml = `
-          <section class="space-y-1">
-            <h2 class="text-lg font-semibold">${esc(t.seven_days)}</h2>
+          <section class="space-y-1" id="fc-daily">
+            <div class="flex items-center justify-between gap-2">
+              <h2 class="text-lg font-semibold">${esc(extended ? t.sixteen_days : t.ten_days)}</h2>
+              <button id="fc-more-days" type="button" class="inline-flex min-h-[44px] items-center rounded-full border border-gray-300 px-3 text-xs font-medium text-blue-700 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-gray-700 dark:text-blue-300 dark:hover:bg-gray-800" aria-pressed="${extended ? 'true' : 'false'}">${esc(extended ? t.fewer_days : t.more_days)}</button>
+            </div>
             ${axisHtml}
             ${dayRows}
+            ${extended ? `<p class="pt-2 text-xs text-gray-500 dark:text-gray-400">${esc(t.days_caveat)}</p>` : ''}
           </section>`;
 
         const wd = windDir(current.windDir);
@@ -618,7 +673,7 @@ const base = siteBase();
               <div class="rounded-md bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-3 space-y-1">
                 <div class="text-xs text-gray-600 dark:text-gray-500"><span aria-hidden="true">🧭</span> <span>${esc(t.wind)}</span></div>
                 <div class="flex items-center gap-2">
-                  <span class="text-lg font-semibold">${Math.round(current.windSpeed)} km/h</span>
+                  <span class="text-lg font-semibold">${fmtS(current.windSpeed)}</span>
                   ${(() => {
                     // Story 3.5 — wind direction arrow. Meteorological
                     // dir = where wind comes FROM, so we rotate the
@@ -630,7 +685,7 @@ const base = siteBase();
                       width="20"
                       height="20"
                       viewBox="0 0 24 24"
-                      aria-label="${esc(t.wind)} ${esc(wd.label)}, ${Math.round(current.windSpeed)} km/h"
+                      aria-label="${esc(t.wind)} ${esc(wd.label)}, ${fmtS(current.windSpeed)}"
                       role="img"
                       class="text-blue-600 dark:text-blue-400"
                       style="transform: rotate(${rot}deg)"
@@ -639,7 +694,7 @@ const base = siteBase();
                     </svg>`;
                   })()}
                 </div>
-                <div class="text-xs text-gray-600 dark:text-gray-400">${esc(wd.label)} · ${esc(t.gusts)} ${Math.round(current.windGusts)} km/h</div>
+                <div class="text-xs text-gray-600 dark:text-gray-400">${esc(wd.label)} · ${esc(t.gusts)} ${fmtS(current.windGusts)}</div>
               </div>
               <div class="rounded-md bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-3 space-y-1">
                 <div class="text-xs text-gray-600 dark:text-gray-500"><span aria-hidden="true">☀️</span> <span>${esc(t.uv_index)}</span></div>
@@ -649,7 +704,7 @@ const base = siteBase();
               <div data-low-priority class="rounded-md bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-3 space-y-1">
                 <div class="text-xs text-gray-600 dark:text-gray-500"><span aria-hidden="true">☁️</span> <span>${esc(t.sky_air)}</span></div>
                 <div class="text-lg font-semibold">${Math.round(current.cloudCover)}%</div>
-                <div class="text-xs text-gray-600 dark:text-gray-400">${esc(t.humidity)} ${Math.round(current.humidity)}% · ${esc(t.pressure)} ${fmt(current.pressure)} hPa · ${esc(t.visibility)} ${esc(String(current.visibilityKm))} km</div>
+                <div class="text-xs text-gray-600 dark:text-gray-400">${esc(t.humidity)} ${Math.round(current.humidity)}% · ${esc(t.pressure)} ${fmtP(current.pressure)} · ${esc(t.visibility)} ${fmtD(current.visibilityKm)}</div>
               </div>
             </div>
           </section>`;
@@ -755,11 +810,30 @@ const base = siteBase();
                 return (
                   `<li class="flex items-center gap-2">` +
                   `<span class="flex-1">${ml} ${esc(r.op)} ${r.threshold}${esc(u)}</span>` +
+                  `<button type="button" data-metric="${esc(r.metric)}" class="fc-alert-ics rounded border border-blue-300 px-1.5 text-[11px] hover:bg-blue-100 dark:border-blue-700 dark:hover:bg-blue-900" title="Recordatorio diario para tu calendario">📅 .ics</button>` +
                   `<button type="button" data-metric="${esc(r.metric)}" class="fc-alert-rm rounded border border-blue-300 px-1.5 text-[11px] hover:bg-blue-100 dark:border-blue-700 dark:hover:bg-blue-900">Quitar</button>` +
                   `</li>`
                 );
               })
               .join('');
+            // Story 17.3 — calendar reminder per rule (.ics download).
+            alertList.querySelectorAll('.fc-alert-ics').forEach((b) => {
+              b.addEventListener('click', () => {
+                const m = (b as HTMLElement).dataset.metric as AlertMetric | undefined;
+                const r = rules.find((x) => x.metric === m);
+                if (!r) return;
+                const ics = buildAlertIcs(r, location.href);
+                const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = alertIcsFilename(r);
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+              });
+            });
             alertList.querySelectorAll('.fc-alert-rm').forEach((b) => {
               b.addEventListener('click', () => {
                 const m = (b as HTMLElement).dataset.metric as
@@ -809,6 +883,28 @@ const base = siteBase();
               alertBanner.innerHTML = '';
               return;
             }
+            // Story 17.3 — system notification once per rule per day when
+            // the user granted permission; the banner below stays either way.
+            try {
+              const today = new Date().toISOString().slice(0, 10);
+              const notified = JSON.parse(store.getItem(NOTIFIED_KEY) ?? '[]') as string[];
+              const pending = pendingNotifications(fired, notified, today);
+              if (pending.alerts.length > 0) {
+                const shown = notifyFired(
+                  pending.alerts,
+                  typeof Notification === 'undefined' ? undefined : Notification,
+                  `${siteBase()}favicon.svg`,
+                );
+                if (shown > 0) {
+                  store.setItem(
+                    NOTIFIED_KEY,
+                    JSON.stringify([...notified, ...pending.keys].slice(-200)),
+                  );
+                }
+              }
+            } catch {
+              /* storage or Notification unavailable — banner only */
+            }
             alertBanner.innerHTML =
               '<div class="font-semibold mb-0.5">⚠️ Alertas disparadas (próximas 24 h):</div>' +
               '<ul class="space-y-0.5 text-xs">' +
@@ -824,6 +920,32 @@ const base = siteBase();
                 .join('') +
               '</ul>';
             alertBanner.classList.remove('hidden');
+          }
+
+          // Story 17.3 — permission toggle for system notifications.
+          const notifyBtn = document.getElementById('fc-alert-notify');
+          const notifyState = document.getElementById('fc-alert-notify-state');
+          const syncNotifyState = (): void => {
+            if (!notifyState || !notifyBtn) return;
+            if (typeof Notification === 'undefined') {
+              notifyState.textContent = 'No disponible en este navegador.';
+              notifyBtn.setAttribute('disabled', 'true');
+              return;
+            }
+            const p = Notification.permission;
+            notifyState.textContent =
+              p === 'granted' ? 'Activadas para este sitio.' : p === 'denied' ? 'Bloqueadas en el navegador.' : '';
+            notifyBtn.toggleAttribute('disabled', p !== 'default');
+          };
+          syncNotifyState();
+          if (notifyBtn) {
+            notifyBtn.addEventListener('click', () => {
+              if (typeof Notification === 'undefined') return;
+              void Notification.requestPermission().then(() => {
+                syncNotifyState();
+                renderAlertBanner();
+              });
+            });
           }
 
           if (alertBtn) {
@@ -1029,8 +1151,28 @@ const base = siteBase();
                 sleep: (ms: number) =>
                   new Promise<void>((r) => setTimeout(r, ms)),
               },
+              undefined,
+              forecastDays,
             )
               .then((d) => {
+                // Story 15.3 — flag the days where the models' Tmax
+                // diverge by ≥2 °C, right on the daily rows.
+                for (const day of d.daily) {
+                  if (day.spread === null || day.spread < 2) continue;
+                  const row = document.querySelector<HTMLElement>(
+                    `[data-fc-day="${day.date}"] > span:last-child`,
+                  );
+                  if (!row || row.querySelector('.fc-diverge')) continue;
+                  const chip = document.createElement('span');
+                  chip.className =
+                    'fc-diverge ml-1 inline-block rounded px-1 text-[10px] font-semibold align-middle ' +
+                    (day.spread <= 3
+                      ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-200'
+                      : 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200');
+                  chip.textContent = `±${day.spread.toFixed(0)}°`;
+                  chip.title = `${t.models_diverge}: ${day.spread.toFixed(1)}°`;
+                  row.appendChild(chip);
+                }
                 const parts: string[] = [];
                 const labels: Record<string, string> = {
                   icon_seamless: 'ICON',

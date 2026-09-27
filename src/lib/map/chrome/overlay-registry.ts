@@ -50,7 +50,7 @@ export interface OverlayRegistryDeps {
 export function createOverlayRegistry(
   els: OverlayRegistryEls,
   overlays: ReadonlyArray<OverlayDef>,
-  deps: OverlayRegistryDeps = {},
+  deps: OverlayRegistryDeps = {}
 ): OverlayRegistry {
   function build(): void {
     if (!els.wrap) return;
@@ -76,13 +76,17 @@ export function createOverlayRegistry(
       const lbl = document.createElement('span');
       lbl.textContent = def.label;
       lbl.className = 'flex-1';
-      const kbd = document.createElement('kbd');
-      kbd.textContent = def.shortcut;
-      kbd.className =
-        'rounded border border-gray-500/40 px-1 text-[10px] font-mono text-gray-400';
       row.appendChild(cb);
       row.appendChild(lbl);
-      row.appendChild(kbd);
+      // An overlay may ship without a letter (every A–Z key is bound
+      // by now); skip the chip rather than render an empty one.
+      if (def.shortcut) {
+        const kbd = document.createElement('kbd');
+        kbd.textContent = def.shortcut;
+        kbd.className =
+          'rounded border border-gray-500/40 px-1 text-[10px] font-mono text-gray-400';
+        row.appendChild(kbd);
+      }
       els.wrap.appendChild(row);
     }
   }
@@ -90,7 +94,7 @@ export function createOverlayRegistry(
   function refresh(): void {
     for (const def of overlays) {
       const cb = document.getElementById(
-        `overlay-${def.id}`,
+        `overlay-${def.id}`
       ) as HTMLInputElement | null;
       if (cb) cb.checked = def.isEnabled();
     }

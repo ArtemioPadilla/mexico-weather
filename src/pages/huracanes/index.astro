@@ -166,11 +166,14 @@ const jsonLd = [
 
   <script>
     interface Storm {
+      id?: string;
       name?: string;
       lat?: number;
       lng?: number;
       classification?: string;
       intensityKt?: number;
+      /** Story 18.1 — true when /huracanes/<id>/ was built with cone + track. */
+      hasDetail?: boolean;
     }
     interface StormsDoc {
       updated?: string;
@@ -309,7 +312,12 @@ const jsonLd = [
                   <dd class="mt-0.5 font-mono text-sm">${lat}°, ${lng}°</dd>
                 </div>
               </dl>
-              <p class="mt-3 text-xs">
+              <p class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                ${
+                  s.hasDetail && s.id && /^[a-z]{2}\d{6}$/.test(s.id)
+                    ? `<a href="${base}huracanes/${s.id}/" data-storm-detail class="font-medium text-blue-700 underline hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">${escapeHtml(lang === 'en' ? 'Track and cone →' : 'Trayectoria y cono →')}</a>`
+                    : ''
+                }
                 <a
                   href="https://www.nhc.noaa.gov/"
                   target="_blank"

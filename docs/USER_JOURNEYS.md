@@ -21,7 +21,7 @@ Every endpoint must be mocked in tests via `page.route(...)` for determinism. No
 | `https://api.open-meteo.com/v1/forecast?...` | City cards, `/forecast` detail, field layers (temp/humidity/pressure), wind layer | `**://api.open-meteo.com/**` (catch-all) or `**/api.open-meteo.com/v1/forecast**` (path) or `/api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/` (wind-only regex) |
 | `https://api.rainviewer.com/public/weather-maps.json` | Map: radar + satellite manifest | `**/api.rainviewer.com/public/weather-maps.json` |
 | `https://tilecache.rainviewer.com/**` | Map: radar + satellite tile fetches | `**/tilecache.rainviewer.com/**` — fulfill with a 1×1 transparent PNG |
-| `https://tile.openstreetmap.org/{z}/{x}/{y}.png` | Map: basemap tiles | `**/tile.openstreetmap.org/**` — fulfill with a transparent PNG (or let through; tile failure is non-blocking) |
+| `https://server{,2}.arcgisonline.com/ArcGIS/rest/services/Canvas/World_{Light,Dark}_Gray_{Base,Reference}/MapServer/tile/{z}/{y}/{x}` | Map: basemap tiles (base + labels) | `**/*.arcgisonline.com/**` — fulfill with a transparent PNG (or let through; tile failure is non-blocking) |
 | `navigator.geolocation` (browser API) | Search-or-locate, map locate | Use Playwright `context.grantPermissions(['geolocation'])` + `context.setGeolocation({...})`, or stub `geolocation.getCurrentPosition` via `addInitScript` |
 
 Reusable fixtures in `e2e/fixtures/`: `geocode.cdmx.json`, `forecast.cdmx.json` (Open-Meteo replies for CDMX). New layer tests typically inline-define their mocks — see existing `e2e/mapa.spec.ts` for the pattern.
@@ -30,9 +30,11 @@ Reusable fixtures in `e2e/fixtures/`: `geocode.cdmx.json`, `forecast.cdmx.json` 
 
 | Route | File | Description |
 |---|---|---|
-| `/` | `src/pages/index.astro` | Home — preset city cards, search, geolocate, favorites, **embedded interactive map** (400 px, layer rail + timeline + preset pins), alerts, feedback FAB |
+| `/` | `src/pages/index.astro` | Home — **map-first interactive map** (viewport-tall, radar default, 5-layer rail + timeline + preset pins) with the geolocate CTA + search floating on top; preset city cards, favorites, alerts and the footer feedback button below |
 | `/forecast/?lat=&lng=&name=&tz=` | `src/pages/forecast.astro` | Shareable forecast detail; client-rendered from URL params |
 | `/mapa/` | `src/pages/mapa.astro` | Interactive weather map (MapLibre + 8 layers + timeline) |
+| `/alertas/` | `src/pages/alertas.astro` | Push alerts without a backend: ntfy topics for cyclones + SMN by state, per-state RSS links |
+| `/rss/<estado>.xml` | `src/pages/rss/[estado].xml.ts` | Per-state (and `nacional`) SMN RSS feed, prerendered from `smn-by-state.json` |
 | `/privacidad/` | `src/pages/privacidad.astro` | Privacy/legal page |
 | `/rss.xml` | `src/pages/rss.xml.ts` | Build-time SMN alerts RSS 2.0 feed |
 | `/sitemap.xml` | `src/pages/sitemap.xml.ts` | Sitemap |
@@ -266,12 +268,12 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
 - **NOT YET COVERED** (the bare "5 cards present" test exists; the peek/expand flow does not).
 
 ### `home-7` — Embedded map on home + deep-link to `/mapa`
-- **Goal**: home page embeds the full interactive map (~400 px) with the layer rail + timeline + preset pins; a small "Abrir mapa a pantalla completa →" link below deep-links to the full-screen `/mapa`.
+- **Goal**: the home is map-first — the interactive map fills the viewport below the nav (radar default, trimmed rail + timeline + preset pins), not lazy; a "Ver mapa interactivo →" chip in the overlay deep-links to the full-screen `/mapa`.
 - **Steps**:
   1. `await page.goto('')`.
   2. Locate the embedded map container: `page.locator('#home-map')` (the home embed uses the `home-map` id; `/mapa` still uses `#map`).
-  3. Scroll it into view so the IntersectionObserver fires.
-  4. `await expect(page.locator('#home-map-root .maplibregl-canvas')).toBeVisible()` — MapLibre canvas mounted (lazy dynamic-import).
+  3. No scrolling needed: the map is above the fold and boots immediately (`lazy={false}`).
+  4. `await expect(page.locator('#home-map-root .maplibregl-canvas')).toBeVisible()` — MapLibre canvas mounted.
   5. Layer rail buttons are present: `await expect(page.locator('#layerbtn-radar')).toBeVisible()` etc. (the home embed still uses the stable `layerbtn-*` IDs).
   6. The "Abrir mapa a pantalla completa →" link below the embed navigates to `/mapa/`.
 - **NOT YET COVERED**.
@@ -387,7 +389,7 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
 
 ### `forecast-7` — Embedded interactive map + deep-link to `/mapa`
 - **Goal**: `/forecast?lat=…&lng=…` shows an embedded **interactive** MapLibre map (~320–360 px tall) in the hero, centered on the URL coords with a blue marker + popup linking back to the canonical forecast URL. A "Abrir mapa a pantalla completa →" link below the embed (`#fc-map-link`) deep-links to `/mapa#view=<lat>,<lng>,9z`.
-- **Preconditions**: `mockOpenMeteo(page)` so the forecast renders; OSM / CartoDB tiles can be mocked to a transparent PNG to keep the test deterministic.
+- **Preconditions**: `mockOpenMeteo(page)` so the forecast renders; Esri basemap tiles (`**/*.arcgisonline.com/**`) can be mocked to a transparent PNG to keep the test deterministic.
 - **Steps**:
   1. `await page.goto('forecast/?lat=19.43&lng=-99.13&tz=America%2FMexico_City&name=Ciudad%20de%20M%C3%A9xico')`
   2. `await expect(page.locator('#fc-root')).toBeVisible()` (forecast has rendered)
@@ -399,7 +401,7 @@ The journey ID format is `<route>-<n>`. Each block has the same structure so a t
 - **Reserved-height check (no CLS)**:
   - The `.fc-map-wrap` reserves height ≥ 320 px (mobile) or ≥ 360 px (`width ≥ 640`) before MapLibre mounts.
 - **Theme sync**:
-  - With `html.dark` set, the map tiles request URLs match `basemaps.cartocdn.com/dark_all/`; with light, they match `tile.openstreetmap.org`.
+  - With `html.dark` set, the map tiles request URLs match `Canvas/World_Dark_Gray_Base`; with light, they match `Canvas/World_Light_Gray_Base`.
 - **NOT YET COVERED**.
 
 ### `forecast-6` — `&admin` query param renders an XSS-escaped subheading

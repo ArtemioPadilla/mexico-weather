@@ -1,9 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import {
   ATTRIBUTION_GIBS,
+  GIBS_HISTORY_DAYS,
+  GIBS_LAG_MS,
   GIBS_LAYERS,
+  gibsLatestTime,
   gibsRoundedTime,
   gibsTileUrl,
+  gibsTimeParam,
 } from './nasa-gibs';
 
 describe('gibsTileUrl', () => {
@@ -12,16 +16,27 @@ describe('gibsTileUrl', () => {
     expect(url).toBe(
       'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/' +
         'GOES-East_ABI_Band13_Clean_Infrared/default/default/' +
-        'GoogleMapsCompatible_Level6/{z}/{y}/{x}.png',
+        'GoogleMapsCompatible_Level6/{z}/{y}/{x}.png'
     );
   });
 
   it('includes the requested time', () => {
-    const url = gibsTileUrl(GIBS_LAYERS.viirsNightLights, '2026-05-24T00:00:00Z');
-    expect(url).toContain('2026-05-24T00:00:00Z');
-    expect(url).toContain('VIIRS_SNPP_DayNightBand_ENCC');
+    const url = gibsTileUrl(GIBS_LAYERS.viirsNightLights, '2026-05-24');
+    expect(url).toContain('/2026-05-24/');
+    expect(url).toContain('VIIRS_NOAA20_DayNightBand_AtSensor_M15');
     expect(url).toContain('Level8');
     expect(url.endsWith('.png')).toBe(true);
+  });
+
+  it('GeoColor uses the Level7 matrix set GIBS publishes for it (Story 16.1)', () => {
+    // Level6 returns 400 "TILEMATRIXSET is invalid for LAYER" since GIBS
+    // re-published GeoColor at Level7 — this is what blanked the
+    // satellite layer in production.
+    expect(gibsTileUrl(GIBS_LAYERS.goesGeocolor, '2026-09-24T06:40:00Z')).toBe(
+      'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/' +
+        'GOES-East_ABI_GeoColor/default/2026-09-24T06:40:00Z/' +
+        'GoogleMapsCompatible_Level7/{z}/{y}/{x}.png'
+    );
   });
 
   it('uses jpg extension for MODIS true color', () => {
@@ -38,7 +53,7 @@ describe('gibsRoundedTime', () => {
 
   it('handles the top of the hour', () => {
     expect(gibsRoundedTime(new Date('2026-05-24T06:00:00Z'))).toBe(
-      '2026-05-24T06:00:00Z',
+      '2026-05-24T06:00:00Z'
     );
   });
 
@@ -53,10 +68,32 @@ describe('GIBS_LAYERS', () => {
   it('exposes goesIR, goesGeocolor, viirsNightLights, modisTrueColor', () => {
     expect(GIBS_LAYERS.goesIR.id).toBe('GOES-East_ABI_Band13_Clean_Infrared');
     expect(GIBS_LAYERS.goesGeocolor.id).toBe('GOES-East_ABI_GeoColor');
-    expect(GIBS_LAYERS.viirsNightLights.id).toBe('VIIRS_SNPP_DayNightBand_ENCC');
-    expect(GIBS_LAYERS.modisTrueColor.id).toBe(
-      'MODIS_Terra_CorrectedReflectance_TrueColor',
+    expect(GIBS_LAYERS.viirsNightLights.id).toBe(
+      'VIIRS_NOAA20_DayNightBand_AtSensor_M15'
     );
+    expect(GIBS_LAYERS.modisTrueColor.id).toBe(
+      'MODIS_Terra_CorrectedReflectance_TrueColor'
+    );
+  });
+});
+
+describe('gibsTimeParam / gibsLatestTime (Story 16.1)', () => {
+  it('10-minute ISO for GOES, bare date for daily products', () => {
+    const t = Date.parse('2026-09-24T06:47:00Z');
+    expect(gibsTimeParam(GIBS_LAYERS.goesGeocolor, t)).toBe(
+      '2026-09-24T06:40:00Z'
+    );
+    expect(gibsTimeParam(GIBS_LAYERS.modisTrueColor, t)).toBe('2026-09-24');
+    expect(gibsTimeParam(GIBS_LAYERS.viirsNightLights, t)).toBe('2026-09-24');
+  });
+  it('latest time backs off by the publishing lag', () => {
+    expect(gibsLatestTime(new Date('2026-09-27T06:17:00Z'))).toBe(
+      '2026-09-27T05:40:00Z'
+    );
+  });
+  it('history + lag constants are the measured values', () => {
+    expect(GIBS_HISTORY_DAYS).toBe(45);
+    expect(GIBS_LAG_MS).toBe(30 * 60 * 1000);
   });
 });
 

@@ -6,17 +6,37 @@ import {
   fieldFrameIndex,
   tempColor,
   TEMP_LEGEND,
+  EXTENDED_FIELD_RANGE,
+  mergeFieldGrids,
+  mergeWindGrids,
+  isExtendedGrid,
+  precipColor,
+  snowColor,
+  precipProbColor,
+  PRECIP_TRANSPARENT,
+  PRECIP_LEGEND,
+  SNOW_LEGEND,
+  PRECIP_PROB_LEGEND,
+  spreadFieldGrid,
+  spreadColorFor,
+  spreadLegendFor,
 } from './mapfields';
 
 describe('viewportGrid', () => {
   it('returns cols*rows points spanning the bbox inclusively', () => {
-    const pts = viewportGrid({ west: -100, south: 10, east: -98, north: 14 }, 3, 2);
+    const pts = viewportGrid(
+      { west: -100, south: 10, east: -98, north: 14 },
+      3,
+      2
+    );
     expect(pts).toHaveLength(6);
     expect(pts[0]).toEqual({ lng: -100, lat: 10 });
     expect(pts[pts.length - 1]).toEqual({ lng: -98, lat: 14 });
   });
   it('clamps degenerate sizes to at least 2x2', () => {
-    expect(viewportGrid({ west: 0, south: 0, east: 1, north: 1 }, 1, 1)).toHaveLength(4);
+    expect(
+      viewportGrid({ west: 0, south: 0, east: 1, north: 1 }, 1, 1)
+    ).toHaveLength(4);
   });
 });
 
@@ -27,11 +47,11 @@ describe('buildFieldUrl', () => {
         { lat: 10, lng: -100 },
         { lat: 12, lng: -99 },
       ],
-      'temperature_2m',
+      'temperature_2m'
     );
     expect(url).toBe(
       'https://api.open-meteo.com/v1/forecast?latitude=10,12&longitude=-100,-99' +
-        '&hourly=temperature_2m&forecast_days=2&timezone=UTC',
+        '&hourly=temperature_2m&forecast_days=2&past_days=1&timezone=UTC'
     );
   });
 });
@@ -42,8 +62,18 @@ describe('parseFieldResponse', () => {
     { lat: 12, lng: -99 },
   ];
   const resp = [
-    { hourly: { time: ['2026-05-19T00:00', '2026-05-19T01:00'], temperature_2m: [20, 21] } },
-    { hourly: { time: ['2026-05-19T00:00', '2026-05-19T01:00'], temperature_2m: [18, 19] } },
+    {
+      hourly: {
+        time: ['2026-05-19T00:00', '2026-05-19T01:00'],
+        temperature_2m: [20, 21],
+      },
+    },
+    {
+      hourly: {
+        time: ['2026-05-19T00:00', '2026-05-19T01:00'],
+        temperature_2m: [18, 19],
+      },
+    },
   ];
   it('aligns each result to its input point by index', () => {
     const g = parseFieldResponse(resp, pts, 'temperature_2m');
@@ -60,7 +90,104 @@ describe('parseFieldResponse', () => {
   });
   it('returns null for malformed input', () => {
     expect(parseFieldResponse(null, pts, 'temperature_2m')).toBeNull();
-    expect(parseFieldResponse([{ hourly: {} }], [pts[0]], 'temperature_2m')).toBeNull();
+    expect(
+      parseFieldResponse([{ hourly: {} }], [pts[0]], 'temperature_2m')
+    ).toBeNull();
+  });
+});
+
+describe('buildFieldUrl with a FieldRange (Story 15.1)', () => {
+  const pts = [{ lat: 19.43, lng: -99.13 }];
+  it('default range is the hourly −24 h … +48 h window (Story 15.2)', () => {
+    expect(buildFieldUrl(pts, 'temperature_2m')).toContain(
+      '&forecast_days=2&past_days=1&timezone=UTC'
+    );
+    expect(buildFieldUrl(pts, 'temperature_2m')).not.toContain(
+      'temporal_resolution'
+    );
+  });
+  it('extended range asks for 10 days at 3-hourly steps', () => {
+    const u = buildFieldUrl(
+      pts,
+      'temperature_2m',
+      undefined,
+      EXTENDED_FIELD_RANGE
+    );
+    expect(u).toContain('&forecast_days=10');
+    expect(u).toContain('&temporal_resolution=hourly_3');
+  });
+  it('past_days is emitted only when set', () => {
+    const u = buildFieldUrl(pts, 'temperature_2m', 'icon_seamless', {
+      forecastDays: 3,
+      pastDays: 1,
+    });
+    expect(u).toContain('&past_days=1');
+    expect(u).toContain('&models=icon_seamless');
+  });
+  it('wind URL honours the range too', () => {
+    expect(
+      buildWindUrl(pts, 'wind_speed_10m', undefined, EXTENDED_FIELD_RANGE)
+    ).toContain('&forecast_days=10&temporal_resolution=hourly_3');
+  });
+});
+
+describe('mergeFieldGrids / mergeWindGrids', () => {
+  const pts = [
+    { lat: 19, lng: -99 },
+    { lat: 20, lng: -100 },
+  ];
+  const base = {
+    times: ['2026-09-27T00:00', '2026-09-27T01:00', '2026-09-27T02:00'],
+    points: pts.map((p, i) => ({ ...p, values: [10 + i, 11 + i, 12 + i] })),
+  };
+  const ext = {
+    times: ['2026-09-27T00:00', '2026-09-27T03:00', '2026-09-27T06:00'],
+    points: pts.map((p, i) => ({ ...p, values: [99, 13 + i, 14 + i] })),
+  };
+  it('unions the timestamps in order and lets hourly (base) values win on overlap', () => {
+    const m = mergeFieldGrids(base, ext);
+    expect(m?.times).toEqual([
+      '2026-09-27T00:00',
+      '2026-09-27T01:00',
+      '2026-09-27T02:00',
+      '2026-09-27T03:00',
+      '2026-09-27T06:00',
+    ]);
+    expect(m?.points[0].values).toEqual([10, 11, 12, 13, 14]);
+    expect(m?.points[1].values).toEqual([11, 12, 13, 14, 15]);
+  });
+  it('refuses grids over different points', () => {
+    const other = {
+      ...ext,
+      points: [ext.points[0], { lat: 21, lng: -101, values: [1, 2, 3] }],
+    };
+    expect(mergeFieldGrids(base, other)).toBeNull();
+    expect(
+      mergeFieldGrids(base, { ...ext, points: ext.points.slice(0, 1) })
+    ).toBeNull();
+  });
+  it('merges u/v wind grids component-wise', () => {
+    const wb = {
+      times: base.times,
+      points: pts.map((p) => ({ ...p, u: [1, 2, 3], v: [-1, -2, -3] })),
+    };
+    const we = {
+      times: ext.times,
+      points: pts.map((p) => ({ ...p, u: [0, 4, 5], v: [0, -4, -5] })),
+    };
+    const m = mergeWindGrids(wb, we);
+    expect(m?.times).toHaveLength(5);
+    expect(m?.points[0].u).toEqual([1, 2, 3, 4, 5]);
+    expect(m?.points[0].v).toEqual([-1, -2, -3, -4, -5]);
+  });
+  it('isExtendedGrid: 3-day default grid no, 10-day grid yes', () => {
+    expect(isExtendedGrid(base)).toBe(false);
+    expect(
+      isExtendedGrid({ times: ['2026-09-26T00:00', '2026-09-28T23:00'] })
+    ).toBe(false);
+    expect(
+      isExtendedGrid({ times: ['2026-09-27T00:00', '2026-10-06T21:00'] })
+    ).toBe(true);
   });
 });
 
@@ -99,7 +226,12 @@ describe('TEMP_LEGEND', () => {
   });
 });
 
-import { humidityColor, pressureColor, HUMIDITY_LEGEND, PRESSURE_LEGEND } from './mapfields';
+import {
+  humidityColor,
+  pressureColor,
+  HUMIDITY_LEGEND,
+  PRESSURE_LEGEND,
+} from './mapfields';
 
 describe('parseFieldResponse null tolerance', () => {
   const pts = [
@@ -108,8 +240,18 @@ describe('parseFieldResponse null tolerance', () => {
   ];
   it('keeps a result when its values array contains nulls (does not return null for the whole grid)', () => {
     const resp = [
-      { hourly: { time: ['2026-05-19T00:00', '2026-05-19T01:00'], temperature_2m: [20, null] } },
-      { hourly: { time: ['2026-05-19T00:00', '2026-05-19T01:00'], temperature_2m: [null, 19] } },
+      {
+        hourly: {
+          time: ['2026-05-19T00:00', '2026-05-19T01:00'],
+          temperature_2m: [20, null],
+        },
+      },
+      {
+        hourly: {
+          time: ['2026-05-19T00:00', '2026-05-19T01:00'],
+          temperature_2m: [null, 19],
+        },
+      },
     ];
     const g = parseFieldResponse(resp, pts, 'temperature_2m');
     expect(g).not.toBeNull();
@@ -117,7 +259,9 @@ describe('parseFieldResponse null tolerance', () => {
     expect(g!.points[1].values).toEqual([null, 19]);
   });
   it('still rejects when values is not an array at all', () => {
-    const bad = [{ hourly: { time: ['2026-05-19T00:00'], temperature_2m: 'oops' } }];
+    const bad = [
+      { hourly: { time: ['2026-05-19T00:00'], temperature_2m: 'oops' } },
+    ];
     expect(parseFieldResponse(bad, [pts[0]], 'temperature_2m')).toBeNull();
   });
 });
@@ -166,12 +310,16 @@ describe('buildWindUrl', () => {
     ]);
     expect(url).toBe(
       'https://api.open-meteo.com/v1/forecast?latitude=10,12&longitude=-100,-99' +
-        '&hourly=wind_speed_10m,wind_direction_10m&forecast_days=2&timezone=UTC',
+        '&hourly=wind_speed_10m,wind_direction_10m&forecast_days=2&past_days=1&timezone=UTC'
     );
   });
 });
 
-import { fetchFieldChunks, fetchWindChunks, FIELD_CHUNK_SIZE } from './mapfields';
+import {
+  fetchFieldChunks,
+  fetchWindChunks,
+  FIELD_CHUNK_SIZE,
+} from './mapfields';
 
 describe('fetchFieldChunks / fetchWindChunks', () => {
   /** points spanning 2 chunks (FIELD_CHUNK_SIZE + 1). */
@@ -192,7 +340,9 @@ describe('fetchFieldChunks / fetchWindChunks', () => {
       await new Promise<void>((r) => resolvers.push(r));
       inFlight -= 1;
       // Tag each chunk response by its point count so ordering is checkable.
-      const n = String(url).match(/latitude=([^&]*)/)![1].split(',').length;
+      const n = String(url)
+        .match(/latitude=([^&]*)/)![1]
+        .split(',').length;
       return okJson(Array.from({ length: n }, (_, i) => ({ chunkSize: n, i })));
     }) as unknown as typeof fetch;
     const p = fetchFieldChunks(manyPoints, 'temperature_2m', fetchImpl);
@@ -213,10 +363,10 @@ describe('fetchFieldChunks / fetchWindChunks', () => {
     const fetchImpl = (async () =>
       new Response('boom', { status: 503 })) as unknown as typeof fetch;
     await expect(
-      fetchFieldChunks(manyPoints.slice(0, 2), 'temperature_2m', fetchImpl),
+      fetchFieldChunks(manyPoints.slice(0, 2), 'temperature_2m', fetchImpl)
     ).rejects.toThrow('field chunk 0 failed: HTTP 503');
     await expect(
-      fetchWindChunks(manyPoints.slice(0, 2), 'wind_speed_10m', fetchImpl),
+      fetchWindChunks(manyPoints.slice(0, 2), 'wind_speed_10m', fetchImpl)
     ).rejects.toThrow('wind chunk 0 failed: HTTP 503');
   });
 
@@ -231,12 +381,12 @@ describe('fetchFieldChunks / fetchWindChunks', () => {
     await expect(
       fetchFieldChunks(manyPoints, 'temperature_2m', fetchImpl, {
         signal: ac.signal,
-      }),
+      })
     ).rejects.toMatchObject({ name: 'AbortError' });
     await expect(
       fetchWindChunks(manyPoints, 'wind_speed_10m', fetchImpl, {
         signal: ac.signal,
-      }),
+      })
     ).rejects.toMatchObject({ name: 'AbortError' });
     expect(calls).toHaveLength(0);
   });
@@ -279,5 +429,70 @@ describe('parseWindResponse', () => {
   it('returns null for malformed input', () => {
     expect(parseWindResponse(null, pts)).toBeNull();
     expect(parseWindResponse([{ hourly: {} }, { hourly: {} }], pts)).toBeNull();
+  });
+});
+
+describe('precipitation ramps (Story 15.5)', () => {
+  it('dry cells are fully transparent, wet cells opaque blue→purple', () => {
+    expect(precipColor(0)).toBe(PRECIP_TRANSPARENT);
+    expect(precipColor(0.05)).toBe(PRECIP_TRANSPARENT);
+    expect(precipColor(NaN)).toBe(PRECIP_TRANSPARENT);
+    expect(precipColor(0.3)).toBe('#a6d8ff');
+    expect(precipColor(3)).toBe('#5b3fb8');
+    expect(precipColor(50)).toBe('#e01e9a');
+    expect(PRECIP_LEGEND[PRECIP_LEGEND.length - 1].label).toContain('mm/h');
+  });
+  it('snow and probability ramps follow the same transparency rule', () => {
+    expect(snowColor(0)).toBe(PRECIP_TRANSPARENT);
+    expect(snowColor(0.7)).toBe('#b8dcff');
+    expect(snowColor(9)).toBe('#4c6fb3');
+    expect(precipProbColor(5)).toBe(PRECIP_TRANSPARENT);
+    expect(precipProbColor(45)).toBe('#8ec2ff');
+    expect(precipProbColor(100)).toBe('#0b3a99');
+    expect(SNOW_LEGEND.length).toBeGreaterThan(2);
+    expect(PRECIP_PROB_LEGEND[0].label).toBe('10%');
+  });
+});
+
+describe('model spread (Story 13.3)', () => {
+  const pts = [
+    { lat: 19, lng: -99 },
+    { lat: 20, lng: -100 },
+  ];
+  const mk = (times: string[], a: (number | null)[], b: (number | null)[]) => ({
+    times,
+    points: [
+      { ...pts[0], values: a },
+      { ...pts[1], values: b },
+    ],
+  });
+  it('computes max−min per point and hour, aligned on the reference times', () => {
+    const t = ['2026-09-27T00:00', '2026-09-27T01:00'];
+    const icon = mk(t, [20, 21], [10, null]);
+    const gfs = mk(t, [22, 21.5], [12, 13]);
+    const ecmwf = mk(['2026-09-27T01:00'], [24], [11]);
+    const s = spreadFieldGrid([icon, gfs, ecmwf], pts, t);
+    expect(s?.times).toEqual(t);
+    expect(s?.points[0].values).toEqual([2, 3]);
+    // Hour 1 at point 2: icon null → gfs 13 vs ecmwf 11 → 2.
+    expect(s?.points[1].values).toEqual([2, 2]);
+    expect(spreadFieldGrid([icon], pts, t)).toBeNull();
+    // A grid on another point layout does not count towards the two.
+    const elsewhere = {
+      times: t,
+      points: [{ lat: 0, lng: 0, values: [1, 2] }],
+    };
+    expect(spreadFieldGrid([icon, elsewhere], pts, t)).toBeNull();
+  });
+  it("ramps and legends follow each layer's own steps", () => {
+    const c = spreadColorFor('temperature');
+    expect(c(0.5)).toBe('#22c55e');
+    expect(c(3)).toBe('#facc15');
+    expect(c(10)).toBe('#7e22ce');
+    expect(spreadColorFor('humidity')(3)).toBe('#22c55e');
+    expect(spreadColorFor('humidity')(25)).toBe('#f97316');
+    const lg = spreadLegendFor('pressure', 'hPa');
+    expect(lg[0].label).toBe('<1');
+    expect(lg[4].label).toBe('≥6 hPa');
   });
 });

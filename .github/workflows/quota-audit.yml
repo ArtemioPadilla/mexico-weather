@@ -1,0 +1,54 @@
+name: Open-Meteo quota audit
+
+# Story 20.2 (plan PRO_GRATIS E20): every day, recompute the Open-Meteo
+# calls our scheduled workflows make (calls per run × runs per day, from
+# the scripts' constants and the workflows' crons — no network) and open
+# an issue when the projection passes 70 % of the 10 000/day allowance.
+# The same script runs in ci.yml on every PR, so a change that blows the
+# budget fails there first; this job is the safety net for drift.
+
+on:
+  schedule:
+    - cron: '41 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    name: Project daily Open-Meteo calls
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Audit
+        id: audit
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 scripts/quota-audit.py | tee audit.txt
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+        continue-on-error: true
+
+      - name: Open or update the alert issue
+        if: steps.audit.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="$(printf 'La proyección diaria de llamadas a Open-Meteo superó el umbral del 70 %% (Story 20.2).\n\n```\n%s\n```\n\nRevisa los crons y las constantes de los scripts (`python3 scripts/quota-audit.py`).' "$(cat audit.txt)")"
+          existing=$(gh issue list --label quota-alert --state open --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh label create quota-alert --color D93F0B --description 'Open-Meteo budget over threshold' 2>/dev/null || true
+            gh issue create --title 'Open-Meteo: presupuesto diario por encima del 70 %' --label quota-alert --body "$body"
+          fi
+          exit 1

@@ -17,10 +17,15 @@ import {
   ATTRIBUTION_GIBS,
   GIBS_LAYERS,
   type GibsLayerDef,
-  gibsRoundedTime,
+  gibsLatestTime,
   gibsTileUrl,
+  gibsTimeParam,
 } from '../sources/nasa-gibs';
-import { rainviewerTileUrl, type RadarFrame, type RainviewerData } from '../../maplayers';
+import {
+  rainviewerTileUrl,
+  type RadarFrame,
+  type RainviewerData,
+} from '../../maplayers';
 
 const RV_SOURCE = 'wx-raster';
 const RV_LAYER = 'wx-raster-layer';
@@ -69,6 +74,9 @@ export interface WeatherRasterDeps {
    *  zoomed in past where the imagery has usable detail). */
   showMsg?: (text: string) => void;
   hideMsg?: () => void;
+  /** Story 16.4 — raster-fade-duration (ms) for the tile layer; read
+   *  when the layer is (re)added. 300 when absent (MapLibre default). */
+  getFadeMs?: () => number;
 }
 
 export interface WeatherRasterFactory {
@@ -83,18 +91,27 @@ export interface WeatherRasterFactory {
       satelliteSubOption: SatelliteSubOption;
       opacity: number;
       currentZoom: number;
-    },
+    }
   ) => void;
   /** Tear down the active raster + the dim backdrop. */
   remove: () => void;
   /** Set raster-opacity on the layer if it exists. Called by the
    *  global opacity slider. */
   setOpacity: (opacity: number) => void;
+  /** Story 16.4 — apply the play style's cross-fade live. */
+  setFadeMs: (ms: number) => void;
+  /** Story 13.2 — radar frame over the satellite raster (combined
+   *  precipitation mode); null frame or no manifest removes it. */
+  showRadarCompanion: (
+    frame: RadarFrame | null,
+    ctx: { rvData: RainviewerData | null; opacity: number }
+  ) => void;
+  removeRadarCompanion: () => void;
 }
 
 export function createWeatherRaster(
   map: maplibregl.Map,
-  deps: WeatherRasterDeps = {},
+  deps: WeatherRasterDeps = {}
 ): WeatherRasterFactory {
   function addDim(): void {
     if (map.getLayer(DIM_LAYER)) return;
@@ -112,7 +129,7 @@ export function createWeatherRaster(
           'fill-opacity': 0.45,
         },
       },
-      beneath,
+      beneath
     );
   }
 
@@ -121,9 +138,21 @@ export function createWeatherRaster(
     if (map.getSource(DIM_SOURCE)) map.removeSource(DIM_SOURCE);
   }
 
+  // Story 13.2 — radar tiles drawn ON TOP of the satellite raster in the
+  // combined precipitation mode. Own source/layer so the satellite
+  // frame swap (teardown + add) cannot bury it.
+  const COMPANION_SOURCE = 'wx-radar-companion-src';
+  const COMPANION_LAYER = 'wx-radar-companion';
+
+  function removeCompanion(): void {
+    if (map.getLayer(COMPANION_LAYER)) map.removeLayer(COMPANION_LAYER);
+    if (map.getSource(COMPANION_SOURCE)) map.removeSource(COMPANION_SOURCE);
+  }
+
   function teardownRaster(): void {
     if (map.getLayer(RV_LAYER)) map.removeLayer(RV_LAYER);
     if (map.getSource(RV_SOURCE)) map.removeSource(RV_SOURCE);
+    removeCompanion();
     removeDim();
   }
 
@@ -135,14 +164,23 @@ export function createWeatherRaster(
         const gibsLayer = pickGibsLayer(ctx.satelliteSubOption);
         map.addSource(RV_SOURCE, {
           type: 'raster',
-          tiles: [gibsTileUrl(gibsLayer, gibsRoundedTime())],
+          // Story 16.1 — the timeline frame picks the TIME; without a
+          // frame fall back to the newest instant GIBS is likely to have.
+          tiles: [
+            gibsTileUrl(
+              gibsLayer,
+              frame
+                ? gibsTimeParam(gibsLayer, frame.time * 1000)
+                : gibsLatestTime()
+            ),
+          ],
           tileSize: 256,
           maxzoom: gibsLayer.maxZoom,
           attribution: ATTRIBUTION_GIBS,
         });
         if (ctx.currentZoom > gibsLayer.maxZoom + 1 && deps.showMsg) {
           deps.showMsg(
-            `Satélite limitado a zoom z${gibsLayer.maxZoom} (NASA GIBS). Acercando más solo aparece la mancha del basemap.`,
+            `Satélite limitado a zoom z${gibsLayer.maxZoom} (NASA GIBS). Acercando más solo aparece la mancha del basemap.`
           );
           if (deps.hideMsg) window.setTimeout(deps.hideMsg, 5000);
         }
@@ -152,7 +190,9 @@ export function createWeatherRaster(
         // Supported" placeholder at higher zoom. 512px pyramid covers
         // through z10. tileSize:512 keeps visual density equivalent.
         if (!ctx.rvData || !frame) return;
-        const tileUrl = rainviewerTileUrl(ctx.rvData.host, frame, { size: 512 });
+        const tileUrl = rainviewerTileUrl(ctx.rvData.host, frame, {
+          size: 512,
+        });
         map.addSource(RV_SOURCE, {
           type: 'raster',
           tiles: [tileUrl],
@@ -168,10 +208,38 @@ export function createWeatherRaster(
         paint: {
           'raster-opacity': ctx.opacity,
           'raster-resampling': 'linear',
+          'raster-fade-duration': deps.getFadeMs?.() ?? 300,
         },
       });
     },
     remove: teardownRaster,
+    showRadarCompanion: (frame, ctx): void => {
+      removeCompanion();
+      if (!frame || !ctx.rvData) return;
+      map.addSource(COMPANION_SOURCE, {
+        type: 'raster',
+        tiles: [rainviewerTileUrl(ctx.rvData.host, frame, { size: 512 })],
+        tileSize: 512,
+        maxzoom: 10,
+        attribution: '© RainViewer',
+      });
+      map.addLayer({
+        id: COMPANION_LAYER,
+        type: 'raster',
+        source: COMPANION_SOURCE,
+        paint: {
+          'raster-opacity': ctx.opacity,
+          'raster-resampling': 'linear',
+          'raster-fade-duration': deps.getFadeMs?.() ?? 300,
+        },
+      });
+    },
+    removeRadarCompanion: removeCompanion,
+    setFadeMs: (ms: number): void => {
+      if (map.getLayer(RV_LAYER)) {
+        map.setPaintProperty(RV_LAYER, 'raster-fade-duration', ms);
+      }
+    },
     setOpacity: (opacity: number): void => {
       if (map.getLayer(RV_LAYER)) {
         map.setPaintProperty(RV_LAYER, 'raster-opacity', opacity);

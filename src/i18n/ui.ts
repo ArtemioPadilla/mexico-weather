@@ -13,7 +13,12 @@ export interface UiStrings {
   today: string;
   feels_like: string;
   hourly_48h: string;
-  seven_days: string;
+  ten_days: string;
+  sixteen_days: string;
+  more_days: string;
+  fewer_days: string;
+  days_caveat: string;
+  models_diverge: string;
   detail: string;
   wind: string;
   uv_index: string;
@@ -36,6 +41,13 @@ export interface UiStrings {
   map_search_placeholder: string;
   map_locate: string;
   map_popup_full_forecast: string;
+  place_card_title: string;
+  place_card_daily: string;
+  place_card_hourly: string;
+  place_card_close: string;
+  place_card_today: string;
+  place_card_tomorrow: string;
+  place_card_error: string;
   map_layer_unavailable: string;
   map_layers: string;
   map_layer_radar: string;
@@ -46,15 +58,35 @@ export interface UiStrings {
   timeline_prev: string;
   timeline_next: string;
   timeline_now: string;
+  timeline_extend: string;
+  timeline_extending: string;
+  timeline_extend_failed: string;
   map_layer_temperature: string;
   map_layer_humidity: string;
   map_layer_pressure: string;
+  map_layer_precipitation: string;
   map_layer_wind: string;
   legend_wind_calm: string;
   legend_wind_breeze: string;
   legend_wind_strong: string;
   legend_wind_gale: string;
   map_layer_sunlight: string;
+  welcome_title: string;
+  welcome_body: string;
+  welcome_locate: string;
+  welcome_dismiss: string;
+  layer_page_link: string;
+  confidence_loading: string;
+  confidence_failed: string;
+  confidence_between_models: string;
+  layer_explainer_radar: string;
+  layer_explainer_satellite: string;
+  layer_explainer_temperature: string;
+  layer_explainer_humidity: string;
+  layer_explainer_pressure: string;
+  layer_explainer_precipitation: string;
+  layer_explainer_wind: string;
+  layer_explainer_sunlight: string;
   map_opacity: string;
   legend_light: string;
   legend_moderate: string;
@@ -95,7 +127,12 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     today: 'Hoy',
     feels_like: 'sensación',
     hourly_48h: 'Por hora — hoy y mañana (48 h)',
-    seven_days: '7 días',
+    ten_days: '10 días',
+    sixteen_days: '16 días',
+    more_days: 'Ver 16 días',
+    fewer_days: 'Ver 10 días',
+    days_caveat: 'Los días 11 a 16 tienen menor confianza: úsalos como tendencia, no como pronóstico.',
+    models_diverge: 'Los modelos difieren',
     detail: 'Detalle',
     wind: 'Viento',
     uv_index: 'Índice UV',
@@ -118,6 +155,13 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_search_placeholder: 'Buscar un lugar en el mapa…',
     map_locate: 'Mi ubicación',
     map_popup_full_forecast: 'Ver pronóstico completo',
+    place_card_title: 'Punto seleccionado',
+    place_card_daily: 'Diario',
+    place_card_hourly: 'Horario',
+    place_card_close: 'Cerrar',
+    place_card_today: 'Hoy',
+    place_card_tomorrow: 'Mañana',
+    place_card_error: 'No se pudo cargar el pronóstico de este punto.',
     map_layer_unavailable: 'Capa no disponible',
     map_layers: 'Capas',
     map_layer_radar: 'Radar',
@@ -128,15 +172,35 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     timeline_prev: 'Cuadro anterior',
     timeline_next: 'Cuadro siguiente',
     timeline_now: 'Ahora',
+    timeline_extend: 'Ver 10 días',
+    timeline_extending: 'Cargando 10 días…',
+    timeline_extend_failed: 'No se pudo ampliar el pronóstico. Intenta de nuevo.',
     map_layer_temperature: 'Temperatura',
     map_layer_humidity: 'Humedad',
     map_layer_pressure: 'Presión',
+    map_layer_precipitation: 'Precipitación',
     map_layer_wind: 'Viento',
     legend_wind_calm: 'Calmo',
     legend_wind_breeze: 'Brisa',
     legend_wind_strong: 'Fuerte',
     legend_wind_gale: 'Tormenta',
     map_layer_sunlight: 'Sol',
+    welcome_title: 'Bienvenido a Clima México',
+    welcome_body: '¿Centramos el mapa en tu ubicación? Solo se usa en tu navegador: sin cuenta, sin cookies, sin rastreo.',
+    welcome_locate: 'Ubicarme',
+    welcome_dismiss: 'Ahora no',
+    layer_page_link: 'Página de esta capa',
+    confidence_loading: 'Comparando modelos (ICON, GFS, ECMWF)…',
+    confidence_failed: 'No se pudo comparar modelos para esta capa.',
+    confidence_between_models: 'entre modelos',
+    layer_explainer_radar: 'Radar muestra precipitación detectada (lluvia, nieve) en tiempo casi real desde RainViewer. Pulsa ▶ para animar las últimas 2 h y el nowcast.',
+    layer_explainer_satellite: 'Satélite GOES-East (NASA GIBS) cada 10 min: GeoColor de día, infrarrojo de noche. El timeline recorre 24 h; "Ver 10 días" amplía. Activa N para luces nocturnas.',
+    layer_explainer_temperature: 'Temperatura del aire a 2 m, gradiente continuo desde ayer hasta +10 días. Sub-opción Aparente incluye humedad y viento (sensación térmica); toca el mapa para ver tu pronóstico.',
+    layer_explainer_humidity: 'Humedad relativa o punto de rocío a 2 m, según sub-opción. Mayor humedad = sensación más pesada al mismo calor.',
+    layer_explainer_pressure: 'Presión atmosférica con isobaras etiquetadas cada 4 hPa. Nivel del mar (msl) es la reducción estándar en meteorología; Superficie respeta la altitud real.',
+    layer_explainer_precipitation: 'Precipitación pronosticada en mm/h (lluvia + nieve), o Nieve en cm/h y Probabilidad en %. El radar dice qué cae ahora; esta capa, qué viene.',
+    layer_explainer_wind: 'Velocidad y dirección del viento a 10 m. Activa Rachas para ver las máximas instantáneas en lugar del promedio.',
+    layer_explainer_sunlight: 'Posición del Sol y zonas en sombra (terminador día/noche). Activa Límite nocturno (O) para ver sólo la línea sobre cualquier capa.',
     map_opacity: 'Opacidad',
     legend_light: 'Ligera',
     legend_moderate: 'Moderada',
@@ -174,7 +238,12 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     today: 'Today',
     feels_like: 'feels like',
     hourly_48h: 'Hourly — today & tomorrow (48 h)',
-    seven_days: '7 days',
+    ten_days: '10 days',
+    sixteen_days: '16 days',
+    more_days: 'See 16 days',
+    fewer_days: 'See 10 days',
+    days_caveat: 'Days 11 to 16 carry lower confidence: read them as a trend, not a forecast.',
+    models_diverge: 'Models disagree',
     detail: 'Detail',
     wind: 'Wind',
     uv_index: 'UV index',
@@ -197,6 +266,13 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_search_placeholder: 'Search a place on the map…',
     map_locate: 'My location',
     map_popup_full_forecast: 'See full forecast',
+    place_card_title: 'Selected point',
+    place_card_daily: 'Daily',
+    place_card_hourly: 'Hourly',
+    place_card_close: 'Close',
+    place_card_today: 'Today',
+    place_card_tomorrow: 'Tomorrow',
+    place_card_error: 'Could not load the forecast for this point.',
     map_layer_unavailable: 'Layer unavailable',
     map_layers: 'Layers',
     map_layer_radar: 'Radar',
@@ -207,15 +283,35 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     timeline_prev: 'Previous frame',
     timeline_next: 'Next frame',
     timeline_now: 'Now',
+    timeline_extend: 'See 10 days',
+    timeline_extending: 'Loading 10 days…',
+    timeline_extend_failed: 'Could not extend the forecast. Try again.',
     map_layer_temperature: 'Temperature',
     map_layer_humidity: 'Humidity',
     map_layer_pressure: 'Pressure',
+    map_layer_precipitation: 'Precipitation',
     map_layer_wind: 'Wind',
     legend_wind_calm: 'Calm',
     legend_wind_breeze: 'Breeze',
     legend_wind_strong: 'Strong',
     legend_wind_gale: 'Gale',
     map_layer_sunlight: 'Sun',
+    welcome_title: 'Welcome to Clima México',
+    welcome_body: 'Centre the map on your location? It stays in your browser: no account, no cookies, no tracking.',
+    welcome_locate: 'Locate me',
+    welcome_dismiss: 'Not now',
+    layer_page_link: 'Page for this layer',
+    confidence_loading: 'Comparing models (ICON, GFS, ECMWF)…',
+    confidence_failed: 'Could not compare models for this layer.',
+    confidence_between_models: 'between models',
+    layer_explainer_radar: 'Radar shows detected precipitation (rain, snow) in near real time from RainViewer. Press ▶ to animate the last 2 h and the nowcast.',
+    layer_explainer_satellite: 'GOES-East satellite (NASA GIBS) every 10 min: GeoColor by day, infrared by night. The timeline spans 24 h; "10 days" extends it. Press N for night lights.',
+    layer_explainer_temperature: 'Air temperature at 2 m, a continuous gradient from yesterday to +10 days. Feels-like adds humidity and wind; tap the map for your forecast.',
+    layer_explainer_humidity: 'Relative humidity or dew point at 2 m, per sub-option. Higher humidity = the same heat feels heavier.',
+    layer_explainer_pressure: 'Atmospheric pressure with isobars labelled every 4 hPa. Sea level (msl) is the standard meteorological reduction; Surface follows real altitude.',
+    layer_explainer_precipitation: 'Forecast precipitation in mm/h (rain + snow), or Snow in cm/h and Probability in %. The radar tells what is falling; this layer what is coming.',
+    layer_explainer_wind: 'Wind speed and direction at 10 m. Turn on Gusts to see instantaneous peaks instead of the average.',
+    layer_explainer_sunlight: 'Sun position and shaded areas (day/night terminator). Turn on Night line (O) to keep just the line over any layer.',
     map_opacity: 'Opacity',
     legend_light: 'Light',
     legend_moderate: 'Moderate',

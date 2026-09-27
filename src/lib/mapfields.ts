@@ -40,22 +40,59 @@ export function viewportGrid(b: Bounds, cols: number, rows: number): LngLat[] {
   return pts;
 }
 
+/** Time window of a field request (Story 15.1 — plan PRO_GRATIS E15).
+ *
+ *  Open-Meteo bills by call, not by payload, so a longer window costs
+ *  nothing in quota — only bytes. The default keeps the 2-day hourly
+ *  window the pre-baked snapshots use; the extended window trades
+ *  hourly for 3-hourly steps so 10 days of 768 points stays ~400 KB
+ *  per variable. */
+export interface FieldRange {
+  /** Days ahead (Open-Meteo allows up to 16). */
+  forecastDays: number;
+  /** Open-Meteo `temporal_resolution`. Omit for hourly. */
+  temporalResolution?: 'hourly_3' | 'hourly_6';
+  /** Days back (`past_days`). Omit for none. */
+  pastDays?: number;
+}
+
+/** What the snapshots bake and what a layer loads first: 72 hourly
+ *  frames — yesterday (Story 15.2, `past_days=1`: same call, same quota,
+ *  so "hace 24 h" costs nothing) plus today and tomorrow. */
+export const DEFAULT_FIELD_RANGE: FieldRange = { forecastDays: 2, pastDays: 1 };
+
+/** What "Ver 10 días" fetches on demand: 3-hourly to +10 d. Merged on
+ *  top of the default grid, the hourly frames win where they overlap. */
+export const EXTENDED_FIELD_RANGE: FieldRange = {
+  forecastDays: 10,
+  temporalResolution: 'hourly_3',
+};
+
+function rangeParams(range: FieldRange | undefined): string {
+  const r = range ?? DEFAULT_FIELD_RANGE;
+  let s = `&forecast_days=${r.forecastDays}`;
+  if (r.pastDays) s += `&past_days=${r.pastDays}`;
+  if (r.temporalResolution) s += `&temporal_resolution=${r.temporalResolution}`;
+  return s;
+}
+
 /** Keyless Open-Meteo bulk forecast URL for the given points + hourly
  *  variable. The optional `model` parameter routes the request to a
  *  specific NWP (e.g. 'icon_seamless'); omit it for Open-Meteo's
- *  default best_match selector. */
+ *  default best_match selector. `range` widens the time window (see
+ *  {@link FieldRange}); omitted ⇒ the 2-day default. */
 export function buildFieldUrl(
   points: LngLat[],
   hourlyVar: string,
   model?: string,
+  range?: FieldRange
 ): string {
   const lats = points.map((p) => p.lat).join(',');
   const lngs = points.map((p) => p.lng).join(',');
-  const modelParam =
-    model && model !== 'best_match' ? `&models=${model}` : '';
+  const modelParam = model && model !== 'best_match' ? `&models=${model}` : '';
   return (
     `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}` +
-    `&hourly=${hourlyVar}&forecast_days=2&timezone=UTC${modelParam}`
+    `&hourly=${hourlyVar}${rangeParams(range)}&timezone=UTC${modelParam}`
   );
 }
 
@@ -76,7 +113,7 @@ async function fetchChunks(
   buildUrl: (chunk: LngLat[]) => string,
   fetchImpl: typeof fetch,
   label: string,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ): Promise<unknown[]> {
   const jobs: Promise<unknown>[] = [];
   for (let i = 0; i < points.length; i += FIELD_CHUNK_SIZE) {
@@ -91,7 +128,7 @@ async function fetchChunks(
           throw new Error(`${label} chunk ${i} failed: HTTP ${res.status}`);
         }
         return res.json() as Promise<unknown>;
-      }),
+      })
     );
   }
   const results = await Promise.all(jobs);
@@ -112,14 +149,14 @@ export async function fetchFieldChunks(
   points: LngLat[],
   hourlyVar: string,
   fetchImpl: typeof fetch,
-  opts?: { signal?: AbortSignal; model?: string },
+  opts?: { signal?: AbortSignal; model?: string; range?: FieldRange }
 ): Promise<unknown[]> {
   return fetchChunks(
     points,
-    (chunk) => buildFieldUrl(chunk, hourlyVar, opts?.model),
+    (chunk) => buildFieldUrl(chunk, hourlyVar, opts?.model, opts?.range),
     fetchImpl,
     'field',
-    opts?.signal,
+    opts?.signal
   );
 }
 
@@ -129,14 +166,14 @@ export async function fetchWindChunks(
   points: LngLat[],
   speedVar: 'wind_speed_10m' | 'wind_gusts_10m',
   fetchImpl: typeof fetch,
-  opts?: { signal?: AbortSignal; model?: string },
+  opts?: { signal?: AbortSignal; model?: string; range?: FieldRange }
 ): Promise<unknown[]> {
   return fetchChunks(
     points,
-    (chunk) => buildWindUrl(chunk, speedVar, opts?.model),
+    (chunk) => buildWindUrl(chunk, speedVar, opts?.model, opts?.range),
     fetchImpl,
     'wind',
-    opts?.signal,
+    opts?.signal
   );
 }
 
@@ -157,7 +194,7 @@ function isNumberOrNullArray(a: unknown): a is (number | null)[] {
 export function parseFieldResponse(
   json: unknown,
   points: LngLat[],
-  hourlyVar: string,
+  hourlyVar: string
 ): FieldGrid | null {
   if (!json) return null;
   const arr = Array.isArray(json) ? json : [json];
@@ -165,9 +202,7 @@ export function parseFieldResponse(
   const first = arr[0] as { hourly?: { time?: unknown } } | undefined;
   const times = first?.hourly?.time;
   if (!Array.isArray(times) || times.length === 0) return null;
-  const pickValues = (
-    h: Record<string, unknown> | undefined,
-  ): unknown => {
+  const pickValues = (h: Record<string, unknown> | undefined): unknown => {
     if (!h) return undefined;
     if (h[hourlyVar] !== undefined) return h[hourlyVar];
     // Model-suffixed variant (e.g. temperature_2m_icon_seamless).
@@ -179,7 +214,8 @@ export function parseFieldResponse(
   };
   const out: FieldGrid['points'] = [];
   for (let i = 0; i < arr.length; i++) {
-    const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)?.hourly;
+    const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)
+      ?.hourly;
     const values = pickValues(h);
     if (!isNumberOrNullArray(values)) return null;
     out.push({ lat: points[i].lat, lng: points[i].lng, values });
@@ -188,12 +224,88 @@ export function parseFieldResponse(
 }
 
 /** Parse an ISO string as UTC: bare strings (no Z / offset) are treated as UTC per Open-Meteo. */
-function parseUtcMs(s: string): number {
+export function parseUtcMs(s: string): number {
   return /[Zz]|[+-]\d{2}:\d{2}$/.test(s) ? Date.parse(s) : Date.parse(s + 'Z');
 }
 
+/** Merge an extended (longer, coarser) grid under a base grid over the
+ *  same points. The result's `times` is the sorted union; where both
+ *  grids carry a timestamp the base (hourly) value wins. Returns null
+ *  when the point lists don't line up (different grid ⇒ can't merge). */
+export function mergeFieldGrids(
+  base: FieldGrid,
+  ext: FieldGrid
+): FieldGrid | null {
+  const n = base.points.length;
+  if (n !== ext.points.length) return null;
+  for (let i = 0; i < n; i++) {
+    if (
+      base.points[i].lat !== ext.points[i].lat ||
+      base.points[i].lng !== ext.points[i].lng
+    ) {
+      return null;
+    }
+  }
+  const baseIdx = new Map<number, number>();
+  base.times.forEach((t, i) => baseIdx.set(parseUtcMs(t), i));
+  const extIdx = new Map<number, number>();
+  ext.times.forEach((t, i) => extIdx.set(parseUtcMs(t), i));
+  const allMs = Array.from(new Set([...baseIdx.keys(), ...extIdx.keys()])).sort(
+    (a, b) => a - b
+  );
+  const times = allMs.map((ms) => {
+    const bi = baseIdx.get(ms);
+    if (bi !== undefined) return base.times[bi];
+    return ext.times[extIdx.get(ms) as number];
+  });
+  const points = base.points.map((bp, i) => {
+    const ep = ext.points[i];
+    const values = allMs.map((ms) => {
+      const bi = baseIdx.get(ms);
+      if (bi !== undefined) return bp.values[bi] ?? null;
+      const ei = extIdx.get(ms) as number;
+      return ep.values[ei] ?? null;
+    });
+    return { lat: bp.lat, lng: bp.lng, values };
+  });
+  return { times, points };
+}
+
+/** Same as {@link mergeFieldGrids} for u/v wind grids. */
+export function mergeWindGrids(base: WindGrid, ext: WindGrid): WindGrid | null {
+  const toField = (g: WindGrid, comp: 'u' | 'v'): FieldGrid => ({
+    times: g.times,
+    points: g.points.map((p) => ({ lat: p.lat, lng: p.lng, values: p[comp] })),
+  });
+  const u = mergeFieldGrids(toField(base, 'u'), toField(ext, 'u'));
+  const v = mergeFieldGrids(toField(base, 'v'), toField(ext, 'v'));
+  if (!u || !v) return null;
+  return {
+    times: u.times,
+    points: u.points.map((p, i) => ({
+      lat: p.lat,
+      lng: p.lng,
+      u: p.values,
+      v: v.points[i].values,
+    })),
+  };
+}
+
+/** True when the grid already spans more than the 2-day default window. */
+export function isExtendedGrid(g: { times: string[] }): boolean {
+  if (g.times.length < 2) return false;
+  // The default window is −24 h … +48 h (< 3 days); the extension
+  // reaches +10 d, so anything past 4 days of span is extended.
+  const span = parseUtcMs(g.times[g.times.length - 1]) - parseUtcMs(g.times[0]);
+  return span > 4 * 86_400_000;
+}
+
 /** Hourly index closest to `iso`; nearest to `nowMs` if iso null/invalid; -1 if empty. */
-export function fieldFrameIndex(times: string[], iso: string | null, nowMs: number): number {
+export function fieldFrameIndex(
+  times: string[],
+  iso: string | null,
+  nowMs: number
+): number {
   if (times.length === 0) return -1;
   const ms = iso ? parseUtcMs(iso) : NaN;
   const target = Number.isFinite(ms) ? ms : nowMs;
@@ -327,6 +439,64 @@ export const HUMIDITY_LEGEND: LegendStop[] = [
   { label: '≥100%', color: '#440154' },
 ];
 
+/** Story 15.5 — forecast precipitation (mm/h) → colour. Dry cells are
+ *  fully transparent (8-digit hex; fillFieldImageData honours the alpha
+ *  nibble) so the field reads like a radar composite over the basemap:
+ *  blue → purple like the RainViewer legend, magenta for downpours. */
+export const PRECIP_TRANSPARENT = '#00000000';
+export function precipColor(mm: number): string {
+  if (!(mm >= 0.1)) return PRECIP_TRANSPARENT;
+  if (mm < 0.5) return '#a6d8ff';
+  if (mm < 1) return '#5aaeff';
+  if (mm < 2.5) return '#1f6fe6';
+  if (mm < 5) return '#5b3fb8';
+  if (mm < 10) return '#9b2fb0';
+  return '#e01e9a';
+}
+
+/** Snowfall (cm/h) → colour; white-blue ramp, transparent when none. */
+export function snowColor(cm: number): string {
+  if (!(cm >= 0.1)) return PRECIP_TRANSPARENT;
+  if (cm < 0.5) return '#e6f4ff';
+  if (cm < 1) return '#b8dcff';
+  if (cm < 2.5) return '#8ec2ff';
+  if (cm < 5) return '#6aa0e6';
+  return '#4c6fb3';
+}
+
+/** Precipitation probability (%) → colour; < 10 % is transparent. */
+export function precipProbColor(p: number): string {
+  if (!(p >= 10)) return PRECIP_TRANSPARENT;
+  if (p < 30) return '#cfe8ff';
+  if (p < 50) return '#8ec2ff';
+  if (p < 70) return '#4d94ff';
+  if (p < 90) return '#1f5fd6';
+  return '#0b3a99';
+}
+
+export const PRECIP_LEGEND: LegendStop[] = [
+  { label: '0.1', color: '#a6d8ff' },
+  { label: '1', color: '#1f6fe6' },
+  { label: '2.5', color: '#5b3fb8' },
+  { label: '5', color: '#9b2fb0' },
+  { label: '≥10 mm/h', color: '#e01e9a' },
+];
+
+export const SNOW_LEGEND: LegendStop[] = [
+  { label: '0.1', color: '#e6f4ff' },
+  { label: '1', color: '#8ec2ff' },
+  { label: '2.5', color: '#6aa0e6' },
+  { label: '≥5 cm/h', color: '#4c6fb3' },
+];
+
+export const PRECIP_PROB_LEGEND: LegendStop[] = [
+  { label: '10%', color: '#cfe8ff' },
+  { label: '30%', color: '#8ec2ff' },
+  { label: '50%', color: '#4d94ff' },
+  { label: '70%', color: '#1f5fd6' },
+  { label: '≥90%', color: '#0b3a99' },
+];
+
 export const PRESSURE_LEGEND: LegendStop[] = [
   { label: '≤970', color: '#542788' },
   { label: '990', color: '#998ec3' },
@@ -341,7 +511,12 @@ import { windUv } from './mapwind';
 /** Wind grid: u/v per point per hour, with nulls for no-data cells. */
 export interface WindGrid {
   times: string[];
-  points: { lat: number; lng: number; u: (number | null)[]; v: (number | null)[] }[];
+  points: {
+    lat: number;
+    lng: number;
+    u: (number | null)[];
+    v: (number | null)[];
+  }[];
 }
 
 /** Keyless Open-Meteo bulk URL fetching speed + direction together.
@@ -350,14 +525,14 @@ export function buildWindUrl(
   points: LngLat[],
   speedVar: 'wind_speed_10m' | 'wind_gusts_10m' = 'wind_speed_10m',
   model?: string,
+  range?: FieldRange
 ): string {
   const lats = points.map((p) => p.lat).join(',');
   const lngs = points.map((p) => p.lng).join(',');
-  const modelParam =
-    model && model !== 'best_match' ? `&models=${model}` : '';
+  const modelParam = model && model !== 'best_match' ? `&models=${model}` : '';
   return (
     `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}` +
-    `&hourly=${speedVar},wind_direction_10m&forecast_days=2&timezone=UTC${modelParam}`
+    `&hourly=${speedVar},wind_direction_10m${rangeParams(range)}&timezone=UTC${modelParam}`
   );
 }
 
@@ -372,7 +547,7 @@ function isSpeedDirArray(a: unknown): a is (number | null)[] {
 export function parseWindResponse(
   json: unknown,
   points: LngLat[],
-  speedVar: 'wind_speed_10m' | 'wind_gusts_10m' = 'wind_speed_10m',
+  speedVar: 'wind_speed_10m' | 'wind_gusts_10m' = 'wind_speed_10m'
 ): WindGrid | null {
   if (!json) return null;
   const arr = Array.isArray(json) ? json : [json];
@@ -383,7 +558,7 @@ export function parseWindResponse(
   const out: WindGrid['points'] = [];
   const pickPrefix = (
     h: Record<string, unknown> | undefined,
-    prefix: string,
+    prefix: string
   ): unknown => {
     if (!h) return undefined;
     if (h[prefix] !== undefined) return h[prefix];
@@ -394,10 +569,16 @@ export function parseWindResponse(
     return undefined;
   };
   for (let i = 0; i < arr.length; i++) {
-    const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)?.hourly;
+    const h = (arr[i] as { hourly?: Record<string, unknown> } | undefined)
+      ?.hourly;
     const sp = pickPrefix(h, speedVar);
     const dr = pickPrefix(h, 'wind_direction_10m');
-    if (!isSpeedDirArray(sp) || !isSpeedDirArray(dr) || sp.length !== times.length || dr.length !== times.length) {
+    if (
+      !isSpeedDirArray(sp) ||
+      !isSpeedDirArray(dr) ||
+      sp.length !== times.length ||
+      dr.length !== times.length
+    ) {
       return null;
     }
     const u: (number | null)[] = [];
@@ -417,4 +598,86 @@ export function parseWindResponse(
     out.push({ lat: points[i].lat, lng: points[i].lng, u, v });
   }
   return { times: times as string[], points: out };
+}
+
+// ---------------------------------------------------------------------
+// Story 13.3 — multi-model disagreement ("incertidumbre").
+// ---------------------------------------------------------------------
+
+/** Per-point, per-hour spread (max − min) across several model grids
+ *  for the same variable, aligned on `refTimes` (a model missing an
+ *  hour, or fewer than two models with a value, yields null). Null when
+ *  fewer than two grids share the reference point layout. */
+export function spreadFieldGrid(
+  grids: readonly FieldGrid[],
+  refPoints: readonly { lat: number; lng: number }[],
+  refTimes: readonly string[]
+): FieldGrid | null {
+  const usable = grids.filter(
+    (g) =>
+      g.points.length === refPoints.length &&
+      g.points.every(
+        (p, i) => p.lat === refPoints[i].lat && p.lng === refPoints[i].lng
+      )
+  );
+  if (usable.length < 2) return null;
+  const idx = usable.map((g) => {
+    const m = new Map<string, number>();
+    g.times.forEach((t, i) => m.set(t, i));
+    return m;
+  });
+  const points: FieldGrid['points'] = refPoints.map((p, pi) => ({
+    lat: p.lat,
+    lng: p.lng,
+    values: refTimes.map((t) => {
+      let lo = Infinity;
+      let hi = -Infinity;
+      let n = 0;
+      for (let gi = 0; gi < usable.length; gi++) {
+        const ti = idx[gi].get(t);
+        if (ti === undefined) continue;
+        const v = usable[gi].points[pi].values[ti];
+        if (typeof v !== 'number' || !Number.isFinite(v)) continue;
+        lo = Math.min(lo, v);
+        hi = Math.max(hi, v);
+        n += 1;
+      }
+      return n >= 2 ? Math.round((hi - lo) * 100) / 100 : null;
+    }),
+  }));
+  return { times: [...refTimes], points };
+}
+
+/** Spread thresholds per layer in the variable's own unit: below the
+ *  first step the models agree; past the last they clearly diverge. */
+export const SPREAD_STEPS: Record<string, [number, number, number, number]> = {
+  temperature: [1, 2, 4, 6],
+  humidity: [5, 10, 20, 30],
+  pressure: [1, 2, 4, 6],
+  precipitation: [0.5, 1, 3, 5],
+};
+
+const SPREAD_COLORS = ['#22c55e', '#a3e635', '#facc15', '#f97316', '#7e22ce'];
+
+/** Spread → colour (green = agreement … purple = strong disagreement). */
+export function spreadColorFor(layerId: string): (v: number) => string {
+  const steps = SPREAD_STEPS[layerId] ?? SPREAD_STEPS.temperature;
+  return (v: number): string => {
+    if (v < steps[0]) return SPREAD_COLORS[0];
+    if (v < steps[1]) return SPREAD_COLORS[1];
+    if (v < steps[2]) return SPREAD_COLORS[2];
+    if (v < steps[3]) return SPREAD_COLORS[3];
+    return SPREAD_COLORS[4];
+  };
+}
+
+export function spreadLegendFor(layerId: string, unit: string): LegendStop[] {
+  const steps = SPREAD_STEPS[layerId] ?? SPREAD_STEPS.temperature;
+  return [
+    { label: `<${steps[0]}`, color: SPREAD_COLORS[0] },
+    { label: `${steps[0]}`, color: SPREAD_COLORS[1] },
+    { label: `${steps[1]}`, color: SPREAD_COLORS[2] },
+    { label: `${steps[2]}`, color: SPREAD_COLORS[3] },
+    { label: `≥${steps[3]} ${unit}`.trim(), color: SPREAD_COLORS[4] },
+  ];
 }

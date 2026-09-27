@@ -47,7 +47,7 @@ const title = `Clima en ${city.name} — Pronóstico para hoy y los próximos d�
 const titleEn = `${city.name} weather — Today's forecast and next days`;
 const description =
   `Pronóstico del tiempo para ${city.name}, ${city.admin}. ` +
-  `Temperatura actual, lluvia, viento y los próximos 7 días. ` +
+  `Temperatura actual, lluvia, viento y los próximos 10 días. ` +
   `Datos del modelo meteorológico de Open-Meteo, sin cuentas ni cookies.`;
 const descriptionEn =
   `Weather forecast for ${city.name}, ${city.admin}. ` +
@@ -114,7 +114,7 @@ const jsonLd = [
           data-i18n-en={`Weather forecast for ${city.name}. Current temperature, rain, wind, and the next 7 days. Open-Meteo model data, free and without registration.`}
         >
           Pronóstico del tiempo para {city.name}. Temperatura actual, lluvia, viento y los próximos
-          7 días. Datos del modelo meteorológico de Open-Meteo, gratis y sin registro.
+          10 días. Datos del modelo meteorológico de Open-Meteo, gratis y sin registro.
         </p>
       </header>
 
@@ -190,7 +190,7 @@ const jsonLd = [
           class="block text-sm opacity-90"
           data-i18n-en="7 days, interactive map, SMN alerts, air quality"
         >
-          7 días, mapa interactivo, alertas SMN, calidad del aire
+          10 días, mapa interactivo, alertas SMN, calidad del aire
         </span>
       </a>
 
@@ -420,7 +420,7 @@ const jsonLd = [
       if (windEl) windEl.textContent = `${tr.wind} ${Math.round(v.windKmh)} km/h`;
       if (humEl) humEl.textContent = `${tr.humidity} ${Math.round(v.humidity)}%`;
       if (nextList && v.next.length) {
-        // Range across the 7-day window — used to size each card's
+        // Range across the 10-day window — used to size each card's
         // mini bar so the visualization is anchored to the actual
         // forecast span (not an arbitrary global scale).
         const losMins = v.next
@@ -441,7 +441,7 @@ const jsonLd = [
               /[<>&"']/g,
               '',
             );
-            // Mini hi-lo bar: position + width as % of 7-day range.
+            // Mini hi-lo bar: position + width as % of 10-day range.
             // Hidden gracefully if either bound is null.
             let bar = '';
             if (d.lo !== null && d.hi !== null) {

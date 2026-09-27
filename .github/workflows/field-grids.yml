@@ -1,7 +1,8 @@
 name: Map Field Grids
 
 # Pre-bakes Open-Meteo field grids (32x24) for the default
-# /mapa layers — temperature, humidity, pressure, cloud cover. The
+# /mapa layers — temperature, humidity, pressure, cloud cover,
+# precipitation. The
 # interactive map reads these on first paint so the initial overlay
 # load doesn't pay for a ~5-KB-URL bulk request. Sub-options and
 # non-default NWP models still go through the live API.

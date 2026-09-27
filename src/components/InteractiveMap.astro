@@ -18,13 +18,12 @@
  * stable for /mapa to preserve e2e selectors and the ?e2e=1 affordance).
  */
 import { ui } from '../i18n/ui';
+import type { InteractiveMapFeatures } from '../lib/interactive-map';
 
-interface Features {
-  layerRail?: boolean;
-  timeline?: boolean;
-  search?: boolean;
-  locateButton?: boolean;
-  presetPins?: boolean;
+/** Single source of truth for the feature flags lives in
+ *  src/lib/interactive-map.ts (InteractiveMapFeatures). This Astro
+ *  wrapper only adds the two flags that are pure markup here. */
+interface Features extends InteractiveMapFeatures {
   backLink?: boolean;
   /** Below sm, reveal the rail's opacity slider, the overlays accordion,
    *  the model toggle and the measure/snapshot tools behind one trigger
@@ -60,6 +59,10 @@ interface Props {
   lazy?: boolean;
   /** Tailwind classes for the outer wrapper. */
   class?: string;
+  /** Top offset of the layer rail (CSS length). /mapa keeps the default
+   *  3.5rem (below its search row); the home overlays its CTA + search
+   *  on the map and pushes the rail down past them. */
+  railOffsetTop?: string;
   lang?: 'es' | 'en';
 }
 
@@ -68,6 +71,10 @@ const {
   height = '100vh',
   initialView = { lat: 23.6, lng: -102.5, zoom: 4.5 },
   initialLayer,
+  // NOTE: this default only applies when the `features` prop is omitted
+  // entirely — there is no per-key merge. Every call-site passes an
+  // explicit object, so list every flag you want there (see mapa.astro
+  // for the "all on" set).
   features = {
     layerRail: true,
     timeline: true,
@@ -75,6 +82,12 @@ const {
     locateButton: true,
     presetPins: true,
     backLink: true,
+    tools: true,
+    settings: true,
+    info: true,
+    modelToggle: true,
+    coords: true,
+    legend: true,
   },
   useHash = false,
   exposeE2eHook = false,
@@ -83,6 +96,7 @@ const {
   lazy = true,
   class: className = '',
   lang = 'es' as const,
+  railOffsetTop = '3.5rem',
 } = Astro.props;
 
 const t = ui[lang];
@@ -103,6 +117,7 @@ const ids = {
   legend: mapId === 'map' ? 'legend' : `${mapId}-legend`,
   msg: mapId === 'map' ? 'mapmsg' : `${mapId}-msg`,
   tooltip: mapId === 'map' ? 'mapTooltip' : `${mapId}-tooltip`,
+  placeCard: mapId === 'map' ? 'mw-place-card' : `${mapId}-place-card`,
   coords: mapId === 'map' ? 'mapCoords' : `${mapId}-coords`,
   timeline: mapId === 'map' ? 'timeline' : `${mapId}-timeline`,
   tlPrev: mapId === 'map' ? 'tl-prev' : `${mapId}-tl-prev`,
@@ -137,14 +152,44 @@ const cfg = JSON.stringify({
     'im-root group/chrome relative w-full overflow-hidden bg-gray-100 dark:bg-gray-950',
     className,
   ]}
-  style={`height:${height};`}
+  style={`height:${height};--im-rail-top:${railOffsetTop};`}
   data-im-config={cfg}
 >
+  {/* Story 19.2 — first-visit welcome card (non-modal; the map stays
+      usable). Hidden until interactive-map.ts confirms the browser has
+      not seen it before, so a second visit never flashes it. */}
+  {features.welcome && (
+    <div
+      id="mw-welcome"
+      role="dialog"
+      aria-labelledby="mw-welcome-title"
+      aria-describedby="mw-welcome-body"
+      hidden
+      class="absolute left-1/2 top-3 z-30 w-[min(22rem,calc(100vw-1.5rem))] -translate-x-1/2 rounded-lg border border-gray-200 bg-white/95 p-3 text-sm text-gray-800 shadow-xl backdrop-blur dark:border-gray-700 dark:bg-gray-900/95 dark:text-gray-100"
+    >
+      <p id="mw-welcome-title" class="font-semibold" data-i18n-en={ui.en.welcome_title}>{t.welcome_title}</p>
+      <p id="mw-welcome-body" class="mt-1 text-xs text-gray-600 dark:text-gray-300" data-i18n-en={ui.en.welcome_body}>{t.welcome_body}</p>
+      <div class="mt-2 flex gap-2">
+        <button
+          id="mw-welcome-locate"
+          type="button"
+          class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 text-sm font-medium text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+          data-i18n-en={ui.en.welcome_locate}
+        >{t.welcome_locate}</button>
+        <button
+          id="mw-welcome-dismiss"
+          type="button"
+          class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-gray-300 px-3 text-sm font-medium hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 dark:border-gray-600 dark:hover:bg-gray-800"
+          data-i18n-en={ui.en.welcome_dismiss}
+        >{t.welcome_dismiss}</button>
+      </div>
+    </div>
+  )}
   {features.backLink && (
     <a
       href={base}
-      class="absolute left-3 top-3 z-10 rounded-lg bg-white/90 px-3 py-1.5 text-sm text-blue-600 shadow hover:underline dark:bg-gray-900/90 dark:text-blue-400"
-      >← {t.back_home}</a
+      class="absolute left-3 top-3 z-10 inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-left"></use></svg> {t.back_home}</a
     >
   )}
   {/* Snapshot compare overlay (plan 3.3). Holds the captured canvas
@@ -163,12 +208,12 @@ const cfg = JSON.stringify({
         <button
           id="mw-search-toggle"
           type="button"
-          class="flex h-11 w-11 items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95"
+          class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
           aria-label={t.map_search_placeholder}
           aria-expanded="false"
           aria-controls={ids.q}
           title={t.map_search_placeholder}
-        >🔍</button>
+        ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-search"></use></svg></button>
         <input
           id={ids.q}
           type="text"
@@ -185,10 +230,10 @@ const cfg = JSON.stringify({
           <button
             id={ids.loc}
             type="button"
-            class="flex h-11 w-11 items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95"
+            class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
             aria-label={t.map_locate}
             title={t.map_locate}
-          >📍</button>
+          ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-locate"></use></svg></button>
         )}
       </div>
       <ul
@@ -201,7 +246,7 @@ const cfg = JSON.stringify({
 
   {features.layerRail && (
     <div
-      class="im-rail absolute left-3 top-14 z-10 w-auto sm:w-44 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg bg-white/95 p-2 sm:p-3 text-sm shadow dark:bg-gray-900/95"
+      class="im-rail absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-44 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg bg-white/95 p-2 sm:p-3 text-sm shadow dark:bg-gray-900/95"
       aria-label={t.map_layers}
       role="group"
     >
@@ -271,7 +316,7 @@ const cfg = JSON.stringify({
       data-i18n-en-aria-label="Map controls"
       title="Controles del mapa"
       class="absolute bottom-[4.5rem] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-gray-900/85 text-base text-white shadow-lg backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
-      >⚙</button
+      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-sliders"></use></svg></button
     >
   )}
 
@@ -289,7 +334,7 @@ const cfg = JSON.stringify({
         aria-pressed="false"
         disabled
         class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/10 px-2.5 text-base leading-none hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-40"
-        >▶</button
+        ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-play"></use></svg></button
       >
       <button
         id="tl-day-prev"
@@ -311,7 +356,8 @@ const cfg = JSON.stringify({
         id={ids.tlTime}
         aria-live="polite"
         aria-atomic="true"
-        class="min-w-[7rem] text-center font-medium tabular-nums sm:min-w-[8rem]"
+        title="Clic: reloj · relativo · ambos"
+        class="min-w-[7rem] cursor-pointer text-center font-medium tabular-nums sm:min-w-[8rem]"
       >—</span>
       <button
         id={ids.tlNext}
@@ -337,6 +383,18 @@ const cfg = JSON.stringify({
         class="hidden rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
         >Ahora</button
       >
+      {/* Story 15.1 — on-demand 10-day window for field/wind layers.
+          Revealed by interactive-map.ts only while the active grid is
+          the 2-day default; hidden again once extended. */}
+      <button
+        id="tl-extend"
+        type="button"
+        hidden
+        class="rounded-full bg-blue-600/90 px-2.5 py-1 text-[11px] font-semibold hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-60"
+        aria-label={t.timeline_extend}
+        title={t.timeline_extend}
+        >{t.timeline_extend}</button
+      >
       <input
         id={ids.tlRange}
         type="range"
@@ -358,6 +416,19 @@ const cfg = JSON.stringify({
     `pointer-events-none` so it never eats map drags; `z-50` so it sits
     above the layer rail and the timeline.
   */}
+  {/* Place card (Story 15.4) — tap anywhere: 10-day daily / 48-h hourly
+      forecast for that point. Bottom sheet below sm, floating panel
+      (top-centre, under the rail offset var) from sm up. Filled and
+      shown by interactive-map.ts; hidden attribute otherwise. */}
+  <div
+    id={ids.placeCard}
+    role="dialog"
+    aria-modal="false"
+    aria-label={t.place_card_title}
+    hidden
+    class="absolute z-40 max-sm:inset-x-0 max-sm:bottom-0 max-sm:rounded-t-2xl sm:left-1/2 sm:top-[var(--im-rail-top)] sm:w-80 sm:-translate-x-1/2 sm:rounded-2xl bg-white/97 text-gray-900 shadow-2xl ring-1 ring-black/5 backdrop-blur-sm dark:bg-gray-900/97 dark:text-gray-100 dark:ring-white/10"
+  ></div>
+
   <div
     id={ids.tooltip}
     role="status"
@@ -372,7 +443,7 @@ const cfg = JSON.stringify({
     on embeds where the corner is too cramped — only the full /mapa page
     passes a non-null `coords` element to initInteractiveMap.
   */}
-  {features.layerRail && (
+  {features.coords && (
     <div
       id={ids.coords}
       class="pointer-events-none absolute bottom-2 left-2 z-10 rounded bg-gray-900/70 px-2 py-1 text-xs font-mono tabular-nums text-gray-200 backdrop-blur-sm hidden sm:inline-block"
@@ -386,7 +457,7 @@ const cfg = JSON.stringify({
     cursor coords badge. Stays visible even when the layer rail is
     collapsed. Hidden on mobile to keep the corner uncluttered.
   */}
-  {features.layerRail && (
+  {features.legend && (
     <div
       id="legend-bar"
       class="pointer-events-none absolute bottom-10 left-2 z-10 sm:flex items-center gap-2 rounded bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow backdrop-blur-sm dark:bg-gray-900/95 dark:text-gray-200"
@@ -404,7 +475,7 @@ const cfg = JSON.stringify({
     highest-resolution model per location (ECMWF in MX = ~9 km, ICON
     ~13 km global fallback). Static label; no JS needed.
   */}
-  {features.layerRail && (
+  {features.modelToggle && (
     <div
       id="mw-model-toggle"
       class="absolute bottom-9 max-sm:group-data-[controls=open]/chrome:bottom-[4.5rem] right-2 z-10 hidden items-center gap-1 rounded-full bg-gray-900/80 px-1 py-0.5 text-[10px] font-mono tabular-nums text-gray-300 backdrop-blur-sm group-data-[controls=open]/chrome:inline-flex sm:inline-flex"
@@ -433,7 +504,7 @@ const cfg = JSON.stringify({
 
   {/* Snapshot compare tools (plan P2.4 — moved out of the layer rail).
       Right edge column above the model toggle. */}
-  {features.layerRail && (
+  {features.tools && (
     <div
       id="mw-snapshot-wrap"
       class="absolute bottom-20 max-sm:group-data-[controls=open]/chrome:bottom-[8rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
@@ -441,51 +512,68 @@ const cfg = JSON.stringify({
       <button
         id="mw-snapshot-capture"
         type="button"
-        class="rounded-full bg-white/95 px-3 py-1 text-gray-700 shadow hover:bg-blue-500/10 dark:bg-gray-900/95 dark:text-gray-200"
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
         aria-label="Capturar vista actual"
         title="Capturar vista actual"
-      >📸 Capturar</button>
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-camera"></use></svg> Capturar</button>
+      <button
+        id="mw-snapshot-24h"
+        type="button"
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        aria-label="Comparar con hace 24 horas"
+        title="Congela la vista actual y mueve el timeline 24 h atrás; alterna con Mostrar/Ocultar"
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-chevron-left"></use></svg> Hace 24 h</button>
       <button
         id="mw-snapshot-toggle"
         type="button"
-        class="hidden rounded-full bg-blue-600/90 px-3 py-1 font-semibold text-white shadow hover:bg-blue-500"
+        hidden
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
         aria-pressed="true"
-      >👁 Ocultar</button>
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-eye"></use></svg> <span data-mw-snapshot-label>Ocultar</span></button>
       <button
         id="mw-snapshot-clear"
         type="button"
-        class="hidden rounded-full bg-white/95 px-3 py-1 text-gray-600 shadow hover:bg-red-500/10 dark:bg-gray-900/95 dark:text-gray-400"
-      >✕ Limpiar</button>
+        hidden
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-x"></use></svg> Limpiar</button>
     </div>
   )}
 
   {/* Measure tools (plan P2.1). Two pills above the snapshot column —
       click activates the mode, click acumulating points, ESC clears.
       Read-only pill at bottom shows the running total. */}
-  {features.layerRail && (
+  {features.tools && (
     <div
       id="mw-measure-wrap"
-      class="absolute bottom-[10.5rem] max-sm:group-data-[controls=open]/chrome:bottom-[11.5rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
+      class="absolute bottom-[11.5rem] max-sm:group-data-[controls=open]/chrome:bottom-[14.5rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
     >
       <button
         id="mw-measure-distance"
         type="button"
-        class="rounded-full bg-white/95 px-3 py-1 text-gray-700 shadow hover:bg-blue-500/10 aria-pressed:bg-blue-500/30 aria-pressed:text-blue-900 dark:bg-gray-900/95 dark:text-gray-200"
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
         aria-label="Medir distancia"
         title="Medir distancia"
         aria-pressed="false"
-      >📏 Distancia</button>
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-ruler"></use></svg> Distancia</button>
       <button
         id="mw-measure-area"
         type="button"
-        class="rounded-full bg-white/95 px-3 py-1 text-gray-700 shadow hover:bg-blue-500/10 aria-pressed:bg-blue-500/30 aria-pressed:text-blue-900 dark:bg-gray-900/95 dark:text-gray-200"
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
         aria-label="Medir área"
         title="Medir área"
         aria-pressed="false"
-      >📐 Área</button>
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area"></use></svg> Área</button>
+      <button
+        id="mw-crosshair-btn"
+        type="button"
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
+        aria-label="Modo mira: valor en el centro del mapa"
+        title="Modo mira: valor de la capa en el centro del mapa"
+        aria-pressed="false"
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-locate"></use></svg> Mira</button>
     </div>
   )}
-  {features.layerRail && (
+  {features.tools && (
     <div
       id="mw-measure-result"
       class="pointer-events-none absolute bottom-3 right-2 z-10 hidden rounded-full bg-blue-600/90 px-3 py-1.5 text-xs font-semibold text-white shadow sm:inline-block"
@@ -499,16 +587,16 @@ const cfg = JSON.stringify({
     its summary and extends to the left so it doesn't escape the
     viewport.
   */}
-  {features.layerRail && (
+  {features.settings && (
     <details
       id="mw-settings"
-      class="absolute right-3 top-[7.25rem] z-20 text-xs [&[open]>summary]:bg-blue-500/15 [&[open]>div]:block"
+      class="absolute right-3 top-[7.25rem] z-20 text-xs [&[open]>summary]:bg-blue-600/90 [&[open]>div]:block"
     >
       <summary
-        class="flex h-11 w-11 cursor-pointer select-none items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95 list-none [&::-webkit-details-marker]:hidden"
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden"
         aria-label="Configuración"
         title="Configuración"
-      >⚙️</summary>
+      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-settings"></use></svg></summary>
       <div class="hidden absolute right-11 top-0 w-56 max-w-[calc(100vw-3.5rem)] space-y-3 rounded-lg bg-white/95 px-3 py-2 text-gray-600 shadow dark:bg-gray-900/95 dark:text-gray-300">
         <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Configuración</p>
         <div>
@@ -525,8 +613,70 @@ const cfg = JSON.stringify({
             <button data-val="24" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">24 h</button>
           </div>
         </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Loop de animación</p>
+          <div class="flex gap-1" data-mw-loop title="Frames dentro de ±N h de ahora">
+            <button data-val="3" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">3 h</button>
+            <button data-val="6" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">6 h</button>
+            <button data-val="12" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">12 h</button>
+            <button data-val="24" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">24 h</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Velocidad</p>
+          <div class="flex gap-1" data-mw-speed>
+            <button data-val="slow" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Lenta</button>
+            <button data-val="medium" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Media</button>
+            <button data-val="fast" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Rápida</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Estilo</p>
+          <div class="flex gap-1" data-mw-style title="Suave funde los frames de radar y satélite">
+            <button data-val="fast" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Rápido</button>
+            <button data-val="smooth" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Suave</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Etiqueta del tiempo (clic en la hora)</p>
+          <div class="flex gap-1" data-mw-label>
+            <button data-val="both" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Ambas</button>
+            <button data-val="clock" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Reloj</button>
+            <button data-val="relative" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Relativa</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Temperatura</p>
+          <div class="flex gap-1" data-mw-temp>
+            <button data-val="C" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">°C</button>
+            <button data-val="F" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">°F</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Viento</p>
+          <div class="flex gap-1" data-mw-speed-unit>
+            <button data-val="kmh" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">km/h</button>
+            <button data-val="mph" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">mph</button>
+            <button data-val="kt" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">kt</button>
+            <button data-val="ms" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">m/s</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Presión</p>
+          <div class="flex gap-1" data-mw-pressure>
+            <button data-val="hPa" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">hPa</button>
+            <button data-val="inHg" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">inHg</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Distancia</p>
+          <div class="flex gap-1" data-mw-distance>
+            <button data-val="km" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">km</button>
+            <button data-val="mi" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">mi</button>
+          </div>
+        </div>
         <p class="text-[10px] italic text-gray-500 dark:text-gray-400">
-          Aplica al reloj del timeline. Persistido localmente.
+          Aplica al timeline, leyenda, tooltip, tarjeta y /forecast en vivo. Persistido localmente, sin cuenta.
         </p>
       </div>
     </details>
@@ -536,16 +686,16 @@ const cfg = JSON.stringify({
     Info panel (zoom.earth-style ℹ️). Compact icon (plan P1.6) — open
     expands to the left as a popover.
   */}
-  {features.layerRail && (
+  {features.info && (
     <details
       id="mw-info"
-      class="absolute right-3 top-16 z-20 text-xs [&[open]>summary]:bg-blue-500/15 [&[open]>div]:block"
+      class="absolute right-3 top-16 z-20 text-xs [&[open]>summary]:bg-blue-600/90 [&[open]>div]:block"
     >
       <summary
-        class="flex h-11 w-11 cursor-pointer select-none items-center justify-center rounded-full bg-white/95 text-base shadow hover:bg-blue-500/10 dark:bg-gray-900/95 list-none [&::-webkit-details-marker]:hidden"
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden"
         aria-label="Información y fuentes de datos"
         title="Información y fuentes de datos"
-      >ℹ️</summary>
+      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-info"></use></svg></summary>
       <div class="hidden absolute right-11 top-0 w-64 max-w-[calc(100vw-3.5rem)] space-y-2 rounded-lg bg-white/95 px-3 py-2 text-gray-600 shadow dark:bg-gray-900/95 dark:text-gray-300">
         <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Información y fuentes</p>
         <p>
@@ -573,14 +723,17 @@ const cfg = JSON.stringify({
           </li>
           <li>
             <span class="font-medium text-gray-700 dark:text-gray-200">Mapa base:</span>
-            <a class="text-blue-600 underline dark:text-blue-400" href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">OSM</a>
-            / <a class="text-blue-600 underline dark:text-blue-400" href="https://carto.com/attributions" rel="noopener" target="_blank">CARTO</a>
+            <a class="text-blue-600 underline dark:text-blue-400" href="https://www.esri.com/en-us/legal/terms/data-attributions" rel="noopener" target="_blank">Esri, HERE, Garmin</a>
+            / <a class="text-blue-600 underline dark:text-blue-400" href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">OSM</a>
           </li>
           <li>
             <span class="font-medium text-gray-700 dark:text-gray-200">Avisos:</span>
             <a class="text-blue-600 underline dark:text-blue-400" href="https://smn.conagua.gob.mx/" rel="noopener" target="_blank">SMN / CONAGUA</a>
           </li>
         </ul>
+        <p class="pt-1">
+          <a id="mw-layer-page-link" hidden href={base} class="text-blue-600 underline dark:text-blue-400" data-i18n-en={ui.en.layer_page_link}>{t.layer_page_link}</a>
+        </p>
         <p class="pt-1 text-[10px] italic text-gray-500 dark:text-gray-400">
           Sin garantía. Para uso informativo. Consulta avisos oficiales.
         </p>
@@ -643,21 +796,17 @@ const cfg = JSON.stringify({
 </style>
 
 <script>
-  import { initInteractiveMap } from '../lib/interactive-map';
+  import {
+    initInteractiveMap,
+    type InteractiveMapFeatures,
+  } from '../lib/interactive-map';
 
   type ImCfg = {
     mapId: string;
     ids: Record<string, string>;
     initialView: { lat: number; lng: number; zoom: number };
     initialLayer?: string;
-    features: {
-      layerRail?: boolean;
-      timeline?: boolean;
-      search?: boolean;
-      locateButton?: boolean;
-      presetPins?: boolean;
-      backLink?: boolean;
-    };
+    features: InteractiveMapFeatures;
     useHash: boolean;
     exposeE2eHook: boolean;
     interactive: boolean;
@@ -705,6 +854,7 @@ const cfg = JSON.stringify({
           msg: document.getElementById(cfg.ids.msg),
           tooltip: document.getElementById(cfg.ids.tooltip),
           coords: document.getElementById(cfg.ids.coords),
+          placeCard: document.getElementById(cfg.ids.placeCard),
         };
         // Surface async init failures. Without these handlers an
         // unhandled rejection inside initInteractiveMap is silently

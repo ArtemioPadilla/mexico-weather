@@ -32,6 +32,15 @@ export interface TimelinePlayer {
 export interface TimelinePlayerOpts {
   /** Frames per second feel; tune in ms. Default 700. */
   intervalMs?: number;
+  /** Story 16.4 — live cadence getter (settings "velocidad"); read
+   *  before every tick so a change applies mid-loop. Wins over
+   *  `intervalMs` when present. */
+  getIntervalMs?: () => number;
+  /** Story 16.4 — inclusive [start, end] index window the loop cycles
+   *  through (settings "duración del loop"). Read every tick; a frame
+   *  outside the window jumps to its start on the next tick. Default:
+   *  the whole axis. */
+  getLoopRange?: () => [number, number];
   /** Test seam for prefers-reduced-motion. */
   reducedMotion?: boolean;
 }
@@ -42,11 +51,12 @@ export function createTimelinePlayer(
   getFrameCount: () => number,
   getCurrentIndex: () => number,
   advanceTo: (i: number) => void,
-  opts: TimelinePlayerOpts = {},
+  opts: TimelinePlayerOpts = {}
 ): TimelinePlayer {
   let playing = false;
   let timer = 0;
-  const intervalMs = opts.intervalMs ?? 700;
+  const intervalMs = (): number =>
+    opts.getIntervalMs?.() ?? opts.intervalMs ?? 700;
   const reduced =
     opts.reducedMotion ??
     (typeof window !== 'undefined' &&
@@ -55,33 +65,50 @@ export function createTimelinePlayer(
   function syncBtn(): void {
     if (!els.playBtn) return;
     els.playBtn.setAttribute('aria-pressed', String(playing));
-    els.playBtn.setAttribute('aria-label', playing ? labels.pause : labels.play);
-    els.playBtn.textContent = playing ? '⏸' : '▶';
+    els.playBtn.setAttribute(
+      'aria-label',
+      playing ? labels.pause : labels.play
+    );
+    // Sprite icons (IconSprite.astro); the play glyph used to be the
+    // '▶' text character, which iOS renders as a coloured emoji.
+    els.playBtn.innerHTML = playing
+      ? '<svg class="h-4 w-4" aria-hidden="true"><use href="#i-pause"></use></svg>'
+      : '<svg class="h-4 w-4" aria-hidden="true"><use href="#i-play"></use></svg>';
+    els.playBtn.dataset.state = playing ? 'playing' : 'paused';
   }
 
   function stop(): void {
     playing = false;
     if (timer) {
-      window.clearInterval(timer);
+      window.clearTimeout(timer);
       timer = 0;
     }
     syncBtn();
+  }
+
+  function tick(): void {
+    if (!playing) return;
+    const n = getFrameCount();
+    if (n < 2) {
+      stop();
+      return;
+    }
+    let [lo, hi] = opts.getLoopRange?.() ?? [0, n - 1];
+    lo = Math.max(0, Math.min(lo, n - 1));
+    hi = Math.max(lo, Math.min(hi, n - 1));
+    const cur = getCurrentIndex();
+    const next = cur < lo || cur >= hi ? lo : cur + 1;
+    advanceTo(next);
+    timer = window.setTimeout(tick, intervalMs());
   }
 
   function start(): void {
     if (reduced || getFrameCount() < 2) return;
     playing = true;
     syncBtn();
-    timer = window.setInterval(() => {
-      const n = getFrameCount();
-      if (n < 2) {
-        stop();
-        return;
-      }
-      const cur = getCurrentIndex();
-      const next = cur + 1 >= n ? 0 : cur + 1;
-      advanceTo(next);
-    }, intervalMs);
+    // A re-armed timeout (not setInterval) so the cadence getter is
+    // honoured on every step.
+    timer = window.setTimeout(tick, intervalMs());
   }
 
   // Reduced motion: disable the play button outright + leave label

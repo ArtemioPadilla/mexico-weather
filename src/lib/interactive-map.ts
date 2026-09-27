@@ -32,6 +32,10 @@ import {
   clampIndex,
   frameOffsetMinutes,
   seekIndexForIso,
+  nearestFrame,
+  satelliteFrames,
+  satelliteFramesExtended,
+  satelliteDailyFrames,
 } from './maptimeline';
 import {
   viewportGrid,
@@ -43,15 +47,30 @@ import {
   tempColor,
   humidityColor,
   pressureColor,
+  spreadFieldGrid,
+  spreadColorFor,
+  spreadLegendFor,
   HUMIDITY_LEGEND,
   PRESSURE_LEGEND,
+  precipColor,
+  snowColor,
+  precipProbColor,
+  PRECIP_LEGEND,
+  SNOW_LEGEND,
+  PRECIP_PROB_LEGEND,
   getTempLegend,
   setColorBlindMode,
   getColorBlindMode,
+  mergeFieldGrids,
+  mergeWindGrids,
+  isExtendedGrid,
+  parseUtcMs,
+  EXTENDED_FIELD_RANGE,
   type FieldGrid,
   type LegendStop,
   type WindGrid,
 } from './mapfields';
+import { relativeFrameLabel, needsWeekday } from './map/chrome/timeline-label';
 import {
   MAX_WIND_MPS,
   windSpeed,
@@ -71,10 +90,20 @@ import { terminatorPolygon, solarPosition } from './mapsun';
 import { presetPins, withUserPin, type MapPin } from './mappins';
 import { cities } from '../data/cities';
 import { geocode } from './geocode';
+import { runLocateFlow, failureMessageKey } from './locate-flow';
+import { getForecast, FORECAST_DAYS } from './forecast';
+import { has as hasFavorite, toggle as toggleFavorite } from './favorites';
+import {
+  renderPlaceCard,
+  renderPlaceCardStatus,
+  type PlaceCardMode,
+  type PlaceCardOpts,
+} from './map/chrome/place-card';
 import { ui } from '../i18n/ui';
 import { siteBase } from '../utils/paths';
 import {
   createNhcSource,
+  createStormsGisSource,
   type NhcStorm,
   GIBS_LAYERS,
   gibsTileUrl,
@@ -116,14 +145,49 @@ export interface InteractiveMapElements {
    *  when present, the cursor's lat/lng renders as "19°25′N 99°07′O"
    *  on mousemove (zoom.earth-style). */
   coords?: HTMLElement | null;
+  /** Place card container (Story 15.4): tap-anywhere 10-day / 48-h
+   *  forecast panel. Optional — when absent, taps fall back to the
+   *  small coordinates popup. */
+  placeCard?: HTMLElement | null;
 }
 
 export interface InteractiveMapFeatures {
+  /** Layer rail (base/radar/temp/… buttons + opacity + overlays). */
   layerRail?: boolean;
+  /** Restrict the rail to this subset of LAYER_IDS (embeds). Omit for all. */
+  railLayers?: string[];
   timeline?: boolean;
   search?: boolean;
   locateButton?: boolean;
   presetPins?: boolean;
+  /** Measure (distance/area) + snapshot-compare tools. */
+  tools?: boolean;
+  /** ⚙️ settings popover (timezone, hour format). */
+  settings?: boolean;
+  /** ℹ️ info/sources popover. Markup-only. */
+  info?: boolean;
+  /** NWP model toggle pills (Auto/ICON/GFS/…). */
+  modelToggle?: boolean;
+  /** Cursor coordinates badge. Markup-only. */
+  coords?: boolean;
+  /** Floating colour-scale legend bar. Markup-only. */
+  legend?: boolean;
+  /** First-visit welcome card offering to locate the user (Story 19.2).
+   *  Only the full-page maps set it; embeds never nag. */
+  welcome?: boolean;
+}
+
+/** Build an <svg><use href="#i-name"/></svg> element for the inline
+ *  sprite rendered by src/components/common/IconSprite.astro. */
+export function spriteIcon(name: string, className = 'h-4 w-4'): SVGSVGElement {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('class', className);
+  svg.setAttribute('aria-hidden', 'true');
+  const use = document.createElementNS(NS, 'use');
+  use.setAttribute('href', `#i-${name}`);
+  svg.appendChild(use);
+  return svg;
 }
 
 // ---------------------------------------------------------------------------
@@ -134,9 +198,9 @@ export interface InteractiveMapFeatures {
 import {
   cachedFetch,
   formatLatLngDM,
+  bearingToArrow,
   polylineLengthKm as measurePolylineLen,
   sphericalAreaKm2 as measureSphArea,
-  formatDistance as measureFmtDist,
   formatArea as measureFmtArea,
 } from './map/utils';
 import { createVolcanoesOverlay } from './map/overlays/volcanoes';
@@ -154,10 +218,15 @@ import { createRadarCoverageOverlay } from './map/overlays/radar-coverage';
 import { createNightLineOverlay } from './map/overlays/night-line';
 import { createNightLightsOverlay } from './map/overlays/night-lights';
 import { createTropicalStormsOverlay } from './map/overlays/tropical-storms';
+import { createTropicalOutlookOverlay } from './map/overlays/tropical-outlook';
 import {
   createBasemapThemeController,
-  CARTO_LIGHT_TILES as BASEMAP_LIGHT_TILES,
-  CARTO_DARK_TILES as BASEMAP_CARTO_DARK_TILES,
+  pickBasemapTiles,
+  BASEMAP_ATTRIBUTION,
+  ESRI_CANVAS_MAX_ZOOM,
+  DEFAULT_BASE_SOURCE_ID as BASEMAP_SOURCE_ID,
+  DEFAULT_REFERENCE_SOURCE_ID as BASEMAP_REFERENCE_SOURCE_ID,
+  DEFAULT_REFERENCE_LAYER_ID as BASEMAP_REFERENCE_LAYER_ID,
 } from './map/chrome/basemap-theme';
 import { createSunLayer } from './map/layers/sun-layer';
 import { createWeatherRaster } from './map/layers/weather-raster';
@@ -165,7 +234,24 @@ import {
   type MapSettings,
   readSettings,
   writeSettings,
+  normalizeSettings,
+  nextTimeLabelMode,
+  loopRange,
+  unitsOf,
+  PLAY_INTERVAL_MS,
+  RASTER_FADE_MS,
 } from './map/settings';
+import {
+  convertLegendStops,
+  formatDistanceKm,
+  formatPressure,
+  formatSpeed,
+  formatTemp,
+  PRESSURE_LABEL,
+  SPEED_LABEL,
+  TEMP_LABEL,
+  type Units,
+} from './units';
 import { createAutocompleteController } from './map/chrome/autocomplete';
 import { createSnapshotCompare } from './map/chrome/snapshot-compare';
 import { createModelToggle } from './map/chrome/model-toggle';
@@ -175,6 +261,8 @@ import {
   windPointsAtHour,
 } from './map/layers/wind-particles';
 import { createIsobarsLayer } from './map/layers/isobars';
+import { createCrosshair } from './map/chrome/crosshair';
+import { layerPageFor } from './layer-pages';
 import { createCloudsOverlay } from './map/overlays/clouds';
 import { createCityValuesOverlay } from './map/overlays/city-values';
 import { createTimelinePlayer } from './map/chrome/timeline-player';
@@ -219,7 +307,7 @@ export interface MapHandle {
  * pages currently unmount, but the contract is clean).
  */
 export async function initInteractiveMap(
-  opts: InteractiveMapOptions,
+  opts: InteractiveMapOptions
 ): Promise<MapHandle> {
   const lang = opts.lang ?? 'es';
   const t = ui[lang];
@@ -256,12 +344,11 @@ export async function initInteractiveMap(
     maplibreModule as unknown as typeof maplibregl,
   ];
   const maplibre = candidates.find(
-    (c): c is typeof maplibregl =>
-      !!(c as { Map?: unknown } | undefined)?.Map,
+    (c): c is typeof maplibregl => !!(c as { Map?: unknown } | undefined)?.Map
   );
   if (!maplibre) {
     throw new Error(
-      'maplibre-gl module did not expose a Map constructor in any known shape',
+      'maplibre-gl module did not expose a Map constructor in any known shape'
     );
   }
 
@@ -300,7 +387,11 @@ export async function initInteractiveMap(
   // ------------------------------------------------------------------
   // Initial view: optionally seeded from URL hash on /mapa, else opts.
   // ------------------------------------------------------------------
-  const hashed = useHash ? parseMapHash(location.hash) : null;
+  // An empty hash is "no state", not the default view: parseMapHash()
+  // would otherwise answer layer 'base' and beat the page's initialLayer
+  // (the /mapa/<capa>/ pages, Story 19.1).
+  const hashed =
+    useHash && location.hash.length > 1 ? parseMapHash(location.hash) : null;
   const initial = hashed ?? {
     lat: opts.initialView?.lat ?? 23.6,
     lng: opts.initialView?.lng ?? -102.5,
@@ -318,8 +409,7 @@ export async function initInteractiveMap(
   // Initial tile arrays — sourced from the shared basemap-theme module
   // to keep the single source of truth (no diverging URL lists between
   // the map construction and the runtime theme controller).
-  const LIGHT_TILES_INIT = BASEMAP_LIGHT_TILES;
-  const CARTO_DARK_TILES_INIT = BASEMAP_CARTO_DARK_TILES;
+  const BASEMAP_TILES_INIT = pickBasemapTiles(initialDark);
 
   // A11Y-3 — translate MapLibre's built-in control strings (zoom
   // buttons, compass) when the document language is Spanish. MapLibre
@@ -356,19 +446,38 @@ export async function initInteractiveMap(
       // Symbol layers (e.g. city value pills) need a glyphs URL to render
       // text. MapLibre's demotiles host serves a stable Noto/Open Sans
       // stack with no API key required.
-      glyphs:
-        'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+      glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
       sources: {
-        osm: {
+        // Esri Canvas gray basemap (no key, no watermark). The source id
+        // keeps its legacy name 'osm' because several call-sites and the
+        // e2e suite reference the 'osm' layer by id.
+        [BASEMAP_SOURCE_ID]: {
           type: 'raster',
-          tiles: initialDark ? CARTO_DARK_TILES_INIT : LIGHT_TILES_INIT,
+          tiles: BASEMAP_TILES_INIT.base,
           tileSize: 256,
-          // Both light (Positron) and dark (Dark Matter) basemaps are
-          // CARTO, OSM-derived.
-          attribution: '© OpenStreetMap contributors © CARTO',
+          maxzoom: ESRI_CANVAS_MAX_ZOOM,
+          attribution: BASEMAP_ATTRIBUTION,
+        },
+        // Labels + boundaries live in a separate Esri "Reference"
+        // service; the theme controller toggles this layer's visibility
+        // below LABEL_ZOOM_THRESHOLD instead of swapping to a
+        // `_nolabels` URL variant.
+        [BASEMAP_REFERENCE_SOURCE_ID]: {
+          type: 'raster',
+          tiles: BASEMAP_TILES_INIT.reference,
+          tileSize: 256,
+          maxzoom: ESRI_CANVAS_MAX_ZOOM,
+          attribution: BASEMAP_ATTRIBUTION,
         },
       },
-      layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
+      layers: [
+        { id: BASEMAP_SOURCE_ID, type: 'raster', source: BASEMAP_SOURCE_ID },
+        {
+          id: BASEMAP_REFERENCE_LAYER_ID,
+          type: 'raster',
+          source: BASEMAP_REFERENCE_SOURCE_ID,
+        },
+      ],
     },
   });
 
@@ -378,7 +487,7 @@ export async function initInteractiveMap(
     // with zoom (e.g. "200 km" at z=6, "10 km" at z=12).
     map.addControl(
       new maplibre.ScaleControl({ unit: 'metric', maxWidth: 120 }),
-      'bottom-right',
+      'bottom-right'
     );
   }
 
@@ -422,7 +531,7 @@ export async function initInteractiveMap(
   const pinManager = createPinManager(
     map,
     features.presetPins ? presetPins(cities) : [],
-    { maplibre, popupHtml, enablePopups: !!markerPopups },
+    { maplibre, popupHtml, enablePopups: !!markerPopups }
   );
   // Aliases kept so the rest of the file's wiring stays unchanged.
   const renderPins = (): void => pinManager.render();
@@ -430,7 +539,7 @@ export async function initInteractiveMap(
     name: string,
     lat: number,
     lng: number,
-    kind: 'search' | 'geo',
+    kind: 'search' | 'geo'
   ): void => {
     pinManager.setUserPin({ name, lat, lng, kind });
   };
@@ -441,6 +550,150 @@ export async function initInteractiveMap(
   // Only wired on the full /mapa page (features.layerRail) and when
   // markerPopups is enabled.
   let placePopup: maplibregl.Popup | null = null;
+
+  // ----------------------------------------------------------------
+  // Place card (Story 15.4 — plan PRO_GRATIS E15). zoom.earth's
+  // "location weather" panel: tap anywhere → 10 daily rows (Pro-only
+  // there) + 48 hourly rows for that point, a favourite star and the
+  // link to the full forecast. One Open-Meteo call per tap (cachedFetch
+  // dedupes for 10 min). Markup lives in map/chrome/place-card.ts.
+  // ----------------------------------------------------------------
+  const placeCardEl = opts.els.placeCard ?? null;
+  let placeMarker: maplibregl.Marker | null = null;
+  let placeCardMode: PlaceCardMode = 'daily';
+  let placeCardPoint: { lat: number; lng: number } | null = null;
+  let placeCardFc: Awaited<ReturnType<typeof getForecast>> | null = null;
+  let placeCardSeq = 0;
+
+  function placeCardOpts(): PlaceCardOpts | null {
+    if (!placeCardPoint) return null;
+    const { lat, lng } = placeCardPoint;
+    const coords = formatLatLngDM(lat, lng);
+    const now = new Date();
+    const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    let isFavorite = false;
+    try {
+      isFavorite = hasFavorite(window.localStorage, lat, lng);
+    } catch {
+      /* storage blocked */
+    }
+    return {
+      mode: placeCardMode,
+      coordsLabel: coords,
+      forecastHref: `${base}forecast?lat=${lat.toFixed(4)}&lng=${lng.toFixed(4)}&name=${encodeURIComponent(coords)}`,
+      isFavorite,
+      tempUnit: currentUnits().temp,
+      nowLine: tooltipValueAt(lng, lat),
+      strings: {
+        title: t.place_card_title,
+        daily: t.place_card_daily,
+        hourly: t.place_card_hourly,
+        close: t.place_card_close,
+        favAdd: t.fav_add,
+        favRemove: t.fav_remove,
+        fullForecast: t.map_popup_full_forecast,
+        loading: t.loading,
+        today: t.place_card_today,
+        tomorrow: t.place_card_tomorrow,
+        error: t.place_card_error,
+      },
+      lang,
+      todayIso,
+    };
+  }
+
+  function paintPlaceCard(status?: 'loading' | 'error'): void {
+    if (!placeCardEl) return;
+    const o = placeCardOpts();
+    if (!o) return;
+    placeCardEl.innerHTML =
+      status || !placeCardFc
+        ? renderPlaceCardStatus(o, status ?? 'loading')
+        : renderPlaceCard(placeCardFc, o);
+    placeCardEl.hidden = false;
+  }
+
+  function closePlaceCard(): void {
+    if (placeCardEl) {
+      placeCardEl.hidden = true;
+      placeCardEl.innerHTML = '';
+    }
+    placeMarker?.remove();
+    placeMarker = null;
+    placeCardPoint = null;
+    placeCardFc = null;
+    placeCardSeq++;
+  }
+
+  async function openPlaceCard(latRaw: number, lngRaw: number): Promise<void> {
+    if (!placeCardEl) return;
+    // 4 dp (~11 m): what the favourites key and the /forecast URL carry.
+    const lat = Number(latRaw.toFixed(4));
+    const lng = Number(lngRaw.toFixed(4));
+    const seq = ++placeCardSeq;
+    placeCardPoint = { lat, lng };
+    placeCardFc = null;
+    placeMarker?.remove();
+    const dot = document.createElement('div');
+    dot.className =
+      'h-4 w-4 rounded-full border-2 border-white bg-blue-600 shadow-md';
+    // Hoisted function: TS can't carry the module guard's narrowing in.
+    const ml = maplibre as typeof maplibregl;
+    placeMarker = new ml.Marker({ element: dot })
+      .setLngLat([lng, lat])
+      .addTo(map);
+    paintPlaceCard('loading');
+    placeCardEl.querySelector<HTMLElement>('[data-pc-close]')?.focus();
+    try {
+      const fc = await getForecast(
+        { lat, lng, tz: 'auto' },
+        deps,
+        undefined,
+        FORECAST_DAYS
+      );
+      if (seq !== placeCardSeq) return; // closed or re-opened meanwhile
+      placeCardFc = fc;
+      paintPlaceCard();
+    } catch {
+      if (seq !== placeCardSeq) return;
+      paintPlaceCard('error');
+    }
+  }
+
+  if (placeCardEl) {
+    placeCardEl.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest('[data-pc-close]')) {
+        closePlaceCard();
+        return;
+      }
+      const modeBtn = target.closest<HTMLElement>('[data-pc-mode]');
+      if (modeBtn) {
+        const m = modeBtn.dataset.pcMode === 'hourly' ? 'hourly' : 'daily';
+        if (m !== placeCardMode) {
+          placeCardMode = m;
+          paintPlaceCard();
+        }
+        return;
+      }
+      if (target.closest('[data-pc-fav]') && placeCardPoint) {
+        try {
+          toggleFavorite(window.localStorage, {
+            lat: placeCardPoint.lat,
+            lng: placeCardPoint.lng,
+            name: formatLatLngDM(placeCardPoint.lat, placeCardPoint.lng),
+            tz: 'America/Mexico_City',
+            addedAt: Date.now(),
+          });
+        } catch {
+          /* storage blocked */
+        }
+        paintPlaceCard();
+      }
+    });
+  }
+
   if (features.layerRail && markerPopups) {
     map.on('click', (e) => {
       // Ignore clicks that landed on a layer feature (storm dots, city
@@ -449,6 +702,10 @@ export async function initInteractiveMap(
         layers: ['wx-storms-circle'],
       });
       if (features.length > 0) return;
+      if (placeCardEl) {
+        void openPlaceCard(e.lngLat.lat, e.lngLat.lng);
+        return;
+      }
       if (placePopup) {
         placePopup.remove();
         placePopup = null;
@@ -470,6 +727,7 @@ export async function initInteractiveMap(
       layer: activeLayer,
       t: activeLayer === 'base' ? null : activeFrameIso,
       model: activeModel === 'best_match' ? null : activeModel,
+      mode: precipMode ? 'precip' : null,
     };
     history.replaceState(null, '', buildMapHash(state));
   }
@@ -555,18 +813,24 @@ export async function initInteractiveMap(
             pointerType: 'mouse',
             clientX: x,
             clientY: y,
-          }),
+          })
         );
         canvas.dispatchEvent(
-          new MouseEvent(type === 'pointerdown' ? 'mousedown'
-            : type === 'pointerup' ? 'mouseup'
-            : type === 'pointermove' ? 'mousemove'
-            : type, {
-            bubbles: true,
-            cancelable: true,
-            clientX: x,
-            clientY: y,
-          }),
+          new MouseEvent(
+            type === 'pointerdown'
+              ? 'mousedown'
+              : type === 'pointerup'
+                ? 'mouseup'
+                : type === 'pointermove'
+                  ? 'mousemove'
+                  : type,
+            {
+              bubbles: true,
+              cancelable: true,
+              clientX: x,
+              clientY: y,
+            }
+          )
         );
       };
       dispatch('pointermove', cx, cy);
@@ -584,6 +848,18 @@ export async function initInteractiveMap(
   // which already triggers paints anyway, so this is a no-op there).
   map.on('sourcedata', (e: { isSourceLoaded?: boolean; sourceId?: string }) => {
     if (!e.isSourceLoaded) return;
+    try {
+      map.triggerRepaint();
+    } catch {
+      /* best-effort */
+    }
+  });
+  // A tile that fails (CDN down, offline, undecodable body) marks its
+  // source loaded without scheduling a frame; if that was the last
+  // pending tile, `loaded()` flips true but `_render` never runs again
+  // and MapLibre never fires `load` — no pins, no overlays, no deep-link
+  // activation. One repaint after each error closes that gap.
+  map.on('error', () => {
     try {
       map.triggerRepaint();
     } catch {
@@ -629,7 +905,7 @@ export async function initInteractiveMap(
     void (async () => {
       try {
         const res = await deps.fetch(
-          'https://api.rainviewer.com/public/weather-maps.json',
+          'https://api.rainviewer.com/public/weather-maps.json'
         );
         rvData = parseRainviewerManifest(await res.json());
       } catch {
@@ -638,7 +914,12 @@ export async function initInteractiveMap(
       // Hash layer wins over the `initialLayer` opt (so deep-links to
       // /mapa#layer=radar still activate radar even when the caller's
       // initialLayer is 'temperature').
-      const wanted = hashed?.layer ?? opts.initialLayer ?? null;
+      // Story 13.2 — a shared combined-mode link opens on satellite with
+      // clouds + radar even if the hash names another layer.
+      const wanted = precipMode
+        ? 'satellite'
+        : (hashed?.layer ?? opts.initialLayer ?? null);
+      if (precipMode) void cloudsOverlay.setEnabled(true);
       if (wanted && wanted !== 'base' && getLayerDef(wanted)) {
         // Cold-load bug (#124, P0.1 in PLAN_UX_PARITY.md): historically a
         // single setTimeout(..., 700) raced the style/source load and the
@@ -663,11 +944,16 @@ export async function initInteractiveMap(
                   ? WIND_CIRCLE_LAYER
                   : null;
           const delays = [0, 250, 600, 1300, 2800]; // ~4.9 s total
+          // The hash `t=` is consumed by the first activation; a retry
+          // must re-arm it or the shared frame silently resets to "now"
+          // (and drops a Story 15.1 auto-extension already in flight).
+          const bootSeekIso = hashed?.t ?? null;
           for (let i = 0; i < delays.length; i++) {
             if (delays[i] > 0) {
-              await new Promise<void>((r) =>
-                window.setTimeout(r, delays[i]),
-              );
+              await new Promise<void>((r) => window.setTimeout(r, delays[i]));
+            }
+            if (i > 0 && bootSeekIso && !pendingSeekIso) {
+              pendingSeekIso = bootSeekIso;
             }
             try {
               await setActiveLayer(wanted);
@@ -676,15 +962,31 @@ export async function initInteractiveMap(
             }
             // Success when the expected layer exists on the map, or
             // when the layer kind has no checkable artifact (overlay).
-            if (!expectedLayerId || map.getLayer(expectedLayerId)) {
-              return;
+            // The field raster is added asynchronously (renderFieldFrame
+            // → canvas → blob → addLayer), so give it up to ~1 s before
+            // deciding the activation failed and re-running it.
+            if (!expectedLayerId) return;
+            for (let w = 0; w < 8; w++) {
+              if (map.getLayer(expectedLayerId)) return;
+              await new Promise<void>((r) => window.setTimeout(r, 125));
             }
           }
         };
         if (map.loaded() && map.isStyleLoaded()) {
           void activateWithRetry();
         } else {
-          map.once('idle', () => void activateWithRetry());
+          // First of: idle, load, or a 4 s timeout — a slow or failing
+          // basemap CDN must not keep a shared link from activating its
+          // layer (activateWithRetry copes with a raster not yet ready).
+          let started = false;
+          const go = (): void => {
+            if (started) return;
+            started = true;
+            void activateWithRetry();
+          };
+          map.once('idle', go);
+          map.once('load', go);
+          window.setTimeout(go, 4000);
         }
       }
     })();
@@ -700,10 +1002,13 @@ export async function initInteractiveMap(
 
   // Basemap theme + label-density controller — extracted to
   // src/lib/map/chrome/basemap-theme.ts. Watches the html.dark class
-  // and the map's zoom level; swaps the 'osm' source tiles when
-  // either crosses a boundary.
+  // and the map's zoom level; swaps both raster sources' tiles on a
+  // theme change and flips the reference (labels) layer visibility
+  // when the zoom crosses LABEL_ZOOM_THRESHOLD.
   const basemapTheme = createBasemapThemeController(map, {
-    sourceId: 'osm',
+    baseSourceId: BASEMAP_SOURCE_ID,
+    referenceSourceId: BASEMAP_REFERENCE_SOURCE_ID,
+    referenceLayerId: BASEMAP_REFERENCE_LAYER_ID,
     initialDark,
   });
   map.on('zoomend', () => basemapTheme.sync());
@@ -724,8 +1029,8 @@ export async function initInteractiveMap(
   // ------------------------------------------------------------------
   // Search autocomplete (scoped to the supplied els.search / els.acList).
   // ------------------------------------------------------------------
-  const q = features.search ? opts.els.search ?? null : null;
-  const acList = features.search ? opts.els.acList ?? null : null;
+  const q = features.search ? (opts.els.search ?? null) : null;
+  const acList = features.search ? (opts.els.acList ?? null) : null;
   let qTimer = 0;
   let searchGen = 0;
 
@@ -742,7 +1047,7 @@ export async function initInteractiveMap(
             hideMsg();
             ac?.close();
             setUserPin(r.name, r.lat, r.lng, 'search');
-          },
+          }
         )
       : null;
   // Thin wrappers preserve the historical names used by existing call
@@ -766,6 +1071,8 @@ export async function initInteractiveMap(
   let frameIndex = -1;
   let activeFrameIso: string | null = null;
   let pendingSeekIso: string | null = hashed?.t ?? null;
+  // Story 15.1 — one in-flight "Ver 10 días" fetch at a time.
+  let extendInFlight: Promise<boolean> | null = null;
 
   const tlEl = opts.els.timeline ?? null;
   const tlRange = opts.els.tlRange ?? null;
@@ -780,10 +1087,24 @@ export async function initInteractiveMap(
       hour12: s.hourFormat === '12',
     };
     if (s.tz === 'UTC') opts.timeZone = 'UTC';
-    const clock = new Date(frame.time * 1000).toLocaleTimeString('es-MX', opts);
-    const rel =
-      off === 0 ? t.timeline_now : off < 0 ? `${off} min` : `+${off} min`;
-    return `${clock}${s.tz === 'UTC' ? ' UTC' : ''} · ${rel}`;
+    const d = new Date(frame.time * 1000);
+    let clock = d.toLocaleTimeString('es-MX', opts);
+    // Frames a day or more away read ambiguously as a bare "15:00";
+    // prefix the weekday ("mié 15:00") past ±24 h (Story 15.1).
+    if (needsWeekday(off)) {
+      const wd = d.toLocaleDateString(lang === 'en' ? 'en-US' : 'es-MX', {
+        weekday: 'short',
+        ...(s.tz === 'UTC' ? { timeZone: 'UTC' } : {}),
+      });
+      clock = `${wd} ${clock}`;
+    }
+    const rel = relativeFrameLabel(off, { now: t.timeline_now });
+    const clockFull = `${clock}${s.tz === 'UTC' ? ' UTC' : ''}`;
+    // Story 16.4 — a tap on the pill (or the ⚙ panel) cycles between
+    // both parts, clock only and relative only.
+    if (s.timeLabel === 'clock') return clockFull;
+    if (s.timeLabel === 'relative') return rel;
+    return `${clockFull} · ${rel}`;
   }
 
   // Settings persistence — extracted to src/lib/map/settings.ts.
@@ -808,7 +1129,10 @@ export async function initInteractiveMap(
       tlRange.value = String(idx);
     }
     if (tlTime) tlTime.textContent = frameLabel(fr);
+    syncExtendButton();
     syncHash();
+    // Story 18.3 — the centre readout follows the frame.
+    crosshair.refresh();
   }
 
   function showTimeline(show: boolean): void {
@@ -900,11 +1224,13 @@ export async function initInteractiveMap(
   type HumiditySubOption = 'relativa' | 'rocio';
   type PressureSubOption = 'msl' | 'surface';
   type WindSubOption = 'velocidad' | 'rachas';
+  type PrecipSubOption = 'lluvia' | 'nieve' | 'probabilidad';
   type SatelliteSubOption = 'geocolor' | 'ir' | 'truecolor';
   let tempSubOption: TempSubOption = 'actual';
   let humiditySubOption: HumiditySubOption = 'relativa';
   let pressureSubOption: PressureSubOption = 'msl';
   let windSubOption: WindSubOption = 'velocidad';
+  let precipSubOption: PrecipSubOption = 'lluvia';
   let satelliteSubOption: SatelliteSubOption = 'geocolor';
   function tempHourlyVar(): string {
     if (tempSubOption === 'aparente') return 'apparent_temperature';
@@ -917,14 +1243,142 @@ export async function initInteractiveMap(
       : 'relative_humidity_2m';
   }
   function pressureHourlyVar(): string {
-    return pressureSubOption === 'surface' ? 'surface_pressure' : 'pressure_msl';
+    return pressureSubOption === 'surface'
+      ? 'surface_pressure'
+      : 'pressure_msl';
+  }
+  // Story 15.5 — precipitation sub-options map to Open-Meteo hourly
+  // variables; `precipitation` (rain + showers + snow water) is the
+  // pre-baked default, `snowfall` is cm/h, probability is %.
+  function precipHourlyVar(): string {
+    if (precipSubOption === 'nieve') return 'snowfall';
+    if (precipSubOption === 'probabilidad') return 'precipitation_probability';
+    return 'precipitation';
+  }
+  function precipColorFn(): (v: number) => string {
+    if (precipSubOption === 'nieve') return snowColor;
+    if (precipSubOption === 'probabilidad') return precipProbColor;
+    return precipColor;
+  }
+  function precipUnit(): string {
+    if (precipSubOption === 'nieve') return 'cm/h';
+    if (precipSubOption === 'probabilidad') return '%';
+    return 'mm/h';
+  }
+  /** Unit of the active field variable in the display units (Story 13.3
+   *  legend + tooltip spread). Spread stays in metric steps. */
+  function fieldUnitLabel(): string {
+    if (activeLayer === 'temperature') return '°C';
+    if (activeLayer === 'humidity') return '%';
+    if (activeLayer === 'pressure') return 'hPa';
+    if (activeLayer === 'precipitation') return precipUnit();
+    return '';
+  }
+  function precipLegend(): LegendStop[] {
+    if (precipSubOption === 'nieve') return SNOW_LEGEND;
+    if (precipSubOption === 'probabilidad') return PRECIP_PROB_LEGEND;
+    return PRECIP_LEGEND;
+  }
+  function formatPrecip(v: number): string {
+    if (precipSubOption === 'probabilidad') return `${Math.round(v)}%`;
+    const n = v < 1 ? Math.round(v * 10) / 10 : Math.round(v);
+    return `${n} ${precipUnit()}`;
   }
   const FIELD_CONFIGS: Record<string, FieldConfig> = {
-    temperature: { get hourlyVar() { return tempHourlyVar(); }, color: tempColor },
-    humidity: { get hourlyVar() { return humidityHourlyVar(); }, color: humidityColor },
-    pressure: { get hourlyVar() { return pressureHourlyVar(); }, color: pressureColor },
+    temperature: {
+      get hourlyVar() {
+        return tempHourlyVar();
+      },
+      color: tempColor,
+    },
+    humidity: {
+      get hourlyVar() {
+        return humidityHourlyVar();
+      },
+      color: humidityColor,
+    },
+    pressure: {
+      get hourlyVar() {
+        return pressureHourlyVar();
+      },
+      color: pressureColor,
+    },
+    precipitation: {
+      get hourlyVar() {
+        return precipHourlyVar();
+      },
+      get color() {
+        return precipColorFn();
+      },
+    },
   } as unknown as Record<string, FieldConfig>;
   let fieldAbort: AbortController | null = null;
+
+  // Story 13.3 — model disagreement ("incertidumbre"): the same
+  // variable from several NWP models, rendered as their spread.
+  const SPREAD_MODELS = ['icon_seamless', 'gfs_seamless', 'ecmwf_ifs04'];
+  let confidenceMode = false;
+  let spreadGrid: FieldGrid | null = null;
+  let spreadAbort: AbortController | null = null;
+  let spreadFor = '';
+
+  async function loadSpreadGrid(): Promise<void> {
+    const cfg = FIELD_CONFIGS[activeLayer];
+    if (!cfg || !fieldGrid || !confidenceMode) return;
+    const key = `${activeLayer}:${cfg.hourlyVar}`;
+    if (spreadGrid && spreadFor === key) return;
+    spreadAbort?.abort();
+    const ac = new AbortController();
+    spreadAbort = ac;
+    const pts = fieldGrid.points.map((p) => ({ lat: p.lat, lng: p.lng }));
+    const refTimes = fieldGrid.times;
+    showMsg(t.confidence_loading);
+    try {
+      const results = await Promise.allSettled(
+        SPREAD_MODELS.map(async (model) => {
+          const json = await fetchFieldChunks(pts, cfg.hourlyVar, deps.fetch, {
+            signal: ac.signal,
+            model,
+          });
+          return parseFieldResponse(json, pts, cfg.hourlyVar);
+        })
+      );
+      if (ac.signal.aborted) return;
+      const grids = results
+        .map((r) => (r.status === 'fulfilled' ? r.value : null))
+        .filter((g): g is FieldGrid => !!g);
+      spreadGrid = spreadFieldGrid(grids, pts, refTimes);
+      spreadFor = key;
+      hideMsg();
+      if (!spreadGrid) {
+        showMsg(t.confidence_failed);
+        window.setTimeout(hideMsg, 4000);
+        return;
+      }
+      if (getLayerDef(activeLayer)?.kind === 'field' && frameIndex >= 0) {
+        void renderFieldFrame(frameIndex);
+      }
+      renderLegend(legendKindFor());
+      refreshCityValues();
+    } finally {
+      if (spreadAbort === ac) spreadAbort = null;
+    }
+  }
+
+  function setConfidenceMode(on: boolean): void {
+    confidenceMode = on;
+    if (!on) {
+      spreadAbort?.abort();
+      spreadGrid = null;
+      spreadFor = '';
+    }
+    if (getLayerDef(activeLayer)?.kind === 'field' && frameIndex >= 0) {
+      void renderFieldFrame(frameIndex);
+    }
+    renderLegend(legendKindFor());
+    refreshCityValues();
+    if (on) void loadSpreadGrid();
+  }
 
   // Wind particles WebGL layer — shader + GPU setup extracted to
   // src/lib/map/layers/wind-particles.ts. Layer id is re-exported as
@@ -984,7 +1438,7 @@ export async function initInteractiveMap(
         north: b.getNorth(),
       },
       8,
-      6,
+      6
     );
     const speedVar =
       windSubOption === 'rachas' ? 'wind_gusts_10m' : 'wind_speed_10m';
@@ -998,7 +1452,7 @@ export async function initInteractiveMap(
       windTexDirty = true;
       const h = Math.max(
         0,
-        Math.min(wg.times.length - 1, frameIndex >= 0 ? frameIndex : 0),
+        Math.min(wg.times.length - 1, frameIndex >= 0 ? frameIndex : 0)
       );
       showWindFrame(h);
     } catch {
@@ -1042,8 +1496,7 @@ export async function initInteractiveMap(
     if (isReducedMotion()) {
       const data = windCircleGeoJSON(windGrid, h);
       const src = map.getSource(WIND_CIRCLE_SOURCE) as
-        | maplibregl.GeoJSONSource
-        | undefined;
+        maplibregl.GeoJSONSource | undefined;
       if (src) {
         src.setData(data);
       } else {
@@ -1073,13 +1526,12 @@ export async function initInteractiveMap(
           onTick: (id) => {
             windRaf = id;
           },
-        }),
+        })
       );
     }
     // City value pills for wind (e.g. "12 km/h ↑").
     refreshCityValues();
   }
-
 
   function revokeFieldBlob(): void {
     if (fieldBlobUrl) {
@@ -1122,7 +1574,13 @@ export async function initInteractiveMap(
   let cityValuesEnabled = true;
 
   // Pressure isobars — extracted to src/lib/map/layers/isobars.ts.
-  const isobarsLayer = createIsobarsLayer(map);
+  const isobarsLayer = createIsobarsLayer(map, () => currentUnits().pressure);
+  // Story 18.3 — crosshair mode; getValueAt is hoisted (function
+  // declaration) so wiring it here, before the tooltip block, is safe.
+  const crosshair = createCrosshair(map, {
+    container: map.getContainer(),
+    getValueAt: (lng, lat) => tooltipValueAt(lng, lat),
+  });
   const removeIsobars = (): void => isobarsLayer.remove();
 
   // Graticule overlay — extracted to src/lib/map/overlays/graticule.ts
@@ -1197,22 +1655,36 @@ export async function initInteractiveMap(
     base,
   });
 
-
   // Tropical storms overlay — extracted to src/lib/map/overlays/tropical-storms.ts.
   // The factory takes the NHC source and an onEmpty callback so it
   // can auto-disable the checkbox when there are no active systems.
+  const stormsGisSource = createStormsGisSource(base);
+  const nhcSourceBound = createNhcSource(base);
   const tropicalStormsOverlay = createTropicalStormsOverlay(
     map,
-    createNhcSource(base),
+    {
+      fetch: () => nhcSourceBound.fetch(undefined, undefined),
+      // Story 18.1 — cone / track / watches from the GIS snapshot.
+      fetchGis: () => stormsGisSource.fetch(),
+    },
     () => {
       tropicalEnabled = false;
       refreshOverlayCheckboxes();
-    },
+    }
+  );
+  // Story 18.2 — NHC Tropical Weather Outlook areas (2 d / 7 d chance).
+  const tropicalOutlookOverlay = createTropicalOutlookOverlay(
+    map,
+    () => stormsGisSource.fetch(),
+    () => refreshOverlayCheckboxes()
   );
   // Backwards-compat alias used by callers below (refreshTropicalStorms
   // is invoked from the map's 'load' handler).
-  const refreshTropicalStorms = (): Promise<void> =>
-    tropicalStormsOverlay.refresh();
+  const refreshTropicalStorms = async (): Promise<void> => {
+    await tropicalStormsOverlay.refresh();
+    await tropicalOutlookOverlay.refresh();
+    refreshOverlayCheckboxes();
+  };
 
   function refreshIsobars(): void {
     if (activeLayer !== 'pressure' || !fieldGrid || !fieldBounds) {
@@ -1263,14 +1735,17 @@ export async function initInteractiveMap(
     // City value pills (zoom.earth "Valores de etiquetas") follow the same
     // cadence — value sampled via tooltipValueAt() at each city.
     refreshCityValues();
+    // Story 13.3 — in confidence mode the raster shows the models'
+    // spread instead of the value (same grid layout, own ramp).
+    const useSpread = confidenceMode && !!spreadGrid;
     const render = await renderFieldRaster(
-      fieldGrid,
+      useSpread && spreadGrid ? spreadGrid : fieldGrid,
       FIELD_GRID_ROWS,
       FIELD_GRID_COLS,
       fieldBounds,
       hourIndex,
-      cfg.color,
-      { width: FIELD_RASTER_W, height: FIELD_RASTER_H },
+      useSpread ? spreadColorFor(activeLayer) : cfg.color,
+      { width: FIELD_RASTER_W, height: FIELD_RASTER_H }
     );
     if (!render) return;
     // Activelayer may have flipped while the canvas blob was settling.
@@ -1341,6 +1816,7 @@ export async function initInteractiveMap(
     'relative_humidity_2m',
     'pressure_msl',
     'cloud_cover',
+    'precipitation',
   ]);
 
   async function loadFieldGrid(layerId: string): Promise<boolean> {
@@ -1369,7 +1845,7 @@ export async function initInteractiveMap(
       try {
         const r = await deps.fetch(
           `${base}data/field-grids/${cfg.hourlyVar}.json`,
-          { signal: ac.signal },
+          { signal: ac.signal }
         );
         if (!ac.signal.aborted && r.ok) {
           const snap = (await r.json()) as FieldGrid | null;
@@ -1428,6 +1904,10 @@ export async function initInteractiveMap(
         if (layerId === 'temperature') lastTempGrid = fieldGrid;
         else if (layerId === 'humidity') lastHumidityGrid = fieldGrid;
         else if (layerId === 'pressure') lastPressureGrid = fieldGrid;
+        if (confidenceMode) {
+          spreadGrid = null;
+          void loadSpreadGrid();
+        }
       }
     } catch {
       if (ac.signal.aborted) return false;
@@ -1445,23 +1925,83 @@ export async function initInteractiveMap(
   const weatherRaster = createWeatherRaster(map, {
     showMsg,
     hideMsg,
+    // Story 16.4 — "estilo" setting: smooth cross-fades tiles between
+    // frames, fast swaps them instantly.
+    getFadeMs: () => RASTER_FADE_MS[readSettings().playStyle],
   });
   const removeWeatherRaster = (): void => weatherRaster.remove();
   const showWeatherFrame = (layerId: string, frame: RadarFrame): void => {
-    weatherRaster.show(
-      layerId === 'satellite' ? 'satellite' : 'radar',
-      frame,
-      {
-        rvData,
-        satelliteSubOption,
-        opacity: rvOpacity,
-        currentZoom: map.getZoom(),
-      },
-    );
+    weatherRaster.show(layerId === 'satellite' ? 'satellite' : 'radar', frame, {
+      rvData,
+      satelliteSubOption,
+      opacity: rvOpacity,
+      currentZoom: map.getZoom(),
+    });
+    // Story 13.2 — combined mode: the radar frame nearest to the
+    // satellite instant rides on top (RainViewer covers −2 h … +30 min,
+    // so older satellite frames simply show no radar).
+    if (precipMode && layerId === 'satellite') {
+      weatherRaster.showRadarCompanion(
+        rvData ? nearestFrame(rvData.frames, frame.time, 15 * 60) : null,
+        { rvData, opacity: Math.min(1, rvOpacity * 0.9) }
+      );
+    } else {
+      weatherRaster.removeRadarCompanion();
+    }
   };
 
+  /** Story 13.2 — zoom.earth's "Precipitación" picture in one click:
+   *  GeoColor satellite + cloud-cover overlay + radar, shareable via
+   *  `&mode=precip`. Turning it off removes radar + clouds and leaves
+   *  the satellite layer. */
+  let precipMode = hashed?.mode === 'precip';
+  function setPrecipMode(on: boolean): void {
+    precipMode = on;
+    void cloudsOverlay.setEnabled(on);
+    if (on && activeLayer !== 'satellite') {
+      void setActiveLayer('satellite');
+    } else if (frameIndex >= 0 && tlFrames[frameIndex]) {
+      applyFrame(frameIndex);
+    } else {
+      weatherRaster.removeRadarCompanion();
+    }
+    renderLegend(legendKindFor());
+    refreshOverlayCheckboxes();
+    syncHash();
+  }
+
+  /** Which legend the active layer needs (null hides the bar). */
+  function legendKindFor():
+    | 'radar'
+    | 'temperature'
+    | 'humidity'
+    | 'pressure'
+    | 'precipitation'
+    | 'confidence'
+    | 'wind'
+    | null {
+    const akind = getLayerDef(activeLayer)?.kind;
+    if (confidenceMode && spreadGrid && akind === 'field') return 'confidence';
+    if (activeLayer === 'radar') return 'radar';
+    // Combined mode reads as precipitation: the radar scale applies.
+    if (precipMode && activeLayer === 'satellite') return 'radar';
+    if (akind === 'field')
+      return activeLayer as
+        'temperature' | 'humidity' | 'pressure' | 'precipitation';
+    if (akind === 'particles') return 'wind';
+    return null;
+  }
+
   function renderLegend(
-    kind: 'radar' | 'temperature' | 'humidity' | 'pressure' | 'wind' | null,
+    kind:
+      | 'radar'
+      | 'temperature'
+      | 'humidity'
+      | 'pressure'
+      | 'precipitation'
+      | 'confidence'
+      | 'wind'
+      | null
   ): void {
     const el = opts.els.legend;
     const bar = document.getElementById('legend-bar');
@@ -1487,28 +2027,36 @@ export async function initInteractiveMap(
             ? HUMIDITY_LEGEND
             : kind === 'pressure'
               ? PRESSURE_LEGEND
-              : WIND_LEGEND.map((s) => ({
-                  label: t[s.labelKey as keyof typeof t] as string,
-                  color: s.color,
-                }));
+              : kind === 'precipitation'
+                ? precipLegend()
+                : kind === 'confidence'
+                  ? spreadLegendFor(activeLayer, fieldUnitLabel())
+                  : WIND_LEGEND.map((s) => ({
+                      label: t[s.labelKey as keyof typeof t] as string,
+                      color: s.color,
+                    }));
     // Horizontal stop layout (plan P0.2): a 28×12 swatch with the
     // label below, similar to zoom.earth's bottom-left scale.
-    el.innerHTML = stops
+    // Story 19.3 — temperature / pressure scales read in the chosen unit.
+    const U = currentUnits();
+    el.innerHTML = convertLegendStops(stops, kind, U)
       .map(
         (s) =>
           `<li class="flex flex-col items-center gap-0.5 leading-none"><span class="inline-block h-2.5 w-7" style="background:${esc(
-            s.color,
-          )}"></span><span class="text-[10px] tabular-nums">${esc(s.label)}</span></li>`,
+            s.color
+          )}"></span><span class="text-[10px] tabular-nums">${esc(s.label)}</span></li>`
       )
       .join('');
     // Unit label varies per layer kind. zoom.earth shows °C for the
     // temperature scale; we mirror that for each metric.
     const unit: Record<typeof kind & string, string> = {
       radar: 'mm/h',
-      temperature: '°C',
+      temperature: TEMP_LABEL[U.temp],
       humidity: '%',
-      pressure: 'hPa',
-      wind: 'km/h',
+      pressure: PRESSURE_LABEL[U.pressure],
+      precipitation: precipUnit(),
+      confidence: `± ${fieldUnitLabel()}`,
+      wind: SPEED_LABEL[U.speed],
     } as Record<string, string>;
     if (unitEl) unitEl.textContent = unit[kind] ?? '';
     if (bar) bar.style.display = '';
@@ -1521,9 +2069,19 @@ export async function initInteractiveMap(
       const btn = wrap.querySelector(`#layerbtn-${def.id}`);
       if (btn) btn.setAttribute('aria-pressed', String(def.id === activeLayer));
     }
+    // Story 19.1 — the info panel links to the active layer's own page.
+    const pageLink = document.getElementById(
+      'mw-layer-page-link'
+    ) as HTMLAnchorElement | null;
+    if (pageLink) {
+      const lp = layerPageFor(activeLayer);
+      pageLink.hidden = !lp;
+      if (lp) pageLink.href = `${base}mapa/${lp.slug}/`;
+    }
     refreshTempSubOptions();
     refreshHumiditySubOptions();
     refreshPressureSubOptions();
+    refreshPrecipSubOptions();
     refreshWindSubOptions();
     refreshSatelliteSubOptions();
     // Plan P2.6: reconcile the wind overlay so it persists across
@@ -1543,17 +2101,9 @@ export async function initInteractiveMap(
       akind !== 'raster-tile' &&
         akind !== 'field' &&
         akind !== 'particles' &&
-        akind !== 'overlay',
+        akind !== 'overlay'
     );
-    const kindForLegend =
-      activeLayer === 'radar'
-        ? ('radar' as const)
-        : akind === 'field'
-          ? (activeLayer as 'temperature' | 'humidity' | 'pressure')
-          : akind === 'particles'
-            ? ('wind' as const)
-            : null;
-    renderLegend(kindForLegend);
+    renderLegend(legendKindFor());
     // Hide the hover tooltip when switching to a layer that doesn't
     // expose per-pixel values (or back to base). The next mousemove
     // re-evaluates tooltipValueAt and re-shows when appropriate.
@@ -1614,9 +2164,16 @@ export async function initInteractiveMap(
    * Format: "26°\n78%\n1014 hPa" — newline-separated; the floating
    * tooltip div whitespace-preserves them via CSS.
    */
+  /** Story 19.3 — display units from the ⚙ settings, read per call so
+   *  a change applies to the next tooltip / legend paint. */
+  function currentUnits(): Units {
+    return unitsOf(readSettings());
+  }
+
   function tooltipValueAt(lng: number, lat: number): string | null {
     const def = getLayerDef(activeLayer);
     if (!def) return null;
+    const U = currentUnits();
     if (def.kind === 'field' || def.kind === 'particles') {
       if (!fieldBounds || frameIndex < 0) return null;
       const bounds = fieldBounds;
@@ -1630,14 +2187,30 @@ export async function initInteractiveMap(
               bounds,
               lat,
               lng,
-              frameIndex,
+              frameIndex
             )
           : null;
+
+      // Precipitation (Story 15.5) — only while it is the active field;
+      // shown first so the tooltip leads with the layer's own value.
+      if (activeLayer === 'precipitation') {
+        const pv = sampleField(fieldGrid);
+        if (pv !== null) lines.push(`🌧 ${formatPrecip(pv)}`);
+      }
+
+      // Story 13.3 — model spread at the point, when the mode is on.
+      if (confidenceMode && spreadGrid && def.kind === 'field') {
+        const sv = sampleField(spreadGrid);
+        if (sv !== null)
+          lines.push(
+            `± ${sv < 1 ? sv.toFixed(1) : Math.round(sv)} ${fieldUnitLabel()} ${t.confidence_between_models}`
+          );
+      }
 
       // Temperature
       const tGrid = activeLayer === 'temperature' ? fieldGrid : lastTempGrid;
       const tVal = sampleField(tGrid);
-      if (tVal !== null) lines.push(`🌡 ${Math.round(tVal)}°`);
+      if (tVal !== null) lines.push(`🌡 ${formatTemp(tVal, U.temp)}`);
 
       // Humidity
       const hGrid = activeLayer === 'humidity' ? fieldGrid : lastHumidityGrid;
@@ -1647,7 +2220,7 @@ export async function initInteractiveMap(
       // Pressure
       const pGrid = activeLayer === 'pressure' ? fieldGrid : lastPressureGrid;
       const pVal = sampleField(pGrid);
-      if (pVal !== null) lines.push(`🧭 ${Math.round(pVal)} hPa`);
+      if (pVal !== null) lines.push(`🧭 ${formatPressure(pVal, U.pressure)}`);
 
       if (lines.length === 0 && def.kind !== 'particles') {
         // Fall through to legacy single-value behavior for field layers
@@ -1660,12 +2233,13 @@ export async function initInteractiveMap(
             fieldBounds,
             lat,
             lng,
-            frameIndex,
+            frameIndex
           );
           if (v === null) return null;
-          if (activeLayer === 'temperature') return `${Math.round(v)}°`;
+          if (activeLayer === 'temperature') return formatTemp(v, U.temp);
           if (activeLayer === 'humidity') return `${Math.round(v)}%`;
-          if (activeLayer === 'pressure') return `${Math.round(v)} hPa`;
+          if (activeLayer === 'pressure') return formatPressure(v, U.pressure);
+          if (activeLayer === 'precipitation') return formatPrecip(v);
           return `${Math.round(v)}`;
         }
         return null;
@@ -1721,9 +2295,16 @@ export async function initInteractiveMap(
         const v01 = p01?.v[h];
         const v11 = p11?.v[h];
         if (
-          u00 == null || u10 == null || u01 == null || u11 == null ||
-          v00 == null || v10 == null || v01 == null || v11 == null
-        ) return null;
+          u00 == null ||
+          u10 == null ||
+          u01 == null ||
+          u11 == null ||
+          v00 == null ||
+          v10 == null ||
+          v01 == null ||
+          v11 == null
+        )
+          return null;
         const au = u00 * (1 - tx) + u10 * tx;
         const bu = u01 * (1 - tx) + u11 * tx;
         const av = v00 * (1 - tx) + v10 * tx;
@@ -1733,7 +2314,6 @@ export async function initInteractiveMap(
       const uv = sampleUv(frameIndex);
       if (!uv) return null;
       const speedMps = Math.hypot(uv.u, uv.v);
-      const kmh = Math.round(speedMps * 3.6);
       // Heading = direction wind is BLOWING TOWARD (math convention).
       // 0° = east (positive u), 90° = north (positive v). Convert to
       // compass bearing where 0° = north, 90° = east, then cardinal.
@@ -1741,7 +2321,9 @@ export async function initInteractiveMap(
       const norm = ((bearing % 360) + 360) % 360;
       const cardinals = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
       const idx = Math.round(norm / 45) % 8;
-      const windLine = `💨 ${kmh} km/h ${cardinals[idx]}`;
+      // Story 13.1 — arrow glyph pointing where the wind blows toward
+      // (bearingToArrow expects the meteorological FROM bearing).
+      const windLine = `💨 ${formatSpeed(speedMps * 3.6, U.speed)} ${bearingToArrow((norm + 180) % 360)} ${cardinals[idx]}`;
       // Wind layer: combine with cached field grids (multi-metric).
       const fLines: string[] = [];
       const wb = fieldBounds;
@@ -1754,15 +2336,15 @@ export async function initInteractiveMap(
               wb,
               lat,
               lng,
-              frameIndex,
+              frameIndex
             )
           : null;
       const tV = sample(lastTempGrid);
-      if (tV !== null) fLines.push(`🌡 ${Math.round(tV)}°`);
+      if (tV !== null) fLines.push(`🌡 ${formatTemp(tV, U.temp)}`);
       const hV = sample(lastHumidityGrid);
       if (hV !== null) fLines.push(`💧 ${Math.round(hV)}%`);
       const pV = sample(lastPressureGrid);
-      if (pV !== null) fLines.push(`🧭 ${Math.round(pV)} hPa`);
+      if (pV !== null) fLines.push(`🧭 ${formatPressure(pV, U.pressure)}`);
       fLines.push(windLine);
       return fLines.join('\n');
     }
@@ -1786,7 +2368,7 @@ export async function initInteractiveMap(
     lng: number,
     lat: number,
     pointX: number,
-    pointY: number,
+    pointY: number
   ): void {
     if (!tooltipEl) return;
     const text = tooltipValueAt(lng, lat);
@@ -1829,20 +2411,17 @@ export async function initInteractiveMap(
    * the user can keep interacting with the map. Persisted per-layer in
    * localStorage so it only appears once.
    */
+  // Story 19.2 — copy lives in ui.ts (es/en) so the English toggle
+  // applies; one entry per weather layer.
   const LAYER_EXPLAINERS: Record<string, string> = {
-    radar:
-      'Radar muestra precipitación detectada (lluvia, nieve) en tiempo casi real desde RainViewer. Usa Animación de lluvia (P) para reproducir.',
-    satellite:
-      'Satélite usa NASA GIBS GOES-East IR — nubes en infrarrojo. Activa N para ver luces nocturnas (VIIRS).',
-    temperature:
-      'Temperatura del aire a 2 m sobre el suelo, gradiente continuo. Sub-opción Aparente incluye humedad y viento (sensación térmica).',
-    humidity:
-      'Humedad relativa o punto de rocío a 2 m, según sub-opción. Mayor humedad = sensación más pesada al mismo calor.',
-    pressure:
-      'Presión atmosférica. Sub-opción Nivel del mar (msl) es la presión reducida estándar usada en meteorología; Superficie respeta la altitud real.',
-    wind: 'Velocidad y dirección del viento a 10 m. Activa Rachas para ver las máximas instantáneas en lugar del promedio.',
-    sunlight:
-      'Posición del Sol y zonas en sombra (terminador día/noche). Activa Límite nocturno (O) para ver sólo la línea sobre cualquier capa.',
+    radar: t.layer_explainer_radar,
+    satellite: t.layer_explainer_satellite,
+    temperature: t.layer_explainer_temperature,
+    humidity: t.layer_explainer_humidity,
+    pressure: t.layer_explainer_pressure,
+    precipitation: t.layer_explainer_precipitation,
+    wind: t.layer_explainer_wind,
+    sunlight: t.layer_explainer_sunlight,
   };
   function maybeShowLayerExplainer(id: string): void {
     const text = LAYER_EXPLAINERS[id];
@@ -1850,7 +2429,7 @@ export async function initInteractiveMap(
     let seen: Record<string, true>;
     try {
       seen = JSON.parse(
-        window.localStorage.getItem('mw:seen-layer-explainer') ?? '{}',
+        window.localStorage.getItem('mw:seen-layer-explainer') ?? '{}'
       ) as Record<string, true>;
     } catch {
       seen = {};
@@ -1860,7 +2439,7 @@ export async function initInteractiveMap(
     try {
       window.localStorage.setItem(
         'mw:seen-layer-explainer',
-        JSON.stringify(seen),
+        JSON.stringify(seen)
       );
     } catch {
       /* private mode — fall through */
@@ -1889,15 +2468,14 @@ export async function initInteractiveMap(
           north: b.getNorth(),
         },
         8,
-        6,
+        6
       );
       fieldAbort?.abort();
       const ac = new AbortController();
       fieldAbort = ac;
       try {
-        const speedVar = windSubOption === 'rachas'
-          ? 'wind_gusts_10m'
-          : 'wind_speed_10m';
+        const speedVar =
+          windSubOption === 'rachas' ? 'wind_gusts_10m' : 'wind_speed_10m';
         // Cold-load resilience: same retry pattern as loadFieldGrid (#164).
         // Wind layer activation from a fresh URL hash like ?layer=wind
         // sometimes hit TypeError: Failed to fetch on first try and fell
@@ -1962,15 +2540,17 @@ export async function initInteractiveMap(
       activeLayer = id;
       tlFrames = windGrid.times.map((iso) => ({
         time: Math.floor(
-          Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000,
+          Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000
         ),
         path: '',
       }));
       const idx = fieldFrameIndex(windGrid.times, pendingSeekIso, Date.now());
+      const seekBeyond = seekBeyondGrid(windGrid.times, pendingSeekIso);
       pendingSeekIso = null;
       showTimeline(true);
       refreshLayerButtons();
       applyFrame(idx >= 0 ? idx : 0);
+      if (seekBeyond) void extendTimeline(seekBeyond);
       return;
     }
     if (def.kind === 'overlay') {
@@ -2014,22 +2594,30 @@ export async function initInteractiveMap(
       activeLayer = id;
       tlFrames = fieldGrid.times.map((iso) => ({
         time: Math.floor(
-          Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000,
+          Date.parse(/[Zz]|[+-]\d{2}:\d{2}$/.test(iso) ? iso : iso + 'Z') / 1000
         ),
         path: '',
       }));
       const idx = fieldFrameIndex(fieldGrid.times, pendingSeekIso, Date.now());
+      const seekBeyond = seekBeyondGrid(fieldGrid.times, pendingSeekIso);
       pendingSeekIso = null;
       showTimeline(true);
       refreshLayerButtons();
       applyFrame(idx >= 0 ? idx : 0);
+      // A deep link past +48 h (e.g. a shared 9-day view) pulls the
+      // extended window automatically, then lands on the asked frame.
+      if (seekBeyond) void extendTimeline(seekBeyond);
       return;
     }
     if (def.kind === 'raster-tile') {
       rvOpacity = def.defaultOpacity;
       if (opacityEl) opacityEl.value = String(Math.round(rvOpacity * 100));
-      const frames = framesForLayer(rvData, id);
-      if (!rvData || frames.length === 0) {
+      // Story 16.1 — satellite frames are a synthetic GIBS TIME axis
+      // (24 h of 10-min frames; daily for MODIS true colour), no longer
+      // the RainViewer IR manifest that the raster never actually used.
+      const frames =
+        id === 'satellite' ? satelliteAxis(false) : framesForLayer(rvData, id);
+      if ((id === 'radar' && !rvData) || frames.length === 0) {
         showMsg(t.map_layer_unavailable);
         activeLayer = 'base';
         tlStop();
@@ -2075,7 +2663,9 @@ export async function initInteractiveMap(
   function buildLayerButtons(): void {
     const wrap = opts.els.layerBtns;
     if (!wrap || !features.layerRail) return;
+    const allowed = features.railLayers ? new Set(features.railLayers) : null;
     for (const def of LAYERS) {
+      if (allowed && !allowed.has(def.id)) continue;
       const btn = document.createElement('button');
       btn.id = `layerbtn-${def.id}`;
       btn.type = 'button';
@@ -2085,11 +2675,9 @@ export async function initInteractiveMap(
       // zoom.earth-style icon prefix; falls back to text-only when LayerDef
       // has no icon glyph.
       if (def.icon) {
-        const iconSpan = document.createElement('span');
-        iconSpan.setAttribute('aria-hidden', 'true');
-        iconSpan.textContent = def.icon;
-        iconSpan.className = 'text-base leading-none';
-        btn.appendChild(iconSpan);
+        // Sprite icon (IconSprite.astro symbol) — monochrome, follows
+        // currentColor, identical on every OS unlike the emoji it replaced.
+        btn.appendChild(spriteIcon(def.icon, 'h-4 w-4 shrink-0'));
       }
       const labelSpan = document.createElement('span');
       labelSpan.textContent = t[def.labelKey as keyof typeof t];
@@ -2103,7 +2691,7 @@ export async function initInteractiveMap(
       if (!btn.getAttribute('aria-label')) {
         btn.setAttribute(
           'aria-label',
-          t[def.labelKey as keyof typeof t] ?? def.id,
+          t[def.labelKey as keyof typeof t] ?? def.id
         );
       }
       // Keyboard shortcut hint as a tiny trailing chip on desktop. Hidden
@@ -2129,75 +2717,109 @@ export async function initInteractiveMap(
   // timeline label re-renders so the user sees their preference take
   // effect immediately.
   // ----------------------------------------------------------------
+  // One toggle group per setting: `[data-mw-<attr>] button[data-val]`.
+  // Values are validated by normalizeSettings(), so an unknown data-val
+  // in the markup falls back to the default instead of persisting junk.
+  const SETTING_GROUPS: ReadonlyArray<{
+    attr: string;
+    key: keyof MapSettings;
+  }> = [
+    { attr: 'data-mw-tz', key: 'tz' },
+    { attr: 'data-mw-hour', key: 'hourFormat' },
+    // Story 16.4 — animation controls.
+    { attr: 'data-mw-loop', key: 'loopHours' },
+    { attr: 'data-mw-speed', key: 'playSpeed' },
+    { attr: 'data-mw-style', key: 'playStyle' },
+    { attr: 'data-mw-label', key: 'timeLabel' },
+    // Story 19.3 — display units.
+    { attr: 'data-mw-temp', key: 'tempUnit' },
+    { attr: 'data-mw-speed-unit', key: 'speedUnit' },
+    { attr: 'data-mw-pressure', key: 'pressureUnit' },
+    { attr: 'data-mw-distance', key: 'distanceUnit' },
+  ];
   function refreshSettingsButtons(): void {
-    if (!features.layerRail) return;
+    if (!features.settings) return;
     const cur = readSettings();
-    document
-      .querySelectorAll<HTMLButtonElement>('[data-mw-tz] button')
-      .forEach((b) => {
-        b.setAttribute('aria-pressed', String(b.dataset.val === cur.tz));
-      });
-    document
-      .querySelectorAll<HTMLButtonElement>('[data-mw-hour] button')
-      .forEach((b) => {
-        b.setAttribute(
-          'aria-pressed',
-          String(b.dataset.val === cur.hourFormat),
-        );
-      });
+    for (const g of SETTING_GROUPS) {
+      document
+        .querySelectorAll<HTMLButtonElement>(`[${g.attr}] button`)
+        .forEach((b) => {
+          b.setAttribute(
+            'aria-pressed',
+            String(b.dataset.val === String(cur[g.key]))
+          );
+        });
+    }
+  }
+  /** Re-render whatever reflects a setting live: the pressed states,
+   *  the timeline label (tz / hour format / label mode) and the tile
+   *  cross-fade (play style). Speed and loop window are read by the
+   *  player on its next tick, so nothing to push there. */
+  function afterSettingsChange(): void {
+    refreshSettingsButtons();
+    if (frameIndex >= 0 && tlFrames[frameIndex]) {
+      const tt = opts.els.tlTime;
+      if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
+    }
+    weatherRaster.setFadeMs(RASTER_FADE_MS[readSettings().playStyle]);
+    // Story 19.3 — units: legend scale + unit, city pills / tooltip
+    // values, and the open place card re-render in place.
+    renderLegend(legendKindFor());
+    refreshCityValues();
+    if (placeCardFc) paintPlaceCard();
+    isobarsLayer.setUnit(currentUnits().pressure);
+    crosshair.refresh();
   }
   function bindSettingsButtons(): void {
-    if (!features.layerRail) return;
-    document
-      .querySelectorAll<HTMLButtonElement>('[data-mw-tz] button')
-      .forEach((b) => {
-        b.addEventListener('click', () => {
-          const val = b.dataset.val === 'UTC' ? 'UTC' : 'local';
-          writeSettings({ ...readSettings(), tz: val });
-          refreshSettingsButtons();
-          // Re-render timeline label so the new tz takes effect.
-          if (frameIndex >= 0 && tlFrames[frameIndex]) {
-            const tt = opts.els.tlTime;
-            if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
-          }
+    if (!features.settings) return;
+    for (const g of SETTING_GROUPS) {
+      document
+        .querySelectorAll<HTMLButtonElement>(`[${g.attr}] button`)
+        .forEach((b) => {
+          b.addEventListener('click', () => {
+            writeSettings(
+              normalizeSettings({ ...readSettings(), [g.key]: b.dataset.val })
+            );
+            afterSettingsChange();
+          });
         });
-      });
-    document
-      .querySelectorAll<HTMLButtonElement>('[data-mw-hour] button')
-      .forEach((b) => {
-        b.addEventListener('click', () => {
-          const val = b.dataset.val === '12' ? '12' : '24';
-          writeSettings({ ...readSettings(), hourFormat: val });
-          refreshSettingsButtons();
-          if (frameIndex >= 0 && tlFrames[frameIndex]) {
-            const tt = opts.els.tlTime;
-            if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
-          }
-        });
-      });
+    }
   }
   bindSettingsButtons();
   refreshSettingsButtons();
+  // Story 16.4 — tapping the timeline pill cycles its label (both →
+  // clock → relative), zoom.earth's clock ↔ timeline toggle. A click,
+  // not a letter: every A–Z key is already bound (J is volcanoes).
+  if (tlTime) {
+    tlTime.addEventListener('click', () => {
+      const s = readSettings();
+      writeSettings({ ...s, timeLabel: nextTimeLabelMode(s.timeLabel) });
+      afterSettingsChange();
+    });
+  }
 
   // ----------------------------------------------------------------
   // Sub-options (zoom.earth's per-layer variants). Single generic
   // factory (createSubOptionsGroup) replaces five near-identical
   // copies — see src/lib/map/chrome/sub-options.ts.
   // ----------------------------------------------------------------
-  const tempSub = createSubOptionsGroup<TempSubOption>(opts.els.layerBtns ?? null, {
-    containerId: 'temp-sub-options',
-    getActive: () => tempSubOption,
-    onSelect: (id) => {
-      tempSubOption = id;
-      void setActiveLayer('temperature');
-    },
-    isVisible: () => activeLayer === 'temperature',
-    options: [
-      { id: 'actual', label: 'Actual' },
-      { id: 'aparente', label: 'Aparente' },
-      { id: 'bulbo', label: 'Bulbo húmedo' },
-    ],
-  });
+  const tempSub = createSubOptionsGroup<TempSubOption>(
+    opts.els.layerBtns ?? null,
+    {
+      containerId: 'temp-sub-options',
+      getActive: () => tempSubOption,
+      onSelect: (id) => {
+        tempSubOption = id;
+        void setActiveLayer('temperature');
+      },
+      isVisible: () => activeLayer === 'temperature',
+      options: [
+        { id: 'actual', label: 'Actual' },
+        { id: 'aparente', label: 'Aparente' },
+        { id: 'bulbo', label: 'Bulbo húmedo' },
+      ],
+    }
+  );
   const refreshTempSubOptions = (): void => tempSub.refresh();
 
   const humiditySub = createSubOptionsGroup<HumiditySubOption>(
@@ -2214,9 +2836,29 @@ export async function initInteractiveMap(
         { id: 'relativa', label: 'Relativa' },
         { id: 'rocio', label: 'Punto de rocío' },
       ],
-    },
+    }
   );
   const refreshHumiditySubOptions = (): void => humiditySub.refresh();
+
+  const precipSub = createSubOptionsGroup<PrecipSubOption>(
+    opts.els.layerBtns ?? null,
+    {
+      containerId: 'precipitation-sub-options',
+      getActive: () => precipSubOption,
+      onSelect: (id) => {
+        precipSubOption = id;
+        pendingSeekIso = activeFrameIso;
+        void setActiveLayer('precipitation');
+      },
+      isVisible: () => activeLayer === 'precipitation',
+      options: [
+        { id: 'lluvia', label: 'Lluvia' },
+        { id: 'nieve', label: 'Nieve' },
+        { id: 'probabilidad', label: 'Probabilidad' },
+      ],
+    }
+  );
+  const refreshPrecipSubOptions = (): void => precipSub.refresh();
 
   const pressureSub = createSubOptionsGroup<PressureSubOption>(
     opts.els.layerBtns ?? null,
@@ -2232,23 +2874,26 @@ export async function initInteractiveMap(
         { id: 'msl', label: 'Nivel del mar' },
         { id: 'surface', label: 'Superficie' },
       ],
-    },
+    }
   );
   const refreshPressureSubOptions = (): void => pressureSub.refresh();
 
-  const windSub = createSubOptionsGroup<WindSubOption>(opts.els.layerBtns ?? null, {
-    containerId: 'wind-sub-options',
-    getActive: () => windSubOption,
-    onSelect: (id) => {
-      windSubOption = id;
-      void setActiveLayer('wind');
-    },
-    isVisible: () => activeLayer === 'wind',
-    options: [
-      { id: 'velocidad', label: 'Velocidad' },
-      { id: 'rachas', label: 'Rachas' },
-    ],
-  });
+  const windSub = createSubOptionsGroup<WindSubOption>(
+    opts.els.layerBtns ?? null,
+    {
+      containerId: 'wind-sub-options',
+      getActive: () => windSubOption,
+      onSelect: (id) => {
+        windSubOption = id;
+        void setActiveLayer('wind');
+      },
+      isVisible: () => activeLayer === 'wind',
+      options: [
+        { id: 'velocidad', label: 'Velocidad' },
+        { id: 'rachas', label: 'Rachas' },
+      ],
+    }
+  );
   const refreshWindSubOptions = (): void => windSub.refresh();
 
   const satelliteSub = createSubOptionsGroup<SatelliteSubOption>(
@@ -2258,6 +2903,9 @@ export async function initInteractiveMap(
       getActive: () => satelliteSubOption,
       onSelect: (id) => {
         satelliteSubOption = id;
+        // Re-activation rebuilds the frame axis (daily vs 10-min);
+        // keep the user's scrub position across the switch.
+        pendingSeekIso = activeFrameIso;
         void setActiveLayer('satellite');
       },
       isVisible: () => activeLayer === 'satellite',
@@ -2266,7 +2914,7 @@ export async function initInteractiveMap(
         { id: 'ir', label: 'Infrarrojo' },
         { id: 'truecolor', label: 'Color real' },
       ],
-    },
+    }
   );
   const refreshSatelliteSubOptions = (): void => satelliteSub.refresh();
 
@@ -2296,7 +2944,10 @@ export async function initInteractiveMap(
       | 'webcams'
       | 'lakes'
       | 'histStorms'
-      | 'smnStateTint';
+      | 'smnStateTint'
+      | 'outlook'
+      | 'precipMode'
+      | 'confidence';
     label: string;
     shortcut: string;
     isEnabled: () => boolean;
@@ -2313,6 +2964,13 @@ export async function initInteractiveMap(
         tropicalEnabled = on;
         tropicalStormsOverlay.setEnabled(on);
       },
+    },
+    {
+      id: 'outlook',
+      label: 'Posible desarrollo (2 / 7 d)',
+      shortcut: '',
+      isEnabled: () => tropicalOutlookOverlay.isEnabled(),
+      setEnabled: (on) => tropicalOutlookOverlay.setEnabled(on),
     },
     {
       id: 'graticule',
@@ -2359,6 +3017,20 @@ export async function initInteractiveMap(
       shortcut: 'Q',
       isEnabled: () => radarCoverageOverlay.isEnabled(),
       setEnabled: (on) => radarCoverageOverlay.setEnabled(on),
+    },
+    {
+      id: 'precipMode',
+      label: 'Modo precipitación (satélite + nubes + radar)',
+      shortcut: '',
+      isEnabled: () => precipMode,
+      setEnabled: (on) => setPrecipMode(on),
+    },
+    {
+      id: 'confidence',
+      label: 'Incertidumbre (desacuerdo entre modelos)',
+      shortcut: '',
+      isEnabled: () => confidenceMode,
+      setEnabled: (on) => setConfidenceMode(on),
     },
     {
       id: 'clouds',
@@ -2475,14 +3147,14 @@ export async function initInteractiveMap(
   // Overlay registry — extracted to chrome/overlay-registry.ts. Owns
   // the Superposiciones panel build + the global keyboard shortcuts.
   const overlayRegistry = createOverlayRegistry(
-    { wrap: features.layerRail ? opts.els.overlayBtns ?? null : null },
+    { wrap: features.layerRail ? (opts.els.overlayBtns ?? null) : null },
     overlayDefs,
     {
       layers: LAYERS.filter(
-        (l): l is typeof l & { shortcut: string } => !!l.shortcut,
+        (l): l is typeof l & { shortcut: string } => !!l.shortcut
       ).map((l) => ({ shortcut: l.shortcut, id: l.id })),
       onLayerShortcut: (id) => void setActiveLayer(id),
-    },
+    }
   );
   overlayRegistry.build();
   const refreshOverlayCheckboxes = (): void => overlayRegistry.refresh();
@@ -2494,7 +3166,7 @@ export async function initInteractiveMap(
     ).installShortcuts();
   }
 
-  const opacityEl = features.layerRail ? opts.els.opacity ?? null : null;
+  const opacityEl = features.layerRail ? (opts.els.opacity ?? null) : null;
   if (opacityEl) {
     opacityEl.value = String(Math.round(rvOpacity * 100));
     opacityEl.addEventListener('input', () => {
@@ -2522,11 +3194,158 @@ export async function initInteractiveMap(
     () => tlFrames.length,
     () => frameIndex,
     (i) => applyFrame(i),
+    {
+      // Story 16.4 — speed and loop window come from settings and are
+      // read on every tick, so the ⚙ panel applies live.
+      getIntervalMs: () => PLAY_INTERVAL_MS[readSettings().playSpeed],
+      getLoopRange: () =>
+        loopRange(
+          tlFrames.map((f) => f.time),
+          readSettings().loopHours,
+          Math.floor(Date.now() / 1000)
+        ),
+    }
   );
   const tlStop = (): void => tlPlayer.stop();
   const tlStart = (): void => tlPlayer.start();
   const tlReducedMotion = tlPlayer.reducedMotion();
   tlPlayBtn?.addEventListener('click', () => tlPlayer.toggle());
+
+  // ----------------------------------------------------------------
+  // Story 15.1 — "Ver 10 días". Field and wind layers boot on the 2-day
+  // hourly window (pre-baked snapshots, cheap). The 10-day window is
+  // fetched on demand at 3-hourly steps (EXTENDED_FIELD_RANGE) and
+  // merged under the hourly frames, so every index-aligned consumer
+  // (raster, tooltip, isobars, city pills, wind texture) keeps working
+  // unchanged — the frame axis simply gets longer. Quota: no extra
+  // calls until the user asks; cachedFetch dedupes for 10 min.
+  // ----------------------------------------------------------------
+  function framesFromTimes(times: string[]): RadarFrame[] {
+    return times.map((iso) => ({
+      time: Math.floor(parseUtcMs(iso) / 1000),
+      path: '',
+    }));
+  }
+
+  /** ISO the user asked for (hash `t=`) when it lies past the grid's
+   *  last frame — the cue to extend automatically. */
+  function seekBeyondGrid(times: string[], iso: string | null): string | null {
+    if (!iso || times.length === 0) return null;
+    const ms = parseUtcMs(iso);
+    if (!Number.isFinite(ms)) return null;
+    return ms > parseUtcMs(times[times.length - 1]) ? iso : null;
+  }
+
+  /** Satellite timeline axis (Story 16.1). Daily products get one frame
+   *  per day; GOES gets 10-minute frames for 24 h, or the 10-day
+   *  hourly+tail axis when extended. */
+  function satelliteAxis(extended: boolean): RadarFrame[] {
+    const now = Math.floor(Date.now() / 1000);
+    if (satelliteSubOption === 'truecolor') return satelliteDailyFrames(now);
+    return extended ? satelliteFramesExtended(now) : satelliteFrames(now);
+  }
+
+  function canExtendTimeline(): boolean {
+    const kind = getLayerDef(activeLayer)?.kind;
+    if (kind === 'field') return !!fieldGrid && !isExtendedGrid(fieldGrid);
+    if (kind === 'particles') return !!windGrid && !isExtendedGrid(windGrid);
+    if (activeLayer === 'satellite') {
+      if (satelliteSubOption === 'truecolor' || tlFrames.length < 2)
+        return false;
+      const span = tlFrames[tlFrames.length - 1].time - tlFrames[0].time;
+      return span <= 2 * 86400;
+    }
+    return false;
+  }
+
+  function syncExtendButton(): void {
+    const btn = document.getElementById(
+      'tl-extend'
+    ) as HTMLButtonElement | null;
+    if (!btn) return;
+    const busy = extendInFlight !== null;
+    btn.hidden = !busy && !canExtendTimeline();
+    btn.disabled = busy;
+    btn.textContent = busy ? t.timeline_extending : t.timeline_extend;
+  }
+
+  async function extendTimeline(
+    seekIso: string | null = null
+  ): Promise<boolean> {
+    if (extendInFlight) return extendInFlight;
+    const kind = getLayerDef(activeLayer)?.kind;
+    if (!canExtendTimeline()) return false;
+    const layerAtStart = activeLayer;
+    const keepIso = seekIso ?? activeFrameIso;
+    if (activeLayer === 'satellite') {
+      // No fetch needed: GIBS serves any instant in its window, so the
+      // axis just gets longer (10 days) and we re-seek to the same time.
+      tlFrames = satelliteAxis(true);
+      const now = Math.floor(Date.now() / 1000);
+      const idx = seekIndexForIso(tlFrames, keepIso, now);
+      applyFrame(idx >= 0 ? idx : tlFrames.length - 1);
+      syncExtendButton();
+      return true;
+    }
+    const run = (async (): Promise<boolean> => {
+      try {
+        let times: string[] | null = null;
+        if (kind === 'field') {
+          const cfg = FIELD_CONFIGS[activeLayer];
+          if (!fieldGrid || !cfg) return false;
+          const pts = fieldGrid.points.map((p) => ({ lat: p.lat, lng: p.lng }));
+          const json = await fetchFieldChunks(pts, cfg.hourlyVar, deps.fetch, {
+            model: activeModel,
+            range: EXTENDED_FIELD_RANGE,
+          });
+          const ext = parseFieldResponse(json, pts, cfg.hourlyVar);
+          if (!ext || activeLayer !== layerAtStart || !fieldGrid) return false;
+          const merged = mergeFieldGrids(fieldGrid, ext);
+          if (!merged) return false;
+          fieldGrid = merged;
+          if (activeLayer === 'temperature') lastTempGrid = merged;
+          else if (activeLayer === 'humidity') lastHumidityGrid = merged;
+          else if (activeLayer === 'pressure') lastPressureGrid = merged;
+          times = merged.times;
+        } else {
+          if (!windGrid) return false;
+          const pts = windGrid.points.map((p) => ({ lat: p.lat, lng: p.lng }));
+          const speedVar =
+            windSubOption === 'rachas' ? 'wind_gusts_10m' : 'wind_speed_10m';
+          const json = await fetchWindChunks(pts, speedVar, deps.fetch, {
+            model: activeModel,
+            range: EXTENDED_FIELD_RANGE,
+          });
+          const ext = parseWindResponse(json, pts, speedVar);
+          if (!ext || activeLayer !== layerAtStart || !windGrid) return false;
+          const merged = mergeWindGrids(windGrid, ext);
+          if (!merged) return false;
+          windGrid = merged;
+          windTexDirty = true;
+          times = merged.times;
+        }
+        tlFrames = framesFromTimes(times);
+        const idx = fieldFrameIndex(times, keepIso, Date.now());
+        applyFrame(idx >= 0 ? idx : 0);
+        return true;
+      } catch {
+        showMsg(t.timeline_extend_failed);
+        return false;
+      } finally {
+        extendInFlight = null;
+        syncExtendButton();
+      }
+    })();
+    extendInFlight = run;
+    syncExtendButton();
+    return run;
+  }
+
+  const placeCardEscHandler = (e: KeyboardEvent): void => {
+    if (e.key === 'Escape' && placeCardEl && !placeCardEl.hidden)
+      closePlaceCard();
+  };
+  document.addEventListener('keydown', placeCardEscHandler);
 
   // Wide-control surfacing timers (set inside the timeline block below),
   // hoisted so destroy() can clear them before they self-clear.
@@ -2542,6 +3361,14 @@ export async function initInteractiveMap(
     opts.els.tlNext?.addEventListener('click', () => {
       if (tlFrames.length) {
         tlStop();
+        if (frameIndex >= tlFrames.length - 1 && canExtendTimeline()) {
+          // Nudging past the last 2-day frame is the natural "more"
+          // gesture: pull the 10-day window, then step onto it.
+          void extendTimeline().then((ok) => {
+            if (ok) applyFrame(frameIndex + 1);
+          });
+          return;
+        }
         applyFrame(frameIndex + 1);
       }
     });
@@ -2555,26 +3382,54 @@ export async function initInteractiveMap(
     // ↑↓ keys for hour and day). We compute the day-stride dynamically
     // from the frame timestamps because raster-tile frames are usually
     // ~10 min apart (RainViewer) while field/wind frames are 1 h apart.
-    const dayStride = (): number => {
-      if (tlFrames.length < 2) return 0;
+    // Time-based rather than "24 frames": once the 10-day window is
+    // merged in, the frame stride changes from 1 h to 3 h past +48 h
+    // (Story 15.1), so a fixed frame count would skip 3 days.
+    const frameIndexShifted = (bySec: number): number => {
+      const cur = tlFrames[frameIndex]?.time;
+      if (typeof cur !== 'number') return frameIndex;
+      const target = cur + bySec;
+      let best = frameIndex;
+      let bestDelta = Infinity;
+      for (let i = 0; i < tlFrames.length; i++) {
+        const tt = tlFrames[i]?.time;
+        if (typeof tt !== 'number') continue;
+        const d = Math.abs(tt - target);
+        if (d < bestDelta) {
+          best = i;
+          bestDelta = d;
+        }
+      }
+      return best;
+    };
+    const spansDays = (): boolean => {
+      if (tlFrames.length < 2) return false;
       const a = tlFrames[0]?.time;
-      const b = tlFrames[1]?.time;
-      if (typeof a !== 'number' || typeof b !== 'number') return 0;
-      const stepSec = Math.abs(b - a);
-      if (stepSec <= 0) return 0;
-      return Math.max(1, Math.round(86400 / stepSec));
+      const b = tlFrames[tlFrames.length - 1]?.time;
+      return typeof a === 'number' && typeof b === 'number' && b - a >= 86400;
     };
     document.getElementById('tl-day-prev')?.addEventListener('click', () => {
       if (tlFrames.length) {
         tlStop();
-        applyFrame(frameIndex - dayStride());
+        applyFrame(frameIndexShifted(-86400));
       }
     });
     document.getElementById('tl-day-next')?.addEventListener('click', () => {
       if (tlFrames.length) {
         tlStop();
-        applyFrame(frameIndex + dayStride());
+        const next = frameIndexShifted(86400);
+        if (next === frameIndex && canExtendTimeline()) {
+          void extendTimeline().then((ok) => {
+            if (ok) applyFrame(frameIndexShifted(86400));
+          });
+          return;
+        }
+        applyFrame(next);
       }
+    });
+    document.getElementById('tl-extend')?.addEventListener('click', () => {
+      tlStop();
+      void extendTimeline();
     });
     document.getElementById('tl-now')?.addEventListener('click', () => {
       if (tlFrames.length) {
@@ -2601,8 +3456,8 @@ export async function initInteractiveMap(
       const dayPrev = document.getElementById('tl-day-prev');
       const dayNext = document.getElementById('tl-day-next');
       const now = document.getElementById('tl-now');
-      // Day-stride buttons only when there are ≥48 frames covered (~2 days).
-      const hasDays = dayStride() > 0 && tlFrames.length >= dayStride();
+      // Day-stride buttons only when the frames span at least a day.
+      const hasDays = spansDays();
       dayPrev?.classList.toggle('hidden', !hasDays);
       dayNext?.classList.toggle('hidden', !hasDays);
       now?.classList.toggle('hidden', false);
@@ -2612,7 +3467,7 @@ export async function initInteractiveMap(
     surfaceInterval = window.setInterval(surfaceWideControls, 1500);
     surfaceTimeout = window.setTimeout(
       () => window.clearInterval(surfaceInterval),
-      30000,
+      30000
     );
   }
 
@@ -2626,7 +3481,11 @@ export async function initInteractiveMap(
     function expandSearch(): void {
       q?.classList.remove('hidden');
       searchToggle?.setAttribute('aria-expanded', 'true');
-      try { q?.focus(); } catch { /* ignore */ }
+      try {
+        q?.focus();
+      } catch {
+        /* ignore */
+      }
     }
     function collapseSearch(): void {
       if (!q || q.value.trim().length > 0) return;
@@ -2710,23 +3569,64 @@ export async function initInteractiveMap(
   }
 
   if (features.locateButton && opts.els.locate) {
+    // Shared flow with the home CTA (src/lib/locate-flow.ts). Here the
+    // final action is a PIN — the map never navigates away.
     opts.els.locate.addEventListener('click', () => {
-      if (!('geolocation' in navigator)) {
-        showMsg(t.geo_denied);
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(
-        (pos) =>
-          setUserPin(
-            t.map_locate,
-            pos.coords.latitude,
-            pos.coords.longitude,
-            'geo',
-          ),
-        () => showMsg(t.geo_denied),
-        { timeout: 10000 },
-      );
+      void runLocateFlow({
+        onResolved: (lat, lng) => setUserPin(t.map_locate, lat, lng, 'geo'),
+        onError: (reason) => showMsg(t[failureMessageKey(reason)]),
+      });
     });
+  }
+
+  // ----------------------------------------------------------------
+  // Story 19.2 — first-visit welcome card. Non-modal (the map stays
+  // usable underneath), shown once per browser (localStorage), never on
+  // embeds (features.welcome is only set by the full-page maps).
+  // ----------------------------------------------------------------
+  const WELCOME_KEY = 'mw:welcomed';
+  const welcomeEl = features.welcome
+    ? document.getElementById('mw-welcome')
+    : null;
+  if (welcomeEl) {
+    const welcomed = ((): boolean => {
+      try {
+        return window.localStorage.getItem(WELCOME_KEY) === '1';
+      } catch {
+        return false;
+      }
+    })();
+    const dismissWelcome = (): void => {
+      welcomeEl.hidden = true;
+      try {
+        window.localStorage.setItem(WELCOME_KEY, '1');
+      } catch {
+        /* private mode — the card simply returns next time */
+      }
+      document.removeEventListener('keydown', welcomeEsc);
+    };
+    const welcomeEsc = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape' && !welcomeEl.hidden) dismissWelcome();
+    };
+    if (!welcomed) {
+      welcomeEl.hidden = false;
+      document
+        .getElementById('mw-welcome-locate')
+        ?.addEventListener('click', () => {
+          dismissWelcome();
+          if (opts.els.locate) opts.els.locate.click();
+          else
+            void runLocateFlow({
+              onResolved: (lat, lng) =>
+                setUserPin(t.map_locate, lat, lng, 'geo'),
+              onError: (reason) => showMsg(t[failureMessageKey(reason)]),
+            });
+        });
+      document
+        .getElementById('mw-welcome-dismiss')
+        ?.addEventListener('click', dismissWelcome);
+      document.addEventListener('keydown', welcomeEsc);
+    }
   }
 
   // ----------------------------------------------------------------
@@ -2737,13 +3637,22 @@ export async function initInteractiveMap(
   // Measure-ESC keydown handler (set inside the block below), hoisted
   // so destroy() can remove the document listener.
   let measureEscHandler: ((e: KeyboardEvent) => void) | null = null;
-  if (features.layerRail) {
+  if (features.tools) {
     const MEASURE_SOURCE = 'mw-measure-src';
     const MEASURE_LINE_LAYER = 'mw-measure-line';
     const MEASURE_POINTS_LAYER = 'mw-measure-points';
     type MeasureMode = 'distance' | 'area' | null;
     let measureMode: MeasureMode = null;
     let measurePts: [number, number][] = [];
+    // Story 18.3 — crosshair ("mira") mode: the active layer's value at
+    // the map centre, for phones where hover never happens.
+    const crossBtn = document.getElementById('mw-crosshair-btn');
+    if (crossBtn) {
+      crossBtn.addEventListener('click', () => {
+        crosshair.toggle();
+        crossBtn.setAttribute('aria-pressed', String(crosshair.isEnabled()));
+      });
+    }
     const distBtn = document.getElementById('mw-measure-distance');
     const areaBtn = document.getElementById('mw-measure-area');
     const wrap = document.getElementById('mw-measure-wrap');
@@ -2786,8 +3695,7 @@ export async function initInteractiveMap(
     function refreshMeasureGeometry(): void {
       ensureMeasureLayers();
       const src = map.getSource(MEASURE_SOURCE) as
-        | maplibregl.GeoJSONSource
-        | undefined;
+        maplibregl.GeoJSONSource | undefined;
       if (!src) return;
       const features: Feature[] = measurePts.map((p) => ({
         type: 'Feature',
@@ -2820,7 +3728,7 @@ export async function initInteractiveMap(
         } else {
           const km = measurePolylineLen(measurePts);
           const n = measurePts.length - 1;
-          resultEl.textContent = `${measureFmtDist(km)} · ${n} ${n === 1 ? 'segmento' : 'segmentos'}`;
+          resultEl.textContent = `${formatDistanceKm(km, currentUnits().distance)} · ${n} ${n === 1 ? 'segmento' : 'segmentos'}`;
         }
       } else {
         if (measurePts.length < 3) {
@@ -2872,7 +3780,7 @@ export async function initInteractiveMap(
   // NWP model. State is mirrored into the URL hash so #model=icon_seamless
   // round-trips. Changing model invalidates the cached grids and forces
   // a refetch via setActiveLayer.
-  if (features.layerRail) {
+  if (features.modelToggle) {
     // Model toggle pills (plan P1.1) — DOM wiring extracted to
     // src/lib/map/chrome/model-toggle.ts. The caller still owns the
     // activeModel variable + the cache-invalidation side-effects.
@@ -2896,7 +3804,7 @@ export async function initInteractiveMap(
           void setActiveLayer(activeLayer);
         }
         syncHash();
-      },
+      }
     );
   }
 
@@ -2905,17 +3813,44 @@ export async function initInteractiveMap(
   // layers and visually diff "antes" vs "ahora". Doesn't require any
   // extra network fetches — pure client-side canvas → data URL.
   // ----------------------------------------------------------------
-  if (features.layerRail) {
+  if (features.tools) {
     // Snapshot compare tool — extracted to chrome/snapshot-compare.ts.
-    createSnapshotCompare({
-      map,
-      captureBtn: document.getElementById('mw-snapshot-capture'),
-      toggleBtn: document.getElementById('mw-snapshot-toggle'),
-      clearBtn: document.getElementById('mw-snapshot-clear'),
-      imgEl: document.getElementById(
-        'mw-snapshot-img',
-      ) as HTMLImageElement | null,
-    }).refresh();
+    createSnapshotCompare(
+      {
+        map,
+        captureBtn: document.getElementById('mw-snapshot-capture'),
+        compareBtn: document.getElementById('mw-snapshot-24h'),
+        toggleBtn: document.getElementById('mw-snapshot-toggle'),
+        clearBtn: document.getElementById('mw-snapshot-clear'),
+        imgEl: document.getElementById(
+          'mw-snapshot-img'
+        ) as HTMLImageElement | null,
+      },
+      {
+        // Story 13.5 — jump the active timeline by ±N s (nearest frame).
+        shiftTime: (bySec) => {
+          if (tlFrames.length < 2 || frameIndex < 0) {
+            showMsg(t.map_layer_unavailable);
+            window.setTimeout(hideMsg, 3000);
+            return false;
+          }
+          tlStop();
+          const target = tlFrames[frameIndex].time + bySec;
+          let best = frameIndex;
+          let bestDelta = Infinity;
+          tlFrames.forEach((f, i) => {
+            const d = Math.abs(f.time - target);
+            if (d < bestDelta) {
+              best = i;
+              bestDelta = d;
+            }
+          });
+          if (best === frameIndex) return false;
+          applyFrame(best);
+          return true;
+        },
+      }
+    ).refresh();
   }
 
   return {
@@ -2939,6 +3874,8 @@ export async function initInteractiveMap(
         document.removeEventListener('click', acOutsideClickHandler);
       if (measureEscHandler)
         document.removeEventListener('keydown', measureEscHandler);
+      document.removeEventListener('keydown', placeCardEscHandler);
+      closePlaceCard();
       overlayRegistry.dispose();
       try {
         map.remove();

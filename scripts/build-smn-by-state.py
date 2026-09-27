@@ -33,6 +33,81 @@ import xml.etree.ElementTree as ET
 
 FEED_PATH = 'src/data/smn-feed.xml'
 OUT_PATH = 'public/data/smn-by-state.json'
+ALERTS_PATH = 'public/data/smn-alerts.json'
+ALERTS_KEEP = 200
+# Emoji tag ntfy renders on the notification (kept out of the
+# alias dict literal shape so the TS parity test doesn't read it as a slug).
+NTFY_TAG = 'warning'
+SITE = 'https://artemiop.com/mexico-weather'
+
+# slug → display name for notification titles (Story 17.2). Keep in
+# sync with src/lib/mx-states.ts.
+STATE_NAMES = {
+    'aguascalientes': 'Aguascalientes', 'baja-california': 'Baja California',
+    'baja-california-sur': 'Baja California Sur', 'campeche': 'Campeche',
+    'chiapas': 'Chiapas', 'chihuahua': 'Chihuahua', 'cdmx': 'Ciudad de México',
+    'coahuila': 'Coahuila', 'colima': 'Colima', 'durango': 'Durango',
+    'estado-de-mexico': 'Estado de México', 'guanajuato': 'Guanajuato',
+    'guerrero': 'Guerrero', 'hidalgo': 'Hidalgo', 'jalisco': 'Jalisco',
+    'michoacan': 'Michoacán', 'morelos': 'Morelos', 'nayarit': 'Nayarit',
+    'nuevo-leon': 'Nuevo León', 'oaxaca': 'Oaxaca', 'puebla': 'Puebla',
+    'queretaro': 'Querétaro', 'quintana-roo': 'Quintana Roo',
+    'san-luis-potosi': 'San Luis Potosí', 'sinaloa': 'Sinaloa', 'sonora': 'Sonora',
+    'tabasco': 'Tabasco', 'tamaulipas': 'Tamaulipas', 'tlaxcala': 'Tlaxcala',
+    'veracruz': 'Veracruz', 'yucatan': 'Yucatán', 'zacatecas': 'Zacatecas',
+}
+
+
+def _load_json(path: str):
+    try:
+        with open(path, encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+
+
+def detect_events(prev: dict | None, by_state: dict, global_avisos: list, now_iso: str) -> list[dict]:
+    """New avisos since the previous index, as ntfy events. One event
+    per (state, aviso); national ones go to the `climamx-smn` topic.
+    Pure — exercised offline by the workflow's dry run."""
+    import hashlib
+
+    def key(rec):
+        # Title only: the scraper stamps `now()` on undated items, so a
+        # pubDate-based key would re-notify the same aviso every hour.
+        # SMN titles carry the date for the periodic reports anyway.
+        return (rec.get('title') or '').strip()
+
+    prev_states = {k: {key(r) for r in v} for k, v in ((prev or {}).get('byState') or {}).items()}
+    prev_global = {key(r) for r in ((prev or {}).get('global') or [])}
+    events = []
+
+    def make(slug, rec, topic, where):
+        h = hashlib.sha1((slug + '|' + key(rec)).encode('utf-8')).hexdigest()[:16]
+        sev = (rec.get('severity') or '').strip()
+        head = f'⚠️ SMN {where}' + (f' · {sev}' if sev else '')
+        return {
+            'id': h,
+            'ts': now_iso,
+            'state': slug,
+            'topic': topic,
+            'title': head,
+            'body': (rec.get('title') or '')[:220],
+            'click': f'{SITE}/estado/{slug}/' if slug != '_global' else f'{SITE}/',
+            'tags': NTFY_TAG,
+            'priority': 4 if 'alerta' in sev.lower() or 'rojo' in sev.lower() else 3,
+        }
+
+    for slug, recs in by_state.items():
+        seen = prev_states.get(slug, set())
+        for r in recs:
+            if key(r) not in seen:
+                events.append(make(slug, r, f'climamx-smn-{slug}', STATE_NAMES.get(slug, slug)))
+    for r in global_avisos:
+        if key(r) not in prev_global:
+            events.append(make('_global', r, 'climamx-smn', 'nacional'))
+    return events
+
 
 # state name → slug.  Each name MUST stay in sync with src/lib/mx-states.ts.
 # Aliases handle the punctuation/abbreviation variants SMN uses ("Edo.
@@ -210,9 +285,26 @@ def main() -> None:
         'global': global_avisos,
     }
 
+    prev = _load_json(OUT_PATH)
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, 'w', encoding='utf-8') as f:
         json.dump(doc, f, separators=(',', ':'), ensure_ascii=False)
+
+    # Story 17.2 — per-state alert events for scripts/publish-ntfy.py.
+    import time as _time
+    now_iso = _time.strftime('%Y-%m-%dT%H:%M:%SZ', _time.gmtime())
+    alerts = _load_json(ALERTS_PATH) or {'events': [], 'published': []}
+    fresh_all = detect_events(prev, by_state, global_avisos, now_iso)
+    known = {e.get('id') for e in alerts.get('events') or []}
+    fresh = [e for e in fresh_all if e['id'] not in known]
+    alerts['events'] = (fresh + list(alerts.get('events') or []))[:ALERTS_KEEP]
+    alerts['updated'] = now_iso
+    if prev is None:
+        # First run: seed as published so nobody gets the whole backlog.
+        alerts['published'] = list({*(alerts.get('published') or []), *(e['id'] for e in fresh)})
+    with open(ALERTS_PATH, 'w', encoding='utf-8') as f:
+        json.dump(alerts, f, separators=(',', ':'), ensure_ascii=False)
+    print(f'{len(fresh)} new SMN alert event(s) → {ALERTS_PATH}', file=sys.stderr)
     size_kb = os.path.getsize(OUT_PATH) / 1024
     print(
         f'indexed {total} avisos: {doc["metadata"]["with_state"]} state-tagged, '

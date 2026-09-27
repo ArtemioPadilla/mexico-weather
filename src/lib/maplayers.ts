@@ -2,10 +2,26 @@
 // Single source of truth for valid layer ids (consumed by maphash.ts).
 
 export type LayerId =
-  | 'base' | 'radar' | 'satellite' | 'temperature' | 'humidity' | 'pressure' | 'wind' | 'sunlight';
+  | 'base'
+  | 'radar'
+  | 'satellite'
+  | 'temperature'
+  | 'humidity'
+  | 'pressure'
+  | 'precipitation'
+  | 'wind'
+  | 'sunlight';
 
 export const LAYER_IDS = [
-  'base', 'radar', 'satellite', 'temperature', 'humidity', 'pressure', 'wind', 'sunlight',
+  'base',
+  'radar',
+  'satellite',
+  'temperature',
+  'humidity',
+  'pressure',
+  'precipitation',
+  'wind',
+  'sunlight',
 ] as const;
 
 export interface LayerDef {
@@ -15,8 +31,9 @@ export interface LayerDef {
   kind: 'base' | 'raster-tile' | 'field' | 'particles' | 'overlay';
   /** Initial layer opacity (0..1); 1 for the base map. */
   defaultOpacity: number;
-  /** Emoji glyph shown in the layer rail next to the label — zoom.earth
-   *  parity. Optional: rail renders text-only when absent. */
+  /** Sprite icon id (without the `i-` prefix) shown in the layer rail
+   *  next to the label — see src/components/common/IconSprite.astro.
+   *  Optional: rail renders text-only when absent. */
   icon?: string;
   /** Single uppercase letter that activates this layer via keyboard.
    *  Matches zoom.earth's shortcut convention. */
@@ -24,14 +41,80 @@ export interface LayerDef {
 }
 
 export const LAYERS: LayerDef[] = [
-  { id: 'base', labelKey: 'map_layer_base', kind: 'base', defaultOpacity: 1, icon: '🗺️', shortcut: 'M' },
-  { id: 'radar', labelKey: 'map_layer_radar', kind: 'raster-tile', defaultOpacity: 0.8, icon: '🌧️', shortcut: 'R' },
-  { id: 'satellite', labelKey: 'map_layer_satellite', kind: 'raster-tile', defaultOpacity: 1, icon: '📡', shortcut: 'A' },
-  { id: 'temperature', labelKey: 'map_layer_temperature', kind: 'field', defaultOpacity: 0.75, icon: '🌡️', shortcut: 'T' },
-  { id: 'humidity', labelKey: 'map_layer_humidity', kind: 'field', defaultOpacity: 0.65, icon: '💧', shortcut: 'H' },
-  { id: 'pressure', labelKey: 'map_layer_pressure', kind: 'field', defaultOpacity: 0.7, icon: '🧭', shortcut: 'P' },
-  { id: 'wind', labelKey: 'map_layer_wind', kind: 'particles', defaultOpacity: 1, icon: '💨', shortcut: 'V' },
-  { id: 'sunlight', labelKey: 'map_layer_sunlight', kind: 'overlay', defaultOpacity: 0.45, icon: '☀️', shortcut: 'L' },
+  {
+    id: 'base',
+    labelKey: 'map_layer_base',
+    kind: 'base',
+    defaultOpacity: 1,
+    icon: 'map',
+    shortcut: 'M',
+  },
+  {
+    id: 'radar',
+    labelKey: 'map_layer_radar',
+    kind: 'raster-tile',
+    defaultOpacity: 0.8,
+    icon: 'radar',
+    shortcut: 'R',
+  },
+  {
+    id: 'satellite',
+    labelKey: 'map_layer_satellite',
+    kind: 'raster-tile',
+    defaultOpacity: 1,
+    icon: 'satellite',
+    shortcut: 'A',
+  },
+  {
+    id: 'temperature',
+    labelKey: 'map_layer_temperature',
+    kind: 'field',
+    defaultOpacity: 0.75,
+    icon: 'thermometer',
+    shortcut: 'T',
+  },
+  {
+    id: 'humidity',
+    labelKey: 'map_layer_humidity',
+    kind: 'field',
+    defaultOpacity: 0.65,
+    icon: 'droplet',
+    shortcut: 'H',
+  },
+  {
+    id: 'pressure',
+    labelKey: 'map_layer_pressure',
+    kind: 'field',
+    defaultOpacity: 0.7,
+    icon: 'gauge',
+    shortcut: 'P',
+  },
+  // Story 15.5 — forecast precipitation as a field (rain / snow /
+  // probability). No letter left for a shortcut: every A–Z key is
+  // already bound to a layer or overlay.
+  {
+    id: 'precipitation',
+    labelKey: 'map_layer_precipitation',
+    kind: 'field',
+    defaultOpacity: 0.8,
+    icon: 'cloud-rain',
+  },
+  {
+    id: 'wind',
+    labelKey: 'map_layer_wind',
+    kind: 'particles',
+    defaultOpacity: 1,
+    icon: 'wind',
+    shortcut: 'V',
+  },
+  {
+    id: 'sunlight',
+    labelKey: 'map_layer_sunlight',
+    kind: 'overlay',
+    defaultOpacity: 0.45,
+    icon: 'sun',
+    shortcut: 'L',
+  },
 ];
 
 export function getLayer(id: string): LayerDef | undefined {
@@ -72,7 +155,7 @@ function collectFrames(arr: unknown): RadarFrame[] {
       (f): f is RadarFrame =>
         !!f &&
         typeof (f as RadarFrame).time === 'number' &&
-        typeof (f as RadarFrame).path === 'string',
+        typeof (f as RadarFrame).path === 'string'
     )
     .map((f) => ({ time: f.time, path: f.path }));
 }
@@ -83,11 +166,14 @@ export function parseRainviewerManifest(json: unknown): RainviewerData | null {
   const o = json as Record<string, unknown>;
   const radar = o.radar as Record<string, unknown> | undefined;
   if (typeof o.host !== 'string' || !radar) return null;
-  const frames = [...collectFrames(radar.past), ...collectFrames(radar.nowcast)].sort(
-    (a, b) => a.time - b.time,
-  );
+  const frames = [
+    ...collectFrames(radar.past),
+    ...collectFrames(radar.nowcast),
+  ].sort((a, b) => a.time - b.time);
   const satellite = o.satellite as Record<string, unknown> | undefined;
-  const satelliteFrames = collectFrames(satellite?.infrared).sort((a, b) => a.time - b.time);
+  const satelliteFrames = collectFrames(satellite?.infrared).sort(
+    (a, b) => a.time - b.time
+  );
   if (frames.length === 0 && satelliteFrames.length === 0) return null;
   return { host: o.host, frames, satelliteFrames };
 }
@@ -100,7 +186,11 @@ export interface TileOpts {
 }
 
 /** RainViewer raster tile template (keeps literal {z}/{x}/{y} for MapLibre). */
-export function rainviewerTileUrl(host: string, frame: RadarFrame, opts: TileOpts = {}): string {
+export function rainviewerTileUrl(
+  host: string,
+  frame: RadarFrame,
+  opts: TileOpts = {}
+): string {
   const size = opts.size ?? 256;
   const color = opts.color ?? 4;
   const smooth = opts.smooth === false ? 0 : 1;

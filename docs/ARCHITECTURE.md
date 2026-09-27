@@ -65,7 +65,7 @@ src/lib/map/
 │
 ├── plugins/
 │   ├── base-layers/               # mutually exclusive
-│   │   ├── basemap.ts             # CARTO Dark Matter / OSM
+│   │   ├── basemap.ts             # Esri Canvas Light/Dark Gray
 │   │   ├── radar.ts               # RainViewer
 │   │   ├── satellite.ts           # RainViewer IR (later: NASA GIBS GOES)
 │   │   ├── temperature.ts         # Open-Meteo + sub-opts actual/aparente
@@ -132,7 +132,7 @@ export interface BaseLayer {
   id: string;                       // 'temperature'
   kind: 'base';
   label: I18nString;
-  icon: string;                     // emoji or SVG path
+  icon: string;                     // IconSprite.astro symbol id (e.g. "radar")
   shortcut?: string;                // 'T'
 
   // sub-options like Actual/Aparente

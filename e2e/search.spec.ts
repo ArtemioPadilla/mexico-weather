@@ -35,7 +35,7 @@ test.describe('search & forecast (deterministic, mocked Open-Meteo)', () => {
     ).toBeVisible();
   });
 
-  test('/forecast with query params renders current temp, 7-day section and detail panels', async ({
+  test('/forecast with query params renders current temp, 10-day section and detail panels', async ({
     page,
   }) => {
     await page.goto(
@@ -49,12 +49,12 @@ test.describe('search & forecast (deterministic, mocked Open-Meteo)', () => {
     // Current temperature is 24.7 → rounded to 25°.
     await expect(page.getByText('25°', { exact: true })).toBeVisible();
 
-    // 7-day outlook section.
+    // 10-day outlook section.
     await expect(
-      page.getByRole('heading', { name: '7 días' }),
+      page.getByRole('heading', { name: '10 días' }),
     ).toBeVisible();
 
-    // The 7-day rows must render a temperature-range bar fill: at least one
+    // The daily rows must render a temperature-range bar fill: at least one
     // <i> with an inline `left:` style under the #fc-root section.
     const barFill = page.locator('#fc-root i[style*="left:"]').first();
     await expect(barFill).toHaveCount(1);

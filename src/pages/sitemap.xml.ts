@@ -5,6 +5,7 @@ import { TOP_CITIES } from '../lib/top-cities';
 import { TOP_BEACHES } from '../lib/top-beaches';
 import { MX_STATES } from '../lib/mx-states';
 import { MX_VOLCANOES } from '../lib/mx-volcanoes';
+import { LAYER_PAGES } from '../lib/layer-pages';
 
 /**
  * Hand-built sitemap (no @astrojs/sitemap dependency — follows the
@@ -24,6 +25,8 @@ export const GET: APIRoute = ({ site }) => {
     'volcan/',
     'compara/',
     'huracanes/',
+    // Story 19.1 — one page per weather layer.
+    ...LAYER_PAGES.map((p) => `mapa/${p.slug}/`),
     ...TOP_CITIES.map((c) => `clima/${c.slug}/`),
     ...TOP_BEACHES.map((b) => `playa/${b.slug}/`),
     ...MX_STATES.map((s) => `estado/${s.slug}/`),

@@ -56,6 +56,7 @@ const mode = slugs.length > 0 ? 'slugs' : 'coords';
   <p data-smn-loc class="mt-0.5 text-xs"></p>
   <ul data-smn-list class="mt-3 space-y-2"></ul>
   <p data-smn-overflow class="mt-2 hidden text-xs"></p>
+  <p data-smn-subscribe class="mt-1 hidden text-xs"></p>
   <p class="mt-3 flex flex-wrap items-center gap-x-2 text-xs">
     <span data-smn-stale class="hidden"></span>
     <span>
@@ -225,6 +226,18 @@ const mode = slugs.length > 0 ? 'slugs' : 'coords';
         overflowEl.classList.remove('hidden');
       } else {
         overflowEl.classList.add('hidden');
+      }
+    }
+    // Story 17.2 — "get these on your phone": /alertas/#<estado> explains
+    // the ntfy topic + per-state RSS. Only when a single state is known.
+    const subEl = host.querySelector<HTMLElement>('[data-smn-subscribe]');
+    if (subEl) {
+      const slugs = (host.dataset.slugs || '').split(',').filter(Boolean);
+      if (slugs.length === 1) {
+        const baseAttr = host.dataset.base || '/';
+        const label = lang === 'en' ? 'Get alerts for this state' : 'Recibir avisos de este estado';
+        subEl.innerHTML = `<a href="${escapeHtml(baseAttr)}alertas/#${escapeHtml(slugs[0])}" class="inline-flex min-h-[44px] items-center gap-1 text-blue-700 underline dark:text-blue-300">${escapeHtml(label)} →</a>`;
+        subEl.classList.remove('hidden');
       }
     }
 

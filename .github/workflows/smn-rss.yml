@@ -69,13 +69,20 @@ jobs:
             echo "Feed has no items — keeping previous per-state index"
           fi
 
+      - name: Publish SMN alerts to ntfy (Story 17.2)
+        # One public topic per state (climamx-smn-<slug>) + climamx-smn
+        # for national avisos. Sent ids live in smn-alerts.json.
+        env:
+          NTFY_DISABLED: ${{ vars.NTFY_DISABLED }}
+        run: python3 scripts/publish-ntfy.py public/data/smn-alerts.json --default-topic climamx-smn --max 20
+
       - name: Commit feed if changed
         id: commit
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           grep -q '<item>' src/data/smn-feed.xml || { echo "Feed has no items — skipping commit"; exit 0; }
-          git add src/data/smn-feed.xml public/data/smn-by-state.json
+          git add src/data/smn-feed.xml public/data/smn-by-state.json public/data/smn-alerts.json
           git diff --cached --quiet || (
             git commit -m 'chore: refresh SMN RSS feed + per-state index' &&
             git pull --rebase origin main &&

@@ -1,5 +1,6 @@
 ---
 import FeedbackFAB from '../components/common/FeedbackFAB.astro';
+import IconSprite from '../components/common/IconSprite.astro';
 import LanguageToggle from '../components/common/LanguageToggle.astro';
 import PwaInstall from '../components/common/PwaInstall.astro';
 import SmnAlertRibbon from '../components/SmnAlertRibbon.astro';
@@ -28,6 +29,10 @@ interface Props {
    *  sized to exactly fill the viewport below the nav (plan P2.2 —
    *  no vertical scrollbar); a footer would force page scroll. */
   noFooter?: boolean;
+  /** Where the feedback button lives. 'fixed' (default) floats bottom-
+   *  right; 'inline' renders it inside the site footer so it never
+   *  overlaps an embedded map (home). Ignored when noFooter is set. */
+  feedbackPlacement?: 'fixed' | 'inline';
 }
 
 const base = siteBase();
@@ -50,7 +55,10 @@ const {
   robots = 'index,follow',
   jsonLd,
   noFooter = false,
+  feedbackPlacement = 'fixed',
 } = Astro.props;
+
+const feedbackInline = feedbackPlacement === 'inline' && !noFooter;
 
 const jsonLdEntries = jsonLd === undefined
   ? []
@@ -81,6 +89,11 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="apple-touch-icon" href={`${base}favicon.svg`} />
     <link rel="manifest" href={`${base}manifest.webmanifest`} />
+    {/* Basemap tile hosts (Esri Canvas, two shards — see
+        src/lib/map/chrome/basemap-theme.ts). Pages with a map above
+        the fold save a TLS handshake per host on first paint. */}
+    <link rel="preconnect" href="https://server.arcgisonline.com" crossorigin />
+    <link rel="preconnect" href="https://server2.arcgisonline.com" crossorigin />
     <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -340,6 +353,7 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
     }
   </head>
   <body class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased">
+    <IconSprite />
     {/* Skip link — sr-only by default, visible on focus. Keyboard
         users skip the ~30-link top nav and land directly on the
         page's main content. Every page that uses BaseLayout has a
@@ -585,6 +599,14 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
               </li>
               <li>
                 <a
+                  href={`${base}alertas/`}
+                  class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
+                  data-i18n-en="Alerts"
+                  >Alertas</a
+                >
+              </li>
+              <li>
+                <a
                   href={`${base}rss.xml`}
                   class="flex min-h-[44px] items-center px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400"
                   data-i18n-en="RSS feed"
@@ -682,6 +704,13 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
         >
         <span aria-hidden="true">•</span>
         <a
+          href={`${base}alertas/`}
+          class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
+          data-i18n-en="Alerts"
+          >Alertas</a
+        >
+        <span aria-hidden="true">•</span>
+        <a
           href={`${base}rss.xml`}
           class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           data-i18n-en="RSS feed"
@@ -702,10 +731,16 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
           class="inline-flex min-h-[44px] items-center px-2 transition-colors hover:text-gray-900 dark:hover:text-gray-300"
           >GitHub</a
         >
+        {feedbackInline && (
+          <>
+            <span aria-hidden="true">•</span>
+            <FeedbackFAB lang={lang} placement="inline" />
+          </>
+        )}
       </nav>
     </footer>
     )}
-    <FeedbackFAB lang={lang} />
+    {!feedbackInline && <FeedbackFAB lang={lang} />}
     <PwaInstall />
     {
       /*
