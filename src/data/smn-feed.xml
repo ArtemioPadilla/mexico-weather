@@ -5,9 +5,33 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 27 Sep 2026 14:44:30 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 19:02:19 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: en zonas de Sonora, Nuevo León y Tamaulipas.]]></description>
+      <pubDate>Sun, 27 Sep 2026 13:02:09 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-27-b598</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 27 SEP 2026: El huracán Polo mantiene su desplazamiento hacia Baja California Sur y la D.T. Dieciocho-E, paralelo a las costas del P...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_27.pdf</link>
+      <description><![CDATA[El huracán Polo mantiene su desplazamiento hacia Baja California Sur y la D.T. Dieciocho-E, paralelo a las costas del P... — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_27.pdf]]></description>
+      <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_09_27</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 27 SEP 2026: El huracán Polo y la D.T. Dieciocho-E generarán lluvias, vientos fuertes y oleaje elevado en Baja California Sur y est...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso40-26.pdf</link>
+      <description><![CDATA[El huracán Polo y la D.T. Dieciocho-E generarán lluvias, vientos fuertes y oleaje elevado en Baja California Sur y est... — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso40-26.pdf]]></description>
+      <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso40-26</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>📋 SMN Comunicado 27 SEP 2026: La madrugada de hoy, se formó la depresión tropical Dieciocho-E frente a las costas de Oaxaca y Guerrero</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso39-26.pdf</link>
@@ -38,23 +62,15 @@ Para hoy, Polo continuará como huracán de categoría mayor en la escala Saffir
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de septiembre del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de septiembre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de septiembre del 2026
-Emisión: 06:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-27-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: en zonas de Sonora, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Sun, 27 Sep 2026 08:44:21 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-27-b598</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 26 SEP 2026: Se prevén, para las próximas horas, chubascos y oleaje de 2.5 a 3.5 m en Baja California Sur, debido al huracán Polo</title>
@@ -62,30 +78,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén, para las próximas horas, chubascos y oleaje de 2.5 a 3.5 m en Baja California Sur, debido al huracán Polo — Comunicado del 26 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso38-26.pdf]]></description>
       <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso38-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 26 SEP 2026: Polo permanece como huracán categoría 4 en la escala Saffir-Simpson a 540 km al sur-suroeste de Cabo San Lucas, Baja C...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso37-26.pdf</link>
-      <description><![CDATA[Polo permanece como huracán categoría 4 en la escala Saffir-Simpson a 540 km al sur-suroeste de Cabo San Lucas, Baja C... — Comunicado del 26 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso37-26.pdf]]></description>
-      <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso37-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 26 SEP 2026: Gobierno de México llama a extremar medidas de prevención ante los efectos del huracán Polo en la península de Baja ...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de Prensa 138-26.pdf</link>
-      <description><![CDATA[Gobierno de México llama a extremar medidas de prevención ante los efectos del huracán Polo en la península de Baja ... — Comunicado del 26 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de Prensa 138-26.pdf]]></description>
-      <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Comunicado de Prensa 138-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 25 SEP 2026: Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso36-26.pdf</link>
-      <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso36-26.pdf]]></description>
-      <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso36-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
