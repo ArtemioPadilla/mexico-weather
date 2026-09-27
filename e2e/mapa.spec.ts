@@ -69,6 +69,10 @@ function fieldResponseForUrl(url: string): string {
       apparent_temperature: series(22),
       dew_point_2m: series(15),
       wet_bulb_temperature_2m: series(18),
+      // Story 15.5 — precipitation field (mm/h); mostly dry with showers.
+      precipitation: time.map((_, i) => (i % 4 === 0 ? 2.5 : 0)),
+      snowfall: time.map(() => 0),
+      precipitation_probability: series(20),
     },
   };
   return JSON.stringify(Array.from({ length: n }, () => point));
@@ -404,7 +408,7 @@ test.describe('mapa page', () => {
     await expect(page.locator('#tl-time')).toHaveText('—');
   });
 
-  for (const layer of ['humidity', 'pressure'] as const) {
+  for (const layer of ['humidity', 'pressure', 'precipitation'] as const) {
     test(`${layer} field layer activates with a legend and timeline`, async ({
       page,
     }) => {

@@ -39,6 +39,15 @@ export type ImageCorners = [
 ];
 
 /** Parse `#rrggbb` (or `#rgb`) to a [r, g, b] tuple. */
+/** `#rgb`, `#rrggbb` or `#rrggbbaa` → [r, g, b, a] with a in 0..255
+ *  (255 when the hex carries no alpha). */
+export function hexToRgba(hex: string): [number, number, number, number] {
+  const [r, g, b] = hexToRgb(hex);
+  const h = hex.replace('#', '');
+  const a = h.length === 8 ? parseInt(h.slice(6, 8), 16) : 255;
+  return [r, g, b, Number.isFinite(a) ? a : 255];
+}
+
 export function hexToRgb(hex: string): [number, number, number] {
   const h = hex.replace('#', '');
   if (h.length === 3) {
@@ -67,7 +76,7 @@ export function bilerpValue(
   bounds: RasterBounds,
   lat: number,
   lng: number,
-  hourIdx: number,
+  hourIdx: number
 ): number | null {
   if (rows < 2 || cols < 2) return null;
   if (grid.points.length !== rows * cols) return null;
@@ -141,7 +150,7 @@ function sampleGrid(
   cols: number,
   gx: number,
   gy: number,
-  hourIdx: number,
+  hourIdx: number
 ): number | null {
   let x = gx;
   let y = gy;
@@ -173,7 +182,7 @@ export function bicubicValue(
   bounds: RasterBounds,
   lat: number,
   lng: number,
-  hourIdx: number,
+  hourIdx: number
 ): number | null {
   if (rows < 2 || cols < 2) return null;
   if (grid.points.length !== rows * cols) return null;
@@ -214,7 +223,7 @@ export function fillFieldImageData(
   bounds: RasterBounds,
   hourIdx: number,
   colorHex: (v: number) => string,
-  alpha: number,
+  alpha: number
 ): void {
   const W = img.width;
   const H = img.height;
@@ -224,12 +233,12 @@ export function fillFieldImageData(
   // piecewise constant so identical values hash to identical hex strings;
   // a Map keyed on the integer-rounded value is a >50× perf win on the
   // typical 400×280 loop.
-  const colorCache = new Map<number, [number, number, number]>();
-  function rgbFor(v: number): [number, number, number] {
+  const colorCache = new Map<number, [number, number, number, number]>();
+  function rgbFor(v: number): [number, number, number, number] {
     const key = Math.round(v * 10);
     const cached = colorCache.get(key);
     if (cached) return cached;
-    const rgb = hexToRgb(colorHex(v));
+    const rgb = hexToRgba(colorHex(v));
     colorCache.set(key, rgb);
     return rgb;
   }
@@ -263,11 +272,13 @@ export function fillFieldImageData(
         img.data[i + 3] = 0;
         continue;
       }
-      const [r, g, b] = rgbFor(v);
+      const [r, g, b, a] = rgbFor(v);
       img.data[i] = r;
       img.data[i + 1] = g;
       img.data[i + 2] = b;
-      img.data[i + 3] = Math.round(alpha * edgeFalloff(px, py));
+      // Ramp alpha (Story 15.5: dry precipitation cells are #00000000)
+      // multiplies the layer alpha and the edge fade.
+      img.data[i + 3] = Math.round((alpha * a * edgeFalloff(px, py)) / 255);
     }
   }
 }
@@ -286,7 +297,9 @@ export function boundsToCorners(bounds: RasterBounds): ImageCorners {
 interface RasterCanvas {
   width: number;
   height: number;
-  getContext(type: '2d'): CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D | null;
+  getContext(
+    type: '2d'
+  ): CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D | null;
   convertToBlob?: (opts?: { type?: string }) => Promise<Blob>;
   toBlob?: (cb: (blob: Blob | null) => void, type?: string) => void;
 }
@@ -296,7 +309,10 @@ export function createRasterCanvas(W: number, H: number): RasterCanvas | null {
   if (typeof OffscreenCanvas === 'function') {
     return new OffscreenCanvas(W, H) as unknown as RasterCanvas;
   }
-  if (typeof document !== 'undefined' && typeof document.createElement === 'function') {
+  if (
+    typeof document !== 'undefined' &&
+    typeof document.createElement === 'function'
+  ) {
     const c = document.createElement('canvas');
     c.width = W;
     c.height = H;
@@ -306,7 +322,10 @@ export function createRasterCanvas(W: number, H: number): RasterCanvas | null {
 }
 
 /** Convert a canvas to a Blob using whichever API is available. */
-export async function canvasToBlob(canvas: RasterCanvas, type = 'image/png'): Promise<Blob> {
+export async function canvasToBlob(
+  canvas: RasterCanvas,
+  type = 'image/png'
+): Promise<Blob> {
   if (typeof canvas.convertToBlob === 'function') {
     return canvas.convertToBlob({ type });
   }
@@ -340,7 +359,7 @@ export async function renderFieldRaster(
   bounds: RasterBounds,
   hourIdx: number,
   colorHex: (v: number) => string,
-  opts?: { width?: number; height?: number; alpha?: number },
+  opts?: { width?: number; height?: number; alpha?: number }
 ): Promise<RasterRender | null> {
   const W = opts?.width ?? 400;
   const H = opts?.height ?? 280;

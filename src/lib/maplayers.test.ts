@@ -16,11 +16,11 @@ describe('layer icons', () => {
   it('every icon id exists in IconSprite.astro', () => {
     const sprite = readFileSync(
       resolve(HERE, '../components/common/IconSprite.astro'),
-      'utf-8',
+      'utf-8'
     );
     for (const l of LAYERS) {
       expect(sprite, `missing symbol for ${l.icon}`).toMatch(
-        new RegExp(`^\\s*'?${l.icon}'?:\\s`, 'm'),
+        new RegExp(`^\\s*'?${l.icon}'?:\\s`, 'm')
       );
     }
   });
@@ -35,6 +35,7 @@ describe('layer registry', () => {
       'temperature',
       'humidity',
       'pressure',
+      'precipitation',
       'wind',
       'sunlight',
     ]);
@@ -45,6 +46,7 @@ describe('layer registry', () => {
       'temperature',
       'humidity',
       'pressure',
+      'precipitation',
       'wind',
       'sunlight',
     ]);
@@ -73,6 +75,7 @@ describe('layer registry', () => {
       'temperature',
       'humidity',
       'pressure',
+      'precipitation',
       'wind',
       'sunlight',
     ]);
@@ -90,6 +93,7 @@ describe('layer registry', () => {
       'temperature',
       'humidity',
       'pressure',
+      'precipitation',
       'wind',
       'sunlight',
     ]);
@@ -108,6 +112,7 @@ describe('layer registry', () => {
       'temperature',
       'humidity',
       'pressure',
+      'precipitation',
       'wind',
       'sunlight',
     ]);
@@ -121,6 +126,18 @@ describe('layer registry', () => {
     expect(pre?.defaultOpacity).toBeGreaterThan(0);
   });
 
+  it('registers a precipitation field layer (Story 15.5)', () => {
+    const p = getLayer('precipitation');
+    expect(p?.kind).toBe('field');
+    expect(p?.labelKey).toBe('map_layer_precipitation');
+    expect(p?.icon).toBe('cloud-rain');
+    expect(p?.defaultOpacity).toBeGreaterThan(0);
+    expect(p?.defaultOpacity).toBeLessThanOrEqual(1);
+    // Shortcuts stay unique across the layer rail.
+    const keys = LAYERS.map((l) => l.shortcut).filter(Boolean);
+    expect(new Set(keys).size).toBe(keys.length);
+  });
+
   it('registers a wind particles layer', () => {
     expect(LAYER_IDS).toEqual([
       'base',
@@ -129,6 +146,7 @@ describe('layer registry', () => {
       'temperature',
       'humidity',
       'pressure',
+      'precipitation',
       'wind',
       'sunlight',
     ]);
@@ -146,6 +164,7 @@ describe('layer registry', () => {
       'temperature',
       'humidity',
       'pressure',
+      'precipitation',
       'wind',
       'sunlight',
     ]);

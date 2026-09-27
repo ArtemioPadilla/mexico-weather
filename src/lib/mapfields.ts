@@ -439,6 +439,64 @@ export const HUMIDITY_LEGEND: LegendStop[] = [
   { label: '≥100%', color: '#440154' },
 ];
 
+/** Story 15.5 — forecast precipitation (mm/h) → colour. Dry cells are
+ *  fully transparent (8-digit hex; fillFieldImageData honours the alpha
+ *  nibble) so the field reads like a radar composite over the basemap:
+ *  blue → purple like the RainViewer legend, magenta for downpours. */
+export const PRECIP_TRANSPARENT = '#00000000';
+export function precipColor(mm: number): string {
+  if (!(mm >= 0.1)) return PRECIP_TRANSPARENT;
+  if (mm < 0.5) return '#a6d8ff';
+  if (mm < 1) return '#5aaeff';
+  if (mm < 2.5) return '#1f6fe6';
+  if (mm < 5) return '#5b3fb8';
+  if (mm < 10) return '#9b2fb0';
+  return '#e01e9a';
+}
+
+/** Snowfall (cm/h) → colour; white-blue ramp, transparent when none. */
+export function snowColor(cm: number): string {
+  if (!(cm >= 0.1)) return PRECIP_TRANSPARENT;
+  if (cm < 0.5) return '#e6f4ff';
+  if (cm < 1) return '#b8dcff';
+  if (cm < 2.5) return '#8ec2ff';
+  if (cm < 5) return '#6aa0e6';
+  return '#4c6fb3';
+}
+
+/** Precipitation probability (%) → colour; < 10 % is transparent. */
+export function precipProbColor(p: number): string {
+  if (!(p >= 10)) return PRECIP_TRANSPARENT;
+  if (p < 30) return '#cfe8ff';
+  if (p < 50) return '#8ec2ff';
+  if (p < 70) return '#4d94ff';
+  if (p < 90) return '#1f5fd6';
+  return '#0b3a99';
+}
+
+export const PRECIP_LEGEND: LegendStop[] = [
+  { label: '0.1', color: '#a6d8ff' },
+  { label: '1', color: '#1f6fe6' },
+  { label: '2.5', color: '#5b3fb8' },
+  { label: '5', color: '#9b2fb0' },
+  { label: '≥10 mm/h', color: '#e01e9a' },
+];
+
+export const SNOW_LEGEND: LegendStop[] = [
+  { label: '0.1', color: '#e6f4ff' },
+  { label: '1', color: '#8ec2ff' },
+  { label: '2.5', color: '#6aa0e6' },
+  { label: '≥5 cm/h', color: '#4c6fb3' },
+];
+
+export const PRECIP_PROB_LEGEND: LegendStop[] = [
+  { label: '10%', color: '#cfe8ff' },
+  { label: '30%', color: '#8ec2ff' },
+  { label: '50%', color: '#4d94ff' },
+  { label: '70%', color: '#1f5fd6' },
+  { label: '≥90%', color: '#0b3a99' },
+];
+
 export const PRESSURE_LEGEND: LegendStop[] = [
   { label: '≤970', color: '#542788' },
   { label: '990', color: '#998ec3' },

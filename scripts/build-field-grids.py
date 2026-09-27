@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Pre-bake the default Open-Meteo field grids consumed by the /mapa
-field layers (temperatura, humedad, presión, nubes).
+field layers (temperatura, humedad, presión, nubes, precipitación).
 
 Without this snapshot, every /mapa visit makes one ~5-KB-URL bulk
 Open-Meteo request per active layer — 32×24 = 768 points each. Pre-
@@ -13,6 +13,7 @@ Output (one file per default hourly variable):
   public/data/field-grids/relative_humidity_2m.json
   public/data/field-grids/surface_pressure.json
   public/data/field-grids/cloud_cover.json
+  public/data/field-grids/precipitation.json
 
 Each file mirrors parseFieldResponse()'s FieldGrid output shape so
 loadFieldGrid() / createCloudsOverlay() can substitute it for the
@@ -42,6 +43,7 @@ LAYERS = [
     'relative_humidity_2m',
     'pressure_msl',
     'cloud_cover',
+    'precipitation',  # Story 15.5 — rain layer default (mm/h)
 ]
 
 

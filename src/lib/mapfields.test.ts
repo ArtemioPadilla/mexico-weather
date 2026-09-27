@@ -10,6 +10,13 @@ import {
   mergeFieldGrids,
   mergeWindGrids,
   isExtendedGrid,
+  precipColor,
+  snowColor,
+  precipProbColor,
+  PRECIP_TRANSPARENT,
+  PRECIP_LEGEND,
+  SNOW_LEGEND,
+  PRECIP_PROB_LEGEND,
 } from './mapfields';
 
 describe('viewportGrid', () => {
@@ -419,5 +426,27 @@ describe('parseWindResponse', () => {
   it('returns null for malformed input', () => {
     expect(parseWindResponse(null, pts)).toBeNull();
     expect(parseWindResponse([{ hourly: {} }, { hourly: {} }], pts)).toBeNull();
+  });
+});
+
+describe('precipitation ramps (Story 15.5)', () => {
+  it('dry cells are fully transparent, wet cells opaque blue→purple', () => {
+    expect(precipColor(0)).toBe(PRECIP_TRANSPARENT);
+    expect(precipColor(0.05)).toBe(PRECIP_TRANSPARENT);
+    expect(precipColor(NaN)).toBe(PRECIP_TRANSPARENT);
+    expect(precipColor(0.3)).toBe('#a6d8ff');
+    expect(precipColor(3)).toBe('#5b3fb8');
+    expect(precipColor(50)).toBe('#e01e9a');
+    expect(PRECIP_LEGEND[PRECIP_LEGEND.length - 1].label).toContain('mm/h');
+  });
+  it('snow and probability ramps follow the same transparency rule', () => {
+    expect(snowColor(0)).toBe(PRECIP_TRANSPARENT);
+    expect(snowColor(0.7)).toBe('#b8dcff');
+    expect(snowColor(9)).toBe('#4c6fb3');
+    expect(precipProbColor(5)).toBe(PRECIP_TRANSPARENT);
+    expect(precipProbColor(45)).toBe('#8ec2ff');
+    expect(precipProbColor(100)).toBe('#0b3a99');
+    expect(SNOW_LEGEND.length).toBeGreaterThan(2);
+    expect(PRECIP_PROB_LEGEND[0].label).toBe('10%');
   });
 });

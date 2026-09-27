@@ -38,7 +38,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
    - Radar: Ligera / Moderada / Intensa / Nieve.
    - Satellite: no intensity legend (it's imagery).
    - Temperature / Humidity / Pressure: colour ramp with stop labels.
-5. The **timeline scrubber** (bottom-centre) appears whenever a weather layer with a time axis is active. Use ‹ / › to step a frame, drag the range, or press ▶ to play (loops with wrap). Pause with ⏸ or by interacting with prev/next/range. Forecast layers (temperature, humidity, pressure, wind) boot on an hourly window from **24 h ago to +48 h** (yesterday comes from the same Open-Meteo call via `past_days=1`, so "hace 24 h" is free — the ‹ day-skip button or a `t=` in the past lands there); the **"Ver 10 días"** chip (or stepping past the last frame) pulls a **10-day, 3-hourly** extension on demand and the axis grows in place — labels switch to "mié 15:00 · +3 d" past 24 h and the day-skip buttons move by 24 h regardless of frame stride. A shared link whose `t=` lies past +48 h pulls the extension automatically.
+5. The **timeline scrubber** (bottom-centre) appears whenever a weather layer with a time axis is active. Use ‹ / › to step a frame, drag the range, or press ▶ to play (loops with wrap). Pause with ⏸ or by interacting with prev/next/range. Forecast layers (temperature, humidity, pressure, precipitation, wind) boot on an hourly window from **24 h ago to +48 h** (yesterday comes from the same Open-Meteo call via `past_days=1`, so "hace 24 h" is free — the ‹ day-skip button or a `t=` in the past lands there); the **"Ver 10 días"** chip (or stepping past the last frame) pulls a **10-day, 3-hourly** extension on demand and the axis grows in place — labels switch to "mié 15:00 · +3 d" past 24 h and the day-skip buttons move by 24 h regardless of frame stride. A shared link whose `t=` lies past +48 h pulls the extension automatically.
 6. **Tap anywhere** on the map to open the **place card**: 10 daily rows (Diario) or 48 hourly rows (Horario) for that point, the active layer's reading there, a favourite star and a link to the full forecast. Bottom sheet on phones, floating panel on desktop; Escape or × closes it.
 7. **Sharing / bookmarking**: the URL hash updates as you pan, zoom, change layer, and scrub. Copy-paste the URL to share the exact view + frame; reloading restores it.
 
@@ -49,7 +49,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 | Param | Format | Meaning |
 |---|---|---|
 | `view` | `<lat>,<lng>,<zoom>z` (e.g. `19.43,-99.13,6.5z`) | Map centre + zoom. Validated; out-of-range values fall back to the default Mexico view. |
-| `layer` | one of `base`, `radar`, `satellite`, `temperature`, `humidity`, `pressure`, `wind`, `sunlight` | Active weather layer; unknown ids fall back to `base`. |
+| `layer` | one of `base`, `radar`, `satellite`, `temperature`, `humidity`, `pressure`, `precipitation`, `wind`, `sunlight` | Active weather layer; unknown ids fall back to `base`. |
 | `t` | ISO timestamp (e.g. `2026-05-19T13:00:00.000Z`) | Selected timeline frame; the nearest frame is restored on load. Omitted when `layer=base`. |
 
 Example: `https://artemiop.com/mexico-weather/mapa#view=19.43,-99.13,6.5z&layer=radar&t=2026-05-19T13:00:00.000Z`.
@@ -127,7 +127,7 @@ The site is mobile-first and tested at four representative breakpoints. There ar
 - **Esri World Light Gray Canvas** — basemap raster tiles (base + reference/labels services) when the UI is in the light theme. No API key. Esri, HERE, Garmin, © OpenStreetMap contributors.
 - **Esri World Dark Gray Canvas** — basemap raster tiles when the UI is in the dark theme (resolved from explicit "Oscuro" or "Sistema → dark"). The map swaps both tile sources live; the MapLibre instance is not recreated. Labels (the reference service) are hidden below zoom 5. Esri, HERE, Garmin, © OpenStreetMap contributors.
 - **RainViewer** — radar + satellite-IR frames and tiles. © RainViewer.
-- **Open-Meteo** — keyless gridded forecast (temperature, humidity, pressure, wind). © Open-Meteo.
+- **Open-Meteo** — keyless gridded forecast (temperature, humidity, pressure, precipitation / snowfall / probability, wind). © Open-Meteo.
 - **SMN / CONAGUA** — weather advisory RSS used for the build-time alert feed at `/rss.xml`.
 - **NASA GIBS** — satellite imagery (GOES-East GeoColor at matrix level 7, Band 13 IR at level 6, MODIS Terra true colour daily) and the VIIRS NOAA-20 day/night band for the night-lights overlay. Keyless, CORS-enabled, © NASA EOSDIS GIBS. The satellite timeline is a synthetic axis of 10-minute frames (24 h by default, "Ver 10 días" for 10 days; GIBS keeps ≈ 45 days) that GIBS serves by TIME; the newest frame lags real time by ~30 min.
 

@@ -48,6 +48,12 @@ import {
   pressureColor,
   HUMIDITY_LEGEND,
   PRESSURE_LEGEND,
+  precipColor,
+  snowColor,
+  precipProbColor,
+  PRECIP_LEGEND,
+  SNOW_LEGEND,
+  PRECIP_PROB_LEGEND,
   getTempLegend,
   setColorBlindMode,
   getColorBlindMode,
@@ -1145,11 +1151,13 @@ export async function initInteractiveMap(
   type HumiditySubOption = 'relativa' | 'rocio';
   type PressureSubOption = 'msl' | 'surface';
   type WindSubOption = 'velocidad' | 'rachas';
+  type PrecipSubOption = 'lluvia' | 'nieve' | 'probabilidad';
   type SatelliteSubOption = 'geocolor' | 'ir' | 'truecolor';
   let tempSubOption: TempSubOption = 'actual';
   let humiditySubOption: HumiditySubOption = 'relativa';
   let pressureSubOption: PressureSubOption = 'msl';
   let windSubOption: WindSubOption = 'velocidad';
+  let precipSubOption: PrecipSubOption = 'lluvia';
   let satelliteSubOption: SatelliteSubOption = 'geocolor';
   function tempHourlyVar(): string {
     if (tempSubOption === 'aparente') return 'apparent_temperature';
@@ -1165,6 +1173,34 @@ export async function initInteractiveMap(
     return pressureSubOption === 'surface'
       ? 'surface_pressure'
       : 'pressure_msl';
+  }
+  // Story 15.5 — precipitation sub-options map to Open-Meteo hourly
+  // variables; `precipitation` (rain + showers + snow water) is the
+  // pre-baked default, `snowfall` is cm/h, probability is %.
+  function precipHourlyVar(): string {
+    if (precipSubOption === 'nieve') return 'snowfall';
+    if (precipSubOption === 'probabilidad') return 'precipitation_probability';
+    return 'precipitation';
+  }
+  function precipColorFn(): (v: number) => string {
+    if (precipSubOption === 'nieve') return snowColor;
+    if (precipSubOption === 'probabilidad') return precipProbColor;
+    return precipColor;
+  }
+  function precipUnit(): string {
+    if (precipSubOption === 'nieve') return 'cm/h';
+    if (precipSubOption === 'probabilidad') return '%';
+    return 'mm/h';
+  }
+  function precipLegend(): LegendStop[] {
+    if (precipSubOption === 'nieve') return SNOW_LEGEND;
+    if (precipSubOption === 'probabilidad') return PRECIP_PROB_LEGEND;
+    return PRECIP_LEGEND;
+  }
+  function formatPrecip(v: number): string {
+    if (precipSubOption === 'probabilidad') return `${Math.round(v)}%`;
+    const n = v < 1 ? Math.round(v * 10) / 10 : Math.round(v);
+    return `${n} ${precipUnit()}`;
   }
   const FIELD_CONFIGS: Record<string, FieldConfig> = {
     temperature: {
@@ -1184,6 +1220,14 @@ export async function initInteractiveMap(
         return pressureHourlyVar();
       },
       color: pressureColor,
+    },
+    precipitation: {
+      get hourlyVar() {
+        return precipHourlyVar();
+      },
+      get color() {
+        return precipColorFn();
+      },
     },
   } as unknown as Record<string, FieldConfig>;
   let fieldAbort: AbortController | null = null;
@@ -1600,6 +1644,7 @@ export async function initInteractiveMap(
     'relative_humidity_2m',
     'pressure_msl',
     'cloud_cover',
+    'precipitation',
   ]);
 
   async function loadFieldGrid(layerId: string): Promise<boolean> {
@@ -1716,7 +1761,14 @@ export async function initInteractiveMap(
   };
 
   function renderLegend(
-    kind: 'radar' | 'temperature' | 'humidity' | 'pressure' | 'wind' | null
+    kind:
+      | 'radar'
+      | 'temperature'
+      | 'humidity'
+      | 'pressure'
+      | 'precipitation'
+      | 'wind'
+      | null
   ): void {
     const el = opts.els.legend;
     const bar = document.getElementById('legend-bar');
@@ -1742,10 +1794,12 @@ export async function initInteractiveMap(
             ? HUMIDITY_LEGEND
             : kind === 'pressure'
               ? PRESSURE_LEGEND
-              : WIND_LEGEND.map((s) => ({
-                  label: t[s.labelKey as keyof typeof t] as string,
-                  color: s.color,
-                }));
+              : kind === 'precipitation'
+                ? precipLegend()
+                : WIND_LEGEND.map((s) => ({
+                    label: t[s.labelKey as keyof typeof t] as string,
+                    color: s.color,
+                  }));
     // Horizontal stop layout (plan P0.2): a 28×12 swatch with the
     // label below, similar to zoom.earth's bottom-left scale.
     el.innerHTML = stops
@@ -1763,6 +1817,7 @@ export async function initInteractiveMap(
       temperature: '°C',
       humidity: '%',
       pressure: 'hPa',
+      precipitation: precipUnit(),
       wind: 'km/h',
     } as Record<string, string>;
     if (unitEl) unitEl.textContent = unit[kind] ?? '';
@@ -1779,6 +1834,7 @@ export async function initInteractiveMap(
     refreshTempSubOptions();
     refreshHumiditySubOptions();
     refreshPressureSubOptions();
+    refreshPrecipSubOptions();
     refreshWindSubOptions();
     refreshSatelliteSubOptions();
     // Plan P2.6: reconcile the wind overlay so it persists across
@@ -1804,7 +1860,8 @@ export async function initInteractiveMap(
       activeLayer === 'radar'
         ? ('radar' as const)
         : akind === 'field'
-          ? (activeLayer as 'temperature' | 'humidity' | 'pressure')
+          ? (activeLayer as
+              'temperature' | 'humidity' | 'pressure' | 'precipitation')
           : akind === 'particles'
             ? ('wind' as const)
             : null;
@@ -1889,6 +1946,13 @@ export async function initInteractiveMap(
             )
           : null;
 
+      // Precipitation (Story 15.5) — only while it is the active field;
+      // shown first so the tooltip leads with the layer's own value.
+      if (activeLayer === 'precipitation') {
+        const pv = sampleField(fieldGrid);
+        if (pv !== null) lines.push(`🌧 ${formatPrecip(pv)}`);
+      }
+
       // Temperature
       const tGrid = activeLayer === 'temperature' ? fieldGrid : lastTempGrid;
       const tVal = sampleField(tGrid);
@@ -1921,6 +1985,7 @@ export async function initInteractiveMap(
           if (activeLayer === 'temperature') return `${Math.round(v)}°`;
           if (activeLayer === 'humidity') return `${Math.round(v)}%`;
           if (activeLayer === 'pressure') return `${Math.round(v)} hPa`;
+          if (activeLayer === 'precipitation') return formatPrecip(v);
           return `${Math.round(v)}`;
         }
         return null;
@@ -2491,6 +2556,26 @@ export async function initInteractiveMap(
     }
   );
   const refreshHumiditySubOptions = (): void => humiditySub.refresh();
+
+  const precipSub = createSubOptionsGroup<PrecipSubOption>(
+    opts.els.layerBtns ?? null,
+    {
+      containerId: 'precipitation-sub-options',
+      getActive: () => precipSubOption,
+      onSelect: (id) => {
+        precipSubOption = id;
+        pendingSeekIso = activeFrameIso;
+        void setActiveLayer('precipitation');
+      },
+      isVisible: () => activeLayer === 'precipitation',
+      options: [
+        { id: 'lluvia', label: 'Lluvia' },
+        { id: 'nieve', label: 'Nieve' },
+        { id: 'probabilidad', label: 'Probabilidad' },
+      ],
+    }
+  );
+  const refreshPrecipSubOptions = (): void => precipSub.refresh();
 
   const pressureSub = createSubOptionsGroup<PressureSubOption>(
     opts.els.layerBtns ?? null,

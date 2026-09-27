@@ -64,6 +64,7 @@ export interface UiStrings {
   map_layer_temperature: string;
   map_layer_humidity: string;
   map_layer_pressure: string;
+  map_layer_precipitation: string;
   map_layer_wind: string;
   legend_wind_calm: string;
   legend_wind_breeze: string;
@@ -161,6 +162,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_layer_temperature: 'Temperatura',
     map_layer_humidity: 'Humedad',
     map_layer_pressure: 'Presión',
+    map_layer_precipitation: 'Precipitación',
     map_layer_wind: 'Viento',
     legend_wind_calm: 'Calmo',
     legend_wind_breeze: 'Brisa',
@@ -255,6 +257,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_layer_temperature: 'Temperature',
     map_layer_humidity: 'Humidity',
     map_layer_pressure: 'Pressure',
+    map_layer_precipitation: 'Precipitation',
     map_layer_wind: 'Wind',
     legend_wind_calm: 'Calm',
     legend_wind_breeze: 'Breeze',

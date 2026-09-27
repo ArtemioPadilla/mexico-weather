@@ -93,9 +93,9 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 - [ ] Cierra la Fase 4 del plan home (tap-to-forecast card).
 - Acceptance: tap en cualquier punto de MX abre la tarjeta con 10 días en ≤1 s; en el home y en `/mapa`; a11y con foco atrapado en el panel en móvil.
 
-**Story 15.5 — Campo de precipitación pronosticada** · est 2d
-- [ ] Nueva variable en `mapfields.ts`: `precipitation` (mm/h) + `snowfall`; rampa azul→morado como la leyenda de radar ("Ligera/Moderada/Intensa/Nieve").
-- [ ] Capa `precipitation` en `LAYERS` (tecla `W` libre), sub-opciones Lluvia / Nieve / Probabilidad (`precipitation_probability`).
+**Story 15.5 — Campo de precipitación pronosticada** · est 2d · **shipped 2026-09-27**
+- [x] Nueva variable en `mapfields.ts`: `precipitation` (mm/h) + `snowfall`; rampa azul→morado como la leyenda de radar, celdas secas transparentes (hex de 8 dígitos; `fillFieldImageData` respeta el alfa).
+- [x] Capa `precipitation` en `LAYERS`, sub-opciones Lluvia / Nieve / Probabilidad (`precipitation_probability`). Sin atajo: la `W` ya era de cámaras y no queda letra libre A–Z.
 - [ ] Encaja con Story 13.2 (modo combinado satélite + nubes + radar/precipitación).
 - Acceptance: la capa aparece en rail y hash; leyenda con unidad; snapshot `field-grids` la incluye.
 
