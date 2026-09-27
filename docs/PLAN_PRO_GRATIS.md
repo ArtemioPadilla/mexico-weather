@@ -1,6 +1,6 @@
 # Plan: la UX y el valor de zoom.earth, con su tier Pro gratis
 
-Estado: **propuesto** · 2026-09-27 · Continúa la numeración de `docs/ROADMAP.md` (E15–E20, Story 15.x–20.x) y usa sus convenciones: épica → historia (~1 PR, tag `Story N.M`) → tarea (`[ ]`), prioridad P0–P4, estimaciones honestas.
+Estado: **en ejecución — 18 de 21 historias shipped** (ver §5) · 2026-09-27 · Continúa la numeración de `docs/ROADMAP.md` (E15–E20, Story 15.x–20.x) y usa sus convenciones: épica → historia (~1 PR, tag `Story N.M`) → tarea (`[ ]`), prioridad P0–P4, estimaciones honestas.
 
 Restricciones que **no se tocan**: sin tracking, sin cookies, sin cuentas, sin API keys, sin backend. Cada historia dice cómo las respeta.
 
@@ -29,15 +29,15 @@ Zoom Earth Pro: suscripción in-app, **$1.99/mes o $11.99/año** (US), cuenta op
 
 | # | Feature Pro de zoom.earth | Free de zoom.earth | Nosotros hoy | Qué falta |
 |---|---|---|---|---|
-| P1 | Mapas de pronóstico hasta **10 días** | +60 h | **2 días** (campos), 7 en `/forecast` | E15 · Story 15.1–15.3 |
-| P2 | Nowcast de radar hasta **60 min** | ~16 min | **30 min** (RainViewer) — ya supera su free | E16 · Story 16.3 para 60 min |
-| P3 | Alertas push de sistemas tropicales | ninguna | Banner local por reglas, RSS SMN, `/huracanes` | E17 |
+| P1 | Mapas de pronóstico hasta **10 días** | +60 h | ✅ **10 días** en campos (−24 h … +10 d) y en `/forecast` (16 opcional) | ✅ ya (15.1–15.3) |
+| P2 | Nowcast de radar hasta **60 min** | ~16 min | **30 min** (RainViewer) — ya supera su free | E16 · Story 16.3 para 60 min (pendiente) |
+| P3 | Alertas push de sistemas tropicales | ninguna | ✅ ntfy `climamx-huracanes` + SMN por estado, RSS, `/alertas`, `/huracanes/<id>/` | ✅ ya (17.1–17.3) |
 | P4 | Sin anuncios | AdSense header/footer | **Sin anuncios, nunca** | ✅ ya |
-| P5 | Tarjeta diaria de **10 días** en el panel de ubicación | 5 días | 7 días en `/forecast`, 8 en `/clima/<slug>`, **0** en el mapa (no hay tarjeta al tocar) | E15 · Story 15.4 + Fase 4 del plan home |
+| P5 | Tarjeta diaria de **10 días** en el panel de ubicación | 5 días | ✅ tarjeta al tocar el mapa: 10 d diario / 48 h horario | ✅ ya (15.4) |
 | P6 | **30** ubicaciones guardadas | 3 | Ilimitadas (localStorage) | ✅ ya |
 | P7 | Cambio automático ICON→GFS al agotar ICON | manual | `best_match` de Open-Meteo lo hace por punto | ✅ ya (documentar) |
 
-Tres de siete ya las damos gratis. Las otras cuatro son E15, E16 y E17.
+Seis de siete ya las damos gratis; solo el nowcast a 60 min (16.3) sigue pendiente.
 
 ## 2. Qué da zoom.earth **gratis** y nosotros no
 
@@ -234,6 +234,18 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 **Hito M3 · "Mejor que ambos" (≈ 3 semanas):** 19.1 → 19.2 → 19.3 → 18.3 → 13.1 → 13.5 → 13.3.
 
 Total ≈ 11–12 semanas de una persona, en PRs de 1–5 días. E10/E11 corren antes o intercalados según el estado real en dispositivo (gate de Story 10.1).
+
+### Estado al 2026-09-27
+
+Shipped en la rama `claude/mexico-weather-inceptor-x63slj` (un commit por historia, sin PR todavía): 15.1, 15.2, 15.3, 15.4, 15.5, 16.1, 16.4, 17.1, 17.2, 17.3, 18.1, 18.2, 18.3, 19.1, 19.2, 19.3, 20.2 y, del roadmap, 13.1, 13.2, 13.3, 13.5.
+
+Pendientes, todas de infraestructura y a decidir contigo antes de tocarlas:
+
+- **20.1 — Sacar los snapshots de `main`.** Cambia el flujo de commits de los bots y el build de CD (rama huérfana `data` o Releases "rolling"). Decisión: cuál de las dos, y si aceptas un `git fetch` extra en CD.
+- **16.2 — Archivo de radar 72 h.** Un workflow cada 10 min que cose ~6 tiles y guarda ~45 MB rodantes; depende de 20.1 para no engordar `main`.
+- **16.3 — Nowcast a 60 min.** Corre en el mismo workflow de 16.2 (flujo óptico sobre los últimos frames) y publica su CSI.
+
+Lo que ya cubre esto sin tocar `main`: el radar sigue en −2 h … +30 min de RainViewer; el satélite sí tiene 10 días (16.1).
 
 ## 6. Costos y cuotas (por qué sigue siendo gratis)
 
