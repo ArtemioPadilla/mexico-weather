@@ -24,6 +24,7 @@ interface Page {
 const PAGES: Page[] = [
   { name: 'home', url: '' },
   { name: 'alertas', url: 'alertas/' },
+  { name: 'mapa/radar (layer page)', url: 'mapa/radar/' },
   { name: 'clima/cdmx', url: 'clima/cdmx/' },
   { name: 'playa/cancun', url: 'playa/cancun/' },
   { name: 'estado/jalisco', url: 'estado/jalisco/' },
@@ -32,13 +33,18 @@ const PAGES: Page[] = [
   { name: 'playa/ index', url: 'playa/' },
   { name: 'estado/ index', url: 'estado/' },
   { name: 'volcan/ index', url: 'volcan/' },
-  { name: 'forecast', url: 'forecast/?lat=19.43&lng=-99.13&name=Ciudad%20de%20M%C3%A9xico&tz=America/Mexico_City' },
+  {
+    name: 'forecast',
+    url: 'forecast/?lat=19.43&lng=-99.13&name=Ciudad%20de%20M%C3%A9xico&tz=America/Mexico_City',
+  },
   { name: 'privacidad', url: 'privacidad/' },
 ];
 
 test.describe('a11y audit — 0 critical / 0 serious', () => {
   for (const p of PAGES) {
-    test(`${p.name} has no critical or serious WCAG violations`, async ({ page }) => {
+    test(`${p.name} has no critical or serious WCAG violations`, async ({
+      page,
+    }) => {
       await page.goto(p.url);
       // Wait long enough for hydration-driven widgets (SmnAvisos,
       // city snapshot, alert ribbon, badges) to render. Using
@@ -49,12 +55,10 @@ test.describe('a11y audit — 0 critical / 0 serious', () => {
       await page.waitForLoadState('domcontentloaded');
       await page.waitForTimeout(800);
 
-      const results = await new AxeBuilder({ page })
-        .withTags(TAGS)
-        .analyze();
+      const results = await new AxeBuilder({ page }).withTags(TAGS).analyze();
 
       const blocking = results.violations.filter(
-        (v) => v.impact === 'critical' || v.impact === 'serious',
+        (v) => v.impact === 'critical' || v.impact === 'serious'
       );
 
       if (blocking.length > 0) {
@@ -72,7 +76,7 @@ test.describe('a11y audit — 0 critical / 0 serious', () => {
           })
           .join('\n');
         throw new Error(
-          `${blocking.length} blocking a11y violation(s) on ${p.url}:${report}`,
+          `${blocking.length} blocking a11y violation(s) on ${p.url}:${report}`
         );
       }
 
@@ -100,11 +104,13 @@ test.describe('a11y audit — /mapa (interactive, slower)', () => {
       .analyze();
 
     const blocking = results.violations.filter(
-      (v) => v.impact === 'critical' || v.impact === 'serious',
+      (v) => v.impact === 'critical' || v.impact === 'serious'
     );
     if (blocking.length > 0) {
       const report = blocking
-        .map((v) => `[${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`)
+        .map(
+          (v) => `[${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`
+        )
         .join('\n  ');
       throw new Error(`/mapa a11y violations:\n  ${report}`);
     }

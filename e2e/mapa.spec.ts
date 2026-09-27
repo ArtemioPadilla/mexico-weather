@@ -756,4 +756,57 @@ test.describe('mapa page', () => {
       page.locator('[data-mw-label] button[data-val="clock"]')
     ).toHaveAttribute('aria-pressed', 'true');
   });
+
+  // Story 19.2 — first-visit welcome card, once per browser.
+  test('welcome card shows on the first visit only and can be dismissed', async ({
+    page,
+  }) => {
+    await page.goto('mapa/');
+    const card = page.locator('#mw-welcome');
+    await expect(card).toBeVisible();
+    await expect(card).toHaveAttribute('role', 'dialog');
+    await page.locator('#mw-welcome-dismiss').click();
+    await expect(card).toBeHidden();
+    expect(await page.evaluate(() => localStorage.getItem('mw:welcomed'))).toBe(
+      '1'
+    );
+    await page.reload();
+    await expect(page.locator('#mw-welcome')).toBeHidden();
+  });
+
+  // Story 19.1 — per-layer landing pages open the map on that layer.
+  test('/mapa/temperatura/ renders its own copy and boots on the temperature layer', async ({
+    page,
+  }) => {
+    await page.route('**/data/field-grids/**', (route) =>
+      route.fulfill({ status: 404 })
+    );
+    await page.route('**/api.open-meteo.com/v1/forecast**', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: fieldResponseForUrl(route.request().url()),
+      })
+    );
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
+    );
+    await page.goto('mapa/temperatura/');
+    await expect(page).toHaveTitle(/Mapa de temperatura/);
+    await expect(
+      page.getByRole('heading', { level: 1, name: /Mapa de temperatura/ })
+    ).toBeVisible();
+    await expect(page.locator('#layerbtn-temperature')).toHaveAttribute(
+      'aria-pressed',
+      'true',
+      { timeout: 15_000 }
+    );
+    await expect(page.locator('#legend-bar')).toBeVisible();
+  });
 });

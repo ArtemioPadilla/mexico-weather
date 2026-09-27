@@ -1,0 +1,86 @@
+---
+/**
+ * /mapa/<capa>/ — one indexable page per weather layer (Story 19.1,
+ * plan PRO_GRATIS E19). Same InteractiveMap as /mapa with the layer
+ * pre-activated (a URL hash still wins, so shared links keep working),
+ * plus a slim visible header with unique copy per layer and the same
+ * JSON-LD / hreflang treatment as every other page.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InteractiveMap from '../../components/InteractiveMap.astro';
+import { LAYER_PAGES, type LayerPage } from '../../lib/layer-pages';
+import { siteBase } from '../../utils/paths';
+import { breadcrumbLd } from '../../lib/structured-data';
+
+export function getStaticPaths() {
+  return LAYER_PAGES.map((p) => ({ params: { layer: p.slug }, props: { page: p } }));
+}
+
+const { page } = Astro.props as { page: LayerPage };
+const base = siteBase();
+const lang = 'es' as const;
+const title = `${page.titleEs} — Clima México 🇲🇽`;
+const titleEn = `${page.titleEn} — Clima México 🇲🇽`;
+const canonical = new URL(`${base}mapa/${page.slug}/`, Astro.site).href;
+const homeUrl = new URL(base, Astro.site).href;
+const mapUrl = new URL(`${base}mapa/`, Astro.site).href;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: page.titleEs,
+    url: canonical,
+    inLanguage: 'es-MX',
+    description: page.descEs,
+  },
+  breadcrumbLd([
+    { name: 'Inicio', url: homeUrl },
+    { name: 'Mapa', url: mapUrl },
+    { name: page.titleEs, url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  title={title}
+  description={page.descEs}
+  titleEn={titleEn}
+  descriptionEn={page.descEn}
+  lang={lang}
+  jsonLd={jsonLd}
+  noFooter
+>
+  <main class="flex h-[calc(100dvh-3rem)] w-full flex-col overflow-hidden bg-gray-100 sm:h-[calc(100dvh-3.5rem)] dark:bg-gray-950">
+    <header class="shrink-0 border-b border-gray-200 bg-white px-4 py-2 text-sm dark:border-gray-800 dark:bg-gray-950">
+      <h1 class="font-semibold text-gray-900 dark:text-gray-100" data-i18n-en={page.titleEn}>{page.titleEs}</h1>
+      <p class="line-clamp-2 text-xs text-gray-600 dark:text-gray-400" data-i18n-en={page.descEn}>{page.descEs}</p>
+    </header>
+    <div class="relative min-h-0 flex-1">
+      <InteractiveMap
+        mapId="map"
+        height="100%"
+        initialView={{ lat: 23.6, lng: -102.5, zoom: 4.5 }}
+        initialLayer={page.id}
+        features={{
+          layerRail: true,
+          timeline: true,
+          search: true,
+          locateButton: true,
+          presetPins: true,
+          backLink: true,
+          mobileControls: true,
+          tools: true,
+          settings: true,
+          info: true,
+          modelToggle: true,
+          coords: true,
+          legend: true,
+          welcome: true,
+        }}
+        useHash={true}
+        lazy={false}
+        lang={lang}
+      />
+    </div>
+  </main>
+</BaseLayout>

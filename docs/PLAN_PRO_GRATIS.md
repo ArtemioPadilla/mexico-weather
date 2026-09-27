@@ -180,14 +180,14 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 
 ### E19 · Descubrimiento, onboarding y unidades (P2)
 
-**Story 19.1 — Páginas por capa para SEO** · est 1d
-- [ ] `src/pages/mapa/[layer].astro` prerenderizado para las 9 capas (`/mapa/radar/`, `/mapa/satelite/`, `/mapa/temperatura/`…): H1, párrafo, JSON-LD, y el mismo `InteractiveMap` con `initialLayer`.
-- [ ] Sitemap + hreflang; enlaces desde el rail ("compartir esta capa").
+**Story 19.1 — Páginas por capa para SEO** · est 1d · **shipped 2026-09-27**
+- [x] `src/pages/mapa/[layer].astro` prerenderizado para las 8 capas meteorológicas (`/mapa/radar/`, `/mapa/satelite/`, `/mapa/temperatura/`, `/mapa/humedad/`, `/mapa/presion/`, `/mapa/precipitacion/`, `/mapa/viento/`, `/mapa/sol/`; el mapa base ya es `/mapa/`): H1 y párrafo visibles es/en (`src/lib/layer-pages.ts`), JSON-LD WebPage + breadcrumb, y el mismo `InteractiveMap` con `initialLayer` (el hash sigue ganando).
+- [x] Sitemap + hreflang (BaseLayout); el panel ℹ️ enlaza a la "Página de esta capa" activa.
 - Acceptance: 9 URLs indexables con contenido único; `a11y.spec` las incluye.
 
-**Story 19.2 — Onboarding de primera visita** · est 1d
-- [ ] Diálogo "Bienvenido: encuentra tu ubicación" (reusa `#geo`), una sola vez (`localStorage`), sin cookies.
-- [ ] Intro de una línea por capa la primera vez que se activa (texto en `ui.ts` es/en).
+**Story 19.2 — Onboarding de primera visita** · est 1d · **shipped 2026-09-27**
+- [x] Tarjeta no modal "Bienvenido: ¿centramos el mapa en tu ubicación?" en `/mapa` y las páginas por capa (reusa el botón de ubicación), una sola vez (`localStorage` `mw:welcomed`), Esc la cierra; los embeds nunca la muestran.
+- [x] Intro de una línea por capa la primera vez que se activa, ahora en `ui.ts` es/en (incluye satélite y precipitación).
 - Acceptance: segunda visita no muestra nada; axe limpio con el diálogo abierto.
 
 **Story 19.3 — Unidades** · est 1d · **shipped 2026-09-27**

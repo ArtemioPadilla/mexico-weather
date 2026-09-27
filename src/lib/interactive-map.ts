@@ -168,6 +168,9 @@ export interface InteractiveMapFeatures {
   coords?: boolean;
   /** Floating colour-scale legend bar. Markup-only. */
   legend?: boolean;
+  /** First-visit welcome card offering to locate the user (Story 19.2).
+   *  Only the full-page maps set it; embeds never nag. */
+  welcome?: boolean;
 }
 
 /** Build an <svg><use href="#i-name"/></svg> element for the inline
@@ -254,6 +257,7 @@ import {
 } from './map/layers/wind-particles';
 import { createIsobarsLayer } from './map/layers/isobars';
 import { createCrosshair } from './map/chrome/crosshair';
+import { layerPageFor } from './layer-pages';
 import { createCloudsOverlay } from './map/overlays/clouds';
 import { createCityValuesOverlay } from './map/overlays/city-values';
 import { createTimelinePlayer } from './map/chrome/timeline-player';
@@ -1906,6 +1910,15 @@ export async function initInteractiveMap(
       const btn = wrap.querySelector(`#layerbtn-${def.id}`);
       if (btn) btn.setAttribute('aria-pressed', String(def.id === activeLayer));
     }
+    // Story 19.1 — the info panel links to the active layer's own page.
+    const pageLink = document.getElementById(
+      'mw-layer-page-link'
+    ) as HTMLAnchorElement | null;
+    if (pageLink) {
+      const lp = layerPageFor(activeLayer);
+      pageLink.hidden = !lp;
+      if (lp) pageLink.href = `${base}mapa/${lp.slug}/`;
+    }
     refreshTempSubOptions();
     refreshHumiditySubOptions();
     refreshPressureSubOptions();
@@ -2228,20 +2241,17 @@ export async function initInteractiveMap(
    * the user can keep interacting with the map. Persisted per-layer in
    * localStorage so it only appears once.
    */
+  // Story 19.2 — copy lives in ui.ts (es/en) so the English toggle
+  // applies; one entry per weather layer.
   const LAYER_EXPLAINERS: Record<string, string> = {
-    radar:
-      'Radar muestra precipitación detectada (lluvia, nieve) en tiempo casi real desde RainViewer. Usa Animación de lluvia (P) para reproducir.',
-    satellite:
-      'Satélite usa NASA GIBS GOES-East IR — nubes en infrarrojo. Activa N para ver luces nocturnas (VIIRS).',
-    temperature:
-      'Temperatura del aire a 2 m sobre el suelo, gradiente continuo. Sub-opción Aparente incluye humedad y viento (sensación térmica).',
-    humidity:
-      'Humedad relativa o punto de rocío a 2 m, según sub-opción. Mayor humedad = sensación más pesada al mismo calor.',
-    pressure:
-      'Presión atmosférica. Sub-opción Nivel del mar (msl) es la presión reducida estándar usada en meteorología; Superficie respeta la altitud real.',
-    wind: 'Velocidad y dirección del viento a 10 m. Activa Rachas para ver las máximas instantáneas en lugar del promedio.',
-    sunlight:
-      'Posición del Sol y zonas en sombra (terminador día/noche). Activa Límite nocturno (O) para ver sólo la línea sobre cualquier capa.',
+    radar: t.layer_explainer_radar,
+    satellite: t.layer_explainer_satellite,
+    temperature: t.layer_explainer_temperature,
+    humidity: t.layer_explainer_humidity,
+    pressure: t.layer_explainer_pressure,
+    precipitation: t.layer_explainer_precipitation,
+    wind: t.layer_explainer_wind,
+    sunlight: t.layer_explainer_sunlight,
   };
   function maybeShowLayerExplainer(id: string): void {
     const text = LAYER_EXPLAINERS[id];
@@ -3381,6 +3391,56 @@ export async function initInteractiveMap(
         onError: (reason) => showMsg(t[failureMessageKey(reason)]),
       });
     });
+  }
+
+  // ----------------------------------------------------------------
+  // Story 19.2 — first-visit welcome card. Non-modal (the map stays
+  // usable underneath), shown once per browser (localStorage), never on
+  // embeds (features.welcome is only set by the full-page maps).
+  // ----------------------------------------------------------------
+  const WELCOME_KEY = 'mw:welcomed';
+  const welcomeEl = features.welcome
+    ? document.getElementById('mw-welcome')
+    : null;
+  if (welcomeEl) {
+    const welcomed = ((): boolean => {
+      try {
+        return window.localStorage.getItem(WELCOME_KEY) === '1';
+      } catch {
+        return false;
+      }
+    })();
+    const dismissWelcome = (): void => {
+      welcomeEl.hidden = true;
+      try {
+        window.localStorage.setItem(WELCOME_KEY, '1');
+      } catch {
+        /* private mode — the card simply returns next time */
+      }
+      document.removeEventListener('keydown', welcomeEsc);
+    };
+    const welcomeEsc = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape' && !welcomeEl.hidden) dismissWelcome();
+    };
+    if (!welcomed) {
+      welcomeEl.hidden = false;
+      document
+        .getElementById('mw-welcome-locate')
+        ?.addEventListener('click', () => {
+          dismissWelcome();
+          if (opts.els.locate) opts.els.locate.click();
+          else
+            void runLocateFlow({
+              onResolved: (lat, lng) =>
+                setUserPin(t.map_locate, lat, lng, 'geo'),
+              onError: (reason) => showMsg(t[failureMessageKey(reason)]),
+            });
+        });
+      document
+        .getElementById('mw-welcome-dismiss')
+        ?.addEventListener('click', dismissWelcome);
+      document.addEventListener('keydown', welcomeEsc);
+    }
   }
 
   // ----------------------------------------------------------------

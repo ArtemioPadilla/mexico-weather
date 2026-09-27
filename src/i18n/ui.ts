@@ -71,6 +71,19 @@ export interface UiStrings {
   legend_wind_strong: string;
   legend_wind_gale: string;
   map_layer_sunlight: string;
+  welcome_title: string;
+  welcome_body: string;
+  welcome_locate: string;
+  welcome_dismiss: string;
+  layer_page_link: string;
+  layer_explainer_radar: string;
+  layer_explainer_satellite: string;
+  layer_explainer_temperature: string;
+  layer_explainer_humidity: string;
+  layer_explainer_pressure: string;
+  layer_explainer_precipitation: string;
+  layer_explainer_wind: string;
+  layer_explainer_sunlight: string;
   map_opacity: string;
   legend_light: string;
   legend_moderate: string;
@@ -169,6 +182,19 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     legend_wind_strong: 'Fuerte',
     legend_wind_gale: 'Tormenta',
     map_layer_sunlight: 'Sol',
+    welcome_title: 'Bienvenido a Clima México',
+    welcome_body: '¿Centramos el mapa en tu ubicación? Solo se usa en tu navegador: sin cuenta, sin cookies, sin rastreo.',
+    welcome_locate: 'Ubicarme',
+    welcome_dismiss: 'Ahora no',
+    layer_page_link: 'Página de esta capa',
+    layer_explainer_radar: 'Radar muestra precipitación detectada (lluvia, nieve) en tiempo casi real desde RainViewer. Pulsa ▶ para animar las últimas 2 h y el nowcast.',
+    layer_explainer_satellite: 'Satélite GOES-East (NASA GIBS) cada 10 min: GeoColor de día, infrarrojo de noche. El timeline recorre 24 h; "Ver 10 días" amplía. Activa N para luces nocturnas.',
+    layer_explainer_temperature: 'Temperatura del aire a 2 m, gradiente continuo desde ayer hasta +10 días. Sub-opción Aparente incluye humedad y viento (sensación térmica); toca el mapa para ver tu pronóstico.',
+    layer_explainer_humidity: 'Humedad relativa o punto de rocío a 2 m, según sub-opción. Mayor humedad = sensación más pesada al mismo calor.',
+    layer_explainer_pressure: 'Presión atmosférica con isobaras etiquetadas cada 4 hPa. Nivel del mar (msl) es la reducción estándar en meteorología; Superficie respeta la altitud real.',
+    layer_explainer_precipitation: 'Precipitación pronosticada en mm/h (lluvia + nieve), o Nieve en cm/h y Probabilidad en %. El radar dice qué cae ahora; esta capa, qué viene.',
+    layer_explainer_wind: 'Velocidad y dirección del viento a 10 m. Activa Rachas para ver las máximas instantáneas en lugar del promedio.',
+    layer_explainer_sunlight: 'Posición del Sol y zonas en sombra (terminador día/noche). Activa Límite nocturno (O) para ver sólo la línea sobre cualquier capa.',
     map_opacity: 'Opacidad',
     legend_light: 'Ligera',
     legend_moderate: 'Moderada',
@@ -264,6 +290,19 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     legend_wind_strong: 'Strong',
     legend_wind_gale: 'Gale',
     map_layer_sunlight: 'Sun',
+    welcome_title: 'Welcome to Clima México',
+    welcome_body: 'Centre the map on your location? It stays in your browser: no account, no cookies, no tracking.',
+    welcome_locate: 'Locate me',
+    welcome_dismiss: 'Not now',
+    layer_page_link: 'Page for this layer',
+    layer_explainer_radar: 'Radar shows detected precipitation (rain, snow) in near real time from RainViewer. Press ▶ to animate the last 2 h and the nowcast.',
+    layer_explainer_satellite: 'GOES-East satellite (NASA GIBS) every 10 min: GeoColor by day, infrared by night. The timeline spans 24 h; "10 days" extends it. Press N for night lights.',
+    layer_explainer_temperature: 'Air temperature at 2 m, a continuous gradient from yesterday to +10 days. Feels-like adds humidity and wind; tap the map for your forecast.',
+    layer_explainer_humidity: 'Relative humidity or dew point at 2 m, per sub-option. Higher humidity = the same heat feels heavier.',
+    layer_explainer_pressure: 'Atmospheric pressure with isobars labelled every 4 hPa. Sea level (msl) is the standard meteorological reduction; Surface follows real altitude.',
+    layer_explainer_precipitation: 'Forecast precipitation in mm/h (rain + snow), or Snow in cm/h and Probability in %. The radar tells what is falling; this layer what is coming.',
+    layer_explainer_wind: 'Wind speed and direction at 10 m. Turn on Gusts to see instantaneous peaks instead of the average.',
+    layer_explainer_sunlight: 'Sun position and shaded areas (day/night terminator). Turn on Night line (O) to keep just the line over any layer.',
     map_opacity: 'Opacity',
     legend_light: 'Light',
     legend_moderate: 'Moderate',
