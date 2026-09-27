@@ -11,7 +11,7 @@ Tras `PLAN_PRO_GRATIS` (18/21 historias en `main`) el sitio da gratis todo lo qu
 | Dimensión | zoom.earth | Nosotros (`/mapa`, `main` @ 2026-09-27) | Evidencia | Brecha |
 |---|---|---|---|---|
 | Primera impresión | Satélite animado a pantalla completa sobre basemap oscuro, sin interacción | Basemap gris claro, capa base (o radar en home); el mapa "vacío" hasta elegir capa | `initialLayer` ausente en `mapa.astro`; `pickBasemapTiles(dark)` solo sigue `html.dark` | Alta |
-| Densidad del chrome | ~6 controles visibles | ~20: rail de 8 capas con chips de atajo, sub-opciones, acordeón de 20 overlays, 5 pastillas de herramientas (`mw-measure-*`, `mw-snapshot-*`, `mw-crosshair-btn`), toggle de modelos, pastilla SMN, ⚙, ℹ, búsqueda, ubicación | ids `mw-*` en `InteractiveMap.astro` | Alta |
+| Densidad del chrome | ~6 controles visibles | **38 desktop / 26 móvil** medidos por `chrome-budget.spec` (Story 22.1); a ojo, ~20: rail de 8 capas con chips de atajo, sub-opciones, acordeón de 20 overlays, 5 pastillas de herramientas (`mw-measure-*`, `mw-snapshot-*`, `mw-crosshair-btn`), toggle de modelos, pastilla SMN, ⚙, ℹ, búsqueda, ubicación | ids `mw-*` en `InteractiveMap.astro` | Alta |
 | Timeline | Barra con escala de fechas, arrastre fino, loop fluido | `<input type=range>` en una pastilla, etiqueta de texto, sin ticks de fecha | `#tl-range`, `#tl-time` | Media |
 | Calidad visual de campos | Gradientes nítidos a cualquier zoom | Raster 32×24 interpolado en canvas; borroso al acercar | `renderFieldRaster()` en `mapraster.ts`; Story 13.4 abierta | Media |
 | Animación | Frames precargados, sin parpadeo | El satélite pide teselas al cambiar de frame; el prefetch de 16.1 quedó pendiente | `weather-raster.ts` recrea la fuente por frame | Media |
@@ -66,9 +66,10 @@ Salvedad: la comparación es sobre DOM y capturas con red simulada (el sandbox n
 
 ### E22 · Dieta de chrome (P0)
 
-**Story 22.1 — Presupuesto de controles como test** · est ½d
-- [ ] `e2e/chrome-budget.spec.ts`: cuenta elementos interactivos visibles sobre el mapa en `/mapa` (desktop 1280 y móvil 360); falla si > 8 / > 5. Primero se escribe con los números actuales como línea base (`test.fixme` hasta 22.5) para que el PR de cada historia lo baje.
+**Story 22.1 — Presupuesto de controles como test** · est ½d · **shipped 2026-09-27**
+- [x] `e2e/chrome-budget.spec.ts`: cuenta elementos interactivos visibles sobre el mapa en `/mapa` (desktop 1280 y móvil 360); falla si > 8 / > 5. Primero se escribe con los números actuales como línea base (`test.fixme` hasta 22.5) para que el PR de cada historia lo baje.
 - Acceptance: el test existe y documenta el número actual.
+- Nota (cómo quedó): **38 en desktop, 26 en móvil** (medido 2026-09-27, carga fría de `/mapa`, capa base, tarjeta de bienvenida ya descartada, teselas simuladas). Dos tests por viewport: el de **línea base** afirma el número exacto (sube → falla; baja → la historia que lo baja actualiza `VARIANTS[].baseline` en el spec y la columna "Hoy" de §5) y el de **presupuesto** (≤ 8 / ≤ 5) queda en `test.fixme` hasta 22.5. Cuenta `button, a[href], input, select, [role=button], summary` con caja no vacía y `checkVisibility()` verdadero que solapan `#map-root` y el viewport; excluye marcadores y popups de MapLibre (datos, no chrome) y el enlace de atribución (legal). Sí cuenta los 3 botones de navegación de MapLibre (zoom ±, brújula), el FAB de feedback, el enlace "Volver al inicio", la pastilla SMN y — sorpresa del inventario — las pastillas Distancia/Área/Mira, que siguen visibles a 360 px pese al `hidden sm:flex` del contenedor porque el bootstrap lo cambia a `flex` en el primer `idle` del mapa en cualquier viewport (22.3 las mete al menú ⋯). La decisión pura (rects → cuenta) vive en `src/lib/map/chrome/chrome-budget.ts` con test unitario; el spec solo mide.
 
 **Story 22.2 — Rail compacto y revelación progresiva** · est 2d
 - [ ] Rail: icono + etiqueta corta; sub-opciones (`sub-options.ts`) solo bajo la capa activa, animadas; chips de atajo se retiran del rail (van al panel `?`, Story 22.5).
@@ -207,9 +208,9 @@ Total ≈ 10 semanas de una persona, en PRs de ½–5 días. Cada PR: `npm run b
 
 ## 5. Métricas de éxito
 
-| Métrica | Hoy (estimado) | Meta | Cómo se mide |
+| Métrica | Hoy (estimado salvo que se indique medido) | Meta | Cómo se mide |
 |---|---|---|---|
-| Controles visibles en `/mapa` (desktop / móvil) | ~20 / ~10 | ≤ 8 / ≤ 5 | `chrome-budget.spec` |
+| Controles visibles en `/mapa` (desktop / móvil) | **38 / 26** (medido 2026-09-27, Story 22.1; la estimación previa de ~20 / ~10 no contaba los 9 botones del rail uno a uno, el navegador de MapLibre, el FAB ni la pastilla SMN) | ≤ 8 / ≤ 5 | `chrome-budget.spec` |
 | Tiempo a primer frame de satélite (4G simulado) | n/a (no arranca en satélite) | < 2 s | `ux-metrics.spec` |
 | fps del loop de satélite en móvil medio | n/a | ≥ 30, sin parpadeo | `ux-metrics.spec` |
 | Teselas nuevas por frame en la 2.ª vuelta del loop | todas | ≤ 1 | `ux-metrics.spec` |

@@ -185,6 +185,35 @@ direct network are unavailable.
 Unit tests for the pure helpers (plan, URLs, mock routing, sheet rendering)
 live in `src/lib/visual-audit-lib.test.ts`.
 
+### Chrome budget on `/mapa` (Story 22.1)
+
+`e2e/chrome-budget.spec.ts` counts the interactive elements (`button`,
+`a[href]`, `input`, `select`, `[role=button]`, `summary`) that are visible and
+overlap the map container on a cold `/mapa` load, at **1280×800** and
+**360×640**, and prints the list with positions in the test output (also
+attached to the HTML report). Two tests per viewport:
+
+- **baseline** — asserts the exact number measured when the story shipped
+  (**38 desktop / 26 mobile**, 2026-09-27). It fails when a PR adds a control
+  over the map *and* when one is removed: the story that removes it records
+  the new number in `VARIANTS[].baseline` and in the "Hoy" column of
+  [`PLAN_PARIDAD_VISUAL.md`](PLAN_PARIDAD_VISUAL.md) §5.
+- **budget** (≤ 8 desktop, ≤ 5 mobile, plan §1.2) — `test.fixme` until
+  Stories 22.2–22.5 land; 22.5 flips it to a real test.
+
+The state measured is the one a returning visitor sees: base layer, nothing
+clicked, welcome card already dismissed. MapLibre markers/popups and the
+attribution link are not counted (data and legal text, not chrome); the
+MapLibre zoom/compass buttons, the feedback FAB, the back link and the SMN
+pill are. The pure decision (rects → count) is
+`src/lib/map/chrome/chrome-budget.ts`, unit-tested in
+`chrome-budget.test.ts`; the spec only measures. Tiles are mocked, so the
+spec runs on any machine:
+
+```sh
+npx playwright test e2e/chrome-budget.spec.ts
+```
+
 ## Related docs
 
 - **E2E user-journey reference** (selectors, journey-by-journey Playwright drives, network mocks, coverage matrix): [`USER_JOURNEYS.md`](USER_JOURNEYS.md)
