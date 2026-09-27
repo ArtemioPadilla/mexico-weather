@@ -71,6 +71,55 @@ function fieldResponseForUrl(url: string): string {
   return JSON.stringify(Array.from({ length: n }, () => point));
 }
 
+/** Rich forecast response (current + hourly + daily) for the place card
+ *  (Story 15.4); sized from the URL's forecast_days. */
+function richForecastForUrl(url: string): string {
+  const days = Number(/[?&]forecast_days=(\d+)/.exec(url)?.[1] ?? 10);
+  const t0 = Date.UTC(2026, 4, 19);
+  const dates = Array.from({ length: days }, (_, i) =>
+    new Date(t0 + i * 86_400_000).toISOString().slice(0, 10),
+  );
+  const hours = Array.from({ length: days * 24 }, (_, i) =>
+    new Date(t0 + i * 3_600_000).toISOString().slice(0, 16),
+  );
+  return JSON.stringify({
+    current: {
+      time: hours[0],
+      temperature_2m: 21,
+      apparent_temperature: 21,
+      weather_code: 2,
+      precipitation_probability: 10,
+      wind_speed_10m: 12,
+      wind_direction_10m: 90,
+      wind_gusts_10m: 20,
+      relative_humidity_2m: 55,
+      cloud_cover: 30,
+      uv_index: 6,
+      visibility: 20000,
+      is_day: 1,
+      pressure_msl: 1015,
+    },
+    hourly: {
+      time: hours,
+      temperature_2m: hours.map((_, i) => 15 + (i % 24) / 2),
+      weather_code: hours.map(() => 2),
+      precipitation_probability: hours.map(() => 10),
+      wind_speed_10m: hours.map(() => 10),
+    },
+    daily: {
+      time: dates,
+      weather_code: dates.map(() => 2),
+      temperature_2m_max: dates.map((_, i) => 26 + i),
+      temperature_2m_min: dates.map((_, i) => 12 + i),
+      precipitation_probability_max: dates.map(() => 20),
+      uv_index_max: dates.map(() => 7),
+      wind_speed_10m_max: dates.map(() => 15),
+      sunrise: dates.map((d) => `${d}T06:30`),
+      sunset: dates.map((d) => `${d}T18:45`),
+    },
+  });
+}
+
 /** Minimal Open-Meteo wind bulk response: 48 points (8x6 grid), 2 hourly steps. */
 const OPEN_METEO_WIND = JSON.stringify(
   Array.from({ length: 48 }, () => ({
@@ -333,6 +382,48 @@ test.describe('mapa page', () => {
     await page.locator('#layerbtn-base').click();
     await expect(page.locator('#legend-bar')).toBeHidden();
     await expect(page.locator('#tl-time')).toHaveText('—');
+  });
+
+  test('tapping the map opens a 10-day / 48-h place card (Story 15.4)', async ({
+    page,
+  }) => {
+    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    );
+    await page.route('**/*.arcgisonline.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+    );
+    // The place card calls the rich forecast endpoint (has `daily=`);
+    // field layers call the same host without it.
+    await page.route('**/api.open-meteo.com/v1/forecast**', (route) => {
+      const url = route.request().url();
+      if (url.includes('daily=')) {
+        route.fulfill({ status: 200, contentType: 'application/json', body: richForecastForUrl(url) });
+      } else {
+        route.fulfill({ status: 200, contentType: 'application/json', body: fieldResponseForUrl(url) });
+      }
+    });
+    await page.goto('mapa/');
+    await expect(page.locator('#layerbtn-base')).toBeVisible();
+    const card = page.locator('#mw-place-card');
+    await expect(card).toBeHidden();
+    const forecastResp = page.waitForResponse(
+      (r) => r.url().includes('api.open-meteo.com') && r.url().includes('daily='),
+    );
+    await page.locator('#map canvas').click({ position: { x: 400, y: 300 } });
+    await forecastResp;
+    await expect(card).toBeVisible();
+    await expect(card.locator('[data-pc-day]')).toHaveCount(10);
+    await card.locator('[data-pc-mode="hourly"]').click();
+    await expect(card.locator('[data-pc-hour]')).toHaveCount(48);
+    await expect(card.getByRole('link', { name: /Ver pronóstico completo/ })).toHaveAttribute(
+      'href',
+      /\/forecast\?lat=/,
+    );
+    await card.locator('[data-pc-fav]').click();
+    await expect(card.locator('[data-pc-fav]')).toHaveAttribute('aria-pressed', 'true');
+    await page.keyboard.press('Escape');
+    await expect(card).toBeHidden();
   });
 
   test('locate button drops a pin on /mapa and never navigates away', async ({

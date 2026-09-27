@@ -38,7 +38,8 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
    - Satellite: no intensity legend (it's imagery).
    - Temperature / Humidity / Pressure: colour ramp with stop labels.
 5. The **timeline scrubber** (bottom-centre) appears whenever a weather layer with a time axis is active. Use ‹ / › to step a frame, drag the range, or press ▶ to play (loops with wrap). Pause with ⏸ or by interacting with prev/next/range. Forecast layers (temperature, humidity, pressure, wind) boot on a **2-day hourly** window; the **"Ver 10 días"** chip (or stepping past the last frame) pulls a **10-day, 3-hourly** extension on demand and the axis grows in place — labels switch to "mié 15:00 · +3 d" past 24 h and the day-skip buttons move by 24 h regardless of frame stride. A shared link whose `t=` lies past +48 h pulls the extension automatically.
-6. **Sharing / bookmarking**: the URL hash updates as you pan, zoom, change layer, and scrub. Copy-paste the URL to share the exact view + frame; reloading restores it.
+6. **Tap anywhere** on the map to open the **place card**: 10 daily rows (Diario) or 48 hourly rows (Horario) for that point, the active layer's reading there, a favourite star and a link to the full forecast. Bottom sheet on phones, floating panel on desktop; Escape or × closes it.
+7. **Sharing / bookmarking**: the URL hash updates as you pan, zoom, change layer, and scrub. Copy-paste the URL to share the exact view + frame; reloading restores it.
 
 ## Public URL schemas
 

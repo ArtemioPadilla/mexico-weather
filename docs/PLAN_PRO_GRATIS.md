@@ -86,7 +86,7 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 - [ ] Barra de temperatura semanal → escala a 10/16 filas; chip de desacuerdo entre modelos por día (ya existe para 1 día: `DISAGREEMENT_MODELS`).
 - Acceptance: `/forecast` muestra 10 días por defecto; e2e `search.spec.ts` sigue verde; Lighthouse LCP sin regresión.
 
-**Story 15.4 — Tarjeta de ubicación al tocar el mapa (diario 10 d / horario 48 h)** · est 3d
+**Story 15.4 — Tarjeta de ubicación al tocar el mapa (diario 10 d / horario 48 h)** · est 3d · **shipped 2026-09-27**
 - [ ] Reusar `placePopup` (`interactive-map.ts`, click-to-place ya existe) y el layout de "Tu ubicación" de zoom.earth: 5 filas visibles, "ver 10 días" expande; toggle Diario/Horario.
 - [ ] Datos: una llamada `/v1/forecast` por punto (`forecast_days=10`), cache 10 min; en móvil, panel swipeable inferior (patrón Story 11.3).
 - [ ] Botón "Pronóstico completo →" a `/forecast?lat&lng` y estrella de favorito.

@@ -78,6 +78,14 @@ import { presetPins, withUserPin, type MapPin } from './mappins';
 import { cities } from '../data/cities';
 import { geocode } from './geocode';
 import { runLocateFlow, failureMessageKey } from './locate-flow';
+import { getForecast, FORECAST_DAYS } from './forecast';
+import { has as hasFavorite, toggle as toggleFavorite } from './favorites';
+import {
+  renderPlaceCard,
+  renderPlaceCardStatus,
+  type PlaceCardMode,
+  type PlaceCardOpts,
+} from './map/chrome/place-card';
 import { ui } from '../i18n/ui';
 import { siteBase } from '../utils/paths';
 import {
@@ -123,6 +131,10 @@ export interface InteractiveMapElements {
    *  when present, the cursor's lat/lng renders as "19°25′N 99°07′O"
    *  on mousemove (zoom.earth-style). */
   coords?: HTMLElement | null;
+  /** Place card container (Story 15.4): tap-anywhere 10-day / 48-h
+   *  forecast panel. Optional — when absent, taps fall back to the
+   *  small coordinates popup. */
+  placeCard?: HTMLElement | null;
 }
 
 export interface InteractiveMapFeatures {
@@ -493,6 +505,149 @@ export async function initInteractiveMap(
   // Only wired on the full /mapa page (features.layerRail) and when
   // markerPopups is enabled.
   let placePopup: maplibregl.Popup | null = null;
+
+  // ----------------------------------------------------------------
+  // Place card (Story 15.4 — plan PRO_GRATIS E15). zoom.earth's
+  // "location weather" panel: tap anywhere → 10 daily rows (Pro-only
+  // there) + 48 hourly rows for that point, a favourite star and the
+  // link to the full forecast. One Open-Meteo call per tap (cachedFetch
+  // dedupes for 10 min). Markup lives in map/chrome/place-card.ts.
+  // ----------------------------------------------------------------
+  const placeCardEl = opts.els.placeCard ?? null;
+  let placeMarker: maplibregl.Marker | null = null;
+  let placeCardMode: PlaceCardMode = 'daily';
+  let placeCardPoint: { lat: number; lng: number } | null = null;
+  let placeCardFc: Awaited<ReturnType<typeof getForecast>> | null = null;
+  let placeCardSeq = 0;
+
+  function placeCardOpts(): PlaceCardOpts | null {
+    if (!placeCardPoint) return null;
+    const { lat, lng } = placeCardPoint;
+    const coords = formatLatLngDM(lat, lng);
+    const now = new Date();
+    const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    let isFavorite = false;
+    try {
+      isFavorite = hasFavorite(window.localStorage, lat, lng);
+    } catch {
+      /* storage blocked */
+    }
+    return {
+      mode: placeCardMode,
+      coordsLabel: coords,
+      forecastHref: `${base}forecast?lat=${lat.toFixed(4)}&lng=${lng.toFixed(4)}&name=${encodeURIComponent(coords)}`,
+      isFavorite,
+      nowLine: tooltipValueAt(lng, lat),
+      strings: {
+        title: t.place_card_title,
+        daily: t.place_card_daily,
+        hourly: t.place_card_hourly,
+        close: t.place_card_close,
+        favAdd: t.fav_add,
+        favRemove: t.fav_remove,
+        fullForecast: t.map_popup_full_forecast,
+        loading: t.loading,
+        today: t.place_card_today,
+        tomorrow: t.place_card_tomorrow,
+        error: t.place_card_error,
+      },
+      lang,
+      todayIso,
+    };
+  }
+
+  function paintPlaceCard(status?: 'loading' | 'error'): void {
+    if (!placeCardEl) return;
+    const o = placeCardOpts();
+    if (!o) return;
+    placeCardEl.innerHTML =
+      status || !placeCardFc
+        ? renderPlaceCardStatus(o, status ?? 'loading')
+        : renderPlaceCard(placeCardFc, o);
+    placeCardEl.hidden = false;
+  }
+
+  function closePlaceCard(): void {
+    if (placeCardEl) {
+      placeCardEl.hidden = true;
+      placeCardEl.innerHTML = '';
+    }
+    placeMarker?.remove();
+    placeMarker = null;
+    placeCardPoint = null;
+    placeCardFc = null;
+    placeCardSeq++;
+  }
+
+  async function openPlaceCard(latRaw: number, lngRaw: number): Promise<void> {
+    if (!placeCardEl) return;
+    // 4 dp (~11 m): what the favourites key and the /forecast URL carry.
+    const lat = Number(latRaw.toFixed(4));
+    const lng = Number(lngRaw.toFixed(4));
+    const seq = ++placeCardSeq;
+    placeCardPoint = { lat, lng };
+    placeCardFc = null;
+    placeMarker?.remove();
+    const dot = document.createElement('div');
+    dot.className =
+      'h-4 w-4 rounded-full border-2 border-white bg-blue-600 shadow-md';
+    // Hoisted function: TS can't carry the module guard's narrowing in.
+    const ml = maplibre as typeof maplibregl;
+    placeMarker = new ml.Marker({ element: dot })
+      .setLngLat([lng, lat])
+      .addTo(map);
+    paintPlaceCard('loading');
+    placeCardEl.querySelector<HTMLElement>('[data-pc-close]')?.focus();
+    try {
+      const fc = await getForecast(
+        { lat, lng, tz: 'auto' },
+        deps,
+        undefined,
+        FORECAST_DAYS
+      );
+      if (seq !== placeCardSeq) return; // closed or re-opened meanwhile
+      placeCardFc = fc;
+      paintPlaceCard();
+    } catch {
+      if (seq !== placeCardSeq) return;
+      paintPlaceCard('error');
+    }
+  }
+
+  if (placeCardEl) {
+    placeCardEl.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest('[data-pc-close]')) {
+        closePlaceCard();
+        return;
+      }
+      const modeBtn = target.closest<HTMLElement>('[data-pc-mode]');
+      if (modeBtn) {
+        const m = modeBtn.dataset.pcMode === 'hourly' ? 'hourly' : 'daily';
+        if (m !== placeCardMode) {
+          placeCardMode = m;
+          paintPlaceCard();
+        }
+        return;
+      }
+      if (target.closest('[data-pc-fav]') && placeCardPoint) {
+        try {
+          toggleFavorite(window.localStorage, {
+            lat: placeCardPoint.lat,
+            lng: placeCardPoint.lng,
+            name: formatLatLngDM(placeCardPoint.lat, placeCardPoint.lng),
+            tz: 'America/Mexico_City',
+            addedAt: Date.now(),
+          });
+        } catch {
+          /* storage blocked */
+        }
+        paintPlaceCard();
+      }
+    });
+  }
+
   if (features.layerRail && markerPopups) {
     map.on('click', (e) => {
       // Ignore clicks that landed on a layer feature (storm dots, city
@@ -501,6 +656,10 @@ export async function initInteractiveMap(
         layers: ['wx-storms-circle'],
       });
       if (features.length > 0) return;
+      if (placeCardEl) {
+        void openPlaceCard(e.lngLat.lat, e.lngLat.lng);
+        return;
+      }
       if (placePopup) {
         placePopup.remove();
         placePopup = null;
@@ -2744,6 +2903,12 @@ export async function initInteractiveMap(
     return run;
   }
 
+  const placeCardEscHandler = (e: KeyboardEvent): void => {
+    if (e.key === 'Escape' && placeCardEl && !placeCardEl.hidden)
+      closePlaceCard();
+  };
+  document.addEventListener('keydown', placeCardEscHandler);
+
   // Wide-control surfacing timers (set inside the timeline block below),
   // hoisted so destroy() can clear them before they self-clear.
   let surfaceInterval = 0;
@@ -3185,6 +3350,8 @@ export async function initInteractiveMap(
         document.removeEventListener('click', acOutsideClickHandler);
       if (measureEscHandler)
         document.removeEventListener('keydown', measureEscHandler);
+      document.removeEventListener('keydown', placeCardEscHandler);
+      closePlaceCard();
       overlayRegistry.dispose();
       try {
         map.remove();

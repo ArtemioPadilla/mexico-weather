@@ -117,6 +117,7 @@ const ids = {
   legend: mapId === 'map' ? 'legend' : `${mapId}-legend`,
   msg: mapId === 'map' ? 'mapmsg' : `${mapId}-msg`,
   tooltip: mapId === 'map' ? 'mapTooltip' : `${mapId}-tooltip`,
+  placeCard: mapId === 'map' ? 'mw-place-card' : `${mapId}-place-card`,
   coords: mapId === 'map' ? 'mapCoords' : `${mapId}-coords`,
   timeline: mapId === 'map' ? 'timeline' : `${mapId}-timeline`,
   tlPrev: mapId === 'map' ? 'tl-prev' : `${mapId}-tl-prev`,
@@ -384,6 +385,19 @@ const cfg = JSON.stringify({
     `pointer-events-none` so it never eats map drags; `z-50` so it sits
     above the layer rail and the timeline.
   */}
+  {/* Place card (Story 15.4) — tap anywhere: 10-day daily / 48-h hourly
+      forecast for that point. Bottom sheet below sm, floating panel
+      (top-centre, under the rail offset var) from sm up. Filled and
+      shown by interactive-map.ts; hidden attribute otherwise. */}
+  <div
+    id={ids.placeCard}
+    role="dialog"
+    aria-modal="false"
+    aria-label={t.place_card_title}
+    hidden
+    class="absolute z-40 max-sm:inset-x-0 max-sm:bottom-0 max-sm:rounded-t-2xl sm:left-1/2 sm:top-[var(--im-rail-top)] sm:w-80 sm:-translate-x-1/2 sm:rounded-2xl bg-white/97 text-gray-900 shadow-2xl ring-1 ring-black/5 backdrop-blur-sm dark:bg-gray-900/97 dark:text-gray-100 dark:ring-white/10"
+  ></div>
+
   <div
     id={ids.tooltip}
     role="status"
@@ -729,6 +743,7 @@ const cfg = JSON.stringify({
           msg: document.getElementById(cfg.ids.msg),
           tooltip: document.getElementById(cfg.ids.tooltip),
           coords: document.getElementById(cfg.ids.coords),
+          placeCard: document.getElementById(cfg.ids.placeCard),
         };
         // Surface async init failures. Without these handlers an
         // unhandled rejection inside initInteractiveMap is silently

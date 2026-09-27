@@ -41,6 +41,13 @@ export interface UiStrings {
   map_search_placeholder: string;
   map_locate: string;
   map_popup_full_forecast: string;
+  place_card_title: string;
+  place_card_daily: string;
+  place_card_hourly: string;
+  place_card_close: string;
+  place_card_today: string;
+  place_card_tomorrow: string;
+  place_card_error: string;
   map_layer_unavailable: string;
   map_layers: string;
   map_layer_radar: string;
@@ -131,6 +138,13 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_search_placeholder: 'Buscar un lugar en el mapa…',
     map_locate: 'Mi ubicación',
     map_popup_full_forecast: 'Ver pronóstico completo',
+    place_card_title: 'Punto seleccionado',
+    place_card_daily: 'Diario',
+    place_card_hourly: 'Horario',
+    place_card_close: 'Cerrar',
+    place_card_today: 'Hoy',
+    place_card_tomorrow: 'Mañana',
+    place_card_error: 'No se pudo cargar el pronóstico de este punto.',
     map_layer_unavailable: 'Capa no disponible',
     map_layers: 'Capas',
     map_layer_radar: 'Radar',
@@ -218,6 +232,13 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_search_placeholder: 'Search a place on the map…',
     map_locate: 'My location',
     map_popup_full_forecast: 'See full forecast',
+    place_card_title: 'Selected point',
+    place_card_daily: 'Daily',
+    place_card_hourly: 'Hourly',
+    place_card_close: 'Close',
+    place_card_today: 'Today',
+    place_card_tomorrow: 'Tomorrow',
+    place_card_error: 'Could not load the forecast for this point.',
     map_layer_unavailable: 'Layer unavailable',
     map_layers: 'Layers',
     map_layer_radar: 'Radar',
