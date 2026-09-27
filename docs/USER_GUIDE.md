@@ -129,7 +129,7 @@ The site is mobile-first and tested at four representative breakpoints. There ar
 - **RainViewer** — radar + satellite-IR frames and tiles. © RainViewer.
 - **Open-Meteo** — keyless gridded forecast (temperature, humidity, pressure, wind). © Open-Meteo.
 - **SMN / CONAGUA** — weather advisory RSS used for the build-time alert feed at `/rss.xml`.
-- **NASA GIBS** — referenced in the design for future satellite layers; not yet a runtime data source.
+- **NASA GIBS** — satellite imagery (GOES-East GeoColor at matrix level 7, Band 13 IR at level 6, MODIS Terra true colour daily) and the VIIRS NOAA-20 day/night band for the night-lights overlay. Keyless, CORS-enabled, © NASA EOSDIS GIBS. The satellite timeline is a synthetic axis of 10-minute frames (24 h by default, "Ver 10 días" for 10 days; GIBS keeps ≈ 45 days) that GIBS serves by TIME; the newest frame lags real time by ~30 min.
 
 All sources are public, keyless, and CORS-enabled. The site ships zero secrets and runs as a static GitHub Pages deployment.
 

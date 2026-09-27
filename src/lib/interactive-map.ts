@@ -32,6 +32,9 @@ import {
   clampIndex,
   frameOffsetMinutes,
   seekIndexForIso,
+  satelliteFrames,
+  satelliteFramesExtended,
+  satelliteDailyFrames,
 } from './maptimeline';
 import {
   viewportGrid,
@@ -2292,8 +2295,12 @@ export async function initInteractiveMap(
     if (def.kind === 'raster-tile') {
       rvOpacity = def.defaultOpacity;
       if (opacityEl) opacityEl.value = String(Math.round(rvOpacity * 100));
-      const frames = framesForLayer(rvData, id);
-      if (!rvData || frames.length === 0) {
+      // Story 16.1 — satellite frames are a synthetic GIBS TIME axis
+      // (24 h of 10-min frames; daily for MODIS true colour), no longer
+      // the RainViewer IR manifest that the raster never actually used.
+      const frames =
+        id === 'satellite' ? satelliteAxis(false) : framesForLayer(rvData, id);
+      if ((id === 'radar' && !rvData) || frames.length === 0) {
         showMsg(t.map_layer_unavailable);
         activeLayer = 'base';
         tlStop();
@@ -2528,6 +2535,9 @@ export async function initInteractiveMap(
       getActive: () => satelliteSubOption,
       onSelect: (id) => {
         satelliteSubOption = id;
+        // Re-activation rebuilds the frame axis (daily vs 10-min);
+        // keep the user's scrub position across the switch.
+        pendingSeekIso = activeFrameIso;
         void setActiveLayer('satellite');
       },
       isVisible: () => activeLayer === 'satellite',
@@ -2823,10 +2833,25 @@ export async function initInteractiveMap(
     return ms > parseUtcMs(times[times.length - 1]) ? iso : null;
   }
 
+  /** Satellite timeline axis (Story 16.1). Daily products get one frame
+   *  per day; GOES gets 10-minute frames for 24 h, or the 10-day
+   *  hourly+tail axis when extended. */
+  function satelliteAxis(extended: boolean): RadarFrame[] {
+    const now = Math.floor(Date.now() / 1000);
+    if (satelliteSubOption === 'truecolor') return satelliteDailyFrames(now);
+    return extended ? satelliteFramesExtended(now) : satelliteFrames(now);
+  }
+
   function canExtendTimeline(): boolean {
     const kind = getLayerDef(activeLayer)?.kind;
     if (kind === 'field') return !!fieldGrid && !isExtendedGrid(fieldGrid);
     if (kind === 'particles') return !!windGrid && !isExtendedGrid(windGrid);
+    if (activeLayer === 'satellite') {
+      if (satelliteSubOption === 'truecolor' || tlFrames.length < 2)
+        return false;
+      const span = tlFrames[tlFrames.length - 1].time - tlFrames[0].time;
+      return span <= 2 * 86400;
+    }
     return false;
   }
 
@@ -2849,6 +2874,16 @@ export async function initInteractiveMap(
     if (!canExtendTimeline()) return false;
     const layerAtStart = activeLayer;
     const keepIso = seekIso ?? activeFrameIso;
+    if (activeLayer === 'satellite') {
+      // No fetch needed: GIBS serves any instant in its window, so the
+      // axis just gets longer (10 days) and we re-seek to the same time.
+      tlFrames = satelliteAxis(true);
+      const now = Math.floor(Date.now() / 1000);
+      const idx = seekIndexForIso(tlFrames, keepIso, now);
+      applyFrame(idx >= 0 ? idx : tlFrames.length - 1);
+      syncExtendButton();
+      return true;
+    }
     const run = (async (): Promise<boolean> => {
       try {
         let times: string[] | null = null;

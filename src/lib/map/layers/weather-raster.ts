@@ -17,10 +17,15 @@ import {
   ATTRIBUTION_GIBS,
   GIBS_LAYERS,
   type GibsLayerDef,
-  gibsRoundedTime,
+  gibsLatestTime,
   gibsTileUrl,
+  gibsTimeParam,
 } from '../sources/nasa-gibs';
-import { rainviewerTileUrl, type RadarFrame, type RainviewerData } from '../../maplayers';
+import {
+  rainviewerTileUrl,
+  type RadarFrame,
+  type RainviewerData,
+} from '../../maplayers';
 
 const RV_SOURCE = 'wx-raster';
 const RV_LAYER = 'wx-raster-layer';
@@ -83,7 +88,7 @@ export interface WeatherRasterFactory {
       satelliteSubOption: SatelliteSubOption;
       opacity: number;
       currentZoom: number;
-    },
+    }
   ) => void;
   /** Tear down the active raster + the dim backdrop. */
   remove: () => void;
@@ -94,7 +99,7 @@ export interface WeatherRasterFactory {
 
 export function createWeatherRaster(
   map: maplibregl.Map,
-  deps: WeatherRasterDeps = {},
+  deps: WeatherRasterDeps = {}
 ): WeatherRasterFactory {
   function addDim(): void {
     if (map.getLayer(DIM_LAYER)) return;
@@ -112,7 +117,7 @@ export function createWeatherRaster(
           'fill-opacity': 0.45,
         },
       },
-      beneath,
+      beneath
     );
   }
 
@@ -135,14 +140,23 @@ export function createWeatherRaster(
         const gibsLayer = pickGibsLayer(ctx.satelliteSubOption);
         map.addSource(RV_SOURCE, {
           type: 'raster',
-          tiles: [gibsTileUrl(gibsLayer, gibsRoundedTime())],
+          // Story 16.1 — the timeline frame picks the TIME; without a
+          // frame fall back to the newest instant GIBS is likely to have.
+          tiles: [
+            gibsTileUrl(
+              gibsLayer,
+              frame
+                ? gibsTimeParam(gibsLayer, frame.time * 1000)
+                : gibsLatestTime()
+            ),
+          ],
           tileSize: 256,
           maxzoom: gibsLayer.maxZoom,
           attribution: ATTRIBUTION_GIBS,
         });
         if (ctx.currentZoom > gibsLayer.maxZoom + 1 && deps.showMsg) {
           deps.showMsg(
-            `Satélite limitado a zoom z${gibsLayer.maxZoom} (NASA GIBS). Acercando más solo aparece la mancha del basemap.`,
+            `Satélite limitado a zoom z${gibsLayer.maxZoom} (NASA GIBS). Acercando más solo aparece la mancha del basemap.`
           );
           if (deps.hideMsg) window.setTimeout(deps.hideMsg, 5000);
         }
@@ -152,7 +166,9 @@ export function createWeatherRaster(
         // Supported" placeholder at higher zoom. 512px pyramid covers
         // through z10. tileSize:512 keeps visual density equivalent.
         if (!ctx.rvData || !frame) return;
-        const tileUrl = rainviewerTileUrl(ctx.rvData.host, frame, { size: 512 });
+        const tileUrl = rainviewerTileUrl(ctx.rvData.host, frame, {
+          size: 512,
+        });
         map.addSource(RV_SOURCE, {
           type: 'raster',
           tiles: [tileUrl],

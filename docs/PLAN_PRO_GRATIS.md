@@ -105,7 +105,7 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 
 > Outcome: el timeline de observaciones iguala a zoom.earth free (satélite 10 días, radar 72 h) y supera a su Pro en nowcast (60 min) sin tile server propio.
 
-**Story 16.1 — Satélite con scrub real (GIBS TIME)** · est 2d · **P0 dentro de la épica: hoy el UI miente**
+**Story 16.1 — Satélite con scrub real (GIBS TIME)** · est 2d · **shipped 2026-09-27**. Spike medido: GeoColor cada 10 min, retención **≈45 días** (200 a −44 d, 404 a −60 d), lag ~30 min. Hallazgo extra: GIBS había movido GeoColor a `GoogleMapsCompatible_Level7` (todo Level6 devolvía 400: la capa estaba rota en producción) y la capa VIIRS ENCC de luces nocturnas terminó en 2023-07; ambas corregidas y ahora cubiertas por el canario nocturno.
 - [ ] `weather-raster.ts`: usar el frame seleccionado en vez de `gibsRoundedTime()`; `GIBS_LAYERS[*].hasTime` ya existe.
 - [ ] Índice de frames propio: GOES-East GeoColor/IR cada 10 min; spike de ½ d para medir la retención real de GIBS (se estima ≥ 30 días; documentar el número medido).
 - [ ] Loop de 3/6/12/24 h (Story 16.4) y prefetch de los 6 frames siguientes al pulsar play.

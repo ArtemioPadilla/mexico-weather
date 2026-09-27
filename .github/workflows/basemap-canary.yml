@@ -55,3 +55,22 @@ jobs:
             echo '::error::At least one Esri Canvas tile host is not serving valid tiles. See src/lib/map/chrome/basemap-theme.ts for the fallback plan (OpenFreeMap vector styles).'
             exit 1
           fi
+
+      - name: Probe NASA GIBS GeoColor (matrix set + TIME)
+        # GIBS re-published GeoColor at Level7 in 2026 and every Level6
+        # request became a 400 — nothing in CI noticed because e2e mocks
+        # the host (Story 16.1). Probe a tile 2 h old with the matrix set
+        # src/lib/map/sources/nasa-gibs.ts uses; a 400/404 here means the
+        # capabilities changed again.
+        shell: bash
+        run: |
+          set -euo pipefail
+          T=$(date -u -d '2 hours ago' +%Y-%m-%dT%H:%M:00Z | sed -E 's/:([0-5])[0-9]:00Z$/:\10:00Z/')
+          url="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/GOES-East_ABI_GeoColor/default/${T}/GoogleMapsCompatible_Level7/4/6/3.png"
+          code=$(curl -sS --retry 3 --retry-delay 5 --max-time 30 -o gibs.png -w '%{http_code}' "$url" || echo 000)
+          type=$(file -b --mime-type gibs.png 2>/dev/null || echo unknown)
+          echo "gibs GeoColor ${T}: ${code} ${type} $(stat -c %s gibs.png 2>/dev/null || echo 0)B"
+          if [ "$code" != "200" ] || [ "$type" != "image/png" ]; then
+            echo '::error::GIBS GeoColor tile probe failed — check the TileMatrixSet/TIME in WMTSCapabilities.xml and update GIBS_LAYERS.'
+            exit 1
+          fi

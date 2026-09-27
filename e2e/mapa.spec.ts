@@ -4,7 +4,7 @@ import { mockOpenMeteo } from './helpers';
 /** Minimal 1×1 transparent PNG (base64) — satisfies MapLibre tile requests. */
 const TRANSPARENT_PNG = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
-  'base64',
+  'base64'
 );
 
 /** Minimal valid RainViewer manifest accepted by parseRainviewerManifest. */
@@ -77,10 +77,10 @@ function richForecastForUrl(url: string): string {
   const days = Number(/[?&]forecast_days=(\d+)/.exec(url)?.[1] ?? 10);
   const t0 = Date.UTC(2026, 4, 19);
   const dates = Array.from({ length: days }, (_, i) =>
-    new Date(t0 + i * 86_400_000).toISOString().slice(0, 10),
+    new Date(t0 + i * 86_400_000).toISOString().slice(0, 10)
   );
   const hours = Array.from({ length: days * 24 }, (_, i) =>
-    new Date(t0 + i * 3_600_000).toISOString().slice(0, 16),
+    new Date(t0 + i * 3_600_000).toISOString().slice(0, 16)
   );
   return JSON.stringify({
     current: {
@@ -129,7 +129,7 @@ const OPEN_METEO_WIND = JSON.stringify(
       wind_direction_10m: [180, 200],
       wind_gusts_10m: [8, 9],
     },
-  })),
+  }))
 );
 
 test.describe('mapa page', () => {
@@ -148,12 +148,14 @@ test.describe('mapa page', () => {
 
   test('radar layer button activates and shows legend', async ({ page }) => {
     // Intercept the RainViewer manifest — no live network needed.
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: RAINVIEWER_MANIFEST,
-      }),
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
     );
 
     // Intercept all RainViewer tile requests so MapLibre doesn't hit the network.
@@ -162,7 +164,7 @@ test.describe('mapa page', () => {
         status: 200,
         contentType: 'image/png',
         body: TRANSPARENT_PNG,
-      }),
+      })
     );
 
     await page.goto('mapa/');
@@ -173,7 +175,9 @@ test.describe('mapa page', () => {
 
     // Wait for the mocked manifest response to be received, then ensure the
     // button is interactive before clicking — eliminates any race with rvData.
-    await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+    await page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
     await expect(radarBtn).toBeEnabled();
 
     await radarBtn.click();
@@ -184,39 +188,102 @@ test.describe('mapa page', () => {
     await expect(page.locator('#legend li')).toHaveCount(4);
   });
 
-  test('satellite layer button activates without an intensity legend', async ({ page }) => {
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+  test('satellite layer button activates without an intensity legend', async ({
+    page,
+  }) => {
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
     );
     await page.route('**/tilecache.rainviewer.com/**', (route) =>
-      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
     );
 
     await page.goto('mapa/');
 
     const satBtn = page.locator('#layerbtn-satellite');
     await expect(satBtn).toBeVisible();
-    await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+    await page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
     await expect(satBtn).toBeEnabled();
+
+    // Story 16.1 — GIBS tiles carry the frame's TIME; capture the URLs.
+    const gibsUrls: string[] = [];
+    await page.route('**/gibs.earthdata.nasa.gov/**', (route) => {
+      gibsUrls.push(route.request().url());
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      });
+    });
 
     await satBtn.click();
 
     await expect(satBtn).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.locator('#layerbtn-radar')).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.locator('#layerbtn-radar')).toHaveAttribute(
+      'aria-pressed',
+      'false'
+    );
     // Satellite is imagery, not intensity-coded: the radar legend stays hidden.
     await expect(page.locator('#legend')).toBeHidden();
+
+    // A synthetic 24 h axis of 10-minute frames (not the RainViewer IR
+    // manifest), newest ≈ now − 30 min, so the scrub actually changes
+    // imagery: stepping back requests a tile with an earlier TIME and the
+    // matrix set is the Level7 one GIBS publishes for GeoColor.
+    await expect(page.locator('#tl-range')).toHaveAttribute('max', '143');
+    await expect(page.locator('#tl-extend')).toBeVisible();
+    await expect.poll(() => gibsUrls.length).toBeGreaterThan(0);
+    const timeOf = (u: string) =>
+      /\/default\/(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)\//.exec(u)?.[1];
+    const first = timeOf(gibsUrls[gibsUrls.length - 1]!);
+    expect(first).toBeTruthy();
+    expect(gibsUrls[gibsUrls.length - 1]).toContain(
+      'GoogleMapsCompatible_Level7'
+    );
+    const before = gibsUrls.length;
+    await page.locator('#tl-prev').click();
+    await expect.poll(() => gibsUrls.length).toBeGreaterThan(before);
+    const second = timeOf(gibsUrls[gibsUrls.length - 1]!);
+    expect(second).toBeTruthy();
+    expect(Date.parse(second!)).toBe(Date.parse(first!) - 600_000);
   });
 
-  test('timeline appears for radar and the range scrubs frames', async ({ page }) => {
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+  test('timeline appears for radar and the range scrubs frames', async ({
+    page,
+  }) => {
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
     );
     await page.route('**/tilecache.rainviewer.com/**', (route) =>
-      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
     );
 
     await page.goto('mapa/');
-    await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+    await page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
 
     // P0.3 — Timeline pill is always visible now (was conditionally
     // 'hidden' before). Initial state is the dash placeholder.
@@ -251,37 +318,56 @@ test.describe('mapa page', () => {
     await expect(page.locator('#tl-time')).toHaveText('—');
   });
 
-  test('temperature field layer activates with a legend and timeline', async ({ page }) => {
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+  test('temperature field layer activates with a legend and timeline', async ({
+    page,
+  }) => {
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
     );
     await page.route('**/tilecache.rainviewer.com/**', (route) =>
-      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
     );
     // Force live path by 404-ing the pre-baked field-grid snapshot —
     // otherwise loadFieldGrid hydrates from the static JSON and the
     // Open-Meteo waitForResponse below never fires.
     await page.route('**/data/field-grids/**', (route) =>
-      route.fulfill({ status: 404 }),
+      route.fulfill({ status: 404 })
     );
     await page.route('**/api.open-meteo.com/v1/forecast**', (route) =>
       route.fulfill({
         status: 200,
         contentType: 'application/json',
         body: fieldResponseForUrl(route.request().url()),
-      }),
+      })
     );
 
     await page.goto('mapa/');
-    await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+    await page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
 
     const tempBtn = page.locator('#layerbtn-temperature');
     await expect(tempBtn).toBeEnabled();
-    const fieldResp = page.waitForResponse('**/api.open-meteo.com/v1/forecast**');
+    const fieldResp = page.waitForResponse(
+      '**/api.open-meteo.com/v1/forecast**'
+    );
     await tempBtn.click();
     await fieldResp;
 
-    await expect(page.locator('#layerbtn-temperature')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('#layerbtn-temperature')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
     // P0.2 — legend moved into a floating bar; check the parent
     // wrapper which controls visibility.
     await expect(page.locator('#legend-bar')).toBeVisible();
@@ -295,7 +381,9 @@ test.describe('mapa page', () => {
     const extendBtn = page.locator('#tl-extend');
     await expect(extendBtn).toBeVisible();
     const extResp = page.waitForResponse(
-      (r) => r.url().includes('api.open-meteo.com') && r.url().includes('forecast_days=10'),
+      (r) =>
+        r.url().includes('api.open-meteo.com') &&
+        r.url().includes('forecast_days=10')
     );
     await extendBtn.click();
     await extResp;
@@ -313,32 +401,48 @@ test.describe('mapa page', () => {
   });
 
   for (const layer of ['humidity', 'pressure'] as const) {
-    test(`${layer} field layer activates with a legend and timeline`, async ({ page }) => {
-      await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-        route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    test(`${layer} field layer activates with a legend and timeline`, async ({
+      page,
+    }) => {
+      await page.route(
+        '**/api.rainviewer.com/public/weather-maps.json',
+        (route) =>
+          route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: RAINVIEWER_MANIFEST,
+          })
       );
       await page.route('**/tilecache.rainviewer.com/**', (route) =>
-        route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+        route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          body: TRANSPARENT_PNG,
+        })
       );
       // See temperature test above — bypass the pre-baked snapshot
       // so the Open-Meteo waitForResponse below fires.
       await page.route('**/data/field-grids/**', (route) =>
-        route.fulfill({ status: 404 }),
+        route.fulfill({ status: 404 })
       );
       await page.route('**/api.open-meteo.com/v1/forecast**', (route) =>
         route.fulfill({
           status: 200,
           contentType: 'application/json',
           body: fieldResponseForUrl(route.request().url()),
-        }),
+        })
       );
 
       await page.goto('mapa/');
-      await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+      await page.waitForResponse(
+        '**/api.rainviewer.com/public/weather-maps.json'
+      );
 
       const btn = page.locator(`#layerbtn-${layer}`);
       await expect(btn).toBeEnabled();
-      const fieldResp = page.waitForResponse('**/api.open-meteo.com/v1/forecast**');
+      const fieldResp = page.waitForResponse(
+        '**/api.open-meteo.com/v1/forecast**'
+      );
       await btn.click();
       await fieldResp;
 
@@ -354,23 +458,43 @@ test.describe('mapa page', () => {
   }
 
   test('wind layer activates with a legend and timeline', async ({ page }) => {
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
     );
     await page.route('**/tilecache.rainviewer.com/**', (route) =>
-      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
     );
     // Wind bulk URL carries `hourly=wind_speed_10m,wind_direction_10m`; route by query.
-    await page.route(/api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/, (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: OPEN_METEO_WIND }),
+    await page.route(
+      /api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/,
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: OPEN_METEO_WIND,
+        })
     );
 
     await page.goto('mapa/');
-    await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+    await page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
 
     const btn = page.locator('#layerbtn-wind');
     await expect(btn).toBeEnabled();
-    const windResp = page.waitForResponse(/api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/);
+    const windResp = page.waitForResponse(
+      /api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/
+    );
     await btn.click();
     await windResp;
 
@@ -387,20 +511,38 @@ test.describe('mapa page', () => {
   test('tapping the map opens a 10-day / 48-h place card (Story 15.4)', async ({
     page,
   }) => {
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
     );
     await page.route('**/*.arcgisonline.com/**', (route) =>
-      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
     );
     // The place card calls the rich forecast endpoint (has `daily=`);
     // field layers call the same host without it.
     await page.route('**/api.open-meteo.com/v1/forecast**', (route) => {
       const url = route.request().url();
       if (url.includes('daily=')) {
-        route.fulfill({ status: 200, contentType: 'application/json', body: richForecastForUrl(url) });
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: richForecastForUrl(url),
+        });
       } else {
-        route.fulfill({ status: 200, contentType: 'application/json', body: fieldResponseForUrl(url) });
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: fieldResponseForUrl(url),
+        });
       }
     });
     await page.goto('mapa/');
@@ -408,7 +550,8 @@ test.describe('mapa page', () => {
     const card = page.locator('#mw-place-card');
     await expect(card).toBeHidden();
     const forecastResp = page.waitForResponse(
-      (r) => r.url().includes('api.open-meteo.com') && r.url().includes('daily='),
+      (r) =>
+        r.url().includes('api.open-meteo.com') && r.url().includes('daily=')
     );
     await page.locator('#map canvas').click({ position: { x: 400, y: 300 } });
     await forecastResp;
@@ -416,12 +559,14 @@ test.describe('mapa page', () => {
     await expect(card.locator('[data-pc-day]')).toHaveCount(10);
     await card.locator('[data-pc-mode="hourly"]').click();
     await expect(card.locator('[data-pc-hour]')).toHaveCount(48);
-    await expect(card.getByRole('link', { name: /Ver pronóstico completo/ })).toHaveAttribute(
-      'href',
-      /\/forecast\?lat=/,
-    );
+    await expect(
+      card.getByRole('link', { name: /Ver pronóstico completo/ })
+    ).toHaveAttribute('href', /\/forecast\?lat=/);
     await card.locator('[data-pc-fav]').click();
-    await expect(card.locator('[data-pc-fav]')).toHaveAttribute('aria-pressed', 'true');
+    await expect(card.locator('[data-pc-fav]')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
     await page.keyboard.press('Escape');
     await expect(card).toBeHidden();
   });
@@ -436,11 +581,21 @@ test.describe('mapa page', () => {
     await context.grantPermissions(['geolocation']);
     await context.setGeolocation({ latitude: 19.43, longitude: -99.13 });
     await mockOpenMeteo(page);
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
     );
     await page.route('**/*.arcgisonline.com/**', (route) =>
-      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
     );
     await page.goto('mapa/');
     await expect(page.locator('.maplibregl-marker')).toHaveCount(5);
@@ -464,14 +619,24 @@ test.describe('mapa page', () => {
         status: 200,
         contentType: 'application/json',
         body: '{"cities":[]}',
-      }),
+      })
     );
     await mockOpenMeteo(page);
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
     );
     await page.route('**/*.arcgisonline.com/**', (route) =>
-      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
     );
 
     await page.goto('mapa/');
@@ -505,19 +670,35 @@ test.describe('mapa page', () => {
     await options.first().click();
     await expect(listbox).toBeHidden();
     await expect(mapq).toHaveAttribute('aria-expanded', 'false');
-    await expect(page.locator('.maplibregl-marker')).toHaveCount(presetCount + 1);
+    await expect(page.locator('.maplibregl-marker')).toHaveCount(
+      presetCount + 1
+    );
   });
 
-  test('sunlight overlay activates without timeline or legend', async ({ page }) => {
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: RAINVIEWER_MANIFEST }),
+  test('sunlight overlay activates without timeline or legend', async ({
+    page,
+  }) => {
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
     );
     await page.route('**/tilecache.rainviewer.com/**', (route) =>
-      route.fulfill({ status: 200, contentType: 'image/png', body: TRANSPARENT_PNG }),
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
     );
 
     await page.goto('mapa/');
-    await page.waitForResponse('**/api.rainviewer.com/public/weather-maps.json');
+    await page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
 
     const btn = page.locator('#layerbtn-sunlight');
     await expect(btn).toBeEnabled();

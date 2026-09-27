@@ -5,6 +5,9 @@ import {
   clampIndex,
   frameOffsetMinutes,
   seekIndexForIso,
+  satelliteFrames,
+  satelliteFramesExtended,
+  satelliteDailyFrames,
 } from './maptimeline';
 import type { RainviewerData } from './maplayers';
 
@@ -68,5 +71,33 @@ describe('seekIndexForIso', () => {
   });
   it('is -1 for an empty list', () => {
     expect(seekIndexForIso([], '2020-01-01T00:00:00.000Z', 0)).toBe(-1);
+  });
+});
+
+describe('satellite frame generators (Story 16.1)', () => {
+  const now = Date.parse('2026-09-27T06:17:00Z') / 1000;
+  it('default window: 144 ten-minute frames ending at now − lag, on the 10-min grid', () => {
+    const f = satelliteFrames(now);
+    expect(f).toHaveLength(144);
+    expect(new Date(f[f.length - 1].time * 1000).toISOString()).toBe(
+      '2026-09-27T05:40:00.000Z'
+    );
+    expect(f[1].time - f[0].time).toBe(600);
+    expect(f.every((x) => x.time % 600 === 0)).toBe(true);
+  });
+  it('extended window: hourly for 9 days then the 10-minute tail, strictly ascending', () => {
+    const f = satelliteFramesExtended(now);
+    expect(f.length).toBe(9 * 24 + 144);
+    for (let i = 1; i < f.length; i++)
+      expect(f[i].time).toBeGreaterThan(f[i - 1].time);
+    expect(f[0].time).toBeLessThanOrEqual(now - 10 * 86400 + 3600);
+  });
+  it('daily frames: one per day at 18:00Z, newest today', () => {
+    const f = satelliteDailyFrames(now);
+    expect(f).toHaveLength(10);
+    expect(new Date(f[9].time * 1000).toISOString()).toBe(
+      '2026-09-27T18:00:00.000Z'
+    );
+    expect(f[9].time - f[8].time).toBe(86400);
   });
 });
