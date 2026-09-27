@@ -276,6 +276,118 @@ test.describe('mapa page', () => {
     expect(Date.parse(second!)).toBe(Date.parse(first!) - 600_000);
   });
 
+  // Story 21.1 — imagery forces the dark canvas even in the light theme,
+  // and the basemap labels ride ABOVE the weather raster at 0.8.
+  test('satellite in the light theme swaps the basemap to World_Dark_Gray_Base under the labels', async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme: 'light' });
+    await page.addInitScript(() => {
+      try {
+        localStorage.setItem('theme', 'light');
+      } catch {
+        /* storage blocked — the media emulation still yields light */
+      }
+    });
+    await page.route(
+      '**/api.rainviewer.com/public/weather-maps.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
+    );
+    // Record which Esri canvas each basemap request hits; every tile is
+    // answered with the decodable transparent PNG so `load` fires.
+    const esriServices: string[] = [];
+    await page.route('**/*.arcgisonline.com/**', (route) => {
+      const m = /Canvas\/([A-Za-z_]+)\/MapServer/.exec(route.request().url());
+      if (m) esriServices.push(m[1]!);
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      });
+    });
+    await page.route('**/gibs.earthdata.nasa.gov/**', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
+    );
+
+    await page.goto('mapa/?e2e=1');
+    await expect(page.locator('html')).not.toHaveClass(/dark/);
+    await page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
+    const satBtn = page.locator('#layerbtn-satellite');
+    await expect(satBtn).toBeEnabled();
+
+    type StyleProbe = {
+      base: string[];
+      reference: string[];
+      order: string[];
+      refOpacity: unknown;
+    };
+    const probe = (): Promise<StyleProbe> =>
+      page.evaluate(() => {
+        const m = (
+          window as unknown as {
+            __map?: {
+              getSource(id: string): { tiles?: string[] } | undefined;
+              getStyle(): { layers: Array<{ id: string }> };
+              getPaintProperty(id: string, p: string): unknown;
+            };
+          }
+        ).__map!;
+        return {
+          base: m.getSource('osm')?.tiles ?? [],
+          reference: m.getSource('osm-reference')?.tiles ?? [],
+          order: m.getStyle().layers.map((l) => l.id),
+          refOpacity: m.getPaintProperty('osm-reference', 'raster-opacity'),
+        };
+      });
+
+    // Light theme, base layer: the light canvas, labels fully opaque.
+    await expect
+      .poll(async () => (await probe()).base.join(' '))
+      .toContain('World_Light_Gray_Base');
+    expect(esriServices).toContain('World_Light_Gray_Base');
+
+    await satBtn.click();
+    await expect(satBtn).toHaveAttribute('aria-pressed', 'true');
+
+    // Imagery on → dark canvas + dark reference (labels), and the tile
+    // fetches actually go to the dark service (not just the style URL).
+    await expect
+      .poll(async () => (await probe()).base.join(' '))
+      .toContain('World_Dark_Gray_Base');
+    const after = await probe();
+    expect(after.base.join(' ')).not.toContain('World_Light_Gray_Base');
+    await expect.poll(() => esriServices).toContain('World_Dark_Gray_Base');
+    // The reference source follows (its layer is hidden below
+    // LABEL_ZOOM_THRESHOLD at the default z4.5, so no fetch to observe).
+    expect(after.reference.join(' ')).toContain('World_Dark_Gray_Reference');
+    // Labels ABOVE the weather raster, dimmed to 0.8.
+    expect(after.order.indexOf('osm-reference')).toBeGreaterThan(
+      after.order.indexOf('wx-raster-layer')
+    );
+    expect(after.order.indexOf('wx-raster-layer')).toBeGreaterThan(
+      after.order.indexOf('osm')
+    );
+    expect(after.refOpacity).toBe(0.8);
+
+    // Back to base → the theme's light canvas returns, labels at 1.
+    await page.locator('#layerbtn-base').click();
+    await expect
+      .poll(async () => (await probe()).base.join(' '))
+      .toContain('World_Light_Gray_Base');
+    expect((await probe()).refOpacity).toBe(1);
+  });
+
   test('timeline appears for radar and the range scrubs frames', async ({
     page,
   }) => {

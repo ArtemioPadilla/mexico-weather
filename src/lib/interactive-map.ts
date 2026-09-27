@@ -406,10 +406,22 @@ export async function initInteractiveMap(
   // already in flight come back as OSM (light) and paint as light patches
   // next to Dark Matter tiles for a couple of seconds.
   const initialDark = document.documentElement.classList.contains('dark');
+  // Story 21.1 — a deep link / page that opens on satellite or radar (or
+  // the combined precipitation mode) gets the dark canvas from the very
+  // first tile fetch, instead of light tiles that flip dark a second
+  // later when the raster lands.
+  const initialLayerWanted = hashed?.layer ?? opts.initialLayer ?? null;
+  const initialImagery =
+    hashed?.mode === 'precip' ||
+    (initialLayerWanted != null &&
+      getLayerDef(initialLayerWanted)?.kind === 'raster-tile');
   // Initial tile arrays — sourced from the shared basemap-theme module
   // to keep the single source of truth (no diverging URL lists between
   // the map construction and the runtime theme controller).
-  const BASEMAP_TILES_INIT = pickBasemapTiles(initialDark);
+  const BASEMAP_TILES_INIT = pickBasemapTiles({
+    dark: initialDark,
+    imagery: initialImagery,
+  });
 
   // A11Y-3 — translate MapLibre's built-in control strings (zoom
   // buttons, compass) when the document language is Spanish. MapLibre
@@ -1010,6 +1022,7 @@ export async function initInteractiveMap(
     referenceSourceId: BASEMAP_REFERENCE_SOURCE_ID,
     referenceLayerId: BASEMAP_REFERENCE_LAYER_ID,
     initialDark,
+    initialImagery,
   });
   map.on('zoomend', () => basemapTheme.sync());
   const syncBasemapTheme = (): void => basemapTheme.sync();
@@ -1928,9 +1941,17 @@ export async function initInteractiveMap(
     // Story 16.4 — "estilo" setting: smooth cross-fades tiles between
     // frames, fast swaps them instantly.
     getFadeMs: () => RASTER_FADE_MS[readSettings().playStyle],
+    // Story 21.1 — imagery goes UNDER the basemap labels, never over them.
+    beforeLayerId: BASEMAP_REFERENCE_LAYER_ID,
   });
-  const removeWeatherRaster = (): void => weatherRaster.remove();
+  const removeWeatherRaster = (): void => {
+    weatherRaster.remove();
+    // Story 21.1 — back to the theme's own canvas (light stays light).
+    basemapTheme.setImagery(false);
+  };
   const showWeatherFrame = (layerId: string, frame: RadarFrame): void => {
+    // Story 21.1 — dark canvas under clouds/echoes even in the light theme.
+    basemapTheme.setImagery(true);
     weatherRaster.show(layerId === 'satellite' ? 'satellite' : 'radar', frame, {
       rvData,
       satelliteSubOption,

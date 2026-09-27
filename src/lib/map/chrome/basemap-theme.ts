@@ -2,10 +2,17 @@
  * Basemap theme + label-density controller.
  *
  * Drives two raster sources (base + reference/labels) in response to
- * two inputs:
+ * three inputs:
  *   1. html.dark class — swaps both sources' tile URLs dark↔light.
  *   2. map zoom level  — hides the reference (labels) layer at z<5 to
  *      reduce label saturation (plan P2.5).
+ *   3. imagery flag    — Story 21.1: while a raster-tile weather layer
+ *      (satellite / radar) is on screen the basemap is dark even in
+ *      the light theme (clouds and echoes read like zoom.earth, not
+ *      like a print-out), and the reference layer — which the weather
+ *      raster is inserted BENEATH (see layers/weather-raster.ts) — is
+ *      dimmed to 0.8 so labels stay legible without shouting over the
+ *      imagery.
  *
  * Stays out of interactive-map.ts so the theme logic is reusable on
  * any other map instance (e.g. forecast page embed) and testable in
@@ -62,21 +69,48 @@ export const BASEMAP_ATTRIBUTION =
 /** Below this zoom the basemap drops labels to reduce saturation. */
 export const LABEL_ZOOM_THRESHOLD = 5;
 
+/** Story 21.1 — raster-opacity of the reference (labels) layer while it
+ *  sits on top of satellite / radar imagery. 1 when no imagery is shown. */
+export const REFERENCE_OVER_IMAGERY_OPACITY = 0.8;
+
 export interface BasemapTiles {
   base: string[];
   reference: string[];
 }
 
-/** Pure mapping dark? → { base, reference } tile URL lists. Exposed for tests. */
-export function pickBasemapTiles(dark: boolean): BasemapTiles {
-  return dark
+export interface BasemapTilesInput {
+  /** html.dark is set (user / OS theme). */
+  dark: boolean;
+  /** A raster-tile weather layer (satellite, radar) is on screen. */
+  imagery: boolean;
+}
+
+/**
+ * Pure mapping { dark, imagery } → { base, reference } tile URL lists.
+ * Exposed for tests. Imagery forces the dark canvas regardless of the
+ * theme (Story 21.1): light gray under GeoColor clouds looks washed
+ * out and the light reference labels vanish over white cloud tops.
+ * The returned arrays are the module constants, so callers can compare
+ * two picks by identity.
+ */
+export function pickBasemapTiles(input: BasemapTilesInput): BasemapTiles {
+  return input.dark || input.imagery
     ? { base: ESRI_DARK_BASE, reference: ESRI_DARK_REFERENCE }
     : { base: ESRI_LIGHT_BASE, reference: ESRI_LIGHT_REFERENCE };
 }
 
+/** True when a pick points at the dark canvas. */
+export function isDarkBasemap(tiles: BasemapTiles): boolean {
+  return tiles.base === ESRI_DARK_BASE;
+}
+
 export interface BasemapThemeController {
-  /** Re-evaluate (dark, zoom) and swap tiles / label visibility if either changed. */
+  /** Re-evaluate (dark, imagery, zoom) and swap tiles / label visibility
+   *  / label opacity if any of them changed. */
   sync: () => void;
+  /** Story 21.1 — tell the controller whether a raster-tile weather
+   *  layer is on screen; re-syncs immediately. Idempotent. */
+  setImagery: (on: boolean) => void;
   /** Tear down the html.dark MutationObserver started by start(). */
   dispose: () => void;
 }
@@ -88,7 +122,13 @@ export interface BasemapThemeOptions {
   referenceSourceId?: string;
   /** Layer id rendering the reference source. Default 'osm-reference'. */
   referenceLayerId?: string;
+  /** Theme the map was constructed with (its sources already carry the
+   *  matching tiles, so the first sync() skips the swap). */
   initialDark?: boolean;
+  /** Story 21.1 — imagery state the map was constructed with; pairs
+   *  with initialDark to describe the tiles already in the sources.
+   *  Default false. */
+  initialImagery?: boolean;
 }
 
 export const DEFAULT_BASE_SOURCE_ID = 'osm';
@@ -112,8 +152,15 @@ export function createBasemapThemeController(
   const referenceSourceId =
     opts.referenceSourceId ?? DEFAULT_REFERENCE_SOURCE_ID;
   const referenceLayerId = opts.referenceLayerId ?? DEFAULT_REFERENCE_LAYER_ID;
-  let lastDark: boolean | null = opts.initialDark ?? null;
+  let imagery = opts.initialImagery ?? false;
+  // Tiles the sources currently carry (null = unknown → swap on first sync).
+  let lastTiles: BasemapTiles | null =
+    opts.initialDark == null
+      ? null
+      : pickBasemapTiles({ dark: opts.initialDark, imagery });
   let lastDense: boolean | null = null;
+  // Reference raster-opacity last applied (imagery ? 0.8 : 1).
+  let lastImageryOpacity: boolean | null = null;
   let observer: MutationObserver | null = null;
 
   const refetch = (sourceId: string): void => {
@@ -141,10 +188,20 @@ export function createBasemapThemeController(
   const sync = (): void => {
     const dark = document.documentElement.classList.contains('dark');
     const dense = map.getZoom() >= LABEL_ZOOM_THRESHOLD;
-    if (dark === lastDark && dense === lastDense) return;
+    const tiles = pickBasemapTiles({ dark, imagery });
+    const tilesChanged =
+      !lastTiles ||
+      tiles.base !== lastTiles.base ||
+      tiles.reference !== lastTiles.reference;
+    if (
+      !tilesChanged &&
+      dense === lastDense &&
+      imagery === lastImageryOpacity
+    ) {
+      return;
+    }
 
-    if (dark !== lastDark) {
-      const tiles = pickBasemapTiles(dark);
+    if (tilesChanged) {
       const pairs: Array<[string, string[]]> = [
         [baseSourceId, tiles.base],
         [referenceSourceId, tiles.reference],
@@ -163,7 +220,7 @@ export function createBasemapThemeController(
           /* retry on next mutation */
         }
       }
-      if (swapped === pairs.length) lastDark = dark;
+      if (swapped === pairs.length) lastTiles = tiles;
     }
 
     if (dense !== lastDense) {
@@ -180,6 +237,29 @@ export function createBasemapThemeController(
         /* retry on next zoomend */
       }
     }
+
+    if (imagery !== lastImageryOpacity) {
+      // Story 21.1 — the weather raster sits between base and labels;
+      // dim the labels a notch so they read as annotation, not chrome.
+      try {
+        if (map.getLayer(referenceLayerId)) {
+          map.setPaintProperty(
+            referenceLayerId,
+            'raster-opacity',
+            imagery ? REFERENCE_OVER_IMAGERY_OPACITY : 1
+          );
+          lastImageryOpacity = imagery;
+        }
+      } catch {
+        /* retry on next sync */
+      }
+    }
+  };
+
+  const setImagery = (on: boolean): void => {
+    if (on === imagery) return;
+    imagery = on;
+    sync();
   };
 
   // Watch html.dark class changes (user-driven theme toggle).
@@ -191,6 +271,7 @@ export function createBasemapThemeController(
 
   return {
     sync,
+    setImagery,
     dispose: (): void => {
       observer?.disconnect();
       observer = null;

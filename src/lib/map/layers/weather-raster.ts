@@ -77,6 +77,11 @@ export interface WeatherRasterDeps {
   /** Story 16.4 — raster-fade-duration (ms) for the tile layer; read
    *  when the layer is (re)added. 300 when absent (MapLibre default). */
   getFadeMs?: () => number;
+  /** Story 21.1 — layer id the weather raster (and its dim backdrop and
+   *  radar companion) is inserted BENEATH, so the basemap reference
+   *  (labels + boundaries) stays readable on top of clouds and echoes.
+   *  Ignored when that layer is absent (appended on top, legacy order). */
+  beforeLayerId?: string;
 }
 
 export interface WeatherRasterFactory {
@@ -113,12 +118,22 @@ export function createWeatherRaster(
   map: maplibregl.Map,
   deps: WeatherRasterDeps = {}
 ): WeatherRasterFactory {
+  /** Story 21.1 — beforeId for every layer this factory adds: the labels
+   *  layer when the caller named one and it exists, else undefined
+   *  (append on top). Resolved per call because the basemap style can
+   *  be rebuilt underneath us. */
+  function belowLabels(): string | undefined {
+    return deps.beforeLayerId && map.getLayer(deps.beforeLayerId)
+      ? deps.beforeLayerId
+      : undefined;
+  }
+
   function addDim(): void {
     if (map.getLayer(DIM_LAYER)) return;
     if (!map.getSource(DIM_SOURCE)) {
       map.addSource(DIM_SOURCE, { type: 'geojson', data: WORLD_RECT_FC });
     }
-    const beneath = map.getLayer(RV_LAYER) ? RV_LAYER : undefined;
+    const beneath = map.getLayer(RV_LAYER) ? RV_LAYER : belowLabels();
     map.addLayer(
       {
         id: DIM_LAYER,
@@ -201,16 +216,19 @@ export function createWeatherRaster(
           attribution: '© RainViewer',
         });
       }
-      map.addLayer({
-        id: RV_LAYER,
-        type: 'raster',
-        source: RV_SOURCE,
-        paint: {
-          'raster-opacity': ctx.opacity,
-          'raster-resampling': 'linear',
-          'raster-fade-duration': deps.getFadeMs?.() ?? 300,
+      map.addLayer(
+        {
+          id: RV_LAYER,
+          type: 'raster',
+          source: RV_SOURCE,
+          paint: {
+            'raster-opacity': ctx.opacity,
+            'raster-resampling': 'linear',
+            'raster-fade-duration': deps.getFadeMs?.() ?? 300,
+          },
         },
-      });
+        belowLabels()
+      );
     },
     remove: teardownRaster,
     showRadarCompanion: (frame, ctx): void => {
@@ -223,16 +241,21 @@ export function createWeatherRaster(
         maxzoom: 10,
         attribution: '© RainViewer',
       });
-      map.addLayer({
-        id: COMPANION_LAYER,
-        type: 'raster',
-        source: COMPANION_SOURCE,
-        paint: {
-          'raster-opacity': ctx.opacity,
-          'raster-resampling': 'linear',
-          'raster-fade-duration': deps.getFadeMs?.() ?? 300,
+      // Below the labels too, but above the satellite raster (which was
+      // inserted before the same anchor a moment earlier).
+      map.addLayer(
+        {
+          id: COMPANION_LAYER,
+          type: 'raster',
+          source: COMPANION_SOURCE,
+          paint: {
+            'raster-opacity': ctx.opacity,
+            'raster-resampling': 'linear',
+            'raster-fade-duration': deps.getFadeMs?.() ?? 300,
+          },
         },
-      });
+        belowLabels()
+      );
     },
     removeRadarCompanion: removeCompanion,
     setFadeMs: (ms: number): void => {

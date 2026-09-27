@@ -10,7 +10,9 @@ import {
   ESRI_LIGHT_BASE,
   ESRI_LIGHT_REFERENCE,
   LABEL_ZOOM_THRESHOLD,
+  REFERENCE_OVER_IMAGERY_OPACITY,
   createBasemapThemeController,
+  isDarkBasemap,
   pickBasemapTiles,
 } from './basemap-theme';
 
@@ -26,16 +28,45 @@ function hostOf(url: string): string {
 }
 
 describe('pickBasemapTiles', () => {
-  it('dark → Esri dark base + dark reference', () => {
-    const t = pickBasemapTiles(true);
+  it('dark, no imagery → Esri dark base + dark reference', () => {
+    const t = pickBasemapTiles({ dark: true, imagery: false });
     expect(t.base).toBe(ESRI_DARK_BASE);
     expect(t.reference).toBe(ESRI_DARK_REFERENCE);
   });
 
-  it('light → Esri light base + light reference', () => {
-    const t = pickBasemapTiles(false);
+  it('light, no imagery → Esri light base + light reference', () => {
+    const t = pickBasemapTiles({ dark: false, imagery: false });
     expect(t.base).toBe(ESRI_LIGHT_BASE);
     expect(t.reference).toBe(ESRI_LIGHT_REFERENCE);
+  });
+
+  // Story 21.1 — the full dark × imagery matrix: imagery wins.
+  it.each([
+    { dark: false, imagery: false, expectDark: false },
+    { dark: false, imagery: true, expectDark: true },
+    { dark: true, imagery: false, expectDark: true },
+    { dark: true, imagery: true, expectDark: true },
+  ])(
+    'dark=$dark imagery=$imagery → dark canvas: $expectDark',
+    ({ dark, imagery, expectDark }) => {
+      const t = pickBasemapTiles({ dark, imagery });
+      expect(isDarkBasemap(t)).toBe(expectDark);
+      // Base and reference always come from the SAME theme — a light
+      // reference (dark labels) over a dark canvas would be unreadable.
+      expect(t.reference).toBe(
+        expectDark ? ESRI_DARK_REFERENCE : ESRI_LIGHT_REFERENCE
+      );
+      expect(t.base).toBe(expectDark ? ESRI_DARK_BASE : ESRI_LIGHT_BASE);
+    }
+  );
+
+  it('light theme + imagery points the BASE at World_Dark_Gray_Base', () => {
+    const t = pickBasemapTiles({ dark: false, imagery: true });
+    for (const url of t.base) expect(url).toContain('World_Dark_Gray_Base');
+  });
+
+  it('REFERENCE_OVER_IMAGERY_OPACITY is 0.8 (plan Story 21.1)', () => {
+    expect(REFERENCE_OVER_IMAGERY_OPACITY).toBe(0.8);
   });
 
   it('never points at CARTO (watermarks anonymous tiles) nor single-host OSM', () => {
@@ -78,16 +109,18 @@ describe('createBasemapThemeController', () => {
       [DEFAULT_REFERENCE_SOURCE_ID]: { setTiles: vi.fn() },
     };
     const setLayoutProperty = vi.fn();
+    const setPaintProperty = vi.fn();
     const map = {
       getZoom: () => zoom,
       getSource: (id: string) => sources[id],
       getLayer: (id: string) =>
         id === DEFAULT_REFERENCE_LAYER_ID ? {} : undefined,
       setLayoutProperty,
+      setPaintProperty,
       style: { sourceCaches: {} },
       transform: {},
     };
-    return { map, sources, setLayoutProperty };
+    return { map, sources, setLayoutProperty, setPaintProperty };
   }
 
   afterEach(() => {
@@ -125,13 +158,106 @@ describe('createBasemapThemeController', () => {
   });
 
   it('is idempotent when nothing changed', () => {
-    const { map, setLayoutProperty } = fakeMap(8);
+    const { map, setLayoutProperty, setPaintProperty } = fakeMap(8);
     const ctl = createBasemapThemeController(map as never, {
       initialDark: false,
     });
     ctl.sync();
     ctl.sync();
     expect(setLayoutProperty).toHaveBeenCalledTimes(1);
+    // First sync applies the reference opacity for "no imagery" once.
+    expect(setPaintProperty).toHaveBeenCalledTimes(1);
+    ctl.dispose();
+  });
+
+  // Story 21.1 — imagery flag.
+  it('setImagery(true) in the LIGHT theme swaps both sources to dark + dims labels', () => {
+    const { map, sources, setPaintProperty } = fakeMap(6);
+    const ctl = createBasemapThemeController(map as never, {
+      initialDark: false,
+    });
+    ctl.sync();
+    expect(sources.osm.setTiles).not.toHaveBeenCalled();
+    ctl.setImagery(true);
+    expect(sources.osm.setTiles).toHaveBeenCalledWith(ESRI_DARK_BASE);
+    expect(sources['osm-reference'].setTiles).toHaveBeenCalledWith(
+      ESRI_DARK_REFERENCE
+    );
+    expect(setPaintProperty).toHaveBeenLastCalledWith(
+      'osm-reference',
+      'raster-opacity',
+      REFERENCE_OVER_IMAGERY_OPACITY
+    );
+    // Back to base → light tiles again, labels fully opaque.
+    ctl.setImagery(false);
+    expect(sources.osm.setTiles).toHaveBeenLastCalledWith(ESRI_LIGHT_BASE);
+    expect(sources['osm-reference'].setTiles).toHaveBeenLastCalledWith(
+      ESRI_LIGHT_REFERENCE
+    );
+    expect(setPaintProperty).toHaveBeenLastCalledWith(
+      'osm-reference',
+      'raster-opacity',
+      1
+    );
+    ctl.dispose();
+  });
+
+  it('setImagery(true) in the DARK theme dims labels but swaps no tiles', () => {
+    document.documentElement.classList.add('dark');
+    const { map, sources, setPaintProperty } = fakeMap(6);
+    const ctl = createBasemapThemeController(map as never, {
+      initialDark: true,
+    });
+    ctl.setImagery(true);
+    expect(sources.osm.setTiles).not.toHaveBeenCalled();
+    expect(sources['osm-reference'].setTiles).not.toHaveBeenCalled();
+    expect(setPaintProperty).toHaveBeenCalledWith(
+      'osm-reference',
+      'raster-opacity',
+      REFERENCE_OVER_IMAGERY_OPACITY
+    );
+    ctl.dispose();
+  });
+
+  it('theme toggle while imagery is on keeps the dark canvas (MutationObserver path)', async () => {
+    const { map, sources } = fakeMap(6);
+    const ctl = createBasemapThemeController(map as never, {
+      initialDark: false,
+    });
+    ctl.setImagery(true);
+    sources.osm.setTiles.mockClear();
+    // User flips to dark, then back to light: the canvas is dark under
+    // imagery either way, so the observer-driven sync must swap nothing.
+    document.documentElement.classList.add('dark');
+    await Promise.resolve();
+    document.documentElement.classList.remove('dark');
+    await Promise.resolve();
+    expect(sources.osm.setTiles).not.toHaveBeenCalled();
+    // Leaving imagery now follows the (light) theme.
+    ctl.setImagery(false);
+    expect(sources.osm.setTiles).toHaveBeenLastCalledWith(ESRI_LIGHT_BASE);
+    ctl.dispose();
+  });
+
+  it('initialImagery describes the tiles the map was built with (no swap on first sync)', () => {
+    const { map, sources } = fakeMap(6);
+    const ctl = createBasemapThemeController(map as never, {
+      initialDark: false,
+      initialImagery: true,
+    });
+    ctl.sync();
+    expect(sources.osm.setTiles).not.toHaveBeenCalled();
+    ctl.dispose();
+  });
+
+  it('setImagery is idempotent', () => {
+    const { map, sources } = fakeMap(6);
+    const ctl = createBasemapThemeController(map as never, {
+      initialDark: false,
+    });
+    ctl.setImagery(true);
+    ctl.setImagery(true);
+    expect(sources.osm.setTiles).toHaveBeenCalledTimes(1);
     ctl.dispose();
   });
 });

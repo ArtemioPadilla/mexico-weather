@@ -37,11 +37,12 @@ Salvedad: la comparación es sobre DOM y capturas con red simulada (el sandbox n
 
 ### E21 · Primera impresión: satélite animado por defecto (P0)
 
-**Story 21.1 — Basemap oscuro bajo capas de imagen** · est 1d
-- [ ] `basemap-theme.ts`: `pickBasemapTiles()` toma `{ dark, imagery }`; con satélite/radar activo usa `ESRI_DARK_BASE` aunque el tema sea claro; la capa de referencia (etiquetas) pasa **encima** del raster meteorológico con opacidad 0.8.
-- [ ] Nuevo token `--im-chrome-bg` oscuro para paneles flotantes (`global.css`), usado por rail, timeline, leyenda, pastillas.
-- [ ] Test unitario de `pickBasemapTiles` (matriz dark × imagery) y e2e: con satélite activo la fuente base es `World_Dark_Gray_Base`.
+**Story 21.1 — Basemap oscuro bajo capas de imagen** · est 1d · **shipped 2026-09-27**
+- [x] `basemap-theme.ts`: `pickBasemapTiles()` toma `{ dark, imagery }`; con satélite/radar activo usa `ESRI_DARK_BASE` aunque el tema sea claro; la capa de referencia (etiquetas) pasa **encima** del raster meteorológico con opacidad 0.8.
+- [x] Nuevo token `--im-chrome-bg` oscuro para paneles flotantes (`global.css`), usado por rail, timeline, leyenda, pastillas.
+- [x] Test unitario de `pickBasemapTiles` (matriz dark × imagery) y e2e: con satélite activo la fuente base es `World_Dark_Gray_Base`.
 - Acceptance: en tema claro, activar satélite cambia el basemap a oscuro y las etiquetas siguen legibles sobre las nubes.
+- Nota (cómo quedó): el controlador de `basemap-theme.ts` gana `setImagery(on)` (+ `initialImagery`); `showWeatherFrame` / `removeWeatherRaster` en `interactive-map.ts` lo llaman, y el `MutationObserver` del tema sigue vivo (con imagen activa, alternar el tema no cambia teselas; al volver a Base se sigue el tema). Un deep-link o página que arranca en satélite/radar (o `mode=precip`) pide el lienzo oscuro desde la **primera** tesela, sin parpadeo claro→oscuro. Las etiquetas quedan encima **insertando** el raster (dim, raster y radar acompañante de 13.2) *debajo* de `osm-reference` (`beforeLayerId` en `weather-raster.ts`), no moviendo la capa de referencia: así las superposiciones que estaban arriba siguen arriba y `osm-reference` conserva su `raster-opacity` 0.8 desde el controlador (1 sin imagen). Tokens `--im-chrome-bg` (gris-900 al 88 %) y `--im-chrome-fg` en `:root` + clase `.im-chrome`; rail, pastilla del timeline y barra de leyenda los usan en **ambos** temas y llevan además la clase `dark` para que las utilidades `dark:` de sus filas resuelvan sobre el panel oscuro también en tema claro (la variante es por clase, `.dark *`; la detección del tema lee solo `<html>`). Pastillas restantes (ajustes, herramientas, tarjeta de lugar, bienvenida) quedan para 22.x/25.x. e2e (teselas simuladas, `?e2e=1`): fuente `osm` en `World_Light_Gray_Base` → satélite → `World_Dark_Gray_Base` (la petición real de Esri también), `osm-reference` en `World_Dark_Gray_Reference` (no hay petición que observar: la capa está oculta bajo z5 en la vista inicial z4.5), orden `osm < wx-raster-layer < osm-reference`, opacidad 0.8, y vuelta a Base restaura claro/1.
 
 **Story 21.2 — `/mapa` arranca en satélite GeoColor animado** · est 1d
 - [ ] `mapa.astro`: `initialLayer="satellite"`; el hash sin `layer` ya no cae en `base` (`maphash.ts` DEFAULT_VIEW.layer → `satellite` solo para `/mapa`; el home embed sigue en radar).

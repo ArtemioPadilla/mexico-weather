@@ -244,9 +244,12 @@ const cfg = JSON.stringify({
     </div>
   )}
 
+  {/* Story 21.1 — `im-chrome dark`: dark translucent panel in both themes
+      (tokens in global.css); the `dark` class makes the rows' `dark:`
+      utilities apply on the dark panel under the light theme too. */}
   {features.layerRail && (
     <div
-      class="im-rail absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-44 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg bg-white/95 p-2 sm:p-3 text-sm shadow dark:bg-gray-900/95"
+      class="im-rail im-chrome dark absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-44 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg p-2 sm:p-3 text-sm shadow backdrop-blur-sm"
       aria-label={t.map_layers}
       role="group"
     >
@@ -323,7 +326,7 @@ const cfg = JSON.stringify({
   {features.timeline && (
     <div
       id={ids.timeline}
-      class="absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 items-center gap-1 rounded-full bg-gray-900/85 px-3 py-1.5 text-sm text-white shadow-lg backdrop-blur-sm sm:gap-2 sm:px-4"
+      class="im-chrome dark absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 items-center gap-1 rounded-full px-3 py-1.5 text-sm shadow-lg backdrop-blur-sm sm:gap-2 sm:px-4"
       role="group"
       aria-label={t.timeline_label}
     >
@@ -460,7 +463,7 @@ const cfg = JSON.stringify({
   {features.legend && (
     <div
       id="legend-bar"
-      class="pointer-events-none absolute bottom-10 left-2 z-10 sm:flex items-center gap-2 rounded bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow backdrop-blur-sm dark:bg-gray-900/95 dark:text-gray-200"
+      class="im-chrome dark pointer-events-none absolute bottom-10 left-2 z-10 sm:flex items-center gap-2 rounded px-3 py-1.5 text-xs shadow backdrop-blur-sm"
       style="display:none"
       aria-hidden="true"
     >

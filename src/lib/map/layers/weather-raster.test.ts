@@ -43,7 +43,7 @@ describe('createWeatherRaster', () => {
       setPaintProperty: (
         layerId: string,
         prop: string,
-        value: unknown,
+        value: unknown
       ): void => {
         if (!paintProps.has(layerId)) paintProps.set(layerId, new Map());
         paintProps.get(layerId)!.set(prop, value);
@@ -95,7 +95,7 @@ describe('createWeatherRaster', () => {
         satelliteSubOption: 'geocolor',
         opacity: 0.8,
         currentZoom: 5,
-      },
+      }
     );
     expect(layers.has(WEATHER_RASTER_LAYER_ID)).toBe(true);
   });
@@ -131,6 +131,119 @@ describe('createWeatherRaster', () => {
     expect(msg).toMatch(/Satélite limitado/);
   });
 
+  // Story 21.1 — imagery is inserted BENEATH the basemap labels layer.
+  describe('beforeLayerId (labels stay above imagery)', () => {
+    const LABELS = 'osm-reference';
+    function orderedMap(initial: string[]) {
+      const order: string[] = [...initial];
+      const sources = new Set<string>();
+      const map = {
+        getSource: (id: string): unknown => (sources.has(id) ? {} : undefined),
+        getLayer: (id: string): unknown =>
+          order.includes(id) ? {} : undefined,
+        addSource: (id: string): void => {
+          sources.add(id);
+        },
+        addLayer: (def: { id: string }, beforeId?: string): void => {
+          const at = beforeId ? order.indexOf(beforeId) : -1;
+          if (at >= 0) order.splice(at, 0, def.id);
+          else order.push(def.id);
+        },
+        removeLayer: (id: string): void => {
+          const at = order.indexOf(id);
+          if (at >= 0) order.splice(at, 1);
+        },
+        removeSource: (id: string): void => {
+          sources.delete(id);
+        },
+        setPaintProperty: (): void => {},
+      } as unknown as Parameters<typeof createWeatherRaster>[0];
+      return { map, order };
+    }
+    const RV = {
+      host: 'https://tilecache.rainviewer.com',
+      frames: [],
+      satelliteFrames: [],
+    };
+
+    it('dim < raster < labels, and an overlay added earlier stays above', () => {
+      const { map, order } = orderedMap(['osm', LABELS, 'ov-clouds']);
+      const factory = createWeatherRaster(map, { beforeLayerId: LABELS });
+      factory.show('satellite', null, {
+        rvData: null,
+        satelliteSubOption: 'geocolor',
+        opacity: 1,
+        currentZoom: 5,
+      });
+      expect(order).toEqual([
+        'osm',
+        'wx-rv-dim-layer',
+        WEATHER_RASTER_LAYER_ID,
+        LABELS,
+        'ov-clouds',
+      ]);
+    });
+
+    it('radar companion lands above the satellite raster, still below labels', () => {
+      const { map, order } = orderedMap(['osm', LABELS]);
+      const factory = createWeatherRaster(map, { beforeLayerId: LABELS });
+      factory.show('satellite', null, {
+        rvData: null,
+        satelliteSubOption: 'geocolor',
+        opacity: 1,
+        currentZoom: 5,
+      });
+      factory.showRadarCompanion(
+        { time: 0, path: '/x' },
+        {
+          rvData: RV,
+          opacity: 0.7,
+        }
+      );
+      expect(order.indexOf('wx-radar-companion')).toBeGreaterThan(
+        order.indexOf(WEATHER_RASTER_LAYER_ID)
+      );
+      expect(order.indexOf('wx-radar-companion')).toBeLessThan(
+        order.indexOf(LABELS)
+      );
+    });
+
+    it('frame swap keeps the order (teardown + re-add before labels)', () => {
+      const { map, order } = orderedMap(['osm', LABELS]);
+      const factory = createWeatherRaster(map, { beforeLayerId: LABELS });
+      const ctx = {
+        rvData: RV,
+        satelliteSubOption: 'geocolor' as const,
+        opacity: 0.8,
+        currentZoom: 5,
+      };
+      factory.show('radar', { time: 1, path: '/a' }, ctx);
+      factory.show('radar', { time: 2, path: '/b' }, ctx);
+      expect(order).toEqual([
+        'osm',
+        'wx-rv-dim-layer',
+        WEATHER_RASTER_LAYER_ID,
+        LABELS,
+      ]);
+    });
+
+    it('falls back to appending on top when the labels layer is missing', () => {
+      const { map, order } = orderedMap(['osm']);
+      const factory = createWeatherRaster(map, { beforeLayerId: LABELS });
+      factory.show('satellite', null, {
+        rvData: null,
+        satelliteSubOption: 'geocolor',
+        opacity: 1,
+        currentZoom: 5,
+      });
+      expect(order).toEqual([
+        'osm',
+        'wx-rv-dim-layer',
+        WEATHER_RASTER_LAYER_ID,
+      ]);
+    });
+  });
+
   it('setOpacity writes through to the active raster layer', () => {
     const { map, paintProps } = mockMap();
     const factory = createWeatherRaster(map);
@@ -146,11 +259,11 @@ describe('createWeatherRaster', () => {
         satelliteSubOption: 'geocolor',
         opacity: 0.6,
         currentZoom: 5,
-      },
+      }
     );
     factory.setOpacity(0.3);
-    expect(
-      paintProps.get(WEATHER_RASTER_LAYER_ID)?.get('raster-opacity'),
-    ).toBe(0.3);
+    expect(paintProps.get(WEATHER_RASTER_LAYER_ID)?.get('raster-opacity')).toBe(
+      0.3
+    );
   });
 });
