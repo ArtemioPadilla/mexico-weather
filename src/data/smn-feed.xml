@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 26 Sep 2026 22:57:55 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 01:33:59 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Sinaloa, Nayarit, Oaxaca, Chiapas, Tabasco y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Durango, Sinaloa, Nayarit, Oaxaca, Chiapas, Tabasco y Veracruz.]]></description>
-      <pubDate>Sat, 26 Sep 2026 16:57:46 -0600</pubDate>
+      <pubDate>Sat, 26 Sep 2026 19:33:51 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-26-b8cf</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 26 SEP 2026: Se prevén, para las próximas horas, chubascos y oleaje de 2.5 a 3.5 m en Baja California Sur, debido al huracán Polo</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso38-26.pdf</link>
+      <description><![CDATA[Se prevén, para las próximas horas, chubascos y oleaje de 2.5 a 3.5 m en Baja California Sur, debido al huracán Polo — Comunicado del 26 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso38-26.pdf]]></description>
+      <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso38-26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 26 SEP 2026: Polo permanece como huracán categoría 4 en la escala Saffir-Simpson a 540 km al sur-suroeste de Cabo San Lucas, Baja C...</title>
@@ -33,31 +41,34 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 537 | 26 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 538 | 26 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN OAXACA, CHIAPAS, VERACRUZ Y TABASCO
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE DURANGO, SINALOA, NAYARIT, OAXACA, CHIAPAS, TABASCO Y VERACRUZ
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 537
+No. Aviso: 538
 Ciudad de México a 26 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
+ 
 
-LLUVIAS PUNTUALES INTENSAS EN OAXACA, CHIAPAS, VERACRUZ Y TABASCO
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE DURANGO, SINALOA, NAYARIT, OAXACA, CHIAPAS, TABASCO Y VERACRUZ
 
-Este día, Polo se mantendrá como huracán de categoría mayor en la escala Saffir-Simpson al suroeste de la península de Baja California. Su circulación reforzará la probabilidad de lluvias fuertes a puntuales muy fuertes en zonas de Baja California Sur, Sinaloa y Nayarit; además de oleaje elevado y rachas de viento en costas de dichos estados. Además, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país, ocasionarán lluvias muy fuertes acompañadas con descargas eléctricas en dicha región.…]]></description>
+ 
+
+El huracán Polo de categoría mayor en la escala Saffir-Simpson se desplazará al sur-suroeste de la península de Baja California. Su circulación reforzará lluvias y chubascos, además de oleaje elevado y rachas fuertes de viento en Baja California Sur. Por otra parte, el monzón mexicano aunado a inestabilidad atmosférica sobre el noroeste de México, ocasionarán lluvias puntuales intensas en zonas de Durango, Sinaloa y Nayarit; lluvias muy fuertes en Chihuahua; lluvias fuertes en Sonora; así como lluvias aisladas en Baja California.  A su vez, canales de baja presión en el interior del país, inestabilidad atmosférica, una zona de baja presión con probabilidad para desarrollo ciclónico frente a las costas de Guerrero y Oaxaca y una vaguada en altura sobre la península de Yucatán, originarán lluvias puntuales intensas en zonas de Oaxaca, Chiapas, Veracruz y Tabasco…]]></description>
       <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-26-537</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-26-538</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-26-12</guid>
@@ -77,14 +88,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso36-26.pdf]]></description>
       <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso36-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 25 SEP 2026: Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso35-26.pdf</link>
-      <description><![CDATA[Se prevén lluvias de fuertes a muy fuertes en regiones de Nayarit, Baja California Sur, Sinaloa, Jalisco, Colima y Mich... — Comunicado del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso35-26.pdf]]></description>
-      <pubDate>Fri, 25 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso35-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
