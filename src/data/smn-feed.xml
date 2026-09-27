@@ -5,21 +5,29 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 27 Sep 2026 19:02:19 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 22:18:34 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Oaxaca y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: en zonas de Sonora, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Sun, 27 Sep 2026 13:02:09 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-27-b598</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco]]></description>
+      <pubDate>Sun, 27 Sep 2026 16:18:26 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-27-9ebc</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 27 SEP 2026: El huracán Polo mantiene su desplazamiento hacia Baja California Sur y la D.T. Dieciocho-E, paralelo a las costas del P...</title>
+      <title>📋 SMN Comunicado 27 SEP 2026: Se formó la tormenta tropical Rachel a partir de la depresión tropical Dieciocho-E</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso41-26.pdf</link>
+      <description><![CDATA[Se formó la tormenta tropical Rachel a partir de la depresión tropical Dieciocho-E — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso41-26.pdf]]></description>
+      <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso41-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 27 SEP 2026: Para este domingo se prevén lluvias intensas en regiones de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_27.pdf</link>
-      <description><![CDATA[El huracán Polo mantiene su desplazamiento hacia Baja California Sur y la D.T. Dieciocho-E, paralelo a las costas del P... — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_27.pdf]]></description>
+      <description><![CDATA[Para este domingo se prevén lluvias intensas en regiones de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_27.pdf]]></description>
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_09_27</guid>
       <category>Comunicado</category>
@@ -62,23 +70,15 @@ Para hoy, Polo continuará como huracán de categoría mayor en la escala Saffir
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de septiembre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de septiembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de septiembre del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-27-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 26 SEP 2026: Se prevén, para las próximas horas, chubascos y oleaje de 2.5 a 3.5 m en Baja California Sur, debido al huracán Polo</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso38-26.pdf</link>
-      <description><![CDATA[Se prevén, para las próximas horas, chubascos y oleaje de 2.5 a 3.5 m en Baja California Sur, debido al huracán Polo — Comunicado del 26 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso38-26.pdf]]></description>
-      <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso38-26</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
