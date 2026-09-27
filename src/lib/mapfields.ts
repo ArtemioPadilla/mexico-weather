@@ -56,8 +56,10 @@ export interface FieldRange {
   pastDays?: number;
 }
 
-/** What the snapshots bake and what a layer loads first: 48 hourly frames. */
-export const DEFAULT_FIELD_RANGE: FieldRange = { forecastDays: 2 };
+/** What the snapshots bake and what a layer loads first: 72 hourly
+ *  frames — yesterday (Story 15.2, `past_days=1`: same call, same quota,
+ *  so "hace 24 h" costs nothing) plus today and tomorrow. */
+export const DEFAULT_FIELD_RANGE: FieldRange = { forecastDays: 2, pastDays: 1 };
 
 /** What "Ver 10 días" fetches on demand: 3-hourly to +10 d. Merged on
  *  top of the default grid, the hourly frames win where they overlap. */
@@ -292,8 +294,10 @@ export function mergeWindGrids(base: WindGrid, ext: WindGrid): WindGrid | null {
 /** True when the grid already spans more than the 2-day default window. */
 export function isExtendedGrid(g: { times: string[] }): boolean {
   if (g.times.length < 2) return false;
+  // The default window is −24 h … +48 h (< 3 days); the extension
+  // reaches +10 d, so anything past 4 days of span is extended.
   const span = parseUtcMs(g.times[g.times.length - 1]) - parseUtcMs(g.times[0]);
-  return span > 3 * 86_400_000;
+  return span > 4 * 86_400_000;
 }
 
 /** Hourly index closest to `iso`; nearest to `nowMs` if iso null/invalid; -1 if empty. */

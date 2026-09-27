@@ -67,6 +67,9 @@ def build_url(points, hourly_var):
         'longitude': lngs,
         'hourly': hourly_var,
         'forecast_days': 2,
+        # Story 15.2 — yesterday rides along in the same call (no extra
+        # quota) so the map timeline can scrub back 24 h.
+        'past_days': 1,
         'timezone': 'UTC',
     })
     return f'https://api.open-meteo.com/v1/forecast?{qs}'

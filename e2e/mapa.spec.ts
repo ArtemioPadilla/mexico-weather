@@ -49,10 +49,13 @@ function fieldResponseForUrl(url: string): string {
   // Story 15.1 — honour the requested window so the extended 10-day /
   // 3-hourly fetch yields a longer frame axis than the 2-day default.
   const days = Number(/[?&]forecast_days=(\d+)/.exec(url)?.[1] ?? 2);
+  const past = Number(/[?&]past_days=(\d+)/.exec(url)?.[1] ?? 0);
   const stepH = /temporal_resolution=hourly_3/.test(url) ? 3 : 1;
+  // Day 0 is fixed at 2026-05-19; past_days (Story 15.2) prepends whole
+  // days before it, as Open-Meteo does.
   const t0 = Date.UTC(2026, 4, 19);
   const time: string[] = [];
-  for (let h = 0; h < days * 24; h += stepH) {
+  for (let h = -past * 24; h < days * 24; h += stepH) {
     time.push(new Date(t0 + h * 3_600_000).toISOString().slice(0, 16));
   }
   const series = (base: number) => time.map((_, i) => base + (i % 3));
@@ -374,10 +377,11 @@ test.describe('mapa page', () => {
     await expect(page.locator('#timeline')).toBeVisible();
     await expect(page.locator('#opacitywrap')).toBeVisible();
 
-    // Story 15.1 — the 2-day window boots first (48 hourly frames), then
-    // "Ver 10 días" pulls the 3-hourly extension on demand and the frame
-    // axis grows: 48 hourly + 64 three-hourly (days 3–10) = 112 frames.
-    await expect(page.locator('#tl-range')).toHaveAttribute('max', '47');
+    // Story 15.1/15.2 — the −24 h … +48 h window boots first (72 hourly
+    // frames), then "Ver 10 días" pulls the 3-hourly extension on demand
+    // and the frame axis grows: 72 hourly + 64 three-hourly (days 3–10)
+    // = 136 frames.
+    await expect(page.locator('#tl-range')).toHaveAttribute('max', '71');
     const extendBtn = page.locator('#tl-extend');
     await expect(extendBtn).toBeVisible();
     const extResp = page.waitForResponse(
@@ -387,7 +391,7 @@ test.describe('mapa page', () => {
     );
     await extendBtn.click();
     await extResp;
-    await expect(page.locator('#tl-range')).toHaveAttribute('max', '111');
+    await expect(page.locator('#tl-range')).toHaveAttribute('max', '135');
     await expect(extendBtn).toBeHidden();
     // Day-skip is time-based now: four skips from the anchor land ~4 d
     // ahead and the label switches to the "+N d" wording.

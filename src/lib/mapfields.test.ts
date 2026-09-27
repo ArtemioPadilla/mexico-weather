@@ -41,7 +41,7 @@ describe('buildFieldUrl', () => {
     );
     expect(url).toBe(
       'https://api.open-meteo.com/v1/forecast?latitude=10,12&longitude=-100,-99' +
-        '&hourly=temperature_2m&forecast_days=2&timezone=UTC'
+        '&hourly=temperature_2m&forecast_days=2&past_days=1&timezone=UTC'
     );
   });
 });
@@ -88,9 +88,9 @@ describe('parseFieldResponse', () => {
 
 describe('buildFieldUrl with a FieldRange (Story 15.1)', () => {
   const pts = [{ lat: 19.43, lng: -99.13 }];
-  it('default range keeps the 2-day hourly window', () => {
+  it('default range is the hourly −24 h … +48 h window (Story 15.2)', () => {
     expect(buildFieldUrl(pts, 'temperature_2m')).toContain(
-      '&forecast_days=2&timezone=UTC'
+      '&forecast_days=2&past_days=1&timezone=UTC'
     );
     expect(buildFieldUrl(pts, 'temperature_2m')).not.toContain(
       'temporal_resolution'
@@ -170,8 +170,11 @@ describe('mergeFieldGrids / mergeWindGrids', () => {
     expect(m?.points[0].u).toEqual([1, 2, 3, 4, 5]);
     expect(m?.points[0].v).toEqual([-1, -2, -3, -4, -5]);
   });
-  it('isExtendedGrid: 2-day grid no, 10-day grid yes', () => {
+  it('isExtendedGrid: 3-day default grid no, 10-day grid yes', () => {
     expect(isExtendedGrid(base)).toBe(false);
+    expect(
+      isExtendedGrid({ times: ['2026-09-26T00:00', '2026-09-28T23:00'] })
+    ).toBe(false);
     expect(
       isExtendedGrid({ times: ['2026-09-27T00:00', '2026-10-06T21:00'] })
     ).toBe(true);
@@ -297,7 +300,7 @@ describe('buildWindUrl', () => {
     ]);
     expect(url).toBe(
       'https://api.open-meteo.com/v1/forecast?latitude=10,12&longitude=-100,-99' +
-        '&hourly=wind_speed_10m,wind_direction_10m&forecast_days=2&timezone=UTC'
+        '&hourly=wind_speed_10m,wind_direction_10m&forecast_days=2&past_days=1&timezone=UTC'
     );
   });
 });

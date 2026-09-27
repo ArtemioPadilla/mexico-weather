@@ -74,10 +74,10 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 - [ ] Cuota: contador de llamadas por sesión en `cachedFetch`, tope suave (p. ej. 60/10 min) con toast "pronóstico extendido en pausa 1 min".
 - Acceptance: `#view=…&layer=temperature&t=<+9d>` pinta el campo a 9 días en ≤3 s tras el primer fetch; `npm run test` con fixtures de 10 días; sin nuevas llamadas hasta que el usuario cruza +48 h.
 
-**Story 15.2 — 24 h de historia en campos ("hace 24 h")** · est 2d
-- [ ] Open-Meteo `past_days=1` en la misma llamada (gratis, misma cuota).
-- [ ] Timeline arranca en −24 h; `t=` negativo permitido; botón "Ayer" (ya existe day-skip).
-- [ ] Desbloquea Story 13.5 (antes/después) sin archivo propio.
+**Story 15.2 — 24 h de historia en campos ("hace 24 h")** · est 2d · **shipped 2026-09-27**
+- [x] Open-Meteo `past_days=1` en la misma llamada (gratis, misma cuota) — `DEFAULT_FIELD_RANGE` y `build-field-grids.py`.
+- [x] Timeline arranca en −24 h; `t=` en el pasado permitido; el day-skip ‹ ya llega a ayer.
+- [x] Desbloquea Story 13.5 (antes/después) sin archivo propio.
 - Acceptance: scrub a −24 h muestra el campo de ayer; snapshots de `field-grids` incluyen `past_days`.
 
 **Story 15.3 — 10 y 16 días en `/forecast`, `/clima/<slug>`, `/compara`** · est 2d · **shipped 2026-09-27**
