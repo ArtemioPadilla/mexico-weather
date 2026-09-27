@@ -5,26 +5,55 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 27 Sep 2026 08:19:44 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 14:44:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de septiembre del 2026 | Emisión 00:00h</title>
+      <title>📋 SMN Comunicado 27 SEP 2026: La madrugada de hoy, se formó la depresión tropical Dieciocho-E frente a las costas de Oaxaca y Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso39-26.pdf</link>
+      <description><![CDATA[La madrugada de hoy, se formó la depresión tropical Dieciocho-E frente a las costas de Oaxaca y Guerrero — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso39-26.pdf]]></description>
+      <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso39-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 539 | 27 de Septiembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA Y CHIAPAS • EL HURACÁN POLO OCASIONARÁ LLUVIAS PUNTUALES FUERTES, RACHAS DE VIENTO Y OLEAJE ELEVADO EN BAJA CALIFORNIA SUR
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 539
+Ciudad de México a 27 de Septiembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA Y CHIAPAS.
+
+EL HURACÁN POLO OCASIONARÁ LLUVIAS PUNTUALES FUERTES, RACHAS DE VIENTO Y OLEAJE ELEVADO EN BAJA CALIFORNIA SUR.
+
+Para hoy, Polo continuará como huracán de categoría mayor en la escala Saffir-Simpson, desplazándose al oeste de Baja California Sur, donde mantendrá la probabilidad de lluvias puntuales fuertes, rachas de viento y oleaje elevado. A su vez, el monzón mexicano e inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en zonas de Sinaloa, Durango y Chihuahua; puntuales fuertes en zonas de Sonora; y chubascos en Baja California.…]]></description>
+      <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-27-539</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de septiembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de septiembre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-27-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Durango, Sinaloa, Nayarit, Oaxaca, Chiapas, Tabasco y Veracruz.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Durango, Sinaloa, Nayarit, Oaxaca, Chiapas, Tabasco y Veracruz.]]></description>
-      <pubDate>Sun, 27 Sep 2026 02:19:35 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-27-43ce</guid>
+      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: en zonas de Sonora, Nuevo León y Tamaulipas.]]></description>
+      <pubDate>Sun, 27 Sep 2026 08:44:21 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-27-b598</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -49,37 +78,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Gobierno de México llama a extremar medidas de prevención ante los efectos del huracán Polo en la península de Baja ... — Comunicado del 26 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado de Prensa 138-26.pdf]]></description>
       <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Comunicado de Prensa 138-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 538 | 26 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE DURANGO, SINALOA, NAYARIT, OAXACA, CHIAPAS, TABASCO Y VERACRUZ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 538
-Ciudad de México a 26 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE DURANGO, SINALOA, NAYARIT, OAXACA, CHIAPAS, TABASCO Y VERACRUZ
-
- 
-
-El huracán Polo de categoría mayor en la escala Saffir-Simpson se desplazará al sur-suroeste de la península de Baja California. Su circulación reforzará lluvias y chubascos, además de oleaje elevado y rachas fuertes de viento en Baja California Sur. Por otra parte, el monzón mexicano aunado a inestabilidad atmosférica sobre el noroeste de México, ocasionarán lluvias puntuales intensas en zonas de Durango, Sinaloa y Nayarit; lluvias muy fuertes en Chihuahua; lluvias fuertes en Sonora; así como lluvias aisladas en Baja California.  A su vez, canales de baja presión en el interior del país, inestabilidad atmosférica, una zona de baja presión con probabilidad para desarrollo ciclónico frente a las costas de Guerrero y Oaxaca y una vaguada en altura sobre la península de Yucatán, originarán lluvias puntuales intensas en zonas de Oaxaca, Chiapas, Veracruz y Tabasco…]]></description>
-      <pubDate>Sat, 26 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-26-538</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 25 SEP 2026: Durante esta tarde se prevén lluvias de fuertes a intensas en zonas de 23 estados de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_25.pdf</link>
-      <description><![CDATA[Durante esta tarde se prevén lluvias de fuertes a intensas en zonas de 23 estados de México — Reporte Vespertino del 25 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_25.pdf]]></description>
-      <pubDate>Fri, 25 Sep 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_25</guid>
       <category>Comunicado</category>
     </item>
     <item>
