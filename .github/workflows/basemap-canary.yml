@@ -1,7 +1,9 @@
-name: Basemap canary
+name: Data sources canary
 
-# Nightly network check on the Esri Canvas tile hosts the map depends on
-# (src/lib/map/chrome/basemap-theme.ts). The previous provider (CARTO)
+# Nightly network check on the keyless providers the map depends on:
+# Esri Canvas basemap tiles (src/lib/map/chrome/basemap-theme.ts), NASA
+# GIBS GeoColor (Story 16.1) and, since Story 20.2, RainViewer radar and
+# Open-Meteo. The previous provider (CARTO)
 # silently started watermarking anonymous tiles while still answering
 # HTTP 200 — a failure no unit test on URL templates can see. This job
 # downloads one sample tile per host/service and fails if it stops
@@ -72,5 +74,46 @@ jobs:
           echo "gibs GeoColor ${T}: ${code} ${type} $(stat -c %s gibs.png 2>/dev/null || echo 0)B"
           if [ "$code" != "200" ] || [ "$type" != "image/png" ]; then
             echo '::error::GIBS GeoColor tile probe failed — check the TileMatrixSet/TIME in WMTSCapabilities.xml and update GIBS_LAYERS.'
+            exit 1
+          fi
+
+      - name: Probe RainViewer (manifest + one radar tile)
+        # Story 20.2 — the radar layer reads weather-maps.json and then
+        # tiles under its `host`; either breaking silently would leave
+        # the default home layer blank. Same tile template as
+        # rainviewerTileUrl() in src/lib/maplayers.ts (256 px, colour 4,
+        # smooth, snow).
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sS --retry 3 --retry-delay 5 --max-time 30 -o rv.json https://api.rainviewer.com/public/weather-maps.json
+          read -r host path < <(python3 -c "
+          import json; d=json.load(open('rv.json')); p=d['radar']['past']; print(d['host'], p[-1]['path'])")
+          url="${host}${path}/256/5/7/13/4/1_1.png"
+          code=$(curl -sS --retry 3 --retry-delay 5 --max-time 30 -o rv.png -w '%{http_code}' "$url" || echo 000)
+          type=$(file -b --mime-type rv.png 2>/dev/null || echo unknown)
+          echo "rainviewer ${path}: ${code} ${type} $(stat -c %s rv.png 2>/dev/null || echo 0)B"
+          if [ "$code" != "200" ] || [ "$type" != "image/png" ]; then
+            echo '::error::RainViewer radar tile probe failed — check the manifest shape in parseRainviewerManifest() and the tile template.'
+            exit 1
+          fi
+
+      - name: Probe Open-Meteo (one forecast call, CDMX)
+        # Story 20.2 — one call/day is noise against the 10 000 budget;
+        # a non-200 or an error body here means every field layer and
+        # snapshot workflow is about to fail too.
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://api.open-meteo.com/v1/forecast?latitude=19.43&longitude=-99.13&hourly=temperature_2m&forecast_days=1&timezone=UTC'
+          code=$(curl -sS --retry 3 --retry-delay 5 --max-time 30 -o om.json -w '%{http_code}' "$url" || echo 000)
+          ok=$(python3 -c "
+          import json,sys
+          try:
+              d=json.load(open('om.json')); print('yes' if isinstance(d.get('hourly',{}).get('temperature_2m'), list) and len(d['hourly']['temperature_2m'])>=24 else 'no')
+          except Exception as e: print('no')")
+          echo "open-meteo: ${code} hourly-ok=${ok}"
+          if [ "$code" != "200" ] || [ "$ok" != "yes" ]; then
+            echo '::error::Open-Meteo forecast probe failed — check https://open-meteo.com/en/docs and the status page before the hourly snapshots pile up 429s.'
             exit 1
           fi

@@ -204,9 +204,9 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 - [ ] Mantener en `main` solo lo mensual (ciudades, IBTrACS, estados).
 - Acceptance: `git log main` sin commits de bot en 24 h; tamaño del clon de `main` estable.
 
-**Story 20.2 — Presupuesto de cuota y canarios** · est 1d
-- [ ] Contador diario de llamadas Open-Meteo agregando los logs de los workflows; alerta (issue automático) al 70 % de 10 000.
-- [ ] Canario de RainViewer y GIBS como el de Esri (`basemap-canary.yml`): tile de muestra + tamaño + tipo.
+**Story 20.2 — Presupuesto de cuota y canarios** · est 1d · **shipped 2026-09-27**
+- [x] Presupuesto determinista en vez de contar logs: `scripts/quota-audit.py` proyecta llamadas/día = llamadas por corrida (constantes de cada script) × corridas por día (cron de cada workflow); hoy 1 252/día (12.5 %). Corre en `ci.yml` en cada PR (falla al superar el 70 %) y a diario en `quota-audit.yml`, que abre/actualiza un issue `quota-alert`.
+- [x] Canario de RainViewer (manifest + tile) y Open-Meteo (una llamada) junto al de Esri y GIBS en `basemap-canary.yml` ("Data sources canary").
 - Acceptance: issue automático al superar el umbral; canarios verdes 7 días.
 
 ---

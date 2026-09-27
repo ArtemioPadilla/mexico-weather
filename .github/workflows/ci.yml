@@ -29,6 +29,9 @@ jobs:
       # Stories 18.1 / 18.2 — the NHC KMZ → GeoJSON parser has its own
       # dependency-free self-test (python3 ships on ubuntu-latest).
       - run: python3 scripts/nhc_kml.py --selftest
+      # Story 20.2 — fail the PR if the scheduled workflows would exceed
+      # 70 % of Open-Meteo's daily allowance (deterministic, no network).
+      - run: python3 scripts/quota-audit.py
         env:
           # Complete the incomplete SMN TLS chain (see src/data/smn-ca.pem)
           # so the RSS endpoint fetches real avisos; TLS stays verified.
