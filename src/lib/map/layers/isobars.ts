@@ -14,6 +14,25 @@ import { computeIsobars } from '../utils/isobars';
 
 const SOURCE_ID = 'wx-isobars-src';
 const LAYER_ID = 'wx-isobars-line';
+// Story 18.3 — values printed along the lines (symbol-placement: line).
+const LABEL_LAYER_ID = 'wx-isobars-label';
+
+export type IsobarUnit = 'hPa' | 'inHg';
+
+/** MapLibre expression for the label in the chosen unit; the source
+ *  keeps hPa so switching units is a layout-property change only. */
+export function isobarLabelExpression(
+  unit: IsobarUnit
+): maplibregl.ExpressionSpecification {
+  if (unit === 'inHg') {
+    return [
+      'number-format',
+      ['/', ['get', 'pressure'], 33.8639],
+      { 'min-fraction-digits': 2, 'max-fraction-digits': 2 },
+    ];
+  }
+  return ['to-string', ['round', ['get', 'pressure']]];
+}
 
 export interface IsobarsLayer {
   /** Add/update the layer with iso-lines for the given field values
@@ -28,9 +47,14 @@ export interface IsobarsLayer {
   }) => void;
   /** Tear down the source + layer. */
   remove: () => void;
+  /** Story 18.3 — re-label the lines in hPa or inHg (no data change). */
+  setUnit: (unit: IsobarUnit) => void;
 }
 
-export function createIsobarsLayer(map: maplibregl.Map): IsobarsLayer {
+export function createIsobarsLayer(
+  map: maplibregl.Map,
+  getUnit: () => IsobarUnit = () => 'hPa'
+): IsobarsLayer {
   return {
     update: (input): void => {
       const fc: FeatureCollection = computeIsobars({
@@ -43,8 +67,7 @@ export function createIsobarsLayer(map: maplibregl.Map): IsobarsLayer {
         east: input.bounds.east,
       });
       const existing = map.getSource(SOURCE_ID) as
-        | maplibregl.GeoJSONSource
-        | undefined;
+        maplibregl.GeoJSONSource | undefined;
       if (existing) {
         existing.setData(fc);
         return;
@@ -60,10 +83,41 @@ export function createIsobarsLayer(map: maplibregl.Map): IsobarsLayer {
           'line-opacity': 0.55,
         },
       });
+      map.addLayer({
+        id: LABEL_LAYER_ID,
+        type: 'symbol',
+        source: SOURCE_ID,
+        layout: {
+          'symbol-placement': 'line',
+          'symbol-spacing': 260,
+          'text-field': isobarLabelExpression(getUnit()),
+          'text-size': 10,
+          'text-font': ['Open Sans Semibold'],
+          'text-rotation-alignment': 'map',
+          'text-pitch-alignment': 'viewport',
+          'text-max-angle': 30,
+          'text-allow-overlap': false,
+        },
+        paint: {
+          'text-color': '#ffffff',
+          'text-halo-color': 'rgba(0,0,0,0.75)',
+          'text-halo-width': 1.2,
+        },
+      });
     },
     remove: (): void => {
+      if (map.getLayer(LABEL_LAYER_ID)) map.removeLayer(LABEL_LAYER_ID);
       if (map.getLayer(LAYER_ID)) map.removeLayer(LAYER_ID);
       if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
+    },
+    setUnit: (unit): void => {
+      if (map.getLayer(LABEL_LAYER_ID)) {
+        map.setLayoutProperty(
+          LABEL_LAYER_ID,
+          'text-field',
+          isobarLabelExpression(unit)
+        );
+      }
     },
   };
 }

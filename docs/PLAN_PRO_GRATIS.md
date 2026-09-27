@@ -171,9 +171,9 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 - [x] NHC "Tropical Weather Outlook" GIS (`xgtwo/gtwo_atl.kmz` + `gtwo_pac.kmz`; `gtwo_areas.kmz` ya no existe) → overlay "Posible desarrollo (2 / 7 d)" con contorno punteado y etiqueta "2 d: 40 % · 7 d: 70 %", color por la probabilidad a 7 d como el gráfico del NHC; se auto-oculta sin áreas.
 - Acceptance: los porcentajes coinciden con el TWO vigente.
 
-**Story 18.3 — Isolíneas con valores y modo mira** · est 2d
-- [ ] `isobars.ts`: etiquetas de hPa sobre la línea (símbolo `symbol-placement: line`).
-- [ ] Modo "mira" (tecla `C`): valor de la capa activa en el centro del mapa, fijo, útil en móvil donde no hay hover; completa Story 13.1.
+**Story 18.3 — Isolíneas con valores y modo mira** · est 2d · **shipped 2026-09-27**
+- [x] `isobars.ts`: etiquetas sobre la línea (`symbol-placement: line`, cada 4 hPa por los umbrales de `computeIsobars`), en hPa o inHg según la unidad elegida (Story 19.3).
+- [x] Modo "mira" (botón *Mira* junto a Distancia/Área; la `C` ya es la animación de viento): mira fija en el centro y el valor de la capa activa debajo, actualizado al mover el mapa y en cada frame; sin fetch extra (`chrome/crosshair.ts`).
 - Acceptance: isobaras muestran valores cada ~4 hPa; el modo mira actualiza al pan sin fetch extra.
 
 ---

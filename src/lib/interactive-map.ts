@@ -253,6 +253,7 @@ import {
   windPointsAtHour,
 } from './map/layers/wind-particles';
 import { createIsobarsLayer } from './map/layers/isobars';
+import { createCrosshair } from './map/chrome/crosshair';
 import { createCloudsOverlay } from './map/overlays/clouds';
 import { createCityValuesOverlay } from './map/overlays/city-values';
 import { createTimelinePlayer } from './map/chrome/timeline-player';
@@ -1088,6 +1089,8 @@ export async function initInteractiveMap(
     if (tlTime) tlTime.textContent = frameLabel(fr);
     syncExtendButton();
     syncHash();
+    // Story 18.3 — the centre readout follows the frame.
+    crosshair.refresh();
   }
 
   function showTimeline(show: boolean): void {
@@ -1454,7 +1457,13 @@ export async function initInteractiveMap(
   let cityValuesEnabled = true;
 
   // Pressure isobars — extracted to src/lib/map/layers/isobars.ts.
-  const isobarsLayer = createIsobarsLayer(map);
+  const isobarsLayer = createIsobarsLayer(map, () => currentUnits().pressure);
+  // Story 18.3 — crosshair mode; getValueAt is hoisted (function
+  // declaration) so wiring it here, before the tooltip block, is safe.
+  const crosshair = createCrosshair(map, {
+    container: map.getContainer(),
+    getValueAt: (lng, lat) => tooltipValueAt(lng, lat),
+  });
   const removeIsobars = (): void => isobarsLayer.remove();
 
   // Graticule overlay — extracted to src/lib/map/overlays/graticule.ts
@@ -2578,6 +2587,8 @@ export async function initInteractiveMap(
     renderLegend(legendKindFor());
     refreshCityValues();
     if (placeCardFc) paintPlaceCard();
+    isobarsLayer.setUnit(currentUnits().pressure);
+    crosshair.refresh();
   }
   function bindSettingsButtons(): void {
     if (!features.settings) return;
@@ -3387,6 +3398,15 @@ export async function initInteractiveMap(
     type MeasureMode = 'distance' | 'area' | null;
     let measureMode: MeasureMode = null;
     let measurePts: [number, number][] = [];
+    // Story 18.3 — crosshair ("mira") mode: the active layer's value at
+    // the map centre, for phones where hover never happens.
+    const crossBtn = document.getElementById('mw-crosshair-btn');
+    if (crossBtn) {
+      crossBtn.addEventListener('click', () => {
+        crosshair.toggle();
+        crossBtn.setAttribute('aria-pressed', String(crosshair.isEnabled()));
+      });
+    }
     const distBtn = document.getElementById('mw-measure-distance');
     const areaBtn = document.getElementById('mw-measure-area');
     const wrap = document.getElementById('mw-measure-wrap');
