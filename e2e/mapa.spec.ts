@@ -1,9 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { mockOpenMeteo } from './helpers';
 
-/** Minimal 1×1 transparent PNG (base64) — satisfies MapLibre tile requests. */
+/** 256×256 transparent PNG (base64) — a decodable tile for MapLibre.
+ *  A 1×1 PNG is rejected by Chromium's createImageBitmap ("source image
+ *  could not be decoded"), every tile errors, and the map never fires
+ *  `load` (no pins, no overlays, no deep-link activation). */
 const TRANSPARENT_PNG = Buffer.from(
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+  'iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAABFUlEQVR4nO3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAMBPAABPO1TCQAAAABJRU5ErkJggg==',
   'base64'
 );
 
@@ -51,9 +54,15 @@ function fieldResponseForUrl(url: string): string {
   const days = Number(/[?&]forecast_days=(\d+)/.exec(url)?.[1] ?? 2);
   const past = Number(/[?&]past_days=(\d+)/.exec(url)?.[1] ?? 0);
   const stepH = /temporal_resolution=hourly_3/.test(url) ? 3 : 1;
-  // Day 0 is fixed at 2026-05-19; past_days (Story 15.2) prepends whole
-  // days before it, as Open-Meteo does.
-  const t0 = Date.UTC(2026, 4, 19);
+  // Day 0 is today at 00:00 UTC, like Open-Meteo, so relative labels
+  // ("+3 d", "−1 d") mean what they say; past_days (Story 15.2) prepends
+  // whole days before it.
+  const now = new Date();
+  const t0 = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate()
+  );
   const time: string[] = [];
   for (let h = -past * 24; h < days * 24; h += stepH) {
     time.push(new Date(t0 + h * 3_600_000).toISOString().slice(0, 16));
@@ -358,6 +367,15 @@ test.describe('mapa page', () => {
       })
     );
 
+    // Deterministic basemap: a decodable tile so MapLibre fires `load`
+    // and `idle` regardless of the runner's network.
+    await page.route('**/*.arcgisonline.com/**', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
+    );
     await page.goto('mapa/');
     await page.waitForResponse(
       '**/api.rainviewer.com/public/weather-maps.json'
@@ -796,6 +814,15 @@ test.describe('mapa page', () => {
           contentType: 'application/json',
           body: RAINVIEWER_MANIFEST,
         })
+    );
+    // Deterministic basemap: a decodable tile so MapLibre fires `load`
+    // and `idle` regardless of the runner's network.
+    await page.route('**/*.arcgisonline.com/**', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      })
     );
     await page.goto('mapa/temperatura/');
     await expect(page).toHaveTitle(/Mapa de temperatura/);

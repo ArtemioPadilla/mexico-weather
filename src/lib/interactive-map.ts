@@ -387,7 +387,11 @@ export async function initInteractiveMap(
   // ------------------------------------------------------------------
   // Initial view: optionally seeded from URL hash on /mapa, else opts.
   // ------------------------------------------------------------------
-  const hashed = useHash ? parseMapHash(location.hash) : null;
+  // An empty hash is "no state", not the default view: parseMapHash()
+  // would otherwise answer layer 'base' and beat the page's initialLayer
+  // (the /mapa/<capa>/ pages, Story 19.1).
+  const hashed =
+    useHash && location.hash.length > 1 ? parseMapHash(location.hash) : null;
   const initial = hashed ?? {
     lat: opts.initialView?.lat ?? 23.6,
     lng: opts.initialView?.lng ?? -102.5,
@@ -850,6 +854,18 @@ export async function initInteractiveMap(
       /* best-effort */
     }
   });
+  // A tile that fails (CDN down, offline, undecodable body) marks its
+  // source loaded without scheduling a frame; if that was the last
+  // pending tile, `loaded()` flips true but `_render` never runs again
+  // and MapLibre never fires `load` — no pins, no overlays, no deep-link
+  // activation. One repaint after each error closes that gap.
+  map.on('error', () => {
+    try {
+      map.triggerRepaint();
+    } catch {
+      /* best-effort */
+    }
+  });
   // First-5-seconds repaint-nudge interval id, hoisted so destroy()
   // can clear it if the map is torn down before it self-clears.
   let repaintNudgeInterval = 0;
@@ -959,7 +975,18 @@ export async function initInteractiveMap(
         if (map.loaded() && map.isStyleLoaded()) {
           void activateWithRetry();
         } else {
-          map.once('idle', () => void activateWithRetry());
+          // First of: idle, load, or a 4 s timeout — a slow or failing
+          // basemap CDN must not keep a shared link from activating its
+          // layer (activateWithRetry copes with a raster not yet ready).
+          let started = false;
+          const go = (): void => {
+            if (started) return;
+            started = true;
+            void activateWithRetry();
+          };
+          map.once('idle', go);
+          map.once('load', go);
+          window.setTimeout(go, 4000);
         }
       }
     })();
