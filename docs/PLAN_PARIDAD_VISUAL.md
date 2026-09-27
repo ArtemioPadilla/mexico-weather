@@ -163,9 +163,10 @@ Salvedad: la comparación es sobre DOM y capturas con red simulada (el sandbox n
 
 ### E26 · Medición y evidencia (P0 técnico, va primero)
 
-**Story 26.1 — Auditoría visual lado a lado** · est 1d
-- [ ] `scripts/visual-audit.mjs` (Playwright con red real, workflow manual `visual-audit.yml`): captura `/mapa` en 3 viewports (1280, 768, 360) en satélite, radar y temperatura, y el mismo estado en zoom.earth; guarda las parejas como artefacto y una hoja `docs/UX_AUDIT_<fecha>.md` con checklist (§0) marcada a mano.
-- Acceptance: primera auditoría publicada antes de la Story 21.1; se repite al cerrar cada épica.
+**Story 26.1 — Auditoría visual lado a lado** · est 1d · **shipped 2026-09-27** (herramienta; la primera hoja real se produce con el workflow, no desde el sandbox)
+- [x] `scripts/visual-audit.mjs` (Playwright con red real, workflow manual `visual-audit.yml`): captura `/mapa` en 3 viewports (1280, 768, 360) en satélite, radar y temperatura, y el mismo estado en zoom.earth; guarda las parejas como artefacto y una hoja `docs/UX_AUDIT_<fecha>.md` con checklist (§0) marcada a mano.
+- Desviaciones: la hoja se genera en `audit-out/UX_AUDIT_<fecha>.md` (artefacto del workflow, 7 días) desde `scripts/visual-audit-template.md` y se copia a `docs/` una vez marcada a mano, para no versionar capturas sin revisar. `--mock` sustituye teselas/APIs por el PNG 256×256 y zoom.earth por una página placeholder (prueba de humo sin red; validado en el sandbox: 18/18 capturas). Un estado de zoom.earth que no carga no aborta: se captura lo que haya y queda anotado en §4 de la hoja. Uso en `docs/USER_GUIDE.md` › Developer notes.
+- Acceptance: primera auditoría publicada antes de la Story 21.1 (**pendiente**: ejecutar `visual-audit.yml` y publicar la hoja); se repite al cerrar cada épica.
 
 **Story 26.2 — Métricas de UX en CI** · est 1d
 - [ ] `e2e/ux-metrics.spec.ts`: tiempo a primer frame de satélite, fps del loop (10 s), controles visibles, conteo de peticiones por frame; escribe `ux-metrics.json` como artefacto y comenta el delta en el PR (job `pull_request`).

@@ -1,0 +1,50 @@
+name: Visual audit (zoom.earth side by side)
+
+# Story 26.1 — manual only. Builds the site, captures /mapa next to
+# zoom.earth on satellite, radar and temperature at 3 viewports with the
+# real network, and uploads audit-out/ (PNG pairs + UX_AUDIT_<date>.md sheet
+# to fill by hand and copy into docs/).
+on:
+  workflow_dispatch:
+    inputs:
+      mock:
+        description: 'Stub tiles/APIs and zoom.earth (smoke test of the script only)'
+        type: boolean
+        default: false
+      skip_zoom:
+        description: 'Capture only our side (no zoom.earth requests)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Capture pairs
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - run: npm ci
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build
+        run: npm run build
+      - name: Run visual audit
+        run: >
+          node scripts/visual-audit.mjs
+          ${{ inputs.mock && '--mock' || '' }}
+          ${{ inputs.skip_zoom && '--skip-zoom' || '' }}
+      - name: Upload audit-out
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-audit-${{ github.run_number }}
+          path: audit-out/
+          retention-days: 7
+          if-no-files-found: error

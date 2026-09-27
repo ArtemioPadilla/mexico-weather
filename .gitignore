@@ -16,3 +16,6 @@ dist/
 # Python bytecode from scripts/ (data fetchers, smn-rss)
 __pycache__/
 *.py[cod]
+
+# Story 26.1 visual audit output (uploaded as a CI artifact instead)
+/audit-out/

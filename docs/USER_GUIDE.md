@@ -147,6 +147,44 @@ These are intentional scope boundaries, not bugs:
 - **Field-layer playback animation** uses simple frame swaps without preloading; preloading/caching is a polish item.
 - **Particle trails / geographic-accurate advection** are a polish item — the v1 wind particle system does not yet render trails.
 
+## Developer notes
+
+### Visual audit against zoom.earth (Story 26.1)
+
+`scripts/visual-audit.mjs` captures `/mapa` next to zoom.earth in the same
+state so the §0 checklist of [`PLAN_PARIDAD_VISUAL.md`](PLAN_PARIDAD_VISUAL.md)
+can be marked against real pixels. It serves `dist/` with `astro preview`
+(port 4399 by default), opens the map on **satellite, radar and temperature**
+at **1280×800, 768×1024 and 360×640** (`#view=23.6,-102.5,5z&layer=<id>`),
+opens `https://zoom.earth/maps/<satellite|radar|temperature>/` on the same
+view, and writes to `audit-out/` (git-ignored):
+
+- `<layer>-<width>w-mexico-weather.png` / `<layer>-<width>w-zoom-earth.png` — the pairs
+- `UX_AUDIT_<date>.md` — sheet from `scripts/visual-audit-template.md`: the pairs table, the §0 checklist and the dark-basemap legibility checks to fill **by hand**, then copy to `docs/UX_AUDIT_<date>.md`
+- `manifest.json` — URLs, timings, paint check and notes per capture
+
+Captures are the cold-load state a first-time visitor sees (welcome card
+included). A zoom.earth state that does not finish loading is captured as is
+and noted in §4 of the sheet; only a missing capture on our side fails the run.
+
+```sh
+npm run build
+node scripts/visual-audit.mjs                 # real network → audit-out/
+node scripts/visual-audit.mjs --mock          # offline smoke test (stubbed tiles, placeholder zoom.earth)
+node scripts/visual-audit.mjs --help          # --base, --port, --out, --date, --skip-zoom, --settle-ms, --chromium, --proxy
+```
+
+The real audit runs on CI: **Actions → "Visual audit (zoom.earth side by
+side)" → Run workflow** (`.github/workflows/visual-audit.yml`, manual only).
+It builds, runs the script with the real network and uploads `audit-out/` as
+the `visual-audit-<run>` artifact (7-day retention). Repeat it when closing
+each of E21–E26. In sandboxes that cannot reach Esri/GIBS use `--mock`; pass
+`--chromium <path>` / `--proxy <server>` when Playwright's own Chromium or a
+direct network are unavailable.
+
+Unit tests for the pure helpers (plan, URLs, mock routing, sheet rendering)
+live in `src/lib/visual-audit-lib.test.ts`.
+
 ## Related docs
 
 - **E2E user-journey reference** (selectors, journey-by-journey Playwright drives, network mocks, coverage matrix): [`USER_JOURNEYS.md`](USER_JOURNEYS.md)
