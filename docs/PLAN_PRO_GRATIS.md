@@ -190,8 +190,8 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 - [ ] Intro de una línea por capa la primera vez que se activa (texto en `ui.ts` es/en).
 - Acceptance: segunda visita no muestra nada; axe limpio con el diálogo abierto.
 
-**Story 19.3 — Unidades** · est 1d
-- [ ] `settings.ts`: temperatura °C/°F, viento km/h·mph·kt·m/s, presión hPa/inHg, distancia km/mi; aplica en tooltip, leyenda, tarjeta, `/forecast`.
+**Story 19.3 — Unidades** · est 1d · **shipped 2026-09-27**
+- [x] `map/settings.ts` + `src/lib/units.ts`: temperatura °C/°F, viento km/h·mph·kt·m/s, presión hPa/inHg, distancia km/mi; aplica en tooltip y pastillas de ciudad, leyenda (escala y unidad convertidas), tarjeta de lugar, herramienta de medir y `/forecast` (actual, horario, diario, viento, presión, visibilidad). La precipitación se queda en mm/h; las reglas de alertas personales siguen en métrico.
 - Acceptance: cambiar unidad re-renderiza sin recarga; tests unitarios de conversión.
 
 ---

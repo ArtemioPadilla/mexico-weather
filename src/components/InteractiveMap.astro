@@ -600,8 +600,38 @@ const cfg = JSON.stringify({
             <button data-val="relative" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Relativa</button>
           </div>
         </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Temperatura</p>
+          <div class="flex gap-1" data-mw-temp>
+            <button data-val="C" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">°C</button>
+            <button data-val="F" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">°F</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Viento</p>
+          <div class="flex gap-1" data-mw-speed-unit>
+            <button data-val="kmh" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">km/h</button>
+            <button data-val="mph" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">mph</button>
+            <button data-val="kt" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">kt</button>
+            <button data-val="ms" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">m/s</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Presión</p>
+          <div class="flex gap-1" data-mw-pressure>
+            <button data-val="hPa" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">hPa</button>
+            <button data-val="inHg" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">inHg</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Distancia</p>
+          <div class="flex gap-1" data-mw-distance>
+            <button data-val="km" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">km</button>
+            <button data-val="mi" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">mi</button>
+          </div>
+        </div>
         <p class="text-[10px] italic text-gray-500 dark:text-gray-400">
-          Aplica al timeline en vivo. Persistido localmente, sin cuenta.
+          Aplica al timeline, leyenda, tooltip, tarjeta y /forecast en vivo. Persistido localmente, sin cuenta.
         </p>
       </div>
     </details>

@@ -12,6 +12,7 @@
  * delegates on: `data-pc-close`, `data-pc-fav`, `data-pc-mode="daily|hourly"`.
  */
 import type { Forecast } from '../../forecast';
+import { formatTemp, type TempUnit } from '../../units';
 
 export type PlaceCardMode = 'daily' | 'hourly';
 
@@ -43,6 +44,8 @@ export interface PlaceCardOpts {
   lang: 'es' | 'en';
   /** Local "today" as YYYY-MM-DD, so the first row can read "Hoy". */
   todayIso: string;
+  /** Story 19.3 — temperature display unit (data is °C). Default °C. */
+  tempUnit?: TempUnit;
 }
 
 export function esc(s: string): string {
@@ -73,6 +76,13 @@ function fmt(n: number | null | undefined): string {
   return n === null || n === undefined || !Number.isFinite(n)
     ? '—'
     : String(Math.round(n));
+}
+
+/** Temperature in the card's unit, degree sign included ("24°"). */
+function fmtTemp(c: number | null | undefined, o: PlaceCardOpts): string {
+  return c === null || c === undefined || !Number.isFinite(c)
+    ? '—°'
+    : formatTemp(c, o.tempUnit ?? 'C');
 }
 
 function addDays(iso: string, n: number): string {
@@ -128,7 +138,7 @@ export function renderDailyRows(fc: Forecast, o: PlaceCardOpts): string {
         `<span class="text-center" aria-hidden="true">${esc(conditionGlyph(d.condition))}</span>` +
         `<span class="relative h-1.5 rounded-full bg-gray-200 dark:bg-gray-800">${barFill(d.tmin, d.tmax, min, span)}</span>` +
         `<span class="text-right text-xs text-blue-600 dark:text-blue-400">${fmt(d.precipProbabilityMax)}%</span>` +
-        `<span class="text-right tabular-nums text-gray-800 dark:text-gray-100">${fmt(d.tmin)}° / ${fmt(d.tmax)}°</span>` +
+        `<span class="text-right tabular-nums text-gray-800 dark:text-gray-100">${fmtTemp(d.tmin, o)} / ${fmtTemp(d.tmax, o)}</span>` +
         `</div>`
     )
     .join('');
@@ -151,7 +161,7 @@ export function renderHourlyRows(fc: Forecast, o: PlaceCardOpts): string {
         `<div data-pc-hour="${esc(h.time)}" class="grid grid-cols-[3rem_1.25rem_1fr_2.4rem] items-center gap-1.5 py-0.5 text-sm">` +
         `<span class="tabular-nums text-gray-700 dark:text-gray-300">${esc(hh)}</span>` +
         `<span class="text-center" aria-hidden="true">${esc(conditionGlyph(h.condition))}</span>` +
-        `<span class="tabular-nums text-gray-800 dark:text-gray-100">${fmt(h.temperature)}°</span>` +
+        `<span class="tabular-nums text-gray-800 dark:text-gray-100">${fmtTemp(h.temperature, o)}</span>` +
         `<span class="text-right text-xs text-blue-600 dark:text-blue-400">${fmt(h.precipProbability)}%</span>` +
         `</div>`
       );

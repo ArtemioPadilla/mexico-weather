@@ -236,6 +236,13 @@ const base = siteBase();
     import { ui } from '../i18n/ui';
     import { initInteractiveMap } from '../lib/interactive-map';
     import { siteBase } from '../utils/paths';
+    import { readSettings, unitsOf } from '../lib/map/settings';
+    import {
+      formatDistanceKm,
+      formatPressure,
+      formatSpeed,
+      formatTemp,
+    } from '../lib/units';
 
     // Runtime language read — set by BaseLayout's pre-paint script
     // (covers sessionStorage, ?lang= URL param and navigator.language
@@ -275,6 +282,18 @@ const base = siteBase();
     function fmt(n: number | null): string {
       return n === null ? '—' : String(Math.round(n));
     }
+
+    // Story 19.3 — display units follow the map's ⚙ settings
+    // (localStorage, read on every render); data stays metric.
+    const units = () => unitsOf(readSettings());
+    const fmtT = (c: number | null): string =>
+      c === null ? '—°' : formatTemp(c, units().temp);
+    const fmtS = (kmh: number | null): string =>
+      kmh === null ? '—' : formatSpeed(kmh, units().speed);
+    const fmtP = (hpa: number | null): string =>
+      hpa === null ? '—' : formatPressure(hpa, units().pressure);
+    const fmtD = (km: number | null): string =>
+      km === null ? '—' : formatDistanceKm(km, units().distance);
 
     function hourLabel(iso: string, idx: number): string {
       return idx === 0 ? t.current : iso.slice(11, 13) + 'h';
@@ -428,8 +447,8 @@ const base = siteBase();
             </div>
             <p class="text-xs text-gray-600 dark:text-gray-500">${subLine}</p>
             <div class="flex items-end gap-3 pt-2">
-              <span class="text-6xl font-bold">${fmt(current.temperature)}°</span>
-              <span class="text-sm text-gray-600 dark:text-gray-400 pb-2">${esc(t.feels_like)} ${fmt(current.feelsLike)}°</span>
+              <span class="text-6xl font-bold">${fmtT(current.temperature)}</span>
+              <span class="text-sm text-gray-600 dark:text-gray-400 pb-2">${esc(t.feels_like)} ${fmtT(current.feelsLike)}</span>
             </div>
             <p class="text-lg text-gray-800 dark:text-gray-200">${esc(current.condition)}</p>
             ${(() => {
@@ -524,9 +543,9 @@ const base = siteBase();
               <i aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:2px;background:${tint}"></i>
               <div class="text-gray-600 dark:text-gray-400">${label}</div>
               <div class="text-base">${esc(emoji(hw.condition))}</div>
-              <div class="font-semibold">${fmt(hw.temperature)}°</div>
+              <div class="font-semibold">${fmtT(hw.temperature)}</div>
               <div class="text-blue-600 dark:text-blue-400">${Math.round(hw.precipProbability)}%</div>
-              <div class="text-gray-600 dark:text-gray-500">${Math.round(hw.windSpeed)} km/h</div>
+              <div class="text-gray-600 dark:text-gray-500">${fmtS(hw.windSpeed)}</div>
             </div>`;
           })
           .join('');
@@ -596,7 +615,7 @@ const base = siteBase();
               <span class="text-center">${esc(emoji(dw.condition))}</span>
               <span class="relative h-1.5 rounded-full bg-gray-200 dark:bg-gray-800 overflow-visible">${barFill(dw.tmin, dw.tmax)}${todayMarker(i)}</span>
               <span class="text-blue-600 dark:text-blue-400 text-right">💧${Math.round(dw.precipProbabilityMax)}%</span>
-              <span class="text-right text-gray-700 dark:text-gray-300">${fmt(dw.tmin)}° / ${fmt(dw.tmax)}°</span>
+              <span class="text-right text-gray-700 dark:text-gray-300">${fmtT(dw.tmin)} / ${fmtT(dw.tmax)}</span>
             </div>`;
           })
           .join('');
@@ -642,7 +661,7 @@ const base = siteBase();
               <div class="rounded-md bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-3 space-y-1">
                 <div class="text-xs text-gray-600 dark:text-gray-500"><span aria-hidden="true">🧭</span> <span>${esc(t.wind)}</span></div>
                 <div class="flex items-center gap-2">
-                  <span class="text-lg font-semibold">${Math.round(current.windSpeed)} km/h</span>
+                  <span class="text-lg font-semibold">${fmtS(current.windSpeed)}</span>
                   ${(() => {
                     // Story 3.5 — wind direction arrow. Meteorological
                     // dir = where wind comes FROM, so we rotate the
@@ -654,7 +673,7 @@ const base = siteBase();
                       width="20"
                       height="20"
                       viewBox="0 0 24 24"
-                      aria-label="${esc(t.wind)} ${esc(wd.label)}, ${Math.round(current.windSpeed)} km/h"
+                      aria-label="${esc(t.wind)} ${esc(wd.label)}, ${fmtS(current.windSpeed)}"
                       role="img"
                       class="text-blue-600 dark:text-blue-400"
                       style="transform: rotate(${rot}deg)"
@@ -663,7 +682,7 @@ const base = siteBase();
                     </svg>`;
                   })()}
                 </div>
-                <div class="text-xs text-gray-600 dark:text-gray-400">${esc(wd.label)} · ${esc(t.gusts)} ${Math.round(current.windGusts)} km/h</div>
+                <div class="text-xs text-gray-600 dark:text-gray-400">${esc(wd.label)} · ${esc(t.gusts)} ${fmtS(current.windGusts)}</div>
               </div>
               <div class="rounded-md bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-3 space-y-1">
                 <div class="text-xs text-gray-600 dark:text-gray-500"><span aria-hidden="true">☀️</span> <span>${esc(t.uv_index)}</span></div>
@@ -673,7 +692,7 @@ const base = siteBase();
               <div data-low-priority class="rounded-md bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-800 p-3 space-y-1">
                 <div class="text-xs text-gray-600 dark:text-gray-500"><span aria-hidden="true">☁️</span> <span>${esc(t.sky_air)}</span></div>
                 <div class="text-lg font-semibold">${Math.round(current.cloudCover)}%</div>
-                <div class="text-xs text-gray-600 dark:text-gray-400">${esc(t.humidity)} ${Math.round(current.humidity)}% · ${esc(t.pressure)} ${fmt(current.pressure)} hPa · ${esc(t.visibility)} ${esc(String(current.visibilityKm))} km</div>
+                <div class="text-xs text-gray-600 dark:text-gray-400">${esc(t.humidity)} ${Math.round(current.humidity)}% · ${esc(t.pressure)} ${fmtP(current.pressure)} · ${esc(t.visibility)} ${fmtD(current.visibilityKm)}</div>
               </div>
             </div>
           </section>`;

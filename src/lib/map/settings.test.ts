@@ -6,6 +6,7 @@ import {
   nextTimeLabelMode,
   normalizeSettings,
   readSettings,
+  unitsOf,
   writeSettings,
 } from './settings';
 
@@ -76,6 +77,35 @@ describe('settings', () => {
     ).toEqual(DEFAULT_SETTINGS);
     expect(normalizeSettings({ loopHours: '12' }).loopHours).toBe(12);
     expect(normalizeSettings(null)).toEqual(DEFAULT_SETTINGS);
+  });
+
+  // Story 19.3 — units.
+  it('unit settings validate per key and resolve to a Units record', () => {
+    expect(
+      normalizeSettings({
+        tempUnit: 'F',
+        speedUnit: 'kt',
+        pressureUnit: 'inHg',
+        distanceUnit: 'mi',
+      })
+    ).toMatchObject({
+      tempUnit: 'F',
+      speedUnit: 'kt',
+      pressureUnit: 'inHg',
+      distanceUnit: 'mi',
+    });
+    expect(
+      normalizeSettings({ tempUnit: 'K', speedUnit: 'furlongs' })
+    ).toMatchObject({
+      tempUnit: 'C',
+      speedUnit: 'kmh',
+    });
+    expect(unitsOf(DEFAULT_SETTINGS)).toEqual({
+      temp: 'C',
+      speed: 'kmh',
+      pressure: 'hPa',
+      distance: 'km',
+    });
   });
 
   it('nextTimeLabelMode cycles both → clock → relative → both', () => {

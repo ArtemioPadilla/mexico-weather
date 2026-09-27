@@ -120,6 +120,12 @@ describe('place card renderer', () => {
     expect(html).toContain('Cargando pronóstico…');
   });
 
+  it('renders temperatures in °F when asked (Story 19.3)', () => {
+    const html = renderDailyRows(fc(), opts({ tempUnit: 'F' }));
+    expect(html).toContain('54° / 79°');
+    expect(html).not.toContain('12° / 26°');
+  });
+
   it('helpers: glyph extraction and weekday labels', () => {
     expect(conditionGlyph('Lluvia 🌧️')).toBe('🌧️');
     expect(conditionGlyph('sin emoji')).toBe('·');

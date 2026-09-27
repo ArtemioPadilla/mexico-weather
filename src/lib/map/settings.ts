@@ -10,6 +10,15 @@
  * any unknown value falls back to its default (see settings.test.ts).
  */
 
+import {
+  DEFAULT_UNITS,
+  type DistanceUnit,
+  type PressureUnit,
+  type SpeedUnit,
+  type TempUnit,
+  type Units,
+} from '../units';
+
 export const SETTINGS_KEY = 'mw:settings';
 
 export type LoopHours = 3 | 6 | 12 | 24;
@@ -30,6 +39,11 @@ export interface MapSettings {
   /** What the timeline pill shows: "07:00 · +2 h", the clock only or
    *  the relative offset only. */
   timeLabel: TimeLabelMode;
+  /** Story 19.3 — display units; data stays metric underneath. */
+  tempUnit: TempUnit;
+  speedUnit: SpeedUnit;
+  pressureUnit: PressureUnit;
+  distanceUnit: DistanceUnit;
 }
 
 export const DEFAULT_SETTINGS: MapSettings = {
@@ -39,7 +53,26 @@ export const DEFAULT_SETTINGS: MapSettings = {
   playSpeed: 'medium',
   playStyle: 'smooth',
   timeLabel: 'both',
+  tempUnit: DEFAULT_UNITS.temp,
+  speedUnit: DEFAULT_UNITS.speed,
+  pressureUnit: DEFAULT_UNITS.pressure,
+  distanceUnit: DEFAULT_UNITS.distance,
 };
+
+export const TEMP_UNITS: readonly TempUnit[] = ['C', 'F'];
+export const SPEED_UNITS: readonly SpeedUnit[] = ['kmh', 'mph', 'kt', 'ms'];
+export const PRESSURE_UNITS: readonly PressureUnit[] = ['hPa', 'inHg'];
+export const DISTANCE_UNITS: readonly DistanceUnit[] = ['km', 'mi'];
+
+/** The display units a settings record resolves to. */
+export function unitsOf(s: MapSettings): Units {
+  return {
+    temp: s.tempUnit,
+    speed: s.speedUnit,
+    pressure: s.pressureUnit,
+    distance: s.distanceUnit,
+  };
+}
 
 export const LOOP_HOURS: readonly LoopHours[] = [3, 6, 12, 24];
 export const PLAY_SPEEDS: readonly PlaySpeed[] = ['slow', 'medium', 'fast'];
@@ -85,6 +118,18 @@ export function normalizeSettings(parsed: unknown): MapSettings {
     playSpeed: pick(PLAY_SPEEDS, p.playSpeed, DEFAULT_SETTINGS.playSpeed),
     playStyle: pick(PLAY_STYLES, p.playStyle, DEFAULT_SETTINGS.playStyle),
     timeLabel: pick(TIME_LABEL_MODES, p.timeLabel, DEFAULT_SETTINGS.timeLabel),
+    tempUnit: pick(TEMP_UNITS, p.tempUnit, DEFAULT_SETTINGS.tempUnit),
+    speedUnit: pick(SPEED_UNITS, p.speedUnit, DEFAULT_SETTINGS.speedUnit),
+    pressureUnit: pick(
+      PRESSURE_UNITS,
+      p.pressureUnit,
+      DEFAULT_SETTINGS.pressureUnit
+    ),
+    distanceUnit: pick(
+      DISTANCE_UNITS,
+      p.distanceUnit,
+      DEFAULT_SETTINGS.distanceUnit
+    ),
   };
 }
 

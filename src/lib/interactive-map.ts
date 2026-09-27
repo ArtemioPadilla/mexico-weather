@@ -193,7 +193,6 @@ import {
   formatLatLngDM,
   polylineLengthKm as measurePolylineLen,
   sphericalAreaKm2 as measureSphArea,
-  formatDistance as measureFmtDist,
   formatArea as measureFmtArea,
 } from './map/utils';
 import { createVolcanoesOverlay } from './map/overlays/volcanoes';
@@ -230,9 +229,21 @@ import {
   normalizeSettings,
   nextTimeLabelMode,
   loopRange,
+  unitsOf,
   PLAY_INTERVAL_MS,
   RASTER_FADE_MS,
 } from './map/settings';
+import {
+  convertLegendStops,
+  formatDistanceKm,
+  formatPressure,
+  formatSpeed,
+  formatTemp,
+  PRESSURE_LABEL,
+  SPEED_LABEL,
+  TEMP_LABEL,
+  type Units,
+} from './units';
 import { createAutocompleteController } from './map/chrome/autocomplete';
 import { createSnapshotCompare } from './map/chrome/snapshot-compare';
 import { createModelToggle } from './map/chrome/model-toggle';
@@ -557,6 +568,7 @@ export async function initInteractiveMap(
       coordsLabel: coords,
       forecastHref: `${base}forecast?lat=${lat.toFixed(4)}&lng=${lng.toFixed(4)}&name=${encodeURIComponent(coords)}`,
       isFavorite,
+      tempUnit: currentUnits().temp,
       nowLine: tooltipValueAt(lng, lat),
       strings: {
         title: t.place_card_title,
@@ -1794,6 +1806,24 @@ export async function initInteractiveMap(
     });
   };
 
+  /** Which legend the active layer needs (null hides the bar). */
+  function legendKindFor():
+    | 'radar'
+    | 'temperature'
+    | 'humidity'
+    | 'pressure'
+    | 'precipitation'
+    | 'wind'
+    | null {
+    const akind = getLayerDef(activeLayer)?.kind;
+    if (activeLayer === 'radar') return 'radar';
+    if (akind === 'field')
+      return activeLayer as
+        'temperature' | 'humidity' | 'pressure' | 'precipitation';
+    if (akind === 'particles') return 'wind';
+    return null;
+  }
+
   function renderLegend(
     kind:
       | 'radar'
@@ -1836,7 +1866,9 @@ export async function initInteractiveMap(
                   }));
     // Horizontal stop layout (plan P0.2): a 28×12 swatch with the
     // label below, similar to zoom.earth's bottom-left scale.
-    el.innerHTML = stops
+    // Story 19.3 — temperature / pressure scales read in the chosen unit.
+    const U = currentUnits();
+    el.innerHTML = convertLegendStops(stops, kind, U)
       .map(
         (s) =>
           `<li class="flex flex-col items-center gap-0.5 leading-none"><span class="inline-block h-2.5 w-7" style="background:${esc(
@@ -1848,11 +1880,11 @@ export async function initInteractiveMap(
     // temperature scale; we mirror that for each metric.
     const unit: Record<typeof kind & string, string> = {
       radar: 'mm/h',
-      temperature: '°C',
+      temperature: TEMP_LABEL[U.temp],
       humidity: '%',
-      pressure: 'hPa',
+      pressure: PRESSURE_LABEL[U.pressure],
       precipitation: precipUnit(),
-      wind: 'km/h',
+      wind: SPEED_LABEL[U.speed],
     } as Record<string, string>;
     if (unitEl) unitEl.textContent = unit[kind] ?? '';
     if (bar) bar.style.display = '';
@@ -1890,16 +1922,7 @@ export async function initInteractiveMap(
         akind !== 'particles' &&
         akind !== 'overlay'
     );
-    const kindForLegend =
-      activeLayer === 'radar'
-        ? ('radar' as const)
-        : akind === 'field'
-          ? (activeLayer as
-              'temperature' | 'humidity' | 'pressure' | 'precipitation')
-          : akind === 'particles'
-            ? ('wind' as const)
-            : null;
-    renderLegend(kindForLegend);
+    renderLegend(legendKindFor());
     // Hide the hover tooltip when switching to a layer that doesn't
     // expose per-pixel values (or back to base). The next mousemove
     // re-evaluates tooltipValueAt and re-shows when appropriate.
@@ -1960,9 +1983,16 @@ export async function initInteractiveMap(
    * Format: "26°\n78%\n1014 hPa" — newline-separated; the floating
    * tooltip div whitespace-preserves them via CSS.
    */
+  /** Story 19.3 — display units from the ⚙ settings, read per call so
+   *  a change applies to the next tooltip / legend paint. */
+  function currentUnits(): Units {
+    return unitsOf(readSettings());
+  }
+
   function tooltipValueAt(lng: number, lat: number): string | null {
     const def = getLayerDef(activeLayer);
     if (!def) return null;
+    const U = currentUnits();
     if (def.kind === 'field' || def.kind === 'particles') {
       if (!fieldBounds || frameIndex < 0) return null;
       const bounds = fieldBounds;
@@ -1990,7 +2020,7 @@ export async function initInteractiveMap(
       // Temperature
       const tGrid = activeLayer === 'temperature' ? fieldGrid : lastTempGrid;
       const tVal = sampleField(tGrid);
-      if (tVal !== null) lines.push(`🌡 ${Math.round(tVal)}°`);
+      if (tVal !== null) lines.push(`🌡 ${formatTemp(tVal, U.temp)}`);
 
       // Humidity
       const hGrid = activeLayer === 'humidity' ? fieldGrid : lastHumidityGrid;
@@ -2000,7 +2030,7 @@ export async function initInteractiveMap(
       // Pressure
       const pGrid = activeLayer === 'pressure' ? fieldGrid : lastPressureGrid;
       const pVal = sampleField(pGrid);
-      if (pVal !== null) lines.push(`🧭 ${Math.round(pVal)} hPa`);
+      if (pVal !== null) lines.push(`🧭 ${formatPressure(pVal, U.pressure)}`);
 
       if (lines.length === 0 && def.kind !== 'particles') {
         // Fall through to legacy single-value behavior for field layers
@@ -2016,9 +2046,9 @@ export async function initInteractiveMap(
             frameIndex
           );
           if (v === null) return null;
-          if (activeLayer === 'temperature') return `${Math.round(v)}°`;
+          if (activeLayer === 'temperature') return formatTemp(v, U.temp);
           if (activeLayer === 'humidity') return `${Math.round(v)}%`;
-          if (activeLayer === 'pressure') return `${Math.round(v)} hPa`;
+          if (activeLayer === 'pressure') return formatPressure(v, U.pressure);
           if (activeLayer === 'precipitation') return formatPrecip(v);
           return `${Math.round(v)}`;
         }
@@ -2094,7 +2124,6 @@ export async function initInteractiveMap(
       const uv = sampleUv(frameIndex);
       if (!uv) return null;
       const speedMps = Math.hypot(uv.u, uv.v);
-      const kmh = Math.round(speedMps * 3.6);
       // Heading = direction wind is BLOWING TOWARD (math convention).
       // 0° = east (positive u), 90° = north (positive v). Convert to
       // compass bearing where 0° = north, 90° = east, then cardinal.
@@ -2102,7 +2131,7 @@ export async function initInteractiveMap(
       const norm = ((bearing % 360) + 360) % 360;
       const cardinals = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
       const idx = Math.round(norm / 45) % 8;
-      const windLine = `💨 ${kmh} km/h ${cardinals[idx]}`;
+      const windLine = `💨 ${formatSpeed(speedMps * 3.6, U.speed)} ${cardinals[idx]}`;
       // Wind layer: combine with cached field grids (multi-metric).
       const fLines: string[] = [];
       const wb = fieldBounds;
@@ -2119,11 +2148,11 @@ export async function initInteractiveMap(
             )
           : null;
       const tV = sample(lastTempGrid);
-      if (tV !== null) fLines.push(`🌡 ${Math.round(tV)}°`);
+      if (tV !== null) fLines.push(`🌡 ${formatTemp(tV, U.temp)}`);
       const hV = sample(lastHumidityGrid);
       if (hV !== null) fLines.push(`💧 ${Math.round(hV)}%`);
       const pV = sample(lastPressureGrid);
-      if (pV !== null) fLines.push(`🧭 ${Math.round(pV)} hPa`);
+      if (pV !== null) fLines.push(`🧭 ${formatPressure(pV, U.pressure)}`);
       fLines.push(windLine);
       return fLines.join('\n');
     }
@@ -2513,6 +2542,11 @@ export async function initInteractiveMap(
     { attr: 'data-mw-speed', key: 'playSpeed' },
     { attr: 'data-mw-style', key: 'playStyle' },
     { attr: 'data-mw-label', key: 'timeLabel' },
+    // Story 19.3 — display units.
+    { attr: 'data-mw-temp', key: 'tempUnit' },
+    { attr: 'data-mw-speed-unit', key: 'speedUnit' },
+    { attr: 'data-mw-pressure', key: 'pressureUnit' },
+    { attr: 'data-mw-distance', key: 'distanceUnit' },
   ];
   function refreshSettingsButtons(): void {
     if (!features.settings) return;
@@ -2539,6 +2573,11 @@ export async function initInteractiveMap(
       if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
     }
     weatherRaster.setFadeMs(RASTER_FADE_MS[readSettings().playStyle]);
+    // Story 19.3 — units: legend scale + unit, city pills / tooltip
+    // values, and the open place card re-render in place.
+    renderLegend(legendKindFor());
+    refreshCityValues();
+    if (placeCardFc) paintPlaceCard();
   }
   function bindSettingsButtons(): void {
     if (!features.settings) return;
@@ -3423,7 +3462,7 @@ export async function initInteractiveMap(
         } else {
           const km = measurePolylineLen(measurePts);
           const n = measurePts.length - 1;
-          resultEl.textContent = `${measureFmtDist(km)} · ${n} ${n === 1 ? 'segmento' : 'segmentos'}`;
+          resultEl.textContent = `${formatDistanceKm(km, currentUnits().distance)} · ${n} ${n === 1 ? 'segmento' : 'segmentos'}`;
         }
       } else {
         if (measurePts.length < 3) {
