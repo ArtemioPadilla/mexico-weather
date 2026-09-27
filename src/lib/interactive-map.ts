@@ -221,7 +221,16 @@ import {
 } from './map/chrome/basemap-theme';
 import { createSunLayer } from './map/layers/sun-layer';
 import { createWeatherRaster } from './map/layers/weather-raster';
-import { type MapSettings, readSettings, writeSettings } from './map/settings';
+import {
+  type MapSettings,
+  readSettings,
+  writeSettings,
+  normalizeSettings,
+  nextTimeLabelMode,
+  loopRange,
+  PLAY_INTERVAL_MS,
+  RASTER_FADE_MS,
+} from './map/settings';
 import { createAutocompleteController } from './map/chrome/autocomplete';
 import { createSnapshotCompare } from './map/chrome/snapshot-compare';
 import { createModelToggle } from './map/chrome/model-toggle';
@@ -1033,7 +1042,12 @@ export async function initInteractiveMap(
       clock = `${wd} ${clock}`;
     }
     const rel = relativeFrameLabel(off, { now: t.timeline_now });
-    return `${clock}${s.tz === 'UTC' ? ' UTC' : ''} · ${rel}`;
+    const clockFull = `${clock}${s.tz === 'UTC' ? ' UTC' : ''}`;
+    // Story 16.4 — a tap on the pill (or the ⚙ panel) cycles between
+    // both parts, clock only and relative only.
+    if (s.timeLabel === 'clock') return clockFull;
+    if (s.timeLabel === 'relative') return rel;
+    return `${clockFull} · ${rel}`;
   }
 
   // Settings persistence — extracted to src/lib/map/settings.ts.
@@ -1749,6 +1763,9 @@ export async function initInteractiveMap(
   const weatherRaster = createWeatherRaster(map, {
     showMsg,
     hideMsg,
+    // Story 16.4 — "estilo" setting: smooth cross-fades tiles between
+    // frames, fast swaps them instantly.
+    getFadeMs: () => RASTER_FADE_MS[readSettings().playStyle],
   });
   const removeWeatherRaster = (): void => weatherRaster.remove();
   const showWeatherFrame = (layerId: string, frame: RadarFrame): void => {
@@ -2465,55 +2482,74 @@ export async function initInteractiveMap(
   // timeline label re-renders so the user sees their preference take
   // effect immediately.
   // ----------------------------------------------------------------
+  // One toggle group per setting: `[data-mw-<attr>] button[data-val]`.
+  // Values are validated by normalizeSettings(), so an unknown data-val
+  // in the markup falls back to the default instead of persisting junk.
+  const SETTING_GROUPS: ReadonlyArray<{
+    attr: string;
+    key: keyof MapSettings;
+  }> = [
+    { attr: 'data-mw-tz', key: 'tz' },
+    { attr: 'data-mw-hour', key: 'hourFormat' },
+    // Story 16.4 — animation controls.
+    { attr: 'data-mw-loop', key: 'loopHours' },
+    { attr: 'data-mw-speed', key: 'playSpeed' },
+    { attr: 'data-mw-style', key: 'playStyle' },
+    { attr: 'data-mw-label', key: 'timeLabel' },
+  ];
   function refreshSettingsButtons(): void {
     if (!features.settings) return;
     const cur = readSettings();
-    document
-      .querySelectorAll<HTMLButtonElement>('[data-mw-tz] button')
-      .forEach((b) => {
-        b.setAttribute('aria-pressed', String(b.dataset.val === cur.tz));
-      });
-    document
-      .querySelectorAll<HTMLButtonElement>('[data-mw-hour] button')
-      .forEach((b) => {
-        b.setAttribute(
-          'aria-pressed',
-          String(b.dataset.val === cur.hourFormat)
-        );
-      });
+    for (const g of SETTING_GROUPS) {
+      document
+        .querySelectorAll<HTMLButtonElement>(`[${g.attr}] button`)
+        .forEach((b) => {
+          b.setAttribute(
+            'aria-pressed',
+            String(b.dataset.val === String(cur[g.key]))
+          );
+        });
+    }
+  }
+  /** Re-render whatever reflects a setting live: the pressed states,
+   *  the timeline label (tz / hour format / label mode) and the tile
+   *  cross-fade (play style). Speed and loop window are read by the
+   *  player on its next tick, so nothing to push there. */
+  function afterSettingsChange(): void {
+    refreshSettingsButtons();
+    if (frameIndex >= 0 && tlFrames[frameIndex]) {
+      const tt = opts.els.tlTime;
+      if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
+    }
+    weatherRaster.setFadeMs(RASTER_FADE_MS[readSettings().playStyle]);
   }
   function bindSettingsButtons(): void {
     if (!features.settings) return;
-    document
-      .querySelectorAll<HTMLButtonElement>('[data-mw-tz] button')
-      .forEach((b) => {
-        b.addEventListener('click', () => {
-          const val = b.dataset.val === 'UTC' ? 'UTC' : 'local';
-          writeSettings({ ...readSettings(), tz: val });
-          refreshSettingsButtons();
-          // Re-render timeline label so the new tz takes effect.
-          if (frameIndex >= 0 && tlFrames[frameIndex]) {
-            const tt = opts.els.tlTime;
-            if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
-          }
+    for (const g of SETTING_GROUPS) {
+      document
+        .querySelectorAll<HTMLButtonElement>(`[${g.attr}] button`)
+        .forEach((b) => {
+          b.addEventListener('click', () => {
+            writeSettings(
+              normalizeSettings({ ...readSettings(), [g.key]: b.dataset.val })
+            );
+            afterSettingsChange();
+          });
         });
-      });
-    document
-      .querySelectorAll<HTMLButtonElement>('[data-mw-hour] button')
-      .forEach((b) => {
-        b.addEventListener('click', () => {
-          const val = b.dataset.val === '12' ? '12' : '24';
-          writeSettings({ ...readSettings(), hourFormat: val });
-          refreshSettingsButtons();
-          if (frameIndex >= 0 && tlFrames[frameIndex]) {
-            const tt = opts.els.tlTime;
-            if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
-          }
-        });
-      });
+    }
   }
   bindSettingsButtons();
   refreshSettingsButtons();
+  // Story 16.4 — tapping the timeline pill cycles its label (both →
+  // clock → relative), zoom.earth's clock ↔ timeline toggle. A click,
+  // not a letter: every A–Z key is already bound (J is volcanoes).
+  if (tlTime) {
+    tlTime.addEventListener('click', () => {
+      const s = readSettings();
+      writeSettings({ ...s, timeLabel: nextTimeLabelMode(s.timeLabel) });
+      afterSettingsChange();
+    });
+  }
 
   // ----------------------------------------------------------------
   // Sub-options (zoom.earth's per-layer variants). Single generic
@@ -2886,7 +2922,18 @@ export async function initInteractiveMap(
     { play: t.timeline_play, pause: t.timeline_pause },
     () => tlFrames.length,
     () => frameIndex,
-    (i) => applyFrame(i)
+    (i) => applyFrame(i),
+    {
+      // Story 16.4 — speed and loop window come from settings and are
+      // read on every tick, so the ⚙ panel applies live.
+      getIntervalMs: () => PLAY_INTERVAL_MS[readSettings().playSpeed],
+      getLoopRange: () =>
+        loopRange(
+          tlFrames.map((f) => f.time),
+          readSettings().loopHours,
+          Math.floor(Date.now() / 1000)
+        ),
+    }
   );
   const tlStop = (): void => tlPlayer.stop();
   const tlStart = (): void => tlPlayer.start();

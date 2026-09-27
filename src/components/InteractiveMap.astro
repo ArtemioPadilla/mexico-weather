@@ -326,7 +326,8 @@ const cfg = JSON.stringify({
         id={ids.tlTime}
         aria-live="polite"
         aria-atomic="true"
-        class="min-w-[7rem] text-center font-medium tabular-nums sm:min-w-[8rem]"
+        title="Clic: reloj · relativo · ambos"
+        class="min-w-[7rem] cursor-pointer text-center font-medium tabular-nums sm:min-w-[8rem]"
       >—</span>
       <button
         id={ids.tlNext}
@@ -567,8 +568,40 @@ const cfg = JSON.stringify({
             <button data-val="24" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">24 h</button>
           </div>
         </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Loop de animación</p>
+          <div class="flex gap-1" data-mw-loop title="Frames dentro de ±N h de ahora">
+            <button data-val="3" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">3 h</button>
+            <button data-val="6" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">6 h</button>
+            <button data-val="12" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">12 h</button>
+            <button data-val="24" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">24 h</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Velocidad</p>
+          <div class="flex gap-1" data-mw-speed>
+            <button data-val="slow" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Lenta</button>
+            <button data-val="medium" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Media</button>
+            <button data-val="fast" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Rápida</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Estilo</p>
+          <div class="flex gap-1" data-mw-style title="Suave funde los frames de radar y satélite">
+            <button data-val="fast" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Rápido</button>
+            <button data-val="smooth" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Suave</button>
+          </div>
+        </div>
+        <div>
+          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Etiqueta del tiempo (clic en la hora)</p>
+          <div class="flex gap-1" data-mw-label>
+            <button data-val="both" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Ambas</button>
+            <button data-val="clock" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Reloj</button>
+            <button data-val="relative" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Relativa</button>
+          </div>
+        </div>
         <p class="text-[10px] italic text-gray-500 dark:text-gray-400">
-          Aplica al reloj del timeline. Persistido localmente.
+          Aplica al timeline en vivo. Persistido localmente, sin cuenta.
         </p>
       </div>
     </details>

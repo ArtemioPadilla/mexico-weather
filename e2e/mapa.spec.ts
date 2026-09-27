@@ -721,4 +721,39 @@ test.describe('mapa page', () => {
     await page.locator('#layerbtn-base').click();
     await expect(btn).toHaveAttribute('aria-pressed', 'false');
   });
+
+  // Story 16.4 — animation controls persist and apply live.
+  test('settings panel persists animation controls; tapping the time pill cycles the label', async ({
+    page,
+  }) => {
+    await page.goto('mapa/');
+    await page.locator('#mw-settings summary').click();
+    await page.locator('[data-mw-speed] button[data-val="fast"]').click();
+    await page.locator('[data-mw-loop] button[data-val="6"]').click();
+    await page.locator('[data-mw-style] button[data-val="fast"]').click();
+    await expect(
+      page.locator('[data-mw-speed] button[data-val="fast"]')
+    ).toHaveAttribute('aria-pressed', 'true');
+    const stored = await page.evaluate(() =>
+      JSON.parse(localStorage.getItem('mw:settings') ?? '{}')
+    );
+    expect(stored).toMatchObject({
+      playSpeed: 'fast',
+      loopHours: 6,
+      playStyle: 'fast',
+    });
+    await page.locator('#mw-settings summary').click();
+    await page.locator('#tl-time').click();
+    await expect
+      .poll(async () =>
+        page.evaluate(
+          () =>
+            JSON.parse(localStorage.getItem('mw:settings') ?? '{}').timeLabel
+        )
+      )
+      .toBe('clock');
+    await expect(
+      page.locator('[data-mw-label] button[data-val="clock"]')
+    ).toHaveAttribute('aria-pressed', 'true');
+  });
 });

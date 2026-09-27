@@ -100,4 +100,45 @@ describe('createTimelinePlayer', () => {
     player.toggle();
     expect(player.isPlaying()).toBe(false);
   });
+
+  // Story 16.4 — animation controls.
+  it('honours a live cadence getter and a loop window', () => {
+    const btn = mkPlayBtn();
+    let cur = 0;
+    let interval = 100;
+    const player = createTimelinePlayer(
+      { playBtn: btn },
+      labels,
+      () => 10,
+      () => cur,
+      (i) => {
+        cur = i;
+      },
+      {
+        reducedMotion: false,
+        getIntervalMs: () => interval,
+        getLoopRange: () => [3, 5],
+      }
+    );
+    player.start();
+    // Outside the window: first tick jumps to its start.
+    vi.advanceTimersByTime(100);
+    expect(cur).toBe(3);
+    vi.advanceTimersByTime(200);
+    expect(cur).toBe(5);
+    // End of window wraps to its start, not to frame 0.
+    vi.advanceTimersByTime(100);
+    expect(cur).toBe(3);
+    // Speed change applies to the next step without restarting.
+    interval = 1000;
+    vi.advanceTimersByTime(100);
+    expect(cur).toBe(4);
+    vi.advanceTimersByTime(500);
+    expect(cur).toBe(4);
+    vi.advanceTimersByTime(500);
+    expect(cur).toBe(5);
+    player.stop();
+    vi.advanceTimersByTime(3000);
+    expect(cur).toBe(5);
+  });
 });

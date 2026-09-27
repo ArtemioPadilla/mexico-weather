@@ -124,9 +124,9 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 - [ ] Validación: script que compara el frame +30 propio contra el observado 30 min después (CSI/FAR) y publica el score en el índice; si CSI < umbral 2 días seguidos, el cliente oculta +40…+60.
 - Acceptance: timeline llega a +60 min en MX; CSI publicado; nunca se muestra como observación.
 
-**Story 16.4 — Controles de animación** · est 1d
-- [ ] Ajustes: duración del loop (3/6/12/24 h), velocidad (lenta/media/rápida), estilo (rápido/suave = crossfade CSS).
-- [ ] Persistir en `settings.ts` (localStorage), atajo `J` para reloj vs timeline como zoom.earth.
+**Story 16.4 — Controles de animación** · est 1d · **shipped 2026-09-27**
+- [x] Ajustes: duración del loop (3/6/12/24 h = frames dentro de ±N h de ahora), velocidad (lenta/media/rápida), estilo (rápido/suave = `raster-fade-duration` en las capas de teselas; el raster de campos es un image source y cambia en seco).
+- [x] Persistir en `map/settings.ts` (localStorage, registro aditivo con migración), la etiqueta cicla ambas → reloj → relativa con un clic en la hora del timeline (la `J` ya es de volcanes y no queda letra libre).
 - Acceptance: los tres ajustes aplican en vivo; `settings.test.ts` cubre defaults y migración.
 
 ---

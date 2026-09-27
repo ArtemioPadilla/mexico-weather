@@ -74,6 +74,9 @@ export interface WeatherRasterDeps {
    *  zoomed in past where the imagery has usable detail). */
   showMsg?: (text: string) => void;
   hideMsg?: () => void;
+  /** Story 16.4 — raster-fade-duration (ms) for the tile layer; read
+   *  when the layer is (re)added. 300 when absent (MapLibre default). */
+  getFadeMs?: () => number;
 }
 
 export interface WeatherRasterFactory {
@@ -95,6 +98,8 @@ export interface WeatherRasterFactory {
   /** Set raster-opacity on the layer if it exists. Called by the
    *  global opacity slider. */
   setOpacity: (opacity: number) => void;
+  /** Story 16.4 — apply the play style's cross-fade live. */
+  setFadeMs: (ms: number) => void;
 }
 
 export function createWeatherRaster(
@@ -184,10 +189,16 @@ export function createWeatherRaster(
         paint: {
           'raster-opacity': ctx.opacity,
           'raster-resampling': 'linear',
+          'raster-fade-duration': deps.getFadeMs?.() ?? 300,
         },
       });
     },
     remove: teardownRaster,
+    setFadeMs: (ms: number): void => {
+      if (map.getLayer(RV_LAYER)) {
+        map.setPaintProperty(RV_LAYER, 'raster-fade-duration', ms);
+      }
+    },
     setOpacity: (opacity: number): void => {
       if (map.getLayer(RV_LAYER)) {
         map.setPaintProperty(RV_LAYER, 'raster-opacity', opacity);
