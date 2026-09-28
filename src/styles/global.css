@@ -282,6 +282,149 @@
 }
 
 /*
+ * Story 25.1 — bottom sheets (src/lib/map/chrome/bottom-sheet.ts). Below
+ * `sm` the place card, the layers rail of /mapa and the ⋯ tools menu rise
+ * from the top of the timeline dock, full width, never over it. The
+ * script sets `--im-sheet-h` (the detent height: peek, half or full) on
+ * the sheet and, while one is open, `data-sheet` + `--im-sheet` on the map
+ * root. `max-height` is the `full` detent (the script computes the same
+ * from `--im-dock` and `--im-sheet-top`): it stops `--im-sheet-top` under
+ * the top of the map, clear of the search row and
+ * of the ⋯ button and of what floats above the sheet (`.im-above-sheet`:
+ * the Controles trigger and the model toggle, one 44 px row). No
+ * `display` here: each panel keeps its own `hidden` / reveal rule.
+ * Unlayered on purpose: it must beat the panels' desktop utilities.
+ */
+@media (max-width: 639.98px) {
+  .im-root {
+    /* px, not rem: bottom-sheet.ts reads it to size the full detent. */
+    --im-sheet-top: 120px;
+  }
+  .im-root .im-sheet {
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: var(--im-dock, 0px);
+    left: 0;
+    /* Over the legend and messages (z-10), under the search row and its
+       suggestions (z-21). */
+    z-index: 20;
+    width: auto;
+    max-width: none;
+    height: var(--im-sheet-h, auto);
+    max-height: calc(100% - var(--im-dock, 0px) - var(--im-sheet-top));
+    margin: 0;
+    padding-top: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 1rem 1rem 0 0;
+    background: var(--im-bg-strong);
+    transition: height 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation: im-sheet-in 200ms ease-out;
+  }
+  .im-root .im-sheet[data-sheet-dragging] {
+    transition: none;
+  }
+  /* The handle: a 44 px full-width row with a grab bar, pinned to the top
+     of the sheet while its content scrolls. */
+  .im-sheet .im-sheet-handle {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    /* Opaque (the gray-900 of --im-bg-strong): rows scroll under it. */
+    background: #111827;
+    touch-action: none;
+    cursor: grab;
+  }
+  .im-sheet[data-sheet-dragging] .im-sheet-handle {
+    cursor: grabbing;
+  }
+  .im-sheet .im-sheet-handle::before {
+    content: '';
+    width: 2.5rem;
+    height: 0.3125rem;
+    border-radius: 9999px;
+    background: var(--im-muted);
+  }
+  .im-sheet .im-sheet-handle:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: -2px;
+  }
+  /* One scroll per sheet: the lists inside give up their own. */
+  .im-sheet :is([data-pc-rows], [data-overlay-list]) {
+    max-height: none;
+    overflow: visible;
+  }
+  .im-sheet [role='tabpanel'] {
+    width: auto;
+  }
+  /* The rail as a sheet: the layer tiles are a 3-column grid of icon +
+     short label (the phone rail's single column of icons had no room
+     for the names), 44 px tall. */
+  .im-rail.im-sheet [data-rail-tiles] {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .im-rail.im-sheet [data-rail-tiles] > [id^='layerbtn-'] {
+    min-height: 44px;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+  .im-rail.im-sheet [data-rail-tiles] > [id^='layerbtn-'] > span {
+    display: block;
+  }
+  /* The ⋯ wrapper stops being the popover's positioning box: the button
+     keeps its place, the panel becomes a sheet of the map root. */
+  .im-tools {
+    display: contents;
+  }
+  .im-tools .im-tools-btn {
+    position: absolute;
+    top: 4rem;
+    right: 0.75rem;
+    z-index: 20;
+  }
+  /* What floats above the dock floats above an open sheet. */
+  .im-root[data-sheet] .im-above-sheet {
+    bottom: calc(var(--im-dock, 0px) + var(--im-sheet, 0px) + 0.75rem);
+    transition: bottom 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .im-root[data-sheet] .im-above-sheet-model {
+    right: auto;
+    left: 4rem;
+  }
+  .im-root[data-sheet] .im-above-sheet-msg {
+    bottom: calc(var(--im-dock, 0px) + var(--im-sheet, 0px) + 4.25rem);
+  }
+  .im-root:has(.im-sheet[data-sheet-dragging]) .im-above-sheet {
+    transition: none;
+  }
+}
+@keyframes im-sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .im-root .im-sheet,
+  .im-root[data-sheet] .im-above-sheet {
+    transition: none;
+    animation: none;
+  }
+}
+
+/*
  * Story 23.1 — the timeline's date-scale bar (timeline-bar.ts draws its
  * SVG). `#tl-range` is the keyboard control behind it, visually hidden:
  * its focus ring is drawn on the bar. "Ver 10 días" (`.tl-tail`) is not a

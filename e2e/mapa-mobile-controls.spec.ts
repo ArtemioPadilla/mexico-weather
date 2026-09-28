@@ -12,10 +12,10 @@ import { TRANSPARENT_PNG_BASE64 } from '../scripts/visual-audit-lib.mjs';
  * in the ⋯ menu on every viewport, and the model toggle shows only with a
  * forecast layer active (panel open on a phone).
  *
- * Reveal-in-place rather than a literal bottom sheet: every one of these
- * controls is wired by id from interactive-map.ts, and three of them are
- * absolutely-positioned siblings of the rail rather than children, so moving
- * DOM nodes would be the risky way to get the same outcome.
+ * Reveal-in-place, no DOM moves: every one of these controls is wired by
+ * id from interactive-map.ts. Since Story 25.1 the revealed rail is a
+ * bottom sheet over the timeline dock (the model toggle floats above it);
+ * its heights, drag and keys are covered by e2e/bottom-sheet.spec.ts.
  *
  * Asserts UI state only, matching e2e/mapa.spec.ts's convention of never
  * depending on tile pixels.

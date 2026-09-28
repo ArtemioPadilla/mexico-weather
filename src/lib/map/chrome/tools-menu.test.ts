@@ -135,6 +135,40 @@ describe('wireToolsMenu', () => {
     expect(panel.hidden).toBe(false);
   });
 
+  it('Story 25.1 — onToggle hears every open and close once', () => {
+    const { button, panel, $ } = mk();
+    const seen: boolean[] = [];
+    const menu = wireToolsMenu({
+      button,
+      panel,
+      onToggle: (open) => {
+        // Told after the panel changed, before the tab gets the focus.
+        expect(panel.hidden).toBe(!open);
+        seen.push(open);
+      },
+    });
+    button.click();
+    menu.open('settings'); // already open: a tab switch, not a toggle
+    expect(document.activeElement).toBe($('t-settings'));
+    menu.close(true);
+    menu.close(); // already closed
+    expect(seen).toEqual([true, false]);
+  });
+
+  it('Story 25.1 — keepOpenOn exempts a target from the outside press', () => {
+    const { button, panel, $ } = mk();
+    wireToolsMenu({
+      button,
+      panel,
+      keepOpenOn: (t) => t === $('outside'),
+    });
+    button.click();
+    $('outside').dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    expect(panel.hidden).toBe(false);
+    document.body.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    expect(panel.hidden).toBe(true);
+  });
+
   it('dispose removes the listeners', () => {
     const { button, panel } = mk();
     const menu = wireToolsMenu({ button, panel });

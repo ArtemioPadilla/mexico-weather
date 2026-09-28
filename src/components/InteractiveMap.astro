@@ -126,6 +126,10 @@ const t = ui[lang];
 const base = import.meta.env.BASE_URL;
 // Story 22.3 — tools, settings and info share one "⋯" menu.
 const toolsMenu = !!(features.tools || features.settings || features.info);
+// Story 25.1 — below sm the rail is a bottom sheet where it hides behind
+// the Controles trigger (/mapa: mobileControls + compactChrome). The
+// layer pages keep their always-on column of icons.
+const railSheet = !!(features.mobileControls && features.compactChrome);
 
 // Derived IDs — let two instances coexist on one page.
 const ids = {
@@ -145,6 +149,8 @@ const ids = {
   railActive: mapId === 'map' ? 'mw-rail-active' : `${mapId}-mw-rail-active`,
   subOptions: mapId === 'map' ? 'mw-sub-options' : `${mapId}-mw-sub-options`,
   controlsToggle: mapId === 'map' ? 'mw-controls-toggle' : `${mapId}-controls-toggle`,
+  // Story 25.1 — the rail's own id, for its bottom-sheet handle.
+  rail: mapId === 'map' ? 'mw-rail' : `${mapId}-mw-rail`,
   opacityWrap: mapId === 'map' ? 'opacitywrap' : `${mapId}-opacitywrap`,
   opacity: mapId === 'map' ? 'opacity' : `${mapId}-opacity`,
   legend: mapId === 'map' ? 'legend' : `${mapId}-legend`,
@@ -316,6 +322,7 @@ const cfg = JSON.stringify({
       (Story 11.3), as the opacity slider and the accordion did. */}
   {features.layerRail && (
     <div
+      id={ids.rail}
       class:list={[
         'im-rail group/rail im-chrome dark absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-52 max-w-[calc(100vw-1.5rem)] max-h-[min(70vh,calc(100%-var(--im-rail-top)-var(--im-dock,0px)-4.25rem))] max-sm:group-data-[legend]/chrome:max-h-[min(70vh,calc(100%-var(--im-rail-top)-var(--im-dock,0px)-7.5rem))] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg p-2 sm:p-2.5 text-sm shadow backdrop-blur-sm',
         /* Story 22.5 — folded to its tab bar the rail sizes to the tabs
@@ -323,6 +330,9 @@ const cfg = JSON.stringify({
            shows with the Controles panel only. */
         features.compactChrome &&
           'sm:data-[rail-open=false]:w-auto max-sm:hidden max-sm:group-data-[controls=open]/chrome:block',
+        /* Story 25.1 — below sm, a bottom sheet over the timeline dock
+           (global.css `.im-sheet`, bottom-sheet.ts). */
+        railSheet && 'im-sheet',
       ]}
       aria-label={t.map_layers}
       data-i18n-en-aria-label={ui.en.map_layers}
@@ -331,6 +341,18 @@ const cfg = JSON.stringify({
       data-rail-collapsible={features.compactChrome ? '' : undefined}
       data-rail-open={features.compactChrome ? 'false' : undefined}
     >
+      {railSheet && (
+        <button
+          type="button"
+          data-sheet-handle
+          aria-controls={ids.rail}
+          aria-label={t.map_sheet_resize}
+          data-i18n-en-aria-label={ui.en.map_sheet_resize}
+          title={t.map_sheet_resize}
+          data-i18n-en-title={ui.en.map_sheet_resize}
+          class="im-sheet-handle sm:hidden"
+        ></button>
+      )}
       <div
         role="tablist"
         aria-label={t.map_layers}
@@ -376,7 +398,7 @@ const cfg = JSON.stringify({
         aria-labelledby={ids.layersTab}
         hidden={features.compactChrome}
       >
-        <div id={ids.layerBtns} class="flex flex-col gap-1 sm:grid sm:grid-cols-3">
+        <div id={ids.layerBtns} data-rail-tiles class="flex flex-col gap-1 sm:grid sm:grid-cols-3">
           {/* Active layer block: interactive-map.ts appends the tiles
               before it, then moves it after the active tile's row and
               hides it on the base map (nothing to vary or fade there). */}
@@ -432,6 +454,7 @@ const cfg = JSON.stringify({
         />
         <div
           id={`${ids.layerBtns}-overlays`}
+          data-overlay-list
           class="flex max-h-[min(50vh,22rem)] flex-col gap-1 overflow-y-auto pr-1"
         ></div>
       </div>
@@ -441,7 +464,7 @@ const cfg = JSON.stringify({
   <p
     id={ids.msg}
     aria-live="polite"
-    class="absolute bottom-[calc(var(--im-dock,0px)+4.25rem)] left-1/2 z-10 hidden -translate-x-1/2 rounded-lg sm:bottom-32 im-chrome dark bg-im-bg-strong px-3 py-1.5 text-xs shadow"
+    class="im-above-sheet-msg absolute bottom-[calc(var(--im-dock,0px)+4.25rem)] left-1/2 z-10 hidden -translate-x-1/2 rounded-lg sm:bottom-32 im-chrome dark bg-im-bg-strong px-3 py-1.5 text-xs shadow"
   >
   </p>
 
@@ -455,7 +478,9 @@ const cfg = JSON.stringify({
       Sits *above* the timeline, not beside it: below sm the timeline is a
       full-width dock (Story 23.4), so the trigger floats --im-dock (the
       dock's height, global.css) + 0.75rem off the bottom — above the
-      legend (which hugs the dock) while a layer shows one. */}
+      legend (which hugs the dock) while a layer shows one. Story 25.1 —
+      on /mapa the rail it reveals is a bottom sheet over the dock, and
+      `.im-above-sheet` keeps this trigger above whichever sheet is open. */}
   {features.mobileControls && (
     <button
       id={ids.controlsToggle}
@@ -465,7 +490,7 @@ const cfg = JSON.stringify({
       data-i18n-en-aria-label={features.compactChrome ? ui.en.map_controls_compact : ui.en.map_controls}
       title={features.compactChrome ? t.map_controls_compact : t.map_controls}
       data-i18n-en-title={features.compactChrome ? ui.en.map_controls_compact : ui.en.map_controls}
-      class="absolute bottom-[calc(var(--im-dock,0px)+0.75rem)] max-sm:group-data-[legend]/chrome:bottom-[calc(var(--im-dock,0px)+4rem)] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-im-bg text-base text-im-text shadow-lg backdrop-blur-sm aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
+      class="im-above-sheet absolute bottom-[calc(var(--im-dock,0px)+0.75rem)] max-sm:group-data-[legend]/chrome:bottom-[calc(var(--im-dock,0px)+4rem)] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-im-bg text-base text-im-text shadow-lg backdrop-blur-sm aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
       ><svg class="h-5 w-5" aria-hidden="true"><use href={features.compactChrome ? '#i-layers' : '#i-sliders'}></use></svg></button
     >
   )}
@@ -617,9 +642,10 @@ const cfg = JSON.stringify({
     above the layer rail and the timeline.
   */}
   {/* Place card (Story 15.4) — tap anywhere: 10-day daily / 48-h hourly
-      forecast for that point. Bottom sheet below sm, floating panel
-      (top-centre, under the rail offset var) from sm up. Filled and
-      shown by interactive-map.ts; hidden attribute otherwise. */}
+      forecast for that point. Bottom sheet below sm (Story 25.1: over the
+      timeline dock, peek / half / full on its handle, bottom-sheet.ts),
+      floating panel (top-centre, under the rail offset var) from sm up.
+      Filled and shown by interactive-map.ts; hidden attribute otherwise. */}
   <div
     id={ids.placeCard}
     role="dialog"
@@ -627,8 +653,21 @@ const cfg = JSON.stringify({
     aria-label={t.place_card_title}
     data-i18n-en-aria-label={ui.en.place_card_title}
     hidden
-    class="absolute z-40 max-sm:inset-x-0 max-sm:bottom-0 max-sm:rounded-t-2xl sm:left-1/2 sm:top-[var(--im-rail-top)] sm:w-80 sm:-translate-x-1/2 sm:rounded-2xl im-chrome dark bg-im-bg-strong shadow-2xl ring-1 ring-im-border backdrop-blur-sm"
-  ></div>
+    class="im-sheet absolute z-40 max-sm:inset-x-0 max-sm:bottom-0 max-sm:rounded-t-2xl sm:left-1/2 sm:top-[var(--im-rail-top)] sm:w-80 sm:-translate-x-1/2 sm:rounded-2xl im-chrome dark bg-im-bg-strong shadow-2xl ring-1 ring-im-border backdrop-blur-sm"
+  >
+    <button
+      type="button"
+      data-sheet-handle
+      aria-controls={ids.placeCard}
+      aria-label={t.map_sheet_resize}
+      data-i18n-en-aria-label={ui.en.map_sheet_resize}
+      title={t.map_sheet_resize}
+      data-i18n-en-title={ui.en.map_sheet_resize}
+      class="im-sheet-handle sm:hidden"
+    ></button>
+    {/* interactive-map.ts paints the card here (the handle stays). */}
+    <div data-pc-body></div>
+  </div>
 
   <div
     id={ids.tooltip}
@@ -688,7 +727,7 @@ const cfg = JSON.stringify({
     <div
       id="mw-model-toggle"
       hidden
-      class="absolute bottom-9 max-sm:group-data-[controls=open]/chrome:bottom-[calc(var(--im-dock,0px)+2.5rem)] right-2 z-10 hidden items-center gap-1 rounded-full bg-im-bg px-1 py-0.5 text-[10px] font-mono tabular-nums text-im-muted backdrop-blur-sm group-data-[controls=open]/chrome:inline-flex sm:inline-flex"
+      class="im-above-sheet im-above-sheet-model absolute bottom-9 max-sm:group-data-[controls=open]/chrome:bottom-[calc(var(--im-dock,0px)+2.5rem)] right-2 z-10 hidden items-center gap-1 rounded-full bg-im-bg px-1 py-0.5 text-[10px] font-mono tabular-nums text-im-muted backdrop-blur-sm group-data-[controls=open]/chrome:inline-flex sm:inline-flex"
       aria-label={t.map_model}
       data-i18n-en-aria-label={ui.en.map_model}
     >
@@ -729,7 +768,7 @@ const cfg = JSON.stringify({
       no longer reveals them). The popover scrolls inside a height that
       clears the timeline (and, on a phone, the feedback FAB). */}
   {toolsMenu && (
-    <div id="mw-tools" class="absolute right-3 top-16 z-20 flex flex-col items-end text-xs">
+    <div id="mw-tools" class="im-tools absolute right-3 top-16 z-20 flex flex-col items-end text-xs">
       <button
         id="mw-tools-btn"
         type="button"
@@ -740,7 +779,7 @@ const cfg = JSON.stringify({
         data-i18n-en-aria-label={ui.en.map_tools}
         title={t.map_tools}
         data-i18n-en-title={ui.en.map_tools}
-        class="flex h-11 w-11 items-center justify-center rounded-full bg-im-bg text-im-text shadow-lg backdrop-blur-sm hover:bg-im-bg-strong aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        class="im-tools-btn flex h-11 w-11 items-center justify-center rounded-full bg-im-bg text-im-text shadow-lg backdrop-blur-sm hover:bg-im-bg-strong aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
       ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-ellipsis"></use></svg></button>
       <div
         id="mw-tools-panel"
@@ -748,8 +787,18 @@ const cfg = JSON.stringify({
         aria-label={t.map_tools}
         data-i18n-en-aria-label={ui.en.map_tools}
         hidden
-        class="im-chrome im-reveal dark mt-2 max-h-[min(34rem,calc(100dvh-16rem))] max-sm:max-h-[calc(100dvh-20rem)] w-72 max-w-[calc(100vw-1.5rem)] overflow-y-auto rounded-lg p-2 shadow-lg backdrop-blur-sm"
+        class="im-sheet im-chrome im-reveal dark mt-2 max-h-[min(34rem,calc(100dvh-16rem))] max-sm:max-h-[calc(100dvh-20rem)] w-72 max-w-[calc(100vw-1.5rem)] overflow-y-auto rounded-lg p-2 shadow-lg backdrop-blur-sm"
       >
+        <button
+          type="button"
+          data-sheet-handle
+          aria-controls="mw-tools-panel"
+          aria-label={t.map_sheet_resize}
+          data-i18n-en-aria-label={ui.en.map_sheet_resize}
+          title={t.map_sheet_resize}
+          data-i18n-en-title={ui.en.map_sheet_resize}
+          class="im-sheet-handle sm:hidden"
+        ></button>
         <div
           role="tablist"
           aria-label={t.map_tools}
@@ -1141,7 +1190,13 @@ const cfg = JSON.stringify({
     type InteractiveMapFeatures,
   } from '../lib/interactive-map';
   import { wireRailTabs, type RailTabs } from '../lib/map/chrome/rail-tabs';
-  import { wireToolsMenu } from '../lib/map/chrome/tools-menu';
+  import { wireToolsMenu, type ToolsMenu } from '../lib/map/chrome/tools-menu';
+  import {
+    createBottomSheet,
+    sheetStrings,
+    type BottomSheet,
+  } from '../lib/map/chrome/bottom-sheet';
+  import { documentUiLang } from '../i18n/ui';
 
   // Rail tabs per rail, so the Controles panel can open/collapse a
   // collapsible rail (Story 22.5) through the same state machine.
@@ -1283,6 +1338,11 @@ const cfg = JSON.stringify({
     toggles.forEach((toggle) => {
       const root = toggle.closest('.im-root') as HTMLElement | null;
       if (!root) return;
+      // Story 25.1 — below sm the /mapa rail is a bottom sheet: the
+      // trigger shows it at half height, a drag down or Escape inside it
+      // closes the panel like the trigger does.
+      const railEl = root.querySelector<HTMLElement>('.im-rail.im-sheet');
+      let sheet: BottomSheet | null = null;
       const setOpen = (open: boolean): void => {
         if (open) root.dataset.controls = 'open';
         else delete root.dataset.controls;
@@ -1303,7 +1363,27 @@ const cfg = JSON.stringify({
             .querySelector<HTMLElement>('.im-rail [data-rail-tab-btn="layers"]')
             ?.click();
         }
+        if (open) {
+          sheet?.show({
+            focus: rail?.querySelector<HTMLElement>(
+              '[role="tab"][aria-selected="true"]'
+            ),
+            returnFocus: toggle,
+          });
+        } else {
+          sheet?.hide();
+        }
       };
+      if (railEl) {
+        sheet = createBottomSheet({
+          name: 'layers',
+          sheet: railEl,
+          handle: railEl.querySelector<HTMLElement>('[data-sheet-handle]'),
+          root,
+          strings: sheetStrings(documentUiLang()),
+          onDismiss: () => setOpen(false),
+        });
+      }
       toggle.addEventListener('click', () => {
         setOpen(root.dataset.controls !== 'open');
       });
@@ -1337,7 +1417,33 @@ const cfg = JSON.stringify({
     const panel = document.getElementById('mw-tools-panel');
     if (!button || !panel || button.dataset.toolsWired === '1') return;
     button.dataset.toolsWired = '1';
-    wireToolsMenu({ button, panel });
+    // Story 25.1 — below sm the popover is a bottom sheet of the map.
+    const root = button.closest<HTMLElement>('.im-root');
+    let sheet: BottomSheet | null = null;
+    const menu: ToolsMenu = wireToolsMenu({
+      button,
+      panel,
+      onToggle: (open) => {
+        if (open) sheet?.show({ returnFocus: button });
+        else sheet?.hide();
+      },
+      // A press on what floats above the sheet (the Controles trigger)
+      // must not close it first and move that control from under the
+      // finger: its own click swaps the sheets.
+      keepOpenOn: (t) =>
+        !!sheet?.isActive() &&
+        !!(t as Element).closest?.('.im-above-sheet'),
+    });
+    if (root) {
+      sheet = createBottomSheet({
+        name: 'tools',
+        sheet: panel,
+        handle: panel.querySelector<HTMLElement>('[data-sheet-handle]'),
+        root,
+        strings: sheetStrings(documentUiLang()),
+        onDismiss: () => menu.close(true),
+      });
+    }
   }
 
   if (document.readyState === 'loading') {

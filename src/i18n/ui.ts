@@ -122,6 +122,11 @@ export interface UiStrings {
   map_tool_compare: string;
   /** Story 22.5 — Controles trigger on /mapa and the `?` cheat-sheet. */
   map_controls_compact: string;
+  /** Story 25.1 — the bottom sheet's drag handle and its three heights. */
+  map_sheet_resize: string;
+  map_sheet_peek: string;
+  map_sheet_half: string;
+  map_sheet_full: string;
   map_shortcuts: string;
   map_shortcuts_close: string;
   map_shortcuts_general: string;
@@ -383,6 +388,10 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_tool_crosshair: 'Mira',
     map_tool_compare: 'Comparación',
     map_controls_compact: 'Capas y controles',
+    map_sheet_resize: 'Tamaño del panel',
+    map_sheet_peek: 'reducido',
+    map_sheet_half: 'medio',
+    map_sheet_full: 'completo',
     map_shortcuts: 'Atajos de teclado',
     map_shortcuts_close: 'Cerrar',
     map_shortcuts_general: 'General',
@@ -635,6 +644,10 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_tool_crosshair: 'Crosshair',
     map_tool_compare: 'Comparison',
     map_controls_compact: 'Layers and controls',
+    map_sheet_resize: 'Panel size',
+    map_sheet_peek: 'collapsed',
+    map_sheet_half: 'half',
+    map_sheet_full: 'full',
     map_shortcuts: 'Keyboard shortcuts',
     map_shortcuts_close: 'Close',
     map_shortcuts_general: 'General',

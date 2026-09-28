@@ -25,6 +25,7 @@ const ASTRO = 'src/components/InteractiveMap.astro';
 const TS_FILES = [
   'src/lib/interactive-map.ts',
   'src/lib/map/chrome/autocomplete.ts',
+  'src/lib/map/chrome/bottom-sheet.ts',
   'src/lib/map/chrome/crosshair.ts',
   'src/lib/map/chrome/layer-rail.ts',
   'src/lib/map/chrome/overlay-registry.ts',

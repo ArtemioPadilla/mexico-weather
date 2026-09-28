@@ -106,6 +106,11 @@ import {
   type PlaceCardMode,
   type PlaceCardOpts,
 } from './map/chrome/place-card';
+import {
+  createBottomSheet,
+  sheetStrings,
+  type BottomSheet,
+} from './map/chrome/bottom-sheet';
 import { ui, fillUi, documentUiLang } from '../i18n/ui';
 import { siteBase } from '../utils/paths';
 import {
@@ -685,6 +690,10 @@ export async function initInteractiveMap(
   // dedupes for 10 min). Markup lives in map/chrome/place-card.ts.
   // ----------------------------------------------------------------
   const placeCardEl = opts.els.placeCard ?? null;
+  // Story 25.1 — the card paints into its body; the bottom-sheet handle
+  // before it stays put (older markup without a body: the card itself).
+  const placeCardBody =
+    placeCardEl?.querySelector<HTMLElement>('[data-pc-body]') ?? placeCardEl;
   let placeMarker: maplibregl.Marker | null = null;
   let placeCardMode: PlaceCardMode = 'daily';
   let placeCardPoint: { lat: number; lng: number } | null = null;
@@ -732,18 +741,20 @@ export async function initInteractiveMap(
     if (!placeCardEl) return;
     const o = placeCardOpts();
     if (!o) return;
-    placeCardEl.innerHTML =
-      status || !placeCardFc
-        ? renderPlaceCardStatus(o, status ?? 'loading')
-        : renderPlaceCard(placeCardFc, o);
+    if (placeCardBody)
+      placeCardBody.innerHTML =
+        status || !placeCardFc
+          ? renderPlaceCardStatus(o, status ?? 'loading')
+          : renderPlaceCard(placeCardFc, o);
     placeCardEl.hidden = false;
   }
 
   function closePlaceCard(): void {
     if (placeCardEl) {
       placeCardEl.hidden = true;
-      placeCardEl.innerHTML = '';
+      if (placeCardBody) placeCardBody.innerHTML = '';
     }
+    placeCardSheet?.hide();
     placeMarker?.remove();
     placeMarker = null;
     placeCardPoint = null;
@@ -769,6 +780,10 @@ export async function initInteractiveMap(
       .setLngLat([lng, lat])
       .addTo(map);
     paintPlaceCard('loading');
+    // Story 25.1 — below sm the card is a bottom sheet over the dock
+    // (half height; the header alone at peek). Opening it closes the
+    // layers / tools sheet; closing it returns the focus to the map.
+    placeCardSheet?.show();
     placeCardEl.querySelector<HTMLElement>('[data-pc-close]')?.focus();
     try {
       const fc = await getForecast(
@@ -785,6 +800,19 @@ export async function initInteractiveMap(
       paintPlaceCard('error');
     }
   }
+
+  const placeCardRoot = placeCardEl?.closest<HTMLElement>('.im-root') ?? null;
+  const placeCardSheet: BottomSheet | null =
+    placeCardEl && placeCardRoot
+      ? createBottomSheet({
+          name: 'place',
+          sheet: placeCardEl,
+          handle: placeCardEl.querySelector<HTMLElement>('[data-sheet-handle]'),
+          root: placeCardRoot,
+          strings: sheetStrings(lang),
+          onDismiss: () => closePlaceCard(),
+        })
+      : null;
 
   if (placeCardEl) {
     placeCardEl.addEventListener('click', (e) => {
@@ -3359,6 +3387,11 @@ export async function initInteractiveMap(
     railActiveEl && typeof window.matchMedia === 'function'
       ? window.matchMedia('(min-width: 640px)')
       : null;
+  // Story 25.1 — a rail that is a bottom sheet below sm keeps the
+  // 3-column grid on a phone too (global.css `.im-rail.im-sheet`).
+  const railIsSheet = !!opts.els.layerBtns
+    ?.closest('.im-rail')
+    ?.classList.contains('im-sheet');
   function placeActiveBlock(): void {
     const wrap = opts.els.layerBtns;
     if (!wrap || !railActiveEl) return;
@@ -3368,7 +3401,7 @@ export async function initInteractiveMap(
     const anchor = activeBlockAnchor(
       tiles.length,
       tiles.findIndex((b) => b.id === `layerbtn-${activeLayer}`),
-      railDesktopMq?.matches ? RAIL_COLUMNS_DESKTOP : 1
+      railDesktopMq?.matches || railIsSheet ? RAIL_COLUMNS_DESKTOP : 1
     );
     const after = anchor >= 0 ? tiles[anchor] : tiles[tiles.length - 1];
     if (after && after.nextElementSibling !== railActiveEl) {
@@ -4880,6 +4913,7 @@ export async function initInteractiveMap(
       toolPill?.dispose();
       document.removeEventListener('keydown', placeCardEscHandler);
       closePlaceCard();
+      placeCardSheet?.dispose();
       overlayRegistry.dispose();
       shortcutsDialog?.dispose();
       railDesktopMq?.removeEventListener('change', onRailMqChange);

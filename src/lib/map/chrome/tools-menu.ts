@@ -35,6 +35,13 @@ import { wireRailTabs, type RailTabs } from './rail-tabs';
 export interface ToolsMenuEls {
   button: HTMLElement;
   panel: HTMLElement;
+  /** Story 25.1 — told after every open / close (the bottom sheet that
+   *  the popover becomes below `sm` follows it). */
+  onToggle?: (open: boolean) => void;
+  /** Story 25.1 — a press on a target this accepts does not count as
+   *  "outside" (the Controles trigger floating above the sheet: closing
+   *  first would move it from under the finger before its click). */
+  keepOpenOn?: (target: Node) => boolean;
 }
 
 export interface ToolsMenu {
@@ -49,7 +56,7 @@ export interface ToolsMenu {
 }
 
 export function wireToolsMenu(els: ToolsMenuEls): ToolsMenu {
-  const { button, panel } = els;
+  const { button, panel, onToggle, keepOpenOn } = els;
   const doc = button.ownerDocument;
   const tabs = wireRailTabs(panel);
 
@@ -64,8 +71,10 @@ export function wireToolsMenu(els: ToolsMenuEls): ToolsMenu {
 
   function open(tab?: string): void {
     if (tab) tabs.select(tab);
+    const was = isOpen();
     panel.hidden = false;
     button.setAttribute('aria-expanded', 'true');
+    if (!was) onToggle?.(true);
     focusSelectedTab();
   }
 
@@ -74,6 +83,7 @@ export function wireToolsMenu(els: ToolsMenuEls): ToolsMenu {
     panel.hidden = true;
     button.setAttribute('aria-expanded', 'false');
     if (focus) button.focus();
+    onToggle?.(false);
   }
 
   const onButton = (): void => {
@@ -91,6 +101,7 @@ export function wireToolsMenu(els: ToolsMenuEls): ToolsMenu {
     if (!isOpen()) return;
     const t = e.target as Node | null;
     if (t && (button.contains(t) || panel.contains(t))) return;
+    if (t && keepOpenOn?.(t)) return;
     close();
   };
   const onPanelClick = (e: Event): void => {
