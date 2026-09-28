@@ -210,3 +210,107 @@ test.describe('a11y audit — /mapa (interactive, slower)', () => {
     expect(await blockingIn('#mw-shortcuts')).toEqual([]);
   });
 });
+
+// Story 25.2 review — the /forecast embed's marker popup is MapLibre's, not
+// InteractiveMap.astro's: it lives in `#fc-map` inside `.fc-map-wrap`, not in
+// an `.im-root`, and it is closed on load, so the page scan above never saw
+// it. A token-only link class once left it at 1.8:1 on a white popup. Open it
+// in both themes and scan it; also compute the text contrast directly, since
+// axe can report a translucent panel over a canvas as "incomplete" instead of
+// a violation.
+const TRANSPARENT_PNG = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAABFUlEQVR4nO3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAMBPAABPO1TCQAAAABJRU5ErkJggg==',
+  'base64'
+);
+
+test.describe('a11y audit — /forecast marker popup', () => {
+  for (const theme of ['light', 'dark'] as const) {
+    test(`forecast marker popup (${theme} theme) has no critical or serious WCAG violations`, async ({
+      page,
+    }) => {
+      test.setTimeout(60_000);
+      await page.emulateMedia({ colorScheme: theme });
+      await page.addInitScript((t) => {
+        try {
+          localStorage.setItem('theme', t);
+        } catch {
+          /* private mode — the media emulation still picks the theme */
+        }
+      }, theme);
+      for (const host of [
+        '**.arcgisonline.com/**',
+        '**gibs.earthdata.nasa.gov/**',
+      ]) {
+        await page.route(host, (r) =>
+          r.fulfill({
+            status: 200,
+            contentType: 'image/png',
+            body: TRANSPARENT_PNG,
+          })
+        );
+      }
+      await page.goto(
+        'forecast/?lat=19.43&lng=-99.13&name=Ciudad%20de%20M%C3%A9xico&tz=America/Mexico_City'
+      );
+      await page.waitForLoadState('domcontentloaded');
+      if (theme === 'dark') {
+        await expect(page.locator('html')).toHaveClass(/(^|\s)dark(\s|$)/);
+      } else {
+        await expect(page.locator('html')).not.toHaveClass(/(^|\s)dark(\s|$)/);
+      }
+
+      const marker = page.locator('#fc-map .maplibregl-marker[role=button]');
+      await marker.scrollIntoViewIfNeeded({ timeout: 30_000 });
+      await marker.click();
+      const popup = page.locator('#fc-map .maplibregl-popup');
+      await expect(popup).toBeVisible();
+      await expect(popup.locator('a')).toBeVisible();
+
+      const results = await new AxeBuilder({ page })
+        .withTags(TAGS)
+        .include('#fc-map .maplibregl-popup')
+        .analyze();
+      const blocking = results.violations.filter(
+        (v) => v.impact === 'critical' || v.impact === 'serious'
+      );
+      expect(
+        blocking.map(
+          (v) =>
+            `${theme}: [${v.impact}] ${v.id}: ${v.help} — ${v.nodes
+              .map((n) => n.target.join(' '))
+              .join(', ')}`
+        )
+      ).toEqual([]);
+
+      // Contrast of the name and the link against the popup panel (its
+      // background is ≥ 0.97 opaque, so compositing it is negligible).
+      const ratios = await popup.evaluate((el) => {
+        const rgb = (c: string): number[] =>
+          (c.match(/[\d.]+/g) ?? []).slice(0, 3).map(Number);
+        const lum = ([r, g, b]: number[]): number => {
+          const f = (v: number): number => {
+            const s = v / 255;
+            return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+          };
+          return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+        };
+        const ratio = (a: string, b: string): number => {
+          const [l1, l2] = [lum(rgb(a)), lum(rgb(b))].sort((x, y) => y - x);
+          return (l1 + 0.05) / (l2 + 0.05);
+        };
+        const content = el.querySelector('.maplibregl-popup-content')!;
+        const bg = getComputedStyle(content).backgroundColor;
+        return Object.fromEntries(
+          ['strong', 'a'].map((sel) => [
+            sel,
+            ratio(getComputedStyle(el.querySelector(sel)!).color, bg),
+          ])
+        );
+      });
+      expect(ratios.strong, `${theme}: name contrast`).toBeGreaterThanOrEqual(
+        4.5
+      );
+      expect(ratios.a, `${theme}: link contrast`).toBeGreaterThanOrEqual(4.5);
+    });
+  }
+});

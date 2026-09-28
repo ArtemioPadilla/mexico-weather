@@ -106,7 +106,7 @@ The site is mobile-first and tested at four representative breakpoints. There ar
   - 48-h hourly row is always `overflow-x: auto`; the row keeps a fixed card height and never wraps. The temperature sparkline lives **inside** the same scroll container as the cards, sized to the cards' total width — so hour N on a card and x position N on the sparkline scroll together (no more visual drift).
   - Daily rows (10 by default, 16 via "Ver 16 días"; days 11–16 dimmed with a confidence caveat) are full-width; the gradient temperature bar reflows to the full container width so it always reads at a glance. An axis row above the days shows `<minWeek>° / <midWeek>° / <maxWeek>°` with 25/50/75 % tick marks, and the "Hoy" row carries a small vertical "current temperature" marker positioned within the week's min/max range.
   - "Detalle" panels: stack vertically on mobile, then `grid-cols-3` from `md:` upward.
-  - An **embedded interactive map** (~320 px tall on mobile, ~360 px on desktop) sits in the hero between the sunrise/sunset line and the hourly cards. Same MapLibre stack as `/mapa`, configured here for a single location: full pan/zoom, a blue marker at the URL's `lat,lng` with a popup that links back to the canonical forecast URL, and theme-synced Esri Light/Dark Gray basemap. Layer rail, search, and timeline are off — users who want layers/timeline tap "Abrir mapa a pantalla completa →" below the embed, which deep-links to `/mapa#view=<lat>,<lng>,9z`. MapLibre is shared with the home map via the `src/lib/interactive-map.ts` factory; height is reserved before init to prevent CLS.
+  - An **embedded interactive map** (~320 px tall on mobile, ~360 px on desktop) sits in the hero between the sunrise/sunset line and the hourly cards. Same MapLibre stack as `/mapa`, configured here for a single location: full pan/zoom, a blue marker at the URL's `lat,lng` with a popup that links back to the canonical forecast URL (a dark panel in both themes, like every popup over a map — Story 25.2), and theme-synced Esri Light/Dark Gray basemap. Layer rail, search, and timeline are off — users who want layers/timeline tap "Abrir mapa a pantalla completa →" below the embed, which deep-links to `/mapa#view=<lat>,<lng>,9z`. MapLibre is shared with the home map via the `src/lib/interactive-map.ts` factory; height is reserved before init to prevent CLS.
 - **`/mapa`**
   - The MapLibre canvas always fills 100 % of the viewport behind the absolute-positioned controls.
   - Layer rail: a single column of icons on phones, a 3-column grid of icon + short-label tiles from `sm` (640 px) up (Story 22.2); mobile users tap, desktop users hover-then-click. No collapse-to-burger. With a layer active the desktop rail takes at most 9 visual rows (7 with satellite: tabs, 3 tile rows, 2 rows of variant chips, opacity).
@@ -300,8 +300,14 @@ floating container carries `im-chrome dark` (the `dark` class keeps the
 `dark:` utilities of embedded content, such as the SMN avisos card, on
 their dark variant). `src/lib/map/chrome/chrome-tokens.test.ts` fails if a
 light/dark utility pair reappears in the chrome files or a token gets a
-second value. MapLibre popups inside `.im-root` are themed by the same
-tokens in `InteractiveMap.astro`'s global style block.
+second value. MapLibre popups are themed by the same tokens in
+`global.css` (the one stylesheet every page loads), scoped to both map
+hosts: `.im-root` (every `InteractiveMap.astro` map) and `.fc-map-wrap`
+(the `/forecast` embed, which calls the factory directly and never renders
+`InteractiveMap.astro`). A new map host outside those two needs adding to
+that `:is(…)` list, or its popups stay MapLibre-white under token-coloured
+text. `e2e/a11y.spec.ts` opens the `/forecast` marker popup in both themes
+and scans it.
 
 ## Related docs
 

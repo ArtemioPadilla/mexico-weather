@@ -92,6 +92,63 @@
 }
 
 /*
+ * Story 25.2 — MapLibre popups float over the map like the rest of the
+ * chrome: the --im-* tokens in both themes (they used to be white under the
+ * light theme and only turned dark under html.dark). MapLibre appends a
+ * popup to its map container, so the rules are scoped to both map hosts:
+ * `.im-root` (every InteractiveMap.astro map: /mapa, the layer and content
+ * pages) and `.fc-map-wrap` (the /forecast embed, which calls the factory
+ * directly and never renders InteractiveMap.astro). They live here, not in
+ * a component's <style>, because global.css is the one stylesheet every page
+ * loads. Unlayered on purpose: maplibre-gl.css is unlayered too, and a
+ * layered rule would lose to it whatever its specificity.
+ */
+:is(.im-root, .fc-map-wrap) .maplibregl-popup-content {
+  background: var(--im-bg-strong);
+  color: var(--im-text);
+  color-scheme: dark;
+}
+:is(.im-root, .fc-map-wrap) .maplibregl-popup-content a {
+  color: var(--im-accent);
+}
+:is(.im-root, .fc-map-wrap) .maplibregl-popup-anchor-top .maplibregl-popup-tip,
+:is(.im-root, .fc-map-wrap)
+  .maplibregl-popup-anchor-top-left
+  .maplibregl-popup-tip,
+:is(.im-root, .fc-map-wrap)
+  .maplibregl-popup-anchor-top-right
+  .maplibregl-popup-tip {
+  border-bottom-color: var(--im-bg-strong);
+}
+:is(.im-root, .fc-map-wrap)
+  .maplibregl-popup-anchor-bottom
+  .maplibregl-popup-tip,
+:is(.im-root, .fc-map-wrap)
+  .maplibregl-popup-anchor-bottom-left
+  .maplibregl-popup-tip,
+:is(.im-root, .fc-map-wrap)
+  .maplibregl-popup-anchor-bottom-right
+  .maplibregl-popup-tip {
+  border-top-color: var(--im-bg-strong);
+}
+:is(.im-root, .fc-map-wrap)
+  .maplibregl-popup-anchor-left
+  .maplibregl-popup-tip {
+  border-right-color: var(--im-bg-strong);
+}
+:is(.im-root, .fc-map-wrap)
+  .maplibregl-popup-anchor-right
+  .maplibregl-popup-tip {
+  border-left-color: var(--im-bg-strong);
+}
+:is(.im-root, .fc-map-wrap) .maplibregl-popup-close-button {
+  color: var(--im-muted);
+}
+:is(.im-root, .fc-map-wrap) .maplibregl-popup-close-button:hover {
+  background-color: rgb(255 255 255 / 0.1);
+}
+
+/*
  * Story 21.4 — no flat gray map, ever. Every map root (`.im-root`: /mapa,
  * the home embed, the layer pages, the forecast embed) paints a dark
  * gradient with a slow shimmer through a pseudo-element from the first

@@ -1079,42 +1079,6 @@ const cfg = JSON.stringify({
       bottom: var(--im-dock);
     }
   }
-
-  /* Story 25.2 — MapLibre popups float over the map like the rest of
-     the chrome: the --im-* tokens in both themes (they used to be white
-     under the light theme and only turned dark under html.dark). MapLibre
-     appends them to the map container, so `.im-root` scopes this to our
-     maps (the /forecast embed's marker popup included). */
-  .im-root .maplibregl-popup-content {
-    background: var(--im-bg-strong);
-    color: var(--im-text);
-    color-scheme: dark;
-  }
-  .im-root .maplibregl-popup-content a {
-    color: var(--im-accent);
-  }
-  .im-root .maplibregl-popup-anchor-top .maplibregl-popup-tip,
-  .im-root .maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
-  .im-root .maplibregl-popup-anchor-top-right .maplibregl-popup-tip {
-    border-bottom-color: var(--im-bg-strong);
-  }
-  .im-root .maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
-  .im-root .maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
-  .im-root .maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip {
-    border-top-color: var(--im-bg-strong);
-  }
-  .im-root .maplibregl-popup-anchor-left .maplibregl-popup-tip {
-    border-right-color: var(--im-bg-strong);
-  }
-  .im-root .maplibregl-popup-anchor-right .maplibregl-popup-tip {
-    border-left-color: var(--im-bg-strong);
-  }
-  .im-root .maplibregl-popup-close-button {
-    color: var(--im-muted);
-  }
-  .im-root .maplibregl-popup-close-button:hover {
-    background-color: rgb(255 255 255 / 0.1);
-  }
 </style>
 
 <script>

@@ -62,10 +62,34 @@ describe('map chrome tokens (Story 25.2)', () => {
   });
 
   it('MapLibre popups are themed by the tokens, not by html.dark', () => {
-    const src = read('src/components/InteractiveMap.astro');
-    expect(src).not.toMatch(/html\.dark\s+\.maplibregl-popup/);
-    expect(src).toMatch(
-      /\.im-root \.maplibregl-popup-content\s*\{[^}]*var\(--im-bg-strong\)/
+    expect(read('src/components/InteractiveMap.astro')).not.toMatch(
+      /html\.dark\s+\.maplibregl-popup/
+    );
+    expect(css).not.toMatch(/html\.dark\s+\.maplibregl-popup/);
+    // In global.css (loaded by every page) and scoped to BOTH map hosts:
+    // `.im-root` (InteractiveMap.astro) and `.fc-map-wrap` (the /forecast
+    // embed, which never renders InteractiveMap.astro — a rule in that
+    // component's <style> does not even load there).
+    expect(css).toMatch(
+      /:is\(\.im-root, \.fc-map-wrap\) \.maplibregl-popup-content\s*\{[^}]*background:\s*var\(--im-bg-strong\)[^}]*color:\s*var\(--im-text\)/
+    );
+    expect(css).toMatch(
+      /:is\(\.im-root, \.fc-map-wrap\) \.maplibregl-popup-content a\s*\{[^}]*var\(--im-accent\)/
+    );
+    // …and not in a cascade layer: maplibre-gl.css is unlayered and would
+    // beat a layered rule whatever its specificity.
+    for (const m of css.matchAll(/@layer[^{;]*\{/g)) {
+      let depth = 1;
+      let i = (m.index ?? 0) + m[0].length;
+      for (; i < css.length && depth > 0; i++) {
+        if (css[i] === '{') depth++;
+        else if (css[i] === '}') depth--;
+      }
+      expect(css.slice(m.index, i)).not.toContain('maplibregl-popup');
+    }
+    // The /forecast page has no `.im-root`; its embed must sit in the host.
+    expect(read('src/pages/forecast.astro')).toMatch(
+      /class="fc-map-wrap[^"]*"[^>]*>\s*<div id="fc-map"/
     );
   });
 });
