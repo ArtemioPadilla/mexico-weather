@@ -31,8 +31,10 @@ interface Props {
   noFooter?: boolean;
   /** Where the feedback button lives. 'fixed' (default) floats bottom-
    *  right; 'inline' renders it inside the site footer so it never
-   *  overlaps an embedded map (home). Ignored when noFooter is set. */
-  feedbackPlacement?: 'fixed' | 'inline';
+   *  overlaps an embedded map (home; ignored when noFooter is set);
+   *  'nav' puts it in the top nav bar (Story 22.5: /mapa, whose full-
+   *  screen map has no footer and a chrome budget over the map). */
+  feedbackPlacement?: 'fixed' | 'inline' | 'nav';
 }
 
 const base = siteBase();
@@ -59,6 +61,7 @@ const {
 } = Astro.props;
 
 const feedbackInline = feedbackPlacement === 'inline' && !noFooter;
+const feedbackNav = feedbackPlacement === 'nav';
 
 const jsonLdEntries = jsonLd === undefined
   ? []
@@ -474,6 +477,7 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
             data-i18n-en="Ask"
             >Pregunta</a
           >
+          {feedbackNav && <FeedbackFAB lang={lang} placement="nav" />}
           <LanguageToggle />
           <ThemeToggle lang={lang} />
           {/* Mobile menu — audit UX-2. Below sm the Catálogo dropdown
@@ -740,7 +744,7 @@ const ogLocale = lang === 'es' ? 'es_MX' : 'en_US';
       </nav>
     </footer>
     )}
-    {!feedbackInline && <FeedbackFAB lang={lang} />}
+    {!feedbackInline && !feedbackNav && <FeedbackFAB lang={lang} />}
     <PwaInstall />
     {
       /*

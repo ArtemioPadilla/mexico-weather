@@ -26,8 +26,8 @@ import {
  *    removes one — on purpose: each of Stories 22.2–22.5 lowers the number
  *    here and in the "Hoy" column of PLAN_PARIDAD_VISUAL §5, so the plan
  *    and the test never drift apart.
- *  - the BUDGET test (≤ 8 desktop, ≤ 5 mobile) is `test.fixme` until the
- *    chrome diet lands; Story 22.5 flips it to a real `test()`.
+ *  - the BUDGET test (≤ 8 desktop, ≤ 5 mobile), a real `test()` since
+ *    Story 22.5 closed the chrome diet (it was `test.fixme` until then).
  *
  * What is measured: every match of CHROME_SELECTOR outside the MapLibre
  * markers/popups/attribution (data and legal text, not controls we chose),
@@ -53,9 +53,9 @@ interface Variant {
   budget: number;
   /** Measured 2026-09-27 on this branch (Story 22.1, re-measured after the
    *  Story 21.2 satellite boot and on 2026-09-28 after the Story 22.2
-   *  compact rail and the Story 22.3 tools menu, and after the Story 22.4
-   *  SMN counter); see the per-variant
-   *  comment. */
+   *  compact rail and the Story 22.3 tools menu, after the Story 22.4
+   *  SMN counter and after the Story 22.5 chrome budget); see the
+   *  per-variant comment. */
   baseline: number;
 }
 
@@ -81,9 +81,12 @@ const VARIANTS: Variant[] = [
     // Info tab and no MapLibre +/−/compass buttons on /mapa (zoom by
     // scroll, pinch and keys; −4) → 27 with the always-on SMN pill
     // turned into a top-bar counter that hides on a quiet feed (22.4,
-    // −1; +1 again while there are avisos). Story 22.5 carries the count
-    // further down.
-    baseline: 27,
+    // −1; +1 again while there are avisos) → 8 with the chrome budget
+    // (22.5): the rail starts folded to its 2 tabs (−9 tiles, −3
+    // sub-options, −opacity), the timeline's « ‹ › » Ahora fade in only on
+    // hover/focus (−5) and the feedback button moved to the nav bar (−1).
+    // Left: search, locate, ⋯, the 2 rail tabs, ▶, "Ver 10 días", scrubber.
+    baseline: 8,
   },
   {
     name: 'mobile',
@@ -98,8 +101,12 @@ const VARIANTS: Variant[] = [
     // the Distancia/Área/Mira pills (which leaked onto the phone map on
     // the first `idle`), ⚙ and ℹ became one ⋯ button (−4) → 19 with the
     // back link inside the ⋯ menu and no MapLibre nav buttons (−4) → 18
-    // with the SMN pill turned into a counter hidden on a quiet feed (22.4).
-    baseline: 18,
+    // with the SMN pill turned into a counter hidden on a quiet feed (22.4)
+    // → 5 with the chrome budget (22.5): the 9 layer icons, ‹ › and "Ver
+    // 10 días" show with the Controles panel (now "Capas y controles"),
+    // the feedback button sits in the nav bar. Left: search, locate, ⋯,
+    // Controles, ▶.
+    baseline: 5,
   },
 ];
 
@@ -155,7 +162,9 @@ async function bootMap(page: Page): Promise<void> {
   });
 
   await page.goto('mapa/?e2e=1');
-  await expect(page.locator('#layerbtn-base')).toBeVisible();
+  // The rail is built (its tiles stay folded away since Story 22.5: the
+  // rail starts collapsed to its tab bar, below sm behind Controles).
+  await expect(page.locator('#layerbtn-base')).toBeAttached();
   // Story 21.2 — /mapa boots on GeoColor and keeps animating, so neither
   // `map.loaded()` nor `networkidle` marks the end of the boot any more
   // (tiles are in flight on every frame). The cold-load state is complete
@@ -178,7 +187,9 @@ async function bootMap(page: Page): Promise<void> {
     'hidden',
     boot
   );
-  await expect(page.locator('#tl-extend')).toBeVisible();
+  // "Ver 10 días" has surfaced (un-[hidden]; on a phone it shows with the
+  // Controles panel since Story 22.5, so: not visible there).
+  await expect(page.locator('#tl-extend')).not.toHaveAttribute('hidden');
   // The SMN feed has loaded (the counter decided whether to show): the
   // widget inside its closed popover settles on the calm state.
   await expect(
@@ -308,10 +319,9 @@ for (const variant of VARIANTS) {
       ).toBe(variant.baseline);
     });
 
-    // Flips to test() once Stories 22.2 (compact rail, shipped), 22.3 (one
-    // tools menu, shipped), 22.4 (SMN counter in the top bar) and 22.5 (`?`
-    // shortcuts panel) have landed — 22.5 owns the flip (plan §2 E22).
-    test.fixme(`/mapa ${variant.name}: interactive elements over the map fit the budget (≤ ${variant.budget})`, async ({
+    // Plan §1.2 / §2 E22 — real since Story 22.5 (compact rail 22.2, one
+    // tools menu 22.3, SMN counter 22.4, `?` panel + chrome budget 22.5).
+    test(`/mapa ${variant.name}: interactive elements over the map fit the budget (≤ ${variant.budget})`, async ({
       page,
     }, testInfo) => {
       await bootMap(page);

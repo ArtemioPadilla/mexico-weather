@@ -14,6 +14,7 @@
  */
 
 import { orderOverlays, overlayMatches } from './layer-rail';
+import { effectiveOverlayKey } from './shortcuts';
 
 export interface OverlayDef {
   /** Stable id (used for the DOM id `overlay-${id}`). */
@@ -89,7 +90,13 @@ export function createOverlayRegistry(
     // Story 22.2 — no chip: the letter (every A–Z key is bound by now,
     // so not every overlay has one) rides in the tooltip until the `?`
     // cheat-sheet of Story 22.5 lists them.
-    if (def.shortcut) row.title = `${def.label} (${def.shortcut})`;
+    // Story 22.5 — only a letter that works: the keydown handler below
+    // matches layer letters first, so an overlay sharing one (T, A) has
+    // no key of its own (the `?` cheat-sheet lists it the same way).
+    const key = deps.layers
+      ? effectiveOverlayKey(deps.layers, def)
+      : def.shortcut;
+    if (key) row.title = `${def.label} (${key})`;
     const cb = document.createElement('input');
     cb.type = 'checkbox';
     cb.id = id;

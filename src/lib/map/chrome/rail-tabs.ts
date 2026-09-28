@@ -20,6 +20,16 @@
  * mirrored on the rail's `data-rail-tab` so CSS and tests can read it.
  * Pure DOM, no map dependency: it runs from the component script before
  * MapLibre boots, so the tabs work even while the map is still loading.
+ *
+ * Story 22.5 — collapsible rail (`data-rail-collapsible` on the rail, set
+ * on /mapa for the chrome budget): the tab bar doubles as the rail's
+ * disclosure. Collapsed, only the tabs show (every panel hidden); a click
+ * on a tab opens the rail on that tab, a click on the tab that is already
+ * open collapses it again, Escape inside the rail collapses it and focuses
+ * the selected tab. ←/→/Inicio/Fin keep moving the selection without
+ * changing the open state. The selected tab carries `aria-expanded`
+ * (true while its panel shows); the rail mirrors the state on
+ * `data-rail-open`.
  */
 
 export interface RailTabs {
@@ -27,6 +37,11 @@ export interface RailTabs {
   select: (name: string, focus?: boolean) => void;
   /** Currently selected tab name. */
   current: () => string;
+  /** Story 22.5 — whether the panels show (always true unless the rail
+   *  is collapsible). */
+  isOpen: () => boolean;
+  /** Story 22.5 — open or collapse a collapsible rail; no-op otherwise. */
+  setOpen: (open: boolean) => void;
   /** Remove the listeners. */
   dispose: () => void;
 }
@@ -40,6 +55,9 @@ export function wireRailTabs(rail: HTMLElement): RailTabs {
     return id ? rail.ownerDocument.getElementById(id) : null;
   };
 
+  const collapsible = rail.dataset.railCollapsible !== undefined;
+  let open = !collapsible || rail.dataset.railOpen === 'true';
+
   let selected =
     tabs.find((t) => t.getAttribute('aria-selected') === 'true')?.dataset
       .railTabBtn ??
@@ -50,20 +68,47 @@ export function wireRailTabs(rail: HTMLElement): RailTabs {
     const target = tabs.find((t) => t.dataset.railTabBtn === name);
     if (!target) return;
     selected = name;
-    for (const t of tabs) {
-      const on = t === target;
-      t.setAttribute('aria-selected', String(on));
-      t.tabIndex = on ? 0 : -1;
-      const panel = panelOf(t);
-      if (panel) panel.hidden = !on;
-    }
+    apply();
     rail.dataset.railTab = name;
     if (focus) target.focus();
   }
 
+  function apply(): void {
+    for (const t of tabs) {
+      const on = t.dataset.railTabBtn === selected;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (collapsible) t.setAttribute('aria-expanded', String(on && open));
+      const panel = panelOf(t);
+      if (panel) panel.hidden = !(on && open);
+    }
+    if (collapsible) rail.dataset.railOpen = String(open);
+  }
+
+  function setOpen(next: boolean): void {
+    if (!collapsible) return;
+    open = next;
+    apply();
+  }
+
   const onClick = (e: Event): void => {
     const tab = (e.currentTarget as HTMLElement).dataset.railTabBtn;
-    if (tab) select(tab);
+    if (!tab) return;
+    if (collapsible) {
+      // The open tab collapses the rail; any tab opens it on itself.
+      if (open && tab === selected) {
+        setOpen(false);
+        return;
+      }
+      open = true;
+    }
+    select(tab);
+  };
+  const onRailKey = (e: KeyboardEvent): void => {
+    if (e.key !== 'Escape' || !open || e.defaultPrevented) return;
+    e.preventDefault();
+    setOpen(false);
+    tabs.find((t) => t.dataset.railTabBtn === selected)?.focus();
   };
   const onKey = (e: KeyboardEvent): void => {
     const i = tabs.indexOf(e.currentTarget as HTMLElement);
@@ -82,16 +127,20 @@ export function wireRailTabs(rail: HTMLElement): RailTabs {
     t.addEventListener('click', onClick);
     t.addEventListener('keydown', onKey);
   }
+  if (collapsible) rail.addEventListener('keydown', onRailKey);
   select(selected);
 
   return {
     select,
     current: () => selected,
+    isOpen: () => open,
+    setOpen,
     dispose: (): void => {
       for (const t of tabs) {
         t.removeEventListener('click', onClick);
         t.removeEventListener('keydown', onKey);
       }
+      if (collapsible) rail.removeEventListener('keydown', onRailKey);
     },
   };
 }

@@ -178,4 +178,35 @@ test.describe('a11y audit — /mapa (interactive, slower)', () => {
     );
     expect(blocking.map((v) => `[${v.impact}] ${v.id}: ${v.help}`)).toEqual([]);
   });
+
+  // Story 22.5 — /mapa folds the layer rail to its tabs on load, so the
+  // first scan never sees the tiles; and the `?` cheat-sheet is a modal
+  // dialog. Scan the unfolded rail, then the open dialog.
+  test('mapa with the rail unfolded and the `?` cheat-sheet open has no critical or serious WCAG violations', async ({
+    page,
+  }) => {
+    await page.goto('mapa/');
+    await page.waitForLoadState('domcontentloaded');
+    await expect(page.locator('#layerbtn-base')).toBeAttached();
+    await page.locator('#mw-layers-tab').click();
+    await expect(page.locator('#layerbtn-radar')).toBeVisible();
+    const blockingIn = async (sel: string): Promise<string[]> => {
+      const results = await new AxeBuilder({ page })
+        .withTags(TAGS)
+        .include(sel)
+        .analyze();
+      return results.violations
+        .filter((v) => v.impact === 'critical' || v.impact === 'serious')
+        .map((v) => `${sel}: [${v.impact}] ${v.id}: ${v.help}`);
+    };
+    expect(await blockingIn('.im-rail')).toEqual([]);
+
+    await page.locator('#map canvas').click({ position: { x: 640, y: 400 } });
+    await page.keyboard.press('?');
+    await expect(page.locator('#mw-shortcuts')).toBeVisible();
+    await expect(
+      page.locator('#mw-shortcuts [data-shortcut]').first()
+    ).toBeVisible();
+    expect(await blockingIn('#mw-shortcuts')).toEqual([]);
+  });
 });

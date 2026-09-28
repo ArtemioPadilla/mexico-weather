@@ -133,6 +133,43 @@
 }
 
 /*
+ * Story 22.5 — chrome budget on /mapa (`.im-root[data-compact]`, plan
+ * PARIDAD_VISUAL §1.2: ≤ 8 controls over the map on desktop, ≤ 5 on a
+ * phone). The timeline pill keeps ▶, the time label, "Ver 10 días" and
+ * the scrubber on show; the step buttons (« ‹ › » Ahora, `.tl-secondary`)
+ * are progressive disclosure:
+ *  - from `sm` on a pointer that can hover, they stay in place (no layout
+ *    shift: nothing moves under the cursor) but transparent until the
+ *    pointer is over the pill or the focus is inside it. Still in the
+ *    accessibility tree, still in the tab order: focusing one reveals all;
+ *  - below `sm` (and `.tl-phone-secondary`, "Ver 10 días") they show with
+ *    the Controles panel, like the rail. On touch screens from `sm` (no
+ *    hover) nothing is hidden.
+ */
+@media (hover: hover) and (min-width: 640px) {
+  .im-root[data-compact] .im-timeline .tl-secondary {
+    transition: opacity 150ms ease-out;
+  }
+  .im-root[data-compact]
+    .im-timeline:not(:hover):not(:focus-within)
+    .tl-secondary {
+    opacity: 0;
+  }
+}
+@media (max-width: 639.98px) {
+  .im-root[data-compact]:not([data-controls='open'])
+    .im-timeline
+    :is(.tl-secondary, .tl-phone-secondary) {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .im-root[data-compact] .im-timeline .tl-secondary {
+    transition: none;
+  }
+}
+
+/*
  * Tailwind v4 changed the default border/divide color from `gray-200` to
  * `currentColor`. The markup uses many bare `border` utilities that relied on
  * the v3 gray-200 default. This is the documented v4 compatibility shim to

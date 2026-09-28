@@ -20,8 +20,10 @@ interface Props {
   lang?: 'es' | 'en';
   /** 'fixed' (default): floating bottom-right button. 'inline': a
    *  static button the layout places in its footer — used on pages
-   *  where a floating FAB would sit on top of an embedded map. */
-  placement?: 'fixed' | 'inline';
+   *  where a floating FAB would sit on top of an embedded map. 'nav': a
+   *  44 px button in the top nav bar (Story 22.5, /mapa: the full-screen
+   *  map has no footer and a chrome budget over it). */
+  placement?: 'fixed' | 'inline' | 'nav';
 }
 
 const { lang = 'es', placement = 'fixed' } = Astro.props;
@@ -29,7 +31,15 @@ const { lang = 'es', placement = 'fixed' } = Astro.props;
 const wrapClass =
   placement === 'inline'
     ? 'relative inline-flex w-12 h-12 shrink-0'
-    : 'fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] sm:bottom-6 right-5 z-50 w-12 h-12';
+    : placement === 'nav'
+      ? 'relative inline-flex h-11 w-11 shrink-0'
+      : 'fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] sm:bottom-6 right-5 z-50 w-12 h-12';
+// The nav bar is 48 px tall on a phone: the button there is 44 px and
+// flat (no floating shadow), like the language and theme toggles.
+const btnSize =
+  placement === 'nav'
+    ? 'w-11 h-11'
+    : 'w-12 h-12 shadow-lg hover:shadow-xl hover:scale-105';
 
 const repoSlug = 'ArtemioPadilla/mexico-weather';
 const buildSha = import.meta.env.PUBLIC_BUILD_SHA || 'dev';
@@ -45,14 +55,16 @@ const tr = feedback[lang];
     type="button"
     aria-label={tr.button_label}
     title={tr.button_label}
-    class="relative w-12 h-12 rounded-full flex items-center justify-center shadow-lg
-           bg-white text-primary-600 ring-1 ring-primary-500/20
+    class:list={[
+      `relative ${btnSize} rounded-full flex items-center justify-center`,
+      `bg-white text-primary-600 ring-1 ring-primary-500/20
            hover:bg-primary-50 hover:ring-primary-500/40
            dark:bg-gray-800 dark:text-primary-400 dark:ring-primary-500/30
            dark:hover:bg-gray-700 dark:hover:ring-primary-500/50
-           transition-all hover:scale-105 hover:shadow-xl
+           transition-all
            motion-reduce:transition-none motion-reduce:hover:scale-100
-           focus:outline-none focus:ring-2 focus:ring-primary-500"
+           focus:outline-none focus:ring-2 focus:ring-primary-500`,
+    ]}
   >
     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round"

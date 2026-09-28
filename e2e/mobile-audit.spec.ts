@@ -235,7 +235,11 @@ test.describe('mobile UX — 360x640 portrait', () => {
       await page.goto(pageUrl);
       await page.waitForLoadState('domcontentloaded');
       if (pageUrl === 'mapa') {
-        await expect(page.locator('#layerbtn-base')).toBeVisible();
+        await expect(page.locator('#layerbtn-base')).toBeAttached();
+        // Story 22.5 — ‹ › (and the rail) show with the Controles panel
+        // on a phone: open it so they are rendered and measured.
+        await page.locator('#mw-controls-toggle').click();
+        await expect(page.locator('#tl-prev')).toBeVisible();
       }
       const summary = page.locator('#mobile-menu summary');
       if (await summary.count()) await summary.click();
@@ -263,8 +267,16 @@ test.describe('mobile UX — 360x640 portrait', () => {
   // skipped by the zero-size guard above.
   test('mapa: mobile-visible chrome meets the strict rule', async ({ page }) => {
     await page.goto('mapa');
-    await expect(page.locator('#layerbtn-base')).toBeVisible(); // rail wired up
+    await expect(page.locator('#layerbtn-base')).toBeAttached(); // rail wired up
     expect(await strictViolations(page)).toEqual([]);
+    // Story 22.5 — and with the Controles panel open (‹ › live there on a
+    // phone now), plus the feedback button that moved to the nav bar.
+    await page.locator('#mw-controls-toggle').click();
+    await expect(page.locator('#tl-prev')).toBeVisible();
+    expect(await strictViolations(page)).toEqual([]);
+    const fab = (await page.locator('#secid-report-btn').boundingBox())!;
+    expect(fab.width).toBeGreaterThanOrEqual(44);
+    expect(fab.height).toBeGreaterThanOrEqual(44);
   });
 
   // Story 22.3 — what the ⋯ menu holds is phone chrome too: its three tabs
@@ -281,7 +293,7 @@ test.describe('mobile UX — 360x640 portrait', () => {
       }
     });
     await page.goto('mapa');
-    await expect(page.locator('#layerbtn-base')).toBeVisible();
+    await expect(page.locator('#layerbtn-base')).toBeAttached();
     await page.locator('#mw-tools-btn').click();
     await expect(page.locator('#mw-tools-panel')).toBeVisible();
     // The measure wrap surfaces on the map's first idle.

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { mockOpenMeteo } from './helpers';
+import { mockOpenMeteo, openLayerRail } from './helpers';
 import { railRowCount } from '../src/lib/map/chrome/layer-rail';
 
 /** 256×256 transparent PNG (base64) — a decodable tile for MapLibre.
@@ -158,7 +158,8 @@ test.describe('mapa page', () => {
     // AND verify the layer rail finished init (a known sentinel that
     // the JS handlers have wired up) before clicking.
     await expect(page.locator('#mw-search-toggle')).toBeVisible();
-    await expect(page.locator('#layerbtn-base')).toBeVisible();
+    // Story 22.5 — the rail is folded to its tab bar: built is enough.
+    await expect(page.locator('#layerbtn-base')).toBeAttached();
     await page.locator('#mw-search-toggle').click();
     await expect(page.getByPlaceholder(/Buscar un lugar/)).toBeVisible();
   });
@@ -186,6 +187,8 @@ test.describe('mapa page', () => {
 
     await page.goto('mapa/');
 
+    // Story 22.5 — the rail starts folded to its tab bar on /mapa.
+    await openLayerRail(page);
     const radarBtn = page.locator('#layerbtn-radar');
     await expect(radarBtn).toBeVisible();
     await expect(page.locator('#legend')).toBeHidden();
@@ -229,6 +232,7 @@ test.describe('mapa page', () => {
     // test is about switching TO satellite, so start on base explicitly.
     await page.goto('mapa/#view=23.6,-102.5,4.5z&layer=base');
 
+    await openLayerRail(page);
     const satBtn = page.locator('#layerbtn-satellite');
     await expect(satBtn).toBeVisible();
     await page.waitForResponse(
@@ -337,6 +341,7 @@ test.describe('mapa page', () => {
     await page.waitForResponse(
       '**/api.rainviewer.com/public/weather-maps.json'
     );
+    await openLayerRail(page);
     const satBtn = page.locator('#layerbtn-satellite');
     await expect(satBtn).toBeEnabled();
 
@@ -501,6 +506,7 @@ test.describe('mapa page', () => {
     await expect(page.locator('#timeline')).toBeVisible();
     await expect(page.locator('#tl-time')).toHaveText('—');
 
+    await openLayerRail(page);
     await page.locator('#layerbtn-radar').click();
     await expect(page.locator('#timeline')).toBeVisible();
 
@@ -576,6 +582,7 @@ test.describe('mapa page', () => {
       '**/api.rainviewer.com/public/weather-maps.json'
     );
 
+    await openLayerRail(page);
     const tempBtn = page.locator('#layerbtn-temperature');
     await expect(tempBtn).toBeEnabled();
     const fieldResp = page.waitForResponse(
@@ -659,6 +666,7 @@ test.describe('mapa page', () => {
         '**/api.rainviewer.com/public/weather-maps.json'
       );
 
+      await openLayerRail(page);
       const btn = page.locator(`#layerbtn-${layer}`);
       await expect(btn).toBeEnabled();
       const fieldResp = page.waitForResponse(
@@ -711,6 +719,7 @@ test.describe('mapa page', () => {
       '**/api.rainviewer.com/public/weather-maps.json'
     );
 
+    await openLayerRail(page);
     const btn = page.locator('#layerbtn-wind');
     await expect(btn).toBeEnabled();
     const windResp = page.waitForResponse(
@@ -767,7 +776,8 @@ test.describe('mapa page', () => {
       }
     });
     await page.goto('mapa/');
-    await expect(page.locator('#layerbtn-base')).toBeVisible();
+    // Story 22.5 — the rail is folded to its tab bar: built is enough.
+    await expect(page.locator('#layerbtn-base')).toBeAttached();
     const card = page.locator('#mw-place-card');
     await expect(card).toBeHidden();
     const forecastResp = page.waitForResponse(
@@ -921,6 +931,7 @@ test.describe('mapa page', () => {
       '**/api.rainviewer.com/public/weather-maps.json'
     );
 
+    await openLayerRail(page);
     const btn = page.locator('#layerbtn-sunlight');
     await expect(btn).toBeEnabled();
     await btn.click();
@@ -1281,6 +1292,7 @@ test.describe('Story 21.2 — /mapa boots on satellite', () => {
     await page.goto('mapa/?e2e=1');
     await manifest;
 
+    await openLayerRail(page);
     const tempBtn = page.locator('#layerbtn-temperature');
     await expect(tempBtn).toBeEnabled();
     const fieldResp = page.waitForResponse(
@@ -1352,6 +1364,7 @@ test.describe('Story 21.2 — /mapa boots on satellite', () => {
     // The boot activation has started: the temperature grid is in flight.
     await bootFetch;
 
+    await openLayerRail(page);
     const radarBtn = page.locator('#layerbtn-radar');
     const tempBtn = page.locator('#layerbtn-temperature');
     await expect(radarBtn).toBeEnabled();
@@ -1589,6 +1602,8 @@ test.describe('Story 22.2 — compact rail and progressive disclosure', () => {
     page,
   }) => {
     await openOnSatellite(page);
+    // Story 22.5 — one click on "Capas" unfolds the rail on /mapa.
+    await openLayerRail(page);
     const boxes = await railBoxes(page);
     expect(railRowCount(boxes)).toBeLessThanOrEqual(9);
 
@@ -1640,6 +1655,7 @@ test.describe('Story 22.2 — compact rail and progressive disclosure', () => {
     page,
   }) => {
     await openOnSatellite(page);
+    await openLayerRail(page);
     const block = page.locator('#mw-rail-active');
     // Sun (row 3, no variants, computed locally): the block moves under
     // the last row, with the opacity control and no sub-options.
@@ -1927,6 +1943,7 @@ test.describe('Story 22.3 — one tools menu', () => {
     const toggle = page.locator('#mw-model-toggle');
     await expect(toggle).toBeHidden();
 
+    await openLayerRail(page);
     await page.locator('#layerbtn-temperature').click();
     await expect(page.locator('#layerbtn-temperature')).toHaveAttribute(
       'aria-pressed',
@@ -2073,6 +2090,252 @@ test.describe('Story 22.4 — SMN avisos counter in the top bar', () => {
       const p = (await panel.boundingBox())!;
       expect(p.x).toBeGreaterThanOrEqual(0);
       expect(p.x + p.width).toBeLessThanOrEqual(360);
+    });
+  });
+});
+
+// Story 22.5 — the `?` keyboard cheat-sheet and the chrome budget on
+// /mapa (≤ 8 controls over the map on desktop, ≤ 5 on a phone; the count
+// itself lives in e2e/chrome-budget.spec.ts). What is asserted here is
+// that nothing left the page: every folded control is one step away.
+test.describe('Story 22.5 — `?` shortcuts panel and the chrome budget', () => {
+  test.describe.configure({ timeout: 60_000 });
+
+  test('the rail starts folded to its tabs and names the active layer', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const tab = page.locator('#mw-layers-tab');
+    const rail = page.locator('.im-rail');
+    await expect(rail).toHaveAttribute('data-rail-open', 'false');
+    await expect(tab).toHaveAttribute('aria-expanded', 'false');
+    await expect(tab).toContainText('Satélite');
+    await expect(page.locator('#layerbtn-radar')).toBeHidden();
+    await expect(page.locator('#mw-rail-active')).toBeHidden();
+
+    // One click unfolds it: every layer tile, the active block.
+    await tab.click();
+    await expect(rail).toHaveAttribute('data-rail-open', 'true');
+    await expect(tab).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#layerbtn-radar')).toBeVisible();
+    await expect(page.locator('#satellite-sub-options')).toBeVisible();
+
+    // The layer name leaves the tab while the tiles show it, and comes
+    // back (updated) when the rail folds again.
+    await page.locator('#layerbtn-sunlight').click();
+    await expect(page.locator('#layerbtn-sunlight')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await tab.click();
+    await expect(rail).toHaveAttribute('data-rail-open', 'false');
+    await expect(page.locator('#layerbtn-sunlight')).toBeHidden();
+    await expect(tab).toContainText('Sol');
+
+    // Escape inside an open rail folds it and keeps the focus on its tab.
+    await page.locator('#mw-overlays-tab').click();
+    await expect(page.locator('#mw-overlays')).toBeVisible();
+    await page.locator('#overlay-graticule').focus();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#mw-overlays')).toBeHidden();
+    await expect(page.locator('#mw-overlays-tab')).toBeFocused();
+  });
+
+  test('the step buttons show on hover and focus, and still work', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const prev = page.locator('#tl-prev');
+    const opacity = () =>
+      prev.evaluate((el) => Number(getComputedStyle(el).opacity));
+    // Nothing points at the pill: transparent (not counted as chrome),
+    // still in the page and the accessibility tree.
+    await page.mouse.move(640, 300);
+    await expect.poll(opacity).toBe(0);
+    await expect(prev).toHaveAttribute('aria-label', /.+/);
+    // Hover reveals them in place.
+    await page.locator('#tl-time').hover();
+    await expect.poll(opacity).toBe(1);
+    // Keyboard: focus inside the pill reveals them too.
+    await page.mouse.move(640, 300);
+    await expect.poll(opacity).toBe(0);
+    await page.locator('#tl-play').focus();
+    await expect.poll(opacity).toBe(1);
+    // And a click steps (and pauses the boot loop, as before).
+    await prev.click();
+    await expect(page.locator('#tl-play')).toHaveAttribute(
+      'data-state',
+      'paused'
+    );
+  });
+
+  test('`?` opens the cheat-sheet generated from the layers and overlays', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const dialog = page.getByRole('dialog', { name: 'Atajos de teclado' });
+    await expect(dialog).toBeHidden();
+    await page.locator('#map canvas').click({ position: { x: 640, y: 400 } });
+    await page.keyboard.press('?');
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator('[data-shortcuts-close]')).toBeFocused();
+
+    // Every layer letter, from LAYERS.
+    for (const [id, key] of [
+      ['base', 'M'],
+      ['radar', 'R'],
+      ['satellite', 'A'],
+      ['temperature', 'T'],
+      ['humidity', 'H'],
+      ['pressure', 'P'],
+      ['wind', 'V'],
+      ['sunlight', 'L'],
+    ]) {
+      await expect(
+        dialog.locator(`[data-shortcut="layer:${id}"] kbd`)
+      ).toHaveText(key);
+    }
+    // Overlay letters, from overlayDefs, with their names.
+    await expect(
+      dialog.locator('[data-shortcut="overlay:graticule"]')
+    ).toContainText('Retícula');
+    await expect(
+      dialog.locator('[data-shortcut="overlay:graticule"] kbd')
+    ).toHaveText('X');
+    await expect(
+      dialog.locator('[data-shortcut="overlay:clouds"] kbd')
+    ).toHaveText('U');
+    // No letter is listed twice (T and A belong to their layers).
+    const letters = await dialog
+      .locator(
+        '[data-shortcuts-section="layers"] kbd, [data-shortcuts-section="overlays"] kbd'
+      )
+      .allTextContents();
+    expect(letters.length).toBeGreaterThanOrEqual(25);
+    expect(new Set(letters).size).toBe(letters.length);
+
+    // Modal: a letter typed while reading does not switch the layer.
+    await page.keyboard.press('r');
+    await expect(page.locator('#layerbtn-radar')).toHaveAttribute(
+      'aria-pressed',
+      'false'
+    );
+    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+
+    // Esc closes; the letters work again afterwards.
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeHidden();
+    await page.keyboard.press('?');
+    await expect(dialog).toBeVisible();
+    await page.keyboard.press('?');
+    await expect(dialog).toBeHidden();
+
+    // `?` typed in the search box is text, not a shortcut.
+    await page.locator('#mw-search-toggle').click();
+    await page.locator('#mapq').fill('');
+    await page.locator('#mapq').press('?');
+    await expect(dialog).toBeHidden();
+  });
+
+  test('the ⋯ menu has an entry for the cheat-sheet; closing returns to ⋯', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const tools = page.locator('#mw-tools-btn');
+    await tools.click();
+    await page.locator('#mw-tools-tab-info').click();
+    const entry = page.locator('#mw-shortcuts-open');
+    await expect(entry).toBeVisible();
+    await expect(entry).toContainText('Atajos de teclado');
+    await entry.click();
+    const dialog = page.locator('#mw-shortcuts');
+    await expect(dialog).toBeVisible();
+    await expect(page.locator('#mw-tools-panel')).toBeHidden();
+    await dialog.locator('[data-shortcuts-close]').click();
+    await expect(dialog).toBeHidden();
+    await expect(tools).toBeFocused();
+  });
+
+  test('?lang=en: the cheat-sheet reads in English', async ({ page }) => {
+    await page.addInitScript(() => {
+      try {
+        localStorage.setItem('mw:welcomed', '1');
+      } catch {
+        /* the card shows */
+      }
+    });
+    await page.goto('mapa/?lang=en');
+    await expect(page.locator('#layerbtn-base')).toBeAttached();
+    await page.locator('#map canvas').click({ position: { x: 640, y: 400 } });
+    await page.keyboard.press('?');
+    const dialog = page.getByRole('dialog', { name: 'Keyboard shortcuts' });
+    await expect(dialog).toBeVisible();
+    await expect(
+      dialog.locator('[data-shortcut="overlay:graticule"]')
+    ).toContainText('Graticule');
+    await expect(dialog.locator('[data-shortcut="layer:radar"]')).toContainText(
+      'Radar'
+    );
+    await expect(
+      dialog.locator('[data-shortcuts-section="layers"] h3')
+    ).toHaveText('Layers');
+  });
+
+  test('the feedback button sits in the nav bar, not over the map', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const fab = page.locator('#secid-report-btn');
+    await expect(fab).toBeVisible();
+    await expect(page.locator('nav #secid-report-btn')).toHaveCount(1);
+    const f = (await fab.boundingBox())!;
+    const m = (await page.locator('#map-root').boundingBox())!;
+    expect(f.y + f.height).toBeLessThanOrEqual(m.y);
+    await fab.click();
+    await expect(page.locator('#secid-report-modal')).toBeVisible();
+  });
+
+  test.describe('phone', () => {
+    test.use({
+      viewport: { width: 360, height: 640 },
+      hasTouch: true,
+      isMobile: true,
+    });
+
+    test('layers, steps and "Ver 10 días" come with "Capas y controles"', async ({
+      page,
+    }) => {
+      await openOnSatellite(page);
+      const trigger = page.locator('#mw-controls-toggle');
+      await expect(trigger).toHaveAttribute('aria-label', 'Capas y controles');
+      await expect(page.locator('.im-rail')).toBeHidden();
+      await expect(page.locator('#tl-next')).toBeHidden();
+      await expect(page.locator('#tl-extend')).toBeHidden();
+      await expect(page.locator('#tl-play')).toBeVisible();
+      // The feedback button fits the phone nav bar.
+      const fab = (await page.locator('#secid-report-btn').boundingBox())!;
+      expect(fab.x + fab.width).toBeLessThanOrEqual(360);
+
+      await trigger.tap();
+      await expect(page.locator('#layerbtn-radar')).toBeVisible();
+      await expect(page.locator('#mw-layers-tab')).toHaveAttribute(
+        'aria-expanded',
+        'true'
+      );
+      await expect(page.locator('#tl-next')).toBeVisible();
+      await expect(page.locator('#tl-extend')).toBeVisible();
+      await page.locator('#layerbtn-radar').tap();
+      await expect(page.locator('#layerbtn-radar')).toHaveAttribute(
+        'aria-pressed',
+        'true'
+      );
+
+      await trigger.tap();
+      await expect(page.locator('.im-rail')).toBeHidden();
+      await expect(page.locator('#tl-next')).toBeHidden();
     });
   });
 });

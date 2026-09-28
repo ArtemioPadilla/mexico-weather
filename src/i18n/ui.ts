@@ -117,6 +117,40 @@ export interface UiStrings {
   map_tool_area: string;
   map_tool_crosshair: string;
   map_tool_compare: string;
+  /** Story 22.5 — Controles trigger on /mapa and the `?` cheat-sheet. */
+  map_controls_compact: string;
+  map_shortcuts: string;
+  map_shortcuts_close: string;
+  map_shortcuts_general: string;
+  map_shortcuts_help: string;
+  map_shortcuts_escape: string;
+  map_shortcuts_zoom: string;
+  map_shortcuts_pan: string;
+  map_shortcuts_hint: string;
+  /** Story 22.5 — overlay names (`map_overlay_<overlayDefs id>`), the
+   *  single source for the overlay rows and the `?` cheat-sheet. */
+  map_overlay_tropical: string;
+  map_overlay_outlook: string;
+  map_overlay_graticule: string;
+  map_overlay_nightLights: string;
+  map_overlay_nightLine: string;
+  map_overlay_borders: string;
+  map_overlay_fires: string;
+  map_overlay_radarCoverage: string;
+  map_overlay_precipMode: string;
+  map_overlay_confidence: string;
+  map_overlay_clouds: string;
+  map_overlay_quakes: string;
+  map_overlay_volcanoes: string;
+  map_overlay_cityValues: string;
+  map_overlay_windOverlay: string;
+  map_overlay_aqi: string;
+  map_overlay_smnStateTint: string;
+  map_overlay_marine: string;
+  map_overlay_webcams: string;
+  map_overlay_lakes: string;
+  map_overlay_histStorms: string;
+  map_overlay_colorBlind: string;
   legend_light: string;
   legend_moderate: string;
   legend_heavy: string;
@@ -257,6 +291,37 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_tool_area: 'Área',
     map_tool_crosshair: 'Mira',
     map_tool_compare: 'Comparación',
+    map_controls_compact: 'Capas y controles',
+    map_shortcuts: 'Atajos de teclado',
+    map_shortcuts_close: 'Cerrar',
+    map_shortcuts_general: 'General',
+    map_shortcuts_help: 'Mostrar u ocultar esta ayuda',
+    map_shortcuts_escape: 'Cerrar un panel o salir de una herramienta',
+    map_shortcuts_zoom: 'Acercar / alejar (mapa enfocado)',
+    map_shortcuts_pan: 'Mover el mapa (mapa enfocado)',
+    map_shortcuts_hint: 'Las letras funcionan cuando no estás escribiendo en un campo: la de una capa la activa, la de una superposición la enciende o apaga.',
+    map_overlay_tropical: 'Sistemas tropicales',
+    map_overlay_outlook: 'Posible desarrollo (2 / 7 d)',
+    map_overlay_graticule: 'Retícula',
+    map_overlay_nightLights: 'Luces nocturnas',
+    map_overlay_nightLine: 'Límite nocturno',
+    map_overlay_borders: 'Líneas fronteras',
+    map_overlay_fires: 'Incendios activos',
+    map_overlay_radarCoverage: 'Cobertura de radar',
+    map_overlay_precipMode: 'Modo precipitación (satélite + nubes + radar)',
+    map_overlay_confidence: 'Incertidumbre (desacuerdo entre modelos)',
+    map_overlay_clouds: 'Nubes',
+    map_overlay_quakes: 'Sismos (USGS)',
+    map_overlay_volcanoes: 'Volcanes activos',
+    map_overlay_cityValues: 'Valores de etiquetas',
+    map_overlay_windOverlay: 'Animación de viento',
+    map_overlay_aqi: 'Calidad del aire (PM2.5)',
+    map_overlay_smnStateTint: 'Alertas SMN por estado',
+    map_overlay_marine: 'Playas (oleaje + SST)',
+    map_overlay_webcams: 'Cámaras en vivo',
+    map_overlay_lakes: 'Lagos y presas',
+    map_overlay_histStorms: 'Huracanes notables MX',
+    map_overlay_colorBlind: 'Paleta accesible',
     legend_light: 'Ligera',
     legend_moderate: 'Moderada',
     legend_heavy: 'Intensa',
@@ -394,6 +459,37 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_tool_area: 'Area',
     map_tool_crosshair: 'Crosshair',
     map_tool_compare: 'Comparison',
+    map_controls_compact: 'Layers and controls',
+    map_shortcuts: 'Keyboard shortcuts',
+    map_shortcuts_close: 'Close',
+    map_shortcuts_general: 'General',
+    map_shortcuts_help: 'Show or hide this help',
+    map_shortcuts_escape: 'Close a panel or leave a tool',
+    map_shortcuts_zoom: 'Zoom in / out (map focused)',
+    map_shortcuts_pan: 'Pan the map (map focused)',
+    map_shortcuts_hint: 'Letters work whenever you are not typing in a field: a layer letter switches to that layer, an overlay letter turns it on or off.',
+    map_overlay_tropical: 'Tropical systems',
+    map_overlay_outlook: 'Development outlook (2 / 7 d)',
+    map_overlay_graticule: 'Graticule',
+    map_overlay_nightLights: 'Night lights',
+    map_overlay_nightLine: 'Day/night line',
+    map_overlay_borders: 'Borders',
+    map_overlay_fires: 'Active fires',
+    map_overlay_radarCoverage: 'Radar coverage',
+    map_overlay_precipMode: 'Precipitation mode (satellite + clouds + radar)',
+    map_overlay_confidence: 'Uncertainty (model disagreement)',
+    map_overlay_clouds: 'Clouds',
+    map_overlay_quakes: 'Earthquakes (USGS)',
+    map_overlay_volcanoes: 'Active volcanoes',
+    map_overlay_cityValues: 'Label values',
+    map_overlay_windOverlay: 'Wind animation',
+    map_overlay_aqi: 'Air quality (PM2.5)',
+    map_overlay_smnStateTint: 'SMN alerts by state',
+    map_overlay_marine: 'Beaches (waves + SST)',
+    map_overlay_webcams: 'Live webcams',
+    map_overlay_lakes: 'Lakes and dams',
+    map_overlay_histStorms: 'Notable MX hurricanes',
+    map_overlay_colorBlind: 'Accessible palette',
     legend_light: 'Light',
     legend_moderate: 'Moderate',
     legend_heavy: 'Heavy',

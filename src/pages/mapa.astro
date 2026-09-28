@@ -29,7 +29,11 @@ const lang = 'es' as const;
 const t = ui[lang];
 ---
 
-<BaseLayout title={`${t.map_title} — Clima México 🇲🇽`} description={t.map_teaser_heading} lang={lang} noFooter>
+{/* Story 22.5 — feedbackPlacement="nav": the site-wide report button
+    sits in the nav bar here instead of floating over the full-screen map
+    (plan PARIDAD_VISUAL §1.2 chrome budget), as the home puts it in the
+    footer so it never covers the embed. */}
+<BaseLayout title={`${t.map_title} — Clima México 🇲🇽`} description={t.map_teaser_heading} lang={lang} noFooter feedbackPlacement="nav">
   {/* Subtract nav height so the map fills the rest of the viewport
       exactly, no vertical scrollbar (plan P2.2). Nav is h-12 mobile,
       h-14 sm+. */}
@@ -61,6 +65,11 @@ const t = ui[lang];
            homepage teaser sets layerRail too, and a 400px embed has no
            room for it (Story 11.3). */
         mobileControls: true,
+        /* Story 22.5 — chrome budget (≤ 8 desktop / ≤ 5 phone, plan
+           PARIDAD_VISUAL §1.2): the rail starts folded to its tab bar and
+           the timeline's step buttons show on hover/focus (with the
+           Controles panel on a phone). /mapa only. */
+        compactChrome: true,
         /* Granular chrome flags — /mapa is the "all on" consumer. The
            home embed leaves these off (see index.astro). */
         tools: true,

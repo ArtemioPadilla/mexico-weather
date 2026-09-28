@@ -56,7 +56,9 @@ async function openMapaOnSatellite(page: Page): Promise<void> {
     }
   });
   await page.goto('mapa');
-  await expect(page.locator('#layerbtn-base')).toBeVisible();
+  // Story 22.5 — below sm the rail shows with the panel only: built is
+  // enough here.
+  await expect(page.locator('#layerbtn-base')).toBeAttached();
   await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
     'aria-pressed',
     'true',
@@ -183,6 +185,9 @@ test('closing the panel on the overlays tab brings the layer icons back', async 
 }) => {
   // Story 22.2 — the tab bar hides with the panel below sm; a rail left on
   // the overlays tab would hide every layer icon with no way back.
+  // Story 22.5 — on /mapa the whole rail now folds away with the panel
+  // (chrome budget): closing it on the overlays tab leaves the rail on
+  // its layers tab, so the next open shows the layer icons again.
   await openMapaOnSatellite(page);
   const trigger = page.locator('#mw-controls-toggle');
   await trigger.click();
@@ -190,16 +195,21 @@ test('closing the panel on the overlays tab brings the layer icons back', async 
   await expect(page.locator('#layerbtn-radar')).toBeHidden();
   await trigger.click();
   await expect(page.locator('#mw-overlays')).toBeHidden();
-  await expect(page.locator('#layerbtn-radar')).toBeVisible();
+  await expect(page.locator('.im-rail')).toBeHidden();
   await expect(page.locator('#mw-layers-tab')).toHaveAttribute(
     'aria-selected',
     'true'
   );
+  await trigger.click();
+  await expect(page.locator('#layerbtn-radar')).toBeVisible();
+  await expect(page.locator('#mw-overlays')).toBeHidden();
 });
 
 test('the timeline is still usable with the panel open', async ({ page }) => {
   await page.goto('mapa');
-  await expect(page.locator('#layerbtn-base')).toBeVisible();
+  await expect(page.locator('#layerbtn-base')).toBeAttached();
+  // Story 22.5 — ‹ › show with the panel on a phone (chrome budget).
+  await expect(page.locator('#tl-next')).toBeHidden();
   await page.locator('#mw-controls-toggle').click();
   await expect(page.locator('#tl-next')).toBeVisible();
   await page.locator('#tl-next').click();

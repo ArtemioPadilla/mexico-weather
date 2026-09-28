@@ -193,6 +193,12 @@ export interface InteractiveMapFeatures {
    *  the layer pages set it (their chrome budget, plan PARIDAD_VISUAL
    *  §1.2); embeds leave it off and keep the buttons. */
   gestureZoomOnly?: boolean;
+  /** Story 22.5 — chrome budget (plan PARIDAD_VISUAL §1.2). Markup-only:
+   *  InteractiveMap.astro collapses the rail to its tab bar and hides the
+   *  timeline's step buttons until hover/focus (Controles below `sm`).
+   *  The script only fills the collapsed rail's active-layer label, which
+   *  it finds by `[data-rail-current]`. /mapa sets it. */
+  compactChrome?: boolean;
 }
 
 /** Build an <svg><use href="#i-name"/></svg> element for the inline
@@ -322,6 +328,11 @@ import {
 } from './map/chrome/layer-rail';
 import { createPinManager } from './map/chrome/pin-manager';
 import { createOverlayRegistry } from './map/chrome/overlay-registry';
+import {
+  buildShortcutSections,
+  overlayShortcutLabel,
+} from './map/chrome/shortcuts';
+import { wireShortcutsDialog } from './map/chrome/shortcuts-dialog';
 import { computeIsobars } from './map/utils/isobars';
 
 export interface InteractiveMapOptions {
@@ -2368,6 +2379,18 @@ export async function initInteractiveMap(
       const btn = wrap.querySelector(`#layerbtn-${def.id}`);
       if (btn) btn.setAttribute('aria-pressed', String(def.id === activeLayer));
     }
+    // Story 22.5 — a collapsed rail (/mapa) names the active layer on its
+    // Capas tab, so the choice stays readable with the tiles folded away.
+    const current = wrap
+      .closest('.im-rail')
+      ?.querySelector<HTMLElement>('[data-rail-current]');
+    if (current) {
+      const def = getLayerDef(activeLayer);
+      const short = def
+        ? (t[def.shortLabelKey as keyof typeof t] ?? def.id)
+        : activeLayer;
+      current.textContent = `· ${short}`;
+    }
     // Story 19.1 — the info panel links to the active layer's own page.
     const pageLink = document.getElementById(
       'mw-layer-page-link'
@@ -3317,7 +3340,7 @@ export async function initInteractiveMap(
   const overlayDefs: OverlayDef[] = [
     {
       id: 'tropical',
-      label: 'Sistemas tropicales',
+      label: t.map_overlay_tropical,
       shortcut: 'T',
       isEnabled: () => tropicalEnabled,
       setEnabled: (on) => {
@@ -3327,35 +3350,35 @@ export async function initInteractiveMap(
     },
     {
       id: 'outlook',
-      label: 'Posible desarrollo (2 / 7 d)',
+      label: t.map_overlay_outlook,
       shortcut: '',
       isEnabled: () => tropicalOutlookOverlay.isEnabled(),
       setEnabled: (on) => tropicalOutlookOverlay.setEnabled(on),
     },
     {
       id: 'graticule',
-      label: 'Retícula',
+      label: t.map_overlay_graticule,
       shortcut: 'X',
       isEnabled: () => graticuleOverlay.isEnabled(),
       setEnabled: (on) => graticuleOverlay.setEnabled(on),
     },
     {
       id: 'nightLights',
-      label: 'Luces nocturnas',
+      label: t.map_overlay_nightLights,
       shortcut: 'N',
       isEnabled: () => nightLightsOverlay.isEnabled(),
       setEnabled: (on) => nightLightsOverlay.setEnabled(on),
     },
     {
       id: 'nightLine',
-      label: 'Límite nocturno',
+      label: t.map_overlay_nightLine,
       shortcut: 'O',
       isEnabled: () => nightLineOverlay.isEnabled(),
       setEnabled: (on) => nightLineOverlay.setEnabled(on),
     },
     {
       id: 'borders',
-      label: 'Líneas fronteras',
+      label: t.map_overlay_borders,
       shortcut: 'F',
       isEnabled: () => bordersOverlay.isEnabled(),
       setEnabled: (on) => {
@@ -3364,7 +3387,7 @@ export async function initInteractiveMap(
     },
     {
       id: 'fires',
-      label: 'Incendios activos',
+      label: t.map_overlay_fires,
       shortcut: 'I',
       isEnabled: () => firesOverlay.isEnabled(),
       setEnabled: (on) => {
@@ -3373,28 +3396,28 @@ export async function initInteractiveMap(
     },
     {
       id: 'radarCoverage',
-      label: 'Cobertura de radar',
+      label: t.map_overlay_radarCoverage,
       shortcut: 'Q',
       isEnabled: () => radarCoverageOverlay.isEnabled(),
       setEnabled: (on) => radarCoverageOverlay.setEnabled(on),
     },
     {
       id: 'precipMode',
-      label: 'Modo precipitación (satélite + nubes + radar)',
+      label: t.map_overlay_precipMode,
       shortcut: '',
       isEnabled: () => precipMode,
       setEnabled: (on) => setPrecipMode(on),
     },
     {
       id: 'confidence',
-      label: 'Incertidumbre (desacuerdo entre modelos)',
+      label: t.map_overlay_confidence,
       shortcut: '',
       isEnabled: () => confidenceMode,
       setEnabled: (on) => setConfidenceMode(on),
     },
     {
       id: 'clouds',
-      label: 'Nubes',
+      label: t.map_overlay_clouds,
       shortcut: 'U',
       isEnabled: () => cloudsOverlay.isEnabled(),
       setEnabled: (on) => {
@@ -3403,7 +3426,7 @@ export async function initInteractiveMap(
     },
     {
       id: 'quakes',
-      label: 'Sismos (USGS)',
+      label: t.map_overlay_quakes,
       shortcut: 'K',
       isEnabled: () => quakesOverlay.isEnabled(),
       setEnabled: (on) => {
@@ -3412,14 +3435,14 @@ export async function initInteractiveMap(
     },
     {
       id: 'volcanoes',
-      label: 'Volcanes activos',
+      label: t.map_overlay_volcanoes,
       shortcut: 'J',
       isEnabled: () => volcanoesOverlay.isEnabled(),
       setEnabled: (on) => volcanoesOverlay.setEnabled(on),
     },
     {
       id: 'cityValues',
-      label: 'Valores de etiquetas',
+      label: t.map_overlay_cityValues,
       shortcut: 'E',
       isEnabled: () => cityValues.isEnabled(),
       setEnabled: (on) => {
@@ -3429,7 +3452,7 @@ export async function initInteractiveMap(
     },
     {
       id: 'windOverlay',
-      label: 'Animación de viento',
+      label: t.map_overlay_windOverlay,
       shortcut: 'C',
       isEnabled: () => windOverlayEnabled || activeLayer === 'wind',
       setEnabled: (on) => {
@@ -3443,7 +3466,7 @@ export async function initInteractiveMap(
     },
     {
       id: 'aqi',
-      label: 'Calidad del aire (PM2.5)',
+      label: t.map_overlay_aqi,
       shortcut: 'Y',
       isEnabled: () => aqiOverlay.isEnabled(),
       setEnabled: (on) => {
@@ -3452,7 +3475,7 @@ export async function initInteractiveMap(
     },
     {
       id: 'smnStateTint',
-      label: 'Alertas SMN por estado',
+      label: t.map_overlay_smnStateTint,
       shortcut: 'A',
       isEnabled: () => smnStateTintOverlay.isEnabled(),
       setEnabled: (on) => {
@@ -3461,7 +3484,7 @@ export async function initInteractiveMap(
     },
     {
       id: 'marine',
-      label: 'Playas (oleaje + SST)',
+      label: t.map_overlay_marine,
       shortcut: 'Z',
       isEnabled: () => marineOverlay.isEnabled(),
       setEnabled: (on) => {
@@ -3470,28 +3493,28 @@ export async function initInteractiveMap(
     },
     {
       id: 'webcams',
-      label: 'Cámaras en vivo',
+      label: t.map_overlay_webcams,
       shortcut: 'W',
       isEnabled: () => webcamsOverlay.isEnabled(),
       setEnabled: (on) => webcamsOverlay.setEnabled(on),
     },
     {
       id: 'lakes',
-      label: 'Lagos y presas',
+      label: t.map_overlay_lakes,
       shortcut: 'G',
       isEnabled: () => lakesOverlay.isEnabled(),
       setEnabled: (on) => lakesOverlay.setEnabled(on),
     },
     {
       id: 'histStorms',
-      label: 'Huracanes notables MX',
+      label: t.map_overlay_histStorms,
       shortcut: 'D',
       isEnabled: () => histStormsOverlay.isEnabled(),
       setEnabled: (on) => histStormsOverlay.setEnabled(on),
     },
     {
       id: 'colorBlind',
-      label: 'Paleta accesible',
+      label: t.map_overlay_colorBlind,
       shortcut: 'B',
       isEnabled: () => getColorBlindMode(),
       setEnabled: (on) => {
@@ -3529,6 +3552,51 @@ export async function initInteractiveMap(
   );
   overlayRegistry.build();
   const refreshOverlayCheckboxes = (): void => overlayRegistry.refresh();
+
+  // Story 22.5 — the `?` keyboard cheat-sheet, generated from the same
+  // two lists the shortcut handler reads (LAYERS + overlayDefs), in the
+  // document's language (the page may be Spanish markup shown in English).
+  const shortcutsDialogEl = features.layerRail
+    ? document.getElementById('mw-shortcuts')
+    : null;
+  const shortcutsDialog = shortcutsDialogEl
+    ? (() => {
+        const docLangNow =
+          document.documentElement.getAttribute('data-lang') === 'en'
+            ? 'en'
+            : lang;
+        const tt = ui[docLangNow];
+        const sections = buildShortcutSections(
+          LAYERS.map((l) => ({
+            id: l.id,
+            shortcut: l.shortcut,
+            label: String(tt[l.labelKey as keyof typeof tt] ?? l.id),
+          })),
+          overlayDefs.map((o) => ({
+            id: o.id,
+            shortcut: o.shortcut,
+            label: overlayShortcutLabel(tt, o.id, o.label),
+          })),
+          {
+            general: tt.map_shortcuts_general,
+            layers: tt.map_layers,
+            overlays: tt.map_overlays,
+            help: tt.map_shortcuts_help,
+            escape: tt.map_shortcuts_escape,
+            zoom: tt.map_shortcuts_zoom,
+            pan: tt.map_shortcuts_pan,
+          },
+          { withKeysOnly: true }
+        );
+        return wireShortcutsDialog(
+          {
+            dialog: shortcutsDialogEl,
+            fallbackFocus: document.getElementById('mw-tools-btn'),
+          },
+          sections
+        );
+      })()
+    : null;
   if (features.layerRail) {
     (
       overlayRegistry as ReturnType<typeof createOverlayRegistry> & {
@@ -4366,6 +4434,7 @@ export async function initInteractiveMap(
       document.removeEventListener('keydown', placeCardEscHandler);
       closePlaceCard();
       overlayRegistry.dispose();
+      shortcutsDialog?.dispose();
       railDesktopMq?.removeEventListener('change', onRailMqChange);
       try {
         map.remove();

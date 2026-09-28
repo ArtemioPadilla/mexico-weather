@@ -32,6 +32,13 @@ interface Features extends InteractiveMapFeatures {
    *  teaser sets that too, and a 400px embed has no room for the panel.
    *  Only the full-page /mapa should set this. */
   mobileControls?: boolean;
+  /** Story 22.5 — the chrome budget of plan PARIDAD_VISUAL §1.2 (≤ 8
+   *  controls over the map on desktop, ≤ 5 on a phone). The rail starts
+   *  collapsed to its Capas / Superposiciones tab bar (a tab opens it);
+   *  the timeline's step buttons (« ‹ › » Ahora) fade in on hover or
+   *  focus from `sm` on a pointer that hovers, and below `sm` they, "Ver
+   *  10 días" and the rail show with the Controles panel. Only /mapa. */
+  compactChrome?: boolean;
 }
 
 interface Props {
@@ -177,6 +184,7 @@ const cfg = JSON.stringify({
   ]}
   style={`height:${height};--im-rail-top:${railOffsetTop};`}
   data-im-config={cfg}
+  data-compact={features.compactChrome ? '' : undefined}
 >
   {/* Story 19.2 — first-visit welcome card (non-modal; the map stays
       usable). Hidden until interactive-map.ts confirms the browser has
@@ -291,15 +299,24 @@ const cfg = JSON.stringify({
       (Story 11.3), as the opacity slider and the accordion did. */}
   {features.layerRail && (
     <div
-      class="im-rail im-chrome dark absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-52 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg p-2 sm:p-2.5 text-sm shadow backdrop-blur-sm"
+      class:list={[
+        'im-rail group/rail im-chrome dark absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-52 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg p-2 sm:p-2.5 text-sm shadow backdrop-blur-sm',
+        /* Story 22.5 — folded to its tab bar the rail sizes to the tabs
+           (the layers tab also names the active layer); below sm it
+           shows with the Controles panel only. */
+        features.compactChrome &&
+          'sm:data-[rail-open=false]:w-auto max-sm:hidden max-sm:group-data-[controls=open]/chrome:block',
+      ]}
       aria-label={t.map_layers}
       role="group"
       data-rail-tab="layers"
+      data-rail-collapsible={features.compactChrome ? '' : undefined}
+      data-rail-open={features.compactChrome ? 'false' : undefined}
     >
       <div
         role="tablist"
         aria-label={t.map_layers}
-        class="hidden group-data-[controls=open]/chrome:flex sm:flex gap-1 rounded-md bg-white/5 p-0.5 text-[11px] font-semibold"
+        class="hidden group-data-[controls=open]/chrome:flex sm:flex gap-1 rounded-md bg-white/5 p-0.5 text-[11px] font-semibold group-data-[rail-open=false]/rail:mb-0"
       >
         <button
           id={ids.layersTab}
@@ -307,16 +324,24 @@ const cfg = JSON.stringify({
           role="tab"
           aria-selected="true"
           aria-controls={ids.layersPanel}
+          aria-expanded={features.compactChrome ? 'false' : undefined}
           data-rail-tab-btn="layers"
-          class="flex-1 rounded px-2 py-1 text-gray-300 hover:bg-white/10 aria-selected:bg-white/15 aria-selected:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:min-h-[44px]"
-          data-i18n-en={ui.en.map_layers}
-        >{t.map_layers}</button>
+          class="inline-flex flex-1 items-center justify-center gap-1 rounded px-2 py-1 text-gray-300 hover:bg-white/10 aria-selected:bg-white/15 aria-selected:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:min-h-[44px]"
+        ><span data-i18n-en={ui.en.map_layers}>{t.map_layers}</span>{features.compactChrome && (
+            /* Story 22.5 — the active layer's short name while the rail is
+               collapsed (filled by interactive-map.ts). */
+            <span
+              data-rail-current
+              class="hidden max-w-[5.5rem] truncate font-normal text-blue-200 group-data-[rail-open=false]/rail:inline"
+            ></span>
+          )}</button>
         <button
           id={ids.overlaysTab}
           type="button"
           role="tab"
           aria-selected="false"
           aria-controls={ids.overlaysPanel}
+          aria-expanded={features.compactChrome ? 'false' : undefined}
           tabindex="-1"
           data-rail-tab-btn="overlays"
           class="inline-flex flex-[2] items-center justify-center gap-1 rounded px-2 py-1 text-gray-300 hover:bg-white/10 aria-selected:bg-white/15 aria-selected:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:min-h-[44px]"
@@ -326,7 +351,12 @@ const cfg = JSON.stringify({
             class="min-w-[1rem] rounded-full bg-blue-500/80 px-1 text-[10px] leading-4 text-white"
           ></span></button>
       </div>
-      <div id={ids.layersPanel} role="tabpanel" aria-labelledby={ids.layersTab}>
+      <div
+        id={ids.layersPanel}
+        role="tabpanel"
+        aria-labelledby={ids.layersTab}
+        hidden={features.compactChrome}
+      >
         <div id={ids.layerBtns} class="flex flex-col gap-1 sm:grid sm:grid-cols-3">
           {/* Active layer block: interactive-map.ts appends the tiles
               before it, then moves it after the active tile's row and
@@ -407,18 +437,19 @@ const cfg = JSON.stringify({
       id={ids.controlsToggle}
       type="button"
       aria-expanded="false"
-      aria-label="Controles del mapa"
-      data-i18n-en-aria-label="Map controls"
-      title="Controles del mapa"
-      class="absolute bottom-[4.5rem] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-gray-900/85 text-base text-white shadow-lg backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
-      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-sliders"></use></svg></button
+      aria-label={features.compactChrome ? t.map_controls_compact : 'Controles del mapa'}
+      data-i18n-en-aria-label={features.compactChrome ? ui.en.map_controls_compact : 'Map controls'}
+      title={features.compactChrome ? t.map_controls_compact : 'Controles del mapa'}
+      data-i18n-en-title={features.compactChrome ? ui.en.map_controls_compact : 'Map controls'}
+      class="absolute bottom-[4.5rem] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-gray-900/85 text-base text-white shadow-lg backdrop-blur-sm aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
+      ><svg class="h-5 w-5" aria-hidden="true"><use href={features.compactChrome ? '#i-layers' : '#i-sliders'}></use></svg></button
     >
   )}
 
   {features.timeline && (
     <div
       id={ids.timeline}
-      class="im-chrome dark absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 items-center gap-1 rounded-full px-3 py-1.5 text-sm shadow-lg backdrop-blur-sm sm:gap-2 sm:px-4"
+      class="im-timeline im-chrome dark absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 items-center gap-1 rounded-full px-3 py-1.5 text-sm shadow-lg backdrop-blur-sm sm:gap-2 sm:px-4"
       role="group"
       aria-label={t.timeline_label}
     >
@@ -436,7 +467,7 @@ const cfg = JSON.stringify({
         type="button"
         aria-label="Día anterior"
         title="Día anterior (-24 h)"
-        class="hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+        class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
         >«</button
       >
       <button
@@ -444,7 +475,7 @@ const cfg = JSON.stringify({
         type="button"
         aria-label={t.timeline_prev}
         title="Hora anterior"
-        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        class="tl-secondary inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
         >‹</button
       >
       <span
@@ -459,7 +490,7 @@ const cfg = JSON.stringify({
         type="button"
         aria-label={t.timeline_next}
         title="Hora siguiente"
-        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        class="tl-secondary inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
         >›</button
       >
       <button
@@ -467,7 +498,7 @@ const cfg = JSON.stringify({
         type="button"
         aria-label="Día siguiente"
         title="Día siguiente (+24 h)"
-        class="hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+        class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
         >»</button
       >
       <button
@@ -475,7 +506,7 @@ const cfg = JSON.stringify({
         type="button"
         aria-label="Volver al frame actual"
         title="Ahora"
-        class="hidden rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+        class="tl-secondary hidden rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
         >Ahora</button
       >
       {/* Story 15.1 — on-demand 10-day window for field/wind layers.
@@ -485,7 +516,7 @@ const cfg = JSON.stringify({
         id="tl-extend"
         type="button"
         hidden
-        class="rounded-full bg-blue-600/90 px-2.5 py-1 text-[11px] font-semibold hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-60"
+        class="tl-phone-secondary rounded-full bg-blue-600/90 px-2.5 py-1 text-[11px] font-semibold hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-60"
         aria-label={t.timeline_extend}
         title={t.timeline_extend}
         >{t.timeline_extend}</button
@@ -855,6 +886,20 @@ const cfg = JSON.stringify({
               class="inline-flex min-h-[44px] items-center gap-1.5 rounded-md bg-white/5 px-3 text-xs font-medium text-gray-100 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
             ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-left"></use></svg> <span data-i18n-en={ui.en.back_home}>{t.back_home}</span></a>
           )}
+          {features.layerRail && (
+            /* Story 22.5 — the `?` cheat-sheet (the key works anywhere on
+               the page; this is the pointer path). The document-level
+               opener in shortcuts-dialog.ts runs after this menu closed. */
+            <button
+              id="mw-shortcuts-open"
+              type="button"
+              data-shortcuts-open
+              data-tools-close
+              aria-haspopup="dialog"
+              aria-controls="mw-shortcuts"
+              class="flex min-h-[44px] w-full items-center gap-1.5 rounded-md bg-white/5 px-3 text-xs font-medium text-gray-100 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+            ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-keyboard"></use></svg> <span class="flex-1 text-start" data-i18n-en={ui.en.map_shortcuts}>{t.map_shortcuts}</span><kbd class="rounded border border-white/20 bg-white/10 px-1.5 font-mono text-[11px] leading-5 text-white">?</kbd></button>
+          )}
           <p>
             <strong class="text-gray-800 dark:text-gray-100">Clima México</strong>
             — mapa interactivo del tiempo. Sin cuenta, sin cookies.
@@ -898,6 +943,34 @@ const cfg = JSON.stringify({
         )}
       </div>
     </div>
+  )}
+
+  {/* Story 22.5 — the keyboard cheat-sheet. Filled and wired by
+      interactive-map.ts from LAYERS and overlayDefs (shortcuts.ts +
+      shortcuts-dialog.ts): `?` or the ⋯ → Info entry opens it; Esc, `?`,
+      the close button or the backdrop close it. Modal, so the map's
+      letter keys never act behind it. */}
+  {toolsMenu && features.layerRail && (
+    <dialog
+      id="mw-shortcuts"
+      aria-labelledby="mw-shortcuts-title"
+      class="im-chrome dark m-auto max-h-[min(85dvh,42rem)] w-[min(44rem,calc(100vw-1.5rem))] overflow-y-auto rounded-xl border border-white/10 p-4 text-sm shadow-2xl backdrop:bg-black/50"
+    >
+      <div class="mb-3 flex items-center justify-between gap-2">
+        <h2 id="mw-shortcuts-title" class="text-base font-semibold text-white" data-i18n-en={ui.en.map_shortcuts}>{t.map_shortcuts}</h2>
+        <button
+          type="button"
+          data-shortcuts-close
+          aria-label={t.map_shortcuts_close}
+          data-i18n-en-aria-label={ui.en.map_shortcuts_close}
+          title={t.map_shortcuts_close}
+          data-i18n-en-title={ui.en.map_shortcuts_close}
+          class="flex h-11 w-11 items-center justify-center rounded-full text-gray-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-x"></use></svg></button>
+      </div>
+      <div data-shortcuts-body class="grid gap-4 sm:grid-cols-3"></div>
+      <p class="mt-3 text-[11px] text-gray-400" data-i18n-en={ui.en.map_shortcuts_hint}>{t.map_shortcuts_hint}</p>
+    </dialog>
   )}
 
   {/* Story 22.3 — while a tool is on (measuring, the crosshair, a
@@ -997,8 +1070,12 @@ const cfg = JSON.stringify({
     initInteractiveMap,
     type InteractiveMapFeatures,
   } from '../lib/interactive-map';
-  import { wireRailTabs } from '../lib/map/chrome/rail-tabs';
+  import { wireRailTabs, type RailTabs } from '../lib/map/chrome/rail-tabs';
   import { wireToolsMenu } from '../lib/map/chrome/tools-menu';
+
+  // Rail tabs per rail, so the Controles panel can open/collapse a
+  // collapsible rail (Story 22.5) through the same state machine.
+  const railTabsByRail = new WeakMap<HTMLElement, RailTabs>();
 
   type ImCfg = {
     mapId: string;
@@ -1136,7 +1213,15 @@ const cfg = JSON.stringify({
         // Story 22.2 — the tab bar hides with the panel below sm; leave
         // the rail on its layers tab so the layer icons never vanish
         // behind a tab the phone can no longer switch back from.
-        if (!open) {
+        // Story 22.5 — a collapsible rail (/mapa) hides with the panel
+        // below sm: opening the panel opens it on the layers tab, closing
+        // the panel collapses it.
+        const rail = root.querySelector<HTMLElement>('.im-rail');
+        const tabs = rail ? railTabsByRail.get(rail) : undefined;
+        if (rail && tabs && rail.dataset.railCollapsible !== undefined) {
+          tabs.select('layers');
+          tabs.setOpen(open);
+        } else if (!open) {
           root
             .querySelector<HTMLElement>('.im-rail [data-rail-tab-btn="layers"]')
             ?.click();
@@ -1162,7 +1247,7 @@ const cfg = JSON.stringify({
     document.querySelectorAll<HTMLElement>('.im-rail').forEach((rail) => {
       if (rail.dataset.railTabsWired === '1') return;
       rail.dataset.railTabsWired = '1';
-      wireRailTabs(rail);
+      railTabsByRail.set(rail, wireRailTabs(rail));
     });
   }
 

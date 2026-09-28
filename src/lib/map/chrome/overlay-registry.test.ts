@@ -91,6 +91,23 @@ describe('createOverlayRegistry (Story 22.2)', () => {
     expect(precip?.title).toBe('');
   });
 
+  it('titles only a letter the handler honours (Story 22.5)', () => {
+    document.body.innerHTML = '<div id="wrap"></div>';
+    const wrap = document.getElementById('wrap') as HTMLElement;
+    // A layer owns T: Sistemas tropicales has no key of its own.
+    const reg = createOverlayRegistry({ wrap }, mkDefs(), {
+      layers: [{ shortcut: 'T', id: 'temperature' }],
+    });
+    reg.build();
+    expect(
+      wrap.querySelector<HTMLElement>('[data-overlay-row="tropical"]')?.title
+    ).toBe('');
+    expect(
+      wrap.querySelector<HTMLElement>('[data-overlay-row="graticule"]')?.title
+    ).toBe('Retícula (X)');
+    reg.dispose();
+  });
+
   it('filters rows accent-insensitively and hides empty groups', () => {
     const { wrap, filter } = setup();
     filter.value = 'reticula';
