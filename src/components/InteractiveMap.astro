@@ -25,8 +25,9 @@ import type { InteractiveMapFeatures } from '../lib/interactive-map';
  *  wrapper only adds the two flags that are pure markup here. */
 interface Features extends InteractiveMapFeatures {
   backLink?: boolean;
-  /** Below sm, reveal the rail's opacity slider, the overlays accordion,
-   *  the model toggle and the measure/snapshot tools behind one trigger
+  /** Below sm, reveal the rail's tab bar (Capas / Superposiciones) and
+   *  active-layer block (sub-options + opacity, Story 22.2), the model
+   *  toggle and the measure/snapshot tools behind one trigger
    *  (Story 11.3). Deliberately NOT keyed off layerRail: the homepage
    *  teaser sets that too, and a 400px embed has no room for the panel.
    *  Only the full-page /mapa should set this. */
@@ -121,6 +122,14 @@ const ids = {
   layerBtns: mapId === 'map' ? 'layerbtns' : `${mapId}-layerbtns`,
   overlayBtns: mapId === 'map' ? 'layerbtns-overlays' : `${mapId}-layerbtns-overlays`,
   overlaysPanel: mapId === 'map' ? 'mw-overlays' : `${mapId}-mw-overlays`,
+  // Story 22.2 — compact rail: tabs, active-layer block, overlay filter.
+  layersTab: mapId === 'map' ? 'mw-layers-tab' : `${mapId}-mw-layers-tab`,
+  layersPanel: mapId === 'map' ? 'mw-layers' : `${mapId}-mw-layers`,
+  overlaysTab: mapId === 'map' ? 'mw-overlays-tab' : `${mapId}-mw-overlays-tab`,
+  overlayCount: mapId === 'map' ? 'mw-overlays-count' : `${mapId}-mw-overlays-count`,
+  overlayFilter: mapId === 'map' ? 'mw-overlays-filter' : `${mapId}-mw-overlays-filter`,
+  railActive: mapId === 'map' ? 'mw-rail-active' : `${mapId}-mw-rail-active`,
+  subOptions: mapId === 'map' ? 'mw-sub-options' : `${mapId}-mw-sub-options`,
   controlsToggle: mapId === 'map' ? 'mw-controls-toggle' : `${mapId}-controls-toggle`,
   opacityWrap: mapId === 'map' ? 'opacitywrap' : `${mapId}-opacitywrap`,
   opacity: mapId === 'map' ? 'opacity' : `${mapId}-opacity`,
@@ -258,50 +267,110 @@ const cfg = JSON.stringify({
 
   {/* Story 21.1 — `im-chrome dark`: dark translucent panel in both themes
       (tokens in global.css); the `dark` class makes the rows' `dark:`
-      utilities apply on the dark panel under the light theme too. */}
+      utilities apply on the dark panel under the light theme too.
+
+      Story 22.2 — compact rail with progressive disclosure: two tabs
+      (Capas / Superposiciones, wired by src/lib/map/chrome/rail-tabs.ts);
+      the layers tab is a grid of icon + short-label tiles (3 columns from
+      sm, a column of icons below it) and the active layer's block — its
+      sub-options and the opacity control — is moved by interactive-map.ts
+      right under the grid row of the active tile. The overlays tab keeps
+      the old accordion's ids (#mw-overlays, #layerbtns-overlays) and adds
+      a filter plus the four most used overlays pinned first. Below sm the
+      tab bar and the active block only show with the Controles panel open
+      (Story 11.3), as the opacity slider and the accordion did. */}
   {features.layerRail && (
     <div
-      class="im-rail im-chrome dark absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-44 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg p-2 sm:p-3 text-sm shadow backdrop-blur-sm"
+      class="im-rail im-chrome dark absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-52 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg p-2 sm:p-2.5 text-sm shadow backdrop-blur-sm"
       aria-label={t.map_layers}
       role="group"
+      data-rail-tab="layers"
     >
-      <p class="hidden sm:block font-semibold text-gray-700 dark:text-gray-200">{t.map_layers}</p>
-      <div id={ids.layerBtns} class="flex flex-col gap-1"></div>
-      <div id={ids.opacityWrap} class="hidden group-data-[controls=open]/chrome:block sm:block pt-1">
-        <label for={ids.opacity} class="block text-xs text-gray-600 dark:text-gray-400"
-          >{t.map_opacity}</label
-        >
-        <input
-          id={ids.opacity}
-          type="range"
-          min="0"
-          max="100"
-          value="80"
-          class="w-full accent-blue-600"
-        />
+      <div
+        role="tablist"
+        aria-label={t.map_layers}
+        class="hidden group-data-[controls=open]/chrome:flex sm:flex gap-1 rounded-md bg-white/5 p-0.5 text-[11px] font-semibold"
+      >
+        <button
+          id={ids.layersTab}
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls={ids.layersPanel}
+          data-rail-tab-btn="layers"
+          class="flex-1 rounded px-2 py-1 text-gray-300 hover:bg-white/10 aria-selected:bg-white/15 aria-selected:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:min-h-[44px]"
+          data-i18n-en={ui.en.map_layers}
+        >{t.map_layers}</button>
+        <button
+          id={ids.overlaysTab}
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls={ids.overlaysPanel}
+          tabindex="-1"
+          data-rail-tab-btn="overlays"
+          class="inline-flex flex-[2] items-center justify-center gap-1 rounded px-2 py-1 text-gray-300 hover:bg-white/10 aria-selected:bg-white/15 aria-selected:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:min-h-[44px]"
+        ><span data-i18n-en={ui.en.map_overlays}>{t.map_overlays}</span><span
+            id={ids.overlayCount}
+            hidden
+            class="min-w-[1rem] rounded-full bg-blue-500/80 px-1 text-[10px] leading-4 text-white"
+          ></span></button>
       </div>
-      {/* Legend moved out of the rail (plan P0.2) — see floating bar
-          below, anchored to the map's bottom-left. We keep a hidden
-          placeholder here to preserve any legacy querySelector that
-          might still reference #legend inside the rail. */}
-
-      {/* Snapshot compare buttons moved out of the layer rail (plan P2.4).
-          See the floating column below — they live to the right with
-          other globals, not as a "layer" choice. */}
-
-      {/*
-        Superposiciones (overlays) panel — zoom.earth-style checkboxes
-        for non-exclusive map decorations. Rendered as a <details>
-        accordion so the rail stays compact when not expanded.
-        Hidden on mobile to keep the rail compact; keyboard shortcuts
-        still toggle the overlays.
-      */}
-      <details id={ids.overlaysPanel} class="hidden group-data-[controls=open]/chrome:block sm:block pt-2 text-xs">
-        <summary class="cursor-pointer select-none font-semibold text-gray-700 dark:text-gray-200">
-          Superposiciones
-        </summary>
-        <div id={`${ids.layerBtns}-overlays`} class="mt-2 flex flex-col gap-1"></div>
-      </details>
+      <div id={ids.layersPanel} role="tabpanel" aria-labelledby={ids.layersTab}>
+        <div id={ids.layerBtns} class="flex flex-col gap-1 sm:grid sm:grid-cols-3">
+          {/* Active layer block: interactive-map.ts appends the tiles
+              before it, then moves it after the active tile's row and
+              hides it on the base map (nothing to vary or fade there). */}
+          <div
+            id={ids.railActive}
+            data-rail-active
+            hidden
+            class:list={[
+              'im-reveal col-span-full flex flex-col gap-1.5 rounded-md bg-white/5 p-1.5',
+              features.mobileControls &&
+                'max-sm:hidden max-sm:group-data-[controls=open]/chrome:flex',
+            ]}
+          >
+            <div
+              id={ids.subOptions}
+              class:list={[!features.mobileControls && 'max-sm:hidden']}
+            ></div>
+            <div id={ids.opacityWrap} class="flex items-center gap-2">
+              <label for={ids.opacity} class="shrink-0 text-[11px] text-gray-600 dark:text-gray-400"
+                >{t.map_opacity}</label
+              >
+              <input
+                id={ids.opacity}
+                type="range"
+                min="0"
+                max="100"
+                value="80"
+                class="min-w-0 flex-1 accent-blue-600"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        id={ids.overlaysPanel}
+        role="tabpanel"
+        aria-labelledby={ids.overlaysTab}
+        hidden
+        class="space-y-2 text-xs max-sm:w-60"
+      >
+        <input
+          id={ids.overlayFilter}
+          type="search"
+          autocomplete="off"
+          aria-label={t.map_overlays_filter}
+          placeholder={t.map_overlays_filter}
+          class="w-full rounded-md border border-white/10 bg-white/5 px-2 py-1 text-xs text-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 max-sm:min-h-[44px]"
+        />
+        <div
+          id={`${ids.layerBtns}-overlays`}
+          class="flex max-h-[min(50vh,22rem)] flex-col gap-1 overflow-y-auto pr-1"
+        ></div>
+      </div>
     </div>
   )}
 
@@ -312,8 +381,8 @@ const cfg = JSON.stringify({
   >
   </p>
 
-  {/* Mobile controls trigger (Story 11.3). Below sm, the opacity slider,
-      overlays accordion, model toggle and measure/snapshot tools are all
+  {/* Mobile controls trigger (Story 11.3). Below sm, the rail's tab bar
+      and active-layer block (Story 22.2), model toggle and measure/snapshot tools are all
       `hidden sm:*`, i.e. unreachable on a phone. This reveals them in
       place via data-controls on the map root — no DOM moves, since every
       one of those controls is wired by id from interactive-map.ts and
@@ -815,6 +884,7 @@ const cfg = JSON.stringify({
     initInteractiveMap,
     type InteractiveMapFeatures,
   } from '../lib/interactive-map';
+  import { wireRailTabs } from '../lib/map/chrome/rail-tabs';
 
   type ImCfg = {
     mapId: string;
@@ -859,6 +929,10 @@ const cfg = JSON.stringify({
           locate: document.getElementById(cfg.ids.loc),
           layerBtns: document.getElementById(cfg.ids.layerBtns),
           overlayBtns: document.getElementById(cfg.ids.overlayBtns),
+          overlayFilter: document.getElementById(cfg.ids.overlayFilter) as HTMLInputElement | null,
+          overlayCount: document.getElementById(cfg.ids.overlayCount),
+          railActive: document.getElementById(cfg.ids.railActive),
+          subOptions: document.getElementById(cfg.ids.subOptions),
           opacityWrap: document.getElementById(cfg.ids.opacityWrap),
           opacity: document.getElementById(cfg.ids.opacity) as HTMLInputElement | null,
           legend: document.getElementById(cfg.ids.legend),
@@ -945,6 +1019,14 @@ const cfg = JSON.stringify({
         if (open) root.dataset.controls = 'open';
         else delete root.dataset.controls;
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        // Story 22.2 — the tab bar hides with the panel below sm; leave
+        // the rail on its layers tab so the layer icons never vanish
+        // behind a tab the phone can no longer switch back from.
+        if (!open) {
+          root
+            .querySelector<HTMLElement>('.im-rail [data-rail-tab-btn="layers"]')
+            ?.click();
+        }
       };
       toggle.addEventListener('click', () => {
         setOpen(root.dataset.controls !== 'open');
@@ -960,10 +1042,22 @@ const cfg = JSON.stringify({
     });
   }
 
+  // Story 22.2 — Capas / Superposiciones tabs of every rail on the page.
+  // Pure DOM, so it runs before (and independently of) the lazy map boot.
+  function wireAllRailTabs(): void {
+    document.querySelectorAll<HTMLElement>('.im-rail').forEach((rail) => {
+      if (rail.dataset.railTabsWired === '1') return;
+      rail.dataset.railTabsWired = '1';
+      wireRailTabs(rail);
+    });
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', wireMobileControls);
+    document.addEventListener('DOMContentLoaded', wireAllRailTabs);
   } else {
     wireMobileControls();
+    wireAllRailTabs();
   }
 
   if (document.readyState === 'loading') {

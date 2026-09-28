@@ -52,7 +52,8 @@ interface Variant {
   mobile: boolean;
   budget: number;
   /** Measured 2026-09-27 on this branch (Story 22.1, re-measured after the
-   *  Story 21.2 satellite boot); see the per-variant comment. */
+   *  Story 21.2 satellite boot and on 2026-09-28 after the Story 22.2
+   *  compact rail); see the per-variant comment. */
   baseline: number;
 }
 
@@ -62,26 +63,33 @@ const VARIANTS: Variant[] = [
     viewport: { width: 1280, height: 800 },
     mobile: false,
     budget: CHROME_BUDGET.desktop,
-    // Back link, search, locate, 9 rail layers, 3 satellite sub-options
-    // (GeoColor / Infrarrojo / Color real — the active layer's, Story
-    // 21.2), opacity, overlays summary, 8 timeline controls (the 7 of the
-    // base layer + "Ver 10 días"), 3 MapLibre nav buttons, 5 model
-    // segments, 2 snapshot + 3 measure pills, ⚙, ℹ, SMN pill, feedback FAB.
-    // 38 on the base layer (Story 22.1) → 42 since /mapa boots on satellite.
-    baseline: 42,
+    // Back link, search, locate, the rail's 2 tabs (Capas /
+    // Superposiciones — Story 22.2, in place of the overlays summary), 9
+    // layer tiles, 3 satellite sub-options (GeoColor / Infrarrojo / Color
+    // real) and the opacity range in the active layer's block, 8 timeline
+    // controls (the 7 of the base layer + "Ver 10 días"), 3 MapLibre nav
+    // buttons, 5 model segments, 2 snapshot + 3 measure pills, ⚙, ℹ, SMN
+    // pill, feedback FAB.
+    // 38 on the base layer (Story 22.1) → 42 since /mapa boots on
+    // satellite (21.2) → 43 with the compact rail (22.2): the tab bar
+    // costs one control more than the summary it replaced, while the rail
+    // itself went from 15 visible rows to 7. Stories 22.3–22.5 carry the
+    // count down.
+    baseline: 43,
   },
   {
     name: 'mobile',
     viewport: { width: 360, height: 640 },
     mobile: true,
     budget: CHROME_BUDGET.mobile,
-    // Same minus what `hidden sm:*` drops on a phone (sub-options, opacity,
-    // overlays, model toggle, snapshot, day-skip/now/range), plus the
-    // Controles trigger and "Ver 10 días" (satellite, Story 21.2). The
-    // measure/crosshair pills are still shown at 360 px: the bootstrap
+    // Same minus what `hidden sm:*` drops on a phone (the rail's tab bar
+    // and active-layer block, model toggle, snapshot, day-skip/now/range),
+    // plus the Controles trigger and "Ver 10 días" (satellite, Story 21.2).
+    // The measure/crosshair pills are still shown at 360 px: the bootstrap
     // swaps the wrap's `hidden` for `flex` on the map's first `idle`, on
     // every viewport (interactive-map.ts, tools wiring). 26 on the base
-    // layer (Story 22.1) → 27 since /mapa boots on satellite.
+    // layer (Story 22.1) → 27 since /mapa boots on satellite; unchanged by
+    // the compact rail (Story 22.2).
     baseline: 27,
   },
 ];

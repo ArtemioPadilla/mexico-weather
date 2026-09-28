@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { mockOpenMeteo } from './helpers';
+import { railRowCount } from '../src/lib/map/chrome/layer-rail';
 
 /** 256×256 transparent PNG (base64) — a decodable tile for MapLibre.
  *  A 1×1 PNG is rejected by Chromium's createImageBitmap ("source image
@@ -1524,5 +1525,193 @@ test.describe('Story 21.3 — frame prefetch and A/B swap', () => {
       () => (window as unknown as E2eWin).__framePrefetch !== undefined
     );
     expect(hasPrefetcher).toBe(false);
+  });
+});
+
+test.describe('Story 22.2 — compact rail and progressive disclosure', () => {
+  const png = (route: import('@playwright/test').Route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'image/png',
+      body: TRANSPARENT_PNG,
+    });
+
+  /** /mapa on its GeoColor boot (Story 21.2), tiles and manifest served
+   *  locally, welcome card pre-dismissed (a one-time dialog). */
+  async function openOnSatellite(
+    page: import('@playwright/test').Page
+  ): Promise<void> {
+    await page.route('**/*.arcgisonline.com/**', png);
+    await page.route('**/gibs.earthdata.nasa.gov/**', png);
+    await page.route('**/tilecache.rainviewer.com/**', png);
+    await page.route('**/api.rainviewer.com/public/weather-maps.json', (r) =>
+      r.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: RAINVIEWER_MANIFEST,
+      })
+    );
+    await page.addInitScript(() => {
+      try {
+        localStorage.setItem('mw:welcomed', '1');
+      } catch {
+        /* private mode — the card shows */
+      }
+    });
+    await page.goto('mapa/');
+    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+      'aria-pressed',
+      'true',
+      { timeout: 20_000 }
+    );
+  }
+
+  /** Visible controls of the rail, as boxes. */
+  async function railBoxes(page: import('@playwright/test').Page) {
+    return page.locator('.im-rail').evaluate((rail) =>
+      Array.from(
+        rail.querySelectorAll<HTMLElement>('button, input, select, summary')
+      )
+        .filter((el) => el.checkVisibility())
+        .map((el) => {
+          const b = el.getBoundingClientRect();
+          return { id: el.id, y: b.y, height: b.height, width: b.width };
+        })
+    );
+  }
+
+  test('desktop rail: ≤ 9 rows with a layer active, only its sub-options, no chips', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const boxes = await railBoxes(page);
+    expect(railRowCount(boxes)).toBeLessThanOrEqual(9);
+
+    // Every layer is one click away, each tile icon + short label; the
+    // full name stays the accessible name and the tooltip carries the
+    // shortcut letter (the chips are gone until the `?` panel, 22.5).
+    for (const id of [
+      'base',
+      'radar',
+      'satellite',
+      'temperature',
+      'humidity',
+      'pressure',
+      'precipitation',
+      'wind',
+      'sunlight',
+    ]) {
+      await expect(page.locator(`#layerbtn-${id}`)).toBeVisible();
+    }
+    await expect(page.locator('#layerbtn-temperature')).toHaveText('Temp.');
+    await expect(page.locator('#layerbtn-temperature')).toHaveAttribute(
+      'aria-label',
+      'Temperatura'
+    );
+    await expect(page.locator('#layerbtn-radar')).toHaveAttribute(
+      'title',
+      'Radar (R)'
+    );
+    await expect(page.locator('.im-rail kbd')).toHaveCount(0);
+
+    // Only the active layer's variants show, inside its block, right
+    // under the grid row of the satellite tile (row 1 of 3).
+    await expect(page.locator('#satellite-sub-options')).toBeVisible();
+    for (const g of ['temp', 'humidity', 'precipitation', 'pressure', 'wind']) {
+      await expect(page.locator(`#${g}-sub-options`)).toBeHidden();
+    }
+    const block = page.locator('#mw-rail-active');
+    await expect(block).toBeVisible();
+    await expect(block.locator('#opacitywrap')).toBeVisible();
+    await expect(block.locator('#satellite-sub-options')).toBeVisible();
+    const sat = await page.locator('#layerbtn-satellite').boundingBox();
+    const temp = await page.locator('#layerbtn-temperature').boundingBox();
+    const blk = await block.boundingBox();
+    expect(blk!.y).toBeGreaterThanOrEqual(sat!.y + sat!.height);
+    expect(blk!.y + blk!.height).toBeLessThanOrEqual(temp!.y);
+  });
+
+  test('the active block follows the layer and leaves with the base map', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const block = page.locator('#mw-rail-active');
+    // Sun (row 3, no variants, computed locally): the block moves under
+    // the last row, with the opacity control and no sub-options.
+    await page.locator('#layerbtn-sunlight').click();
+    await expect(page.locator('#layerbtn-sunlight')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(page.locator('#opacitywrap')).toBeVisible();
+    await expect(page.locator('#satellite-sub-options')).toBeHidden();
+    await expect(page.locator('#mw-sub-options')).toBeHidden();
+    const sun = await page.locator('#layerbtn-sunlight').boundingBox();
+    const blk = await block.boundingBox();
+    expect(blk!.y).toBeGreaterThanOrEqual(sun!.y + sun!.height);
+    // The opacity control drives the active layer as before.
+    await page.locator('#opacity').fill('30');
+    await expect(page.locator('#opacity')).toHaveValue('30');
+
+    await page.locator('#layerbtn-base').click();
+    await expect(block).toBeHidden();
+    await expect(page.locator('#opacitywrap')).toBeHidden();
+  });
+
+  test('overlays tab: most used pinned first, filter, every overlay in ≤ 2 clicks', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const tab = page.locator('#mw-overlays-tab');
+    const panel = page.locator('#mw-overlays');
+    await expect(panel).toBeHidden();
+    await expect(tab).toHaveAttribute('aria-selected', 'false');
+
+    // Click 1: the tab.
+    await tab.click();
+    await expect(tab).toHaveAttribute('aria-selected', 'true');
+    await expect(panel).toBeVisible();
+    await expect(page.locator('#mw-layers')).toBeHidden();
+    const order = await page
+      .locator('#layerbtns-overlays [data-overlay-row]')
+      .evaluateAll((rows) =>
+        rows.map((r) => (r as HTMLElement).dataset.overlayRow)
+      );
+    expect(order.slice(0, 4)).toEqual([
+      'tropical',
+      'clouds',
+      'precipMode',
+      'windOverlay',
+    ]);
+    expect(order.length).toBeGreaterThanOrEqual(20);
+    // Every overlay checkbox is there, with its old id, and visible.
+    for (const id of order) {
+      await expect(page.locator(`#overlay-${id}`)).toBeVisible();
+    }
+    // Click 2: toggle one that is not pinned.
+    const grat = page.locator('#overlay-graticule');
+    await grat.check();
+    await expect(grat).toBeChecked();
+    await expect(page.locator('#mw-overlays-count')).toBeVisible();
+
+    // Filter: accent-insensitive, hides the rest, Escape clears.
+    const filter = page.locator('#mw-overlays-filter');
+    await filter.fill('reticula');
+    await expect(
+      page.locator('#layerbtns-overlays [data-overlay-row]:visible')
+    ).toHaveCount(1);
+    await expect(page.locator('[data-overlay-row="graticule"]')).toBeVisible();
+    await filter.press('Escape');
+    await expect(filter).toHaveValue('');
+    await expect(
+      page.locator('#layerbtns-overlays [data-overlay-row]:visible')
+    ).toHaveCount(order.length);
+
+    // Keyboard: ← goes back to the layers tab (roving focus).
+    await tab.focus();
+    await page.keyboard.press('ArrowLeft');
+    await expect(page.locator('#mw-layers-tab')).toBeFocused();
+    await expect(page.locator('#mw-layers')).toBeVisible();
+    await expect(panel).toBeHidden();
   });
 });

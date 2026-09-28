@@ -88,6 +88,22 @@ export interface UiStrings {
   layer_explainer_wind: string;
   layer_explainer_sunlight: string;
   map_opacity: string;
+  /** Story 22.2 — short rail labels (icon + short label tiles). */
+  map_layer_short_base: string;
+  map_layer_short_radar: string;
+  map_layer_short_satellite: string;
+  map_layer_short_temperature: string;
+  map_layer_short_humidity: string;
+  map_layer_short_pressure: string;
+  map_layer_short_precipitation: string;
+  map_layer_short_wind: string;
+  map_layer_short_sunlight: string;
+  /** Story 22.2 — overlays tab of the layers panel. */
+  map_overlays: string;
+  map_overlays_filter: string;
+  map_overlays_pinned: string;
+  map_overlays_all: string;
+  map_overlays_empty: string;
   legend_light: string;
   legend_moderate: string;
   legend_heavy: string;
@@ -202,6 +218,20 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     layer_explainer_wind: 'Velocidad y dirección del viento a 10 m. Activa Rachas para ver las máximas instantáneas en lugar del promedio.',
     layer_explainer_sunlight: 'Posición del Sol y zonas en sombra (terminador día/noche). Activa Límite nocturno (O) para ver sólo la línea sobre cualquier capa.',
     map_opacity: 'Opacidad',
+    map_layer_short_base: 'Mapa',
+    map_layer_short_radar: 'Radar',
+    map_layer_short_satellite: 'Satélite',
+    map_layer_short_temperature: 'Temp.',
+    map_layer_short_humidity: 'Humedad',
+    map_layer_short_pressure: 'Presión',
+    map_layer_short_precipitation: 'Precip.',
+    map_layer_short_wind: 'Viento',
+    map_layer_short_sunlight: 'Sol',
+    map_overlays: 'Superposiciones',
+    map_overlays_filter: 'Filtrar superposiciones',
+    map_overlays_pinned: 'Más usadas',
+    map_overlays_all: 'Todas',
+    map_overlays_empty: 'Sin coincidencias',
     legend_light: 'Ligera',
     legend_moderate: 'Moderada',
     legend_heavy: 'Intensa',
@@ -313,6 +343,20 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     layer_explainer_wind: 'Wind speed and direction at 10 m. Turn on Gusts to see instantaneous peaks instead of the average.',
     layer_explainer_sunlight: 'Sun position and shaded areas (day/night terminator). Turn on Night line (O) to keep just the line over any layer.',
     map_opacity: 'Opacity',
+    map_layer_short_base: 'Map',
+    map_layer_short_radar: 'Radar',
+    map_layer_short_satellite: 'Satellite',
+    map_layer_short_temperature: 'Temp.',
+    map_layer_short_humidity: 'Humidity',
+    map_layer_short_pressure: 'Pressure',
+    map_layer_short_precipitation: 'Precip.',
+    map_layer_short_wind: 'Wind',
+    map_layer_short_sunlight: 'Sun',
+    map_overlays: 'Overlays',
+    map_overlays_filter: 'Filter overlays',
+    map_overlays_pinned: 'Most used',
+    map_overlays_all: 'All',
+    map_overlays_empty: 'No matches',
     legend_light: 'Light',
     legend_moderate: 'Moderate',
     legend_heavy: 'Heavy',

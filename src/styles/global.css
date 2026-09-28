@@ -108,6 +108,31 @@
 }
 
 /*
+ * Story 22.2 — progressive disclosure in the layer rail. The active
+ * layer's block (sub-options + opacity) and each sub-option row fade and
+ * slide in whenever they appear: the animation restarts on every
+ * display:none → shown flip and every DOM move, i.e. each layer switch.
+ */
+.im-reveal {
+  animation: im-reveal 160ms ease-out;
+}
+@keyframes im-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .im-reveal {
+    animation: none;
+  }
+}
+
+/*
  * Tailwind v4 changed the default border/divide color from `gray-200` to
  * `currentColor`. The markup uses many bare `border` utilities that relied on
  * the v3 gray-200 default. This is the documented v4 compatibility shim to

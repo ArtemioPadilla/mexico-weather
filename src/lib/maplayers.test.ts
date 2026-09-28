@@ -3,8 +3,24 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LAYERS, LAYER_IDS, getLayer, RADAR_LEGEND } from './maplayers';
+import { ui } from '../i18n/ui';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
+
+describe('layer short labels (Story 22.2)', () => {
+  it('every layer has a short label in both languages, ≤ 9 chars', () => {
+    for (const l of LAYERS) {
+      for (const lang of ['es', 'en'] as const) {
+        const short = (ui[lang] as unknown as Record<string, string>)[
+          l.shortLabelKey
+        ];
+        expect(short, `${lang} ${l.shortLabelKey}`).toBeTruthy();
+        // A 3-column tile of the desktop rail fits ~9 characters at 11 px.
+        expect(short.length, `${lang} ${short}`).toBeLessThanOrEqual(9);
+      }
+    }
+  });
+});
 
 describe('layer icons', () => {
   it('are sprite ids (no emoji / nothing outside the BMP)', () => {

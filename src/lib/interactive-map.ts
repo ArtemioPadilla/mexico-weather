@@ -126,6 +126,14 @@ export interface InteractiveMapElements {
    *  menu of toggleable map decorations. Optional; when null overlays
    *  are reachable only via keyboard shortcuts. */
   overlayBtns?: HTMLElement | null;
+  /** Story 22.2 — overlays tab: filter input + "n on" badge. Optional. */
+  overlayFilter?: HTMLInputElement | null;
+  overlayCount?: HTMLElement | null;
+  /** Story 22.2 — the active layer's block (sub-options + opacity) that
+   *  follows the active tile's grid row, and its sub-options slot.
+   *  Optional: without them the sub-options fall back to layerBtns. */
+  railActive?: HTMLElement | null;
+  subOptions?: HTMLElement | null;
   opacityWrap?: HTMLElement | null;
   opacity?: HTMLInputElement | null;
   legend?: HTMLElement | null;
@@ -176,8 +184,9 @@ export interface InteractiveMapFeatures {
    *  Only the full-page maps set it; embeds never nag. */
   welcome?: boolean;
   /** "Controles" trigger that reveals the `hidden sm:*` chrome on phones
-   *  (Story 11.3). Markup-only, except that with it present the opacity
-   *  wrap's visibility below `sm` is the panel's to decide. */
+   *  (Story 11.3). Markup-only: with it present the rail's tab bar and
+   *  the active layer's block (sub-options + opacity) show below `sm`
+   *  only while the panel is open (Story 22.2). */
   mobileControls?: boolean;
 }
 
@@ -297,6 +306,11 @@ import { createCloudsOverlay } from './map/overlays/clouds';
 import { createCityValuesOverlay } from './map/overlays/city-values';
 import { createTimelinePlayer } from './map/chrome/timeline-player';
 import { createSubOptionsGroup } from './map/chrome/sub-options';
+import {
+  PINNED_OVERLAYS,
+  RAIL_COLUMNS_DESKTOP,
+  activeBlockAnchor,
+} from './map/chrome/layer-rail';
 import { createPinManager } from './map/chrome/pin-manager';
 import { createOverlayRegistry } from './map/chrome/overlay-registry';
 import { computeIsobars } from './map/utils/isobars';
@@ -2355,20 +2369,36 @@ export async function initInteractiveMap(
       }
     }
     const akind = getLayerDef(activeLayer)?.kind;
-    // The wrap is `hidden … sm:block`, so on desktop it is always shown
-    // and this toggle only ever mattered below `sm`. With the Controles
-    // panel (Story 11.3) the phone shows it through
-    // `group-data-[controls=open]`, and dropping `hidden` here leaked the
-    // slider onto the map for any active weather layer — visible from the
-    // first paint now that /mapa boots on satellite (Story 21.2). Pages
-    // without the panel (home embed) keep the old behaviour.
-    if (!features.mobileControls) {
+    // Story 22.2 — the opacity control lives in the active layer's block,
+    // which follows the active tile's grid row and exists only for a
+    // weather layer (nothing to fade on the base map). The block's own
+    // classes decide the phone case: with the Controles panel (Story
+    // 11.3) it shows only while the panel is open — the fix for the
+    // Story 21.2 leak of the slider onto the phone map stays — and the
+    // home embed keeps the slider it always had.
+    placeActiveBlock();
+    if (opts.els.railActive) {
+      opts.els.railActive.hidden = !(
+        akind === 'raster-tile' ||
+        akind === 'field' ||
+        akind === 'particles' ||
+        akind === 'overlay'
+      );
+    } else if (!features.mobileControls) {
       opts.els.opacityWrap?.classList.toggle(
         'hidden',
         akind !== 'raster-tile' &&
           akind !== 'field' &&
           akind !== 'particles' &&
           akind !== 'overlay'
+      );
+    }
+    // Collapse the sub-options slot for layers without variants (radar,
+    // sun) so it leaves no gap above the opacity row.
+    const subSlot = opts.els.subOptions;
+    if (subSlot) {
+      subSlot.hidden = !Array.from(subSlot.children).some(
+        (c) => !c.classList.contains('hidden')
       );
     }
     renderLegend(legendKindFor());
@@ -2948,53 +2978,80 @@ export async function initInteractiveMap(
     syncHash();
   }
 
+  // Story 22.2 — compact rail. Tiles: icon + short label (the full
+  // name stays the accessible name and the tooltip, with the shortcut
+  // letter until the `?` cheat-sheet of Story 22.5 takes it over). The
+  // grid is 3 columns from `sm` and a single column of icons below it;
+  // the active layer's block is re-inserted after the last tile of the
+  // active tile's row (layer-rail.ts), so it opens right under the layer
+  // the visitor picked.
+  const railActiveEl =
+    features.layerRail && opts.els.layerBtns && opts.els.railActive
+      ? opts.els.railActive
+      : null;
+  const railDesktopMq =
+    railActiveEl && typeof window.matchMedia === 'function'
+      ? window.matchMedia('(min-width: 640px)')
+      : null;
+  function placeActiveBlock(): void {
+    const wrap = opts.els.layerBtns;
+    if (!wrap || !railActiveEl) return;
+    const tiles = Array.from(
+      wrap.querySelectorAll<HTMLElement>(':scope > [id^="layerbtn-"]')
+    );
+    const anchor = activeBlockAnchor(
+      tiles.length,
+      tiles.findIndex((b) => b.id === `layerbtn-${activeLayer}`),
+      railDesktopMq?.matches ? RAIL_COLUMNS_DESKTOP : 1
+    );
+    const after = anchor >= 0 ? tiles[anchor] : tiles[tiles.length - 1];
+    if (after && after.nextElementSibling !== railActiveEl) {
+      after.after(railActiveEl);
+    }
+  }
+  const onRailMqChange = (): void => placeActiveBlock();
+  railDesktopMq?.addEventListener('change', onRailMqChange);
+
   function buildLayerButtons(): void {
     const wrap = opts.els.layerBtns;
     if (!wrap || !features.layerRail) return;
     const allowed = features.railLayers ? new Set(features.railLayers) : null;
     for (const def of LAYERS) {
       if (allowed && !allowed.has(def.id)) continue;
+      const fullLabel = t[def.labelKey as keyof typeof t] ?? def.id;
       const btn = document.createElement('button');
       btn.id = `layerbtn-${def.id}`;
       btn.type = 'button';
       btn.setAttribute('aria-pressed', String(def.id === activeLayer));
       btn.className =
-        'flex items-center gap-1.5 rounded px-2 py-1 text-left hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:bg-blue-400/10';
-      // zoom.earth-style icon prefix; falls back to text-only when LayerDef
-      // has no icon glyph.
+        'flex min-w-0 items-center justify-center gap-1.5 rounded px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/20 aria-pressed:font-semibold aria-pressed:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:bg-blue-400/10 sm:flex-col sm:gap-0.5 sm:px-1 sm:py-1.5';
+      // zoom.earth-style icon; falls back to text-only when LayerDef has
+      // no icon glyph.
       if (def.icon) {
         // Sprite icon (IconSprite.astro symbol) — monochrome, follows
         // currentColor, identical on every OS unlike the emoji it replaced.
-        btn.appendChild(spriteIcon(def.icon, 'h-4 w-4 shrink-0'));
+        btn.appendChild(spriteIcon(def.icon, 'h-4 w-4 shrink-0 sm:h-5 sm:w-5'));
       }
+      // Short label under the icon from `sm` up; icons only on a phone
+      // (the rail stays one narrow column there).
       const labelSpan = document.createElement('span');
-      labelSpan.textContent = t[def.labelKey as keyof typeof t];
-      // Hide label text on narrow viewports — the icon + tooltip carry
-      // the meaning and the rail stays narrow on mobile (zoom.earth
-      // parity). Desktop (>=sm) sees full text.
-      labelSpan.className = 'hidden sm:inline';
+      labelSpan.textContent =
+        t[def.shortLabelKey as keyof typeof t] ?? fullLabel;
+      labelSpan.className =
+        'hidden max-w-full truncate text-[11px] leading-tight sm:block';
       btn.appendChild(labelSpan);
-      // For screen readers we still need the label; the title attribute
-      // already includes it but ensure SR users get it.
-      if (!btn.getAttribute('aria-label')) {
-        btn.setAttribute(
-          'aria-label',
-          t[def.labelKey as keyof typeof t] ?? def.id
-        );
-      }
-      // Keyboard shortcut hint as a tiny trailing chip on desktop. Hidden
-      // on narrow screens to keep the rail compact.
-      if (def.shortcut) {
-        const kbd = document.createElement('kbd');
-        kbd.textContent = def.shortcut;
-        kbd.className =
-          'ml-auto hidden rounded border border-gray-500/40 px-1 text-xs font-mono text-gray-400 lg:inline';
-        btn.appendChild(kbd);
-        btn.title = `${t[def.labelKey as keyof typeof t]} (${def.shortcut})`;
-      }
+      btn.setAttribute('aria-label', fullLabel);
+      // No shortcut chip any more (Story 22.2): the letter rides in the
+      // tooltip until the `?` panel (Story 22.5) lists every shortcut.
+      btn.title = def.shortcut ? `${fullLabel} (${def.shortcut})` : fullLabel;
       btn.addEventListener('click', () => void setActiveLayer(def.id));
-      wrap.appendChild(btn);
+      if (railActiveEl && railActiveEl.parentElement === wrap) {
+        wrap.insertBefore(btn, railActiveEl);
+      } else {
+        wrap.appendChild(btn);
+      }
     }
+    placeActiveBlock();
   }
   buildLayerButtons();
 
@@ -3090,102 +3147,91 @@ export async function initInteractiveMap(
   // Sub-options (zoom.earth's per-layer variants). Single generic
   // factory (createSubOptionsGroup) replaces five near-identical
   // copies — see src/lib/map/chrome/sub-options.ts.
+  // Story 22.2 — they render in the active layer's block (subOptions
+  // slot), not under the whole list; layerBtns is the fallback for a
+  // caller without the compact rail markup.
   // ----------------------------------------------------------------
-  const tempSub = createSubOptionsGroup<TempSubOption>(
-    opts.els.layerBtns ?? null,
-    {
-      containerId: 'temp-sub-options',
-      getActive: () => tempSubOption,
-      onSelect: (id) => {
-        tempSubOption = id;
-        void setActiveLayer('temperature');
-      },
-      isVisible: () => activeLayer === 'temperature',
-      options: [
-        { id: 'actual', label: 'Actual' },
-        { id: 'aparente', label: 'Aparente' },
-        { id: 'bulbo', label: 'Bulbo húmedo' },
-      ],
-    }
-  );
+  const subOptionsWrap = opts.els.subOptions ?? opts.els.layerBtns ?? null;
+  const tempSub = createSubOptionsGroup<TempSubOption>(subOptionsWrap, {
+    containerId: 'temp-sub-options',
+    getActive: () => tempSubOption,
+    onSelect: (id) => {
+      tempSubOption = id;
+      void setActiveLayer('temperature');
+    },
+    isVisible: () => activeLayer === 'temperature',
+    options: [
+      { id: 'actual', label: 'Actual' },
+      { id: 'aparente', label: 'Aparente' },
+      { id: 'bulbo', label: 'Bulbo húmedo' },
+    ],
+  });
   const refreshTempSubOptions = (): void => tempSub.refresh();
 
-  const humiditySub = createSubOptionsGroup<HumiditySubOption>(
-    opts.els.layerBtns ?? null,
-    {
-      containerId: 'humidity-sub-options',
-      getActive: () => humiditySubOption,
-      onSelect: (id) => {
-        humiditySubOption = id;
-        void setActiveLayer('humidity');
-      },
-      isVisible: () => activeLayer === 'humidity',
-      options: [
-        { id: 'relativa', label: 'Relativa' },
-        { id: 'rocio', label: 'Punto de rocío' },
-      ],
-    }
-  );
+  const humiditySub = createSubOptionsGroup<HumiditySubOption>(subOptionsWrap, {
+    containerId: 'humidity-sub-options',
+    getActive: () => humiditySubOption,
+    onSelect: (id) => {
+      humiditySubOption = id;
+      void setActiveLayer('humidity');
+    },
+    isVisible: () => activeLayer === 'humidity',
+    options: [
+      { id: 'relativa', label: 'Relativa' },
+      { id: 'rocio', label: 'Punto de rocío' },
+    ],
+  });
   const refreshHumiditySubOptions = (): void => humiditySub.refresh();
 
-  const precipSub = createSubOptionsGroup<PrecipSubOption>(
-    opts.els.layerBtns ?? null,
-    {
-      containerId: 'precipitation-sub-options',
-      getActive: () => precipSubOption,
-      onSelect: (id) => {
-        precipSubOption = id;
-        pendingSeekIso = activeFrameIso;
-        void setActiveLayer('precipitation');
-      },
-      isVisible: () => activeLayer === 'precipitation',
-      options: [
-        { id: 'lluvia', label: 'Lluvia' },
-        { id: 'nieve', label: 'Nieve' },
-        { id: 'probabilidad', label: 'Probabilidad' },
-      ],
-    }
-  );
+  const precipSub = createSubOptionsGroup<PrecipSubOption>(subOptionsWrap, {
+    containerId: 'precipitation-sub-options',
+    getActive: () => precipSubOption,
+    onSelect: (id) => {
+      precipSubOption = id;
+      pendingSeekIso = activeFrameIso;
+      void setActiveLayer('precipitation');
+    },
+    isVisible: () => activeLayer === 'precipitation',
+    options: [
+      { id: 'lluvia', label: 'Lluvia' },
+      { id: 'nieve', label: 'Nieve' },
+      { id: 'probabilidad', label: 'Probabilidad' },
+    ],
+  });
   const refreshPrecipSubOptions = (): void => precipSub.refresh();
 
-  const pressureSub = createSubOptionsGroup<PressureSubOption>(
-    opts.els.layerBtns ?? null,
-    {
-      containerId: 'pressure-sub-options',
-      getActive: () => pressureSubOption,
-      onSelect: (id) => {
-        pressureSubOption = id;
-        void setActiveLayer('pressure');
-      },
-      isVisible: () => activeLayer === 'pressure',
-      options: [
-        { id: 'msl', label: 'Nivel del mar' },
-        { id: 'surface', label: 'Superficie' },
-      ],
-    }
-  );
+  const pressureSub = createSubOptionsGroup<PressureSubOption>(subOptionsWrap, {
+    containerId: 'pressure-sub-options',
+    getActive: () => pressureSubOption,
+    onSelect: (id) => {
+      pressureSubOption = id;
+      void setActiveLayer('pressure');
+    },
+    isVisible: () => activeLayer === 'pressure',
+    options: [
+      { id: 'msl', label: 'Nivel del mar' },
+      { id: 'surface', label: 'Superficie' },
+    ],
+  });
   const refreshPressureSubOptions = (): void => pressureSub.refresh();
 
-  const windSub = createSubOptionsGroup<WindSubOption>(
-    opts.els.layerBtns ?? null,
-    {
-      containerId: 'wind-sub-options',
-      getActive: () => windSubOption,
-      onSelect: (id) => {
-        windSubOption = id;
-        void setActiveLayer('wind');
-      },
-      isVisible: () => activeLayer === 'wind',
-      options: [
-        { id: 'velocidad', label: 'Velocidad' },
-        { id: 'rachas', label: 'Rachas' },
-      ],
-    }
-  );
+  const windSub = createSubOptionsGroup<WindSubOption>(subOptionsWrap, {
+    containerId: 'wind-sub-options',
+    getActive: () => windSubOption,
+    onSelect: (id) => {
+      windSubOption = id;
+      void setActiveLayer('wind');
+    },
+    isVisible: () => activeLayer === 'wind',
+    options: [
+      { id: 'velocidad', label: 'Velocidad' },
+      { id: 'rachas', label: 'Rachas' },
+    ],
+  });
   const refreshWindSubOptions = (): void => windSub.refresh();
 
   const satelliteSub = createSubOptionsGroup<SatelliteSubOption>(
-    opts.els.layerBtns ?? null,
+    subOptionsWrap,
     {
       containerId: 'satellite-sub-options',
       getActive: () => satelliteSubOption,
@@ -3435,9 +3481,20 @@ export async function initInteractiveMap(
   // Overlay registry — extracted to chrome/overlay-registry.ts. Owns
   // the Superposiciones panel build + the global keyboard shortcuts.
   const overlayRegistry = createOverlayRegistry(
-    { wrap: features.layerRail ? (opts.els.overlayBtns ?? null) : null },
+    {
+      wrap: features.layerRail ? (opts.els.overlayBtns ?? null) : null,
+      // Story 22.2 — the overlays tab: filter + "n on" badge.
+      filter: features.layerRail ? (opts.els.overlayFilter ?? null) : null,
+      count: features.layerRail ? (opts.els.overlayCount ?? null) : null,
+    },
     overlayDefs,
     {
+      pinned: PINNED_OVERLAYS,
+      strings: {
+        pinned: t.map_overlays_pinned,
+        all: t.map_overlays_all,
+        empty: t.map_overlays_empty,
+      },
       layers: LAYERS.filter(
         (l): l is typeof l & { shortcut: string } => !!l.shortcut
       ).map((l) => ({ shortcut: l.shortcut, id: l.id })),
@@ -4227,6 +4284,7 @@ export async function initInteractiveMap(
       document.removeEventListener('keydown', placeCardEscHandler);
       closePlaceCard();
       overlayRegistry.dispose();
+      railDesktopMq?.removeEventListener('change', onRailMqChange);
       try {
         map.remove();
       } catch {

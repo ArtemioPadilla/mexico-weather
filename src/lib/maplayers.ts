@@ -28,6 +28,9 @@ export interface LayerDef {
   id: LayerId;
   /** Key into UiStrings for the rail button label. */
   labelKey: string;
+  /** Key into UiStrings for the short label under the rail icon (Story
+   *  22.2). The full label stays the button's accessible name + title. */
+  shortLabelKey: string;
   kind: 'base' | 'raster-tile' | 'field' | 'particles' | 'overlay';
   /** Initial layer opacity (0..1); 1 for the base map. */
   defaultOpacity: number;
@@ -44,6 +47,7 @@ export const LAYERS: LayerDef[] = [
   {
     id: 'base',
     labelKey: 'map_layer_base',
+    shortLabelKey: 'map_layer_short_base',
     kind: 'base',
     defaultOpacity: 1,
     icon: 'map',
@@ -52,6 +56,7 @@ export const LAYERS: LayerDef[] = [
   {
     id: 'radar',
     labelKey: 'map_layer_radar',
+    shortLabelKey: 'map_layer_short_radar',
     kind: 'raster-tile',
     defaultOpacity: 0.8,
     icon: 'radar',
@@ -60,6 +65,7 @@ export const LAYERS: LayerDef[] = [
   {
     id: 'satellite',
     labelKey: 'map_layer_satellite',
+    shortLabelKey: 'map_layer_short_satellite',
     kind: 'raster-tile',
     defaultOpacity: 1,
     icon: 'satellite',
@@ -68,6 +74,7 @@ export const LAYERS: LayerDef[] = [
   {
     id: 'temperature',
     labelKey: 'map_layer_temperature',
+    shortLabelKey: 'map_layer_short_temperature',
     kind: 'field',
     defaultOpacity: 0.75,
     icon: 'thermometer',
@@ -76,6 +83,7 @@ export const LAYERS: LayerDef[] = [
   {
     id: 'humidity',
     labelKey: 'map_layer_humidity',
+    shortLabelKey: 'map_layer_short_humidity',
     kind: 'field',
     defaultOpacity: 0.65,
     icon: 'droplet',
@@ -84,6 +92,7 @@ export const LAYERS: LayerDef[] = [
   {
     id: 'pressure',
     labelKey: 'map_layer_pressure',
+    shortLabelKey: 'map_layer_short_pressure',
     kind: 'field',
     defaultOpacity: 0.7,
     icon: 'gauge',
@@ -95,6 +104,7 @@ export const LAYERS: LayerDef[] = [
   {
     id: 'precipitation',
     labelKey: 'map_layer_precipitation',
+    shortLabelKey: 'map_layer_short_precipitation',
     kind: 'field',
     defaultOpacity: 0.8,
     icon: 'cloud-rain',
@@ -102,6 +112,7 @@ export const LAYERS: LayerDef[] = [
   {
     id: 'wind',
     labelKey: 'map_layer_wind',
+    shortLabelKey: 'map_layer_short_wind',
     kind: 'particles',
     defaultOpacity: 1,
     icon: 'wind',
@@ -110,6 +121,7 @@ export const LAYERS: LayerDef[] = [
   {
     id: 'sunlight',
     labelKey: 'map_layer_sunlight',
+    shortLabelKey: 'map_layer_short_sunlight',
     kind: 'overlay',
     defaultOpacity: 0.45,
     icon: 'sun',
