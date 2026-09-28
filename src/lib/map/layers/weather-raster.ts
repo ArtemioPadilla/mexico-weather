@@ -178,6 +178,13 @@ export interface WeatherRasterFactory {
     ctx: { rvData: RainviewerData | null; opacity: number }
   ) => void;
   removeRadarCompanion: () => void;
+  /** Resolves once the last frame `show` asked for is on screen with its
+   *  tiles loaded (no swap in flight, visible slot's source loaded), or
+   *  after `timeoutMs`. The timeline gate for satellite: GIBS tiles are
+   *  `no-store`, so they cannot be prefetched into the HTTP cache — the
+   *  loop waits on the A/B swap itself instead of outrunning what is
+   *  drawn. */
+  swapSettled: (timeoutMs: number) => Promise<void>;
 }
 
 export function createWeatherRaster(
@@ -254,6 +261,49 @@ export function createWeatherRaster(
   let stopWaiting: (() => void) | null = null;
   let fadeTimer: ReturnType<typeof setTimeout> | null = null;
   let fadeDone: (() => void) | null = null;
+  /** `swapSettled` callers: each re-checks when a swap lands/aborts. */
+  let settleWaiters: Array<() => void> = [];
+
+  /** The last frame `show` asked for is on screen and its tiles are in:
+   *  no swap in flight, and the visible slot's source reports loaded
+   *  (every in-view tile loaded or errored). A swap that cross-faded on
+   *  SWAP_TIMEOUT_MS is on screen but not settled until its tiles land. */
+  function isSettled(): boolean {
+    if (incomingUrl !== null) return false;
+    const src = SLOT_SOURCE[front];
+    return !map.getSource(src) || map.isSourceLoaded(src);
+  }
+
+  function flushSettled(): void {
+    for (const w of settleWaiters.slice()) w();
+  }
+
+  function swapSettled(timeoutMs: number): Promise<void> {
+    if (isSettled()) return Promise.resolve();
+    return new Promise<void>((resolve) => {
+      let finished = false;
+      const finish = (): void => {
+        if (finished) return;
+        finished = true;
+        clearTimeout(timer);
+        map.off('sourcedata', onData);
+        map.off('error', onData);
+        settleWaiters = settleWaiters.filter((w) => w !== check);
+        resolve();
+      };
+      const check = (): void => {
+        if (isSettled()) finish();
+      };
+      // Deferred for the same reason as in awaitIncoming.
+      const onData = (e: { sourceId?: string }): void => {
+        if (e.sourceId === SLOT_SOURCE[front]) queueMicrotask(check);
+      };
+      const timer = setTimeout(finish, timeoutMs);
+      map.on('sourcedata', onData);
+      map.on('error', onData);
+      settleWaiters.push(check);
+    });
+  }
 
   function addSlot(
     slot: Slot,
@@ -305,6 +355,7 @@ export function createWeatherRaster(
     stopWaiting?.();
     stopWaiting = null;
     incomingUrl = null;
+    flushSettled();
   }
 
   /** Complete a running cross-fade now (the outgoing slot drops to 0). */
@@ -323,12 +374,17 @@ export function createWeatherRaster(
     const outSlot = front;
     const url = incomingUrl;
     incomingUrl = null;
-    if (!map.getLayer(SLOT_LAYER[inSlot])) return;
+    if (!map.getLayer(SLOT_LAYER[inSlot])) {
+      flushSettled();
+      return;
+    }
     const ms = fadeMs();
     map.moveLayer(SLOT_LAYER[inSlot], topOfRasters());
     setSlotOpacity(inSlot, opacity, ms);
     front = inSlot;
     frontUrl = url;
+    // After `front` moved: waiters now check the slot just brought up.
+    flushSettled();
     const hideOut = (): void => setSlotOpacity(outSlot, 0, 0);
     if (ms <= 0) {
       hideOut();
@@ -387,6 +443,7 @@ export function createWeatherRaster(
     product = null;
     front = 'A';
     frontUrl = null;
+    flushSettled();
   }
 
   return {
@@ -454,6 +511,7 @@ export function createWeatherRaster(
       awaitIncoming();
     },
     remove: teardownRaster,
+    swapSettled,
     showRadarCompanion: (frame, ctx): void => {
       removeCompanion();
       if (!frame || !ctx.rvData) return;

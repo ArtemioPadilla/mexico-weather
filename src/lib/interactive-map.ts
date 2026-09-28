@@ -2154,22 +2154,28 @@ export async function initInteractiveMap(
   };
 
   // ------------------------------------------------------------------
-  // Story 21.3 — frame prefetch. While the loop plays satellite or
-  // radar, the tiles the viewport needs for the next frames are fetched
-  // ahead with Image() (same URLs MapLibre builds from the same tile
-  // spec), under a 4 MB look-ahead window. A layer, variant or view
-  // change cancels whatever is in flight. Opt-in per page (/mapa and
-  // the per-layer pages) and never under data saver.
+  // Story 21.3 — frame prefetch. While the loop plays radar, the tiles
+  // the viewport needs for the next frames are fetched ahead with
+  // Image() (same URLs MapLibre builds from the same tile spec), under a
+  // 4 MB look-ahead window. A layer or view change cancels whatever is
+  // in flight. Opt-in per page (/mapa and the per-layer pages) and never
+  // under data saver.
+  //
+  // Satellite is NOT prefetched: NASA GIBS answers every tile with
+  // `Cache-Control: max-age=0, no-store` (checked live 2026-09-28, any
+  // TIME, with and without Origin/Referer), so MapLibre's own fetch
+  // never reuses an Image() download — prefetching only doubled the
+  // GIBS traffic and made the gate wait on useless loads. RainViewer
+  // sends `max-age=172800`, so radar is where the HTTP cache works. The
+  // satellite loop is gated on the A/B swap instead (nextFrameReady).
   // ------------------------------------------------------------------
   framePrefetcher =
     opts.framePrefetch === true && !readSaveData(navigator)
       ? createFramePrefetcher({ loader: imageTileLoader() })
       : null;
 
-  function prefetchLayer(): 'radar' | 'satellite' | null {
-    return activeLayer === 'radar' || activeLayer === 'satellite'
-      ? activeLayer
-      : null;
+  function prefetchLayer(): 'radar' | null {
+    return activeLayer === 'radar' ? 'radar' : null;
   }
 
   /** Tile URLs frame `i` needs in the current view ([] when not a
@@ -2221,7 +2227,6 @@ export async function initInteractiveMap(
     framePrefetcher.schedule({
       key: [
         layer,
-        satelliteSubOption,
         rvData?.host ?? '',
         map.getZoom().toFixed(2),
         r(b.getWest()),
@@ -2239,15 +2244,24 @@ export async function initInteractiveMap(
     });
   }
 
-  /** Timeline gate: the next frame's tiles are cached (or it is not a
-   *  prefetchable frame). Waits at most 3 s — a slow tile must not
-   *  freeze the loop, MapLibre fetches it on the swap anyway. */
+  /** Timeline gate. Radar: the next frame's tiles are cached. Satellite
+   *  (not prefetchable, see above): the current frame is on screen
+   *  with its tiles in (the A/B swap landed) — the loop never runs
+   *  ahead of what is drawn, and each GIBS tile is downloaded once, by
+   *  MapLibre. Waits at most 3 s — a slow tile must not freeze the
+   *  loop. */
   function nextFrameReady(next: number): Promise<boolean> {
-    if (!framePrefetcher || !prefetchLayer()) return Promise.resolve(true);
+    if (!framePrefetcher) return Promise.resolve(true);
+    const layerAtAsk = activeLayer;
+    if (activeLayer === 'satellite') {
+      return weatherRaster
+        .swapSettled(3000)
+        .then(() => activeLayer === layerAtAsk);
+    }
+    if (!prefetchLayer()) return Promise.resolve(true);
     schedulePrefetch();
     const urls = frameTileUrls(next);
     if (framePrefetcher.isCached(urls)) return Promise.resolve(true);
-    const layerAtAsk = activeLayer;
     return framePrefetcher
       .ensure(urls, 3000)
       .then(() => activeLayer === layerAtAsk);

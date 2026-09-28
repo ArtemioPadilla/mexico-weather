@@ -588,4 +588,105 @@ describe('A/B frame swap (Story 21.3)', () => {
     expect(m.order).toContain(A);
     expect(m.order).not.toContain(B);
   });
+
+  // Review fix (paridad visual V1) — the satellite loop's timeline gate:
+  // GIBS tiles are `no-store`, so instead of a prefetch the loop waits
+  // until the frame it asked for is on screen with its tiles in.
+  describe('swapSettled', () => {
+    const flush = async (): Promise<void> => {
+      for (let i = 0; i < 4; i++) await Promise.resolve();
+    };
+
+    it('resolves at once when the visible slot is loaded and nothing is in flight', async () => {
+      const m = abMap();
+      const f = createWeatherRaster(m.map, { getFadeMs: () => 0 });
+      f.show('radar', { time: 1, path: '/a' }, ctx);
+      await m.loadSource(WEATHER_RASTER_SOURCE_ID);
+      const spy = vi.fn();
+      void f.swapSettled(3000).then(spy);
+      await flush();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it("waits for the first frame's tiles, then for the incoming slot to land", async () => {
+      const m = abMap();
+      const f = createWeatherRaster(m.map, { getFadeMs: () => 0 });
+      f.show('radar', { time: 1, path: '/a' }, ctx);
+      const first = vi.fn();
+      void f.swapSettled(3000).then(first);
+      await flush();
+      expect(first).not.toHaveBeenCalled();
+      await m.loadSource(WEATHER_RASTER_SOURCE_ID);
+      await flush();
+      expect(first).toHaveBeenCalledTimes(1);
+
+      f.show('radar', { time: 2, path: '/b' }, ctx);
+      const spy = vi.fn();
+      void f.swapSettled(3000).then(spy);
+      await flush();
+      expect(spy).not.toHaveBeenCalled();
+      await m.loadSource(WEATHER_RASTER_SOURCE_B_ID);
+      await flush();
+      expect(spy).toHaveBeenCalledTimes(1);
+      // Every listener and timer (the swap's and the waiter's) is gone.
+      expect(m.listenerCount()).toBe(0);
+      expect(vi.getTimerCount()).toBe(0);
+    });
+
+    it('a swap that cross-faded on SWAP_TIMEOUT_MS is not settled until its tiles land', async () => {
+      const m = abMap();
+      const f = createWeatherRaster(m.map, { getFadeMs: () => 0 });
+      f.show('radar', { time: 1, path: '/a' }, ctx);
+      await m.loadSource(WEATHER_RASTER_SOURCE_ID);
+      f.show('radar', { time: 2, path: '/b' }, ctx);
+      const spy = vi.fn();
+      void f.swapSettled(5000).then(spy);
+      vi.advanceTimersByTime(SWAP_TIMEOUT_MS);
+      await flush();
+      // B is on screen now, but still loading.
+      expect(m.paint.get(B)?.['raster-opacity']).toBe(0.8);
+      expect(spy).not.toHaveBeenCalled();
+      await m.loadSource(WEATHER_RASTER_SOURCE_B_ID);
+      await flush();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('a retarget keeps it waiting; scrubbing back to the frame on screen releases it', async () => {
+      const m = abMap();
+      const f = createWeatherRaster(m.map, { getFadeMs: () => 0 });
+      f.show('radar', { time: 1, path: '/a' }, ctx);
+      await m.loadSource(WEATHER_RASTER_SOURCE_ID);
+      f.show('radar', { time: 2, path: '/b' }, ctx);
+      const spy = vi.fn();
+      void f.swapSettled(3000).then(spy);
+      f.show('radar', { time: 3, path: '/c' }, ctx);
+      await flush();
+      expect(spy).not.toHaveBeenCalled();
+      f.show('radar', { time: 1, path: '/a' }, ctx);
+      await flush();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('resolves after timeoutMs when nothing lands, and on remove()', async () => {
+      const m = abMap();
+      const f = createWeatherRaster(m.map, { getFadeMs: () => 0 });
+      f.show('radar', { time: 1, path: '/a' }, ctx);
+      await m.loadSource(WEATHER_RASTER_SOURCE_ID);
+      f.show('radar', { time: 2, path: '/b' }, ctx);
+      const late = vi.fn();
+      void f.swapSettled(500).then(late);
+      vi.advanceTimersByTime(499);
+      await flush();
+      expect(late).not.toHaveBeenCalled();
+      vi.advanceTimersByTime(1);
+      await flush();
+      expect(late).toHaveBeenCalledTimes(1);
+      const onRemove = vi.fn();
+      void f.swapSettled(3000).then(onRemove);
+      f.remove();
+      await flush();
+      expect(onRemove).toHaveBeenCalledTimes(1);
+      expect(m.listenerCount()).toBe(0);
+    });
+  });
 });

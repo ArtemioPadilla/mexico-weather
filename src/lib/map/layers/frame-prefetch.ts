@@ -1,6 +1,10 @@
 /**
- * Story 21.3 — frame prefetch for the raster-tile timeline layers
- * (satellite GIBS, radar RainViewer).
+ * Story 21.3 — frame prefetch for the raster-tile timeline layers.
+ * The map uses it for radar (RainViewer, `Cache-Control: max-age=172800`)
+ * only: NASA GIBS serves satellite tiles `no-store`, so an `Image()`
+ * download is never reused by MapLibre's fetch and prefetching GeoColor
+ * would just double the traffic (see interactive-map.ts). The module
+ * itself is layer-agnostic.
  *
  * While the loop plays, the tiles the viewport needs for the next N
  * frames are fetched ahead with `Image()` — the exact URLs MapLibre
@@ -32,12 +36,14 @@ export const PREFETCH_FRAMES = 6;
 /** Hard cap for the look-ahead window, in bytes. */
 export const PREFETCH_BUDGET_BYTES = 4 * 1024 * 1024;
 /** Size assumed for a tile whose real size is unknown (an `Image()` does
- *  not expose it, and Resource Timing only does with Timing-Allow-Origin).
- *  An assumption, not a measurement (the sandbox cannot reach GIBS or
- *  RainViewer): at 32 KB a 1280×720 view at z4.5 (32 GeoColor tiles)
- *  costs ~1 MB per frame, so the 4 MB window holds 4 frames there and
- *  the full 6 on a phone. Real sizes replace it whenever reported. */
-export const EST_TILE_BYTES = 32 * 1024;
+ *  not expose it, and Resource Timing only does with Timing-Allow-Origin,
+ *  which neither RainViewer nor GIBS sends). Measured 2026-09-28:
+ *  RainViewer 512 px radar tiles 1–44 KB; GIBS GeoColor z6 PNGs
+ *  65–173 KB (not prefetched: `no-store`). Kept conservative: at 48 KB a
+ *  1280×720 radar view at z4.5 (12–15 tiles of 512 px) costs
+ *  ~0.6–0.7 MB per frame, so the 4 MB window still holds all 6 frames.
+ *  Real sizes replace it whenever reported. */
+export const EST_TILE_BYTES = 48 * 1024;
 /** Parallel tile loads. During the loop the map's own tile fetches are
  *  HTTP-cache hits, so 8 in flight keep a ~30-tile frame inside one
  *  700 ms cadence (4 did not in the local probe: ~1.5 s per frame). */

@@ -39,9 +39,12 @@ import { bootMap, measureStable } from './chrome-budget-helpers';
  *  3. visible controls over the map, desktop 1280×800 and phone 360×640
  *     (the chrome-budget count; chrome-budget.spec asserts its baseline);
  *  4. tile requests per frame on the loop's second pass, and how many hit
- *     a URL never requested before (Story 21.3's prefetch should leave
- *     none). Request interception disables Chromium's HTTP cache, so the
- *     raw count includes MapLibre re-fetching URLs it already had.
+ *     a URL never requested before (a second lap should add none).
+ *     Request interception disables Chromium's HTTP cache, so the raw
+ *     count includes MapLibre re-fetching URLs it already had. On the
+ *     real network GIBS serves satellite tiles `no-store`, so each of
+ *     those re-fetches is a download there too (which is why Story 21.3
+ *     prefetches radar only) — this counts URLs, not bytes.
  *
  * Writes test-results/ux-metrics.json (each test merges what it measured)
  * and attaches it. Thresholds are soft: printed as warnings, never failed

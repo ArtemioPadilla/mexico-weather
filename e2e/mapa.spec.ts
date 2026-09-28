@@ -1399,9 +1399,12 @@ test.describe('Story 21.2 — /mapa boots on satellite', () => {
   });
 });
 
-// Story 21.3 — the satellite loop prefetches the next frames and swaps
-// them through two raster slots (A/B) instead of re-creating the source;
-// the play button shows a buffering state while the next frame is not in.
+// Story 21.3 — the loop swaps frames through two raster slots (A/B)
+// instead of re-creating the source, and the play button shows a
+// buffering state while the next frame is not in. Radar frames are
+// prefetched ahead; satellite ones are not (GIBS serves tiles `no-store`,
+// so an Image() download is never reused) — the satellite loop waits on
+// the A/B swap instead.
 test.describe('Story 21.3 — frame prefetch and A/B swap', () => {
   const png = (route: import('@playwright/test').Route) =>
     route.fulfill({
@@ -1439,7 +1442,7 @@ test.describe('Story 21.3 — frame prefetch and A/B swap', () => {
     __framePrefetch?: { stats(): { requested: number } };
   };
 
-  test('the loop swaps frames through two slots under the labels and prefetches ahead', async ({
+  test('the loop swaps frames through two slots under the labels; radar prefetches ahead, satellite does not', async ({
     page,
   }) => {
     await mockNet(page);
@@ -1477,8 +1480,28 @@ test.describe('Story 21.3 — frame prefetch and A/B swap', () => {
       );
       expect(state.order.indexOf(id)).toBeLessThan(ref);
     }
-    // Tiles of frames ahead of the playhead were fetched with Image().
-    expect(state.requested).toBeGreaterThan(0);
+    // Satellite: GIBS tiles are `no-store`, nothing is fetched ahead.
+    expect(state.requested).toBe(0);
+
+    // Radar: tiles of frames ahead of the playhead are fetched with
+    // Image() (RainViewer tiles are cacheable).
+    await openLayerRail(page);
+    await page.locator('#layerbtn-radar').click();
+    await expect(page.locator('#tl-range')).toHaveAttribute('max', '3');
+    const play = page.locator('#tl-play');
+    if ((await play.getAttribute('data-state')) !== 'playing') {
+      await play.click();
+    }
+    await expect(play).toHaveAttribute('data-state', 'playing');
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () =>
+            (window as unknown as E2eWin).__framePrefetch?.stats().requested ??
+            -1
+        )
+      )
+      .toBeGreaterThan(0);
   });
 
   test('the play button buffers (aria-busy) while the next frame is not cached', async ({
