@@ -1230,7 +1230,8 @@ export async function initInteractiveMap(
             hideMsg();
             ac?.close();
             setUserPin(r.name, r.lat, r.lng, 'search');
-          }
+          },
+          { cityBadge: t.map_search_city_badge }
         )
       : null;
   // Thin wrappers preserve the historical names used by existing call
@@ -4200,7 +4201,7 @@ export async function initInteractiveMap(
       qTimer = window.setTimeout(async () => {
         const gen = ++searchGen;
         try {
-          const results = await geocode(query, deps, 'es', undefined, base);
+          const results = await geocode(query, deps, lang, undefined, base);
           if (gen !== searchGen) return;
           if (!results.length) {
             closeAcList();

@@ -39,6 +39,8 @@ export interface UiStrings {
   map_teaser_cta: string;
   map_layer_base: string;
   map_search_placeholder: string;
+  /** Badge on a search suggestion with population ≥ 50 000 (Story 25.3). */
+  map_search_city_badge: string;
   map_locate: string;
   map_popup_full_forecast: string;
   place_card_title: string;
@@ -303,6 +305,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_teaser_cta: 'Ver mapa interactivo',
     map_layer_base: 'Mapa base',
     map_search_placeholder: 'Buscar un lugar en el mapa…',
+    map_search_city_badge: 'ciudad',
     map_locate: 'Mi ubicación',
     map_popup_full_forecast: 'Ver pronóstico completo',
     place_card_title: 'Punto seleccionado',
@@ -554,6 +557,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_teaser_cta: 'Open interactive map',
     map_layer_base: 'Base map',
     map_search_placeholder: 'Search a place on the map…',
+    map_search_city_badge: 'city',
     map_locate: 'My location',
     map_popup_full_forecast: 'See full forecast',
     place_card_title: 'Selected point',

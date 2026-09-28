@@ -1,9 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import {
-  createAutocompleteController,
-  type GeoItem,
-} from './autocomplete';
+import { createAutocompleteController, type GeoItem } from './autocomplete';
 
 function mkInput(): HTMLInputElement {
   const i = document.createElement('input');
@@ -55,6 +52,21 @@ describe('autocomplete controller', () => {
     const secondLiText = (ul.children[1] as HTMLElement).textContent;
     expect(firstLiText).toContain('ciudad');
     expect(secondLiText).not.toContain('ciudad');
+  });
+
+  it('the badge takes the localised string (Story 25.3)', () => {
+    const q = mkInput();
+    const ul = mkList();
+    const ctrl = createAutocompleteController(q, ul, () => undefined, {
+      cityBadge: 'city',
+    });
+    ctrl.setResults([cdmx, small]);
+    const badge = (ul.children[0] as HTMLElement).querySelector(
+      '.font-semibold + span'
+    );
+    expect(badge?.textContent).toBe('city');
+    expect((ul.children[0] as HTMLElement).textContent).not.toContain('ciudad');
+    expect((ul.children[1] as HTMLElement).textContent).not.toContain('city');
   });
 
   it('setActiveIndex clamps to result range and highlights', () => {

@@ -9,6 +9,8 @@
  * Pure DOM logic — no map dependency, no async fetching.
  */
 
+import { ui } from '../../../i18n/ui';
+
 export interface GeoItem {
   name: string;
   admin1?: string;
@@ -39,8 +41,11 @@ export interface AutocompleteController {
 export function createAutocompleteController(
   q: HTMLInputElement,
   acList: HTMLUListElement,
-  select: (r: GeoItem) => void
+  select: (r: GeoItem) => void,
+  /** Localised chrome strings (Story 25.3); Spanish when omitted. */
+  strings?: { cityBadge: string }
 ): AutocompleteController {
+  const cityBadge = strings?.cityBadge ?? ui.es.map_search_city_badge;
   let results: GeoItem[] = [];
   let active = -1;
 
@@ -88,7 +93,7 @@ export function createAutocompleteController(
         const badge = document.createElement('span');
         badge.className =
           'rounded-full bg-blue-500/10 px-1.5 py-0.5 text-[10px] font-medium text-im-accent';
-        badge.textContent = 'ciudad';
+        badge.textContent = cityBadge;
         primary.appendChild(badge);
       }
       li.appendChild(primary);

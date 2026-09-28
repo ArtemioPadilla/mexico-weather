@@ -2439,6 +2439,7 @@ test.describe('Story 25.3 — /mapa?lang=en shows no Spanish in the chrome', () 
     'siguiente',
     'Ahora',
     'Controles',
+    'ciudad',
     'de',
     'del',
     'con',
@@ -2546,6 +2547,61 @@ test.describe('Story 25.3 — /mapa?lang=en shows no Spanish in the chrome', () 
 
     // Timeline pill (steps, "Now", the 10-day tail).
     expect(await spanishIn(page, '#timeline')).toEqual([]);
+  });
+
+  test('search suggestions read in English: the city badge and the geocoder language', async ({
+    page,
+  }) => {
+    // The static MX dictionary is served empty so the query reaches the
+    // live geocoder (its names are Spanish proper names by design — plan
+    // §25.3 deviation). The geocoder answers in English and records the
+    // language it was asked for.
+    await page.route('**/data/mx-cities.json', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: '{"cities":[]}',
+      })
+    );
+    const languages: string[] = [];
+    await page.route('**/geocoding-api.open-meteo.com/**', (route) => {
+      languages.push(
+        new URL(route.request().url()).searchParams.get('language') ?? ''
+      );
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          results: [
+            {
+              id: 3530597,
+              name: 'Mexico City',
+              latitude: 19.42847,
+              longitude: -99.12766,
+              feature_code: 'PPLC',
+              country_code: 'MX',
+              admin1: 'Mexico City',
+              timezone: 'America/Mexico_City',
+              country: 'Mexico',
+              population: 1_000_000,
+            },
+          ],
+        }),
+      });
+    });
+    await openOnSatellite(page, 'mapa/?lang=en');
+
+    await page.locator('#mw-search-toggle').click();
+    await page.locator('#mapq').fill('Mexico');
+    const listbox = page.locator('#mapac');
+    await expect(listbox).toBeVisible();
+    // The badge is the second <span> of the option's first row.
+    await expect(
+      listbox.locator('li').first().locator('div > span').nth(1)
+    ).toHaveText('city');
+    expect(await spanishIn(page, '#mapac')).toEqual([]);
+    expect(languages.length).toBeGreaterThan(0);
+    expect(languages.every((l) => l === 'en')).toBe(true);
   });
 
   test('Spanish stays the default: the same chrome without ?lang reads in Spanish', async ({
