@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { mockOpenMeteo } from './helpers';
 import AxeBuilder from '@axe-core/playwright';
 
 /**
@@ -249,6 +250,10 @@ test.describe('a11y audit — /forecast marker popup', () => {
           })
         );
       }
+      // The forecast fetch gates the embed; live Open-Meteo made this
+      // take 4–27 s through the runner's network and time out at the
+      // marker wait now and then. Mocked, like the other forecast specs.
+      await mockOpenMeteo(page);
       await page.goto(
         'forecast/?lat=19.43&lng=-99.13&name=Ciudad%20de%20M%C3%A9xico&tz=America/Mexico_City'
       );
