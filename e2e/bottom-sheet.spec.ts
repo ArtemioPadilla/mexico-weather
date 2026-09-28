@@ -80,7 +80,7 @@ async function dragHandle(
 const expectFitsAboveDock = async (page: Page, sheet: Locator) => {
   const root = await boxOf(page.locator('#map-root'));
   const dock = await boxOf(page.locator('#timeline'));
-  // Wait out the 200 ms height transition before measuring.
+  // Wait out the 150 ms height transition before measuring.
   await page.waitForTimeout(300);
   const s = await boxOf(sheet);
   // Edge to edge, resting on the dock, never over it.
