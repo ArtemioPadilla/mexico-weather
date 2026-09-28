@@ -12,7 +12,9 @@
  *     Timing mark (src/lib/map/chrome/first-frame-mark.ts), ms from
  *     navigation start;
  *  2. loop fps — requestAnimationFrame callbacks per second over the first
- *     10 s of the boot loop;
+ *     10 s of the boot loop (plus, as context, the long tasks a
+ *     PerformanceObserver sampled in that window and the loop's step
+ *     cadence — Story 23.2);
  *  3. visible controls over the map, desktop / mobile (chrome-budget
  *     helper, e2e/chrome-budget-helpers.ts);
  *  4. new satellite tiles per frame on the loop's second pass (URLs never
@@ -87,6 +89,73 @@ export function fpsStats(timestamps, startMs, windowMs = FPS_WINDOW_MS) {
     frames,
     maxGapMs: round(maxGapMs, 1),
     windowMs,
+  };
+}
+
+/** How many of the longest long tasks the loop sample keeps. */
+export const LONG_TASK_SAMPLE_SIZE = 5;
+
+/**
+ * Story 23.2 — the long tasks a PerformanceObserver sampled during the
+ * loop (the spec observes from the loop's first frame for the fps window):
+ * how many, their total and the longest, plus the N longest with their
+ * start relative to the loop start and the entry's `name` (`self`,
+ * `same-origin-descendant`, `unknown`…), to see what blocks the frames.
+ *
+ * @param {{ start: number, duration: number, name?: string }[]} entries
+ * @param {number} startMs loop start (same clock as `entries[].start`)
+ */
+export function longTaskSample(
+  entries,
+  startMs,
+  windowMs = FPS_WINDOW_MS,
+  size = LONG_TASK_SAMPLE_SIZE
+) {
+  const inWindow = entries.filter(
+    (e) => e.start >= startMs && e.start < startMs + windowMs
+  );
+  const total = inWindow.reduce((s, e) => s + e.duration, 0);
+  const longest = [...inWindow]
+    .sort((a, b) => b.duration - a.duration)
+    .slice(0, size)
+    .map((e) => ({
+      atMs: Math.round(e.start - startMs),
+      durationMs: Math.round(e.duration),
+      name: e.name ?? null,
+    }));
+  return {
+    count: inWindow.length,
+    totalMs: Math.round(total),
+    maxMs: longest.length ? longest[0].durationMs : 0,
+    longest,
+  };
+}
+
+/**
+ * Story 23.2 — the loop's cadence: time between consecutive frame steps
+ * while ▶ plays inside `[startT, startT + windowMs)` (median and longest).
+ * With a steady cadence the median is the "velocidad" setting and the
+ * longest shows the steps that waited (gate, long task, stall). Null with
+ * fewer than two steps in the window.
+ *
+ * @param {{ t: number, index: number, playing: boolean }[]} events
+ */
+export function loopStepStats(events, startT, windowMs = FPS_WINDOW_MS) {
+  const ts = events
+    .filter((e) => e.playing && e.t >= startT && e.t < startT + windowMs)
+    .map((e) => e.t)
+    .sort((a, b) => a - b);
+  if (ts.length < 2) return null;
+  const gaps = [];
+  for (let i = 1; i < ts.length; i++) gaps.push(ts[i] - ts[i - 1]);
+  const sorted = [...gaps].sort((a, b) => a - b);
+  const mid = sorted.length >> 1;
+  const median =
+    sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+  return {
+    steps: gaps.length,
+    medianMs: Math.round(median),
+    maxMs: Math.round(sorted[sorted.length - 1]),
   };
 }
 
@@ -184,6 +253,12 @@ export function buildUxMetrics(parts = {}) {
       maxFrameGapMs: num(parts.fps?.maxGapMs),
       longTasks: num(parts.longTasks?.count),
       longTaskMs: num(parts.longTasks?.totalMs),
+      longTaskMaxMs: num(parts.longTasks?.maxMs),
+      longTaskSample: Array.isArray(parts.longTasks?.longest)
+        ? parts.longTasks.longest
+        : null,
+      loopStepMedianMs: num(parts.steps?.medianMs),
+      loopStepMaxMs: num(parts.steps?.maxMs),
     },
   };
 }
@@ -213,6 +288,16 @@ export function mergeUxMetrics(base, next) {
       maxFrameGapMs: pick(base.extra?.maxFrameGapMs, next.extra?.maxFrameGapMs),
       longTasks: pick(base.extra?.longTasks, next.extra?.longTasks),
       longTaskMs: pick(base.extra?.longTaskMs, next.extra?.longTaskMs),
+      longTaskMaxMs: pick(base.extra?.longTaskMaxMs, next.extra?.longTaskMaxMs),
+      longTaskSample: pick(
+        base.extra?.longTaskSample,
+        next.extra?.longTaskSample
+      ),
+      loopStepMedianMs: pick(
+        base.extra?.loopStepMedianMs,
+        next.extra?.loopStepMedianMs
+      ),
+      loopStepMaxMs: pick(base.extra?.loopStepMaxMs, next.extra?.loopStepMaxMs),
     },
   };
 }
@@ -351,7 +436,18 @@ export function renderUxComment(metrics, ctx = {}) {
     extra.push(`longest rAF gap ${fmt(m.extra.maxFrameGapMs, ' ms')}`);
   if (m.extra?.longTasks !== undefined && m.extra?.longTasks !== null)
     extra.push(
-      `${m.extra.longTasks} long tasks (${fmt(m.extra.longTaskMs, ' ms')}) during the fps window`
+      `${m.extra.longTasks} long tasks (${fmt(m.extra.longTaskMs, ' ms')}` +
+        (m.extra.longTaskMaxMs !== undefined && m.extra.longTaskMaxMs !== null
+          ? `, longest ${fmt(m.extra.longTaskMaxMs, ' ms')}`
+          : '') +
+        ') during the fps window'
+    );
+  if (
+    m.extra?.loopStepMedianMs !== undefined &&
+    m.extra?.loopStepMedianMs !== null
+  )
+    extra.push(
+      `loop step every ${fmt(m.extra.loopStepMedianMs, ' ms')} (median; longest ${fmt(m.extra.loopStepMaxMs, ' ms')})`
     );
   if (extra.length) lines.push(`Also measured: ${extra.join(' · ')}.`, '');
   lines.push(

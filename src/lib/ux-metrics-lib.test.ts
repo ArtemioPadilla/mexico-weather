@@ -6,7 +6,10 @@ import {
   formatDelta,
   fpsStats,
   isSatelliteTileRequest,
+  LONG_TASK_SAMPLE_SIZE,
+  longTaskSample,
   loopPassStarts,
+  loopStepStats,
   mergeUxMetrics,
   parseUxComment,
   renderUxComment,
@@ -37,7 +40,16 @@ function metrics(): UxMetrics {
       newTilesPerFrame: 0,
       msPerFrame: 785,
     },
-    longTasks: { count: 2, totalMs: 140 },
+    longTasks: {
+      count: 2,
+      totalMs: 140,
+      maxMs: 90,
+      longest: [
+        { atMs: 1200, durationMs: 90, name: 'self' },
+        { atMs: 4000, durationMs: 50, name: 'self' },
+      ],
+    },
+    steps: { steps: 13, medianMs: 700, maxMs: 733 },
   });
 }
 
@@ -102,6 +114,78 @@ function loopEvents(passes: number): IndexEvent[] {
   }
   return ev;
 }
+
+// Story 23.2 — the loop-scoped long-task sample and the step cadence.
+describe('longTaskSample', () => {
+  it('keeps the window, totals it and lists the longest first', () => {
+    const entries = [
+      { start: 900, duration: 300, name: 'self' }, // before the loop
+      { start: 1_050, duration: 60, name: 'self' },
+      { start: 3_000, duration: 120.4, name: 'unknown' },
+      { start: 5_000, duration: 51 },
+      { start: 11_000, duration: 400, name: 'self' }, // after the window
+    ];
+    const s = longTaskSample(entries, 1_000);
+    expect(s.count).toBe(3);
+    expect(s.totalMs).toBe(231);
+    expect(s.maxMs).toBe(120);
+    expect(s.longest).toEqual([
+      { atMs: 2_000, durationMs: 120, name: 'unknown' },
+      { atMs: 50, durationMs: 60, name: 'self' },
+      { atMs: 4_000, durationMs: 51, name: null },
+    ]);
+  });
+
+  it('caps the list and reports an empty window as zeros', () => {
+    const many = Array.from({ length: 12 }, (_, i) => ({
+      start: i * 100,
+      duration: 50 + i,
+    }));
+    const s = longTaskSample(many, 0);
+    expect(s.count).toBe(12);
+    expect(s.longest).toHaveLength(LONG_TASK_SAMPLE_SIZE);
+    expect(s.longest[0].durationMs).toBe(61);
+    expect(longTaskSample([], 0)).toEqual({
+      count: 0,
+      totalMs: 0,
+      maxMs: 0,
+      longest: [],
+    });
+  });
+});
+
+describe('loopStepStats', () => {
+  const ev = (t: number, index: number, playing = true): IndexEvent => ({
+    t,
+    index,
+    playing,
+  });
+
+  it('median and longest time between playing steps inside the window', () => {
+    const events = [
+      ev(500, 0, false),
+      ev(1_000, 1),
+      ev(1_700, 2),
+      ev(2_400, 3),
+      ev(3_900, 4), // a step that waited
+      ev(4_600, 5),
+      ev(20_000, 6), // after the window
+    ];
+    expect(loopStepStats(events, 1_000)).toEqual({
+      steps: 4,
+      medianMs: 700,
+      maxMs: 1_500,
+    });
+  });
+
+  it('averages the two middle gaps and needs two steps', () => {
+    expect(
+      loopStepStats([ev(0, 1), ev(600, 2), ev(1_400, 3)], 0)?.medianMs
+    ).toBe(700);
+    expect(loopStepStats([ev(0, 1)], 0)).toBeNull();
+    expect(loopStepStats([ev(0, 1, false), ev(700, 2, false)], 0)).toBeNull();
+  });
+});
 
 describe('loopPassStarts', () => {
   it('starts pass 1 at the first playing frame and a pass at every wrap', () => {
@@ -201,6 +285,12 @@ describe('mergeUxMetrics', () => {
     expect(merged.loopFps).toBe(60);
     expect(merged.controls).toEqual({ desktop: 8, mobile: 5 });
     expect(merged.extra.longTasks).toBe(1);
+    // Story 23.2 extras survive the merge too.
+    expect(merged.extra.longTaskMaxMs).toBeNull();
+    expect(mergeUxMetrics(metrics(), mobile).extra.loopStepMedianMs).toBe(700);
+    expect(mergeUxMetrics(metrics(), mobile).extra.longTaskSample).toHaveLength(
+      2
+    );
     expect(mergeUxMetrics(null, mobile)).toBe(mobile);
     // Order does not matter for the numbers.
     expect(mergeUxMetrics(mobile, desktop).controls).toEqual({
@@ -261,6 +351,10 @@ describe('renderUxComment / parseUxComment', () => {
     expect(body).toContain(
       '| New tiles per frame, 2nd loop | 0 (31 requests/frame'
     );
+    expect(body).toContain(
+      '2 long tasks (140 ms, longest 90 ms) during the fps window'
+    );
+    expect(body).toContain('loop step every 700 ms (median; longest 733 ms)');
     expect(body).toContain('Commit `abcdef1`');
     expect(body).toContain('[Run](https://github.com/o/r/actions/runs/1)');
     expect(parseUxComment(body)).toEqual(m);

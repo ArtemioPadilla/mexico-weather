@@ -8,12 +8,15 @@ import {
   buildUxMetrics,
   fpsStats,
   isSatelliteTileRequest,
+  longTaskSample,
+  loopStepStats,
   mergeUxMetrics,
   secondLoopStats,
   uxWarnings,
 } from '../scripts/ux-metrics-lib.mjs';
 import type {
   IndexEvent,
+  LongTaskEntry,
   TileRequest,
   UxMetrics,
   UxMetricsParts,
@@ -35,7 +38,9 @@ import { bootMap, measureStable } from './chrome-budget-helpers';
  *     Timing mark the app sets when the first GeoColor frame's tiles are
  *     all loaded (src/lib/map/chrome/first-frame-mark.ts);
  *  2. loop fps: requestAnimationFrame callbacks per second over the first
- *     10 s of the boot loop (plus the longest gap and the long tasks);
+ *     10 s of the boot loop (plus the longest gap, the loop's step cadence
+ *     and a sample of the long tasks a PerformanceObserver started with
+ *     the loop sees in that window — Story 23.2);
  *  3. visible controls over the map, desktop 1280×800 and phone 360×640
  *     (the chrome-budget count; chrome-budget.spec asserts its baseline);
  *  4. tile requests per frame on the loop's second pass, and how many hit
@@ -60,7 +65,11 @@ interface Recorder {
   origin: number;
   raf: number[];
   index: IndexEvent[];
-  longTasks: { start: number; duration: number }[];
+  /** Story 23.2 — long tasks seen by the loop-scoped observer. */
+  longTasks: LongTaskEntry[];
+  /** performance.now() when that observer started (null: not yet, or
+   *  no Long Tasks API). */
+  longTaskObserverAt: number | null;
 }
 
 declare global {
@@ -71,16 +80,40 @@ declare global {
 
 /** In-page recorder, installed before any app script: every rAF
  *  timestamp, every change of the timeline index (with ▶'s state, in epoch
- *  ms to line up with the request log) and the long tasks. */
+ *  ms to line up with the request log) and — Story 23.2 — a sample of the
+ *  long tasks during the loop: a PerformanceObserver started on the
+ *  loop's first playing frame and disconnected once the fps window (plus
+ *  a second for a task still running at its end) has passed. */
 async function installRecorder(page: Page): Promise<void> {
-  await page.addInitScript(() => {
+  await page.addInitScript((windowMs: number) => {
     const rec: Recorder = {
       origin: performance.timeOrigin,
       raf: [],
       index: [],
       longTasks: [],
+      longTaskObserverAt: null,
     };
     window.__uxm = rec;
+    let sampling = false;
+    const sampleLongTasks = (): void => {
+      if (sampling) return;
+      sampling = true;
+      try {
+        const obs = new PerformanceObserver((list) => {
+          for (const e of list.getEntries())
+            rec.longTasks.push({
+              start: e.startTime,
+              duration: e.duration,
+              name: e.name,
+            });
+        });
+        obs.observe({ type: 'longtask' });
+        rec.longTaskObserverAt = performance.now();
+        setTimeout(() => obs.disconnect(), windowMs + 1000);
+      } catch {
+        /* no Long Tasks API: the long-task numbers stay null */
+      }
+    };
     let last: number | null = null;
     const tick = (ts: number): void => {
       rec.raf.push(ts);
@@ -91,26 +124,20 @@ async function installRecorder(page: Page): Promise<void> {
         const i = Number(range.value);
         if (i !== last) {
           last = i;
+          const playing =
+            document.getElementById('tl-play')?.dataset.state === 'playing';
           rec.index.push({
             t: performance.timeOrigin + performance.now(),
             index: i,
-            playing:
-              document.getElementById('tl-play')?.dataset.state === 'playing',
+            playing,
           });
+          if (playing) sampleLongTasks();
         }
       }
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
-    try {
-      new PerformanceObserver((list) => {
-        for (const e of list.getEntries())
-          rec.longTasks.push({ start: e.startTime, duration: e.duration });
-      }).observe({ type: 'longtask', buffered: true });
-    } catch {
-      /* no Long Tasks API: the extra stays null */
-    }
-  });
+  }, FPS_WINDOW_MS);
 }
 
 async function readRecorder(page: Page): Promise<Recorder> {
@@ -122,6 +149,7 @@ async function readRecorder(page: Page): Promise<Recorder> {
       raf: r.raf.slice(),
       index: r.index.slice(),
       longTasks: r.longTasks.slice(),
+      longTaskObserverAt: r.longTaskObserverAt,
     };
   });
 }
@@ -233,13 +261,13 @@ test.describe('ux metrics · desktop', () => {
       const loopStart = rec.index.find((e) => e.playing)!.t - rec.origin;
       parts.fps = fpsStats(rec.raf, loopStart);
       parts.secondLoop = secondLoopStats(rec.index, requests);
-      const inWindow = rec.longTasks.filter(
-        (lt) => lt.start >= loopStart && lt.start < loopStart + FPS_WINDOW_MS
-      );
-      parts.longTasks = {
-        count: inWindow.length,
-        totalMs: Math.round(inWindow.reduce((s, lt) => s + lt.duration, 0)),
-      };
+      // Story 23.2 — the loop-scoped long-task sample and the loop's step
+      // cadence (median / longest time between frames) in that window.
+      parts.steps = loopStepStats(rec.index, loopStart + rec.origin);
+      parts.longTasks =
+        rec.longTaskObserverAt === null
+          ? null
+          : longTaskSample(rec.longTasks, loopStart);
     } finally {
       const m = await recordMetrics(testInfo, parts);
       console.log(
@@ -248,6 +276,23 @@ test.describe('ux metrics · desktop', () => {
           `2nd loop ${m.secondLoop?.newTilesPerFrame ?? 'n/a'} new tiles/frame ` +
           `(${m.secondLoop?.requestsPerFrame ?? 'n/a'} requests/frame over ${m.secondLoop?.frames ?? 'n/a'} frames)`
       );
+      console.log(
+        `[ux-metrics] desktop loop (first ${FPS_WINDOW_MS / 1000} s): ` +
+          `longest rAF gap ${m.extra.maxFrameGapMs ?? 'n/a'} ms · ` +
+          `step every ${m.extra.loopStepMedianMs ?? 'n/a'} ms (median; longest ${m.extra.loopStepMaxMs ?? 'n/a'} ms) · ` +
+          `${m.extra.longTasks ?? 'n/a'} long tasks, ${m.extra.longTaskMs ?? 'n/a'} ms in all, ` +
+          `longest ${m.extra.longTaskMaxMs ?? 'n/a'} ms`
+      );
+      if (m.extra.longTaskSample?.length)
+        console.log(
+          '[ux-metrics] longest long tasks during the loop: ' +
+            m.extra.longTaskSample
+              .map(
+                (lt) =>
+                  `${lt.durationMs} ms at +${lt.atMs} ms (${lt.name ?? '?'})`
+              )
+              .join(', ')
+        );
     }
   });
 });

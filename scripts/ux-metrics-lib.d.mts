@@ -10,6 +10,7 @@ export const UX_METRICS_SCHEMA: number;
 export const UX_METRICS_FILE: string;
 export const UX_COMMENT_MARKER: string;
 export const FPS_WINDOW_MS: number;
+export const LONG_TASK_SAMPLE_SIZE: number;
 export const UX_THRESHOLDS: {
   firstSatelliteFrameMs: Threshold;
   loopFps: Threshold;
@@ -59,7 +60,37 @@ export interface UxMetrics {
     maxFrameGapMs: number | null;
     longTasks: number | null;
     longTaskMs: number | null;
+    /** Story 23.2 — optional: absent in documents from before it. */
+    longTaskMaxMs?: number | null;
+    longTaskSample?: LongTaskSampleEntry[] | null;
+    loopStepMedianMs?: number | null;
+    loopStepMaxMs?: number | null;
   };
+}
+
+export interface LongTaskEntry {
+  start: number;
+  duration: number;
+  name?: string;
+}
+
+export interface LongTaskSampleEntry {
+  atMs: number;
+  durationMs: number;
+  name: string | null;
+}
+
+export interface LongTaskSample {
+  count: number;
+  totalMs: number;
+  maxMs: number;
+  longest: LongTaskSampleEntry[];
+}
+
+export interface LoopStepStats {
+  steps: number;
+  medianMs: number;
+  maxMs: number;
 }
 
 export interface UxMetricsParts {
@@ -69,7 +100,13 @@ export interface UxMetricsParts {
   fps?: FpsStats | null;
   controls?: { desktop?: number | null; mobile?: number | null };
   secondLoop?: SecondLoopStats | null;
-  longTasks?: { count: number; totalMs: number } | null;
+  longTasks?: {
+    count: number;
+    totalMs: number;
+    maxMs?: number;
+    longest?: LongTaskSampleEntry[];
+  } | null;
+  steps?: LoopStepStats | null;
 }
 
 export function isSatelliteTileRequest(url: string): boolean;
@@ -78,6 +115,17 @@ export function fpsStats(
   startMs: number,
   windowMs?: number
 ): FpsStats | null;
+export function longTaskSample(
+  entries: LongTaskEntry[],
+  startMs: number,
+  windowMs?: number,
+  size?: number
+): LongTaskSample;
+export function loopStepStats(
+  events: IndexEvent[],
+  startT: number,
+  windowMs?: number
+): LoopStepStats | null;
 export function loopPassStarts(events: IndexEvent[]): number[];
 export function secondLoopStats(
   events: IndexEvent[],
