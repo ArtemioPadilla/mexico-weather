@@ -230,6 +230,11 @@ const cfg = JSON.stringify({
   {features.search && (
     <div id="mw-search-wrap" class="absolute right-3 top-3 z-[21] flex flex-col items-end gap-2">
       <div class="flex items-center gap-2">
+        {/* Story 22.4 — page-owned controls that belong in the top bar,
+            left of search (/mapa's SMN avisos counter and its popover).
+            A popover placed here with `absolute right-0 top-14` hangs
+            from #mw-search-wrap's right edge, under the row. */}
+        <slot name="topbar" />
         {/* Search icon — click expands the input (plan P1.7). */}
         <button
           id="mw-search-toggle"

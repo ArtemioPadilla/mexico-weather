@@ -1950,3 +1950,129 @@ test.describe('Story 22.3 — one tools menu', () => {
     await expect(toggle).toBeHidden();
   });
 });
+
+test.describe('Story 22.4 — SMN avisos counter in the top bar', () => {
+  test.describe.configure({ timeout: 60_000 });
+
+  const aviso = (link: string, severity: 'critical' | 'warn' | 'info') => ({
+    title: `Aviso ${link}`,
+    link: `https://smn.example/${link}.pdf`,
+    pubDate: 'Sun, 27 Sep 2026 12:00:00 -0600',
+    category: 'Aviso',
+    severity,
+  });
+  /** 3 distinct avisos: one shared by two states (counted once), a
+   *  critical one in a state bucket (the site-wide ribbon only reads the
+   *  global bucket, so it stays out of the way) and a national one. */
+  const SMN_DOC = {
+    metadata: { updated: new Date().toUTCString(), total_items: 3 },
+    byState: {
+      sonora: [aviso('polo', 'warn'), aviso('calor', 'critical')],
+      sinaloa: [aviso('polo', 'warn')],
+    },
+    global: [aviso('frente', 'info')],
+  };
+
+  async function serveSmn(
+    page: import('@playwright/test').Page,
+    doc: object
+  ): Promise<void> {
+    await page.route('**/data/smn-by-state.json', (r) =>
+      r.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(doc),
+      })
+    );
+  }
+
+  test('the counter sits next to search and opens the same SMN panel', async ({
+    page,
+  }) => {
+    await serveSmn(page, SMN_DOC);
+    await openOnSatellite(page);
+    const btn = page.locator('#mapa-smn-btn');
+    const panel = page.locator('#mapa-smn-panel');
+    await expect(btn).toBeVisible();
+    await expect(btn).toHaveText(/3/);
+    await expect(btn).toHaveAccessibleName('3 avisos SMN');
+    await expect(btn).toHaveAttribute('data-severity', 'critical');
+    await expect(btn).toHaveAttribute('aria-expanded', 'false');
+    await expect(panel).toBeHidden();
+    // In the top bar: the search row, just left of the search button.
+    await expect(
+      page.locator(
+        '#mw-search-wrap #mapa-smn-btn + #mapa-smn-panel + #mw-search-toggle'
+      )
+    ).toHaveCount(1);
+    const b = (await btn.boundingBox())!;
+    const s = (await page.locator('#mw-search-toggle').boundingBox())!;
+    expect(Math.abs(b.y + b.height / 2 - (s.y + s.height / 2))).toBeLessThan(2);
+    expect(b.x + b.width).toBeLessThanOrEqual(s.x);
+    // The floating amber pill is gone.
+    await expect(page.locator('details#mapa-smn-panel')).toHaveCount(0);
+    await expect(page.locator('#mapa-smn-panel summary')).toHaveCount(0);
+
+    // Open: the <SmnAvisos> widget, with the rows the counter counted.
+    await btn.click();
+    await expect(btn).toHaveAttribute('aria-expanded', 'true');
+    await expect(panel).toBeVisible();
+    await expect(panel).toBeFocused();
+    const widget = panel.locator('[data-smn-avisos]');
+    await expect(widget).toBeVisible();
+    await expect(widget).toHaveAttribute('data-smn-state', 'alert');
+    await expect(widget.locator('[data-smn-list] li')).toHaveCount(3);
+    await expect(widget.locator('[data-smn-loc]')).toHaveText(
+      'Avisos vigentes en el país:'
+    );
+
+    // Escape closes and hands the focus back to the counter.
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
+    await expect(btn).toBeFocused();
+    await expect(btn).toHaveAttribute('aria-expanded', 'false');
+
+    // A press on the map closes it too.
+    await btn.click();
+    await expect(panel).toBeVisible();
+    await page.locator('#map canvas').click({ position: { x: 400, y: 500 } });
+    await expect(panel).toBeHidden();
+  });
+
+  test('no avisos: no counter on the map', async ({ page }) => {
+    await serveSmn(page, { metadata: {}, byState: {}, global: [] });
+    await openOnSatellite(page);
+    // The widget inside the (closed) panel settles on its calm state once
+    // the feed loaded — by then the counter has had its say too.
+    await expect(
+      page.locator('#mapa-smn-panel [data-smn-avisos]')
+    ).toHaveAttribute('data-smn-state', 'calm');
+    await expect(page.locator('#mapa-smn-btn')).toBeHidden();
+    await expect(page.locator('#mapa-smn-panel')).toBeHidden();
+  });
+
+  test.describe('phone', () => {
+    test.use({
+      viewport: { width: 360, height: 640 },
+      hasTouch: true,
+      isMobile: true,
+    });
+
+    test('the counter and its panel fit a 360 px screen', async ({ page }) => {
+      await serveSmn(page, SMN_DOC);
+      await openOnSatellite(page);
+      const btn = page.locator('#mapa-smn-btn');
+      await expect(btn).toBeVisible();
+      const b = (await btn.boundingBox())!;
+      expect(b.height).toBeGreaterThanOrEqual(44);
+      expect(b.width).toBeGreaterThanOrEqual(44);
+      await btn.tap();
+      const panel = page.locator('#mapa-smn-panel');
+      await expect(panel).toBeVisible();
+      await expect(panel.locator('[data-smn-list] li')).toHaveCount(3);
+      const p = (await panel.boundingBox())!;
+      expect(p.x).toBeGreaterThanOrEqual(0);
+      expect(p.x + p.width).toBeLessThanOrEqual(360);
+    });
+  });
+});

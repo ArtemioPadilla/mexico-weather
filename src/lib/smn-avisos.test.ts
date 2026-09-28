@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import {
+  allAvisos,
   avisosForState,
   avisosForStates,
   loadSmnAvisos,
@@ -186,5 +187,37 @@ describe('avisosForStates (multi-state, volcano use case)', () => {
 
   it('returns empty when doc is null', () => {
     expect(avisosForStates(null, ['puebla'])).toEqual([]);
+  });
+});
+
+describe('allAvisos (Story 22.4 — country-view /mapa counter)', () => {
+  it('returns every state bucket plus the global one, deduped by link', () => {
+    const shared = {
+      title: 'Frente frío (Jalisco y Oaxaca)',
+      link: 'https://example.com/shared',
+      pubDate: 'Mon, 25 May 2026',
+      category: 'Aviso',
+      severity: 'warn' as const,
+    };
+    const doc = {
+      ...SAMPLE_DOC,
+      byState: {
+        jalisco: [...SAMPLE_DOC.byState.jalisco, shared],
+        oaxaca: [...SAMPLE_DOC.byState.oaxaca, shared],
+      },
+    };
+    const links = allAvisos(doc).map((a) => a.link);
+    expect(links).toEqual([
+      'https://example.com/a',
+      'https://example.com/shared',
+      'https://example.com/b',
+      ...SAMPLE_DOC.global.map((a) => a.link),
+    ]);
+  });
+
+  it('is empty for a null doc or an empty feed', () => {
+    expect(allAvisos(null)).toEqual([]);
+    expect(allAvisos({ byState: {}, global: [] })).toEqual([]);
+    expect(allAvisos({})).toEqual([]);
   });
 });

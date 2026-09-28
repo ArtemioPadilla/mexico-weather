@@ -12,6 +12,10 @@
  * When none of these is passed, the runtime script falls back to URL
  * params (?lat=&lng=) — used by /forecast.
  *
+ * `scope="all"` lists every aviso in the feed — each state plus the
+ * national bucket, deduped (allAvisos()) — for the country-view /mapa,
+ * whose top-bar counter (Story 22.4) counts the same list.
+ *
  * The widget always renders, including when there are zero avisos
  * (shows a calm "Sin alertas vigentes" line) — users get explicit
  * confirmation we checked. Staleness is surfaced when the index is
@@ -24,14 +28,15 @@ interface Props {
   stateSlug?: string;
   stateSlugs?: readonly string[];
   coords?: { lat: number; lng: number };
+  scope?: 'all';
 }
 
-const { stateSlug, stateSlugs, coords } = Astro.props;
+const { stateSlug, stateSlugs, coords, scope } = Astro.props;
 const base = siteBase();
 // Resolved mode: 'slugs' = known at build time. 'coords' = polygon
 // lookup at runtime (also the URL-params fallback path).
 const slugs = stateSlugs ?? (stateSlug ? [stateSlug] : []);
-const mode = slugs.length > 0 ? 'slugs' : 'coords';
+const mode = scope === 'all' ? 'all' : slugs.length > 0 ? 'slugs' : 'coords';
 ---
 
 <section
@@ -76,6 +81,7 @@ const mode = slugs.length > 0 ? 'slugs' : 'coords';
 
 <script>
   import {
+    allAvisos,
     avisosForStates,
     loadSmnAvisos,
     type SmnAviso,
@@ -264,6 +270,19 @@ const mode = slugs.length > 0 ? 'slugs' : 'coords';
       // No SMN data available at all — hide entirely. Distinct from
       // 'no avisos' (which renders the calm state).
       host.classList.add('hidden');
+      return;
+    }
+
+    if (mode === 'all') {
+      const every = allAvisos(doc);
+      const label = every.length === 0
+        ? lang === 'en'
+          ? 'No active alerts in Mexico.'
+          : 'Sin avisos vigentes en el país.'
+        : lang === 'en'
+          ? 'Active alerts across Mexico:'
+          : 'Avisos vigentes en el país:';
+      render(host, every, label, doc);
       return;
     }
 

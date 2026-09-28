@@ -75,77 +75,77 @@ const t = ui[lang];
       exposeE2eHook={true}
       lazy={false}
       lang={lang}
-    />
-
-    {/* Floating SMN avisos panel — collapsed pill in the corner that
-        expands into the full <SmnAvisos> widget. Shows global
-        (national-scope) avisos by default. A future PR could hook the
-        panel's coords to map click / locate / search events for state-
-        specific avisos, but the country-view default of /mapa makes
-        the global feed the most-useful initial set. */}
-    <details
-      id="mapa-smn-panel"
-      class="group pointer-events-auto absolute bottom-3 right-3 z-10 max-w-[min(380px,calc(100vw-1.5rem))] rounded-lg border border-amber-200 bg-amber-50/95 shadow-md backdrop-blur dark:border-amber-900 dark:bg-amber-950/95"
     >
-      <summary
-        class="cursor-pointer list-none rounded-lg px-3 py-2 text-sm font-medium text-amber-900 hover:bg-amber-100/60 dark:text-amber-200 dark:hover:bg-amber-900/40"
-        aria-label="Mostrar avisos SMN"
-      >
-        <span aria-hidden="true">⚠️</span>
-        <span id="mapa-smn-count">Avisos SMN</span>
-        <span class="ml-1 text-xs opacity-70 group-open:hidden">▾</span>
-        <span class="ml-1 hidden text-xs opacity-70 group-open:inline">▴</span>
-      </summary>
-      <div class="border-t border-amber-200 p-2 dark:border-amber-900">
-        <SmnAvisos />
-      </div>
-    </details>
+      {/* Story 22.4 — SMN avisos counter in the top bar, left of search.
+          Replaces the always-on amber <details> pill that floated in the
+          bottom-right corner: the counter ships [hidden] and shows only
+          when the feed has at least one aviso (every state plus the
+          national bucket, deduped — the same allAvisos() list the panel
+          renders with scope="all"), red when one is critical. It opens
+          the same <SmnAvisos> widget in a popover hanging from the
+          search row (#mapa-smn-panel keeps the old panel's id; the print
+          stylesheet hides it). Wired by src/lib/map/chrome/smn-counter.ts
+          from the script below. */}
+      <Fragment slot="topbar">
+        <button
+          id="mapa-smn-btn"
+          type="button"
+          hidden
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="mapa-smn-panel"
+          aria-label="Avisos SMN"
+          title="Avisos SMN"
+          data-severity="info"
+          class="group/smn flex h-11 min-w-11 items-center justify-center gap-1 rounded-full bg-gray-900/80 px-3 text-sm font-semibold tabular-nums text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-expanded:ring-2 aria-expanded:ring-amber-400/70 data-[severity=critical]:bg-red-600/90 data-[severity=critical]:hover:bg-red-600"
+        >
+          <span aria-hidden="true" class="text-base leading-none text-amber-400 group-data-[severity=critical]/smn:text-white">⚠&#xFE0E;</span>
+          <span id="mapa-smn-count"></span>
+        </button>
+        <div
+          id="mapa-smn-panel"
+          role="dialog"
+          aria-label="Avisos SMN"
+          data-i18n-en-aria-label="SMN alerts"
+          tabindex="-1"
+          hidden
+          class="im-reveal absolute right-0 top-14 max-h-[min(60vh,32rem)] w-[min(380px,calc(100vw-1.5rem))] overflow-y-auto rounded-lg text-start shadow-xl focus:outline-none"
+        >
+          <SmnAvisos scope="all" />
+        </div>
+      </Fragment>
+    </InteractiveMap>
   </main>
 
   <script>
-    // Populate the floating pill's count label from the SMN doc. The
-    // <SmnAvisos> widget inside the panel handles its own rendering;
-    // this script only touches the summary text so users can see the
-    // count without opening the panel.
+    // Story 22.4 — the top-bar counter. <SmnAvisos scope="all"> renders
+    // the panel's content on its own; this only fills the counter (same
+    // memoised fetch, one request) and wires the popover.
     import { loadSmnAvisos } from '../lib/smn-avisos';
+    import {
+      applySmnCounter,
+      smnCounterState,
+      wireSmnCounter,
+    } from '../lib/map/chrome/smn-counter';
     const base = (() => {
       const b = (import.meta.env.BASE_URL as string) || '/';
       return b.endsWith('/') ? b : b + '/';
     })();
 
-    void (async () => {
-      const doc = await loadSmnAvisos(base);
-      const label = document.getElementById('mapa-smn-count');
-      if (!label) return;
-      if (!doc) {
-        label.textContent = 'Avisos SMN';
-        return;
-      }
-      // The country-view map cares about global + every state, so the
-      // headline number is total avisos across all buckets (deduped
-      // by link to avoid double-counting cross-state advisories).
-      const seen = new Set<string>();
-      const count = (() => {
-        let n = 0;
-        for (const list of Object.values(doc.byState ?? {})) {
-          for (const a of list) {
-            const k = a.link || a.title;
-            if (!seen.has(k)) {
-              seen.add(k);
-              n += 1;
-            }
-          }
-        }
-        for (const a of doc.global ?? []) {
-          const k = a.link || a.title;
-          if (!seen.has(k)) {
-            seen.add(k);
-            n += 1;
-          }
-        }
-        return n;
-      })();
-      label.textContent = count > 0 ? `${count} aviso${count === 1 ? '' : 's'} SMN` : 'Sin alertas SMN';
-    })();
+    const button = document.getElementById('mapa-smn-btn');
+    const panel = document.getElementById('mapa-smn-panel');
+    if (button && panel) {
+      const els = {
+        button,
+        panel,
+        countEl: document.getElementById('mapa-smn-count'),
+      };
+      wireSmnCounter(els);
+      const lang =
+        document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'es';
+      void loadSmnAvisos(base).then((doc) => {
+        applySmnCounter(els, smnCounterState(doc), lang);
+      });
+    }
   </script>
 </BaseLayout>

@@ -140,4 +140,42 @@ test.describe('a11y audit — /mapa (interactive, slower)', () => {
       ).toEqual([]);
     }
   });
+  // Story 22.4 — the SMN counter's popover is closed on load too; serve a
+  // feed with avisos (the counter hides on a quiet one) and scan it open.
+  test('mapa with the SMN avisos popover open has no critical or serious WCAG violations', async ({
+    page,
+  }) => {
+    const aviso = (link: string, severity: string) => ({
+      title: `Aviso ${link}`,
+      link: `https://smn.example/${link}.pdf`,
+      pubDate: 'Sun, 27 Sep 2026 12:00:00 -0600',
+      category: 'Aviso',
+      severity,
+    });
+    await page.route('**/data/smn-by-state.json', (r) =>
+      r.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          metadata: { updated: new Date().toUTCString() },
+          byState: { sonora: [aviso('a', 'critical'), aviso('b', 'warn')] },
+          global: [aviso('c', 'info')],
+        }),
+      })
+    );
+    await page.goto('mapa/');
+    await page.waitForLoadState('domcontentloaded');
+    await page.locator('#mapa-smn-btn').click();
+    await expect(
+      page.locator('#mapa-smn-panel [data-smn-list] li')
+    ).toHaveCount(3);
+    const results = await new AxeBuilder({ page })
+      .withTags(TAGS)
+      .include('#mw-search-wrap')
+      .analyze();
+    const blocking = results.violations.filter(
+      (v) => v.impact === 'critical' || v.impact === 'serious'
+    );
+    expect(blocking.map((v) => `[${v.impact}] ${v.id}: ${v.help}`)).toEqual([]);
+  });
 });

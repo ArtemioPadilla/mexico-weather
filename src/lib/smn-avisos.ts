@@ -87,3 +87,12 @@ export function avisosForStates(
   for (const a of doc.global ?? []) pushUnique(a);
   return out;
 }
+
+/** Every aviso in the doc — each state bucket plus the global one —
+ *  deduped by `link` like avisosForStates(). The country-view /mapa
+ *  counter (Story 22.4) and the panel it opens both read this, so the
+ *  number on the button is the number of rows behind it. */
+export function allAvisos(doc: SmnByStateDoc | null): SmnAviso[] {
+  if (!doc) return [];
+  return avisosForStates(doc, Object.keys(doc.byState ?? {}));
+}

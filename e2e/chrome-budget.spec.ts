@@ -53,7 +53,8 @@ interface Variant {
   budget: number;
   /** Measured 2026-09-27 on this branch (Story 22.1, re-measured after the
    *  Story 21.2 satellite boot and on 2026-09-28 after the Story 22.2
-   *  compact rail and the Story 22.3 tools menu); see the per-variant
+   *  compact rail and the Story 22.3 tools menu, and after the Story 22.4
+   *  SMN counter); see the per-variant
    *  comment. */
   baseline: number;
 }
@@ -69,7 +70,7 @@ const VARIANTS: Variant[] = [
     // layer tiles, 3 satellite sub-options (GeoColor / Infrarrojo / Color
     // real) and the opacity range in the active layer's block, 8 timeline
     // controls (the 7 of the base layer + "Ver 10 días"), the ⋯ tools
-    // menu, SMN pill, feedback FAB.
+    // menu, feedback FAB (the SMN counter only with avisos, Story 22.4).
     // 38 on the base layer (Story 22.1) → 42 since /mapa boots on
     // satellite (21.2) → 43 with the compact rail (22.2): the tab bar
     // costs one control more than the summary it replaced, while the rail
@@ -78,9 +79,11 @@ const VARIANTS: Variant[] = [
     // (−4), and the 5 model segments show only with a forecast layer, not
     // on satellite (−5) → 28 with the back link moved into the ⋯ menu's
     // Info tab and no MapLibre +/−/compass buttons on /mapa (zoom by
-    // scroll, pinch and keys; −4). Stories 22.4–22.5 carry the count
+    // scroll, pinch and keys; −4) → 27 with the always-on SMN pill
+    // turned into a top-bar counter that hides on a quiet feed (22.4,
+    // −1; +1 again while there are avisos). Story 22.5 carries the count
     // further down.
-    baseline: 28,
+    baseline: 27,
   },
   {
     name: 'mobile',
@@ -94,8 +97,9 @@ const VARIANTS: Variant[] = [
     // the compact rail (Story 22.2) → 23 with the one tools menu (22.3):
     // the Distancia/Área/Mira pills (which leaked onto the phone map on
     // the first `idle`), ⚙ and ℹ became one ⋯ button (−4) → 19 with the
-    // back link inside the ⋯ menu and no MapLibre nav buttons (−4).
-    baseline: 19,
+    // back link inside the ⋯ menu and no MapLibre nav buttons (−4) → 18
+    // with the SMN pill turned into a counter hidden on a quiet feed (22.4).
+    baseline: 18,
   },
 ];
 
@@ -131,6 +135,17 @@ async function bootMap(page: Page): Promise<void> {
       body: JSON.stringify({ activeStorms: [] }),
     })
   );
+  // Story 22.4 — the SMN counter in the top bar shows only when the feed
+  // has avisos. Serve a quiet feed so the count never depends on the
+  // week's weather: with avisos the counter adds one control (+1 on both
+  // viewports), which is what the always-on SMN pill used to cost.
+  await page.route('**/data/smn-by-state.json', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ metadata: {}, byState: {}, global: [] }),
+    })
+  );
   await page.addInitScript(() => {
     try {
       window.localStorage.setItem('mw:welcomed', '1');
@@ -164,6 +179,11 @@ async function bootMap(page: Page): Promise<void> {
     boot
   );
   await expect(page.locator('#tl-extend')).toBeVisible();
+  // The SMN feed has loaded (the counter decided whether to show): the
+  // widget inside its closed popover settles on the calm state.
+  await expect(
+    page.locator('#mapa-smn-panel [data-smn-avisos]')
+  ).toHaveAttribute('data-smn-state', 'calm', boot);
   // One tick of the wide-control surfacing interval (1.5 s) for margin.
   await page.waitForTimeout(1600);
 }
@@ -228,7 +248,7 @@ async function measure(page: Page): Promise<Measurement> {
 
 /**
  * Measure until two consecutive readings agree — the rail buttons are built
- * by the bootstrap and the SMN pill updates its label asynchronously, so a
+ * by the bootstrap and the SMN counter shows asynchronously, so a
  * single read right after `load` could catch the chrome mid-flight.
  */
 async function measureStable(

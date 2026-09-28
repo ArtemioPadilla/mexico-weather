@@ -43,6 +43,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 7. **First visit**: `/mapa` and the layer pages show a one-time, non-modal welcome card offering to centre the map on you (same locate flow as the 📍 button; remembered in localStorage, nothing leaves the browser), and each weather layer shows a one-line intro the first time it is activated (Story 19.2).
 8. **Sharing / bookmarking**: the URL hash updates as you pan, zoom, change layer, and scrub. Copy-paste the URL to share the exact view + frame; reloading restores it.
 9. **Tools menu (⋯)** (Story 22.3): one round **⋯** button under the search row (every viewport, where the ℹ button used to be) opens a popover with three tabs — **Herramientas** (Distancia, Área, Mira, Capturar, Hace 24 h; Limpiar once a snapshot exists), **Ajustes** (the old ⚙ panel: time zone, hour format, loop, speed, style, time label, units) and **Info** (the old ℹ panel: data sources and the active layer's own page, headed by the **Volver al inicio** link that used to float in the map's top-left corner). ←/→ move between tabs; **Escape** closes it and puts the focus back on ⋯; a click outside closes it; picking a tool closes it so your next click lands on the map. While a tool is on — measuring, the crosshair, or a snapshot comparison — **one pill** at the top of the map (under the search row on a phone) names it ("Distancia", "Distancia · Mira", "Comparación"…), shows the running measurement, carries the comparison's **Ocultar / Mostrar** switch and a **Salir** button that turns every active tool off (Escape still ends measuring; with the menu open the first Escape only closes the menu). While measuring, a click on the map adds a point and does not open the place card. The **model toggle** (Auto / ICON / GFS / ECMWF / JMA, bottom-right) only shows while a forecast layer is on — temperature, humidity, pressure, precipitation or wind — since the model changes nothing on satellite, radar, sun or the base map; on a phone it still sits behind **Controles**, which no longer reveals the measure/snapshot tools (they are in ⋯). `/mapa` and the `/mapa/<capa>/` pages have **no +/− zoom or compass buttons** any more: zoom with the mouse wheel, a pinch, a double-click, or the keyboard (+ / − and the arrow keys with the map focused); the home and `/forecast` embeds keep the buttons.
+10. **SMN avisos counter** (Story 22.4): when the SMN feed has at least one aviso, a round **⚠ N** counter sits in the top bar, just left of search (dark with an amber ⚠; red when one of them is critical). N counts every aviso once — each state's plus the national ones. Clicking it opens the same SMN alerts widget as before ("Avisos vigentes en el país:", the first 5 rows, "+N más en el feed RSS" beyond that) in a popover under the search row; **Escape** closes it and returns the focus to the counter, a click outside closes it. With no avisos (or no feed) there is **no counter at all** — the old amber "⚠️ Avisos SMN" pill in the bottom-right corner, which showed even with "Sin alertas SMN", is gone.
 
 ## Public URL schemas
 
@@ -202,12 +203,15 @@ attached to the HTML report). Two tests per viewport:
   are counted; **43 / 27** with the Story 22.2 rail tabs; **28 / 19** since
   Story 22.3 moved the tools, ⚙, ℹ and the back link into the ⋯ menu,
   dropped the MapLibre zoom/compass buttons on `/mapa` and shows the model
-  toggle only with a forecast layer). It fails when a PR adds a control
+  toggle only with a forecast layer; **27 / 18** since Story 22.4 turned
+  the SMN pill into a top-bar counter that only shows with avisos — the
+  spec serves a quiet SMN feed, so the number never depends on the week's
+  weather; with avisos it is one more). It fails when a PR adds a control
   over the map *and* when one is removed: the story that removes it records
   the new number in `VARIANTS[].baseline` and in the "Hoy" column of
   [`PLAN_PARIDAD_VISUAL.md`](PLAN_PARIDAD_VISUAL.md) §5.
 - **budget** (≤ 8 desktop, ≤ 5 mobile, plan §1.2) — `test.fixme` until
-  Stories 22.2–22.5 land (22.2 and 22.3 have); 22.5 flips it to a real test.
+  Stories 22.2–22.5 land (22.2, 22.3 and 22.4 have); 22.5 flips it to a real test.
 
 The state measured is the one a returning visitor sees: satellite layer
 with its loop running (the Story 21.2 boot), nothing clicked, welcome card
@@ -215,8 +219,9 @@ already dismissed; the spec mocks GIBS too and waits for the pressed
 satellite button + the playing ▶ rather than `map.loaded()`, which never
 settles while frames animate. MapLibre markers/popups and the
 attribution link are not counted (data and legal text, not chrome); the
-feedback FAB and the SMN pill are (so were the MapLibre zoom/compass
-buttons and the back link until Story 22.3 took them off the map). The pure decision (rects → count) is
+feedback FAB is, and so is the SMN counter when it shows (so were the
+MapLibre zoom/compass buttons and the back link until Story 22.3 took them
+off the map, and the always-on SMN pill until Story 22.4). The pure decision (rects → count) is
 `src/lib/map/chrome/chrome-budget.ts`, unit-tested in
 `chrome-budget.test.ts`; the spec only measures. Tiles are mocked, so the
 spec runs on any machine:
