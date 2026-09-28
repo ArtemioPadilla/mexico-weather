@@ -7,6 +7,7 @@
  */
 import type { FeatureCollection } from 'geojson';
 import type maplibregl from 'maplibre-gl';
+import { labelHalo, labelLayout } from '../utils/label-style';
 
 const SOURCE_ID = 'wx-webcams-src';
 const CIRCLE_LAYER_ID = 'wx-webcams-circle';
@@ -112,7 +113,7 @@ export function createWebcamsOverlay(
         minzoom: 5,
         layout: {
           'text-field': ['get', 'label'],
-          'text-size': 11,
+          ...labelLayout('name'),
           'text-offset': [0, 1.1],
           'text-anchor': 'top',
           'text-allow-overlap': false,
@@ -120,8 +121,7 @@ export function createWebcamsOverlay(
         },
         paint: {
           'text-color': '#0369a1',
-          'text-halo-color': '#ffffff',
-          'text-halo-width': 1.2,
+          ...labelHalo('dark'),
         },
       });
       // One-shot listener registration (idempotent across toggles).

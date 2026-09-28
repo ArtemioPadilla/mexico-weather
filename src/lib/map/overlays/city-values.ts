@@ -11,6 +11,7 @@
  */
 import type { FeatureCollection } from 'geojson';
 import type maplibregl from 'maplibre-gl';
+import { labelHalo, labelLayout } from '../utils/label-style';
 
 const SOURCE_ID = 'wx-city-values-src';
 const LAYER_ID = 'wx-city-values-text';
@@ -101,20 +102,17 @@ export function createCityValuesOverlay(
       minzoom: 5,
       layout: {
         'text-field': ['get', 'label'],
-        'text-size': 12,
+        ...labelLayout('value'),
         'text-offset': [0, 1.4],
         'text-anchor': 'top',
         'text-allow-overlap': false,
         'text-ignore-placement': false,
         'text-padding': 4,
         'text-line-height': 1.1,
-        'text-font': ['Open Sans Semibold'],
       },
       paint: {
         'text-color': '#ffffff',
-        'text-halo-color': 'rgba(0,0,0,0.75)',
-        'text-halo-width': 1.4,
-        'text-halo-blur': 0.2,
+        ...labelHalo('light'),
       },
     });
   }

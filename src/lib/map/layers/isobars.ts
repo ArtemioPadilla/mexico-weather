@@ -11,6 +11,7 @@
 import type { FeatureCollection } from 'geojson';
 import type maplibregl from 'maplibre-gl';
 import { computeIsobars } from '../utils/isobars';
+import { labelHalo, labelLayout } from '../utils/label-style';
 
 const SOURCE_ID = 'wx-isobars-src';
 const LAYER_ID = 'wx-isobars-line';
@@ -91,8 +92,7 @@ export function createIsobarsLayer(
           'symbol-placement': 'line',
           'symbol-spacing': 260,
           'text-field': isobarLabelExpression(getUnit()),
-          'text-size': 10,
-          'text-font': ['Open Sans Semibold'],
+          ...labelLayout('detail'),
           'text-rotation-alignment': 'map',
           'text-pitch-alignment': 'viewport',
           'text-max-angle': 30,
@@ -100,8 +100,7 @@ export function createIsobarsLayer(
         },
         paint: {
           'text-color': '#ffffff',
-          'text-halo-color': 'rgba(0,0,0,0.75)',
-          'text-halo-width': 1.2,
+          ...labelHalo('light'),
         },
       });
     },

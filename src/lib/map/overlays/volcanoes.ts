@@ -14,6 +14,7 @@
  */
 import type { FeatureCollection } from 'geojson';
 import type maplibregl from 'maplibre-gl';
+import { labelHalo, labelLayout } from '../utils/label-style';
 
 const SOURCE_ID = 'wx-volcanoes-src';
 const CIRCLE_LAYER_ID = 'wx-volcanoes-circle';
@@ -83,7 +84,7 @@ export function createVolcanoesOverlay(
         minzoom: 5,
         layout: {
           'text-field': ['get', 'label'],
-          'text-size': 11,
+          ...labelLayout('name'),
           'text-offset': [0, 1.1],
           'text-anchor': 'top',
           'text-allow-overlap': false,
@@ -91,8 +92,7 @@ export function createVolcanoesOverlay(
         },
         paint: {
           'text-color': '#dc2626',
-          'text-halo-color': '#ffffff',
-          'text-halo-width': 1.2,
+          ...labelHalo('dark'),
         },
       });
     },

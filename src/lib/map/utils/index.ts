@@ -29,3 +29,13 @@ export {
   formatDistance,
   formatArea,
 } from './measure';
+
+export {
+  MAP_LABEL_FONT,
+  LABEL_BASE_PX,
+  labelSize,
+  labelLayout,
+  labelHalo,
+  type LabelRole,
+  type LabelTone,
+} from './label-style';

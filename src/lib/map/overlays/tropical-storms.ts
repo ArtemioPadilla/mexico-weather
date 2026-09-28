@@ -14,6 +14,7 @@
 import type { FeatureCollection } from 'geojson';
 import type maplibregl from 'maplibre-gl';
 import type { NhcStorm } from '../sources/nhc';
+import { labelHalo, labelLayout } from '../utils/label-style';
 
 const SOURCE_ID = 'wx-storms-src';
 const CIRCLE_LAYER_ID = 'wx-storms-circle';
@@ -231,16 +232,14 @@ export function createTropicalStormsOverlay(
         minzoom: 4,
         layout: {
           'text-field': ['get', 'label'],
-          'text-size': 10,
+          ...labelLayout('detail'),
           'text-offset': [0, -1.1],
           'text-anchor': 'bottom',
-          'text-font': ['Open Sans Semibold'],
           'text-allow-overlap': false,
         },
         paint: {
           'text-color': '#ffffff',
-          'text-halo-color': 'rgba(0,0,0,0.8)',
-          'text-halo-width': 1.2,
+          ...labelHalo('light'),
         },
       },
       beneath
@@ -293,15 +292,13 @@ export function createTropicalStormsOverlay(
       source: SOURCE_ID,
       layout: {
         'text-field': ['get', 'label'],
-        'text-size': 11,
+        ...labelLayout('name'),
         'text-offset': [0, 1.6],
         'text-anchor': 'top',
-        'text-font': ['Open Sans Semibold'],
       },
       paint: {
         'text-color': '#ffffff',
-        'text-halo-color': 'rgba(0,0,0,0.8)',
-        'text-halo-width': 1.4,
+        ...labelHalo('light'),
       },
     });
   }

@@ -7,6 +7,7 @@
  */
 import type { FeatureCollection } from 'geojson';
 import type maplibregl from 'maplibre-gl';
+import { labelHalo, labelLayout } from '../utils/label-style';
 
 const SOURCE_ID = 'wx-marine-src';
 const CIRCLE_LAYER_ID = 'wx-marine-circle';
@@ -172,7 +173,7 @@ export function createMarineOverlay(
         minzoom: 4,
         layout: {
           'text-field': ['get', 'label'],
-          'text-size': 10,
+          ...labelLayout('detail'),
           'text-offset': [0, 1.5],
           'text-anchor': 'top',
           'text-allow-overlap': false,
@@ -180,8 +181,7 @@ export function createMarineOverlay(
         },
         paint: {
           'text-color': '#0f172a',
-          'text-halo-color': '#ffffff',
-          'text-halo-width': 1.3,
+          ...labelHalo('dark'),
         },
       });
     },

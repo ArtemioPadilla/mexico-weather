@@ -7,6 +7,7 @@
  */
 import type { FeatureCollection } from 'geojson';
 import type maplibregl from 'maplibre-gl';
+import { labelHalo, labelLayout } from '../utils/label-style';
 
 const SOURCE_ID = 'wx-outlook-src';
 const AREA_FILL_ID = 'wx-outlook-fill';
@@ -104,15 +105,13 @@ export function createTropicalOutlookOverlay(
       filter: ['==', ['get', 'kind'], 'outlook-point'],
       layout: {
         'text-field': ['get', 'label'],
-        'text-size': 11,
+        ...labelLayout('name'),
         'text-offset': [0, 1.4],
         'text-anchor': 'top',
-        'text-font': ['Open Sans Semibold'],
       },
       paint: {
         'text-color': '#ffffff',
-        'text-halo-color': 'rgba(0,0,0,0.8)',
-        'text-halo-width': 1.4,
+        ...labelHalo('light'),
       },
     });
   }

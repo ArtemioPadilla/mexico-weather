@@ -8,6 +8,7 @@
  */
 import type { FeatureCollection } from 'geojson';
 import type maplibregl from 'maplibre-gl';
+import { labelHalo, labelLayout } from '../utils/label-style';
 
 const SOURCE_ID = 'wx-lakes-src';
 const CIRCLE_LAYER_ID = 'wx-lakes-circle';
@@ -80,7 +81,7 @@ export function createLakesOverlay(
         minzoom: 5,
         layout: {
           'text-field': ['get', 'label'],
-          'text-size': 10,
+          ...labelLayout('detail'),
           'text-offset': [0, 1.1],
           'text-anchor': 'top',
           'text-allow-overlap': false,
@@ -88,8 +89,7 @@ export function createLakesOverlay(
         },
         paint: {
           'text-color': '#0e7490',
-          'text-halo-color': '#ffffff',
-          'text-halo-width': 1.1,
+          ...labelHalo('dark'),
         },
       });
     },
