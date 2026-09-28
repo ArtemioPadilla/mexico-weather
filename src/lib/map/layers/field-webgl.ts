@@ -36,8 +36,14 @@ import {
   hexToRgba,
   mercatorY,
   rowLatitude,
+  type FieldDetailLayer,
   type RasterBounds,
 } from '../../mapraster';
+import {
+  FIELD_DETAIL_FADE,
+  detailWeight,
+  mergeFieldValue,
+} from './field-detail';
 
 /** Same id as the canvas raster layer: the boot retry, the e2e suite and
  *  removeField() look for `wx-field-layer` whichever renderer drew it. */
@@ -109,20 +115,16 @@ export interface FieldValueDomain {
   size: number;
 }
 
-const domainCache = new WeakMap<FieldGrid, FieldValueDomain>();
+const extentCache = new WeakMap<FieldGrid, [number, number]>();
+const domainCache = new WeakMap<
+  FieldGrid,
+  WeakMap<FieldGrid, FieldValueDomain>
+>();
 
-/**
- * LUT domain for a grid: its finite min … max over every hour (so the
- * LUT is built once per grid, not per frame), padded by a quarter of the
- * range plus one unit for the Catmull-Rom overshoot. Values past the pad
- * clamp to the end texels, which is what the clamped ramps do anyway.
- */
-export function fieldValueDomain(
-  grid: FieldGrid,
-  size = FIELD_LUT_SIZE
-): FieldValueDomain {
-  const cached = domainCache.get(grid);
-  if (cached && cached.size === size) return cached;
+/** Finite min / max of a grid over every hour (±Infinity when empty). */
+function gridExtent(grid: FieldGrid): [number, number] {
+  const cached = extentCache.get(grid);
+  if (cached) return cached;
   let lo = Infinity;
   let hi = -Infinity;
   for (const p of grid.points) {
@@ -132,6 +134,36 @@ export function fieldValueDomain(
       if (v > hi) hi = v;
     }
   }
+  const e: [number, number] = [lo, hi];
+  extentCache.set(grid, e);
+  return e;
+}
+
+/**
+ * LUT domain for a grid: its finite min … max over every hour (so the
+ * LUT is built once per grid, not per frame), padded by a quarter of the
+ * range plus one unit for the Catmull-Rom overshoot. Values past the pad
+ * clamp to the end texels, which is what the clamped ramps do anyway.
+ * Story 24.2 — `extra` (the local grid merged over it) widens the range:
+ * a finer grid resolves colder peaks and warmer valleys.
+ */
+export function fieldValueDomain(
+  grid: FieldGrid,
+  size = FIELD_LUT_SIZE,
+  extra?: FieldGrid | null
+): FieldValueDomain {
+  // Cached per grid (and per local grid merged over it), so the same
+  // frame pair hands setFrame the same object.
+  let perExtra = domainCache.get(grid);
+  const slot = extra ?? grid;
+  const cached = perExtra?.get(slot);
+  if (cached && cached.size === size) return cached;
+  let [lo, hi] = gridExtent(grid);
+  if (extra) {
+    const [elo, ehi] = gridExtent(extra);
+    lo = Math.min(lo, elo);
+    hi = Math.max(hi, ehi);
+  }
   if (!Number.isFinite(lo)) {
     lo = 0;
     hi = 1;
@@ -140,7 +172,11 @@ export function fieldValueDomain(
   const min = lo - pad;
   const max = hi + pad;
   const d: FieldValueDomain = { min, step: (max - min) / size, size };
-  domainCache.set(grid, d);
+  if (!perExtra) {
+    perExtra = new WeakMap();
+    domainCache.set(grid, perExtra);
+  }
+  perExtra.set(slot, d);
   return d;
 }
 
@@ -215,30 +251,17 @@ export interface FieldGeometry {
   height: number;
 }
 
-/**
- * Pure JS reference of the fragment shader at raster pixel (px, py) —
- * px along the columns (west→east), py down the rows (north→south),
- * rows linear in Mercator y. Returns straight RGBA8 with the layer alpha
- * `alpha` (0–255) at full opacity: what `fillFieldImageData(…,
- * { rowSpace: 'mercator' })` writes for the same pixel. A pixel whose
- * 4×4 stencil touches a missing cell is [0, 0, 0, 0].
- */
-export function fieldPixelReference(
+/** Bicubic of a packed (value, valid) grid at grid coords (fx, fy),
+ *  clamped to the edges; null when any of the 16 cells is missing. */
+function packedBicubic(
   packed: Float32Array,
-  geom: FieldGeometry,
-  lut: Uint8Array,
-  domain: FieldValueDomain,
-  px: number,
-  py: number,
-  alpha: number
-): [number, number, number, number] {
-  const { rows, cols, bounds, width: W, height: H } = geom;
-  const u = W > 1 ? px / (W - 1) : 0;
-  const lat = rowLatitude(py, H, bounds, 'mercator');
-  let fx = u * (cols - 1);
-  let fy = ((lat - bounds.south) / (bounds.north - bounds.south)) * (rows - 1);
-  fx = Math.min(Math.max(fx, 0), cols - 1);
-  fy = Math.min(Math.max(fy, 0), rows - 1);
+  cols: number,
+  rows: number,
+  fxIn: number,
+  fyIn: number
+): number | null {
+  const fx = Math.min(Math.max(fxIn, 0), cols - 1);
+  const fy = Math.min(Math.max(fyIn, 0), rows - 1);
   const ix = Math.floor(fx);
   const iy = Math.floor(fy);
   const tx = fx - ix;
@@ -259,11 +282,69 @@ export function fieldPixelReference(
     ok = Math.min(ok, s0[1], s1[1], s2[1], s3[1]);
     rowV.push(catmullRom(tx, s0[0], s1[0], s2[0], s3[0]));
   }
-  if (ok < 0.5) return [0, 0, 0, 0];
-  const v = catmullRom(ty, rowV[0], rowV[1], rowV[2], rowV[3]);
+  if (ok < 0.5) return null;
+  return catmullRom(ty, rowV[0], rowV[1], rowV[2], rowV[3]);
+}
+
+/** Story 24.2 — the local grid of a frame, packed like the national one. */
+export interface PackedFieldDetail {
+  packed: Float32Array;
+  rows: number;
+  cols: number;
+  bounds: RasterBounds;
+}
+
+/**
+ * Pure JS reference of the fragment shader at raster pixel (px, py) —
+ * px along the columns (west→east), py down the rows (north→south),
+ * rows linear in Mercator y. Returns straight RGBA8 with the layer alpha
+ * `alpha` (0–255) at full opacity: what `fillFieldImageData(…,
+ * { rowSpace: 'mercator' })` writes for the same pixel. A pixel whose
+ * 4×4 stencil touches a missing cell is [0, 0, 0, 0]. With `detail`
+ * (Story 24.2) the local grid is merged by bounds exactly as
+ * `fillFieldImageData(…, { detail })` does.
+ */
+export function fieldPixelReference(
+  packed: Float32Array,
+  geom: FieldGeometry,
+  lut: Uint8Array,
+  domain: FieldValueDomain,
+  px: number,
+  py: number,
+  alpha: number,
+  detail?: PackedFieldDetail | null
+): [number, number, number, number] {
+  const { rows, cols, bounds, width: W, height: H } = geom;
+  const u = W > 1 ? px / (W - 1) : 0;
+  const lat = rowLatitude(py, H, bounds, 'mercator');
+  const fx = u * (cols - 1);
+  const fy =
+    ((lat - bounds.south) / (bounds.north - bounds.south)) * (rows - 1);
+  let v = packedBicubic(packed, cols, rows, fx, fy);
+  let detailAlpha = 1;
+  if (detail) {
+    const lng = bounds.west + u * (bounds.east - bounds.west);
+    const b = detail.bounds;
+    const w = detailWeight(lng, lat, b);
+    if (w > 0) {
+      const dv = packedBicubic(
+        detail.packed,
+        detail.cols,
+        detail.rows,
+        ((lng - b.west) / (b.east - b.west)) * (detail.cols - 1),
+        ((lat - b.south) / (b.north - b.south)) * (detail.rows - 1)
+      );
+      const m = mergeFieldValue(v, dv, w);
+      if (m) {
+        v = m.value;
+        detailAlpha = m.alpha;
+      }
+    }
+  }
+  if (v === null) return [0, 0, 0, 0];
   const k = lutIndex(v, domain) * 4;
   const a = Math.round(
-    (alpha * lut[k + 3] * edgeFalloffAt(px, py, W, H)) / 255
+    (alpha * lut[k + 3] * detailAlpha * edgeFalloffAt(px, py, W, H)) / 255
   );
   return [lut[k], lut[k + 1], lut[k + 2], a];
 }
@@ -299,6 +380,13 @@ uniform vec3 u_domain;      // min, step, size
 uniform vec2 u_size;        // virtual raster W, H (edge fade)
 uniform float u_fade;       // edge fade fraction
 uniform float u_alpha;      // layer alpha × opacity, 0..1
+uniform vec2 u_lng;         // west, east (degrees)
+// Story 24.2 — local grid merged by bounds (u_dOn 0 ⇒ national only).
+uniform sampler2D u_detail; // RG32F dcols × drows: (value, valid)
+uniform vec2 u_dDims;       // dcols, drows
+uniform vec4 u_dBounds;     // west, south, east, north (degrees)
+uniform float u_dFade;      // blend band, fraction of the local box
+uniform float u_dOn;
 in vec2 v_uv;
 out vec4 fragColor;
 const float PI = 3.141592653589793;
@@ -310,9 +398,42 @@ float cubic(float t, float a, float b, float c, float d) {
   float a3 = b;
   return ((a0 * t + a1) * t + a2) * t + a3;
 }
-vec2 cell(int x, int y) {
-  ivec2 hi = ivec2(u_dims) - 1;
-  return texelFetch(u_grid, clamp(ivec2(x, y), ivec2(0), hi), 0).rg;
+vec2 cell(sampler2D tex, ivec2 hi, int x, int y) {
+  return texelFetch(tex, clamp(ivec2(x, y), ivec2(0), hi), 0).rg;
+}
+// Catmull-Rom at grid coords (fx, fy): (value, 1 when all 16 cells valid).
+vec2 bicubic(sampler2D tex, vec2 dims, float fxIn, float fyIn) {
+  ivec2 hi = ivec2(dims) - 1;
+  float fx = clamp(fxIn, 0.0, dims.x - 1.0);
+  float fy = clamp(fyIn, 0.0, dims.y - 1.0);
+  float ixf = floor(fx);
+  float iyf = floor(fy);
+  float tx = fx - ixf;
+  float ty = fy - iyf;
+  int ix = int(ixf);
+  int iy = int(iyf);
+  float r[4];
+  float ok = 1.0;
+  for (int dy = -1; dy <= 2; dy++) {
+    vec2 s0 = cell(tex, hi, ix - 1, iy + dy);
+    vec2 s1 = cell(tex, hi, ix, iy + dy);
+    vec2 s2 = cell(tex, hi, ix + 1, iy + dy);
+    vec2 s3 = cell(tex, hi, ix + 2, iy + dy);
+    ok = min(ok, min(min(s0.g, s1.g), min(s2.g, s3.g)));
+    r[dy + 1] = cubic(tx, s0.r, s1.r, s2.r, s3.r);
+  }
+  return vec2(cubic(ty, r[0], r[1], r[2], r[3]), ok);
+}
+float detailWeight(float lng, float lat) {
+  vec2 uv = vec2(
+    (lng - u_dBounds.x) / (u_dBounds.z - u_dBounds.x),
+    (lat - u_dBounds.y) / (u_dBounds.w - u_dBounds.y)
+  );
+  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return 0.0;
+  vec2 d = min(uv, 1.0 - uv);
+  vec2 f = u_dFade > 0.0 ? clamp(d / u_dFade, 0.0, 1.0) : vec2(1.0);
+  f = f * f * (3.0 - 2.0 * f);
+  return f.x * f.y;
 }
 float falloff(float p, float n) {
   float fade = max(2.0, floor(n * u_fade));
@@ -324,29 +445,40 @@ void main() {
   vec2 uv = clamp(v_uv, 0.0, 1.0);
   float my = mix(u_mercY.x, u_mercY.y, uv.y);
   float lat = degrees(2.0 * atan(exp(PI * (1.0 - 2.0 * my))) - PI / 2.0);
-  float fx = clamp(uv.x * (u_dims.x - 1.0), 0.0, u_dims.x - 1.0);
-  float fy = clamp((lat - u_lat.x) / (u_lat.y - u_lat.x) * (u_dims.y - 1.0), 0.0, u_dims.y - 1.0);
-  float ixf = floor(fx);
-  float iyf = floor(fy);
-  float tx = fx - ixf;
-  float ty = fy - iyf;
-  int ix = int(ixf);
-  int iy = int(iyf);
-  float r[4];
-  float ok = 1.0;
-  for (int dy = -1; dy <= 2; dy++) {
-    vec2 s0 = cell(ix - 1, iy + dy);
-    vec2 s1 = cell(ix, iy + dy);
-    vec2 s2 = cell(ix + 1, iy + dy);
-    vec2 s3 = cell(ix + 2, iy + dy);
-    ok = min(ok, min(min(s0.g, s1.g), min(s2.g, s3.g)));
-    r[dy + 1] = cubic(tx, s0.r, s1.r, s2.r, s3.r);
+  vec2 n = bicubic(
+    u_grid,
+    u_dims,
+    uv.x * (u_dims.x - 1.0),
+    (lat - u_lat.x) / (u_lat.y - u_lat.x) * (u_dims.y - 1.0)
+  );
+  float v = n.x;
+  float ok = n.y;
+  float dAlpha = 1.0;
+  if (u_dOn > 0.5) {
+    float lng = mix(u_lng.x, u_lng.y, uv.x);
+    float w = detailWeight(lng, lat);
+    if (w > 0.0) {
+      vec2 d = bicubic(
+        u_detail,
+        u_dDims,
+        (lng - u_dBounds.x) / (u_dBounds.z - u_dBounds.x) * (u_dDims.x - 1.0),
+        (lat - u_dBounds.y) / (u_dBounds.w - u_dBounds.y) * (u_dDims.y - 1.0)
+      );
+      if (d.y >= 0.5) {
+        if (ok >= 0.5) {
+          v = n.x + (d.x - n.x) * w;
+        } else {
+          v = d.x;
+          dAlpha = w;
+          ok = 1.0;
+        }
+      }
+    }
   }
   if (ok < 0.5) discard;
-  float v = cubic(ty, r[0], r[1], r[2], r[3]);
   float k = clamp(floor((v - u_domain.x) / u_domain.y), 0.0, u_domain.z - 1.0);
   vec4 c = texelFetch(u_lut, ivec2(int(k), 0), 0);
-  float a = u_alpha * c.a
+  float a = u_alpha * c.a * dAlpha
     * falloff(uv.x * (u_size.x - 1.0), u_size.x)
     * falloff(uv.y * (u_size.y - 1.0), u_size.y);
   // MapLibre blends custom layers premultiplied (ONE, ONE_MINUS_SRC_ALPHA).
@@ -369,6 +501,8 @@ export interface FieldGlFrame {
   rampKey?: string;
   /** Layer alpha, 0–255 (the canvas path's `alpha`, 200 by default). */
   alpha: number;
+  /** Story 24.2 — local grid merged by bounds (its own hour index). */
+  detail?: FieldDetailLayer | null;
 }
 
 export interface FieldGlDeps {
@@ -406,6 +540,7 @@ export function createFieldGlLayer(
   let quad: WebGLBuffer | null = null;
   let gridTex: WebGLTexture | null = null;
   let lutTex: WebGLTexture | null = null;
+  let detailTex: WebGLTexture | null = null;
   const loc: Record<string, WebGLUniformLocation | null> = {};
   let aPos = -1;
   let broken = false;
@@ -415,6 +550,11 @@ export function createFieldGlLayer(
   let packedDims = '';
   let gridDirty = false;
   let gridTexDims = '';
+  // Story 24.2 — the local grid's texture (a 1×1 placeholder when none).
+  let detailPacked: Float32Array | null = null;
+  let detailDims = '';
+  let detailDirty = false;
+  let detailTexDims = '';
   let lut: Uint8Array | null = null;
   let lutDirty = false;
   let lutKey: {
@@ -453,17 +593,21 @@ export function createFieldGlLayer(
       if (quad) g.deleteBuffer(quad);
       if (gridTex) g.deleteTexture(gridTex);
       if (lutTex) g.deleteTexture(lutTex);
+      if (detailTex) g.deleteTexture(detailTex);
     }
     prog = null;
     vao = null;
     quad = null;
     gridTex = null;
     lutTex = null;
+    detailTex = null;
     gridTexDims = '';
+    detailTexDims = '';
     gl = null;
     // A re-add (layer switched off and on) re-uploads everything.
     gridDirty = !!packed;
     lutDirty = !!lut;
+    detailDirty = !!detailPacked;
   }
 
   function newTexture(g: GL2): WebGLTexture | null {
@@ -507,6 +651,12 @@ export function createFieldGlLayer(
       'u_size',
       'u_fade',
       'u_alpha',
+      'u_lng',
+      'u_detail',
+      'u_dDims',
+      'u_dBounds',
+      'u_dFade',
+      'u_dOn',
     ]) {
       loc[name] = g.getUniformLocation(p, name);
     }
@@ -526,8 +676,24 @@ export function createFieldGlLayer(
     g.bindBuffer(g.ARRAY_BUFFER, null);
     gridTex = newTexture(g);
     lutTex = newTexture(g);
+    detailTex = newTexture(g);
+    if (detailTex) {
+      // Complete from the start: the sampler is bound on every draw.
+      g.texImage2D(
+        g.TEXTURE_2D,
+        0,
+        g.RG32F,
+        1,
+        1,
+        0,
+        g.RG,
+        g.FLOAT,
+        new Float32Array(2)
+      );
+      detailTexDims = '1x1';
+    }
     g.bindTexture(g.TEXTURE_2D, null);
-    return !!gridTex && !!lutTex;
+    return !!gridTex && !!lutTex && !!detailTex;
   }
 
   function upload(g: GL2): void {
@@ -564,6 +730,39 @@ export function createFieldGlLayer(
         );
       }
       gridDirty = false;
+    }
+    const d = frame.detail;
+    if (detailDirty && d && detailPacked && detailTex) {
+      g.activeTexture(g.TEXTURE2);
+      g.bindTexture(g.TEXTURE_2D, detailTex);
+      const dims = `${d.cols}x${d.rows}`;
+      if (detailTexDims !== dims) {
+        g.texImage2D(
+          g.TEXTURE_2D,
+          0,
+          g.RG32F,
+          d.cols,
+          d.rows,
+          0,
+          g.RG,
+          g.FLOAT,
+          detailPacked
+        );
+        detailTexDims = dims;
+      } else {
+        g.texSubImage2D(
+          g.TEXTURE_2D,
+          0,
+          0,
+          0,
+          d.cols,
+          d.rows,
+          g.RG,
+          g.FLOAT,
+          detailPacked
+        );
+      }
+      detailDirty = false;
     }
     if (lutDirty && lut && lutTex && domain) {
       g.activeTexture(g.TEXTURE1);
@@ -638,12 +837,27 @@ export function createFieldGlLayer(
         g.uniform2f(loc.u_size, width, height);
         g.uniform1f(loc.u_fade, FIELD_EDGE_FADE_FRACTION);
         g.uniform1f(loc.u_alpha, (frame.alpha / 255) * opacity);
+        g.uniform2f(loc.u_lng, bounds.west, bounds.east);
+        const d = frame.detail;
+        g.uniform1f(loc.u_dOn, d && detailPacked ? 1 : 0);
+        g.uniform2f(loc.u_dDims, d?.cols ?? 1, d?.rows ?? 1);
+        g.uniform4f(
+          loc.u_dBounds,
+          d?.bounds.west ?? 0,
+          d?.bounds.south ?? 0,
+          d?.bounds.east ?? 1,
+          d?.bounds.north ?? 1
+        );
+        g.uniform1f(loc.u_dFade, FIELD_DETAIL_FADE);
         g.activeTexture(g.TEXTURE0);
         g.bindTexture(g.TEXTURE_2D, gridTex);
         g.uniform1i(loc.u_grid, 0);
         g.activeTexture(g.TEXTURE1);
         g.bindTexture(g.TEXTURE_2D, lutTex);
         g.uniform1i(loc.u_lut, 1);
+        g.activeTexture(g.TEXTURE2);
+        g.bindTexture(g.TEXTURE_2D, detailTex);
+        g.uniform1i(loc.u_detail, 2);
         g.disable(g.DEPTH_TEST);
         g.disable(g.STENCIL_TEST);
         g.enable(g.BLEND);
@@ -651,6 +865,8 @@ export function createFieldGlLayer(
         g.bindVertexArray(vao);
         g.drawArrays(g.TRIANGLES, 0, 6);
         g.bindVertexArray(null);
+        g.bindTexture(g.TEXTURE_2D, null);
+        g.activeTexture(g.TEXTURE1);
         g.bindTexture(g.TEXTURE_2D, null);
         g.activeTexture(g.TEXTURE0);
         g.bindTexture(g.TEXTURE_2D, null);
@@ -680,7 +896,20 @@ export function createFieldGlLayer(
       );
       packedDims = dims;
       gridDirty = true;
-      domain = fieldValueDomain(next.grid);
+      const d = next.detail ?? null;
+      if (d) {
+        const ddims = `${d.cols}x${d.rows}`;
+        detailPacked = packFieldFrame(
+          d.grid,
+          d.hourIdx,
+          detailDims === ddims && detailPacked ? detailPacked : undefined
+        );
+        detailDims = ddims;
+        detailDirty = true;
+      } else {
+        detailPacked = null;
+      }
+      domain = fieldValueDomain(next.grid, FIELD_LUT_SIZE, d?.grid);
       const rampKey = next.rampKey ?? '';
       if (
         !lutKey ||

@@ -14,6 +14,7 @@ import {
   pickFieldRenderer,
   type FieldGeometry,
 } from './field-webgl';
+import { detailWeight, mergeFieldValue } from './field-detail';
 import {
   bicubicValue,
   fillFieldImageData,
@@ -215,6 +216,156 @@ describe('Story 24.1 — shader reference vs fillFieldImageData', () => {
     expect(
       fieldPixelReference(packed, geom, lut, domain, W / 2, H / 2, 200)[3]
     ).toBe(200);
+  });
+});
+
+describe('Story 24.2 — local grid merged by bounds', () => {
+  // The same 250×175 virtual raster; a local 32×24 box over central
+  // Mexico with a sharper field (the "valley and coast" the national grid
+  // cannot resolve) and a hole of nulls straddling its east edge.
+  const W = 250;
+  const H = 175;
+  const ALPHA = 200;
+  const geom: FieldGeometry = {
+    rows: ROWS,
+    cols: COLS,
+    bounds: BOUNDS,
+    width: W,
+    height: H,
+  };
+  const DB = { west: -110, south: 14, east: -90, north: 28 };
+  const local: FieldGrid = {
+    times: temperature.times,
+    points: viewportGrid(DB, COLS, ROWS).map((p) => ({
+      lat: p.lat,
+      lng: p.lng,
+      values: [0, 1].map((h) =>
+        p.lng > -91.5 && p.lat > 19 && p.lat < 22
+          ? null
+          : 14 + 18 * Math.sin((p.lng + 100) / 1.7) * Math.cos(p.lat / 2.3) + h
+      ),
+    })),
+  };
+
+  it('shader reference with a detail texture matches the canvas pixel by pixel', () => {
+    const detailLayer = {
+      grid: local,
+      rows: ROWS,
+      cols: COLS,
+      bounds: DB,
+      hourIdx: 0,
+    };
+    const img = { data: new Uint8ClampedArray(W * H * 4), width: W, height: H };
+    fillFieldImageData(
+      img,
+      temperature,
+      ROWS,
+      COLS,
+      BOUNDS,
+      0,
+      tempColor,
+      ALPHA,
+      {
+        rowSpace: 'mercator',
+        detail: detailLayer,
+      }
+    );
+    const packed = packFieldFrame(temperature, 0);
+    const detail = {
+      packed: packFieldFrame(local, 0),
+      rows: ROWS,
+      cols: COLS,
+      bounds: DB,
+    };
+    const domain = fieldValueDomain(temperature, FIELD_LUT_SIZE, local);
+    const lut = buildRampLut(tempColor, domain);
+    const eps = 0.05 + domain.step;
+    let compared = 0;
+    let insideLocal = 0;
+    let maxDiff = 0;
+    let skipped = 0;
+    for (let py = 0; py < H; py += 2) {
+      const lat = rowLatitude(py, H, BOUNDS, 'mercator');
+      for (let px = 0; px < W; px += 2) {
+        const lng = BOUNDS.west + (px / (W - 1)) * (BOUNDS.east - BOUNDS.west);
+        const ref = fieldPixelReference(
+          packed,
+          geom,
+          lut,
+          domain,
+          px,
+          py,
+          ALPHA,
+          detail
+        );
+        // Skip points on a ramp step, as above (the merged value,
+        // recomputed in float64 here).
+        const vn = bicubicValue(temperature, ROWS, COLS, BOUNDS, lat, lng, 0);
+        const w = detailWeight(lng, lat, DB);
+        const inBox = w > 0;
+        const vd = inBox
+          ? bicubicValue(local, ROWS, COLS, DB, lat, lng, 0)
+          : null;
+        const v = mergeFieldValue(vn, vd, w)?.value ?? null;
+        if (v !== null && tempColor(v - eps) !== tempColor(v + eps)) {
+          skipped++;
+          continue;
+        }
+        const i = (py * W + px) * 4;
+        compared++;
+        if (inBox && vd !== null) insideLocal++;
+        for (let ch = 0; ch < 4; ch++)
+          maxDiff = Math.max(maxDiff, Math.abs(img.data[i + ch] - ref[ch]));
+      }
+    }
+    expect(maxDiff).toBeLessThanOrEqual(2);
+    expect(insideLocal).toBeGreaterThan(200);
+    expect(compared).toBeGreaterThan(0.6 * (compared + skipped));
+  });
+
+  it('inside the box the local value wins; outside nothing changes', () => {
+    const packed = packFieldFrame(temperature, 0);
+    const detail = {
+      packed: packFieldFrame(local, 0),
+      rows: ROWS,
+      cols: COLS,
+      bounds: DB,
+    };
+    const domain = fieldValueDomain(temperature, FIELD_LUT_SIZE, local);
+    const lut = buildRampLut(tempColor, domain);
+    const at = (lng: number, lat: number): [number, number] => {
+      const px = ((lng - BOUNDS.west) / 70) * (W - 1);
+      const yN = mercatorY(BOUNDS.north);
+      const yS = mercatorY(BOUNDS.south);
+      const py = ((mercatorY(lat) - yN) / (yS - yN)) * (H - 1);
+      return [px, py];
+    };
+    // Outside: identical with and without the detail texture.
+    const [ox, oy] = at(-75, 35);
+    expect(
+      fieldPixelReference(packed, geom, lut, domain, ox, oy, ALPHA, detail)
+    ).toEqual(fieldPixelReference(packed, geom, lut, domain, ox, oy, ALPHA));
+    // Deep inside: the local value's colour, not the national one's.
+    const [ix, iy] = at(-100, 17);
+    const vLocal = bicubicValue(local, ROWS, COLS, DB, 17, -100, 0)!;
+    const got = fieldPixelReference(
+      packed,
+      geom,
+      lut,
+      domain,
+      ix,
+      iy,
+      ALPHA,
+      detail
+    );
+    const k = lutIndex(vLocal, domain) * 4;
+    expect(got.slice(0, 3)).toEqual(Array.from(lut.slice(k, k + 3)));
+    // The domain covers both grids.
+    let localMax = -Infinity;
+    for (const p of local.points)
+      for (const v of p.values)
+        if (v !== null) localMax = Math.max(localMax, v);
+    expect(domain.min + domain.size * domain.step).toBeGreaterThan(localMax);
   });
 });
 

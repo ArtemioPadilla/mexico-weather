@@ -21,6 +21,19 @@
 // HTMLCanvasElement) and wiring the Blob URL into the map.
 
 import type { FieldGrid } from './mapfields';
+import { detailWeight, mergeFieldValue } from './map/layers/field-detail';
+
+/** Story 24.2 — a local grid merged over the national one by bounds:
+ *  inside `bounds` the renderer uses it (blended across the outer
+ *  `FIELD_DETAIL_FADE` of the box), outside the national grid. */
+export interface FieldDetailLayer {
+  grid: FieldGrid;
+  rows: number;
+  cols: number;
+  bounds: RasterBounds;
+  /** The local grid's own index of the hour being drawn. */
+  hourIdx: number;
+}
 
 /** Bounding box in degrees (same shape used in mapfields.viewportGrid). */
 export interface RasterBounds {
@@ -292,9 +305,10 @@ export function fillFieldImageData(
   hourIdx: number,
   colorHex: (v: number) => string,
   alpha: number,
-  opts?: { rowSpace?: RasterRowSpace }
+  opts?: { rowSpace?: RasterRowSpace; detail?: FieldDetailLayer | null }
 ): void {
   const W = img.width;
+  const detail = opts?.detail ?? null;
   const H = img.height;
   const dLng = bounds.east - bounds.west;
   const rowSpace = opts?.rowSpace ?? 'lat';
@@ -322,7 +336,28 @@ export function fillFieldImageData(
     const lat = rowLatitude(py, H, bounds, rowSpace);
     for (let px = 0; px < W; px++) {
       const lng = bounds.west + (px / (W - 1)) * dLng;
-      const v = bicubicValue(grid, rows, cols, bounds, lat, lng, hourIdx);
+      let v = bicubicValue(grid, rows, cols, bounds, lat, lng, hourIdx);
+      // Story 24.2 — the local grid wins inside its box.
+      let detailAlpha = 1;
+      if (detail) {
+        const w = detailWeight(lng, lat, detail.bounds);
+        if (w > 0) {
+          const dv = bicubicValue(
+            detail.grid,
+            detail.rows,
+            detail.cols,
+            detail.bounds,
+            lat,
+            lng,
+            detail.hourIdx
+          );
+          const m = mergeFieldValue(v, dv, w);
+          if (m) {
+            v = m.value;
+            detailAlpha = m.alpha;
+          }
+        }
+      }
       const i = (py * W + px) * 4;
       if (v === null) {
         img.data[i + 3] = 0;
@@ -335,7 +370,7 @@ export function fillFieldImageData(
       // Ramp alpha (Story 15.5: dry precipitation cells are #00000000)
       // multiplies the layer alpha and the edge fade.
       img.data[i + 3] = Math.round(
-        (alpha * a * edgeFalloffAt(px, py, W, H)) / 255
+        (alpha * a * detailAlpha * edgeFalloffAt(px, py, W, H)) / 255
       );
     }
   }
@@ -422,6 +457,7 @@ export async function renderFieldRaster(
     height?: number;
     alpha?: number;
     rowSpace?: RasterRowSpace;
+    detail?: FieldDetailLayer | null;
   }
 ): Promise<RasterRender | null> {
   const W = opts?.width ?? 400;
@@ -434,6 +470,7 @@ export async function renderFieldRaster(
   const img = ctx.createImageData(W, H);
   fillFieldImageData(img, grid, rows, cols, bounds, hourIdx, colorHex, alpha, {
     rowSpace: opts?.rowSpace,
+    detail: opts?.detail,
   });
   ctx.putImageData(img, 0, 0);
   try {
