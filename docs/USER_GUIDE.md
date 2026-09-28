@@ -413,8 +413,12 @@ and the crosshair, `glyphLinesHtml` / `conditionIconHtml` for the place
 card), which swaps each known emoji for its sprite plus a visually hidden
 name and drops any unknown one. `src/lib/map/chrome/chrome-polish.test.ts`
 fails if a `<button>` / `<summary>` of `InteractiveMap.astro` (or `/mapa`'s
-top bar) holds an emoji or lacks `.im-btn`, if a button restyles a state
-itself, if a radius or shadow utility outside the tokens appears in the
+top bar) holds an emoji or lacks `.im-btn`, if an i18n string the scripts
+put into the chrome (`ui.ts` keys `map_`, `timeline_`, `settings_`,
+`info_`, `welcome_`, `place_card_`, `layer_explainer_`, both languages:
+`showMsg`, the tool pill, the tiles) holds one — the radar's first-use
+hint says "Pulsa Reproducir" / "Press Play", not "▶" — if a button
+restyles a state itself, if a radius or shadow utility outside the tokens appears in the
 component, or if a panel loses its reveal.
 
 ## Related docs

@@ -9,7 +9,9 @@
  *    `focus-visible:`, `aria-pressed:` …): hover, pressed, focus, on,
  *    selected and disabled live once, in global.css.
  *  - No emoji in any <button> / <summary> markup, nor in any text the
- *    component renders (comments aside): icons come from the sprite.
+ *    component renders (comments aside), nor in the i18n strings the
+ *    scripts put into the chrome (showMsg, pill, tiles): icons come from
+ *    the sprite.
  *  - Radii and shadows are the `--im-*` tokens (`rounded-im-panel`,
  *    `rounded-im-control`, `rounded-full`; `shadow-im`, `shadow-im-raised`).
  */
@@ -17,6 +19,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
+import { ui } from '../../../i18n/ui';
 import { hasEmoji } from './glyph-icons';
 import { createSubOptionsGroup } from './sub-options';
 
@@ -104,6 +107,24 @@ describe('map chrome polish (Story 25.4)', () => {
 
   it('no emoji anywhere in the rendered markup of InteractiveMap.astro', () => {
     expect(hasEmoji(stripComments(astro))).toBe(false);
+  });
+
+  it('no emoji in the i18n strings the scripts put into the chrome', () => {
+    // showMsg (#mapmsg), the tool pill, layer tiles, settings, info, the
+    // welcome card and the place card are built from these keys at run
+    // time, so the .astro scan alone would miss them.
+    const CHROME_KEY =
+      /^(map_|timeline_|settings_|info_|welcome_|place_card_|layer_explainer_)/;
+    for (const lang of ['es', 'en'] as const) {
+      const entries = Object.entries(ui[lang]).filter(([k]) =>
+        CHROME_KEY.test(k)
+      );
+      expect(entries.length, lang).toBeGreaterThan(10);
+      const offenders = entries
+        .filter(([, v]) => typeof v === 'string' && hasEmoji(v))
+        .map(([k, v]) => `${lang}.${k}: ${v}`);
+      expect(offenders, lang).toEqual([]);
+    }
   });
 
   it('every button carries im-btn and no state utility of its own', () => {
