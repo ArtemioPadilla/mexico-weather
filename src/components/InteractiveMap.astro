@@ -181,6 +181,10 @@ const cfg = JSON.stringify({
     // controls that are absolutely-positioned siblings of the rail, not
     // just its children, via group-data-[controls=open]/chrome variants.
     'im-root group/chrome relative w-full overflow-hidden bg-gray-100 dark:bg-gray-950',
+    // Story 23.4 — below sm the timeline is a full-width dock at the
+    // bottom; global.css sets --im-dock (its height) for what floats
+    // above it (Controles, legend, messages, MapLibre corners).
+    features.timeline && 'im-docked',
     className,
   ]}
   style={`height:${height};--im-rail-top:${railOffsetTop};`}
@@ -301,7 +305,7 @@ const cfg = JSON.stringify({
   {features.layerRail && (
     <div
       class:list={[
-        'im-rail group/rail im-chrome dark absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-52 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg p-2 sm:p-2.5 text-sm shadow backdrop-blur-sm',
+        'im-rail group/rail im-chrome dark absolute left-3 top-[var(--im-rail-top)] z-10 w-auto sm:w-52 max-w-[calc(100vw-1.5rem)] max-h-[min(70vh,calc(100%-var(--im-rail-top)-var(--im-dock,0px)-4.25rem))] max-sm:group-data-[legend]/chrome:max-h-[min(70vh,calc(100%-var(--im-rail-top)-var(--im-dock,0px)-7.5rem))] overflow-y-auto sm:max-h-none sm:overflow-visible space-y-2 rounded-lg p-2 sm:p-2.5 text-sm shadow backdrop-blur-sm',
         /* Story 22.5 — folded to its tab bar the rail sizes to the tabs
            (the layers tab also names the active layer); below sm it
            shows with the Controles panel only. */
@@ -418,7 +422,7 @@ const cfg = JSON.stringify({
   <p
     id={ids.msg}
     aria-live="polite"
-    class="absolute bottom-20 left-1/2 z-10 hidden -translate-x-1/2 rounded-lg sm:bottom-32 bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow dark:bg-gray-900/95 dark:text-gray-300"
+    class="absolute bottom-[calc(var(--im-dock,0px)+4.25rem)] left-1/2 z-10 hidden -translate-x-1/2 rounded-lg sm:bottom-32 bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow dark:bg-gray-900/95 dark:text-gray-300"
   >
   </p>
 
@@ -429,10 +433,10 @@ const cfg = JSON.stringify({
       place via data-controls on the map root — no DOM moves, since every
       one of those controls is wired by id from interactive-map.ts and
       three of them are absolutely-positioned siblings of the rail.
-      Sits *above* the timeline, not beside it: the centred pill is 280px
-      wide at 360px (x=40..320), leaving only 40px of gutter — less than a
-      44px target plus its margin, so a bottom-3 trigger would be partly
-      covered by the pill. Measured, not assumed. */}
+      Sits *above* the timeline, not beside it: below sm the timeline is a
+      full-width dock (Story 23.4), so the trigger floats --im-dock (the
+      dock's height, global.css) + 0.75rem off the bottom — above the
+      legend (which hugs the dock) while a layer shows one. */}
   {features.mobileControls && (
     <button
       id={ids.controlsToggle}
@@ -442,7 +446,7 @@ const cfg = JSON.stringify({
       data-i18n-en-aria-label={features.compactChrome ? ui.en.map_controls_compact : 'Map controls'}
       title={features.compactChrome ? t.map_controls_compact : 'Controles del mapa'}
       data-i18n-en-title={features.compactChrome ? ui.en.map_controls_compact : 'Map controls'}
-      class="absolute bottom-[4.5rem] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-gray-900/85 text-base text-white shadow-lg backdrop-blur-sm aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
+      class="absolute bottom-[calc(var(--im-dock,0px)+0.75rem)] max-sm:group-data-[legend]/chrome:bottom-[calc(var(--im-dock,0px)+4rem)] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-gray-900/85 text-base text-white shadow-lg backdrop-blur-sm aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
       ><svg class="h-5 w-5" aria-hidden="true"><use href={features.compactChrome ? '#i-layers' : '#i-sliders'}></use></svg></button
     >
   )}
@@ -450,16 +454,18 @@ const cfg = JSON.stringify({
   {features.timeline && (
     <div
       id={ids.timeline}
-      class="im-timeline im-chrome dark absolute bottom-3 left-1/2 z-30 flex w-max max-w-[calc(100vw-1.5rem)] -translate-x-1/2 items-center gap-1 rounded-full px-3 py-1.5 text-sm shadow-lg backdrop-blur-sm sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-1 sm:gap-y-0 sm:rounded-2xl sm:px-4 sm:pt-2"
+      class="im-timeline im-chrome dark absolute bottom-0 left-0 right-0 z-30 grid grid-cols-[minmax(0,1fr)_auto] items-center rounded-t-2xl px-2 pt-1 text-sm shadow-lg backdrop-blur-sm sm:bottom-3 sm:left-1/2 sm:right-auto sm:w-max sm:max-w-[calc(100vw-1.5rem)] sm:-translate-x-1/2 sm:gap-x-1 sm:rounded-2xl sm:px-4 sm:pb-1.5 sm:pt-2"
       role="group"
       aria-label={t.timeline_label}
     >
       {/* Story 23.1 — from `sm` the pill is two rows: the date-scale bar
           (+ the dotted "Ver 10 días" tail) on top, the buttons and the
-          label below. Below `sm` it stays one row and the bar is not drawn
-          (Story 23.4 brings the full-width phone bar). Ids unchanged: the
-          buttons only moved into this row wrapper. */}
-      <div class="tl-controls flex items-center gap-1 sm:col-span-2 sm:row-start-2 sm:justify-center sm:gap-2">
+          label below. Story 23.4 — below `sm` it is a full-width dock
+          glued to the bottom edge: the buttons and the label on top, the
+          bar (56 px tall, the thumb's scrubbing strip) + its tail at the
+          very bottom. Ids unchanged: the buttons only moved into this row
+          wrapper. */}
+      <div class="tl-controls col-span-2 row-start-1 flex min-h-[44px] items-center justify-center gap-1 sm:row-start-2 sm:gap-2">
         <button
           id={ids.tlPlay}
           type="button"
@@ -469,12 +475,17 @@ const cfg = JSON.stringify({
           class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/10 px-2.5 text-base leading-none hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-40"
           ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-play"></use></svg></button
         >
+        {/* « » are desktop steps (`hidden` until the axis spans days, then
+            `sm:inline-flex`). Story 23.4 — `max-sm:hidden` keeps them off
+            a phone once interactive-map.ts drops `hidden`: the dock's row
+            has no room for two more 44 px targets, and on a phone a day
+            is one drag along the bar (day labels) or "Saltar a fecha". */}
         <button
           id="tl-day-prev"
           type="button"
           aria-label="Día anterior"
           title="Día anterior (-24 h)"
-          class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+          class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:hidden sm:inline-flex"
           >«</button
         >
         <button
@@ -495,7 +506,7 @@ const cfg = JSON.stringify({
           aria-atomic="true"
           title={t.timeline_jump}
           data-i18n-en-title={ui.en.timeline_jump}
-          class="min-w-[7rem] cursor-pointer text-center font-medium tabular-nums sm:min-w-[8rem]"
+          class="min-w-[7rem] cursor-pointer whitespace-nowrap text-center font-medium tabular-nums sm:min-w-[8rem]"
         >—</span>
         <button
           id={ids.tlNext}
@@ -510,7 +521,7 @@ const cfg = JSON.stringify({
           type="button"
           aria-label="Día siguiente"
           title="Día siguiente (+24 h)"
-          class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+          class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:hidden sm:inline-flex"
           >»</button
         >
         <button
@@ -526,7 +537,8 @@ const cfg = JSON.stringify({
           screen readers, e2e): visually hidden, kept in sync with the bar
           both ways, focused when the bar is pressed; the bar draws its
           focus ring. On a phone with the compact chrome it comes with the
-          Controles panel, like ‹ ›. */}
+          Controles panel, like ‹ › (chrome budget ≤ 5); the bar itself is
+          always on the phone dock (Story 23.4). */}
       <input
         id={ids.tlRange}
         type="range"
@@ -538,19 +550,20 @@ const cfg = JSON.stringify({
       />
       <div
         id={ids.tlBar}
-        class="tl-bar hidden h-9 cursor-pointer touch-none select-none rounded-md sm:col-start-1 sm:row-start-1 sm:block sm:w-[22rem] lg:w-[28rem]"
+        class="tl-bar col-start-1 row-start-2 flex h-14 cursor-pointer touch-none select-none items-center rounded-md sm:row-start-1 sm:block sm:h-9 sm:w-[22rem] lg:w-[28rem]"
         aria-hidden="true"
       ></div>
       {/* Story 15.1 — on-demand 10-day window for field/wind layers and
           satellite. Revealed by interactive-map.ts only while the active
           axis is the short default; hidden again once extended. Story
           23.1: from `sm` it is drawn as the bar's dotted tail (global.css
-          `.tl-tail`); dragging the bar onto it extends too. */}
+          `.tl-tail`); dragging the bar onto it extends too. Story 23.4:
+          the phone dock draws it the same way, 56 px tall like the bar. */}
       <button
         id="tl-extend"
         type="button"
         hidden
-        class="tl-tail tl-phone-secondary rounded-full bg-blue-600/90 px-2.5 py-1 text-[11px] font-semibold hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-60 sm:col-start-2 sm:row-start-1"
+        class="tl-tail tl-phone-secondary col-start-2 row-start-2 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-60 sm:row-start-1"
         aria-label={t.timeline_extend}
         title={t.timeline_extend}
         >{t.timeline_extend}</button
@@ -611,7 +624,7 @@ const cfg = JSON.stringify({
   {features.legend && (
     <div
       id="legend-bar"
-      class="im-chrome dark pointer-events-none absolute bottom-10 left-2 z-10 sm:flex items-center gap-2 rounded px-3 py-1.5 text-xs shadow backdrop-blur-sm"
+      class="im-chrome dark pointer-events-none absolute bottom-10 left-2 z-10 max-sm:bottom-[calc(var(--im-dock,0px)+0.5rem)] sm:flex items-center gap-2 rounded px-3 py-1.5 text-xs shadow backdrop-blur-sm"
       style="display:none"
       aria-hidden="true"
     >
@@ -632,7 +645,7 @@ const cfg = JSON.stringify({
     <div
       id="mw-model-toggle"
       hidden
-      class="absolute bottom-9 max-sm:group-data-[controls=open]/chrome:bottom-[4.5rem] right-2 z-10 hidden items-center gap-1 rounded-full bg-gray-900/80 px-1 py-0.5 text-[10px] font-mono tabular-nums text-gray-300 backdrop-blur-sm group-data-[controls=open]/chrome:inline-flex sm:inline-flex"
+      class="absolute bottom-9 max-sm:group-data-[controls=open]/chrome:bottom-[calc(var(--im-dock,0px)+2.5rem)] right-2 z-10 hidden items-center gap-1 rounded-full bg-gray-900/80 px-1 py-0.5 text-[10px] font-mono tabular-nums text-gray-300 backdrop-blur-sm group-data-[controls=open]/chrome:inline-flex sm:inline-flex"
       aria-label="Modelo de pronóstico Open-Meteo"
     >
       {[
@@ -1054,6 +1067,17 @@ const cfg = JSON.stringify({
   .maplibregl-ctrl-bottom-left {
     bottom: 72px !important;
     left: 12px !important;
+  }
+  /* Story 23.4 — below sm the timeline is a full-width dock (--im-dock
+     tall, global.css): both bottom corners — zoom buttons on the left,
+     scale + attribution on the right — sit on top of it, not under it. */
+  @media (max-width: 639.98px) {
+    .im-docked .maplibregl-ctrl-bottom-left {
+      bottom: calc(var(--im-dock) + 0.75rem) !important;
+    }
+    .im-docked .maplibregl-ctrl-bottom-right {
+      bottom: var(--im-dock);
+    }
   }
 
   html.dark .maplibregl-popup-content {

@@ -5,6 +5,10 @@
  * pre-activated (a URL hash still wins, so shared links keep working),
  * plus a slim visible header with unique copy per layer and the same
  * JSON-LD / hreflang treatment as every other page.
+ *
+ * Story 23.4 — the feedback button sits in the nav bar, as on /mapa: on
+ * a phone the timeline is a full-width dock at the bottom and the
+ * floating button (bottom 5rem, right) landed on its "Ahora".
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import InteractiveMap from '../../components/InteractiveMap.astro';
@@ -49,6 +53,7 @@ const jsonLd = [
   lang={lang}
   jsonLd={jsonLd}
   noFooter
+  feedbackPlacement="nav"
 >
   <main class="flex h-[calc(100dvh-3rem)] w-full flex-col overflow-hidden bg-gray-100 sm:h-[calc(100dvh-3.5rem)] dark:bg-gray-950">
     <header class="shrink-0 border-b border-gray-200 bg-white px-4 py-2 text-sm dark:border-gray-800 dark:bg-gray-950">

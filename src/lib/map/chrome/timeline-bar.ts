@@ -619,7 +619,7 @@ export function createTimelineBar(
     if (!bar || !svg) return;
     const times = deps.getTimes();
     const width = measureWidth();
-    if (width <= 0) return; // hidden (phone); the observer redraws on show
+    if (width <= 0) return; // not laid out yet; the observer redraws on show
     box = { width, pad: BAR_PAD };
     const now = nowSec();
     const f = deps.format();

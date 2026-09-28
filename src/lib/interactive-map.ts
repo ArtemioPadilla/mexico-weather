@@ -2396,6 +2396,9 @@ export async function initInteractiveMap(
       // Inline display:none beats the base sm:flex utility in the
       // cascade — otherwise the legend would stay visible at sm+.
       if (bar) bar.style.display = 'none';
+      // Story 23.4 — on the phone dock the Controles trigger sits right
+      // above the dock unless a legend takes that spot (global.css).
+      bar?.closest('.im-root')?.removeAttribute('data-legend');
       if (unitEl) unitEl.textContent = '';
       return;
     }
@@ -2444,6 +2447,7 @@ export async function initInteractiveMap(
     } as Record<string, string>;
     if (unitEl) unitEl.textContent = unit[kind] ?? '';
     if (bar) bar.style.display = '';
+    bar?.closest('.im-root')?.setAttribute('data-legend', '');
   }
 
   /** Story 22.3 — the model toggle only while a forecast grid (field or
@@ -4136,13 +4140,12 @@ export async function initInteractiveMap(
       const hasDays = spansDays();
       dayPrev?.classList.toggle('hidden', !hasDays);
       dayNext?.classList.toggle('hidden', !hasDays);
-      // 'Ahora' is `hidden … sm:inline-flex`. Compact /mapa keeps it off
-      // on phones (its Controles panel reveals `.tl-secondary`); every
-      // other map — home embed, layer pages, /forecast — has no other way
-      // back to the current frame on a phone (the range is lg-only), so
-      // it shows there once frames exist.
-      if (!features.compactChrome)
-        document.getElementById('tl-now')?.classList.remove('hidden');
+      // 'Ahora' is `hidden … sm:inline-flex` until frames exist; then it
+      // shows on every map and viewport. Story 23.4 — on the compact
+      // /mapa phone dock it is a `.tl-secondary` like ‹ ›: global.css
+      // keeps it off until the Controles panel opens (chrome budget ≤ 5)
+      // and shows it with the panel, where it used to stay `hidden`.
+      document.getElementById('tl-now')?.classList.remove('hidden');
     };
     // The frame array is rebuilt every time activeLayer changes; we re-
     // evaluate on each tick of the visibility refresh (frame change).

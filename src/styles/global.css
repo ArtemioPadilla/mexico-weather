@@ -142,9 +142,11 @@
  *    shift: nothing moves under the cursor) but transparent until the
  *    pointer is over the pill or the focus is inside it. Still in the
  *    accessibility tree, still in the tab order: focusing one reveals all;
- *  - below `sm` (and `.tl-phone-secondary`, "Ver 10 días") they show with
- *    the Controles panel, like the rail. On touch screens from `sm` (no
- *    hover) nothing is hidden.
+ *  - below `sm` (and `.tl-phone-secondary`: "Ver 10 días", the range)
+ *    they show with the Controles panel, like the rail — ‹ › Ahora in the
+ *    dock's button row, "Ver 10 días" as the bar's tail (Story 23.4; « »
+ *    stay desktop-only). On touch screens from `sm` (no hover) nothing is
+ *    hidden.
  */
 @media (hover: hover) and (min-width: 640px) {
   .im-root[data-compact] .im-timeline .tl-secondary {
@@ -170,13 +172,28 @@
 }
 
 /*
+ * Story 23.4 — below `sm` the timeline is a dock glued to the map's
+ * bottom edge, full width: a 44 px row of buttons (▶ ‹ label › Ahora)
+ * over the 56 px scrubbing bar, 4 px of top padding. `--im-dock` is its
+ * height, so what floats above it (Controles, the legend, messages, the
+ * MapLibre corners, the rail's max height) clears it; 0 on maps without
+ * a timeline and from `sm`, where the timeline is a floating pill.
+ */
+@media (max-width: 639.98px) {
+  .im-docked {
+    --im-dock: 104px;
+  }
+}
+
+/*
  * Story 23.1 — the timeline's date-scale bar (timeline-bar.ts draws its
  * SVG). `#tl-range` is the keyboard control behind it, visually hidden:
- * its focus ring is drawn on the bar (on the whole pill below `sm`, where
- * the bar is not shown). From `sm`, "Ver 10 días" (`.tl-tail`) stops
- * being a blue pill and becomes the dotted continuation of the bar's
- * track, its label in the bar's label row. Unlayered on purpose: it must
- * beat the button's phone utilities (`[hidden]` still wins, !important).
+ * its focus ring is drawn on the bar. "Ver 10 días" (`.tl-tail`) is not a
+ * blue pill but the dotted continuation of the bar's track, its label in
+ * the bar's label row — from `sm` (23.1) and on the phone dock (23.4),
+ * where both are 56 px tall and the 36 px drawing is centred in them.
+ * Unlayered on purpose: it must beat the button's utilities (`[hidden]`
+ * still wins, !important).
  */
 .im-timeline .tl-bar svg {
   display: block;
@@ -190,42 +207,45 @@
   outline: 2px solid #60a5fa;
   outline-offset: 2px;
 }
-@media (max-width: 639.98px) {
-  .im-timeline:has(> .tl-range:focus-visible) {
-    outline: 2px solid #60a5fa;
-    outline-offset: 2px;
-  }
+.im-timeline .tl-tail {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  align-self: stretch;
+  min-width: 4.75rem;
+  height: 56px;
+  /* The label row of the centred 36 px drawing starts 10 px down. */
+  padding: 14px 2px 0 6px;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: #93c5fd;
+  font-size: 10px;
+  line-height: 12px;
+  white-space: nowrap;
+}
+.im-timeline .tl-tail::after {
+  content: '';
+  position: absolute;
+  /* Centred on the track: 10 px + the drawing's 20–26 px band. */
+  top: 31px;
+  right: 4px;
+  left: 0;
+  border-top: 4px dotted rgb(96 165 250 / 0.75);
+}
+.im-timeline .tl-tail:hover {
+  background: rgb(255 255 255 / 0.06);
+  color: #dbeafe;
+}
+.im-timeline .tl-tail:hover::after {
+  border-top-color: #93c5fd;
 }
 @media (min-width: 640px) {
   .im-timeline .tl-tail {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    align-self: stretch;
-    min-width: 4.75rem;
     height: 36px;
-    padding: 4px 2px 0 6px;
-    border-radius: 0.375rem;
-    background: transparent;
-    color: #93c5fd;
-    font-size: 10px;
-    line-height: 12px;
-    white-space: nowrap;
+    padding-top: 4px;
   }
   .im-timeline .tl-tail::after {
-    content: '';
-    position: absolute;
     top: 21px;
-    right: 4px;
-    left: 0;
-    border-top: 4px dotted rgb(96 165 250 / 0.75);
-  }
-  .im-timeline .tl-tail:hover {
-    background: rgb(255 255 255 / 0.06);
-    color: #dbeafe;
-  }
-  .im-timeline .tl-tail:hover::after {
-    border-top-color: #93c5fd;
   }
 }
 
