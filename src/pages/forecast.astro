@@ -1254,7 +1254,7 @@ const base = siteBase();
                       const fcUrl = `${baseUrl}/forecast?lat=${loc.lat}&lng=${loc.lng}&name=${encodeURIComponent(loc.name || '')}`;
                       const popupHtml =
                         `<div class="text-sm"><strong>${esc(loc.name || (loc.lat + ', ' + loc.lng))}</strong><br>` +
-                        `<a href="${esc(fcUrl)}" class="text-blue-600 underline">${esc(t.full_forecast)} →</a></div>`;
+                        `<a href="${esc(fcUrl)}" class="text-im-accent underline">${esc(t.full_forecast)} →</a></div>`;
                       const popup = new ml.Popup({ offset: 24 }).setHTML(popupHtml);
                       const fcMarker = new ml.Marker({ color: '#2563eb' })
                         .setLngLat([loc.lng, loc.lat])

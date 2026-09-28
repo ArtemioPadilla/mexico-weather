@@ -29,7 +29,8 @@
 /*
  * Story 21.1 — dark-first chrome over the map (PLAN_PARIDAD_VISUAL §1.1).
  * Everything that floats over imagery (layer rail, timeline pill, legend
- * bar) uses these two tokens in BOTH themes: a light panel over GeoColor
+ * bar) uses the `--im-*` tokens below in BOTH themes (Story 25.2 extends
+ * them to every floating element): a light panel over GeoColor
  * clouds reads like a print-out, and the same panel is what zoom.earth
  * users expect. Content pages keep the regular light/dark tokens.
  *
@@ -39,15 +40,53 @@
  * the dark panel — the `dark` variant is class-based (`.dark *`), so a
  * subtree can opt in without touching <html>. Theme detection reads
  * document.documentElement only, so this never confuses the theme code.
+ * Since Story 25.2 the chrome's own markup uses the tokens, not `dark:`
+ * pairs; the class stays for content embedded in a panel (the SMN
+ * avisos card in /mapa's top-bar popover) and for native form controls.
+ */
+/*
+ * Story 25.2 — one set of `--im-*` tokens for EVERYTHING that floats over
+ * the map (rail, timeline, legend, search, suggestions, round buttons,
+ * ⋯ menu and its tool pill, `?` shortcuts dialog, place card, welcome
+ * card, tooltips, messages, MapLibre popups). They are defined once on
+ * :root and never redefined under `.dark`: the global light theme is for
+ * content pages, the map chrome looks the same in both. Exposed to
+ * Tailwind through `@theme inline` below as `bg-im-bg`, `bg-im-bg-strong`,
+ * `border-im-border`, `text-im-text`, `text-im-muted`, `text-im-accent`,
+ * so markup never needs a `… dark:…` pair again.
+ *
+ *  - bg         translucent panel (gray-900 at 88 %)
+ *  - bg-strong  near-opaque surface for reading (cards, dialogs, inputs)
+ *  - border     hairline on the dark panel
+ *  - text       primary text (gray-100)
+ *  - muted      secondary text (gray-400: ≥ 5:1 on `bg` even over white
+ *               clouds, AA for the 10–11 px labels)
+ *  - accent     links / highlighted values (blue-300)
+ *
+ * `--im-chrome-bg` / `--im-chrome-fg` (Story 21.1) stay as aliases.
  */
 :root {
-  --im-chrome-bg: rgb(17 24 39 / 0.88);
-  --im-chrome-fg: #f3f4f6;
+  --im-bg: rgb(17 24 39 / 0.88);
+  --im-bg-strong: rgb(17 24 39 / 0.97);
+  --im-border: rgb(255 255 255 / 0.12);
+  --im-text: #f3f4f6;
+  --im-muted: #9ca3af;
+  --im-accent: #93c5fd;
+  --im-chrome-bg: var(--im-bg);
+  --im-chrome-fg: var(--im-text);
+}
+@theme inline {
+  --color-im-bg: var(--im-bg);
+  --color-im-bg-strong: var(--im-bg-strong);
+  --color-im-border: var(--im-border);
+  --color-im-text: var(--im-text);
+  --color-im-muted: var(--im-muted);
+  --color-im-accent: var(--im-accent);
 }
 @layer components {
   .im-chrome {
-    background-color: var(--im-chrome-bg);
-    color: var(--im-chrome-fg);
+    background-color: var(--im-bg);
+    color: var(--im-text);
     color-scheme: dark;
   }
 }

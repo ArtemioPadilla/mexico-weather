@@ -59,7 +59,7 @@ export function renderShortcutSections(
     h.id = `mw-shortcuts-h-${s.id}`;
     h.textContent = s.title;
     h.className =
-      'mb-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400';
+      'mb-1 text-[10px] font-semibold uppercase tracking-wide text-im-muted';
     section.setAttribute('aria-labelledby', h.id);
     const dl = doc.createElement('dl');
     dl.className = 'space-y-0.5';
@@ -72,19 +72,19 @@ export function renderShortcutSections(
       if (r.keys.length === 0) {
         const none = doc.createElement('span');
         none.textContent = '—';
-        none.className = 'text-gray-500';
+        none.className = 'text-im-muted';
         dt.appendChild(none);
       }
       for (const k of r.keys) {
         const kbd = doc.createElement('kbd');
         kbd.textContent = k;
         kbd.className =
-          'inline-flex min-w-[1.5rem] justify-center rounded border border-white/20 bg-white/10 px-1 font-mono text-[11px] leading-5 text-white';
+          'inline-flex min-w-[1.5rem] justify-center rounded border border-white/20 bg-white/10 px-1 font-mono text-[11px] leading-5 text-im-text';
         dt.appendChild(kbd);
       }
       const dd = doc.createElement('dd');
       dd.textContent = r.label;
-      dd.className = 'min-w-0 text-gray-200';
+      dd.className = 'min-w-0 text-im-text';
       row.append(dt, dd);
       dl.appendChild(row);
     }

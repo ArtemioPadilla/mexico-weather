@@ -105,9 +105,9 @@ export function dayLabel(
 }
 
 const BTN =
-  'inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-gray-600 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-300 dark:hover:bg-gray-800';
+  'inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
 const TAB =
-  'inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full px-3 text-xs font-semibold aria-selected:bg-blue-600 aria-selected:text-white text-gray-700 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-200 dark:hover:bg-gray-800';
+  'inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full px-3 text-xs font-semibold aria-selected:bg-blue-600 aria-selected:text-white text-im-text hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
 
 function barFill(
   lo: number | null,
@@ -134,11 +134,11 @@ export function renderDailyRows(fc: Forecast, o: PlaceCardOpts): string {
     .map(
       (d) =>
         `<div data-pc-day="${esc(d.date)}" class="grid grid-cols-[3.4rem_1.25rem_1fr_2.4rem_4.4rem] items-center gap-1.5 py-1 text-sm">` +
-        `<span class="capitalize text-gray-700 dark:text-gray-300">${esc(dayLabel(d.date, o))}</span>` +
+        `<span class="capitalize text-im-muted">${esc(dayLabel(d.date, o))}</span>` +
         `<span class="text-center" aria-hidden="true">${esc(conditionGlyph(d.condition))}</span>` +
-        `<span class="relative h-1.5 rounded-full bg-gray-200 dark:bg-gray-800">${barFill(d.tmin, d.tmax, min, span)}</span>` +
-        `<span class="text-right text-xs text-blue-600 dark:text-blue-400">${fmt(d.precipProbabilityMax)}%</span>` +
-        `<span class="text-right tabular-nums text-gray-800 dark:text-gray-100">${fmtTemp(d.tmin, o)} / ${fmtTemp(d.tmax, o)}</span>` +
+        `<span class="relative h-1.5 rounded-full bg-white/10">${barFill(d.tmin, d.tmax, min, span)}</span>` +
+        `<span class="text-right text-xs text-im-accent">${fmt(d.precipProbabilityMax)}%</span>` +
+        `<span class="text-right tabular-nums text-im-text">${fmtTemp(d.tmin, o)} / ${fmtTemp(d.tmax, o)}</span>` +
         `</div>`
     )
     .join('');
@@ -154,15 +154,15 @@ export function renderHourlyRows(fc: Forecast, o: PlaceCardOpts): string {
       let sep = '';
       if (date !== lastDate) {
         lastDate = date;
-        sep = `<div class="pt-2 pb-0.5 text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">${esc(dayLabel(date, o))}</div>`;
+        sep = `<div class="pt-2 pb-0.5 text-[10px] font-semibold uppercase tracking-wide text-im-muted">${esc(dayLabel(date, o))}</div>`;
       }
       return (
         sep +
         `<div data-pc-hour="${esc(h.time)}" class="grid grid-cols-[3rem_1.25rem_1fr_2.4rem] items-center gap-1.5 py-0.5 text-sm">` +
-        `<span class="tabular-nums text-gray-700 dark:text-gray-300">${esc(hh)}</span>` +
+        `<span class="tabular-nums text-im-muted">${esc(hh)}</span>` +
         `<span class="text-center" aria-hidden="true">${esc(conditionGlyph(h.condition))}</span>` +
-        `<span class="tabular-nums text-gray-800 dark:text-gray-100">${fmtTemp(h.temperature, o)}</span>` +
-        `<span class="text-right text-xs text-blue-600 dark:text-blue-400">${fmt(h.precipProbability)}%</span>` +
+        `<span class="tabular-nums text-im-text">${fmtTemp(h.temperature, o)}</span>` +
+        `<span class="text-right text-xs text-im-accent">${fmt(h.precipProbability)}%</span>` +
         `</div>`
       );
     })
@@ -174,15 +174,15 @@ function header(o: PlaceCardOpts): string {
   return (
     `<div class="flex items-start justify-between gap-2 px-3 pt-2">` +
     `<div class="min-w-0">` +
-    `<p class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">${esc(s.title)}</p>` +
-    `<p class="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">${esc(o.coordsLabel)}</p>` +
+    `<p class="text-[10px] font-semibold uppercase tracking-wide text-im-muted">${esc(s.title)}</p>` +
+    `<p class="truncate text-sm font-semibold text-im-text">${esc(o.coordsLabel)}</p>` +
     (o.nowLine
-      ? `<p class="text-xs text-gray-600 dark:text-gray-300">${esc(o.nowLine)}</p>`
+      ? `<p class="text-xs text-im-muted">${esc(o.nowLine)}</p>`
       : '') +
     `</div>` +
     `<div class="flex shrink-0 gap-0.5">` +
-    `<button type="button" data-pc-fav class="${BTN} ${o.isFavorite ? 'text-amber-500 dark:text-amber-400' : ''}" aria-pressed="${o.isFavorite ? 'true' : 'false'}" aria-label="${esc(o.isFavorite ? s.favRemove : s.favAdd)}" title="${esc(o.isFavorite ? s.favRemove : s.favAdd)}"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-star"></use></svg></button>` +
-    `<button type="button" data-pc-close class="${BTN}" aria-label="${esc(s.close)}" title="${esc(s.close)}"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-x"></use></svg></button>` +
+    `<button type="button" data-pc-fav class="${BTN} ${o.isFavorite ? 'text-amber-400' : 'text-im-muted hover:text-im-text'}" aria-pressed="${o.isFavorite ? 'true' : 'false'}" aria-label="${esc(o.isFavorite ? s.favRemove : s.favAdd)}" title="${esc(o.isFavorite ? s.favRemove : s.favAdd)}"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-star"></use></svg></button>` +
+    `<button type="button" data-pc-close class="${BTN} text-im-muted hover:text-im-text" aria-label="${esc(s.close)}" title="${esc(s.close)}"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-x"></use></svg></button>` +
     `</div></div>`
   );
 }
@@ -195,7 +195,7 @@ export function renderPlaceCardStatus(
   const s = o.strings;
   return (
     header(o) +
-    `<p class="px-3 pb-3 pt-2 text-sm ${status === 'error' ? 'text-red-600 dark:text-red-400' : 'text-gray-500 dark:text-gray-400'}" aria-live="polite">${esc(status === 'error' ? s.error : s.loading)}</p>`
+    `<p class="px-3 pb-3 pt-2 text-sm ${status === 'error' ? 'text-red-400' : 'text-im-muted'}" aria-live="polite">${esc(status === 'error' ? s.error : s.loading)}</p>`
   );
 }
 
@@ -212,7 +212,7 @@ export function renderPlaceCard(fc: Forecast, o: PlaceCardOpts): string {
     (daily ? renderDailyRows(fc, o) : renderHourlyRows(fc, o)) +
     `</div>` +
     `<div class="px-3 pb-3 pt-1">` +
-    `<a href="${esc(o.forecastHref)}" class="inline-flex min-h-[44px] items-center text-sm font-medium text-blue-700 hover:underline dark:text-blue-300">${esc(s.fullForecast)} →</a>` +
+    `<a href="${esc(o.forecastHref)}" class="inline-flex min-h-[44px] items-center text-sm font-medium text-im-accent hover:underline">${esc(s.fullForecast)} →</a>` +
     `</div>`
   );
 }

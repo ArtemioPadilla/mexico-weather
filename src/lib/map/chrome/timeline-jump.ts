@@ -270,7 +270,7 @@ export function createTimelineJump(
     panel.hidden = true;
     panel.setAttribute('role', 'dialog');
     panel.className =
-      'tl-jump absolute bottom-full left-1/2 z-40 mb-2 w-max max-w-[calc(100vw-1.5rem)] -translate-x-1/2 rounded-xl bg-gray-900/95 p-3 text-left text-xs text-gray-100 shadow-lg';
+      'tl-jump absolute bottom-full left-1/2 z-40 mb-2 w-max max-w-[calc(100vw-1.5rem)] -translate-x-1/2 rounded-xl bg-im-bg-strong p-3 text-left text-xs text-im-text shadow-lg';
     heading = document.createElement('label');
     heading.className = 'mb-1 block font-semibold';
     heading.htmlFor = `${baseId}-input`;
@@ -278,10 +278,10 @@ export function createTimelineJump(
     input.id = `${baseId}-input`;
     input.type = 'datetime-local';
     input.className =
-      'block min-h-[44px] w-full rounded-md border border-white/20 bg-white/10 px-2 text-sm text-gray-100 [color-scheme:dark] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:min-h-0 sm:py-1';
+      'block min-h-[44px] w-full rounded-md border border-white/20 bg-white/10 px-2 text-sm text-im-text [color-scheme:dark] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:min-h-0 sm:py-1';
     hint = document.createElement('p');
     hint.id = `${baseId}-hint`;
-    hint.className = 'mt-1 text-[11px] text-gray-400';
+    hint.className = 'mt-1 text-[11px] text-im-muted';
     input.setAttribute('aria-describedby', hint.id);
     panel.append(heading, input, hint);
     host.appendChild(panel);

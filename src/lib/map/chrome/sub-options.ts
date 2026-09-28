@@ -52,7 +52,7 @@ export interface SubOptionsOpts<T extends string> {
 
 export function createSubOptionsGroup<T extends string>(
   wrap: HTMLElement | null,
-  opts: SubOptionsOpts<T>,
+  opts: SubOptionsOpts<T>
 ): SubOptionsGroup<T> {
   if (!wrap) {
     return { refresh: (): void => undefined };
@@ -60,7 +60,7 @@ export function createSubOptionsGroup<T extends string>(
   const container = document.createElement('div');
   container.id = opts.containerId;
   container.className =
-    'im-reveal hidden flex-wrap gap-1 text-[11px] text-gray-600 dark:text-gray-400';
+    'im-reveal hidden flex-wrap gap-1 text-[11px] text-im-muted';
 
   for (const o of opts.options) {
     const btn = document.createElement('button');
@@ -68,7 +68,7 @@ export function createSubOptionsGroup<T extends string>(
     btn.dataset.sub = o.id;
     btn.textContent = o.label;
     btn.className =
-      'inline-flex items-center rounded-full border border-white/10 px-2 py-0.5 hover:bg-blue-500/10 max-sm:min-h-[44px] aria-pressed:border-blue-400/60 aria-pressed:bg-blue-500/20 aria-pressed:font-semibold aria-pressed:text-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:aria-pressed:text-gray-100';
+      'inline-flex items-center rounded-full border border-im-border px-2 py-0.5 hover:bg-blue-500/10 max-sm:min-h-[44px] aria-pressed:border-blue-400/60 aria-pressed:bg-blue-500/20 aria-pressed:font-semibold aria-pressed:text-im-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
     btn.setAttribute('aria-pressed', String(opts.getActive() === o.id));
     btn.addEventListener('click', () => {
       if (opts.getActive() === o.id) return;
@@ -88,7 +88,7 @@ export function createSubOptionsGroup<T extends string>(
       container.querySelectorAll('button').forEach((b) => {
         b.setAttribute(
           'aria-pressed',
-          String((b as HTMLButtonElement).dataset.sub === current),
+          String((b as HTMLButtonElement).dataset.sub === current)
         );
       });
     },

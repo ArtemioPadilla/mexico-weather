@@ -619,7 +619,7 @@ export async function initInteractiveMap(
     const fc = `${base}forecast?lat=${p.lat}&lng=${p.lng}&name=${encodeURIComponent(p.name)}`;
     return (
       `<div class="text-sm"><strong>${esc(p.name)}</strong><br>` +
-      `<a href="${esc(fc)}" class="text-blue-600 underline">${esc(t.map_popup_full_forecast)} →</a></div>`
+      `<a href="${esc(fc)}" class="text-im-accent underline">${esc(t.map_popup_full_forecast)} →</a></div>`
     );
   }
 
@@ -630,8 +630,8 @@ export async function initInteractiveMap(
     return (
       `<div class="text-sm">` +
       `<strong>${esc(coords)}</strong><br>` +
-      `<span class="text-gray-600 dark:text-gray-300">${esc(name)}</span><br>` +
-      `<a href="${esc(fc)}" class="mt-1 inline-block text-blue-600 underline">${esc(t.map_popup_full_forecast)} →</a>` +
+      `<span class="text-im-muted">${esc(name)}</span><br>` +
+      `<a href="${esc(fc)}" class="mt-1 inline-block text-im-accent underline">${esc(t.map_popup_full_forecast)} →</a>` +
       `</div>`
     );
   }
@@ -3161,7 +3161,7 @@ export async function initInteractiveMap(
       btn.type = 'button';
       btn.setAttribute('aria-pressed', String(def.id === activeLayer));
       btn.className =
-        'flex min-w-0 items-center justify-center gap-1.5 rounded px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/20 aria-pressed:font-semibold aria-pressed:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:bg-blue-400/10 sm:flex-col sm:gap-0.5 sm:px-1 sm:py-1.5';
+        'flex min-w-0 items-center justify-center gap-1.5 rounded px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/20 aria-pressed:font-semibold aria-pressed:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 sm:flex-col sm:gap-0.5 sm:px-1 sm:py-1.5';
       // zoom.earth-style icon; falls back to text-only when LayerDef has
       // no icon glyph.
       if (def.icon) {

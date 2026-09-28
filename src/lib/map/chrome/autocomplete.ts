@@ -39,7 +39,7 @@ export interface AutocompleteController {
 export function createAutocompleteController(
   q: HTMLInputElement,
   acList: HTMLUListElement,
-  select: (r: GeoItem) => void,
+  select: (r: GeoItem) => void
 ): AutocompleteController {
   let results: GeoItem[] = [];
   let active = -1;
@@ -56,11 +56,11 @@ export function createAutocompleteController(
   function highlight(): void {
     Array.from(acList.children).forEach((li, i) => {
       if (i === active) {
-        li.classList.add('bg-gray-100', 'dark:bg-gray-800');
+        li.classList.add('bg-white/10');
         li.setAttribute('aria-selected', 'true');
         q.setAttribute('aria-activedescendant', (li as HTMLElement).id);
       } else {
-        li.classList.remove('bg-gray-100', 'dark:bg-gray-800');
+        li.classList.remove('bg-white/10');
         li.setAttribute('aria-selected', 'false');
       }
     });
@@ -74,21 +74,20 @@ export function createAutocompleteController(
       li.id = (acList.id || 'mapac') + '-' + i;
       li.setAttribute('role', 'option');
       li.setAttribute('aria-selected', 'false');
-      li.className =
-        'px-3 py-2 text-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800';
+      li.className = 'px-3 py-2 text-sm cursor-pointer hover:bg-white/10';
 
       const primary = document.createElement('div');
       primary.className = 'flex items-center gap-2';
 
       const nameEl = document.createElement('span');
-      nameEl.className = 'font-semibold text-gray-900 dark:text-gray-100';
+      nameEl.className = 'font-semibold text-im-text';
       nameEl.textContent = r.name;
       primary.appendChild(nameEl);
 
       if (typeof r.population === 'number' && r.population >= 50000) {
         const badge = document.createElement('span');
         badge.className =
-          'rounded-full bg-blue-500/10 px-1.5 py-0.5 text-[10px] font-medium text-blue-600 dark:text-blue-400';
+          'rounded-full bg-blue-500/10 px-1.5 py-0.5 text-[10px] font-medium text-im-accent';
         badge.textContent = 'ciudad';
         primary.appendChild(badge);
       }
@@ -97,7 +96,7 @@ export function createAutocompleteController(
       const sub = [r.admin1, r.country].filter(Boolean).join(' · ');
       if (sub) {
         const subEl = document.createElement('div');
-        subEl.className = 'text-xs text-gray-500 dark:text-gray-400';
+        subEl.className = 'text-xs text-im-muted';
         subEl.textContent = sub;
         li.appendChild(subEl);
       }

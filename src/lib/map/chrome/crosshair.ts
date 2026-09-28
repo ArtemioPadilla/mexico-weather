@@ -50,7 +50,7 @@ export function createCrosshair(
     value.setAttribute('role', 'status');
     value.setAttribute('aria-live', 'polite');
     value.className =
-      'pointer-events-none absolute left-1/2 top-[calc(50%+1.25rem)] z-20 -translate-x-1/2 whitespace-pre rounded bg-gray-900/85 px-2 py-1 text-center text-sm font-medium leading-tight text-white shadow-lg backdrop-blur-sm';
+      'pointer-events-none absolute left-1/2 top-[calc(50%+1.25rem)] z-20 -translate-x-1/2 whitespace-pre rounded bg-im-bg px-2 py-1 text-center text-sm font-medium leading-tight text-im-text shadow-lg backdrop-blur-sm';
     deps.container.appendChild(mark);
     deps.container.appendChild(value);
   }

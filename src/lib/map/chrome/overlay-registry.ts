@@ -124,7 +124,7 @@ export function createOverlayRegistry(
     p.dataset.overlayHeading = group;
     p.textContent = text;
     p.className =
-      'mt-1 px-1 text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400';
+      'mt-1 px-1 text-[10px] font-semibold uppercase tracking-wide text-im-muted';
     return p;
   };
 
@@ -162,7 +162,7 @@ export function createOverlayRegistry(
     emptyEl = document.createElement('p');
     emptyEl.dataset.overlayEmpty = '';
     emptyEl.hidden = true;
-    emptyEl.className = 'px-1 py-1 italic text-gray-400';
+    emptyEl.className = 'px-1 py-1 italic text-im-muted';
     emptyEl.textContent = deps.strings?.empty ?? '—';
     els.wrap.appendChild(emptyEl);
     applyFilter();
