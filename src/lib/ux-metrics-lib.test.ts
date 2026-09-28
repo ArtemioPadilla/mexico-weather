@@ -16,6 +16,8 @@ import {
   renderUxComment,
   secondLoopStats,
   uxWarnings,
+  windFpsStats,
+  WIND_FPS_WINDOW_MS,
 } from '../../scripts/ux-metrics-lib.mjs';
 import type {
   IndexEvent,
@@ -380,6 +382,57 @@ describe('fieldFrameStats (Story 24.1)', () => {
       'field frame 1.8 ms (median of 20, longest 3.2 ms, webgl; target < 4 ms) on temperature [−0.5 ms (better)]'
     );
     expect(renderUxComment(metrics())).not.toContain('field frame');
+  });
+});
+
+describe('windFpsStats (Story 24.4)', () => {
+  it('rAF and map redraws per second over the wind window', () => {
+    const raf = Array.from({ length: 400 }, (_, i) => 1000 + i * 20); // 50 fps
+    const renders = raf.filter((_, i) => i % 2 === 0); // every other frame
+    const s = windFpsStats(raf, renders, 1000);
+    expect(s).toEqual({
+      fps: 50,
+      renderFps: 25,
+      maxGapMs: 20,
+      windowMs: WIND_FPS_WINDOW_MS,
+    });
+    // Renders outside the window do not count.
+    expect(windFpsStats(raf, [0, 500, ...renders], 1000)?.renderFps).toBe(25);
+    expect(windFpsStats(raf.slice(0, 10), renders, 1000)).toBeNull();
+  });
+
+  it('lands in extra per viewport, survives the merge, warns and reads in the comment', () => {
+    const desk = buildUxMetrics({
+      windFps: {
+        desktop: { fps: 58, renderFps: 55, maxGapMs: 40, windowMs: 5000 },
+      },
+    });
+    const phone = buildUxMetrics({
+      windFps: {
+        mobile: { fps: 24, renderFps: 20, maxGapMs: 90, windowMs: 5000 },
+      },
+    });
+    expect(metrics().extra.windFpsDesktop).toBeNull();
+    const merged = mergeUxMetrics(mergeUxMetrics(metrics(), desk), phone);
+    expect(merged.extra).toMatchObject({
+      windFpsDesktop: 58,
+      windFpsMobile: 24,
+      windRenderFpsDesktop: 55,
+      windRenderFpsMobile: 20,
+    });
+    expect(merged.loopFps).toBe(59.8);
+    expect(uxWarnings(merged)).toEqual([
+      'UX metrics: wind particle fps (phone) 24 is below the target ≥ 30',
+    ]);
+    const body = renderUxComment(merged, {
+      previous: { ...merged, extra: { ...merged.extra, windFpsMobile: 30 } },
+    });
+    expect(body).toContain(
+      'wind particles 58 / 24 fps desktop / phone (map redraws 55 / 20 per s; target ≥ 30) [phone −6 (worse)]'
+    );
+    // Not measured: no warning, no line.
+    expect(uxWarnings(metrics())).toEqual([]);
+    expect(renderUxComment(metrics())).not.toContain('wind particles');
   });
 });
 

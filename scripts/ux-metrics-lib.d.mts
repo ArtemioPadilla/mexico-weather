@@ -10,6 +10,7 @@ export const UX_METRICS_SCHEMA: number;
 export const UX_METRICS_FILE: string;
 export const UX_COMMENT_MARKER: string;
 export const FPS_WINDOW_MS: number;
+export const WIND_FPS_WINDOW_MS: number;
 export const LONG_TASK_SAMPLE_SIZE: number;
 export const UX_THRESHOLDS: {
   firstSatelliteFrameMs: Threshold;
@@ -18,6 +19,7 @@ export const UX_THRESHOLDS: {
   controlsMobile: Threshold;
   newTilesPerFrame: Threshold;
   fieldFrameMs: Threshold;
+  windFps: Threshold;
 };
 
 export interface FpsStats {
@@ -71,6 +73,11 @@ export interface UxMetrics {
     fieldFrameMaxMs?: number | null;
     fieldFrames?: number | null;
     fieldRenderer?: string | null;
+    /** Story 24.4 — optional: absent in documents from before it. */
+    windFpsDesktop?: number | null;
+    windFpsMobile?: number | null;
+    windRenderFpsDesktop?: number | null;
+    windRenderFpsMobile?: number | null;
   };
 }
 
@@ -114,7 +121,23 @@ export interface UxMetricsParts {
   } | null;
   steps?: LoopStepStats | null;
   fieldFrame?: FieldFrameStats | null;
+  windFps?: { desktop?: WindFpsStats | null; mobile?: WindFpsStats | null };
 }
+
+/** Story 24.4 — frame rate while the wind particles animate. */
+export interface WindFpsStats {
+  fps: number;
+  renderFps: number;
+  maxGapMs: number;
+  windowMs: number;
+}
+
+export function windFpsStats(
+  raf: number[],
+  renders: number[],
+  startMs: number,
+  windowMs?: number
+): WindFpsStats | null;
 
 /** Story 24.1 — per-frame field render time. */
 export interface FieldFrameStats {

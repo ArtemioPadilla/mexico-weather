@@ -22,7 +22,8 @@
  *
  * Plus, as context (Story 24.1): the main-thread time per field frame on
  * the temperature layer — the `mw:field-frame` User Timing measures the
- * app records for each frame it draws, WebGL or canvas.
+ * app records for each frame it draws, WebGL or canvas — and (Story 24.4)
+ * the frame rate while the wind particles animate, desktop and phone.
  */
 
 export const UX_METRICS_SCHEMA = 1;
@@ -35,6 +36,9 @@ const DATA_SUFFIX = ' -->';
 
 /** Length of the fps window, from the first frame the loop plays. */
 export const FPS_WINDOW_MS = 10_000;
+
+/** Story 24.4 — length of the wind-particle fps window. */
+export const WIND_FPS_WINDOW_MS = 5_000;
 
 /**
  * Soft targets from plan §5 (warnings only until E21–E23 close). `max`
@@ -50,7 +54,37 @@ export const UX_THRESHOLDS = {
    *  desktop. Context only: warned when measured and over, never when
    *  missing (it is not one of the four numbers). */
   fieldFrameMs: { max: 4 },
+  /** Story 24.4 — plan §E24 acceptance: the wind particles never drop
+   *  under 30 fps on a phone. Context only, like the field frame. */
+  windFps: { min: 30 },
 };
+
+/**
+ * Story 24.4 — frame rate while the wind particles animate: rAF callbacks
+ * per second and MapLibre `render` events per second (the frames the map
+ * actually redrew) over `[startMs, startMs + windowMs)`, plus the longest
+ * gap between two rAF callbacks. Null until the window has closed.
+ *
+ * @param {number[]} raf rAF timestamps (ms, ascending)
+ * @param {number[]} renders `render` event timestamps (same clock)
+ */
+export function windFpsStats(
+  raf,
+  renders,
+  startMs,
+  windowMs = WIND_FPS_WINDOW_MS
+) {
+  const base = fpsStats(raf, startMs, windowMs);
+  if (!base) return null;
+  const end = startMs + windowMs;
+  const redraws = (renders ?? []).filter((t) => t >= startMs && t < end).length;
+  return {
+    fps: base.fps,
+    renderFps: round(redraws / (windowMs / 1000), 1),
+    maxGapMs: base.maxGapMs,
+    windowMs,
+  };
+}
 
 /**
  * Median and longest of the per-frame field render times (Story 24.1),
@@ -294,6 +328,10 @@ export function buildUxMetrics(parts = {}) {
       fieldFrameMaxMs: num(parts.fieldFrame?.maxMs),
       fieldFrames: num(parts.fieldFrame?.frames),
       fieldRenderer: parts.fieldFrame?.renderer ?? null,
+      windFpsDesktop: num(parts.windFps?.desktop?.fps),
+      windFpsMobile: num(parts.windFps?.mobile?.fps),
+      windRenderFpsDesktop: num(parts.windFps?.desktop?.renderFps),
+      windRenderFpsMobile: num(parts.windFps?.mobile?.renderFps),
     },
   };
 }
@@ -343,6 +381,19 @@ export function mergeUxMetrics(base, next) {
       ),
       fieldFrames: pick(base.extra?.fieldFrames, next.extra?.fieldFrames),
       fieldRenderer: pick(base.extra?.fieldRenderer, next.extra?.fieldRenderer),
+      windFpsDesktop: pick(
+        base.extra?.windFpsDesktop,
+        next.extra?.windFpsDesktop
+      ),
+      windFpsMobile: pick(base.extra?.windFpsMobile, next.extra?.windFpsMobile),
+      windRenderFpsDesktop: pick(
+        base.extra?.windRenderFpsDesktop,
+        next.extra?.windRenderFpsDesktop
+      ),
+      windRenderFpsMobile: pick(
+        base.extra?.windRenderFpsMobile,
+        next.extra?.windRenderFpsMobile
+      ),
     },
   };
 }
@@ -397,6 +448,13 @@ export function uxWarnings(metrics) {
       UX_THRESHOLDS.fieldFrameMs,
       ' ms'
     );
+  // Story 24.4 — context numbers too: only warn when measured.
+  for (const [value, where] of [
+    [metrics.extra?.windFpsDesktop, 'desktop'],
+    [metrics.extra?.windFpsMobile, 'phone'],
+  ])
+    if (value !== null && value !== undefined)
+      check(value, `wind particle fps (${where})`, UX_THRESHOLDS.windFps);
   return out;
 }
 
@@ -514,6 +572,18 @@ export function renderUxComment(metrics, ctx = {}) {
         (p?.extra?.fieldFrameMedianMs !== undefined &&
         p?.extra?.fieldFrameMedianMs !== null
           ? ` [${formatDelta(m.extra.fieldFrameMedianMs, p.extra.fieldFrameMedianMs, { unit: ' ms' })}]`
+          : '')
+    );
+  const wd = m.extra?.windFpsDesktop;
+  const wm = m.extra?.windFpsMobile;
+  if ((wd ?? null) !== null || (wm ?? null) !== null)
+    extra.push(
+      `wind particles ${fmt(wd)} / ${fmt(wm)} fps desktop / phone ` +
+        `(map redraws ${fmt(m.extra?.windRenderFpsDesktop)} / ${fmt(m.extra?.windRenderFpsMobile)} per s; ` +
+        `target ≥ ${T.windFps.min})` +
+        (p?.extra?.windFpsMobile !== undefined &&
+        p?.extra?.windFpsMobile !== null
+          ? ` [phone ${formatDelta(wm, p.extra.windFpsMobile, { better: 'higher' })}]`
           : '')
     );
   if (extra.length) lines.push(`Also measured: ${extra.join(' · ')}.`, '');

@@ -14,6 +14,8 @@ import {
   mergeUxMetrics,
   secondLoopStats,
   uxWarnings,
+  WIND_FPS_WINDOW_MS,
+  windFpsStats,
 } from '../scripts/ux-metrics-lib.mjs';
 import type {
   IndexEvent,
@@ -21,9 +23,14 @@ import type {
   TileRequest,
   UxMetrics,
   UxMetricsParts,
+  WindFpsStats,
 } from '../scripts/ux-metrics-lib.mjs';
 import { CHROME_BUDGET } from '../src/lib/map/chrome/chrome-budget';
 import { FIRST_SATELLITE_FRAME_MARK } from '../src/lib/map/chrome/first-frame-mark';
+import {
+  WIND_PARTICLES_LAYER_ID,
+  windParticleCount,
+} from '../src/lib/map/layers/wind-particles';
 import { bootMap, measureStable } from './chrome-budget-helpers';
 
 /**
@@ -56,7 +63,9 @@ import { bootMap, measureStable } from './chrome-budget-helpers';
  * the temperature layer — the `mw:field-frame` User Timing measures the
  * app records per frame (WebGL: packing + upload + draw call; canvas:
  * the bicubic raster + PNG encode), collected by a PerformanceObserver
- * while the timeline steps through 24 frames.
+ * while the timeline steps through 24 frames. And (Story 24.4) the frame
+ * rate while the wind particles animate, at 1280×800 and at 360×640:
+ * rAF callbacks and MapLibre `render` events per second over 5 s.
  *
  * Writes test-results/ux-metrics.json (each test merges what it measured)
  * and attaches it. Thresholds are soft: printed as warnings, never failed
@@ -83,6 +92,7 @@ declare global {
   interface Window {
     __uxm?: Recorder;
     __uxmField?: { duration: number; renderer: string | null }[];
+    __uxmRenders?: number[];
   }
 }
 
@@ -281,7 +291,7 @@ test.describe('ux metrics · desktop', () => {
       const m = await recordMetrics(
         testInfo,
         parts,
-        (w) => !/mobile|field frame/.test(w)
+        (w) => !/mobile|field frame|wind/.test(w)
       );
       console.log(
         `[ux-metrics] desktop: first satellite frame ${m.firstSatelliteFrameMs} ms · ` +
@@ -408,10 +418,157 @@ test.describe('ux metrics · mobile', () => {
       );
       mobile = over.length;
     } finally {
-      const m = await recordMetrics(testInfo, { controls: { mobile } }, (w) =>
-        /mobile/.test(w)
+      const m = await recordMetrics(
+        testInfo,
+        { controls: { mobile } },
+        (w) => /mobile/.test(w) && !/wind/.test(w)
       );
       console.log(`[ux-metrics] mobile: controls ${m.controls.mobile}`);
+    }
+  });
+});
+
+// Story 24.4 — frame rate while the wind particles animate (trails, the
+// zoom's particle count, colour by speed). Plan §E24 acceptance: ≥ 30 fps
+// on a phone. The wind grid is served from a fixture (speeds 2–30 m/s, so
+// every colour band and trail width is drawn); nothing else changes from
+// the cold boot above.
+
+/** One Open-Meteo wind response per requested point, six hourly steps
+ *  around now, speeds 2…30 m/s and directions that turn across the grid. */
+function windFixture(url: string): string {
+  const lats = (new URL(url).searchParams.get('latitude') ?? '').split(',');
+  const hour = Math.floor(Date.now() / 3.6e6) * 3.6e6;
+  const times = Array.from({ length: 6 }, (_, i) =>
+    new Date(hour + (i - 2) * 3.6e6).toISOString().slice(0, 16)
+  );
+  return JSON.stringify(
+    lats.map((_, i) => ({
+      hourly: {
+        time: times,
+        wind_speed_10m: times.map((_, h) => 2 + ((i + h) % 8) * 4),
+        wind_direction_10m: times.map(() => 200 + (i % 6) * 20),
+        wind_gusts_10m: times.map(() => 30),
+      },
+    }))
+  );
+}
+
+async function measureWindFps(page: Page): Promise<{
+  stats: WindFpsStats | null;
+  particles: number;
+}> {
+  await page.route(/api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/, (r) =>
+    r.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: windFixture(r.request().url()),
+    })
+  );
+  await installRecorder(page);
+  await bootMap(page);
+  // V = Viento (a visitor's pick: the satellite loop stops).
+  await page.keyboard.press('v');
+  await expect(page.locator('#layerbtn-wind')).toHaveAttribute(
+    'aria-pressed',
+    'true'
+  );
+  await expect
+    .poll(() =>
+      page.evaluate(
+        (id) =>
+          !!(
+            window as unknown as {
+              __map?: { getLayer: (id: string) => unknown };
+            }
+          ).__map?.getLayer(id),
+        WIND_PARTICLES_LAYER_ID
+      )
+    )
+    .toBe(true);
+  // One second for the trails to build up, then the window.
+  await page.waitForTimeout(1000);
+  const view = await page.evaluate(() => {
+    type M = {
+      on: (e: string, f: () => void) => void;
+      getZoom: () => number;
+      getCanvas: () => HTMLCanvasElement;
+    };
+    const m = (window as unknown as { __map: M }).__map;
+    const out: number[] = [];
+    window.__uxmRenders = out;
+    m.on('render', () => out.push(performance.now()));
+    const c = m.getCanvas();
+    return {
+      start: performance.now(),
+      zoom: m.getZoom(),
+      w: c.clientWidth,
+      h: c.clientHeight,
+    };
+  });
+  await page.waitForTimeout(WIND_FPS_WINDOW_MS + 500);
+  const rec = await readRecorder(page);
+  const renders = await page.evaluate(() =>
+    (window.__uxmRenders ?? []).slice()
+  );
+  const stats = windFpsStats(rec.raf, renders, view.start);
+  expect(stats, 'the wind fps window did not close').not.toBeNull();
+  expect(
+    stats!.renderFps,
+    'the map did not redraw while the wind animates'
+  ).toBeGreaterThan(0);
+  return { stats, particles: windParticleCount(view.zoom, view.w, view.h) };
+}
+
+test.describe('ux metrics · wind · desktop', () => {
+  test.use({ viewport: { width: 1280, height: 800 } });
+
+  test('@ux-metrics /mapa desktop: wind particle fps', async ({
+    page,
+  }, testInfo) => {
+    test.setTimeout(90_000);
+    let desktop: WindFpsStats | null = null;
+    let particles = 0;
+    try {
+      ({ stats: desktop, particles } = await measureWindFps(page));
+    } finally {
+      const m = await recordMetrics(testInfo, { windFps: { desktop } }, (w) =>
+        /wind particle fps \(desktop\)/.test(w)
+      );
+      console.log(
+        `[ux-metrics] wind (desktop): ${m.extra.windFpsDesktop ?? 'n/a'} fps, ` +
+          `map redraws ${m.extra.windRenderFpsDesktop ?? 'n/a'}/s, ` +
+          `longest rAF gap ${desktop?.maxGapMs ?? 'n/a'} ms, ${particles} particles`
+      );
+    }
+  });
+});
+
+test.describe('ux metrics · wind · mobile', () => {
+  test.use({
+    viewport: { width: 360, height: 640 },
+    hasTouch: true,
+    isMobile: true,
+    deviceScaleFactor: 2,
+  });
+
+  test('@ux-metrics /mapa mobile: wind particle fps', async ({
+    page,
+  }, testInfo) => {
+    test.setTimeout(90_000);
+    let mobile: WindFpsStats | null = null;
+    let particles = 0;
+    try {
+      ({ stats: mobile, particles } = await measureWindFps(page));
+    } finally {
+      const m = await recordMetrics(testInfo, { windFps: { mobile } }, (w) =>
+        /wind particle fps \(phone\)/.test(w)
+      );
+      console.log(
+        `[ux-metrics] wind (phone): ${m.extra.windFpsMobile ?? 'n/a'} fps, ` +
+          `map redraws ${m.extra.windRenderFpsMobile ?? 'n/a'}/s, ` +
+          `longest rAF gap ${mobile?.maxGapMs ?? 'n/a'} ms, ${particles} particles`
+      );
     }
   });
 });
