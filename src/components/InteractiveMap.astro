@@ -73,6 +73,10 @@ interface Props {
    *  timeline plays (4 MB window; off under data saver). Full-page maps
    *  only: the home embed never sets it. */
   framePrefetch?: boolean;
+  /** Story 24.2 — from zoom 6, fetch a 768-point grid of the viewport
+   *  for the active field and draw it inside its bounds (off under data
+   *  saver). Full-page maps only: the home embed never sets it. */
+  fieldDetail?: boolean;
   /** Tailwind classes for the outer wrapper. */
   class?: string;
   /** Top offset of the layer rail (CSS length). /mapa keeps the default
@@ -112,6 +116,7 @@ const {
   lazy = true,
   bootAutoplay = false,
   framePrefetch = false,
+  fieldDetail = false,
   class: className = '',
   lang = 'es' as const,
   railOffsetTop = '3.5rem',
@@ -170,6 +175,7 @@ const cfg = JSON.stringify({
   lazy,
   bootAutoplay,
   framePrefetch,
+  fieldDetail,
   lang,
 });
 ---
@@ -1154,6 +1160,7 @@ const cfg = JSON.stringify({
     lazy: boolean;
     bootAutoplay?: boolean;
     framePrefetch?: boolean;
+    fieldDetail?: boolean;
     lang: 'es' | 'en';
   };
 
@@ -1219,6 +1226,7 @@ const cfg = JSON.stringify({
             markerPopups: cfg.markerPopups,
             bootAutoplay: cfg.bootAutoplay === true,
             framePrefetch: cfg.framePrefetch === true,
+            fieldDetail: cfg.fieldDetail === true,
             lang: cfg.lang,
           }).catch((err) => {
              

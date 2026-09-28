@@ -85,6 +85,16 @@ import {
   type FieldGlLayer,
   type FieldRendererKind,
 } from './map/layers/field-webgl';
+import {
+  FIELD_DETAIL_COLS,
+  FIELD_DETAIL_ROWS,
+  createFieldDetail,
+  detailHourIndex,
+  detailWeight,
+  mergeFieldValue,
+  type FieldDetail,
+} from './map/layers/field-detail';
+import type { FieldDetailLayer } from './mapraster';
 import { terminatorPolygon, solarPosition } from './mapsun';
 import { presetPins, withUserPin, type MapPin } from './mappins';
 import { cities } from '../data/cities';
@@ -382,6 +392,12 @@ export interface InteractiveMapOptions {
    *  never on the home embed, and always off under
    *  `navigator.connection.saveData`. */
   framePrefetch?: boolean;
+  /** Story 24.2 — from zoom 6, fetch a 768-point grid of the viewport
+   *  for the active field (same chunked Open-Meteo call as the national
+   *  grid, debounced on moveend, cached per rounded view + variable +
+   *  model) and draw it inside its bounds. Full-page maps only: the home
+   *  embed never sets it; off under `navigator.connection.saveData`. */
+  fieldDetail?: boolean;
   /** Fallback language. The document's `<html data-lang>` (set by
    *  BaseLayout from `?lang=`, the toggle or the browser) wins: the pages
    *  are built in Spanish and shown in English at runtime (Story 25.3). */
@@ -1471,6 +1487,98 @@ export async function initInteractiveMap(
   /** User Timing measure per field frame (read by e2e/ux-metrics.spec). */
   const FIELD_FRAME_MEASURE = 'mw:field-frame';
 
+  // ------------------------------------------------------------------
+  // Story 24.2 — local detail on demand. From zoom 6 the viewport gets
+  // its own 32×24 grid of the active field (the national grid's chunked
+  // Open-Meteo call over a smaller box), debounced on moveend, cached per
+  // rounded view + variable + model, and drawn inside its bounds with the
+  // national grid outside (see field-detail.ts). A layer / variable /
+  // model change aborts it; data saver and the confidence mode skip it.
+  // Client traffic only: each new box is one request set (4 calls).
+  // ------------------------------------------------------------------
+  const fieldDetail: FieldDetail | null =
+    opts.fieldDetail === true
+      ? createFieldDetail({
+          load: async (points, ids, signal) => {
+            const json = await fetchFieldChunks(
+              points,
+              ids.hourlyVar,
+              deps.fetch,
+              { signal, model: ids.model }
+            );
+            return parseFieldResponse(json, points, ids.hourlyVar);
+          },
+          onChange: () => {
+            if (getLayerDef(activeLayer)?.kind === 'field' && frameIndex >= 0)
+              void renderFieldFrame(frameIndex);
+          },
+          saveData: () => readSaveData(navigator),
+        })
+      : null;
+
+  /** Ask for the local grid of the current view (moveend, layer ready). */
+  function requestFieldDetail(): void {
+    if (!fieldDetail) return;
+    const cfg = FIELD_CONFIGS[activeLayer];
+    if (
+      !cfg ||
+      !fieldGrid ||
+      !fieldBounds ||
+      confidenceMode ||
+      // A layer / variable / model is still loading: ask once it lands.
+      fieldAbort !== null ||
+      getLayerDef(activeLayer)?.kind !== 'field'
+    ) {
+      fieldDetail.cancel();
+      return;
+    }
+    const b = map.getBounds();
+    fieldDetail.update(
+      {
+        bounds: {
+          west: b.getWest(),
+          south: b.getSouth(),
+          east: b.getEast(),
+          north: b.getNorth(),
+        },
+        zoom: map.getZoom(),
+      },
+      fieldBounds,
+      { hourlyVar: cfg.hourlyVar, model: activeModel }
+    );
+  }
+
+  /** The local grid to merge into national frame `hourIndex`, if any:
+   *  same variable and model as the field on screen, and an hour it has
+   *  (it covers the 72 h default window, not the +10 d extension). */
+  function fieldDetailFrame(hourIndex: number): FieldDetailLayer | null {
+    const e = fieldDetail?.active();
+    const cfg = FIELD_CONFIGS[activeLayer];
+    if (!e || !cfg || !fieldGrid) return null;
+    if (e.ids.hourlyVar !== cfg.hourlyVar || e.ids.model !== activeModel)
+      return null;
+    const hourIdx = detailHourIndex(e.grid, fieldGrid.times[hourIndex]);
+    if (hourIdx < 0) return null;
+    return {
+      grid: e.grid,
+      rows: FIELD_DETAIL_ROWS,
+      cols: FIELD_DETAIL_COLS,
+      bounds: e.bounds,
+      hourIdx,
+    };
+  }
+
+  if (fieldDetail) {
+    map.on('moveend', requestFieldDetail);
+    if (
+      exposeE2eHook &&
+      new URLSearchParams(location.search).get('e2e') === '1'
+    ) {
+      (window as unknown as { __fieldDetail?: FieldDetail }).__fieldDetail =
+        fieldDetail;
+    }
+  }
+
   interface FieldConfig {
     hourlyVar: string;
     color: (v: number) => string;
@@ -1625,6 +1733,8 @@ export async function initInteractiveMap(
       spreadGrid = null;
       spreadFor = '';
     }
+    // Story 24.2 — the spread has no local grid; the value field does.
+    requestFieldDetail();
     if (getLayerDef(activeLayer)?.kind === 'field' && frameIndex >= 0) {
       void renderFieldFrame(frameIndex);
     }
@@ -1838,7 +1948,8 @@ export async function initInteractiveMap(
   function showFieldGl(
     grid: FieldGrid,
     hourIndex: number,
-    color: (v: number) => string
+    color: (v: number) => string,
+    detail: FieldDetailLayer | null
   ): boolean {
     if (!fieldBounds) return false;
     if (!fieldGl || fieldGl.failed()) {
@@ -1877,11 +1988,14 @@ export async function initInteractiveMap(
       // tempColor switches ramp with the colour-blind setting.
       rampKey: getColorBlindMode() ? 'cb' : '',
       alpha: FIELD_ALPHA,
+      detail,
     });
     return true;
   }
 
   function removeField(): void {
+    // Story 24.2 — no field, no local grid (and none in flight).
+    fieldDetail?.cancel();
     if (map.getLayer(FIELD_LAYER)) map.removeLayer(FIELD_LAYER);
     // Legacy halo + circle layer cleanup (PR #119/#121 stacks). Kept
     // defensive so older sessions / hot-reloads don't leak the layer.
@@ -2077,8 +2191,13 @@ export async function initInteractiveMap(
     const useSpread = confidenceMode && !!spreadGrid;
     const grid = useSpread && spreadGrid ? spreadGrid : fieldGrid;
     const color = useSpread ? spreadColorFor(activeLayer) : cfg.color;
+    // Story 24.2 — the viewport's local grid, merged by bounds.
+    const detail = useSpread ? null : fieldDetailFrame(hourIndex);
     // Story 24.1 — GPU path: upload the frame, the shader does the rest.
-    if (fieldRendererKind() === 'webgl' && showFieldGl(grid, hourIndex, color))
+    if (
+      fieldRendererKind() === 'webgl' &&
+      showFieldGl(grid, hourIndex, color, detail)
+    )
       return;
     const t0 = performance.now();
     const render = await renderFieldRaster(
@@ -2095,6 +2214,7 @@ export async function initInteractiveMap(
         // Rows linear in Mercator y, as MapLibre stretches the image
         // (and as the WebGL renderer samples) — Story 24.1.
         rowSpace: 'mercator',
+        detail,
       }
     );
     if (!render) return;
@@ -2182,6 +2302,8 @@ export async function initInteractiveMap(
     const bounds: RasterBounds = { ...MX_FIELD_BOUNDS };
     const grid = viewportGrid(bounds, FIELD_GRID_COLS, FIELD_GRID_ROWS);
     fieldBounds = bounds;
+    // Story 24.2 — a new layer / variable / model aborts the local grid.
+    fieldDetail?.cancel();
     fieldAbort?.abort();
     const ac = new AbortController();
     fieldAbort = ac;
@@ -2686,18 +2808,33 @@ export async function initInteractiveMap(
       if (!fieldBounds || frameIndex < 0) return null;
       const bounds = fieldBounds;
       const lines: string[] = [];
-      const sampleField = (g: FieldGrid | null): number | null =>
-        g
-          ? bilerpValue(
-              g,
-              FIELD_GRID_ROWS,
-              FIELD_GRID_COLS,
-              bounds,
-              lat,
-              lng,
-              frameIndex
-            )
-          : null;
+      const sampleField = (g: FieldGrid | null): number | null => {
+        if (!g) return null;
+        const v = bilerpValue(
+          g,
+          FIELD_GRID_ROWS,
+          FIELD_GRID_COLS,
+          bounds,
+          lat,
+          lng,
+          frameIndex
+        );
+        // Story 24.2 — the active field reads what the map paints: the
+        // local grid inside its box.
+        const d = g === fieldGrid ? fieldDetailFrame(frameIndex) : null;
+        const w = d ? detailWeight(lng, lat, d.bounds) : 0;
+        if (!d || w <= 0) return v;
+        const dv = bilerpValue(
+          d.grid,
+          d.rows,
+          d.cols,
+          d.bounds,
+          lat,
+          lng,
+          d.hourIdx
+        );
+        return mergeFieldValue(v, dv, w)?.value ?? null;
+      };
 
       // Precipitation (Story 15.5) — only while it is the active field;
       // shown first so the tooltip leads with the layer's own value.
@@ -2734,15 +2871,7 @@ export async function initInteractiveMap(
         // Fall through to legacy single-value behavior for field layers
         // when no cached grids exist yet (first paint).
         if (fieldGrid) {
-          const v = bilerpValue(
-            fieldGrid,
-            FIELD_GRID_ROWS,
-            FIELD_GRID_COLS,
-            fieldBounds,
-            lat,
-            lng,
-            frameIndex
-          );
+          const v = sampleField(fieldGrid);
           if (v === null) return null;
           if (activeLayer === 'temperature') return formatTemp(v, U.temp);
           if (activeLayer === 'humidity') return `${Math.round(v)}%`;
@@ -3132,6 +3261,8 @@ export async function initInteractiveMap(
       showTimeline(true);
       refreshLayerButtons();
       applyFrame(idx >= 0 ? idx : 0);
+      // Story 24.2 — already zoomed in: the local grid for this view.
+      requestFieldDetail();
       // A deep link past +48 h (e.g. a shared 9-day view) pulls the
       // extended window automatically, then lands on the asked frame.
       if (seekBeyond) void extendTimeline(seekBeyond);
@@ -4686,6 +4817,9 @@ export async function initInteractiveMap(
       tlJump = null;
       fieldAbort?.abort();
       fieldAbort = null;
+      // Story 24.2 — debounce timer, local-grid fetch in flight, cache.
+      if (fieldDetail) map.off('moveend', requestFieldDetail);
+      fieldDetail?.destroy();
       revokeFieldBlob(); // free the last field raster blob URL
       // Story 24.1 — onRemove frees the WebGL field's program, VAO,
       // buffer and textures before the map (and its context) goes.
