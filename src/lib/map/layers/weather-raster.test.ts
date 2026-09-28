@@ -343,6 +343,7 @@ describe('A/B frame swap (Story 21.3)', () => {
     >();
     const added: string[] = [];
     const paint = new Map<string, Record<string, unknown>>();
+    const layout = new Map<string, Record<string, unknown>>();
     const loaded = new Map<string, boolean>();
     const handlers = new Map<string, Set<Handler>>();
     const map = {
@@ -386,6 +387,10 @@ describe('A/B frame swap (Story 21.3)', () => {
         if (!paint.has(id)) paint.set(id, {});
         paint.get(id)![prop] = v;
       },
+      setLayoutProperty: (id: string, prop: string, v: unknown): void => {
+        if (!layout.has(id)) layout.set(id, {});
+        layout.get(id)![prop] = v;
+      },
       isSourceLoaded: (id: string): boolean => loaded.get(id) === true,
       on: (type: string, fn: Handler): void => {
         if (!handlers.has(type)) handlers.set(type, new Set());
@@ -407,7 +412,16 @@ describe('A/B frame swap (Story 21.3)', () => {
     }
     const listenerCount = (): number =>
       [...handlers.values()].reduce((n, s) => n + s.size, 0);
-    return { map, order, sources, added, paint, loadSource, listenerCount };
+    return {
+      map,
+      order,
+      sources,
+      added,
+      paint,
+      layout,
+      loadSource,
+      listenerCount,
+    };
   }
 
   const RV = {
@@ -465,6 +479,10 @@ describe('A/B frame swap (Story 21.3)', () => {
     expect(m.order.indexOf(B)).toBeLessThan(m.order.indexOf('osm-reference'));
     vi.advanceTimersByTime(300);
     expect(m.paint.get(A)?.['raster-opacity']).toBe(0);
+    // Out of the render too: opacity 0 alone keeps MapLibre fetching
+    // the hidden frame's tiles on every pan/zoom.
+    expect(m.layout.get(A)?.visibility).toBe('none');
+    expect(m.layout.get(B)?.visibility ?? 'visible').toBe('visible');
     expect(m.listenerCount()).toBe(0);
   });
 

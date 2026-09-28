@@ -506,7 +506,7 @@ const cfg = JSON.stringify({
         type="button"
         aria-label="Volver al frame actual"
         title="Ahora"
-        class="tl-secondary hidden rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+        class="tl-secondary hidden min-h-[44px] min-w-[44px] rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex sm:min-h-0 sm:min-w-0"
         >Ahora</button
       >
       {/* Story 15.1 — on-demand 10-day window for field/wind layers.
@@ -1158,10 +1158,14 @@ const cfg = JSON.stringify({
           }).catch((err) => {
              
             console.error('[interactive-map] init failed:', err);
+            // Never leave the Story 21.4 skeleton shimmering over a map
+            // that will not come.
+            root.classList.add('im-ready');
           });
         } catch (err) {
            
           console.error('[interactive-map] init threw synchronously:', err);
+          root.classList.add('im-ready');
         }
       };
 

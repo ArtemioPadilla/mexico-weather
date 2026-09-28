@@ -9,7 +9,7 @@ import {
 import { GIBS_LAYERS, gibsLatestTime } from './nasa-gibs';
 
 describe('gibsProbeUrl', () => {
-  it('is the GeoColor Level7 tile over central Mexico at the newest frame', () => {
+  it('is the GeoColor Level7 world tile (z0) at the newest frame', () => {
     const now = new Date('2026-09-27T15:04:00Z');
     const url = gibsProbeUrl(GIBS_LAYERS.goesGeocolor, now);
     expect(url).toBe(

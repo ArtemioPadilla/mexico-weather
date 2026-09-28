@@ -1128,10 +1128,10 @@ test.describe('Story 21.2 — /mapa boots on satellite', () => {
     // The 24 h GeoColor axis (Story 16.1), newest frame selected first.
     const range = page.locator('#tl-range');
     await expect(range).toHaveAttribute('max', '143');
-    // The boot probe asked GIBS for one GeoColor tile over central
-    // Mexico (z4 y6 x3) at the newest frame before any map tile.
+    // The boot probe asked GIBS for the GeoColor world tile (z0) at the
+    // newest frame before any map tile.
     expect(gibsUrls[0]).toMatch(
-      /GOES-East_ABI_GeoColor\/default\/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\/GoogleMapsCompatible_Level7\/4\/6\/3\.png$/
+      /GOES-East_ABI_GeoColor\/default\/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\/GoogleMapsCompatible_Level7\/0\/0\/0\.png$/
     );
 
     // Autoplay: no click, the loop is running …

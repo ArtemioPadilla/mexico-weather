@@ -21,18 +21,19 @@ import {
   type GibsLayerDef,
 } from './nasa-gibs';
 
-/** z4 tile covering central Mexico (≈ 23.6° N, −102.5° E): x=3, y=6. */
-export const GIBS_PROBE_TILE = { z: 4, y: 6, x: 3 } as const;
+/** z0: the single world tile, the smallest GeoColor request. GIBS
+ *  answers no-store, so the probe never warms a cache; it only has to
+ *  be cheap. */
+export const GIBS_PROBE_TILE = { z: 0, y: 0, x: 0 } as const;
 
-/** Longer than a healthy tile round-trip, shorter than a visitor's
- *  patience; a timeout keeps satellite (see module comment). */
-export const GIBS_PROBE_TIMEOUT_MS = 5000;
+/** Longer than a healthy tile round-trip, short enough that the boot
+ *  (which waits on it) is not held back; a timeout keeps satellite. */
+export const GIBS_PROBE_TIMEOUT_MS = 2500;
 
 export type GibsProbeResult = 'ok' | 'down' | 'unknown';
 
-/** The exact URL MapLibre would request for that tile at the newest
- *  frame, so a healthy probe warms the browser cache instead of costing
- *  an extra tile. */
+/** GeoColor URL of the probe tile at the newest frame the map would
+ *  show — same host, product and TIME as the real tiles. */
 export function gibsProbeUrl(
   layer: GibsLayerDef = GIBS_LAYERS.goesGeocolor,
   now: Date = new Date()

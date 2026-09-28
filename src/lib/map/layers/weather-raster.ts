@@ -351,10 +351,22 @@ export function createWeatherRaster(
     return map.getLayer(COMPANION_LAYER) ? COMPANION_LAYER : belowLabels();
   }
 
+  /** Opacity 0 still counts as "used" for MapLibre (Style._updateSources
+   *  only checks visibility and zoom range), so a faded-out slot would
+   *  keep requesting its frame's tiles on every pan and zoom — twice the
+   *  weather tiles, each a full download on GIBS (no-store). A slot that
+   *  is not on screen is taken out of the render instead. */
+  function setSlotVisible(slot: Slot, on: boolean): void {
+    const id = SLOT_LAYER[slot];
+    if (map.getLayer(id))
+      map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none');
+  }
+
   function abortSwap(): void {
     stopWaiting?.();
     stopWaiting = null;
     incomingUrl = null;
+    setSlotVisible(otherSlot(front), false);
     flushSettled();
   }
 
@@ -385,7 +397,10 @@ export function createWeatherRaster(
     frontUrl = url;
     // After `front` moved: waiters now check the slot just brought up.
     flushSettled();
-    const hideOut = (): void => setSlotOpacity(outSlot, 0, 0);
+    const hideOut = (): void => {
+      setSlotOpacity(outSlot, 0, 0);
+      setSlotVisible(outSlot, false);
+    };
     if (ms <= 0) {
       hideOut();
       return;
@@ -501,6 +516,8 @@ export function createWeatherRaster(
         | undefined;
       if (map.getLayer(SLOT_LAYER[back]) && backSource?.setTiles) {
         setSlotOpacity(back, 0, 0);
+        // Back in the render so its tiles load (invisible at opacity 0).
+        setSlotVisible(back, true);
         backSource.setTiles([spec.url]);
       } else {
         if (map.getLayer(SLOT_LAYER[back])) map.removeLayer(SLOT_LAYER[back]);

@@ -3990,11 +3990,13 @@ export async function initInteractiveMap(
       const hasDays = spansDays();
       dayPrev?.classList.toggle('hidden', !hasDays);
       dayNext?.classList.toggle('hidden', !hasDays);
-      // 'Ahora' is `hidden … sm:inline-flex`: always on at ≥ sm, and
-      // meant to stay off on phones (Story 23.4 owns the mobile timeline).
-      // Dropping `hidden` here only ever leaked it below `sm` for any
-      // layer with frames — from the first paint since /mapa boots on
-      // satellite (Story 21.2) — so the class is left alone.
+      // 'Ahora' is `hidden … sm:inline-flex`. Compact /mapa keeps it off
+      // on phones (its Controles panel reveals `.tl-secondary`); every
+      // other map — home embed, layer pages, /forecast — has no other way
+      // back to the current frame on a phone (the range is lg-only), so
+      // it shows there once frames exist.
+      if (!features.compactChrome)
+        document.getElementById('tl-now')?.classList.remove('hidden');
     };
     // The frame array is rebuilt every time activeLayer changes; we re-
     // evaluate on each tick of the visibility refresh (frame change).
@@ -4341,10 +4343,16 @@ export async function initInteractiveMap(
         compare: t.map_tool_compare,
       },
       () => {
+        const hadFocus = !!document
+          .getElementById('mw-tool-pill')
+          ?.contains(document.activeElement);
         if (measureMode) setMeasureMode(null);
         if (crosshair.isEnabled()) setCrosshair(false);
         clearCompare?.();
         refreshToolPill();
+        // The pill just hid under the focus: hand it back to the ⋯
+        // button the tools came from, not to <body>.
+        if (hadFocus) document.getElementById('mw-tools-btn')?.focus();
       }
     );
     refreshToolPill = (): void => {
