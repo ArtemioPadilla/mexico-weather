@@ -61,6 +61,10 @@ interface Props {
    *  on satellite (last 3 h; not under reduced motion / data saver).
    *  Only /mapa sets this; embeds and layer pages stay static. */
   bootAutoplay?: boolean;
+  /** Story 21.3 — prefetch the next satellite/radar frames while the
+   *  timeline plays (4 MB window; off under data saver). Full-page maps
+   *  only: the home embed never sets it. */
+  framePrefetch?: boolean;
   /** Tailwind classes for the outer wrapper. */
   class?: string;
   /** Top offset of the layer rail (CSS length). /mapa keeps the default
@@ -99,6 +103,7 @@ const {
   markerPopups = true,
   lazy = true,
   bootAutoplay = false,
+  framePrefetch = false,
   class: className = '',
   lang = 'es' as const,
   railOffsetTop = '3.5rem',
@@ -145,6 +150,7 @@ const cfg = JSON.stringify({
   markerPopups,
   lazy,
   bootAutoplay,
+  framePrefetch,
   lang,
 });
 ---
@@ -822,6 +828,7 @@ const cfg = JSON.stringify({
     markerPopups: boolean;
     lazy: boolean;
     bootAutoplay?: boolean;
+    framePrefetch?: boolean;
     lang: 'es' | 'en';
   };
 
@@ -881,6 +888,7 @@ const cfg = JSON.stringify({
             interactive: cfg.interactive,
             markerPopups: cfg.markerPopups,
             bootAutoplay: cfg.bootAutoplay === true,
+            framePrefetch: cfg.framePrefetch === true,
             lang: cfg.lang,
           }).catch((err) => {
              

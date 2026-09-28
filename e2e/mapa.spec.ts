@@ -272,10 +272,19 @@ test.describe('mapa page', () => {
     );
     const before = gibsUrls.length;
     await page.locator('#tl-prev').click();
-    await expect.poll(() => gibsUrls.length).toBeGreaterThan(before);
-    const second = timeOf(gibsUrls[gibsUrls.length - 1]!);
-    expect(second).toBeTruthy();
-    expect(Date.parse(second!)).toBe(Date.parse(first!) - 600_000);
+    // Story 21.3 — the frame on screen stays (slot A, possibly still
+    // finishing its tiles) while the previous one loads into slot B, so
+    // the earlier TIME is looked for among every request made after the
+    // click rather than in the very last one.
+    await expect
+      .poll(() =>
+        gibsUrls
+          .slice(before)
+          .some(
+            (u) => Date.parse(timeOf(u) ?? '') === Date.parse(first!) - 600_000
+          )
+      )
+      .toBe(true);
   });
 
   // Story 21.1 — imagery forces the dark canvas even in the light theme,
@@ -1369,5 +1378,151 @@ test.describe('Story 21.2 — /mapa boots on satellite', () => {
       };
     });
     expect(layers).toEqual({ raster: true, field: false });
+  });
+});
+
+// Story 21.3 — the satellite loop prefetches the next frames and swaps
+// them through two raster slots (A/B) instead of re-creating the source;
+// the play button shows a buffering state while the next frame is not in.
+test.describe('Story 21.3 — frame prefetch and A/B swap', () => {
+  const png = (route: import('@playwright/test').Route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'image/png',
+      body: TRANSPARENT_PNG,
+    });
+
+  async function mockNet(page: import('@playwright/test').Page) {
+    await page.route('**/*.arcgisonline.com/**', png);
+    await page.route('**/tilecache.rainviewer.com/**', png);
+    await page.route('**/gibs.earthdata.nasa.gov/**', png);
+    await page.route('**/api.rainviewer.com/public/weather-maps.json', (r) =>
+      r.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: RAINVIEWER_MANIFEST,
+      })
+    );
+    await page.addInitScript(() => {
+      try {
+        localStorage.setItem('mw:welcomed', '1');
+      } catch {
+        /* private mode — nothing below depends on it */
+      }
+    });
+  }
+
+  type E2eWin = {
+    __map?: {
+      getLayer(id: string): unknown;
+      getSource(id: string): unknown;
+      getStyle(): { layers: Array<{ id: string }> };
+    };
+    __framePrefetch?: { stats(): { requested: number } };
+  };
+
+  test('the loop swaps frames through two slots under the labels and prefetches ahead', async ({
+    page,
+  }) => {
+    await mockNet(page);
+    await page.goto('mapa/?e2e=1');
+    // The boot (GIBS probe, manifest, first idle) can take a while on a
+    // loaded runner before the loop starts.
+    await expect(page.locator('#tl-play')).toHaveAttribute(
+      'data-state',
+      'playing',
+      { timeout: 20_000 }
+    );
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () =>
+            !!(window as unknown as E2eWin).__map?.getLayer('wx-raster-layer-b')
+        )
+      )
+      .toBe(true);
+    const state = await page.evaluate(() => {
+      const w = window as unknown as E2eWin;
+      const order = w.__map!.getStyle().layers.map((l) => l.id);
+      return {
+        order,
+        a: !!w.__map!.getSource('wx-raster'),
+        b: !!w.__map!.getSource('wx-raster-b'),
+        requested: w.__framePrefetch?.stats().requested ?? -1,
+      };
+    });
+    expect(state.a && state.b).toBe(true);
+    const ref = state.order.indexOf('osm-reference');
+    for (const id of ['wx-raster-layer', 'wx-raster-layer-b']) {
+      expect(state.order.indexOf(id)).toBeGreaterThan(
+        state.order.indexOf('osm')
+      );
+      expect(state.order.indexOf(id)).toBeLessThan(ref);
+    }
+    // Tiles of frames ahead of the playhead were fetched with Image().
+    expect(state.requested).toBeGreaterThan(0);
+  });
+
+  test('the play button buffers (aria-busy) while the next frame is not cached', async ({
+    page,
+  }) => {
+    await mockNet(page);
+    await page.goto('mapa/?e2e=1');
+    const play = page.locator('#tl-play');
+    await expect(play).toHaveAttribute('data-state', 'playing', {
+      timeout: 20_000,
+    });
+    // From now on GIBS answers only when released: the loop runs through
+    // what is already cached, then waits on the first frame that is not.
+    let release!: () => void;
+    const gate = new Promise<void>((r) => (release = r));
+    await page.route('**/gibs.earthdata.nasa.gov/**', async (route) => {
+      await gate;
+      await png(route);
+    });
+    await expect(play).toHaveAttribute('aria-busy', 'true', {
+      timeout: 15_000,
+    });
+    await expect(play).toHaveAttribute('data-state', 'playing');
+    await expect(play.locator('use')).toHaveAttribute('href', '#i-loader');
+    const range = page.locator('#tl-range');
+    const held = await range.inputValue();
+    await page.waitForTimeout(1000);
+    expect(await range.inputValue()).toBe(held);
+    release();
+    await expect(play).not.toHaveAttribute('aria-busy', 'true');
+    await expect
+      .poll(async () => await range.inputValue(), { timeout: 10_000 })
+      .not.toBe(held);
+  });
+
+  test('data saver: no prefetcher, and ▶ plays on the plain cadence', async ({
+    page,
+  }) => {
+    await mockNet(page);
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'connection', {
+        configurable: true,
+        value: { saveData: true },
+      });
+    });
+    await page.goto('mapa/?e2e=1');
+    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    const range = page.locator('#tl-range');
+    await expect(range).toHaveAttribute('max', '143');
+    const play = page.locator('#tl-play');
+    // Data saver also skips the boot autoplay (Story 21.2).
+    await expect(play).toHaveAttribute('data-state', 'paused');
+    const start = await range.inputValue();
+    await play.click();
+    await expect(play).toHaveAttribute('data-state', 'playing');
+    await expect.poll(async () => await range.inputValue()).not.toBe(start);
+    const hasPrefetcher = await page.evaluate(
+      () => (window as unknown as E2eWin).__framePrefetch !== undefined
+    );
+    expect(hasPrefetcher).toBe(false);
   });
 });

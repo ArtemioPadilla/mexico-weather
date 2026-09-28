@@ -29,6 +29,12 @@ import {
 
 const RV_SOURCE = 'wx-raster';
 const RV_LAYER = 'wx-raster-layer';
+// Story 21.3 — the second slot of the A/B pair. Slot A keeps the
+// historical ids (the boot autoplay waits on `wx-raster`, e2e and the
+// cold-load check look for `wx-raster-layer`); B only exists once a
+// second frame has been shown.
+const RV_SOURCE_B = 'wx-raster-b';
+const RV_LAYER_B = 'wx-raster-layer-b';
 const DIM_SOURCE = 'wx-rv-dim-src';
 const DIM_LAYER = 'wx-rv-dim-layer';
 
@@ -37,6 +43,13 @@ const DIM_LAYER = 'wx-rv-dim-layer';
  *  working without duplicating the constant. */
 export const WEATHER_RASTER_LAYER_ID = RV_LAYER;
 export const WEATHER_RASTER_SOURCE_ID = RV_SOURCE;
+export const WEATHER_RASTER_LAYER_B_ID = RV_LAYER_B;
+export const WEATHER_RASTER_SOURCE_B_ID = RV_SOURCE_B;
+
+/** Story 21.3 — how long a frame swap waits for the incoming slot's
+ *  tiles before cross-fading anyway (a tile that never answers must not
+ *  freeze the picture on the old frame). */
+export const SWAP_TIMEOUT_MS = 2000;
 
 const WORLD_RECT_FC: FeatureCollection = {
   type: 'FeatureCollection',
@@ -68,6 +81,57 @@ export function pickGibsLayer(opt: SatelliteSubOption): GibsLayerDef {
   return GIBS_LAYERS.goesGeocolor;
 }
 
+/** Tile template + raster-source parameters for one frame of a weather
+ *  raster product. Single source of truth for the URLs MapLibre asks
+ *  for and the ones the frame prefetcher (Story 21.3) warms. */
+export interface WeatherRasterTileSpec {
+  /** `{z}/{x}/{y}` template (GIBS orders it `{z}/{y}/{x}`). */
+  url: string;
+  tileSize: number;
+  maxzoom: number;
+  attribution: string;
+  /** Same product (layer + variant + tile pyramid): frames of one
+   *  product swap through the A/B pair; a new product rebuilds. */
+  productKey: string;
+}
+
+export function weatherRasterTileSpec(
+  layerId: 'radar' | 'satellite',
+  frame: RadarFrame | null,
+  ctx: {
+    rvData: RainviewerData | null;
+    satelliteSubOption: SatelliteSubOption;
+  }
+): WeatherRasterTileSpec | null {
+  if (layerId === 'satellite') {
+    const gibsLayer = pickGibsLayer(ctx.satelliteSubOption);
+    return {
+      // Story 16.1 — the timeline frame picks the TIME; without a
+      // frame fall back to the newest instant GIBS is likely to have.
+      url: gibsTileUrl(
+        gibsLayer,
+        frame ? gibsTimeParam(gibsLayer, frame.time * 1000) : gibsLatestTime()
+      ),
+      tileSize: 256,
+      maxzoom: gibsLayer.maxZoom,
+      attribution: ATTRIBUTION_GIBS,
+      productKey: `satellite|${gibsLayer.id}`,
+    };
+  }
+  // Radar from RainViewer.
+  // 256px pyramid maxes at ~z8 → server returns "Zoom Level Not
+  // Supported" placeholder at higher zoom. 512px pyramid covers
+  // through z10. tileSize:512 keeps visual density equivalent.
+  if (!ctx.rvData || !frame) return null;
+  return {
+    url: rainviewerTileUrl(ctx.rvData.host, frame, { size: 512 }),
+    tileSize: 512,
+    maxzoom: 10,
+    attribution: '© RainViewer',
+    productKey: `radar|${ctx.rvData.host}`,
+  };
+}
+
 export interface WeatherRasterDeps {
   /** Show a transient toast — the factory calls this when satellite
    *  is requested above the GIBS-product max zoom (i.e. user is
@@ -75,7 +139,9 @@ export interface WeatherRasterDeps {
   showMsg?: (text: string) => void;
   hideMsg?: () => void;
   /** Story 16.4 — raster-fade-duration (ms) for the tile layer; read
-   *  when the layer is (re)added. 300 when absent (MapLibre default). */
+   *  when the layer is (re)added and on every frame swap, where it is
+   *  also the A/B cross-fade length (Story 21.3). 300 when absent
+   *  (MapLibre default); 0 swaps instantly. */
   getFadeMs?: () => number;
   /** Story 21.1 — layer id the weather raster (and its dim backdrop and
    *  radar companion) is inserted BENEATH, so the basemap reference
@@ -100,8 +166,8 @@ export interface WeatherRasterFactory {
   ) => void;
   /** Tear down the active raster + the dim backdrop. */
   remove: () => void;
-  /** Set raster-opacity on the layer if it exists. Called by the
-   *  global opacity slider. */
+  /** Set raster-opacity on the visible slot (and the incoming one while
+   *  it fades in). Called by the global opacity slider. */
   setOpacity: (opacity: number) => void;
   /** Story 16.4 — apply the play style's cross-fade live. */
   setFadeMs: (ms: number) => void;
@@ -155,7 +221,7 @@ export function createWeatherRaster(
 
   // Story 13.2 — radar tiles drawn ON TOP of the satellite raster in the
   // combined precipitation mode. Own source/layer so the satellite
-  // frame swap (teardown + add) cannot bury it.
+  // frame swap (A/B, Story 21.3) cannot bury it.
   const COMPANION_SOURCE = 'wx-radar-companion-src';
   const COMPANION_LAYER = 'wx-radar-companion';
 
@@ -164,71 +230,228 @@ export function createWeatherRaster(
     if (map.getSource(COMPANION_SOURCE)) map.removeSource(COMPANION_SOURCE);
   }
 
+  const fadeMs = (): number => deps.getFadeMs?.() ?? 300;
+
+  // ------------------------------------------------------------------
+  // Story 21.3 — A/B frame pair. Frames of one product no longer tear
+  // the source down: the hidden slot gets the next frame's tiles
+  // (`setTiles`, straight from the HTTP cache the prefetcher warmed),
+  // and once they are in it moves on top and fades in over the visible
+  // slot for `raster-fade-duration` ms; only then does the old slot drop
+  // to 0. The picture is never empty between frames.
+  // ------------------------------------------------------------------
+  type Slot = 'A' | 'B';
+  const SLOT_SOURCE: Record<Slot, string> = { A: RV_SOURCE, B: RV_SOURCE_B };
+  const SLOT_LAYER: Record<Slot, string> = { A: RV_LAYER, B: RV_LAYER_B };
+  const otherSlot = (s: Slot): Slot => (s === 'A' ? 'B' : 'A');
+
+  let product: string | null = null;
+  let front: Slot = 'A';
+  let frontUrl: string | null = null;
+  /** Template loading into the hidden slot, awaiting its cross-fade. */
+  let incomingUrl: string | null = null;
+  let opacity = 1;
+  let stopWaiting: (() => void) | null = null;
+  let fadeTimer: ReturnType<typeof setTimeout> | null = null;
+  let fadeDone: (() => void) | null = null;
+
+  function addSlot(
+    slot: Slot,
+    spec: WeatherRasterTileSpec,
+    slotOpacity: number,
+    beforeId: string | undefined
+  ): void {
+    if (!map.getSource(SLOT_SOURCE[slot])) {
+      map.addSource(SLOT_SOURCE[slot], {
+        type: 'raster',
+        tiles: [spec.url],
+        tileSize: spec.tileSize,
+        maxzoom: spec.maxzoom,
+        attribution: spec.attribution,
+      });
+    }
+    map.addLayer(
+      {
+        id: SLOT_LAYER[slot],
+        type: 'raster',
+        source: SLOT_SOURCE[slot],
+        paint: {
+          'raster-opacity': slotOpacity,
+          'raster-resampling': 'linear',
+          'raster-fade-duration': fadeMs(),
+        },
+      },
+      beforeId
+    );
+  }
+
+  function setSlotOpacity(slot: Slot, value: number, durationMs: number): void {
+    const id = SLOT_LAYER[slot];
+    if (!map.getLayer(id)) return;
+    map.setPaintProperty(id, 'raster-opacity-transition', {
+      duration: durationMs,
+      delay: 0,
+    });
+    map.setPaintProperty(id, 'raster-opacity', value);
+  }
+
+  /** Top of the weather rasters: under the radar companion when it is
+   *  there, else under the labels (Story 21.1). */
+  function topOfRasters(): string | undefined {
+    return map.getLayer(COMPANION_LAYER) ? COMPANION_LAYER : belowLabels();
+  }
+
+  function abortSwap(): void {
+    stopWaiting?.();
+    stopWaiting = null;
+    incomingUrl = null;
+  }
+
+  /** Complete a running cross-fade now (the outgoing slot drops to 0). */
+  function finishFade(): void {
+    if (fadeTimer) clearTimeout(fadeTimer);
+    fadeTimer = null;
+    const done = fadeDone;
+    fadeDone = null;
+    done?.();
+  }
+
+  function crossfade(): void {
+    stopWaiting?.();
+    stopWaiting = null;
+    const inSlot = otherSlot(front);
+    const outSlot = front;
+    const url = incomingUrl;
+    incomingUrl = null;
+    if (!map.getLayer(SLOT_LAYER[inSlot])) return;
+    const ms = fadeMs();
+    map.moveLayer(SLOT_LAYER[inSlot], topOfRasters());
+    setSlotOpacity(inSlot, opacity, ms);
+    front = inSlot;
+    frontUrl = url;
+    const hideOut = (): void => setSlotOpacity(outSlot, 0, 0);
+    if (ms <= 0) {
+      hideOut();
+      return;
+    }
+    fadeDone = hideOut;
+    fadeTimer = setTimeout(finishFade, ms);
+  }
+
+  /** Cross-fade once the hidden slot's source reports loaded (every
+   *  in-view tile loaded or errored), capped at SWAP_TIMEOUT_MS. */
+  function awaitIncoming(): void {
+    stopWaiting?.();
+    const src = SLOT_SOURCE[otherSlot(front)];
+    let done = false;
+    const check = (): void => {
+      if (done || !map.getSource(src)) return;
+      if (map.isSourceLoaded(src)) crossfade();
+    };
+    // Deferred: `setTiles` fires `metadata` then `content` back to back
+    // and the tiles only turn stale on `content`; a check in between
+    // would see the previous frame's tiles as "loaded".
+    const onData = (e: maplibregl.MapSourceDataEvent): void => {
+      if (e.sourceId !== src || e.sourceDataType === 'metadata') return;
+      queueMicrotask(check);
+    };
+    // The last tile can error instead of loading (no `sourcedata`).
+    const onError = (e: { sourceId?: string }): void => {
+      if (e.sourceId === src) queueMicrotask(check);
+    };
+    map.on('sourcedata', onData);
+    map.on('error', onError);
+    const timer = setTimeout(() => {
+      if (!done) crossfade();
+    }, SWAP_TIMEOUT_MS);
+    stopWaiting = (): void => {
+      done = true;
+      map.off('sourcedata', onData);
+      map.off('error', onError);
+      clearTimeout(timer);
+    };
+  }
+
   function teardownRaster(): void {
-    if (map.getLayer(RV_LAYER)) map.removeLayer(RV_LAYER);
-    if (map.getSource(RV_SOURCE)) map.removeSource(RV_SOURCE);
+    abortSwap();
+    fadeDone = null;
+    finishFade();
+    for (const slot of ['A', 'B'] as const) {
+      if (map.getLayer(SLOT_LAYER[slot])) map.removeLayer(SLOT_LAYER[slot]);
+      if (map.getSource(SLOT_SOURCE[slot])) {
+        map.removeSource(SLOT_SOURCE[slot]);
+      }
+    }
     removeCompanion();
     removeDim();
+    product = null;
+    front = 'A';
+    frontUrl = null;
   }
 
   return {
     show: (layerId, frame, ctx): void => {
-      teardownRaster();
-      addDim();
-      if (layerId === 'satellite') {
-        const gibsLayer = pickGibsLayer(ctx.satelliteSubOption);
-        map.addSource(RV_SOURCE, {
-          type: 'raster',
-          // Story 16.1 — the timeline frame picks the TIME; without a
-          // frame fall back to the newest instant GIBS is likely to have.
-          tiles: [
-            gibsTileUrl(
-              gibsLayer,
-              frame
-                ? gibsTimeParam(gibsLayer, frame.time * 1000)
-                : gibsLatestTime()
-            ),
-          ],
-          tileSize: 256,
-          maxzoom: gibsLayer.maxZoom,
-          attribution: ATTRIBUTION_GIBS,
-        });
-        if (ctx.currentZoom > gibsLayer.maxZoom + 1 && deps.showMsg) {
+      const prevOpacity = opacity;
+      opacity = ctx.opacity;
+      const spec = weatherRasterTileSpec(layerId, frame, ctx);
+      if (!spec) {
+        // Radar without a manifest/frame: dim only (defensive, as before).
+        teardownRaster();
+        addDim();
+        return;
+      }
+      const intact =
+        product === spec.productKey &&
+        !!map.getLayer(SLOT_LAYER[front]) &&
+        !!map.getSource(SLOT_SOURCE[front]);
+      if (!intact) {
+        // New product (layer, satellite variant, radar host) or a style
+        // rebuilt underneath us: start over on slot A.
+        teardownRaster();
+        addDim();
+        addSlot('A', spec, opacity, belowLabels());
+        product = spec.productKey;
+        front = 'A';
+        frontUrl = spec.url;
+        const maxZoom = spec.maxzoom;
+        if (
+          layerId === 'satellite' &&
+          ctx.currentZoom > maxZoom + 1 &&
+          deps.showMsg
+        ) {
           deps.showMsg(
-            `Satélite limitado a zoom z${gibsLayer.maxZoom} (NASA GIBS). Acercando más solo aparece la mancha del basemap.`
+            `Satélite limitado a zoom z${maxZoom} (NASA GIBS). Acercando más solo aparece la mancha del basemap.`
           );
           if (deps.hideMsg) window.setTimeout(deps.hideMsg, 5000);
         }
-      } else {
-        // Radar from RainViewer.
-        // 256px pyramid maxes at ~z8 → server returns "Zoom Level Not
-        // Supported" placeholder at higher zoom. 512px pyramid covers
-        // through z10. tileSize:512 keeps visual density equivalent.
-        if (!ctx.rvData || !frame) return;
-        const tileUrl = rainviewerTileUrl(ctx.rvData.host, frame, {
-          size: 512,
-        });
-        map.addSource(RV_SOURCE, {
-          type: 'raster',
-          tiles: [tileUrl],
-          tileSize: 512,
-          maxzoom: 10,
-          attribution: '© RainViewer',
-        });
+        return;
       }
-      map.addLayer(
-        {
-          id: RV_LAYER,
-          type: 'raster',
-          source: RV_SOURCE,
-          paint: {
-            'raster-opacity': ctx.opacity,
-            'raster-resampling': 'linear',
-            'raster-fade-duration': deps.getFadeMs?.() ?? 300,
-          },
-        },
-        belowLabels()
-      );
+      if (prevOpacity !== opacity && map.getLayer(SLOT_LAYER[front])) {
+        map.setPaintProperty(SLOT_LAYER[front], 'raster-opacity', opacity);
+      }
+      if (spec.url === frontUrl) {
+        // Back to the frame on screen (scrub): drop the swap in flight.
+        abortSwap();
+        return;
+      }
+      if (spec.url === incomingUrl) return;
+      // A cross-fade still running completes now; its old slot is the
+      // one the new frame loads into.
+      finishFade();
+      const back = otherSlot(front);
+      const backSource = map.getSource(SLOT_SOURCE[back]) as
+        | (maplibregl.RasterTileSource & { setTiles?: (t: string[]) => void })
+        | undefined;
+      if (map.getLayer(SLOT_LAYER[back]) && backSource?.setTiles) {
+        setSlotOpacity(back, 0, 0);
+        backSource.setTiles([spec.url]);
+      } else {
+        if (map.getLayer(SLOT_LAYER[back])) map.removeLayer(SLOT_LAYER[back]);
+        if (backSource) map.removeSource(SLOT_SOURCE[back]);
+        addSlot(back, spec, 0, topOfRasters());
+      }
+      incomingUrl = spec.url;
+      awaitIncoming();
     },
     remove: teardownRaster,
     showRadarCompanion: (frame, ctx): void => {
@@ -251,7 +474,7 @@ export function createWeatherRaster(
           paint: {
             'raster-opacity': ctx.opacity,
             'raster-resampling': 'linear',
-            'raster-fade-duration': deps.getFadeMs?.() ?? 300,
+            'raster-fade-duration': fadeMs(),
           },
         },
         belowLabels()
@@ -259,13 +482,16 @@ export function createWeatherRaster(
     },
     removeRadarCompanion: removeCompanion,
     setFadeMs: (ms: number): void => {
-      if (map.getLayer(RV_LAYER)) {
-        map.setPaintProperty(RV_LAYER, 'raster-fade-duration', ms);
+      for (const slot of ['A', 'B'] as const) {
+        if (map.getLayer(SLOT_LAYER[slot])) {
+          map.setPaintProperty(SLOT_LAYER[slot], 'raster-fade-duration', ms);
+        }
       }
     },
-    setOpacity: (opacity: number): void => {
-      if (map.getLayer(RV_LAYER)) {
-        map.setPaintProperty(RV_LAYER, 'raster-opacity', opacity);
+    setOpacity: (value: number): void => {
+      opacity = value;
+      if (map.getLayer(SLOT_LAYER[front])) {
+        map.setPaintProperty(SLOT_LAYER[front], 'raster-opacity', value);
       }
     },
   };

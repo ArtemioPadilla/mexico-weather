@@ -233,7 +233,19 @@ import {
   DEFAULT_REFERENCE_LAYER_ID as BASEMAP_REFERENCE_LAYER_ID,
 } from './map/chrome/basemap-theme';
 import { createSunLayer } from './map/layers/sun-layer';
-import { createWeatherRaster } from './map/layers/weather-raster';
+import {
+  createWeatherRaster,
+  weatherRasterTileSpec,
+} from './map/layers/weather-raster';
+import {
+  PREFETCH_FRAMES,
+  createFramePrefetcher,
+  fillTileTemplate,
+  imageTileLoader,
+  upcomingFrames,
+  visibleTileCoords,
+  type FramePrefetcher,
+} from './map/layers/frame-prefetch';
 import { createSkeletonReveal, findMapRoot } from './map/chrome/map-skeleton';
 import {
   bootActivationAllowed,
@@ -318,6 +330,12 @@ export interface InteractiveMapOptions {
    *  `t=`; the first interaction with the timeline pauses it. /mapa only;
    *  embeds and layer pages default to false. */
   bootAutoplay?: boolean;
+  /** Story 21.3 — while the timeline plays satellite or radar, fetch the
+   *  visible tiles of the next frames ahead (N = 6, 4 MB window) and
+   *  hold the loop until the next frame is cached. Full-page maps only:
+   *  never on the home embed, and always off under
+   *  `navigator.connection.saveData`. */
+  framePrefetch?: boolean;
   lang?: 'es' | 'en';
 }
 
@@ -1176,6 +1194,11 @@ export async function initInteractiveMap(
   let rvOpacity = getLayerDef('radar')?.defaultOpacity ?? 0.8;
   let tlFrames: RadarFrame[] = [];
   let frameIndex = -1;
+  // Story 21.3 — assigned once the raster factory and the timeline
+  // player exist (further down); declared here so applyFrame() can call
+  // the prefetch hook whenever it runs.
+  let framePrefetcher: FramePrefetcher | null = null;
+  let tlIsPlaying = (): boolean => false;
   let activeFrameIso: string | null = null;
   let pendingSeekIso: string | null = hashed?.t ?? null;
   // Story 15.1 — one in-flight "Ver 10 días" fetch at a time.
@@ -1229,6 +1252,8 @@ export async function initInteractiveMap(
       void renderFieldFrame(idx);
     } else {
       showWeatherFrame(activeLayer, fr);
+      // Story 21.3 — slide the look-ahead window with the playhead.
+      if (tlIsPlaying()) schedulePrefetch();
     }
     activeFrameIso = new Date(fr.time * 1000).toISOString();
     if (tlRange) {
@@ -2040,6 +2065,8 @@ export async function initInteractiveMap(
   });
   const removeWeatherRaster = (): void => {
     weatherRaster.remove();
+    // Story 21.3 — nothing ahead to warm once the raster is gone.
+    framePrefetcher?.cancel();
     // Story 21.1 — back to the theme's own canvas (light stays light).
     basemapTheme.setImagery(false);
   };
@@ -2064,6 +2091,123 @@ export async function initInteractiveMap(
       weatherRaster.removeRadarCompanion();
     }
   };
+
+  // ------------------------------------------------------------------
+  // Story 21.3 — frame prefetch. While the loop plays satellite or
+  // radar, the tiles the viewport needs for the next frames are fetched
+  // ahead with Image() (same URLs MapLibre builds from the same tile
+  // spec), under a 4 MB look-ahead window. A layer, variant or view
+  // change cancels whatever is in flight. Opt-in per page (/mapa and
+  // the per-layer pages) and never under data saver.
+  // ------------------------------------------------------------------
+  framePrefetcher =
+    opts.framePrefetch === true && !readSaveData(navigator)
+      ? createFramePrefetcher({ loader: imageTileLoader() })
+      : null;
+
+  function prefetchLayer(): 'radar' | 'satellite' | null {
+    return activeLayer === 'radar' || activeLayer === 'satellite'
+      ? activeLayer
+      : null;
+  }
+
+  /** Tile URLs frame `i` needs in the current view ([] when not a
+   *  prefetchable raster frame). */
+  function frameTileUrls(i: number): string[] {
+    const layer = prefetchLayer();
+    const frame = tlFrames[i];
+    if (!layer || !frame) return [];
+    const spec = weatherRasterTileSpec(layer, frame, {
+      rvData,
+      satelliteSubOption,
+    });
+    if (!spec) return [];
+    const b = map.getBounds();
+    return visibleTileCoords(
+      {
+        west: b.getWest(),
+        south: b.getSouth(),
+        east: b.getEast(),
+        north: b.getNorth(),
+      },
+      map.getZoom(),
+      { tileSize: spec.tileSize, maxZoom: spec.maxzoom }
+    ).map((c) => fillTileTemplate(spec.url, c));
+  }
+
+  function currentLoopRange(): [number, number] {
+    return loopRange(
+      tlFrames.map((f) => f.time),
+      // Story 21.2 — the boot loop covers the last 3 h unless the
+      // visitor ever chose a window in ⚙ (read raw: readSettings()
+      // fills the 24 h default in, and "default" is what we override).
+      bootLoopActive
+        ? bootLoopHours(readRawSettings())
+        : readSettings().loopHours,
+      Math.floor(Date.now() / 1000)
+    );
+  }
+
+  function schedulePrefetch(): void {
+    if (!framePrefetcher) return;
+    const layer = prefetchLayer();
+    if (!layer || tlFrames.length < 2 || frameIndex < 0) {
+      framePrefetcher.cancel();
+      return;
+    }
+    const b = map.getBounds();
+    const r = (v: number): string => v.toFixed(3);
+    framePrefetcher.schedule({
+      key: [
+        layer,
+        satelliteSubOption,
+        rvData?.host ?? '',
+        map.getZoom().toFixed(2),
+        r(b.getWest()),
+        r(b.getSouth()),
+        r(b.getEast()),
+        r(b.getNorth()),
+      ].join('|'),
+      frames: upcomingFrames(
+        frameIndex,
+        tlFrames.length,
+        PREFETCH_FRAMES,
+        currentLoopRange()
+      ),
+      urlsFor: frameTileUrls,
+    });
+  }
+
+  /** Timeline gate: the next frame's tiles are cached (or it is not a
+   *  prefetchable frame). Waits at most 3 s — a slow tile must not
+   *  freeze the loop, MapLibre fetches it on the swap anyway. */
+  function nextFrameReady(next: number): Promise<boolean> {
+    if (!framePrefetcher || !prefetchLayer()) return Promise.resolve(true);
+    schedulePrefetch();
+    const urls = frameTileUrls(next);
+    if (framePrefetcher.isCached(urls)) return Promise.resolve(true);
+    const layerAtAsk = activeLayer;
+    return framePrefetcher
+      .ensure(urls, 3000)
+      .then(() => activeLayer === layerAtAsk);
+  }
+
+  if (framePrefetcher) {
+    // The view is part of every URL: a pan/zoom voids the window, and
+    // it is re-planned for the new view when the move ends.
+    map.on('movestart', () => framePrefetcher?.cancel());
+    map.on('moveend', () => {
+      if (tlIsPlaying()) schedulePrefetch();
+    });
+    if (
+      exposeE2eHook &&
+      new URLSearchParams(location.search).get('e2e') === '1'
+    ) {
+      (
+        window as unknown as { __framePrefetch?: FramePrefetcher }
+      ).__framePrefetch = framePrefetcher;
+    }
+  }
 
   /** Story 13.2 — zoom.earth's "Precipitación" picture in one click:
    *  GeoColor satellite + cloud-cover overlay + radar, shareable via
@@ -3315,8 +3459,8 @@ export async function initInteractiveMap(
     opacityEl.value = String(Math.round(rvOpacity * 100));
     opacityEl.addEventListener('input', () => {
       rvOpacity = Number(opacityEl.value) / 100;
-      if (map.getLayer(RV_LAYER))
-        map.setPaintProperty(RV_LAYER, 'raster-opacity', rvOpacity);
+      // Story 21.3 — the factory knows which A/B slot is on screen.
+      weatherRaster.setOpacity(rvOpacity);
       if (map.getLayer(FIELD_LAYER))
         map.setPaintProperty(FIELD_LAYER, 'raster-opacity', rvOpacity);
       if (map.getLayer(WIND_CIRCLE_LAYER))
@@ -3342,19 +3486,14 @@ export async function initInteractiveMap(
       // Story 16.4 — speed and loop window come from settings and are
       // read on every tick, so the ⚙ panel applies live.
       getIntervalMs: () => PLAY_INTERVAL_MS[readSettings().playSpeed],
-      getLoopRange: () =>
-        loopRange(
-          tlFrames.map((f) => f.time),
-          // Story 21.2 — the boot loop covers the last 3 h unless the
-          // visitor ever chose a window in ⚙ (read raw: readSettings()
-          // fills the 24 h default in, and "default" is what we override).
-          bootLoopActive
-            ? bootLoopHours(readRawSettings())
-            : readSettings().loopHours,
-          Math.floor(Date.now() / 1000)
-        ),
+      getLoopRange: currentLoopRange,
+      // Story 21.3 — never step onto a frame whose tiles are not in yet
+      // (the button shows the buffering state meanwhile). Only where the
+      // prefetcher exists: embeds and data saver keep the plain cadence.
+      canAdvance: framePrefetcher ? nextFrameReady : undefined,
     }
   );
+  tlIsPlaying = (): boolean => tlPlayer.isPlaying();
   const tlStop = (): void => {
     // Story 21.2 — any pause (prev/next/range, layer change, tools) ends
     // the one-shot boot loop and its 3 h window for good.
@@ -3368,6 +3507,9 @@ export async function initInteractiveMap(
     bootAutoplayCancelled = true;
     bootLoopActive = false;
     tlPlayer.toggle();
+    // Story 21.3 — start warming the next frames with the first ▶, not
+    // one cadence later.
+    if (tlPlayer.isPlaying()) schedulePrefetch();
   });
 
   // ------------------------------------------------------------------
@@ -3411,6 +3553,7 @@ export async function initInteractiveMap(
       if (tlPlayer.isPlaying()) return;
       bootLoopActive = true;
       tlPlayer.start();
+      schedulePrefetch();
     });
   }
 

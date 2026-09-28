@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createTimelinePlayer } from './timeline-player';
+import { BUFFERING_UI_DELAY_MS, createTimelinePlayer } from './timeline-player';
 
 function mkPlayBtn(): HTMLButtonElement {
   return document.createElement('button');
@@ -170,5 +170,158 @@ describe('createTimelinePlayer', () => {
     player.stop();
     vi.advanceTimersByTime(3000);
     expect(cur).toBe(5);
+  });
+
+  // Story 21.3 — the loop waits for the next frame to be cached.
+  describe('canAdvance gate', () => {
+    function gated(opts: { interval?: number } = {}) {
+      const btn = mkPlayBtn();
+      let cur = 0;
+      const asked: number[] = [];
+      const answers: Array<(ok: boolean) => void> = [];
+      const player = createTimelinePlayer(
+        { playBtn: btn },
+        labels,
+        () => 5,
+        () => cur,
+        (i) => {
+          cur = i;
+        },
+        {
+          reducedMotion: false,
+          intervalMs: opts.interval ?? 100,
+          canAdvance: (next) => {
+            asked.push(next);
+            return new Promise<boolean>((res) => answers.push(res));
+          },
+        }
+      );
+      return { btn, player, asked, answers, cur: () => cur };
+    }
+
+    it('holds the frame until the gate says yes, then keeps the cadence', async () => {
+      const g = gated();
+      g.player.start();
+      await vi.advanceTimersByTimeAsync(100);
+      expect(g.asked).toEqual([1]);
+      expect(g.cur()).toBe(0);
+      // Waiting far longer than the cadence does not skip or re-ask.
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(g.cur()).toBe(0);
+      expect(g.asked).toEqual([1]);
+      g.answers[0](true);
+      await vi.advanceTimersByTimeAsync(0);
+      expect(g.cur()).toBe(1);
+      // Next tick one cadence after the advance.
+      await vi.advanceTimersByTimeAsync(99);
+      expect(g.asked).toEqual([1]);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(g.asked).toEqual([1, 2]);
+    });
+
+    it('shows the buffering state (aria-busy + loader glyph) only while pending past the delay', async () => {
+      const g = gated();
+      g.player.start();
+      await vi.advanceTimersByTimeAsync(100);
+      await vi.advanceTimersByTimeAsync(BUFFERING_UI_DELAY_MS - 1);
+      expect(g.btn.hasAttribute('aria-busy')).toBe(false);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(g.btn.getAttribute('aria-busy')).toBe('true');
+      expect(g.btn.dataset.buffering).toBe('true');
+      expect(g.btn.innerHTML).toContain('#i-loader');
+      // Still "playing" for everything that reads the state.
+      expect(g.btn.dataset.state).toBe('playing');
+      expect(g.btn.getAttribute('aria-pressed')).toBe('true');
+      g.answers[0](true);
+      await vi.advanceTimersByTimeAsync(0);
+      expect(g.btn.hasAttribute('aria-busy')).toBe(false);
+      expect(g.btn.dataset.buffering).toBeUndefined();
+      expect(g.btn.innerHTML).toContain('#i-pause');
+    });
+
+    it('a quick yes never flashes the spinner', async () => {
+      const btn = mkPlayBtn();
+      let cur = 0;
+      let busySeen = false;
+      const obs = new MutationObserver(() => {
+        if (btn.hasAttribute('aria-busy')) busySeen = true;
+      });
+      obs.observe(btn, { attributes: true });
+      const player = createTimelinePlayer(
+        { playBtn: btn },
+        labels,
+        () => 5,
+        () => cur,
+        (i) => {
+          cur = i;
+        },
+        {
+          reducedMotion: false,
+          intervalMs: 100,
+          canAdvance: () => Promise.resolve(true),
+        }
+      );
+      player.start();
+      await vi.advanceTimersByTimeAsync(450);
+      expect(cur).toBe(4);
+      await Promise.resolve();
+      obs.disconnect();
+      expect(busySeen).toBe(false);
+    });
+
+    it('a "no" keeps the frame and asks again on the next cadence', async () => {
+      const g = gated();
+      g.player.start();
+      await vi.advanceTimersByTimeAsync(100);
+      g.answers[0](false);
+      await vi.advanceTimersByTimeAsync(0);
+      expect(g.cur()).toBe(0);
+      await vi.advanceTimersByTimeAsync(100);
+      expect(g.asked).toEqual([1, 1]);
+      g.answers[1](true);
+      await vi.advanceTimersByTimeAsync(0);
+      expect(g.cur()).toBe(1);
+    });
+
+    it('stop() while waiting: the late answer is ignored and busy clears', async () => {
+      const g = gated();
+      g.player.start();
+      await vi.advanceTimersByTimeAsync(100 + BUFFERING_UI_DELAY_MS);
+      expect(g.btn.getAttribute('aria-busy')).toBe('true');
+      g.player.stop();
+      expect(g.btn.hasAttribute('aria-busy')).toBe(false);
+      expect(g.btn.innerHTML).toContain('#i-play');
+      g.answers[0](true);
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(g.cur()).toBe(0);
+      expect(g.asked).toEqual([1]);
+      // A restart asks afresh.
+      g.player.start();
+      await vi.advanceTimersByTimeAsync(100);
+      expect(g.asked).toEqual([1, 1]);
+    });
+
+    it('a rejecting gate does not freeze the loop', async () => {
+      const btn = mkPlayBtn();
+      let cur = 0;
+      const player = createTimelinePlayer(
+        { playBtn: btn },
+        labels,
+        () => 5,
+        () => cur,
+        (i) => {
+          cur = i;
+        },
+        {
+          reducedMotion: false,
+          intervalMs: 100,
+          canAdvance: () => Promise.reject(new Error('boom')),
+        }
+      );
+      player.start();
+      await vi.advanceTimersByTimeAsync(100);
+      expect(cur).toBe(1);
+      player.stop();
+    });
   });
 });
