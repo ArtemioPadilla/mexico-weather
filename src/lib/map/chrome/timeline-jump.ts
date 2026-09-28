@@ -261,6 +261,25 @@ export function createTimelineJump(
   let heading: HTMLLabelElement | null = null;
   let openedAt: number | null = null;
   let disposed = false;
+  /** Keyboard edits of a datetime-local fire `change` once per segment
+   *  (8 events for 8 digits in Chromium): seeking on each would render
+   *  intermediate dates and, past the loaded axis, start the 10-day
+   *  fetch. Commit once typing pauses; Enter and closing flush it. */
+  let changeTimer: ReturnType<typeof setTimeout> | null = null;
+  const CHANGE_DEBOUNCE_MS = 500;
+  function onInputChange(): void {
+    if (changeTimer) clearTimeout(changeTimer);
+    changeTimer = setTimeout(() => {
+      changeTimer = null;
+      onChange();
+    }, CHANGE_DEBOUNCE_MS);
+  }
+  function flushChange(): void {
+    if (!changeTimer) return;
+    clearTimeout(changeTimer);
+    changeTimer = null;
+    onChange();
+  }
 
   function build(): boolean {
     if (panel) return true;
@@ -287,7 +306,7 @@ export function createTimelineJump(
     host.appendChild(panel);
     panel.addEventListener('keydown', onPanelKey);
     panel.addEventListener('focusout', onFocusOut);
-    input.addEventListener('change', onChange);
+    input.addEventListener('change', onInputChange);
     return true;
   }
 
@@ -336,6 +355,7 @@ export function createTimelineJump(
 
   function close(restoreFocus = false): void {
     if (!panel || panel.hidden) return;
+    flushChange();
     panel.hidden = true;
     openedAt = null;
     document.removeEventListener('pointerdown', onOutside, true);
@@ -378,6 +398,8 @@ export function createTimelineJump(
     } else if (e.key === 'Enter' && e.target === input) {
       e.preventDefault();
       e.stopPropagation();
+      if (changeTimer) clearTimeout(changeTimer);
+      changeTimer = null;
       onChange();
       close(true);
     }
@@ -418,6 +440,8 @@ export function createTimelineJump(
     dispose(): void {
       if (disposed) return;
       disposed = true;
+      if (changeTimer) clearTimeout(changeTimer);
+      changeTimer = null;
       document.removeEventListener('pointerdown', onOutside, true);
       label?.removeEventListener('click', onLabelClick);
       range?.removeEventListener('keydown', onRangeKey);
@@ -425,7 +449,7 @@ export function createTimelineJump(
       if (panel) {
         panel.removeEventListener('keydown', onPanelKey);
         panel.removeEventListener('focusout', onFocusOut);
-        input?.removeEventListener('change', onChange);
+        input?.removeEventListener('change', onInputChange);
         panel.remove();
       }
       panel = null;

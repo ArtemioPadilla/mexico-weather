@@ -705,15 +705,24 @@ export const SPREAD_COLORS: readonly string[] = [
 ];
 
 /** Spread → colour (green = agreement … purple = strong disagreement). */
+// One function per layer: the WebGL field renderer reuses its ramp LUT
+// only while the colour function is the same object (Story 24.1), so a
+// fresh closure per frame rebuilt and re-uploaded it every frame.
+const spreadColorCache = new Map<string, (v: number) => string>();
+
 export function spreadColorFor(layerId: string): (v: number) => string {
+  const hit = spreadColorCache.get(layerId);
+  if (hit) return hit;
   const steps = SPREAD_STEPS[layerId] ?? SPREAD_STEPS.temperature;
-  return (v: number): string => {
+  const fn = (v: number): string => {
     if (v < steps[0]) return SPREAD_COLORS[0];
     if (v < steps[1]) return SPREAD_COLORS[1];
     if (v < steps[2]) return SPREAD_COLORS[2];
     if (v < steps[3]) return SPREAD_COLORS[3];
     return SPREAD_COLORS[4];
   };
+  spreadColorCache.set(layerId, fn);
+  return fn;
 }
 
 export function spreadLegendFor(layerId: string, unit: string): LegendStop[] {

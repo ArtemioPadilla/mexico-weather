@@ -7,6 +7,7 @@ import {
   expect,
   it,
   vi,
+  beforeEach,
 } from 'vitest';
 import {
   createTimelineJump,
@@ -250,10 +251,42 @@ describe('createTimelineJump', () => {
     return { jump, deps, label, rangeEl, panel, input, state };
   }
 
+  // `change` is debounced (keyboard edits fire it per segment): a pick
+  // commits once typing pauses, so the helper lets that time pass.
   const pick = (input: HTMLInputElement, v: string): void => {
     input.value = v;
     input.dispatchEvent(new Event('change', { bubbles: true }));
+    vi.advanceTimersByTime(500);
   };
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('keyboard edits commit once, after typing pauses (V2/V3 review)', () => {
+    const { deps, label, input } = setup();
+    label.click();
+    // Intermediate values a keyboard produces while typing, the last
+    // one inside the loaded 24 h axis.
+    for (const v of [
+      '2026-09-21T00:00',
+      '2026-09-22T00:00',
+      '2026-09-30T12:00',
+    ]) {
+      input().value = v;
+      input().dispatchEvent(new Event('change', { bubbles: true }));
+      vi.advanceTimersByTime(100);
+    }
+    expect(deps.seek).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(500);
+    expect(deps.seek).toHaveBeenCalledTimes(1);
+    expect(deps.seek).toHaveBeenLastCalledWith(72);
+    // The out-of-axis intermediate dates never started the 10-day fetch.
+    expect(deps.extendTo).not.toHaveBeenCalled();
+  });
 
   it('a click on the label opens a bounded datetime-local input', () => {
     const { deps, label, panel, input, rangeEl } = setup();

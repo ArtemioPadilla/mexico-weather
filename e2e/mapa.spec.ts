@@ -1204,7 +1204,9 @@ test.describe('mapa page', () => {
   test('settings panel persists animation controls and the time label mode; the time pill opens the date picker', async ({
     page,
   }) => {
-    await page.goto('mapa/');
+    // Tiles + manifest mocked: the clock-only label asserted below needs
+    // frames, which a live GIBS boot does not guarantee in CI.
+    await openOnSatellite(page);
     // Story 22.3 — ⚙ is the Ajustes tab of the ⋯ menu.
     await page.locator('#mw-tools-btn').click();
     await page.locator('#mw-tools-tab-settings').click();

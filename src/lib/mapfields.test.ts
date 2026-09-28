@@ -497,3 +497,10 @@ describe('model spread (Story 13.3)', () => {
     expect(lg[4].label).toBe('≥6 hPa');
   });
 });
+
+describe('spreadColorFor identity (V2/V3 review)', () => {
+  it('returns the same function per layer so the WebGL LUT is reused', () => {
+    expect(spreadColorFor('temperature')).toBe(spreadColorFor('temperature'));
+    expect(spreadColorFor('humidity')).not.toBe(spreadColorFor('temperature'));
+  });
+});
