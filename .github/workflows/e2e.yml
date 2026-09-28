@@ -18,7 +18,9 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
       - name: Run E2E tests
-        run: npm run test:e2e
+        # Story 26.2 — the @ux-metrics spec runs in its own workflow
+        # (ux-metrics.yml), which posts its numbers on the PR.
+        run: npm run test:e2e -- --grep-invert @ux-metrics
         env:
           CI: 'true'
       - name: Upload Playwright report

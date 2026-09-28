@@ -240,6 +240,43 @@ spec runs on any machine:
 npx playwright test e2e/chrome-budget.spec.ts
 ```
 
+The boot and the count live in `e2e/chrome-budget-helpers.ts`, shared with
+the UX metrics spec below.
+
+### UX metrics on every PR (Story 26.2)
+
+`e2e/ux-metrics.spec.ts` measures the four numbers of
+[`PLAN_PARIDAD_VISUAL.md`](PLAN_PARIDAD_VISUAL.md) §5 on a cold `/mapa` load
+(the same mocked boot as the chrome budget, so they never depend on the
+network or the week's weather):
+
+| Number | How |
+|---|---|
+| Time to first satellite frame | `startTime` of the `mw:first-satellite-frame` User Timing mark, which the app sets once, when every tile of the first satellite frame is on the canvas (`src/lib/map/chrome/first-frame-mark.ts`) |
+| Loop fps | `requestAnimationFrame` callbacks per second over the first 10 s of the boot loop (plus the longest gap between two and the long tasks in that window) |
+| Visible controls | the chrome-budget count at 1280×800 and 360×640 |
+| Tiles per frame, 2nd loop | GIBS tile requests between the start of the loop's second pass and its third, and how many ask for a URL never requested before ("new tiles", the §5 metric). Request interception turns off Chromium's HTTP cache, so the raw count includes MapLibre re-fetching tiles it already had |
+
+It writes `test-results/ux-metrics.json`. The **UX metrics** workflow
+(`.github/workflows/ux-metrics.yml`) runs it on every pull request to
+`main`, uploads the JSON as the `ux-metrics` artifact and keeps **one** PR
+comment up to date with the four numbers, the change since the previous run
+of that PR, the targets and a status. Targets are soft for now (a missed one
+is a warning annotation on the run, never a failure); the job fails only
+when a number cannot be measured. The main E2E job skips this spec
+(`--grep-invert @ux-metrics`). The numbers come from headless Chromium
+without a GPU, so the fps and the first-frame time are pessimistic next to a
+real phone; compare them run to run, not against a device.
+
+```sh
+npx playwright test e2e/ux-metrics.spec.ts   # → test-results/ux-metrics.json
+```
+
+The pure helpers (fps window, loop passes, new tiles, warnings, comment
+rendering) are in `scripts/ux-metrics-lib.mjs` and the comment upsert in
+`scripts/ux-metrics-comment.mjs`, unit-tested in
+`src/lib/ux-metrics-lib.test.ts` and `src/lib/ux-metrics-comment.test.ts`.
+
 ## Related docs
 
 - **E2E user-journey reference** (selectors, journey-by-journey Playwright drives, network mocks, coverage matrix): [`USER_JOURNEYS.md`](USER_JOURNEYS.md)

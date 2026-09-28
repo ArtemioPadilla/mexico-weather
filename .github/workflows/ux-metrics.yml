@@ -1,0 +1,72 @@
+name: UX metrics
+
+# Story 26.2 (plan PARIDAD_VISUAL §5) — on every PR, measure /mapa with
+# e2e/ux-metrics.spec.ts (tiles mocked, so the numbers are deterministic):
+# time to first satellite frame, loop fps over 10 s, visible controls
+# (desktop / mobile) and tiles per frame on the loop's second pass. Uploads
+# test-results/ux-metrics.json and keeps ONE PR comment with the four
+# numbers up to date (found by its marker, edited in place, with the change
+# since the previous run).
+#
+# Thresholds are soft for now: a missed target is a `core.warning`
+# annotation, never a failure. The job fails only when the spec cannot
+# measure (the performance mark is gone, the loop never wraps). The main
+# E2E job skips this spec (`--grep-invert @ux-metrics`).
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ux-metrics-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  ux-metrics:
+    name: UX metrics (/mapa)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - run: npm ci
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Measure /mapa
+        run: npx playwright test e2e/ux-metrics.spec.ts --grep @ux-metrics
+        env:
+          CI: 'true'
+      - name: Upload ux-metrics.json
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: ux-metrics
+          path: test-results/ux-metrics.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Warn on soft thresholds + comment on the PR
+        # always(): a run whose spec failed still updates the comment
+        # ("not measured") so a stale number never reads as current.
+        if: ${{ !cancelled() }}
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const fs = require('fs');
+            const { pathToFileURL } = require('url');
+            const { default: run } = await import(
+              pathToFileURL(`${process.env.GITHUB_WORKSPACE}/scripts/ux-metrics-comment.mjs`).href
+            );
+            const outcome = await run({
+              github,
+              context,
+              core,
+              readFile: (p) => fs.readFileSync(p, 'utf8'),
+            });
+            core.info(`UX metrics comment: ${outcome}`);
