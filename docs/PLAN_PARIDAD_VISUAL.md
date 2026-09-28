@@ -218,6 +218,13 @@ Una revisión de todo el diff contra `main` encontró seis problemas; los seis q
 - **Baja — skeleton infinito si el mapa no inicia** (sin WebGL o chunk caído): el `catch` del arranque marca `im-ready`.
 - **Baja — "Ahora" desaparecía en teléfonos** en el embed del home, las páginas por capa y `/forecast`; vuelve a mostrarse fuera de `/mapa` compacto, con 44 px de área táctil.
 
+### Revisión adversarial de los hitos V2/V3 (2026-09-28)
+
+Dos hallazgos, ambos reproducidos (e2e en rojo antes del arreglo) y corregidos en la rama:
+
+- **Media — los atajos de una letra y `?` dejaban de funcionar tras pulsar la barra de fechas:** la barra enfoca `#tl-range` (a propósito: ← → Inicio Fin después del clic) y los manejadores globales ignoraban cualquier `INPUT`. Un `input[type=range]` no hace nada con letras, así que ya no cuenta como campo de texto (`isTypingTarget` en `shortcuts.ts`, compartido por `?` y por las letras de capas/superposiciones). Tests en `shortcuts.test.ts`, `overlay-registry.test.ts` y `e2e/timeline-bar.spec.ts`.
+- **Media — una segunda elección en "Saltar a fecha" mientras cargaba el pronóstico de 10 días se perdía:** `extendTimeline` devolvía la extensión en curso e ignoraba el nuevo instante, y al llegar volvía al primero. Ahora gana el último instante pedido; si el cuadro se movió desde esa petición (búsqueda dentro del eje cargado, arrastre, loop), se queda en el cuadro en pantalla. Test en `e2e/timeline-jump.spec.ts` (fetch retenido entre las dos elecciones).
+
 ## 3. Integración con el backlog existente
 
 | Existente | Relación |

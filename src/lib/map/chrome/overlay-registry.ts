@@ -14,7 +14,7 @@
  */
 
 import { orderOverlays, overlayMatches } from './layer-rail';
-import { effectiveOverlayKey } from './shortcuts';
+import { effectiveOverlayKey, isTypingTarget } from './shortcuts';
 
 export interface OverlayDef {
   /** Stable id (used for the DOM id `overlay-${id}`). */
@@ -233,16 +233,7 @@ export function createOverlayRegistry(
   function installShortcuts(): void {
     if (typeof window === 'undefined' || shortcutsHandler) return;
     shortcutsHandler = (e: KeyboardEvent): void => {
-      const target = e.target as HTMLElement | null;
-      if (
-        e.ctrlKey ||
-        e.metaKey ||
-        e.altKey ||
-        (target &&
-          (target.tagName === 'INPUT' ||
-            target.tagName === 'TEXTAREA' ||
-            target.isContentEditable))
-      ) {
+      if (e.ctrlKey || e.metaKey || e.altKey || isTypingTarget(e.target)) {
         return;
       }
       const key = e.key.toUpperCase();

@@ -8,6 +8,7 @@ import {
   buildShortcutSections,
   effectiveOverlayKey,
   isShortcutsKey,
+  isTypingTarget,
   overlayLabelKey,
   overlayShortcutLabel,
   shadowedOverlays,
@@ -146,6 +147,41 @@ describe('shortcuts — pure cheat-sheet data (Story 22.5)', () => {
         target: { tagName: 'DIV', isContentEditable: true } as never,
       })
     ).toBe(false);
+  });
+
+  it('a focused range input (#tl-range after pressing the bar) still opens `?`', () => {
+    expect(
+      isShortcutsKey({
+        key: '?',
+        target: { tagName: 'INPUT', type: 'range' } as never,
+      })
+    ).toBe(true);
+    for (const type of ['text', 'search', 'date', 'time', '']) {
+      expect(
+        isShortcutsKey({
+          key: '?',
+          target: { tagName: 'INPUT', type } as never,
+        })
+      ).toBe(false);
+    }
+  });
+});
+
+describe('isTypingTarget', () => {
+  it('counts text fields, selects and contenteditable, not a range', () => {
+    expect(isTypingTarget(null)).toBe(false);
+    expect(isTypingTarget({ tagName: 'BUTTON' } as never)).toBe(false);
+    expect(isTypingTarget({ tagName: 'INPUT', type: 'range' } as never)).toBe(
+      false
+    );
+    expect(isTypingTarget({ tagName: 'INPUT', type: 'search' } as never)).toBe(
+      true
+    );
+    expect(isTypingTarget({ tagName: 'TEXTAREA' } as never)).toBe(true);
+    expect(isTypingTarget({ tagName: 'SELECT' } as never)).toBe(true);
+    expect(
+      isTypingTarget({ tagName: 'DIV', isContentEditable: true } as never)
+    ).toBe(true);
   });
 });
 

@@ -4165,10 +4165,25 @@ export async function initInteractiveMap(
     btn.textContent = busy ? t.timeline_extending : t.timeline_extend;
   }
 
+  /** Latest instant asked of the extension in flight: a pick made while
+   *  the 10-day forecast loads ("Saltar a fecha" corrected, a deep link
+   *  then a pick) replaces the earlier one instead of being dropped. */
+  let extendSeekIso: string | null = null;
+  /** Frame on screen when `extendSeekIso` was asked. When the frame moved
+   *  since (a seek inside the loaded axis, a drag, the loop), the landing
+   *  keeps what is on screen rather than snapping back to a stale pick. */
+  let extendSeekAt: string | null = null;
+
   async function extendTimeline(
     seekIso: string | null = null
   ): Promise<boolean> {
-    if (extendInFlight) return extendInFlight;
+    if (extendInFlight) {
+      if (seekIso) {
+        extendSeekIso = seekIso;
+        extendSeekAt = activeFrameIso;
+      }
+      return extendInFlight;
+    }
     const kind = getLayerDef(activeLayer)?.kind;
     if (!canExtendTimeline()) return false;
     const layerAtStart = activeLayer;
@@ -4183,6 +4198,8 @@ export async function initInteractiveMap(
       syncExtendButton();
       return true;
     }
+    extendSeekIso = seekIso;
+    extendSeekAt = activeFrameIso;
     const run = (async (): Promise<boolean> => {
       try {
         let times: string[] | null = null;
@@ -4221,7 +4238,11 @@ export async function initInteractiveMap(
           times = merged.times;
         }
         tlFrames = framesFromTimes(times);
-        const idx = fieldFrameIndex(times, keepIso, Date.now());
+        const landIso =
+          activeFrameIso !== extendSeekAt
+            ? activeFrameIso
+            : (extendSeekIso ?? activeFrameIso);
+        const idx = fieldFrameIndex(times, landIso, Date.now());
         applyFrame(idx >= 0 ? idx : 0);
         return true;
       } catch {
@@ -4229,6 +4250,8 @@ export async function initInteractiveMap(
         return false;
       } finally {
         extendInFlight = null;
+        extendSeekIso = null;
+        extendSeekAt = null;
         syncExtendButton();
       }
     })();

@@ -155,6 +155,35 @@ describe('createOverlayRegistry (Story 22.2)', () => {
     expect(count.hidden).toBe(true);
   });
 
+  it('letter shortcuts work from a focused range input, not from a text field', () => {
+    document.body.innerHTML = `
+      <input id="range" type="range" />
+      <input id="text" type="search" />
+      <div id="wrap"></div>`;
+    const wrap = document.getElementById('wrap') as HTMLElement;
+    const picked: string[] = [];
+    const reg = createOverlayRegistry({ wrap }, mkDefs(), {
+      layers: [{ shortcut: 'R', id: 'radar' }],
+      onLayerShortcut: (id) => picked.push(id),
+    }) as ReturnType<typeof createOverlayRegistry> & {
+      installShortcuts: () => void;
+    };
+    reg.build();
+    reg.installShortcuts();
+    const press = (id: string): void => {
+      document
+        .getElementById(id)
+        ?.dispatchEvent(
+          new KeyboardEvent('keydown', { key: 'r', bubbles: true })
+        );
+    };
+    press('range');
+    expect(picked).toEqual(['radar']);
+    press('text');
+    expect(picked).toEqual(['radar']);
+    reg.dispose();
+  });
+
   it('dispose() unbinds the filter', () => {
     const { wrap, filter, reg } = setup();
     reg.dispose();

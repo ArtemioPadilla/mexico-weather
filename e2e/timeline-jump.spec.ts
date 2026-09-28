@@ -198,6 +198,55 @@ test.describe('timeline jump to date', () => {
     await expect.poll(() => hashT(page)).toBe(target);
     await expect(page.locator('#tl-time')).toHaveText(/\+\d+(\.\d)? d$/);
   });
+
+  test('temperature: a second pick while the 10-day forecast loads wins', async ({
+    page,
+  }) => {
+    await page.route('**/data/field-grids/**', (route) =>
+      route.fulfill({ status: 404 })
+    );
+    // Hold the 10-day fetch until both picks are in, so the second one
+    // lands while the extension started by the first is still in flight.
+    let release: () => void = () => {};
+    const gate = new Promise<void>((r) => (release = r));
+    let held = 0;
+    await page.route('**/api.open-meteo.com/v1/forecast**', async (route) => {
+      const url = route.request().url();
+      if (url.includes('forecast_days=10')) {
+        held += 1;
+        await gate;
+      }
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: fieldResponseForUrl(url),
+      });
+    });
+    await bootMap(page);
+    await openLayerRail(page);
+    await page.locator('#layerbtn-temperature').click();
+    const range = page.locator('#tl-range');
+    await expect(range).toHaveAttribute('max', '71');
+
+    await page.locator('#tl-time').click();
+    const dialog = page.getByRole('dialog', { name: 'Saltar a fecha' });
+    const input = dialog.getByLabel('Saltar a fecha');
+    const now = Date.now();
+    const today = Date.UTC(
+      new Date(now).getUTCFullYear(),
+      new Date(now).getUTCMonth(),
+      new Date(now).getUTCDate()
+    );
+    const first = today + 5 * DAY + 12 * HOUR;
+    const second = today + 7 * DAY + 12 * HOUR;
+    await input.fill(await msToWall(page, first));
+    await expect.poll(() => held).toBeGreaterThan(0);
+    // Corrected before the forecast arrives: still past the 2-day axis.
+    await input.fill(await msToWall(page, second));
+    release();
+    await expect(range).toHaveAttribute('max', '135');
+    await expect.poll(() => hashT(page)).toBe(second);
+  });
 });
 
 /** Open-Meteo bulk response sized from the URL (points, window, step),

@@ -130,6 +130,30 @@ test.describe('timeline bar', () => {
     await expect(page.locator('#tl-extend')).toBeHidden();
   });
 
+  test('the letter shortcuts and ? still work after pressing the bar', async ({
+    page,
+  }) => {
+    const range = page.locator('#tl-range');
+    const { box, y } = await barBox(page);
+    await page.mouse.click(box.x + box.width * 0.5, y);
+    await expect(range).toBeFocused();
+
+    // A range input does nothing with letters, so the focus it takes from
+    // the bar must not swallow the map's single-key shortcuts.
+    await page.keyboard.press('?');
+    await expect(page.locator('#mw-shortcuts')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#mw-shortcuts')).toBeHidden();
+
+    await page.mouse.click(box.x + box.width * 0.5, y);
+    await expect(range).toBeFocused();
+    await page.keyboard.press('r');
+    await expect(page.locator('#layerbtn-radar')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+  });
+
   test('the wheel over the bar steps one frame per notch', async ({ page }) => {
     const range = page.locator('#tl-range');
     const { box, y } = await barBox(page);

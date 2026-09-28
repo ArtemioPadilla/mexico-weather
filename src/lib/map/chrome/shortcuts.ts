@@ -161,6 +161,30 @@ export function buildShortcutSections(
 }
 
 /**
+ * Whether a key event's target is a field that takes typed characters,
+ * so the map's single-key shortcuts must leave the key alone. A range
+ * input (`#tl-range`, focused whenever the timeline bar is pressed) does
+ * nothing with letters or `?`, so it does not count: the shortcuts keep
+ * working after a click or drag on the bar.
+ */
+export function isTypingTarget(
+  target: EventTarget | null | undefined
+): boolean {
+  const t = target as
+    | { tagName?: string; type?: string; isContentEditable?: boolean }
+    | null
+    | undefined;
+  if (!t) return false;
+  const tag = (t.tagName ?? '').toUpperCase();
+  return (
+    (tag === 'INPUT' && (t.type ?? '').toLowerCase() !== 'range') ||
+    tag === 'TEXTAREA' ||
+    tag === 'SELECT' ||
+    t.isContentEditable === true
+  );
+}
+
+/**
  * Whether a keydown should open (or close) the cheat-sheet: the `?`
  * character on any layout (Shift is how most keyboards type it), with no
  * Ctrl/Meta/Alt, and not while typing in a field.
@@ -173,14 +197,5 @@ export function isShortcutsKey(e: {
   target?: EventTarget | null;
 }): boolean {
   if (e.key !== '?' || e.ctrlKey || e.metaKey || e.altKey) return false;
-  const t = e.target as
-    { tagName?: string; isContentEditable?: boolean } | null | undefined;
-  if (!t) return true;
-  const tag = (t.tagName ?? '').toUpperCase();
-  return !(
-    tag === 'INPUT' ||
-    tag === 'TEXTAREA' ||
-    tag === 'SELECT' ||
-    t.isContentEditable === true
-  );
+  return !isTypingTarget(e.target);
 }
