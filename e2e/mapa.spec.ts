@@ -628,6 +628,87 @@ test.describe('mapa page', () => {
     await expect(page.locator('#tl-time')).toHaveText('—');
   });
 
+  // Story 24.3 — the legend is one continuous colour bar with ticks and
+  // the unit, and it follows the °C/°F setting (Story 19.3) live.
+  test('temperature legend is a gradient bar with ticks and converts to °F', async ({
+    page,
+  }) => {
+    await page.route('**/api.rainviewer.com/public/weather-maps.json', (r) =>
+      r.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: RAINVIEWER_MANIFEST,
+      })
+    );
+    const png = (r: import('@playwright/test').Route) =>
+      r.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        body: TRANSPARENT_PNG,
+      });
+    await page.route('**/tilecache.rainviewer.com/**', png);
+    await page.route('**/*.arcgisonline.com/**', png);
+    await page.route('**/gibs.earthdata.nasa.gov/**', png);
+    await page.route('**/data/field-grids/**', (r) =>
+      r.fulfill({ status: 404 })
+    );
+    await page.route('**/api.open-meteo.com/v1/forecast**', (r) =>
+      r.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: fieldResponseForUrl(r.request().url()),
+      })
+    );
+    await page.goto('mapa/');
+    await page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
+    await openLayerRail(page);
+    const tempBtn = page.locator('#layerbtn-temperature');
+    await expect(tempBtn).toBeEnabled();
+    await tempBtn.click();
+    await expect(tempBtn).toHaveAttribute('aria-pressed', 'true');
+    const bar = page.locator('#legend-bar');
+    await expect(bar).toBeVisible();
+
+    // A gradient element, not a row of swatches.
+    const ramp = bar.locator('.im-legend-ramp');
+    await expect(ramp).toBeVisible();
+    const bg = await ramp.evaluate(
+      (el) => getComputedStyle(el).backgroundImage
+    );
+    expect(bg).toMatch(/^linear-gradient\(/);
+    const box = await ramp.boundingBox();
+    expect(box?.width ?? 0).toBeGreaterThan(150);
+
+    // ≥ 3 ticks with values, and the unit.
+    const ticks = page.locator('#legend li');
+    expect(await ticks.count()).toBeGreaterThanOrEqual(3);
+    await expect(page.locator('#legend-unit')).toHaveText('°C');
+    await expect(ticks).toContainText(['0', '10', '18', '25', '32', '45']);
+    // Every tick sits on the bar.
+    const rampBox = box!;
+    for (const tick of await ticks.all()) {
+      const tb = await tick.boundingBox();
+      expect(tb).not.toBeNull();
+      const cx = tb!.x + tb!.width / 2;
+      expect(cx).toBeGreaterThanOrEqual(rampBox.x - 1);
+      expect(cx).toBeLessThanOrEqual(rampBox.x + rampBox.width + 1);
+    }
+    // The legend uses the map labels' family.
+    expect(await bar.evaluate((el) => getComputedStyle(el).fontFamily)).toMatch(
+      /^"?Open Sans"?/
+    );
+
+    // ⋯ → Ajustes → °F re-labels the same ticks.
+    await page.locator('#mw-tools-btn').click();
+    await page.locator('#mw-tools-tab-settings').click();
+    await page.locator('[data-mw-temp] button[data-val="F"]').click();
+    await expect(page.locator('#legend-unit')).toHaveText('°F');
+    await expect(ticks).toContainText(['32', '50', '64', '77', '90', '113']);
+    expect(await ticks.count()).toBeGreaterThanOrEqual(3);
+  });
+
   for (const layer of ['humidity', 'pressure', 'precipitation'] as const) {
     test(`${layer} field layer activates with a legend and timeline`, async ({
       page,
