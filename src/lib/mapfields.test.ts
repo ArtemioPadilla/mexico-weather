@@ -310,7 +310,8 @@ describe('buildWindUrl', () => {
     ]);
     expect(url).toBe(
       'https://api.open-meteo.com/v1/forecast?latitude=10,12&longitude=-100,-99' +
-        '&hourly=wind_speed_10m,wind_direction_10m&forecast_days=2&past_days=1&timezone=UTC'
+        '&hourly=wind_speed_10m,wind_direction_10m&forecast_days=2&past_days=1' +
+        '&wind_speed_unit=ms&timezone=UTC'
     );
   });
 });

@@ -568,7 +568,10 @@ export function buildWindUrl(
   const modelParam = model && model !== 'best_match' ? `&models=${model}` : '';
   return (
     `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lngs}` +
-    `&hourly=${speedVar},wind_direction_10m${rangeParams(range)}&timezone=UTC${modelParam}`
+    `&hourly=${speedVar},wind_direction_10m${rangeParams(range)}` +
+    // Story 24.4 — m/s, the unit of the whole wind chain (ramp, legend,
+    // tooltip × 3.6); Open-Meteo's default is km/h.
+    `&wind_speed_unit=ms&timezone=UTC${modelParam}`
   );
 }
 
