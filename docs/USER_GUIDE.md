@@ -46,6 +46,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 10. **SMN avisos counter** (Story 22.4): when the SMN feed has at least one aviso, a round **⚠ N** counter sits in the top bar, just left of search (dark with an amber ⚠; red when one of them is critical). N counts every aviso once — each state's plus the national ones. Clicking it opens the same SMN alerts widget as before ("Avisos vigentes en el país:", the first 5 rows, "+N más en el feed RSS" beyond that) in a popover under the search row; **Escape** closes it and returns the focus to the counter, a click outside closes it. With no avisos (or no feed) there is **no counter at all** — the old amber "⚠️ Avisos SMN" pill in the bottom-right corner, which showed even with "Sin alertas SMN", is gone.
 11. **Keyboard shortcuts panel** (Story 22.5): press **`?`** anywhere on the map page (not while typing in a field), or open ⋯ → **Info** → **Atajos de teclado**, to see every shortcut in a dialog: the general keys (`?`, Esc, + / −, arrows, and **Intro** / Enter on the timeline to jump to a date), one letter per layer (M Mapa base, R Radar, A Satélite, T Temperatura, H Humedad, P Presión, V Viento, L Sol — Precipitación has none) and one per overlay that has one. The list is generated from the layer and overlay definitions, so it cannot drift from what the keys do, and it follows the page language (`?lang=en` shows it in English). Two overlays share a letter with a layer and the layer wins (**T** is Temperatura, not Sistemas tropicales; **A** is Satélite, not Alertas SMN por estado), so the panel — and those overlays' tooltips — list them without a key; switch them from the Superposiciones tab. **Esc**, `?` again, the × button or a click outside closes it and puts the focus back where it was (on ⋯ when you came from the menu). While it is open, letters do not act on the map behind it.
 12. **Feedback button on `/mapa`** (Story 22.5): the round report button sits in the top nav bar, next to the language and theme toggles, instead of floating over the bottom-right corner of the full-screen map; it opens the same pre-filled issue dialog. The `/mapa/<capa>/` pages do the same since Story 23.4 (on a phone the floating button landed on the timeline dock).
+13. **The whole map in English** (Story 25.3): with the site in English (the ES | EN toggle, or a `?lang=en` link such as `/mapa/?lang=en`) every word of the map's own controls is English — the rail (tabs, layer tiles, sub-options such as *GeoColor / Infrared / True color* or *Air / Feels like / Wet bulb*, *Opacity*, every overlay name, the filter), the ⋯ menu (*Tools*: Distance, Area, Crosshair, Capture, 24 h ago, Clear; *Settings*: Time zone, Hour format, Animation loop, Speed — Slow / Medium / Fast, Style — Instant / Smooth, Time label, and the units; *Info*: the data sources and the disclaimer), the active-tool pill (*Distance · Crosshair*, *Comparison*, *Hide / Show*, *Exit*, "Tap another point to measure", "1 segment"), the timeline's buttons and their tooltips (Previous / Next hour, Previous / Next day, *Now*, *See 10 days*), the place card, the coordinates (**W** instead of **O** for west), the map messages (e.g. the satellite zoom-limit notice), the pins' names for screen readers and the zoom buttons of the embeds. The time label in the timeline pill follows the language too ("Wed 15:00", or "03:00 PM" with the 12 h format). What stays as it is: proper names (Clima México, Open-Meteo, NASA GIBS…), units, and the SMN avisos themselves — the text of each aviso is the SMN's own, in Spanish.
 
 ## Public URL schemas
 
@@ -80,7 +81,7 @@ Example: `https://artemiop.com/mexico-weather/mapa#view=19.43,-99.13,6.5z&layer=
 - **Timeline timestamp** (`#tl-time`) uses `aria-live="polite"` + `aria-atomic="true"` so scrubbing announces the new frame time.
 - **Timeline bar** (Story 23.1): the drawn bar is `aria-hidden`; the accessible control behind it is still the native range `#tl-range` (labelled "Línea de tiempo"), visually hidden but in the tab order and the accessibility tree, and kept in sync with the bar both ways. Its `aria-valuetext` is the full date and time plus the offset ("miércoles, 30 de septiembre, 15:00 · −3 h"), not a frame number. Pressing the bar moves the focus to it; when it has keyboard focus the bar shows the focus ring (at every width since Story 23.4, which draws the bar on phones too). ← → Home End step it (→ past the end extends to 10 days); ↑ ↓ PageUp PageDown keep their native range behaviour. On a phone with `/mapa`'s compact chrome it comes with the **Capas y controles** panel, like ‹ ›.
 - **`prefers-reduced-motion: reduce`** disables timeline autoplay — the ▶ button is disabled (`data-state="paused"`) and labelled accordingly, and `/mapa` opens on a still satellite frame instead of the 3 h loop (Story 21.2); manual prev / next / range scrubbing still works. A data-saver connection (`navigator.connection.saveData`) also skips the boot loop. MapLibre's `flyTo` animations are also suppressed under reduced motion.
-- **Spanish-first**: every UI string is Spanish by default; English strings exist in the i18n table for future routing.
+- **Spanish-first, fully bilingual map**: every UI string is Spanish by default. On the map, every visible label *and* every accessible name, tooltip and placeholder has its English twin in `src/i18n/ui.ts` (Story 25.3): with `?lang=en` or the EN toggle a screen reader hears "Measure distance", "Previous hour", "Hide comparison" rather than the Spanish.
 - **Contrast on the map chrome** (Story 25.2): the floating panels use one palette in both themes — light text (gray-100) and secondary text (gray-400, at least 5:1 even over bright cloud tops) on a gray-900 panel at 88 % (97 % for cards, dialogs and inputs), links in blue-300 — so the axe contrast checks give the same result whichever theme is active.
 - **XSS-safe**: all dynamic strings injected into popups, legends, and labels pass through an HTML-escape helper.
 
@@ -153,11 +154,28 @@ These are intentional scope boundaries, not bugs:
 
 - **Wind layer under `prefers-reduced-motion: reduce`** falls back to static circle markers (no animated particles).
 - **Field layers (temperature/humidity/pressure)** use a coarse 8×6 viewport-aligned grid. Adequate for country-level views; finer resolution is a polish item.
-- **Time label** in the timeline is formatted in `es-MX` locale. Multi-locale time formatting is a non-goal for v1. (The date-scale bar of Story 23.1 and the range's spoken value do follow the page language — `?lang=en` gives "Wed 30" / "3 PM".)
+- **Time label** in the timeline follows the page language since Story 25.3 (`es-MX` by default, `en-US` with `?lang=en` — "03:00 PM" rather than "03:00 p.m." with the 12 h format), like the date-scale bar of Story 23.1 and the range's spoken value ("Wed 30" / "3 PM").
 - **Field-layer playback animation** uses simple frame swaps without preloading; preloading/caching is a polish item. (Radar is prefetched since Story 21.3 and satellite waits on its A/B swap — GIBS tiles are `no-store`, so prefetching them would only double the download; the radar companion of the combined precipitation mode is not prefetched.)
 - **Particle trails / geographic-accurate advection** are a polish item — the v1 wind particle system does not yet render trails.
 
 ## Developer notes
+
+### Map chrome strings (Story 25.3)
+
+Every word of the map chrome lives in `src/i18n/ui.ts`, in `es` and `en`.
+In `InteractiveMap.astro` render `{t.key}` and add its English twin for
+BaseLayout's pre-paint swap: `data-i18n-en={ui.en.key}` for text (wrap the
+text in a `<span>` when the element also holds an icon — the swap replaces
+`textContent`), `data-i18n-en-aria-label`, `-title`, `-placeholder` for
+attributes. Script-built chrome reads `t.key` in `interactive-map.ts`, where
+`t` follows `<html data-lang>` (the page is built in Spanish and shown in
+English at runtime); chrome modules take their words from the caller and fall
+back to `ui.es`. Placeholders (`{n}`, `{z}`, `{name}`, `{coords}`) are filled
+with `fillUi()`. `src/lib/map/chrome/chrome-i18n.test.ts` fails on a Spanish
+literal (accented letters, or Spanish function words in prose) in the chrome
+sources, on a hard-coded `aria-label`/`title`/`placeholder`, and on a `t.*`
+attribute or text node without its English twin; its allowlist holds only
+proper names ("Clima México").
 
 ### Visual audit against zoom.earth (Story 26.1)
 

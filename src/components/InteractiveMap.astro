@@ -228,7 +228,7 @@ const cfg = JSON.stringify({
     <a
       href={base}
       class="absolute left-3 top-3 z-10 inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-im-bg px-3 text-xs font-medium text-im-text shadow-lg backdrop-blur-sm hover:bg-im-bg-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-left"></use></svg> {t.back_home}</a
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-left"></use></svg> <span data-i18n-en={ui.en.back_home}>{t.back_home}</span></a
     >
   )}
   {/* Snapshot compare overlay (plan 3.3). Holds the captured canvas
@@ -254,9 +254,11 @@ const cfg = JSON.stringify({
           type="button"
           class="flex h-11 w-11 items-center justify-center rounded-full bg-im-bg text-im-text shadow-lg backdrop-blur-sm hover:bg-im-bg-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
           aria-label={t.map_search_placeholder}
+          data-i18n-en-aria-label={ui.en.map_search_placeholder}
           aria-expanded="false"
           aria-controls={ids.q}
           title={t.map_search_placeholder}
+          data-i18n-en-title={ui.en.map_search_placeholder}
         ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-search"></use></svg></button>
         <input
           id={ids.q}
@@ -267,7 +269,9 @@ const cfg = JSON.stringify({
           aria-controls={ids.ac}
           aria-autocomplete="list"
           aria-label={t.map_search_placeholder}
+          data-i18n-en-aria-label={ui.en.map_search_placeholder}
           placeholder={t.map_search_placeholder}
+          data-i18n-en-placeholder={ui.en.map_search_placeholder}
           class="hidden w-72 max-w-[calc(100vw-6rem)] rounded-lg border border-im-border bg-im-bg-strong px-3 py-1.5 text-sm text-im-text shadow [color-scheme:dark] placeholder:text-im-muted focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         {features.locateButton && (
@@ -276,7 +280,9 @@ const cfg = JSON.stringify({
             type="button"
             class="flex h-11 w-11 items-center justify-center rounded-full bg-im-bg text-im-text shadow-lg backdrop-blur-sm hover:bg-im-bg-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
             aria-label={t.map_locate}
+            data-i18n-en-aria-label={ui.en.map_locate}
             title={t.map_locate}
+            data-i18n-en-title={ui.en.map_locate}
           ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-locate"></use></svg></button>
         )}
       </div>
@@ -313,6 +319,7 @@ const cfg = JSON.stringify({
           'sm:data-[rail-open=false]:w-auto max-sm:hidden max-sm:group-data-[controls=open]/chrome:block',
       ]}
       aria-label={t.map_layers}
+      data-i18n-en-aria-label={ui.en.map_layers}
       role="group"
       data-rail-tab="layers"
       data-rail-collapsible={features.compactChrome ? '' : undefined}
@@ -321,6 +328,7 @@ const cfg = JSON.stringify({
       <div
         role="tablist"
         aria-label={t.map_layers}
+        data-i18n-en-aria-label={ui.en.map_layers}
         class="hidden group-data-[controls=open]/chrome:flex sm:flex gap-1 rounded-md bg-white/5 p-0.5 text-[11px] font-semibold group-data-[rail-open=false]/rail:mb-0"
       >
         <button
@@ -381,7 +389,10 @@ const cfg = JSON.stringify({
               class:list={[!features.mobileControls && 'max-sm:hidden']}
             ></div>
             <div id={ids.opacityWrap} class="flex items-center gap-2">
-              <label for={ids.opacity} class="shrink-0 text-[11px] text-im-muted"
+              <label
+                for={ids.opacity}
+                class="shrink-0 text-[11px] text-im-muted"
+                data-i18n-en={ui.en.map_opacity}
                 >{t.map_opacity}</label
               >
               <input
@@ -408,7 +419,9 @@ const cfg = JSON.stringify({
           type="search"
           autocomplete="off"
           aria-label={t.map_overlays_filter}
+          data-i18n-en-aria-label={ui.en.map_overlays_filter}
           placeholder={t.map_overlays_filter}
+          data-i18n-en-placeholder={ui.en.map_overlays_filter}
           class="w-full rounded-md border border-im-border bg-white/5 px-2 py-1 text-xs text-im-text placeholder:text-im-muted focus:outline-none focus:ring-2 focus:ring-blue-500 max-sm:min-h-[44px]"
         />
         <div
@@ -442,10 +455,10 @@ const cfg = JSON.stringify({
       id={ids.controlsToggle}
       type="button"
       aria-expanded="false"
-      aria-label={features.compactChrome ? t.map_controls_compact : 'Controles del mapa'}
-      data-i18n-en-aria-label={features.compactChrome ? ui.en.map_controls_compact : 'Map controls'}
-      title={features.compactChrome ? t.map_controls_compact : 'Controles del mapa'}
-      data-i18n-en-title={features.compactChrome ? ui.en.map_controls_compact : 'Map controls'}
+      aria-label={features.compactChrome ? t.map_controls_compact : t.map_controls}
+      data-i18n-en-aria-label={features.compactChrome ? ui.en.map_controls_compact : ui.en.map_controls}
+      title={features.compactChrome ? t.map_controls_compact : t.map_controls}
+      data-i18n-en-title={features.compactChrome ? ui.en.map_controls_compact : ui.en.map_controls}
       class="absolute bottom-[calc(var(--im-dock,0px)+0.75rem)] max-sm:group-data-[legend]/chrome:bottom-[calc(var(--im-dock,0px)+4rem)] left-3 z-30 flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-im-bg text-base text-im-text shadow-lg backdrop-blur-sm aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:hidden"
       ><svg class="h-5 w-5" aria-hidden="true"><use href={features.compactChrome ? '#i-layers' : '#i-sliders'}></use></svg></button
     >
@@ -457,6 +470,7 @@ const cfg = JSON.stringify({
       class="im-timeline im-chrome dark absolute bottom-0 left-0 right-0 z-30 grid grid-cols-[minmax(0,1fr)_auto] items-center rounded-t-2xl px-2 pt-1 text-sm shadow-lg backdrop-blur-sm sm:bottom-3 sm:left-1/2 sm:right-auto sm:w-max sm:max-w-[calc(100vw-1.5rem)] sm:-translate-x-1/2 sm:gap-x-1 sm:rounded-2xl sm:px-4 sm:pb-1.5 sm:pt-2"
       role="group"
       aria-label={t.timeline_label}
+      data-i18n-en-aria-label={ui.en.timeline_label}
     >
       {/* Story 23.1 — from `sm` the pill is two rows: the date-scale bar
           (+ the dotted "Ver 10 días" tail) on top, the buttons and the
@@ -470,6 +484,7 @@ const cfg = JSON.stringify({
           id={ids.tlPlay}
           type="button"
           aria-label={t.timeline_play}
+          data-i18n-en-aria-label={ui.en.timeline_play}
           aria-pressed="false"
           disabled
           class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/10 px-2.5 text-base leading-none hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-40"
@@ -483,8 +498,10 @@ const cfg = JSON.stringify({
         <button
           id="tl-day-prev"
           type="button"
-          aria-label="Día anterior"
-          title="Día anterior (-24 h)"
+          aria-label={t.timeline_day_prev}
+          data-i18n-en-aria-label={ui.en.timeline_day_prev}
+          title={`${t.timeline_day_prev} (-24 h)`}
+          data-i18n-en-title={`${ui.en.timeline_day_prev} (-24 h)`}
           class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:hidden sm:inline-flex"
           >«</button
         >
@@ -492,7 +509,9 @@ const cfg = JSON.stringify({
           id={ids.tlPrev}
           type="button"
           aria-label={t.timeline_prev}
-          title="Hora anterior"
+          data-i18n-en-aria-label={ui.en.timeline_prev}
+          title={t.timeline_hour_prev}
+          data-i18n-en-title={ui.en.timeline_hour_prev}
           class="tl-secondary inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
           >‹</button
         >
@@ -512,25 +531,32 @@ const cfg = JSON.stringify({
           id={ids.tlNext}
           type="button"
           aria-label={t.timeline_next}
-          title="Hora siguiente"
+          data-i18n-en-aria-label={ui.en.timeline_next}
+          title={t.timeline_hour_next}
+          data-i18n-en-title={ui.en.timeline_hour_next}
           class="tl-secondary inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
           >›</button
         >
         <button
           id="tl-day-next"
           type="button"
-          aria-label="Día siguiente"
-          title="Día siguiente (+24 h)"
+          aria-label={t.timeline_day_next}
+          data-i18n-en-aria-label={ui.en.timeline_day_next}
+          title={`${t.timeline_day_next} (+24 h)`}
+          data-i18n-en-title={`${ui.en.timeline_day_next} (+24 h)`}
           class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:hidden sm:inline-flex"
           >»</button
         >
         <button
           id="tl-now"
           type="button"
-          aria-label="Volver al frame actual"
-          title="Ahora"
+          aria-label={t.timeline_now_aria}
+          data-i18n-en-aria-label={ui.en.timeline_now_aria}
+          title={t.timeline_now}
+          data-i18n-en-title={ui.en.timeline_now}
           class="tl-secondary hidden min-h-[44px] min-w-[44px] rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex sm:min-h-0 sm:min-w-0"
-          >Ahora</button
+          data-i18n-en={ui.en.timeline_now}
+          >{t.timeline_now}</button
         >
       </div>
       {/* Story 23.1 — `#tl-range` stays the accessible control (keyboard,
@@ -547,6 +573,7 @@ const cfg = JSON.stringify({
         value="0"
         class="tl-range tl-phone-secondary sr-only"
         aria-label={t.timeline_label}
+        data-i18n-en-aria-label={ui.en.timeline_label}
       />
       <div
         id={ids.tlBar}
@@ -565,13 +592,16 @@ const cfg = JSON.stringify({
         hidden
         class="tl-tail tl-phone-secondary col-start-2 row-start-2 font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-60 sm:row-start-1"
         aria-label={t.timeline_extend}
+        data-i18n-en-aria-label={ui.en.timeline_extend}
         title={t.timeline_extend}
+        data-i18n-en-title={ui.en.timeline_extend}
+        data-i18n-en={ui.en.timeline_extend}
         >{t.timeline_extend}</button
       >
     </div>
   )}
 
-  <div id={mapId} class="h-full w-full" role="application" aria-label={t.map_title}></div>
+  <div id={mapId} class="h-full w-full" role="application" aria-label={t.map_title} data-i18n-en-aria-label={ui.en.map_title}></div>
 
   {/*
     Floating tooltip that follows the cursor when a field/wind/sun layer
@@ -589,6 +619,7 @@ const cfg = JSON.stringify({
     role="dialog"
     aria-modal="false"
     aria-label={t.place_card_title}
+    data-i18n-en-aria-label={ui.en.place_card_title}
     hidden
     class="absolute z-40 max-sm:inset-x-0 max-sm:bottom-0 max-sm:rounded-t-2xl sm:left-1/2 sm:top-[var(--im-rail-top)] sm:w-80 sm:-translate-x-1/2 sm:rounded-2xl im-chrome dark bg-im-bg-strong shadow-2xl ring-1 ring-im-border backdrop-blur-sm"
   ></div>
@@ -646,7 +677,8 @@ const cfg = JSON.stringify({
       id="mw-model-toggle"
       hidden
       class="absolute bottom-9 max-sm:group-data-[controls=open]/chrome:bottom-[calc(var(--im-dock,0px)+2.5rem)] right-2 z-10 hidden items-center gap-1 rounded-full bg-im-bg px-1 py-0.5 text-[10px] font-mono tabular-nums text-im-muted backdrop-blur-sm group-data-[controls=open]/chrome:inline-flex sm:inline-flex"
-      aria-label="Modelo de pronóstico Open-Meteo"
+      aria-label={t.map_model}
+      data-i18n-en-aria-label={ui.en.map_model}
     >
       {[
         { id: 'best_match', label: 'Auto' },
@@ -695,18 +727,21 @@ const cfg = JSON.stringify({
         aria-label={t.map_tools}
         data-i18n-en-aria-label={ui.en.map_tools}
         title={t.map_tools}
+        data-i18n-en-title={ui.en.map_tools}
         class="flex h-11 w-11 items-center justify-center rounded-full bg-im-bg text-im-text shadow-lg backdrop-blur-sm hover:bg-im-bg-strong aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
       ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-ellipsis"></use></svg></button>
       <div
         id="mw-tools-panel"
         role="dialog"
         aria-label={t.map_tools}
+        data-i18n-en-aria-label={ui.en.map_tools}
         hidden
         class="im-chrome im-reveal dark mt-2 max-h-[min(34rem,calc(100dvh-16rem))] max-sm:max-h-[calc(100dvh-20rem)] w-72 max-w-[calc(100vw-1.5rem)] overflow-y-auto rounded-lg p-2 shadow-lg backdrop-blur-sm"
       >
         <div
           role="tablist"
           aria-label={t.map_tools}
+          data-i18n-en-aria-label={ui.en.map_tools}
           class="flex gap-1 rounded-md bg-white/5 p-0.5 text-[11px] font-semibold"
         >
           {features.tools && (
@@ -765,28 +800,34 @@ const cfg = JSON.stringify({
                 type="button"
                 data-tools-close
                 class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-im-text hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
-                aria-label="Medir distancia"
-                title="Medir distancia"
+                aria-label={t.map_tool_distance_aria}
+                data-i18n-en-aria-label={ui.en.map_tool_distance_aria}
+                title={t.map_tool_distance_aria}
+                data-i18n-en-title={ui.en.map_tool_distance_aria}
                 aria-pressed="false"
-              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-ruler"></use></svg> Distancia</button>
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-ruler"></use></svg> <span data-i18n-en={ui.en.map_tool_distance}>{t.map_tool_distance}</span></button>
               <button
                 id="mw-measure-area"
                 type="button"
                 data-tools-close
                 class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-im-text hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
-                aria-label="Medir área"
-                title="Medir área"
+                aria-label={t.map_tool_area_aria}
+                data-i18n-en-aria-label={ui.en.map_tool_area_aria}
+                title={t.map_tool_area_aria}
+                data-i18n-en-title={ui.en.map_tool_area_aria}
                 aria-pressed="false"
-              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area"></use></svg> Área</button>
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area"></use></svg> <span data-i18n-en={ui.en.map_tool_area}>{t.map_tool_area}</span></button>
               <button
                 id="mw-crosshair-btn"
                 type="button"
                 data-tools-close
                 class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-im-text hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
-                aria-label="Modo mira: valor en el centro del mapa"
-                title="Modo mira: valor de la capa en el centro del mapa"
+                aria-label={t.map_tool_crosshair_aria}
+                data-i18n-en-aria-label={ui.en.map_tool_crosshair_aria}
+                title={t.map_tool_crosshair_title}
+                data-i18n-en-title={ui.en.map_tool_crosshair_title}
                 aria-pressed="false"
-              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-locate"></use></svg> Mira</button>
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-locate"></use></svg> <span data-i18n-en={ui.en.map_tool_crosshair}>{t.map_tool_crosshair}</span></button>
             </div>
             <p class="text-[10px] font-semibold uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.map_tools_compare}>{t.map_tools_compare}</p>
             <div id="mw-snapshot-wrap" class="grid grid-cols-2 gap-1">
@@ -795,24 +836,28 @@ const cfg = JSON.stringify({
                 type="button"
                 data-tools-close
                 class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-im-text hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
-                aria-label="Capturar vista actual"
-                title="Capturar vista actual"
-              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-camera"></use></svg> Capturar</button>
+                aria-label={t.map_snapshot_capture_aria}
+                data-i18n-en-aria-label={ui.en.map_snapshot_capture_aria}
+                title={t.map_snapshot_capture_aria}
+                data-i18n-en-title={ui.en.map_snapshot_capture_aria}
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-camera"></use></svg> <span data-i18n-en={ui.en.map_snapshot_capture}>{t.map_snapshot_capture}</span></button>
               <button
                 id="mw-snapshot-24h"
                 type="button"
                 data-tools-close
                 class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-im-text hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
-                aria-label="Comparar con hace 24 horas"
-                title="Congela la vista actual y mueve el timeline 24 h atrás; alterna con Mostrar/Ocultar"
-              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-chevron-left"></use></svg> Hace 24 h</button>
+                aria-label={t.map_snapshot_24h_aria}
+                data-i18n-en-aria-label={ui.en.map_snapshot_24h_aria}
+                title={t.map_snapshot_24h_title}
+                data-i18n-en-title={ui.en.map_snapshot_24h_title}
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-chevron-left"></use></svg> <span data-i18n-en={ui.en.map_snapshot_24h}>{t.map_snapshot_24h}</span></button>
               <button
                 id="mw-snapshot-clear"
                 type="button"
                 hidden
                 data-tools-close
                 class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-im-text hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white col-span-2"
-              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-x"></use></svg> Limpiar</button>
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-x"></use></svg> <span data-i18n-en={ui.en.map_snapshot_clear}>{t.map_snapshot_clear}</span></button>
             </div>
           </div>
         )}
@@ -827,22 +872,22 @@ const cfg = JSON.stringify({
             class="space-y-3 pt-2"
           >
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Zona horaria</p>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_tz}>{t.settings_tz}</p>
             <div class="flex gap-1" data-mw-tz>
-              <button type="button" data-val="local" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">Local</button>
+              <button type="button" data-val="local" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold" data-i18n-en={ui.en.settings_tz_local}>{t.settings_tz_local}</button>
               <button type="button" data-val="UTC" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">UTC</button>
             </div>
           </div>
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Formato de hora</p>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_hour}>{t.settings_hour}</p>
             <div class="flex gap-1" data-mw-hour>
               <button type="button" data-val="12" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">12 h</button>
               <button type="button" data-val="24" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">24 h</button>
             </div>
           </div>
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Loop de animación</p>
-            <div class="flex gap-1" data-mw-loop title="Frames dentro de ±N h de ahora">
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_loop}>{t.settings_loop}</p>
+            <div class="flex gap-1" data-mw-loop title={t.settings_loop_hint} data-i18n-en-title={ui.en.settings_loop_hint}>
               <button type="button" data-val="3" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">3 h</button>
               <button type="button" data-val="6" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">6 h</button>
               <button type="button" data-val="12" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">12 h</button>
@@ -850,37 +895,37 @@ const cfg = JSON.stringify({
             </div>
           </div>
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Velocidad</p>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_speed}>{t.settings_speed}</p>
             <div class="flex gap-1" data-mw-speed>
-              <button type="button" data-val="slow" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">Lenta</button>
-              <button type="button" data-val="medium" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">Media</button>
-              <button type="button" data-val="fast" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">Rápida</button>
+              <button type="button" data-val="slow" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold" data-i18n-en={ui.en.settings_speed_slow}>{t.settings_speed_slow}</button>
+              <button type="button" data-val="medium" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold" data-i18n-en={ui.en.settings_speed_medium}>{t.settings_speed_medium}</button>
+              <button type="button" data-val="fast" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold" data-i18n-en={ui.en.settings_speed_fast}>{t.settings_speed_fast}</button>
             </div>
           </div>
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Estilo</p>
-            <div class="flex gap-1" data-mw-style title="Suave funde los frames de radar y satélite">
-              <button type="button" data-val="fast" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">Rápido</button>
-              <button type="button" data-val="smooth" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">Suave</button>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_style}>{t.settings_style}</p>
+            <div class="flex gap-1" data-mw-style title={t.settings_style_hint} data-i18n-en-title={ui.en.settings_style_hint}>
+              <button type="button" data-val="fast" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold" data-i18n-en={ui.en.settings_style_fast}>{t.settings_style_fast}</button>
+              <button type="button" data-val="smooth" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold" data-i18n-en={ui.en.settings_style_smooth}>{t.settings_style_smooth}</button>
             </div>
           </div>
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Etiqueta del tiempo</p>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_label}>{t.settings_label}</p>
             <div class="flex gap-1" data-mw-label>
-              <button type="button" data-val="both" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">Ambas</button>
-              <button type="button" data-val="clock" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">Reloj</button>
-              <button type="button" data-val="relative" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">Relativa</button>
+              <button type="button" data-val="both" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold" data-i18n-en={ui.en.settings_label_both}>{t.settings_label_both}</button>
+              <button type="button" data-val="clock" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold" data-i18n-en={ui.en.settings_label_clock}>{t.settings_label_clock}</button>
+              <button type="button" data-val="relative" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold" data-i18n-en={ui.en.settings_label_relative}>{t.settings_label_relative}</button>
             </div>
           </div>
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Temperatura</p>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_temp}>{t.settings_temp}</p>
             <div class="flex gap-1" data-mw-temp>
               <button type="button" data-val="C" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">°C</button>
               <button type="button" data-val="F" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">°F</button>
             </div>
           </div>
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Viento</p>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_wind}>{t.settings_wind}</p>
             <div class="flex gap-1" data-mw-speed-unit>
               <button type="button" data-val="kmh" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">km/h</button>
               <button type="button" data-val="mph" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">mph</button>
@@ -889,22 +934,20 @@ const cfg = JSON.stringify({
             </div>
           </div>
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Presión</p>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_pressure}>{t.settings_pressure}</p>
             <div class="flex gap-1" data-mw-pressure>
               <button type="button" data-val="hPa" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">hPa</button>
               <button type="button" data-val="inHg" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">inHg</button>
             </div>
           </div>
           <div>
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted">Distancia</p>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-im-muted" data-i18n-en={ui.en.settings_distance}>{t.settings_distance}</p>
             <div class="flex gap-1" data-mw-distance>
               <button type="button" data-val="km" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">km</button>
               <button type="button" data-val="mi" class="flex-1 rounded border border-im-border px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold">mi</button>
             </div>
           </div>
-          <p class="text-[10px] italic text-im-muted">
-            Aplica al timeline, leyenda, tooltip, tarjeta y /forecast en vivo. Persistido localmente, sin cuenta.
-          </p>
+          <p class="text-[10px] italic text-im-muted" data-i18n-en={ui.en.settings_note}>{t.settings_note}</p>
           </div>
         )}
 
@@ -940,43 +983,41 @@ const cfg = JSON.stringify({
           )}
           <p>
             <strong class="text-im-text">Clima México</strong>
-            — mapa interactivo del tiempo. Sin cuenta, sin cookies.
+            <span data-i18n-en={ui.en.info_tagline}>{t.info_tagline}</span>
           </p>
           <ul class="space-y-1">
             <li>
-              <span class="font-medium text-im-text">Pronóstico:</span>
+              <span class="font-medium text-im-text" data-i18n-en={ui.en.info_src_forecast}>{t.info_src_forecast}</span>
               <a class="text-im-accent underline" href="https://open-meteo.com/" rel="noopener" target="_blank">Open-Meteo</a>
               (ICON/GFS/ECMWF)
             </li>
             <li>
-              <span class="font-medium text-im-text">Radar:</span>
+              <span class="font-medium text-im-text" data-i18n-en={ui.en.info_src_radar}>{t.info_src_radar}</span>
               <a class="text-im-accent underline" href="https://www.rainviewer.com/" rel="noopener" target="_blank">RainViewer</a>
             </li>
             <li>
-              <span class="font-medium text-im-text">Satélite:</span>
+              <span class="font-medium text-im-text" data-i18n-en={ui.en.info_src_satellite}>{t.info_src_satellite}</span>
               <a class="text-im-accent underline" href="https://nasa-gibs.github.io/gibs-api-docs/" rel="noopener" target="_blank">NASA GIBS</a>
               (GOES-East, VIIRS)
             </li>
             <li>
-              <span class="font-medium text-im-text">Ciclones:</span>
+              <span class="font-medium text-im-text" data-i18n-en={ui.en.info_src_cyclones}>{t.info_src_cyclones}</span>
               <a class="text-im-accent underline" href="https://www.nhc.noaa.gov/" rel="noopener" target="_blank">NOAA NHC</a>
             </li>
             <li>
-              <span class="font-medium text-im-text">Mapa base:</span>
+              <span class="font-medium text-im-text" data-i18n-en={ui.en.info_src_basemap}>{t.info_src_basemap}</span>
               <a class="text-im-accent underline" href="https://www.esri.com/en-us/legal/terms/data-attributions" rel="noopener" target="_blank">Esri, HERE, Garmin</a>
               / <a class="text-im-accent underline" href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">OSM</a>
             </li>
             <li>
-              <span class="font-medium text-im-text">Avisos:</span>
+              <span class="font-medium text-im-text" data-i18n-en={ui.en.info_src_alerts}>{t.info_src_alerts}</span>
               <a class="text-im-accent underline" href="https://smn.conagua.gob.mx/" rel="noopener" target="_blank">SMN / CONAGUA</a>
             </li>
           </ul>
           <p class="pt-1">
             <a id="mw-layer-page-link" hidden href={base} class="text-im-accent underline" data-i18n-en={ui.en.layer_page_link}>{t.layer_page_link}</a>
           </p>
-          <p class="pt-1 text-[10px] italic text-im-muted">
-            Sin garantía. Para uso informativo. Consulta avisos oficiales.
-          </p>
+          <p class="pt-1 text-[10px] italic text-im-muted" data-i18n-en={ui.en.info_disclaimer}>{t.info_disclaimer}</p>
           </div>
         )}
       </div>
@@ -1039,8 +1080,9 @@ const cfg = JSON.stringify({
         hidden
         class="inline-flex min-h-[44px] shrink-0 items-center gap-1 rounded-full bg-white/10 px-3 font-medium text-im-text hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
         aria-pressed="true"
-        aria-label="Ocultar comparación"
-      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-eye"></use></svg> <span data-mw-snapshot-label class="max-sm:sr-only">Ocultar</span></button>
+        aria-label={t.map_snapshot_hide_aria}
+        data-i18n-en-aria-label={ui.en.map_snapshot_hide_aria}
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-eye"></use></svg> <span data-mw-snapshot-label class="max-sm:sr-only" data-i18n-en={ui.en.map_snapshot_hide}>{t.map_snapshot_hide}</span></button>
       <button
         id="mw-tool-pill-exit"
         type="button"

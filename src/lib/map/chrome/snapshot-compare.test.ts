@@ -2,6 +2,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import type maplibregl from 'maplibre-gl';
 import { createSnapshotCompare } from './snapshot-compare';
+import { ui } from '../../../i18n/ui';
 
 function els() {
   const mk = (id: string) => {
@@ -71,5 +72,25 @@ describe('snapshot compare — "hace 24 h" (Story 13.5)', () => {
     expect(e.imgEl.classList.contains('hidden')).toBe(true);
     expect(e.captureBtn.hidden).toBe(false);
     expect(e.toggleBtn.hidden).toBe(true);
+  });
+
+  it("speaks the caller's language (Story 25.3)", () => {
+    const e = els();
+    const en = ui.en;
+    createSnapshotCompare(e, {
+      shiftTime: () => true,
+      strings: {
+        hide: en.map_snapshot_hide,
+        show: en.map_snapshot_show,
+        hideAria: en.map_snapshot_hide_aria,
+        showAria: en.map_snapshot_show_aria,
+      },
+    }).refresh();
+    e.captureBtn.click();
+    expect(e.toggleBtn.textContent).toBe('Hide');
+    expect(e.toggleBtn.getAttribute('aria-label')).toBe('Hide comparison');
+    e.toggleBtn.click();
+    expect(e.toggleBtn.textContent).toBe('Show');
+    expect(e.toggleBtn.getAttribute('aria-label')).toBe('Show comparison');
   });
 });

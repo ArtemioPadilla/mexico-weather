@@ -48,6 +48,9 @@ describe('formatLngDM', () => {
 describe('formatLatLngDM', () => {
   it('joins lat and lng with a comma (zoom.earth-parity)', () => {
     expect(formatLatLngDM(19.43, -99.13)).toBe("19° 25' N, 99° 07' O");
+    // Story 25.3 — English pages pass "W".
+    expect(formatLatLngDM(19.43, -99.13, 'W')).toBe("19° 25' N, 99° 07' W");
+    expect(formatLngDM(99.13, 'W')).toBe("99° 07' E");
   });
 });
 

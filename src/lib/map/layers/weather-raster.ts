@@ -13,6 +13,7 @@
  */
 import type { FeatureCollection } from 'geojson';
 import type maplibregl from 'maplibre-gl';
+import { ui, fillUi } from '../../../i18n/ui';
 import {
   ATTRIBUTION_GIBS,
   GIBS_LAYERS,
@@ -138,6 +139,9 @@ export interface WeatherRasterDeps {
    *  zoomed in past where the imagery has usable detail). */
   showMsg?: (text: string) => void;
   hideMsg?: () => void;
+  /** Story 25.3 — the zoom-limit toast in the page's language (the
+   *  product's max zoom in); Spanish when absent. */
+  zoomLimitMsg?: (maxZoom: number) => string;
   /** Story 16.4 — raster-fade-duration (ms) for the tile layer; read
    *  when the layer is (re)added and on every frame swap, where it is
    *  also the A/B cross-fade length (Story 21.3). 300 when absent
@@ -506,7 +510,9 @@ export function createWeatherRaster(
           deps.showMsg
         ) {
           deps.showMsg(
-            `Satélite limitado a zoom z${maxZoom} (NASA GIBS). Acercando más solo aparece la mancha del basemap.`
+            deps.zoomLimitMsg
+              ? deps.zoomLimitMsg(maxZoom)
+              : fillUi(ui.es.map_satellite_zoom_limit, { z: maxZoom })
           );
           if (deps.hideMsg) window.setTimeout(deps.hideMsg, 5000);
         }

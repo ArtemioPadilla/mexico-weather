@@ -132,7 +132,25 @@ describe('createWeatherRaster', () => {
       opacity: 1,
       currentZoom: 10, // geocolor maxZoom = 6 → 10 > 7 triggers
     });
-    expect(msg).toMatch(/Satélite limitado/);
+    expect(msg).toMatch(/Satélite limitado a zoom z7 /);
+  });
+
+  it("the limit toast comes in the caller's words (Story 25.3)", () => {
+    let msg = '';
+    const { map } = mockMap();
+    const factory = createWeatherRaster(map, {
+      showMsg: (s) => {
+        msg = s;
+      },
+      zoomLimitMsg: (z) => `Satellite is limited to zoom z${z}`,
+    });
+    factory.show('satellite', null, {
+      rvData: null,
+      satelliteSubOption: 'geocolor',
+      opacity: 1,
+      currentZoom: 10,
+    });
+    expect(msg).toBe('Satellite is limited to zoom z7');
   });
 
   // Story 21.1 — imagery is inserted BENEATH the basemap labels layer.

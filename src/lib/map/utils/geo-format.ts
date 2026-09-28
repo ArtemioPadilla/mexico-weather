@@ -31,8 +31,10 @@ export function formatLatDM(latDeg: number): string {
   return formatDM(latDeg, latDeg >= 0 ? 'N' : 'S');
 }
 
-export function formatLngDM(lngDeg: number): string {
-  return formatDM(lngDeg, lngDeg >= 0 ? 'E' : 'O');
+/** `west` is the letter for W longitudes: "O" (oeste) by default, "W"
+ *  in English (Story 25.3, `ui.map_west`). */
+export function formatLngDM(lngDeg: number, west = 'O'): string {
+  return formatDM(lngDeg, lngDeg >= 0 ? 'E' : west);
 }
 
 function formatDM(deg: number, cardinal: string): string {
@@ -49,8 +51,8 @@ function formatDM(deg: number, cardinal: string): string {
  * Format a (lat, lng) pair in degrees-minutes with cardinal letters,
  * comma-separated: "19° 25' N, 99° 07' O" (zoom.earth-parity).
  */
-export function formatLatLngDM(lat: number, lng: number): string {
-  return `${formatLatDM(lat)}, ${formatLngDM(lng)}`;
+export function formatLatLngDM(lat: number, lng: number, west = 'O'): string {
+  return `${formatLatDM(lat)}, ${formatLngDM(lng, west)}`;
 }
 
 /**

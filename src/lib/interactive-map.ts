@@ -99,7 +99,7 @@ import {
   type PlaceCardMode,
   type PlaceCardOpts,
 } from './map/chrome/place-card';
-import { ui } from '../i18n/ui';
+import { ui, fillUi, documentUiLang } from '../i18n/ui';
 import { siteBase } from '../utils/paths';
 import {
   createNhcSource,
@@ -387,6 +387,9 @@ export interface InteractiveMapOptions {
    *  never on the home embed, and always off under
    *  `navigator.connection.saveData`. */
   framePrefetch?: boolean;
+  /** Fallback language. The document's `<html data-lang>` (set by
+   *  BaseLayout from `?lang=`, the toggle or the browser) wins: the pages
+   *  are built in Spanish and shown in English at runtime (Story 25.3). */
   lang?: 'es' | 'en';
 }
 
@@ -403,7 +406,7 @@ export interface MapHandle {
 export async function initInteractiveMap(
   opts: InteractiveMapOptions
 ): Promise<MapHandle> {
-  const lang = opts.lang ?? 'es';
+  const lang = documentUiLang(opts.lang ?? 'es');
   const t = ui[lang];
   const base = siteBase();
   const features = opts.features;
@@ -520,17 +523,11 @@ export async function initInteractiveMap(
   // A11Y-3 — translate MapLibre's built-in control strings (zoom
   // buttons, compass) when the document language is Spanish. MapLibre
   // ships English defaults; `locale` patches the default table.
-  const docLang =
-    document.documentElement.getAttribute('data-lang') ||
-    document.documentElement.lang;
-  const mapLocale =
-    docLang === 'es'
-      ? {
-          'NavigationControl.ZoomIn': 'Acercar',
-          'NavigationControl.ZoomOut': 'Alejar',
-          'NavigationControl.ResetBearing': 'Restablecer orientación al norte',
-        }
-      : undefined;
+  const mapLocale = {
+    'NavigationControl.ZoomIn': t.map_zoom_in,
+    'NavigationControl.ZoomOut': t.map_zoom_out,
+    'NavigationControl.ResetBearing': t.map_reset_bearing,
+  };
 
   const map = new maplibre.Map({
     container: opts.els.container,
@@ -605,7 +602,11 @@ export async function initInteractiveMap(
   if (controls && opts.els.coords) {
     const coordsEl = opts.els.coords;
     map.on('mousemove', (e) => {
-      coordsEl.textContent = formatLatLngDM(e.lngLat.lat, e.lngLat.lng);
+      coordsEl.textContent = formatLatLngDM(
+        e.lngLat.lat,
+        e.lngLat.lng,
+        t.map_west
+      );
     });
     map.on('mouseout', () => {
       coordsEl.textContent = '';
@@ -624,8 +625,8 @@ export async function initInteractiveMap(
   }
 
   function placePopupHtml(lat: number, lng: number): string {
-    const coords = formatLatLngDM(lat, lng);
-    const name = `Ubicación ${coords}`;
+    const coords = formatLatLngDM(lat, lng, t.map_west);
+    const name = fillUi(t.map_place_location, { coords });
     const fc = `${base}forecast?lat=${lat.toFixed(4)}&lng=${lng.toFixed(4)}&name=${encodeURIComponent(coords)}`;
     return (
       `<div class="text-sm">` +
@@ -639,7 +640,13 @@ export async function initInteractiveMap(
   const pinManager = createPinManager(
     map,
     features.presetPins ? presetPins(cities) : [],
-    { maplibre, popupHtml, enablePopups: !!markerPopups }
+    {
+      maplibre,
+      popupHtml,
+      enablePopups: !!markerPopups,
+      markerLabel: (name) =>
+        name ? fillUi(t.map_marker_named, { name }) : t.map_marker,
+    }
   );
   // Aliases kept so the rest of the file's wiring stays unchanged.
   const renderPins = (): void => pinManager.render();
@@ -676,7 +683,7 @@ export async function initInteractiveMap(
   function placeCardOpts(): PlaceCardOpts | null {
     if (!placeCardPoint) return null;
     const { lat, lng } = placeCardPoint;
-    const coords = formatLatLngDM(lat, lng);
+    const coords = formatLatLngDM(lat, lng, t.map_west);
     const now = new Date();
     const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     let isFavorite = false;
@@ -790,7 +797,11 @@ export async function initInteractiveMap(
           toggleFavorite(window.localStorage, {
             lat: placeCardPoint.lat,
             lng: placeCardPoint.lng,
-            name: formatLatLngDM(placeCardPoint.lat, placeCardPoint.lng),
+            name: formatLatLngDM(
+              placeCardPoint.lat,
+              placeCardPoint.lng,
+              t.map_west
+            ),
             tz: 'America/Mexico_City',
             addedAt: Date.now(),
           });
@@ -1293,10 +1304,8 @@ export async function initInteractiveMap(
    *  (read live: the ⚙ panel and ?lang=en apply without a reload). */
   function tickFormat(): TickFormat {
     const s = readSettings();
-    const docLangNow =
-      document.documentElement.getAttribute('data-lang') || lang;
     return {
-      locale: docLangNow === 'en' ? 'en-US' : 'es-MX',
+      locale: lang === 'en' ? 'en-US' : 'es-MX',
       tz: s.tz === 'UTC' ? 'UTC' : 'local',
       hour12: s.hourFormat === '12',
     };
@@ -1323,7 +1332,7 @@ export async function initInteractiveMap(
     };
     if (s.tz === 'UTC') opts.timeZone = 'UTC';
     const d = new Date(frame.time * 1000);
-    let clock = d.toLocaleTimeString('es-MX', opts);
+    let clock = d.toLocaleTimeString(lang === 'en' ? 'en-US' : 'es-MX', opts);
     // Frames a day or more away read ambiguously as a bare "15:00";
     // prefix the weekday ("mié 15:00") past ±24 h (Story 15.1).
     if (needsWeekday(off)) {
@@ -2166,6 +2175,7 @@ export async function initInteractiveMap(
   const weatherRaster = createWeatherRaster(map, {
     showMsg,
     hideMsg,
+    zoomLimitMsg: (z) => fillUi(t.map_satellite_zoom_limit, { z }),
     // Story 16.4 — "estilo" setting: smooth cross-fades tiles between
     // frames, fast swaps them instantly.
     getFadeMs: () => RASTER_FADE_MS[readSettings().playStyle],
@@ -2794,7 +2804,7 @@ export async function initInteractiveMap(
         Math.cos(sun.lat * DEG) *
           Math.cos(lat * DEG) *
           Math.cos((lng - sun.lng) * DEG);
-      return cosDist >= 0 ? 'Día' : 'Noche';
+      return cosDist >= 0 ? t.map_tooltip_day : t.map_tooltip_night;
     }
     return null;
   }
@@ -3297,9 +3307,9 @@ export async function initInteractiveMap(
     },
     isVisible: () => activeLayer === 'temperature',
     options: [
-      { id: 'actual', label: 'Actual' },
-      { id: 'aparente', label: 'Aparente' },
-      { id: 'bulbo', label: 'Bulbo húmedo' },
+      { id: 'actual', label: t.map_sub_temp_actual },
+      { id: 'aparente', label: t.map_sub_temp_aparente },
+      { id: 'bulbo', label: t.map_sub_temp_bulbo },
     ],
   });
   const refreshTempSubOptions = (): void => tempSub.refresh();
@@ -3313,8 +3323,8 @@ export async function initInteractiveMap(
     },
     isVisible: () => activeLayer === 'humidity',
     options: [
-      { id: 'relativa', label: 'Relativa' },
-      { id: 'rocio', label: 'Punto de rocío' },
+      { id: 'relativa', label: t.map_sub_humidity_relativa },
+      { id: 'rocio', label: t.map_sub_humidity_rocio },
     ],
   });
   const refreshHumiditySubOptions = (): void => humiditySub.refresh();
@@ -3329,9 +3339,9 @@ export async function initInteractiveMap(
     },
     isVisible: () => activeLayer === 'precipitation',
     options: [
-      { id: 'lluvia', label: 'Lluvia' },
-      { id: 'nieve', label: 'Nieve' },
-      { id: 'probabilidad', label: 'Probabilidad' },
+      { id: 'lluvia', label: t.map_sub_precip_lluvia },
+      { id: 'nieve', label: t.map_sub_precip_nieve },
+      { id: 'probabilidad', label: t.map_sub_precip_probabilidad },
     ],
   });
   const refreshPrecipSubOptions = (): void => precipSub.refresh();
@@ -3345,8 +3355,8 @@ export async function initInteractiveMap(
     },
     isVisible: () => activeLayer === 'pressure',
     options: [
-      { id: 'msl', label: 'Nivel del mar' },
-      { id: 'surface', label: 'Superficie' },
+      { id: 'msl', label: t.map_sub_pressure_msl },
+      { id: 'surface', label: t.map_sub_pressure_surface },
     ],
   });
   const refreshPressureSubOptions = (): void => pressureSub.refresh();
@@ -3360,8 +3370,8 @@ export async function initInteractiveMap(
     },
     isVisible: () => activeLayer === 'wind',
     options: [
-      { id: 'velocidad', label: 'Velocidad' },
-      { id: 'rachas', label: 'Rachas' },
+      { id: 'velocidad', label: t.map_sub_wind_velocidad },
+      { id: 'rachas', label: t.map_sub_wind_rachas },
     ],
   });
   const refreshWindSubOptions = (): void => windSub.refresh();
@@ -3380,9 +3390,9 @@ export async function initInteractiveMap(
       },
       isVisible: () => activeLayer === 'satellite',
       options: [
-        { id: 'geocolor', label: 'GeoColor' },
-        { id: 'ir', label: 'Infrarrojo' },
-        { id: 'truecolor', label: 'Color real' },
+        { id: 'geocolor', label: t.map_sub_satellite_geocolor },
+        { id: 'ir', label: t.map_sub_satellite_ir },
+        { id: 'truecolor', label: t.map_sub_satellite_truecolor },
       ],
     }
   );
@@ -3648,35 +3658,30 @@ export async function initInteractiveMap(
     : null;
   const shortcutsDialog = shortcutsDialogEl
     ? (() => {
-        const docLangNow =
-          document.documentElement.getAttribute('data-lang') === 'en'
-            ? 'en'
-            : lang;
-        const tt = ui[docLangNow];
         const sections = buildShortcutSections(
           LAYERS.map((l) => ({
             id: l.id,
             shortcut: l.shortcut,
-            label: String(tt[l.labelKey as keyof typeof tt] ?? l.id),
+            label: String(t[l.labelKey as keyof typeof t] ?? l.id),
           })),
           overlayDefs.map((o) => ({
             id: o.id,
             shortcut: o.shortcut,
-            label: overlayShortcutLabel(tt, o.id, o.label),
+            label: overlayShortcutLabel(t, o.id, o.label),
           })),
           {
-            general: tt.map_shortcuts_general,
-            layers: tt.map_layers,
-            overlays: tt.map_overlays,
-            help: tt.map_shortcuts_help,
-            escape: tt.map_shortcuts_escape,
-            zoom: tt.map_shortcuts_zoom,
-            pan: tt.map_shortcuts_pan,
+            general: t.map_shortcuts_general,
+            layers: t.map_layers,
+            overlays: t.map_overlays,
+            help: t.map_shortcuts_help,
+            escape: t.map_shortcuts_escape,
+            zoom: t.map_shortcuts_zoom,
+            pan: t.map_shortcuts_pan,
             ...(features.timeline
               ? {
                   jumpDate: {
-                    key: tt.map_shortcuts_enter,
-                    label: tt.map_shortcuts_jump_date,
+                    key: t.map_shortcuts_enter,
+                    label: t.map_shortcuts_jump_date,
                   },
                 }
               : {}),
@@ -4102,13 +4107,7 @@ export async function initInteractiveMap(
         },
         format: tickFormat,
         strings: () => {
-          const tt =
-            ui[
-              document.documentElement.getAttribute('data-lang') === 'en'
-                ? 'en'
-                : lang
-            ];
-          return { title: tt.timeline_jump };
+          return { title: t.timeline_jump };
         },
       }
     );
@@ -4418,15 +4417,17 @@ export async function initInteractiveMap(
       }
       if (measureMode === 'distance') {
         if (measurePts.length < 2) {
-          resultEl.textContent = 'Toca otro punto para medir';
+          resultEl.textContent = t.map_measure_tap_next;
         } else {
           const km = measurePolylineLen(measurePts);
           const n = measurePts.length - 1;
-          resultEl.textContent = `${formatDistanceKm(km, currentUnits().distance)} · ${n} ${n === 1 ? 'segmento' : 'segmentos'}`;
+          resultEl.textContent = `${formatDistanceKm(km, currentUnits().distance)} · ${n} ${n === 1 ? t.map_measure_segment : t.map_measure_segments}`;
         }
       } else {
         if (measurePts.length < 3) {
-          resultEl.textContent = `Añade ${3 - measurePts.length} punto(s) más`;
+          resultEl.textContent = fillUi(t.map_measure_add_points, {
+            n: 3 - measurePts.length,
+          });
         } else {
           const km2 = measureSphArea(measurePts);
           resultEl.textContent = measureFmtArea(km2);
@@ -4566,6 +4567,12 @@ export async function initInteractiveMap(
         ) as HTMLImageElement | null,
       },
       {
+        strings: {
+          hide: t.map_snapshot_hide,
+          show: t.map_snapshot_show,
+          hideAria: t.map_snapshot_hide_aria,
+          showAria: t.map_snapshot_show_aria,
+        },
         // Story 13.5 — jump the active timeline by ±N s (nearest frame).
         shiftTime: (bySec) => {
           if (tlFrames.length < 2 || frameIndex < 0) {

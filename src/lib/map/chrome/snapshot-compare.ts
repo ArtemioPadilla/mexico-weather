@@ -14,6 +14,7 @@
  * calls refresh() once to initialise visibility.
  */
 import type maplibregl from 'maplibre-gl';
+import { ui } from '../../../i18n/ui';
 
 export interface SnapshotCompareEls {
   map: maplibregl.Map;
@@ -35,7 +36,17 @@ export interface SnapshotCompare {
   clear: () => void;
 }
 
+/** Story 25.3 — the toggle's words, from `ui.ts` in the page's
+ *  language; Spanish when the caller passes none. */
+export interface SnapshotCompareStrings {
+  hide: string;
+  show: string;
+  hideAria: string;
+  showAria: string;
+}
+
 export interface SnapshotCompareDeps {
+  strings?: SnapshotCompareStrings;
   /** Story 13.5 — move the timeline by `bySec` (negative = past);
    *  false when there is no time axis to move. */
   shiftTime?: (bySec: number) => boolean;
@@ -49,6 +60,12 @@ export function createSnapshotCompare(
   deps: SnapshotCompareDeps = {}
 ): SnapshotCompare {
   let visible = true;
+  const s: SnapshotCompareStrings = deps.strings ?? {
+    hide: ui.es.map_snapshot_hide,
+    show: ui.es.map_snapshot_show,
+    hideAria: ui.es.map_snapshot_hide_aria,
+    showAria: ui.es.map_snapshot_show_aria,
+  };
 
   function capture(): boolean {
     try {
@@ -90,10 +107,10 @@ export function createSnapshotCompare(
       // Story 22.3 — the toggle sits in the context pill next to the
       // "Comparación" name, so the visible text is the short verb; the
       // accessible name keeps the full phrase.
-      label.textContent = visible ? 'Ocultar' : 'Mostrar';
+      label.textContent = visible ? s.hide : s.show;
       els.toggleBtn.setAttribute(
         'aria-label',
-        visible ? 'Ocultar comparación' : 'Mostrar comparación'
+        visible ? s.hideAria : s.showAria
       );
       els.toggleBtn.setAttribute('aria-pressed', String(visible));
     }

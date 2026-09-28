@@ -10,6 +10,7 @@
  *     pin, respecting prefers-reduced-motion.
  */
 import type maplibregl from 'maplibre-gl';
+import { ui, fillUi } from '../../../i18n/ui';
 import { type MapPin, withUserPin } from '../../mappins';
 
 export interface PinManager {
@@ -33,6 +34,9 @@ export interface PinManagerDeps {
   /** Show a popup at all? When false the manager creates markers
    *  without popups (embedded maps). */
   enablePopups: boolean;
+  /** Story 25.3 — the marker's accessible name in the page's language
+   *  (`name` is '' for an unnamed pin). Spanish when absent. */
+  markerLabel?: (name: string) => string;
 }
 
 export function createPinManager(
@@ -69,7 +73,11 @@ export function createPinManager(
         el.setAttribute('role', 'button');
         el.setAttribute(
           'aria-label',
-          p.name ? `Marcador: ${p.name}` : 'Marcador en el mapa',
+          deps.markerLabel
+            ? deps.markerLabel(p.name ?? '')
+            : p.name
+              ? fillUi(ui.es.map_marker_named, { name: p.name })
+              : ui.es.map_marker,
         );
       } catch {
         /* best-effort */
