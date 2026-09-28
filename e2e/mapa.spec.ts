@@ -947,7 +947,7 @@ test.describe('mapa page', () => {
   });
 
   // Story 16.4 — animation controls persist and apply live.
-  test('settings panel persists animation controls; tapping the time pill cycles the label', async ({
+  test('settings panel persists animation controls and the time label mode; the time pill opens the date picker', async ({
     page,
   }) => {
     await page.goto('mapa/');
@@ -961,6 +961,12 @@ test.describe('mapa page', () => {
     await expect(
       page.locator('[data-mw-speed] button[data-val="fast"]')
     ).toHaveAttribute('aria-pressed', 'true');
+    // Story 23.3 — the label mode (Story 16.4) lives here only: a tap on
+    // the time pill opens "Saltar a fecha" instead of cycling it.
+    await page.locator('[data-mw-label] button[data-val="clock"]').click();
+    await expect(
+      page.locator('[data-mw-label] button[data-val="clock"]')
+    ).toHaveAttribute('aria-pressed', 'true');
     const stored = await page.evaluate(() =>
       JSON.parse(localStorage.getItem('mw:settings') ?? '{}')
     );
@@ -968,21 +974,23 @@ test.describe('mapa page', () => {
       playSpeed: 'fast',
       loopHours: 6,
       playStyle: 'fast',
+      timeLabel: 'clock',
     });
     await page.locator('#mw-tools-btn').click();
     await expect(page.locator('#mw-settings')).toBeHidden();
+    // Clock only: no relative part (" · hace 2 h") once frames exist.
+    await expect(page.locator('#tl-time')).toHaveText(/^[^·]+:\d{2}[^·]*$/, {
+      timeout: 20_000,
+    });
     await page.locator('#tl-time').click();
-    await expect
-      .poll(async () =>
-        page.evaluate(
-          () =>
-            JSON.parse(localStorage.getItem('mw:settings') ?? '{}').timeLabel
-        )
-      )
-      .toBe('clock');
     await expect(
-      page.locator('[data-mw-label] button[data-val="clock"]')
-    ).toHaveAttribute('aria-pressed', 'true');
+      page.getByRole('dialog', { name: 'Saltar a fecha' })
+    ).toBeVisible();
+    expect(
+      await page.evaluate(
+        () => JSON.parse(localStorage.getItem('mw:settings') ?? '{}').timeLabel
+      )
+    ).toBe('clock');
   });
 
   // Story 19.2 — first-visit welcome card, once per browser.
@@ -2236,6 +2244,10 @@ test.describe('Story 22.5 — `?` shortcuts panel and the chrome budget', () => 
       .allTextContents();
     expect(letters.length).toBeGreaterThanOrEqual(25);
     expect(new Set(letters).size).toBe(letters.length);
+    // Story 23.3 — Enter on the timeline opens "Saltar a fecha".
+    await expect(dialog.locator('[data-shortcut="jump-date"] kbd')).toHaveText(
+      'Intro'
+    );
 
     // Modal: a letter typed while reading does not switch the layer.
     await page.keyboard.press('r');

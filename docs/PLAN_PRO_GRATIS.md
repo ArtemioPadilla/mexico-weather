@@ -126,7 +126,7 @@ Donde **ya ganamos**: 17 overlays MX-específicos (SMN por estado, sismos, AQI, 
 
 **Story 16.4 — Controles de animación** · est 1d · **shipped 2026-09-27**
 - [x] Ajustes: duración del loop (3/6/12/24 h = frames dentro de ±N h de ahora), velocidad (lenta/media/rápida), estilo (rápido/suave = `raster-fade-duration` en las capas de teselas; el raster de campos es un image source y cambia en seco).
-- [x] Persistir en `map/settings.ts` (localStorage, registro aditivo con migración), la etiqueta cicla ambas → reloj → relativa con un clic en la hora del timeline (la `J` ya es de volcanes y no queda letra libre).
+- [x] Persistir en `map/settings.ts` (localStorage, registro aditivo con migración), la etiqueta cicla ambas → reloj → relativa con un clic en la hora del timeline (la `J` ya es de volcanes y no queda letra libre). (Desde la Story 23.3 de `PLAN_PARIDAD_VISUAL` ese clic abre "Saltar a fecha" y el modo se elige solo en ⋯ → Ajustes.)
 - Acceptance: los tres ajustes aplican en vivo; `settings.test.ts` cubre defaults y migración.
 
 ---

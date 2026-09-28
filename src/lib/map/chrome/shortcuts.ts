@@ -54,6 +54,10 @@ export interface ShortcutStrings {
   escape: string;
   zoom: string;
   pan: string;
+  /** Story 23.3 — Enter on the timeline opens "Saltar a fecha": the key's
+   *  name in the page language ("Intro" / "Enter") and the row's label.
+   *  Omitted ⇒ no row (maps without a timeline). */
+  jumpDate?: { key: string; label: string };
 }
 
 /** ui.ts key of an overlay's display name (`map_overlay_<id>`). */
@@ -122,6 +126,13 @@ export function buildShortcutSections(
     { target: 'zoom', keys: ['+', '−'], label: strings.zoom },
     { target: 'pan', keys: ['←', '↑', '→', '↓'], label: strings.pan },
   ];
+  if (strings.jumpDate) {
+    general.push({
+      target: 'jump-date',
+      keys: [strings.jumpDate.key],
+      label: strings.jumpDate.label,
+    });
+  }
   const layerRows: ShortcutRow[] = layers.map((l) => {
     const key = normaliseKey(l.shortcut);
     return { target: `layer:${l.id}`, keys: key ? [key] : [], label: l.label };

@@ -61,6 +61,7 @@ export interface UiStrings {
   timeline_extend: string;
   timeline_extending: string;
   timeline_extend_failed: string;
+  timeline_jump: string;
   map_layer_temperature: string;
   map_layer_humidity: string;
   map_layer_pressure: string;
@@ -126,6 +127,8 @@ export interface UiStrings {
   map_shortcuts_escape: string;
   map_shortcuts_zoom: string;
   map_shortcuts_pan: string;
+  map_shortcuts_jump_date: string;
+  map_shortcuts_enter: string;
   map_shortcuts_hint: string;
   /** Story 22.5 — overlay names (`map_overlay_<overlayDefs id>`), the
    *  single source for the overlay rows and the `?` cheat-sheet. */
@@ -238,6 +241,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     timeline_extend: 'Ver 10 días',
     timeline_extending: 'Cargando 10 días…',
     timeline_extend_failed: 'No se pudo ampliar el pronóstico. Intenta de nuevo.',
+    timeline_jump: 'Saltar a fecha',
     map_layer_temperature: 'Temperatura',
     map_layer_humidity: 'Humedad',
     map_layer_pressure: 'Presión',
@@ -299,6 +303,8 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_shortcuts_escape: 'Cerrar un panel o salir de una herramienta',
     map_shortcuts_zoom: 'Acercar / alejar (mapa enfocado)',
     map_shortcuts_pan: 'Mover el mapa (mapa enfocado)',
+    map_shortcuts_jump_date: 'Saltar a fecha (línea de tiempo enfocada)',
+    map_shortcuts_enter: 'Intro',
     map_shortcuts_hint: 'Las letras funcionan cuando no estás escribiendo en un campo: la de una capa la activa, la de una superposición la enciende o apaga.',
     map_overlay_tropical: 'Sistemas tropicales',
     map_overlay_outlook: 'Posible desarrollo (2 / 7 d)',
@@ -406,6 +412,7 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     timeline_extend: 'See 10 days',
     timeline_extending: 'Loading 10 days…',
     timeline_extend_failed: 'Could not extend the forecast. Try again.',
+    timeline_jump: 'Jump to date',
     map_layer_temperature: 'Temperature',
     map_layer_humidity: 'Humidity',
     map_layer_pressure: 'Pressure',
@@ -467,6 +474,8 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_shortcuts_escape: 'Close a panel or leave a tool',
     map_shortcuts_zoom: 'Zoom in / out (map focused)',
     map_shortcuts_pan: 'Pan the map (map focused)',
+    map_shortcuts_jump_date: 'Jump to a date (timeline focused)',
+    map_shortcuts_enter: 'Enter',
     map_shortcuts_hint: 'Letters work whenever you are not typing in a field: a layer letter switches to that layer, an overlay letter turns it on or off.',
     map_overlay_tropical: 'Tropical systems',
     map_overlay_outlook: 'Development outlook (2 / 7 d)',

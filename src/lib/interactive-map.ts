@@ -290,7 +290,6 @@ import {
   readSettings,
   writeSettings,
   normalizeSettings,
-  nextTimeLabelMode,
   loopRange,
   unitsOf,
   PLAY_INTERVAL_MS,
@@ -332,6 +331,12 @@ import {
   type TickFormat,
   type TimelineBar,
 } from './map/chrome/timeline-bar';
+import {
+  createTimelineJump,
+  extendedFieldEnd,
+  type JumpRange,
+  type TimelineJump,
+} from './map/chrome/timeline-jump';
 import { createSubOptionsGroup } from './map/chrome/sub-options';
 import {
   PINNED_OVERLAYS,
@@ -1280,6 +1285,9 @@ export async function initInteractiveMap(
   // Story 23.1 — the date-scale bar; created with the timeline controls
   // further down, redrawn by applyFrame()/showTimeline().
   let tlBar: TimelineBar | null = null;
+  // Story 23.3 — "Saltar a fecha": the label (or Enter on the range)
+  // opens a native date/time input; created with the bar.
+  let tlJump: TimelineJump | null = null;
 
   /** Locale / zone / hour format for the bar and the range's valuetext
    *  (read live: the ⚙ panel and ?lang=en apply without a reload). */
@@ -3263,16 +3271,9 @@ export async function initInteractiveMap(
   }
   bindSettingsButtons();
   refreshSettingsButtons();
-  // Story 16.4 — tapping the timeline pill cycles its label (both →
-  // clock → relative), zoom.earth's clock ↔ timeline toggle. A click,
-  // not a letter: every A–Z key is already bound (J is volcanoes).
-  if (tlTime) {
-    tlTime.addEventListener('click', () => {
-      const s = readSettings();
-      writeSettings({ ...s, timeLabel: nextTimeLabelMode(s.timeLabel) });
-      afterSettingsChange();
-    });
-  }
+  // Story 16.4's label mode (both / clock / relative) used to cycle on a
+  // tap on the timeline label; since Story 23.3 that tap opens the date
+  // picker, and the mode lives in ⋯ → Ajustes (`data-mw-label`) only.
 
   // ----------------------------------------------------------------
   // Sub-options (zoom.earth's per-layer variants). Single generic
@@ -3667,6 +3668,14 @@ export async function initInteractiveMap(
             escape: tt.map_shortcuts_escape,
             zoom: tt.map_shortcuts_zoom,
             pan: tt.map_shortcuts_pan,
+            ...(features.timeline
+              ? {
+                  jumpDate: {
+                    key: tt.map_shortcuts_enter,
+                    label: tt.map_shortcuts_jump_date,
+                  },
+                }
+              : {}),
           },
           { withKeysOnly: true }
         );
@@ -3835,6 +3844,34 @@ export async function initInteractiveMap(
       return span <= 2 * 86400;
     }
     return false;
+  }
+
+  /** Story 23.3 — the axis "Ver 10 días" would load (satellite: 10 days
+   *  back; fields and wind: up to +10 d), or null when the loaded axis is
+   *  all there is (radar, daily true colour, already extended). */
+  function jumpPotential(): JumpRange | null {
+    if (!tlFrames.length || !canExtendTimeline()) return null;
+    if (activeLayer === 'satellite') {
+      const ext = satelliteAxis(true);
+      return ext.length
+        ? { min: ext[0].time, max: ext[ext.length - 1].time }
+        : null;
+    }
+    const kind = getLayerDef(activeLayer)?.kind;
+    if (kind === 'field' || kind === 'particles') {
+      const res = EXTENDED_FIELD_RANGE.temporalResolution;
+      const stepSec =
+        res === 'hourly_6' ? 6 * 3600 : res === 'hourly_3' ? 3 * 3600 : 3600;
+      return {
+        min: tlFrames[0].time,
+        max: extendedFieldEnd(
+          Date.now() / 1000,
+          EXTENDED_FIELD_RANGE.forecastDays,
+          stepSec
+        ),
+      };
+    }
+    return null;
   }
 
   function syncExtendButton(): void {
@@ -4015,16 +4052,17 @@ export async function initInteractiveMap(
     // bar redraw), so the two stay in sync both ways.
     let barTimesSrc: RadarFrame[] | null = null;
     let barTimes: number[] = [];
+    const frameTimes = (): number[] => {
+      if (barTimesSrc !== tlFrames) {
+        barTimesSrc = tlFrames;
+        barTimes = tlFrames.map((f) => f.time);
+      }
+      return barTimes;
+    };
     tlBar = createTimelineBar(
       { bar: opts.els.tlBar ?? null, range: tlRange },
       {
-        getTimes: () => {
-          if (barTimesSrc !== tlFrames) {
-            barTimesSrc = tlFrames;
-            barTimes = tlFrames.map((f) => f.time);
-          }
-          return barTimes;
-        },
+        getTimes: frameTimes,
         getIndex: () => (tlFrames.length ? frameIndex : -1),
         seek: (i) => {
           tlStop();
@@ -4036,6 +4074,38 @@ export async function initInteractiveMap(
           return extendTimeline();
         },
         format: tickFormat,
+      }
+    );
+    // Story 23.3 — "Saltar a fecha". The picker spans what the layer can
+    // show, not only what is loaded: the satellite's 10 days and the
+    // fields' +10 d come from "Ver 10 días", which a pick past the loaded
+    // axis triggers before seeking (extendTimeline re-seeks the instant).
+    tlJump = createTimelineJump(
+      { label: tlTime, host: tlEl, range: tlRange },
+      {
+        getTimes: frameTimes,
+        getIndex: () => (tlFrames.length ? frameIndex : -1),
+        getPotential: jumpPotential,
+        canExtend: canExtendTimeline,
+        pause: tlStop,
+        seek: (i) => {
+          tlStop();
+          applyFrame(i);
+        },
+        extendTo: (sec) => {
+          tlStop();
+          return extendTimeline(new Date(sec * 1000).toISOString());
+        },
+        format: tickFormat,
+        strings: () => {
+          const tt =
+            ui[
+              document.documentElement.getAttribute('data-lang') === 'en'
+                ? 'en'
+                : lang
+            ];
+          return { title: tt.timeline_jump };
+        },
       }
     );
     document.getElementById('tl-now')?.addEventListener('click', () => {
@@ -4537,6 +4607,8 @@ export async function initInteractiveMap(
       tlPlayer.destroy();
       tlBar?.dispose(); // pointer/wheel/key listeners, observer, rAF
       tlBar = null;
+      tlJump?.dispose(); // label/range/document listeners + the popover
+      tlJump = null;
       fieldAbort?.abort();
       fieldAbort = null;
       revokeFieldBlob(); // free the last field raster blob URL

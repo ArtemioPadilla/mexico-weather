@@ -103,6 +103,18 @@ describe('shortcuts — pure cheat-sheet data (Story 22.5)', () => {
     expect(only.map((s) => s.id)).toEqual(['general']);
   });
 
+  it('lists Enter on the timeline when the map has one (Story 23.3)', () => {
+    const [general] = buildShortcutSections([], [], {
+      ...STRINGS,
+      jumpDate: { key: 'Intro', label: 'Saltar a fecha' },
+    });
+    expect(general.rows[general.rows.length - 1]).toEqual({
+      target: 'jump-date',
+      keys: ['Intro'],
+      label: 'Saltar a fecha',
+    });
+  });
+
   it('overlay names come from ui.ts with the definition as fallback', () => {
     expect(overlayLabelKey('nightLights')).toBe('map_overlay_nightLights');
     expect(overlayShortcutLabel(ui.en, 'nightLights', 'x')).toBe(
