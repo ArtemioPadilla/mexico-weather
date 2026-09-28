@@ -86,6 +86,13 @@ import {
   type RasterBounds,
   type ImageCorners,
 } from './mapraster';
+import {
+  FIELD_RENDERER_STORAGE_KEY,
+  createFieldGlLayer,
+  pickFieldRenderer,
+  type FieldGlLayer,
+  type FieldRendererKind,
+} from './map/layers/field-webgl';
 import { terminatorPolygon, solarPosition } from './mapsun';
 import { presetPins, withUserPin, type MapPin } from './mappins';
 import { cities } from '../data/cities';
@@ -1464,6 +1471,17 @@ export async function initInteractiveMap(
   let fieldBounds: RasterBounds | null = null;
   let fieldBlobUrl: string | null = null;
   const fieldResampleTimer = 0;
+  // Story 24.1 — the field draws through a WebGL2 custom layer when the
+  // map has a WebGL2 context (decided on the first field frame, see
+  // pickFieldRenderer); the canvas raster above stays as the fallback
+  // (`?field=canvas`, localStorage `mw:field-renderer`, or a shader that
+  // fails at runtime).
+  let fieldRenderer: FieldRendererKind | null = null;
+  let fieldGl: FieldGlLayer | null = null;
+  /** Layer alpha of the field raster (0–255), both renderers. */
+  const FIELD_ALPHA = 200;
+  /** User Timing measure per field frame (read by e2e/ux-metrics.spec). */
+  const FIELD_FRAME_MEASURE = 'mw:field-frame';
 
   interface FieldConfig {
     hourlyVar: string;
@@ -1796,6 +1814,90 @@ export async function initInteractiveMap(
     }
   }
 
+  /** Story 24.1 — which renderer draws the field (decided once). */
+  function fieldRendererKind(): FieldRendererKind {
+    if (fieldRenderer) return fieldRenderer;
+    const tryRead = <T>(read: () => T): T | null => {
+      try {
+        return read();
+      } catch {
+        return null;
+      }
+    };
+    fieldRenderer = pickFieldRenderer({
+      // Same context type as MapLibre's ⇒ its context; a WebGL1 map ⇒ null.
+      gl: tryRead(() => map.getCanvas().getContext('webgl2')),
+      search: window.location.search,
+      stored: tryRead(() =>
+        window.localStorage.getItem(FIELD_RENDERER_STORAGE_KEY)
+      ),
+    });
+    return fieldRenderer;
+  }
+
+  /** One `mw:field-frame` measure (the last only: cleared before each). */
+  function markFieldFrame(renderer: FieldRendererKind, ms: number): void {
+    try {
+      performance.clearMeasures(FIELD_FRAME_MEASURE);
+      const end = performance.now();
+      performance.measure(FIELD_FRAME_MEASURE, {
+        start: end - ms,
+        end,
+        detail: { renderer },
+      });
+    } catch {
+      /* no User Timing L3: the number is only for ux-metrics */
+    }
+  }
+
+  /** Draw `hourIndex` of `grid` with the WebGL layer; false when the GPU
+   *  path is unavailable and the caller should use the canvas. */
+  function showFieldGl(
+    grid: FieldGrid,
+    hourIndex: number,
+    color: (v: number) => string
+  ): boolean {
+    if (!fieldBounds) return false;
+    if (!fieldGl || fieldGl.failed()) {
+      // The canvas raster (if any) makes way for the custom layer.
+      if (map.getLayer(FIELD_LAYER)) map.removeLayer(FIELD_LAYER);
+      if (map.getSource(FIELD_SOURCE)) map.removeSource(FIELD_SOURCE);
+      revokeFieldBlob();
+      const created = createFieldGlLayer(map, {
+        onFrame: (ms) => markFieldFrame('webgl', ms),
+        onError: (reason) => {
+          // A layer already replaced, or a map already destroyed: ignore.
+          if (fieldGl !== created) return;
+          console.warn(`[field-webgl] falling back to canvas: ${reason}`);
+          fieldRenderer = 'canvas';
+          fieldGl = null;
+          if (map.getLayer(FIELD_LAYER)) map.removeLayer(FIELD_LAYER);
+          if (getLayerDef(activeLayer)?.kind === 'field' && frameIndex >= 0)
+            void renderFieldFrame(frameIndex);
+        },
+      });
+      fieldGl = created;
+    }
+    if (!map.getLayer(FIELD_LAYER)) map.addLayer(fieldGl.layer);
+    fieldGl.setOpacity(rvOpacity);
+    fieldGl.setFrame({
+      grid,
+      hourIdx: hourIndex,
+      geometry: {
+        rows: FIELD_GRID_ROWS,
+        cols: FIELD_GRID_COLS,
+        bounds: fieldBounds,
+        width: FIELD_RASTER_W,
+        height: FIELD_RASTER_H,
+      },
+      color,
+      // tempColor switches ramp with the colour-blind setting.
+      rampKey: getColorBlindMode() ? 'cb' : '',
+      alpha: FIELD_ALPHA,
+    });
+    return true;
+  }
+
   function removeField(): void {
     if (map.getLayer(FIELD_LAYER)) map.removeLayer(FIELD_LAYER);
     // Legacy halo + circle layer cleanup (PR #119/#121 stacks). Kept
@@ -1990,16 +2092,30 @@ export async function initInteractiveMap(
     // Story 13.3 — in confidence mode the raster shows the models'
     // spread instead of the value (same grid layout, own ramp).
     const useSpread = confidenceMode && !!spreadGrid;
+    const grid = useSpread && spreadGrid ? spreadGrid : fieldGrid;
+    const color = useSpread ? spreadColorFor(activeLayer) : cfg.color;
+    // Story 24.1 — GPU path: upload the frame, the shader does the rest.
+    if (fieldRendererKind() === 'webgl' && showFieldGl(grid, hourIndex, color))
+      return;
+    const t0 = performance.now();
     const render = await renderFieldRaster(
-      useSpread && spreadGrid ? spreadGrid : fieldGrid,
+      grid,
       FIELD_GRID_ROWS,
       FIELD_GRID_COLS,
       fieldBounds,
       hourIndex,
-      useSpread ? spreadColorFor(activeLayer) : cfg.color,
-      { width: FIELD_RASTER_W, height: FIELD_RASTER_H }
+      color,
+      {
+        width: FIELD_RASTER_W,
+        height: FIELD_RASTER_H,
+        alpha: FIELD_ALPHA,
+        // Rows linear in Mercator y, as MapLibre stretches the image
+        // (and as the WebGL renderer samples) — Story 24.1.
+        rowSpace: 'mercator',
+      }
     );
     if (!render) return;
+    markFieldFrame('canvas', performance.now() - t0);
     // Activelayer may have flipped while the canvas blob was settling.
     if (getLayerDef(activeLayer)?.kind !== 'field') {
       URL.revokeObjectURL(render.blobUrl);
@@ -3714,7 +3830,9 @@ export async function initInteractiveMap(
       rvOpacity = Number(opacityEl.value) / 100;
       // Story 21.3 — the factory knows which A/B slot is on screen.
       weatherRaster.setOpacity(rvOpacity);
-      if (map.getLayer(FIELD_LAYER))
+      // Story 24.1 — the WebGL field has no paint properties.
+      fieldGl?.setOpacity(rvOpacity);
+      if (map.getLayer(FIELD_LAYER)?.type === 'raster')
         map.setPaintProperty(FIELD_LAYER, 'raster-opacity', rvOpacity);
       if (map.getLayer(WIND_CIRCLE_LAYER))
         map.setPaintProperty(WIND_CIRCLE_LAYER, 'circle-opacity', rvOpacity);
@@ -4624,6 +4742,14 @@ export async function initInteractiveMap(
       fieldAbort?.abort();
       fieldAbort = null;
       revokeFieldBlob(); // free the last field raster blob URL
+      // Story 24.1 — onRemove frees the WebGL field's program, VAO,
+      // buffer and textures before the map (and its context) goes.
+      try {
+        if (map.getLayer(FIELD_LAYER)) map.removeLayer(FIELD_LAYER);
+      } catch {
+        /* style already gone */
+      }
+      fieldGl = null;
       placePopup?.remove();
       placePopup = null;
       window.clearTimeout(hashTimer);

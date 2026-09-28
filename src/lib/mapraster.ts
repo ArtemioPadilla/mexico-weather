@@ -214,6 +214,74 @@ export function bicubicValue(
   return cubic(ty, rowResults[0], rowResults[1], rowResults[2], rowResults[3]);
 }
 
+/** Web Mercator y of a latitude, normalised like MapLibre's
+ *  `MercatorCoordinate` (0 at ~85.05° N, 1 at ~85.05° S). */
+export function mercatorY(lat: number): number {
+  const phi = (lat * Math.PI) / 180;
+  return 0.5 - Math.log(Math.tan(Math.PI / 4 + phi / 2)) / (2 * Math.PI);
+}
+
+/** Inverse of {@link mercatorY}: latitude (degrees) of a normalised y. */
+export function latFromMercatorY(y: number): number {
+  return (
+    ((2 * Math.atan(Math.exp(Math.PI * (1 - 2 * y))) - Math.PI / 2) * 180) /
+    Math.PI
+  );
+}
+
+/**
+ * How image rows map to latitude (Story 24.1).
+ *
+ * - `'lat'` (the historical default): rows are evenly spaced in latitude.
+ * - `'mercator'`: rows are evenly spaced in Web Mercator y, which is how
+ *   MapLibre stretches an `image` source between its corners. Without it a
+ *   lat-linear image lands ~3° north of its data around 20° N on the
+ *   −5…50° field box (the tooltip, which samples at the true latitude,
+ *   disagreed with the colour under the pointer).
+ */
+export type RasterRowSpace = 'lat' | 'mercator';
+
+/** Latitude of image row `py` of `H` rows over `bounds`. */
+export function rowLatitude(
+  py: number,
+  H: number,
+  bounds: RasterBounds,
+  rowSpace: RasterRowSpace = 'lat'
+): number {
+  const t = H > 1 ? py / (H - 1) : 0;
+  if (rowSpace === 'mercator') {
+    const yN = mercatorY(bounds.north);
+    const yS = mercatorY(bounds.south);
+    return latFromMercatorY(yN + t * (yS - yN));
+  }
+  return bounds.north - t * (bounds.north - bounds.south);
+}
+
+/** Fraction of the raster edge that fades to transparent (see
+ *  {@link edgeFalloffAt}). Shared with the WebGL renderer (Story 24.1). */
+export const FIELD_EDGE_FADE_FRACTION = 0.12;
+
+/** Soft alpha fade near the raster edges for pixel (px, py) of a W×H
+ *  raster; `px`/`py` may be fractional (the WebGL renderer evaluates it
+ *  per fragment). 1 inside, smoothstep to 0 at the border. */
+export function edgeFalloffAt(
+  px: number,
+  py: number,
+  W: number,
+  H: number
+): number {
+  const fadePxW = Math.max(2, Math.floor(W * FIELD_EDGE_FADE_FRACTION));
+  const fadePxH = Math.max(2, Math.floor(H * FIELD_EDGE_FADE_FRACTION));
+  const dx = Math.min(px, W - 1 - px);
+  const dy = Math.min(py, H - 1 - py);
+  const fx = dx >= fadePxW ? 1 : Math.max(0, dx) / fadePxW;
+  const fy = dy >= fadePxH ? 1 : Math.max(0, dy) / fadePxH;
+  // Smoothstep both axes for a perceptually nicer fade than linear.
+  const sx = fx * fx * (3 - 2 * fx);
+  const sy = fy * fy * (3 - 2 * fy);
+  return sx * sy;
+}
+
 /** Fill an ImageData buffer with the bicubic-interpolated field. */
 export function fillFieldImageData(
   img: { data: Uint8ClampedArray; width: number; height: number },
@@ -223,12 +291,13 @@ export function fillFieldImageData(
   bounds: RasterBounds,
   hourIdx: number,
   colorHex: (v: number) => string,
-  alpha: number
+  alpha: number,
+  opts?: { rowSpace?: RasterRowSpace }
 ): void {
   const W = img.width;
   const H = img.height;
   const dLng = bounds.east - bounds.west;
-  const dLat = bounds.north - bounds.south;
+  const rowSpace = opts?.rowSpace ?? 'lat';
   // Cache the color ramp lookups in a small bucket. The ramp itself is
   // piecewise constant so identical values hash to identical hex strings;
   // a Map keyed on the integer-rounded value is a >50× perf win on the
@@ -247,23 +316,10 @@ export function fillFieldImageData(
   // viewport at low zoom shows the raster's rectangular boundary as a
   // hard edge against the basemap. Fading the outermost ~12% of pixels
   // to fully transparent makes the field blend smoothly with the
-  // basemap beyond, eliminating the rectangle look.
-  const FADE_FRACTION = 0.12;
-  const fadePxW = Math.max(2, Math.floor(W * FADE_FRACTION));
-  const fadePxH = Math.max(2, Math.floor(H * FADE_FRACTION));
-  function edgeFalloff(px: number, py: number): number {
-    const dx = Math.min(px, W - 1 - px);
-    const dy = Math.min(py, H - 1 - py);
-    const fx = dx >= fadePxW ? 1 : dx / fadePxW;
-    const fy = dy >= fadePxH ? 1 : dy / fadePxH;
-    // Smoothstep both axes for a perceptually nicer fade than linear.
-    const sx = fx * fx * (3 - 2 * fx);
-    const sy = fy * fy * (3 - 2 * fy);
-    return sx * sy;
-  }
+  // basemap beyond, eliminating the rectangle look (edgeFalloffAt).
   for (let py = 0; py < H; py++) {
     // Image y goes top→bottom (north→south); flip to grid lat (south→north).
-    const lat = bounds.north - (py / (H - 1)) * dLat;
+    const lat = rowLatitude(py, H, bounds, rowSpace);
     for (let px = 0; px < W; px++) {
       const lng = bounds.west + (px / (W - 1)) * dLng;
       const v = bicubicValue(grid, rows, cols, bounds, lat, lng, hourIdx);
@@ -278,7 +334,9 @@ export function fillFieldImageData(
       img.data[i + 2] = b;
       // Ramp alpha (Story 15.5: dry precipitation cells are #00000000)
       // multiplies the layer alpha and the edge fade.
-      img.data[i + 3] = Math.round((alpha * a * edgeFalloff(px, py)) / 255);
+      img.data[i + 3] = Math.round(
+        (alpha * a * edgeFalloffAt(px, py, W, H)) / 255
+      );
     }
   }
 }
@@ -359,7 +417,12 @@ export async function renderFieldRaster(
   bounds: RasterBounds,
   hourIdx: number,
   colorHex: (v: number) => string,
-  opts?: { width?: number; height?: number; alpha?: number }
+  opts?: {
+    width?: number;
+    height?: number;
+    alpha?: number;
+    rowSpace?: RasterRowSpace;
+  }
 ): Promise<RasterRender | null> {
   const W = opts?.width ?? 400;
   const H = opts?.height ?? 280;
@@ -369,7 +432,9 @@ export async function renderFieldRaster(
   const ctx = canvas.getContext('2d');
   if (!ctx) return null;
   const img = ctx.createImageData(W, H);
-  fillFieldImageData(img, grid, rows, cols, bounds, hourIdx, colorHex, alpha);
+  fillFieldImageData(img, grid, rows, cols, bounds, hourIdx, colorHex, alpha, {
+    rowSpace: opts?.rowSpace,
+  });
   ctx.putImageData(img, 0, 0);
   try {
     const blob = await canvasToBlob(canvas);

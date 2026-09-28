@@ -40,7 +40,7 @@ export interface CloudsOverlayDeps {
 
 export function createCloudsOverlay(
   map: maplibregl.Map,
-  deps: CloudsOverlayDeps,
+  deps: CloudsOverlayDeps
 ): CloudsOverlay {
   let abort: AbortController | null = null;
   let blobUrl: string | null = null;
@@ -83,7 +83,7 @@ export function createCloudsOverlay(
           try {
             const r = await deps.fetch(
               `${deps.base}data/field-grids/cloud_cover.json`,
-              { signal: ac.signal },
+              { signal: ac.signal }
             );
             if (r.ok && !ac.signal.aborted) {
               const snap = (await r.json()) as FieldGrid | null;
@@ -125,7 +125,9 @@ export function createCloudsOverlay(
           bounds,
           0, // first frame
           () => '#f8fafc', // near-white; alpha encodes density
-          { width: 800, height: 560, alpha: 255 },
+          // Story 24.1 — rows linear in Mercator y, as MapLibre stretches
+          // the image: the clouds line up with the field layer underneath.
+          { width: 800, height: 560, alpha: 255, rowSpace: 'mercator' }
         );
         if (!render || ac.signal.aborted) return;
         blobUrl = render.blobUrl;
