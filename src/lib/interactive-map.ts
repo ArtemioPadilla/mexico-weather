@@ -66,8 +66,6 @@ import { legendScaleFor, type LegendKind } from './map/chrome/legend-scale';
 import { clearLegendScale, paintLegendScale } from './map/chrome/legend-bar';
 import {
   MAX_WIND_MPS,
-  windSpeed,
-  windSpeedColor,
   encodeWindGrid,
   initParticlePositions,
   type WindPoint,
@@ -320,9 +318,11 @@ import {
 } from './map/chrome/model-toggle';
 import { createToolPill, type ToolPill } from './map/chrome/tool-pill';
 import {
+  WIND_ARROW_IMAGE,
   WIND_PARTICLES_LAYER_ID,
   makeWindParticlesLayer,
-  windPointsAtHour,
+  windArrowCollection,
+  windArrowSdf,
 } from './map/layers/wind-particles';
 import { createIsobarsLayer } from './map/layers/isobars';
 import { createCrosshair } from './map/chrome/crosshair';
@@ -1117,7 +1117,14 @@ export async function initInteractiveMap(
               : def.kind === 'field'
                 ? 'wx-field-layer'
                 : def.kind === 'particles'
-                  ? WIND_CIRCLE_LAYER
+                  ? // Story 24.4 — the animated layer, or the arrows
+                    // under reduced motion (this used to expect the
+                    // reduced-motion circles only, so a `#layer=wind`
+                    // boot re-ran the activation — and its Open-Meteo
+                    // call — five times before giving up).
+                    isReducedMotion()
+                    ? WIND_ARROW_LAYER
+                    : WIND_LAYER
                   : null;
           const delays = [0, 250, 600, 1300, 2800]; // ~4.9 s total
           // The hash `t=` is consumed by the first activation; a retry
@@ -1747,8 +1754,10 @@ export async function initInteractiveMap(
   // src/lib/map/layers/wind-particles.ts. Layer id is re-exported as
   // WIND_PARTICLES_LAYER_ID; alias kept for the rest of this file.
   const WIND_LAYER = WIND_PARTICLES_LAYER_ID;
-  const WIND_CIRCLE_LAYER = 'wx-wind-circle';
-  const WIND_CIRCLE_SOURCE = 'wx-wind-circle-src';
+  // Story 24.4 — under prefers-reduced-motion the particles give way to
+  // static arrows (one per grid point, rotated and coloured by speed).
+  const WIND_ARROW_LAYER = 'wx-wind-arrows';
+  const WIND_ARROW_SOURCE = 'wx-wind-arrows-src';
 
   let windGrid: WindGrid | null = null;
   let windHourIndex = 0;
@@ -1766,14 +1775,23 @@ export async function initInteractiveMap(
   const refreshSun = (): void => sunLayer.refresh();
   const removeSun = (): void => sunLayer.remove();
 
-  function removeWind(): void {
+  /** Drop the particle layer (its onRemove stops the rAF loop and frees
+   *  the GL resources) and the reduced-motion arrows. */
+  function removeWindLayers(): void {
     if (windRaf) {
       window.cancelAnimationFrame(windRaf);
       windRaf = 0;
     }
     if (map.getLayer(WIND_LAYER)) map.removeLayer(WIND_LAYER);
-    if (map.getLayer(WIND_CIRCLE_LAYER)) map.removeLayer(WIND_CIRCLE_LAYER);
-    if (map.getSource(WIND_CIRCLE_SOURCE)) map.removeSource(WIND_CIRCLE_SOURCE);
+    removeWindArrows();
+  }
+  function removeWindArrows(): void {
+    if (map.getLayer(WIND_ARROW_LAYER)) map.removeLayer(WIND_ARROW_LAYER);
+    if (map.getSource(WIND_ARROW_SOURCE)) map.removeSource(WIND_ARROW_SOURCE);
+  }
+
+  function removeWind(): void {
+    removeWindLayers();
     removeCityValues();
   }
 
@@ -1824,32 +1842,7 @@ export async function initInteractiveMap(
   }
   function removeWindOverlay(): void {
     if (activeLayer === 'wind') return; // owned by the layer, not us
-    if (windRaf) {
-      window.cancelAnimationFrame(windRaf);
-      windRaf = 0;
-    }
-    if (map.getLayer(WIND_LAYER)) map.removeLayer(WIND_LAYER);
-    if (map.getLayer(WIND_CIRCLE_LAYER)) map.removeLayer(WIND_CIRCLE_LAYER);
-    if (map.getSource(WIND_CIRCLE_SOURCE)) map.removeSource(WIND_CIRCLE_SOURCE);
-  }
-
-  // windPointsAtHour now imported from the wind-particles module so
-  // the layer + this layer-rail wiring share a single implementation.
-
-  function windCircleGeoJSON(g: WindGrid, h: number): FeatureCollection {
-    const feats: Feature[] = [];
-    for (const p of g.points) {
-      const u = p.u[h];
-      const v = p.v[h];
-      if (u === null || v === null) continue;
-      const s = windSpeed(u, v);
-      feats.push({
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
-        properties: { color: windSpeedColor(s), speed: Math.round(s) },
-      });
-    }
-    return { type: 'FeatureCollection', features: feats };
+    removeWindLayers();
   }
 
   function showWindFrame(h: number): void {
@@ -1857,26 +1850,57 @@ export async function initInteractiveMap(
     windHourIndex = h;
     windTexDirty = true;
     if (isReducedMotion()) {
-      const data = windCircleGeoJSON(windGrid, h);
-      const src = map.getSource(WIND_CIRCLE_SOURCE) as
+      // Story 24.4 — static arrows; a mid-session switch of the OS
+      // setting drops the animated layer on the next frame.
+      if (map.getLayer(WIND_LAYER)) {
+        if (windRaf) window.cancelAnimationFrame(windRaf);
+        windRaf = 0;
+        map.removeLayer(WIND_LAYER);
+      }
+      const data = windArrowCollection(windGrid, h);
+      const src = map.getSource(WIND_ARROW_SOURCE) as
         maplibregl.GeoJSONSource | undefined;
       if (src) {
         src.setData(data);
       } else {
-        map.addSource(WIND_CIRCLE_SOURCE, { type: 'geojson', data });
+        if (!map.hasImage(WIND_ARROW_IMAGE))
+          map.addImage(WIND_ARROW_IMAGE, windArrowSdf(), {
+            sdf: true,
+            pixelRatio: 2,
+          });
+        map.addSource(WIND_ARROW_SOURCE, { type: 'geojson', data });
         map.addLayer({
-          id: WIND_CIRCLE_LAYER,
-          type: 'circle',
-          source: WIND_CIRCLE_SOURCE,
+          id: WIND_ARROW_LAYER,
+          type: 'symbol',
+          source: WIND_ARROW_SOURCE,
+          layout: {
+            'icon-image': WIND_ARROW_IMAGE,
+            'icon-rotate': ['get', 'bearing'],
+            'icon-rotation-alignment': 'map',
+            'icon-size': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              3,
+              ['*', 0.8, ['get', 'scale']],
+              8,
+              ['*', 1.6, ['get', 'scale']],
+            ],
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true,
+          },
           paint: {
-            'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 6, 8, 18],
-            'circle-color': ['get', 'color'],
-            'circle-opacity': rvOpacity,
+            'icon-color': ['get', 'color'],
+            'icon-halo-color': 'rgba(0, 0, 0, 0.6)',
+            'icon-halo-width': 1,
+            'icon-opacity': rvOpacity,
           },
         });
       }
+      refreshCityValues();
       return;
     }
+    removeWindArrows();
     if (!map.getLayer(WIND_LAYER)) {
       map.addLayer(
         makeWindParticlesLayer(map, {
@@ -1886,6 +1910,7 @@ export async function initInteractiveMap(
           markTexClean: () => {
             windTexDirty = false;
           },
+          getOpacity: () => rvOpacity,
           onTick: (id) => {
             windRaf = id;
           },
@@ -3910,8 +3935,10 @@ export async function initInteractiveMap(
       fieldGl?.setOpacity(rvOpacity);
       if (map.getLayer(FIELD_LAYER)?.type === 'raster')
         map.setPaintProperty(FIELD_LAYER, 'raster-opacity', rvOpacity);
-      if (map.getLayer(WIND_CIRCLE_LAYER))
-        map.setPaintProperty(WIND_CIRCLE_LAYER, 'circle-opacity', rvOpacity);
+      // Story 24.4 — the particles read rvOpacity on every frame; the
+      // reduced-motion arrows are a symbol layer.
+      if (map.getLayer(WIND_ARROW_LAYER))
+        map.setPaintProperty(WIND_ARROW_LAYER, 'icon-opacity', rvOpacity);
       // Sun layer reads rvOpacity via its opacityScaleFn closure on
       // each refresh — calling refresh() re-applies the expression to
       // both tiers without duplicating the constants here.
@@ -4807,6 +4834,14 @@ export async function initInteractiveMap(
     destroy(): void {
       themeObserver?.disconnect();
       sunLayer.remove(); // also stops the internal ticker
+      // Story 24.4 — onRemove stops the particle loop, drops its
+      // movestart/moveend listeners and frees programs, textures,
+      // framebuffer and buffers before the map (and its context) goes.
+      try {
+        removeWindLayers();
+      } catch {
+        /* style already gone */
+      }
       if (windRaf) window.cancelAnimationFrame(windRaf);
       // Story 23.2 — cancels the loop's pending animation frame and
       // buffering timer; a late start() (boot autoplay) is a no-op.
