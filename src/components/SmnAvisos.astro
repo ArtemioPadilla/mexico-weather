@@ -55,7 +55,9 @@ const mode = scope === 'all' ? 'all' : slugs.length > 0 ? 'slugs' : 'coords';
     class="flex items-center gap-2 text-base font-semibold"
     data-smn-title
   >
-    <span data-smn-icon aria-hidden="true">⚠️</span>
+    {/* Story 25.4 — a sprite icon, not the ⚠️ / ✓ emoji: the card also
+        sits in /mapa's SMN popover, where the chrome shows no emoji. */}
+    <svg data-smn-icon class="h-5 w-5 shrink-0" aria-hidden="true"><use href="#i-alert"></use></svg>
     <span data-smn-heading data-i18n-en="SMN alerts">Alertas SMN</span>
   </h2>
   <p data-smn-loc class="mt-0.5 text-xs"></p>
@@ -153,7 +155,7 @@ const mode = scope === 'all' ? 'all' : slugs.length > 0 ? 'slugs' : 'coords';
   function applyVisualState(host: HTMLElement, state: 'alert' | 'calm'): void {
     host.dataset.smnState = state;
     const heading = host.querySelector('[data-smn-heading]') as HTMLElement | null;
-    const icon = host.querySelector('[data-smn-icon]') as HTMLElement | null;
+    const icon = host.querySelector('[data-smn-icon]');
     host.classList.remove(
       'border-amber-200', 'bg-amber-50', 'dark:border-amber-900', 'dark:bg-amber-950',
       'border-gray-200', 'bg-gray-50', 'dark:border-gray-800', 'dark:bg-gray-900/40',
@@ -168,7 +170,7 @@ const mode = scope === 'all' ? 'all' : slugs.length > 0 ? 'slugs' : 'coords';
       if (stale) stale.className = stale.classList.contains('hidden')
         ? 'hidden'
         : 'text-amber-800 dark:text-amber-300';
-      if (icon) icon.textContent = '⚠️';
+      icon?.querySelector('use')?.setAttribute('href', '#i-alert');
       if (heading)
         heading.textContent = lang === 'en' ? 'SMN alerts' : 'Alertas SMN';
     } else {
@@ -178,7 +180,7 @@ const mode = scope === 'all' ? 'all' : slugs.length > 0 ? 'slugs' : 'coords';
       if (stale) stale.className = stale.classList.contains('hidden')
         ? 'hidden'
         : 'text-gray-600 dark:text-gray-400';
-      if (icon) icon.textContent = '✓';
+      icon?.querySelector('use')?.setAttribute('href', '#i-check');
       if (heading)
         heading.textContent = lang === 'en'
           ? 'No active SMN alerts'

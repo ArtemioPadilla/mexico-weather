@@ -8,7 +8,7 @@
  * shows only when there is at least one aviso, and opens the same
  * <SmnAvisos> widget in a popover:
  *
- *   <button aria-expanded="false" aria-controls="P" hidden>⚠ <span>N</span></button>
+ *   <button aria-expanded="false" aria-controls="P" hidden><svg>#i-alert</svg> <span>N</span></button>
  *   <div id="P" role="dialog" tabindex="-1" hidden><SmnAvisos scope="all" /></div>
  *
  * - smnCounterState() / smnCounterLabel() are pure: the count is

@@ -331,6 +331,7 @@ import {
 } from './map/layers/wind-particles';
 import { createIsobarsLayer } from './map/layers/isobars';
 import { createCrosshair } from './map/chrome/crosshair';
+import { renderGlyphLines, type GlyphLabels } from './map/chrome/glyph-icons';
 import { layerPageFor } from './layer-pages';
 import { createCloudsOverlay } from './map/overlays/clouds';
 import { createCityValuesOverlay } from './map/overlays/city-values';
@@ -424,6 +425,15 @@ export async function initInteractiveMap(
 ): Promise<MapHandle> {
   const lang = documentUiLang(opts.lang ?? 'es');
   const t = ui[lang];
+  // Story 25.4 — spoken names of the value icons (tooltip, crosshair,
+  // place card), so a screen reader hears "Temperatura 24°", not "24°".
+  const glyphLabels = (): GlyphLabels => ({
+    thermometer: t.map_layer_temperature,
+    droplet: t.map_layer_humidity,
+    gauge: t.map_layer_pressure,
+    wind: t.map_layer_wind,
+    'cloud-rain': t.map_layer_precipitation,
+  });
   const base = siteBase();
   const features = opts.features;
   const useHash = opts.useHash ?? false;
@@ -719,6 +729,7 @@ export async function initInteractiveMap(
       isFavorite,
       tempUnit: currentUnits().temp,
       nowLine: tooltipValueAt(lng, lat),
+      glyphLabels: glyphLabels(),
       strings: {
         title: t.place_card_title,
         daily: t.place_card_daily,
@@ -2084,6 +2095,7 @@ export async function initInteractiveMap(
   const crosshair = createCrosshair(map, {
     container: map.getContainer(),
     getValueAt: (lng, lat) => tooltipValueAt(lng, lat),
+    labels: glyphLabels(),
   });
   const removeIsobars = (): void => isobarsLayer.remove();
 
@@ -2822,7 +2834,8 @@ export async function initInteractiveMap(
   function setTooltip(text: string, x: number, y: number): void {
     if (!tooltipEl) return;
     if (text !== lastTooltipText) {
-      tooltipEl.textContent = text;
+      // Story 25.4 — one row per value, its emoji drawn as a sprite icon.
+      renderGlyphLines(tooltipEl, text, glyphLabels());
       lastTooltipText = text;
     }
     // Offset so the cursor doesn't cover the card. The container is the
@@ -3422,8 +3435,10 @@ export async function initInteractiveMap(
       btn.id = `layerbtn-${def.id}`;
       btn.type = 'button';
       btn.setAttribute('aria-pressed', String(def.id === activeLayer));
+      // Story 25.4 — the chrome's one button spec (global.css `.im-btn`):
+      // hover, pressed, focus and the active layer's `on` come from there.
       btn.className =
-        'flex min-w-0 items-center justify-center gap-1.5 rounded px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/20 aria-pressed:font-semibold aria-pressed:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 sm:flex-col sm:gap-0.5 sm:px-1 sm:py-1.5';
+        'im-btn flex min-w-0 gap-1.5 px-2 py-1 sm:flex-col sm:gap-0.5 sm:px-1 sm:py-1.5';
       // zoom.earth-style icon; falls back to text-only when LayerDef has
       // no icon glyph.
       if (def.icon) {

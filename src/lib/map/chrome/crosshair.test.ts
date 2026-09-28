@@ -37,11 +37,15 @@ describe('crosshair mode (Story 18.3)', () => {
     ch.setEnabled(true);
     expect(container.querySelector(`#${CROSSHAIR_ID}`)).not.toBeNull();
     const readout = container.querySelector(`#${CROSSHAIR_VALUE_ID}`)!;
-    expect(readout.textContent).toBe('🌡 19°');
+    // Story 25.4 — the emoji is drawn as a sprite icon, not as text.
+    expect(readout.textContent).toBe('19°');
+    expect(readout.querySelector('use')?.getAttribute('href')).toBe(
+      '#i-thermometer'
+    );
     expect(sampled).toEqual([-99.1, 19.4]);
     center.lat = 25.7;
     map.fire('move');
-    expect(readout.textContent).toBe('🌡 26°');
+    expect(readout.textContent).toBe('26°');
     expect(handlers.get('move')?.size).toBe(1);
     ch.toggle();
     expect(ch.isEnabled()).toBe(false);

@@ -67,8 +67,9 @@ export function createSubOptionsGroup<T extends string>(
     btn.type = 'button';
     btn.dataset.sub = o.id;
     btn.textContent = o.label;
+    // Story 25.4 — the chrome's one button spec (global.css `.im-btn`).
     btn.className =
-      'inline-flex items-center rounded-full border border-im-border px-2 py-0.5 hover:bg-blue-500/10 max-sm:min-h-[44px] aria-pressed:border-blue-400/60 aria-pressed:bg-blue-500/20 aria-pressed:font-semibold aria-pressed:text-im-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
+      'im-btn im-btn-chip rounded-full px-2 py-0.5 max-sm:min-h-[44px]';
     btn.setAttribute('aria-pressed', String(opts.getActive() === o.id));
     btn.addEventListener('click', () => {
       if (opts.getActive() === o.id) return;

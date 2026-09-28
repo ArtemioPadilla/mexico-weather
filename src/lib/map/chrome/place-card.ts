@@ -13,6 +13,11 @@
  */
 import type { Forecast } from '../../forecast';
 import { formatTemp, type TempUnit } from '../../units';
+import {
+  conditionIconHtml,
+  glyphLinesHtml,
+  type GlyphLabels,
+} from './glyph-icons';
 
 export type PlaceCardMode = 'daily' | 'hourly';
 
@@ -37,9 +42,12 @@ export interface PlaceCardOpts {
   /** Link to /forecast?lat=&lng=… */
   forecastHref: string;
   isFavorite: boolean;
-  /** Optional one-line reading at the point from the active layer
-   *  (tooltipValueAt), e.g. "🌡 24° · 💧 60%". */
+  /** Optional reading at the point from the active layer
+   *  (tooltipValueAt), e.g. "🌡 24°\n💧 60%": drawn as sprite icon + value,
+   *  never as emoji (Story 25.4). */
   nowLine?: string | null;
+  /** Story 25.4 — spoken names of the value icons (sprite id → name). */
+  glyphLabels?: GlyphLabels;
   strings: PlaceCardStrings;
   lang: 'es' | 'en';
   /** Local "today" as YYYY-MM-DD, so the first row can read "Hoy". */
@@ -63,13 +71,6 @@ export function esc(s: string): string {
         return '&#39;';
     }
   });
-}
-
-/** Trailing emoji of a WMO condition string ("Lluvia 🌧️" → "🌧️"). */
-export function conditionGlyph(condition: string): string {
-  const parts = condition.trim().split(/\s+/);
-  const last = parts[parts.length - 1] ?? '';
-  return /\p{Extended_Pictographic}/u.test(last) ? last : '·';
 }
 
 function fmt(n: number | null | undefined): string {
@@ -104,10 +105,11 @@ export function dayLabel(
   });
 }
 
-const BTN =
-  'inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
+// Story 25.4 — the map chrome's one button spec (global.css `.im-btn`):
+// states (hover, pressed, focus, on, selected) come from there.
+const BTN = 'im-btn im-btn-icon';
 const TAB =
-  'inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full px-3 text-xs font-semibold aria-selected:bg-blue-600 aria-selected:text-white text-im-text hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
+  'im-btn min-h-[44px] flex-1 rounded-full px-3 text-xs font-semibold';
 
 function barFill(
   lo: number | null,
@@ -135,7 +137,7 @@ export function renderDailyRows(fc: Forecast, o: PlaceCardOpts): string {
       (d) =>
         `<div data-pc-day="${esc(d.date)}" class="grid grid-cols-[3.4rem_1.25rem_1fr_2.4rem_4.4rem] items-center gap-1.5 py-1 text-sm">` +
         `<span class="capitalize text-im-muted">${esc(dayLabel(d.date, o))}</span>` +
-        `<span class="text-center" aria-hidden="true">${esc(conditionGlyph(d.condition))}</span>` +
+        `<span class="text-center" aria-hidden="true">${conditionIconHtml(d.condition, 'inline-block h-4 w-4 align-middle')}</span>` +
         `<span class="relative h-1.5 rounded-full bg-white/10">${barFill(d.tmin, d.tmax, min, span)}</span>` +
         `<span class="text-right text-xs text-im-accent">${fmt(d.precipProbabilityMax)}%</span>` +
         `<span class="text-right tabular-nums text-im-text">${fmtTemp(d.tmin, o)} / ${fmtTemp(d.tmax, o)}</span>` +
@@ -160,7 +162,7 @@ export function renderHourlyRows(fc: Forecast, o: PlaceCardOpts): string {
         sep +
         `<div data-pc-hour="${esc(h.time)}" class="grid grid-cols-[3rem_1.25rem_1fr_2.4rem] items-center gap-1.5 py-0.5 text-sm">` +
         `<span class="tabular-nums text-im-muted">${esc(hh)}</span>` +
-        `<span class="text-center" aria-hidden="true">${esc(conditionGlyph(h.condition))}</span>` +
+        `<span class="text-center" aria-hidden="true">${conditionIconHtml(h.condition, 'inline-block h-4 w-4 align-middle')}</span>` +
         `<span class="tabular-nums text-im-text">${fmtTemp(h.temperature, o)}</span>` +
         `<span class="text-right text-xs text-im-accent">${fmt(h.precipProbability)}%</span>` +
         `</div>`
@@ -177,12 +179,12 @@ function header(o: PlaceCardOpts): string {
     `<p class="text-[10px] font-semibold uppercase tracking-wide text-im-muted">${esc(s.title)}</p>` +
     `<p class="truncate text-sm font-semibold text-im-text">${esc(o.coordsLabel)}</p>` +
     (o.nowLine
-      ? `<p class="text-xs text-im-muted">${esc(o.nowLine)}</p>`
+      ? `<p data-pc-now class="flex flex-wrap items-center text-xs text-im-muted">${glyphLinesHtml(o.nowLine, o.glyphLabels)}</p>`
       : '') +
     `</div>` +
     `<div class="flex shrink-0 gap-0.5">` +
-    `<button type="button" data-pc-fav class="${BTN} ${o.isFavorite ? 'text-amber-400' : 'text-im-muted hover:text-im-text'}" aria-pressed="${o.isFavorite ? 'true' : 'false'}" aria-label="${esc(o.isFavorite ? s.favRemove : s.favAdd)}" title="${esc(o.isFavorite ? s.favRemove : s.favAdd)}"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-star"></use></svg></button>` +
-    `<button type="button" data-pc-close class="${BTN} text-im-muted hover:text-im-text" aria-label="${esc(s.close)}" title="${esc(s.close)}"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-x"></use></svg></button>` +
+    `<button type="button" data-pc-fav class="${BTN}" aria-pressed="${o.isFavorite ? 'true' : 'false'}" aria-label="${esc(o.isFavorite ? s.favRemove : s.favAdd)}" title="${esc(o.isFavorite ? s.favRemove : s.favAdd)}"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-star"></use></svg></button>` +
+    `<button type="button" data-pc-close class="${BTN}" aria-label="${esc(s.close)}" title="${esc(s.close)}"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-x"></use></svg></button>` +
     `</div></div>`
   );
 }

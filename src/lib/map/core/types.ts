@@ -93,7 +93,8 @@ export interface BaseLayer {
   id: string;
   kind: 'base';
   label: I18nString;
-  /** Emoji or SVG path string for the layer rail. */
+  /** Sprite id for the layer rail (IconSprite.astro, without `i-`;
+   *  Story 25.4: no emoji in the map chrome). */
   icon: string;
   /** Single uppercase letter for keyboard activation, e.g. 'T'. */
   shortcut?: string;

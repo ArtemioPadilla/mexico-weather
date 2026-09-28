@@ -9,12 +9,15 @@
  * same getValueAt() the hover tooltip uses.
  */
 import type maplibregl from 'maplibre-gl';
+import { renderGlyphLines, type GlyphLabels } from './glyph-icons';
 
 export interface CrosshairDeps {
   /** The map's positioned container (map.getContainer()). */
   container: HTMLElement;
   /** Same sampler as the hover tooltip; null when the layer has none. */
   getValueAt: (lng: number, lat: number) => string | null;
+  /** Story 25.4 — spoken names of the value icons (sprite id → name). */
+  labels?: GlyphLabels;
 }
 
 export interface Crosshair {
@@ -50,7 +53,7 @@ export function createCrosshair(
     value.setAttribute('role', 'status');
     value.setAttribute('aria-live', 'polite');
     value.className =
-      'pointer-events-none absolute left-1/2 top-[calc(50%+1.25rem)] z-20 -translate-x-1/2 whitespace-pre rounded bg-im-bg px-2 py-1 text-center text-sm font-medium leading-tight text-im-text shadow-lg backdrop-blur-sm';
+      'pointer-events-none absolute left-1/2 top-[calc(50%+1.25rem)] z-20 -translate-x-1/2 whitespace-pre rounded-im-control bg-im-bg px-2 py-1 text-center text-sm font-medium leading-tight text-im-text shadow-im backdrop-blur-sm';
     deps.container.appendChild(mark);
     deps.container.appendChild(value);
   }
@@ -58,7 +61,8 @@ export function createCrosshair(
   function refresh(): void {
     if (!enabled || !value) return;
     const c = map.getCenter();
-    value.textContent = deps.getValueAt(c.lng, c.lat) ?? '—';
+    // Story 25.4 — one row per value, its emoji drawn as a sprite icon.
+    renderGlyphLines(value, deps.getValueAt(c.lng, c.lat) ?? '—', deps.labels);
   }
 
   function setEnabled(on: boolean): void {

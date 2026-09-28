@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Forecast } from '../../forecast';
+import { hasEmoji } from './glyph-icons';
 import {
-  conditionGlyph,
   dayLabel,
   renderDailyRows,
   renderHourlyRows,
@@ -107,7 +107,30 @@ describe('place card renderer', () => {
     expect(html).toContain(
       'href="/mexico-weather/forecast?lat=19.43&amp;lng=-99.13"'
     );
-    expect(html).toContain('🌡 24°');
+    // Story 25.4 — the reading's emoji is drawn as a sprite icon.
+    expect(html).toContain('<use href="#i-thermometer">');
+    expect(html).toContain('<span>24°</span>');
+  });
+
+  it('draws no emoji: conditions and readings use sprite icons (Story 25.4)', () => {
+    const daily = renderPlaceCard(
+      fc(),
+      opts({
+        nowLine: '🌡 24°\n💧 60%',
+        glyphLabels: { thermometer: 'Temperatura', droplet: 'Humedad' },
+      })
+    );
+    const hourly = renderPlaceCard(fc(), opts({ mode: 'hourly' }));
+    expect(hasEmoji(daily)).toBe(false);
+    expect(hasEmoji(hourly)).toBe(false);
+    expect(daily).toContain('#i-cloud-rain');
+    expect(hourly).toContain('#i-cloud-sun');
+    expect(daily).toContain('<span class="sr-only">Temperatura</span>');
+    // Both buttons follow the chrome's one button spec.
+    expect(daily.match(/<button[^>]*class="im-btn[ "]/g)).toHaveLength(4);
+    expect(daily).not.toMatch(
+      /<button[^>]*class="[^"]*\b(hover|focus-visible|aria-selected):/
+    );
   });
 
   it('escapes user-visible strings', () => {
@@ -126,9 +149,7 @@ describe('place card renderer', () => {
     expect(html).not.toContain('12° / 26°');
   });
 
-  it('helpers: glyph extraction and weekday labels', () => {
-    expect(conditionGlyph('Lluvia 🌧️')).toBe('🌧️');
-    expect(conditionGlyph('sin emoji')).toBe('·');
+  it('helpers: weekday labels', () => {
     expect(dayLabel('2026-09-27', opts())).toBe('Hoy');
     expect(dayLabel('2026-09-28', opts())).toBe('Mañana');
     expect(dayLabel('2026-09-30', opts({ lang: 'en' }))).toMatch(/^Wed/);

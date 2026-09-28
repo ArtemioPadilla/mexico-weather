@@ -48,7 +48,7 @@ export const sunBaseLayer: BaseLayer = {
     es: 'Sol y luz solar',
     en: 'Sun & daylight',
   },
-  icon: '☀️',
+  icon: 'sun',
   shortcut: 'O',
 
   // No sub-options — the terminator is what it is.
