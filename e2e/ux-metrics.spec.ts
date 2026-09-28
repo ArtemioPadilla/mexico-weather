@@ -6,6 +6,7 @@ import {
   FPS_WINDOW_MS,
   UX_METRICS_FILE,
   buildUxMetrics,
+  fieldFrameStats,
   fpsStats,
   isSatelliteTileRequest,
   longTaskSample,
@@ -51,6 +52,12 @@ import { bootMap, measureStable } from './chrome-budget-helpers';
  *     those re-fetches is a download there too (which is why Story 21.3
  *     prefetches radar only) — this counts URLs, not bytes.
  *
+ * Plus, as context (Story 24.1): the main-thread time per field frame on
+ * the temperature layer — the `mw:field-frame` User Timing measures the
+ * app records per frame (WebGL: packing + upload + draw call; canvas:
+ * the bicubic raster + PNG encode), collected by a PerformanceObserver
+ * while the timeline steps through 24 frames.
+ *
  * Writes test-results/ux-metrics.json (each test merges what it measured)
  * and attaches it. Thresholds are soft: printed as warnings, never failed
  * here — the workflow turns them into `core.warning`. The spec fails only
@@ -75,6 +82,7 @@ interface Recorder {
 declare global {
   interface Window {
     __uxm?: Recorder;
+    __uxmField?: { duration: number; renderer: string | null }[];
   }
 }
 
@@ -161,7 +169,10 @@ function metricsPath(testInfo: TestInfo): string {
 /** Merge this test's numbers into test-results/ux-metrics.json. */
 async function recordMetrics(
   testInfo: TestInfo,
-  parts: UxMetricsParts
+  parts: UxMetricsParts,
+  /** The warnings about numbers this test measured (the others are the
+   *  other tests' to print). */
+  owns: (warning: string) => boolean
 ): Promise<UxMetrics> {
   const file = metricsPath(testInfo);
   let existing: UxMetrics | null = null;
@@ -185,10 +196,8 @@ async function recordMetrics(
     contentType: 'application/json',
   });
   for (const w of uxWarnings(merged)) {
-    // Only the numbers this test owns; the other test reports its own.
-    if (parts.controls?.mobile === undefined && /mobile/.test(w)) continue;
-    if (parts.controls?.mobile !== undefined && !/mobile/.test(w)) continue;
-    console.warn(`[ux-metrics] ${w}`);
+    // Only the numbers this test owns; the other tests report their own.
+    if (owns(w)) console.warn(`[ux-metrics] ${w}`);
   }
   return merged;
 }
@@ -269,7 +278,11 @@ test.describe('ux metrics · desktop', () => {
           ? null
           : longTaskSample(rec.longTasks, loopStart);
     } finally {
-      const m = await recordMetrics(testInfo, parts);
+      const m = await recordMetrics(
+        testInfo,
+        parts,
+        (w) => !/mobile|field frame/.test(w)
+      );
       console.log(
         `[ux-metrics] desktop: first satellite frame ${m.firstSatelliteFrameMs} ms · ` +
           `loop ${m.loopFps} fps · controls ${m.controls.desktop} · ` +
@@ -293,6 +306,79 @@ test.describe('ux metrics · desktop', () => {
               )
               .join(', ')
         );
+    }
+  });
+});
+
+// Story 24.1 — per-frame render time of a field layer (temperature, from
+// the pre-baked static grid, so no Open-Meteo call). Plan §E24 target:
+// < 4 ms per frame on desktop.
+test.describe('ux metrics · field frame', () => {
+  test.use({ viewport: { width: 1280, height: 800 } });
+
+  const FIELD_FRAMES = 24;
+
+  test('@ux-metrics /mapa desktop: field frame render time on temperature', async ({
+    page,
+  }, testInfo) => {
+    test.setTimeout(90_000);
+    // Every `mw:field-frame` measure, before any app script runs (the app
+    // keeps only the last one in the performance buffer).
+    await page.addInitScript(() => {
+      const out: { duration: number; renderer: string | null }[] = [];
+      window.__uxmField = out;
+      try {
+        new PerformanceObserver((list) => {
+          for (const e of list.getEntries()) {
+            if (e.name !== 'mw:field-frame') continue;
+            const detail = (e as PerformanceMeasure).detail as {
+              renderer?: string;
+            } | null;
+            out.push({
+              duration: e.duration,
+              renderer: detail?.renderer ?? null,
+            });
+          }
+        }).observe({ type: 'measure' });
+      } catch {
+        /* no PerformanceObserver: the number stays null */
+      }
+    });
+    const read = () => page.evaluate(() => (window.__uxmField ?? []).slice());
+    let fieldFrame: UxMetricsParts['fieldFrame'] = null;
+    try {
+      await bootMap(page);
+      // T = Temperatura (a visitor's pick: the satellite loop stops).
+      await page.keyboard.press('t');
+      await expect(page.locator('#layerbtn-temperature')).toHaveAttribute(
+        'aria-pressed',
+        'true'
+      );
+      await expect.poll(async () => (await read()).length).toBeGreaterThan(0);
+      const range = page.locator('#tl-range');
+      await expect(range).toHaveAttribute('max', /^[1-9]\d+$/);
+      const before = (await read()).length;
+      for (let i = 0; i < FIELD_FRAMES; i++) {
+        const idx = Number(await range.inputValue());
+        await range.press(i % 2 ? 'ArrowLeft' : 'ArrowRight');
+        // One frame per step: wait until it was drawn and measured.
+        await expect
+          .poll(async () => (await read()).length)
+          .toBeGreaterThan(before + i);
+        expect(Number(await range.inputValue())).not.toBe(idx);
+      }
+      const samples = (await read()).slice(before);
+      fieldFrame = fieldFrameStats(samples);
+      expect(fieldFrame, 'no mw:field-frame measures').not.toBeNull();
+    } finally {
+      const m = await recordMetrics(testInfo, { fieldFrame }, (w) =>
+        /field frame/.test(w)
+      );
+      console.log(
+        `[ux-metrics] field frame (temperature): ${m.extra.fieldFrameMedianMs ?? 'n/a'} ms median, ` +
+          `longest ${m.extra.fieldFrameMaxMs ?? 'n/a'} ms over ${m.extra.fieldFrames ?? 'n/a'} frames ` +
+          `(${m.extra.fieldRenderer ?? 'n/a'})`
+      );
     }
   });
 });
@@ -322,7 +408,9 @@ test.describe('ux metrics · mobile', () => {
       );
       mobile = over.length;
     } finally {
-      const m = await recordMetrics(testInfo, { controls: { mobile } });
+      const m = await recordMetrics(testInfo, { controls: { mobile } }, (w) =>
+        /mobile/.test(w)
+      );
       console.log(`[ux-metrics] mobile: controls ${m.controls.mobile}`);
     }
   });

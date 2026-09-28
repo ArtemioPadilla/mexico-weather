@@ -19,6 +19,10 @@
  *     helper, e2e/chrome-budget-helpers.ts);
  *  4. new satellite tiles per frame on the loop's second pass (URLs never
  *     requested before), next to the raw tile requests per frame.
+ *
+ * Plus, as context (Story 24.1): the main-thread time per field frame on
+ * the temperature layer — the `mw:field-frame` User Timing measures the
+ * app records for each frame it draws, WebGL or canvas.
  */
 
 export const UX_METRICS_SCHEMA = 1;
@@ -42,7 +46,34 @@ export const UX_THRESHOLDS = {
   controlsDesktop: { max: 8 },
   controlsMobile: { max: 5 },
   newTilesPerFrame: { max: 1 },
+  /** Story 24.1 — plan §E24 acceptance: < 4 ms per field frame on
+   *  desktop. Context only: warned when measured and over, never when
+   *  missing (it is not one of the four numbers). */
+  fieldFrameMs: { max: 4 },
 };
+
+/**
+ * Median and longest of the per-frame field render times (Story 24.1),
+ * with the renderer the app reported. Null without samples.
+ *
+ * @param {{ duration: number, renderer?: string | null }[]} samples
+ */
+export function fieldFrameStats(samples) {
+  const ok = (samples ?? []).filter(
+    (s) => typeof s?.duration === 'number' && Number.isFinite(s.duration)
+  );
+  if (!ok.length) return null;
+  const d = ok.map((s) => s.duration).sort((a, b) => a - b);
+  const mid = d.length >> 1;
+  const median = d.length % 2 ? d[mid] : (d[mid - 1] + d[mid]) / 2;
+  const kinds = new Set(ok.map((s) => s.renderer ?? 'unknown'));
+  return {
+    frames: d.length,
+    medianMs: round(median, 2),
+    maxMs: round(d[d.length - 1], 2),
+    renderer: kinds.size === 1 ? [...kinds][0] : [...kinds].sort().join('+'),
+  };
+}
 
 /** A GIBS WMTS tile (the satellite raster, its prefetch and the boot
  *  probe) — the requests that change with every frame of the loop. */
@@ -259,6 +290,10 @@ export function buildUxMetrics(parts = {}) {
         : null,
       loopStepMedianMs: num(parts.steps?.medianMs),
       loopStepMaxMs: num(parts.steps?.maxMs),
+      fieldFrameMedianMs: num(parts.fieldFrame?.medianMs),
+      fieldFrameMaxMs: num(parts.fieldFrame?.maxMs),
+      fieldFrames: num(parts.fieldFrame?.frames),
+      fieldRenderer: parts.fieldFrame?.renderer ?? null,
     },
   };
 }
@@ -298,6 +333,16 @@ export function mergeUxMetrics(base, next) {
         next.extra?.loopStepMedianMs
       ),
       loopStepMaxMs: pick(base.extra?.loopStepMaxMs, next.extra?.loopStepMaxMs),
+      fieldFrameMedianMs: pick(
+        base.extra?.fieldFrameMedianMs,
+        next.extra?.fieldFrameMedianMs
+      ),
+      fieldFrameMaxMs: pick(
+        base.extra?.fieldFrameMaxMs,
+        next.extra?.fieldFrameMaxMs
+      ),
+      fieldFrames: pick(base.extra?.fieldFrames, next.extra?.fieldFrames),
+      fieldRenderer: pick(base.extra?.fieldRenderer, next.extra?.fieldRenderer),
     },
   };
 }
@@ -343,6 +388,15 @@ export function uxWarnings(metrics) {
     'new tiles per frame on the 2nd loop',
     UX_THRESHOLDS.newTilesPerFrame
   );
+  // Story 24.1 — context number: only warn when it was measured.
+  const field = metrics.extra?.fieldFrameMedianMs;
+  if (field !== null && field !== undefined)
+    check(
+      field,
+      'field frame render time (median)',
+      UX_THRESHOLDS.fieldFrameMs,
+      ' ms'
+    );
   return out;
 }
 
@@ -448,6 +502,19 @@ export function renderUxComment(metrics, ctx = {}) {
   )
     extra.push(
       `loop step every ${fmt(m.extra.loopStepMedianMs, ' ms')} (median; longest ${fmt(m.extra.loopStepMaxMs, ' ms')})`
+    );
+  if (
+    m.extra?.fieldFrameMedianMs !== undefined &&
+    m.extra?.fieldFrameMedianMs !== null
+  )
+    extra.push(
+      `field frame ${fmt(m.extra.fieldFrameMedianMs, ' ms')} (median of ${fmt(m.extra.fieldFrames)}, ` +
+        `longest ${fmt(m.extra.fieldFrameMaxMs, ' ms')}, ${m.extra.fieldRenderer ?? '?'}; ` +
+        `target < ${T.fieldFrameMs.max} ms) on temperature` +
+        (p?.extra?.fieldFrameMedianMs !== undefined &&
+        p?.extra?.fieldFrameMedianMs !== null
+          ? ` [${formatDelta(m.extra.fieldFrameMedianMs, p.extra.fieldFrameMedianMs, { unit: ' ms' })}]`
+          : '')
     );
   if (extra.length) lines.push(`Also measured: ${extra.join(' · ')}.`, '');
   lines.push(

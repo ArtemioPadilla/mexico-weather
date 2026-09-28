@@ -3,6 +3,7 @@ import {
   FPS_WINDOW_MS,
   UX_COMMENT_MARKER,
   buildUxMetrics,
+  fieldFrameStats,
   formatDelta,
   fpsStats,
   isSatelliteTileRequest,
@@ -321,8 +322,64 @@ describe('uxWarnings', () => {
     );
   });
 
+  it('warns on the field frame time only when it was measured and is over', () => {
+    const m = metrics();
+    expect(uxWarnings(m)).toEqual([]);
+    m.extra.fieldFrameMedianMs = 2.5;
+    expect(uxWarnings(m)).toEqual([]);
+    m.extra.fieldFrameMedianMs = 31;
+    const w = uxWarnings(m);
+    expect(w).toHaveLength(1);
+    expect(w[0]).toContain(
+      'field frame render time (median) 31 ms is above the target ≤ 4 ms'
+    );
+  });
+
   it('warns once when the file is missing', () => {
     expect(uxWarnings(null)).toHaveLength(1);
+  });
+});
+
+describe('fieldFrameStats (Story 24.1)', () => {
+  it('median, longest and the renderer of the field frames', () => {
+    expect(
+      fieldFrameStats([
+        { duration: 3.1, renderer: 'webgl' },
+        { duration: 1.2, renderer: 'webgl' },
+        { duration: 2.0, renderer: 'webgl' },
+        { duration: 9.456, renderer: 'webgl' },
+      ])
+    ).toEqual({ frames: 4, medianMs: 2.55, maxMs: 9.46, renderer: 'webgl' });
+    expect(
+      fieldFrameStats([
+        { duration: 30, renderer: 'canvas' },
+        { duration: 2, renderer: 'webgl' },
+        { duration: NaN, renderer: 'webgl' },
+      ])
+    ).toEqual({ frames: 2, medianMs: 16, maxMs: 30, renderer: 'canvas+webgl' });
+    expect(fieldFrameStats([])).toBeNull();
+  });
+
+  it('lands in extra, survives the merge and reads in the comment', () => {
+    const field = buildUxMetrics({
+      fieldFrame: { frames: 20, medianMs: 1.8, maxMs: 3.2, renderer: 'webgl' },
+    });
+    expect(field.extra.fieldFrameMedianMs).toBe(1.8);
+    expect(metrics().extra.fieldFrameMedianMs).toBeNull();
+    const merged = mergeUxMetrics(field, metrics());
+    expect(merged.extra.fieldFrameMedianMs).toBe(1.8);
+    expect(merged.extra.fieldRenderer).toBe('webgl');
+    expect(merged.firstSatelliteFrameMs).toBe(812);
+    const body = renderUxComment(merged, {
+      previous: {
+        ...merged,
+        extra: { ...merged.extra, fieldFrameMedianMs: 2.3 },
+      },
+    });
+    expect(body).toContain(
+      'field frame 1.8 ms (median of 20, longest 3.2 ms, webgl; target < 4 ms) on temperature [−0.5 ms (better)]'
+    );
+    expect(renderUxComment(metrics())).not.toContain('field frame');
   });
 });
 

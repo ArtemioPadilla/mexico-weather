@@ -17,6 +17,7 @@ export const UX_THRESHOLDS: {
   controlsDesktop: Threshold;
   controlsMobile: Threshold;
   newTilesPerFrame: Threshold;
+  fieldFrameMs: Threshold;
 };
 
 export interface FpsStats {
@@ -65,6 +66,11 @@ export interface UxMetrics {
     longTaskSample?: LongTaskSampleEntry[] | null;
     loopStepMedianMs?: number | null;
     loopStepMaxMs?: number | null;
+    /** Story 24.1 — optional: absent in documents from before it. */
+    fieldFrameMedianMs?: number | null;
+    fieldFrameMaxMs?: number | null;
+    fieldFrames?: number | null;
+    fieldRenderer?: string | null;
   };
 }
 
@@ -107,7 +113,20 @@ export interface UxMetricsParts {
     longest?: LongTaskSampleEntry[];
   } | null;
   steps?: LoopStepStats | null;
+  fieldFrame?: FieldFrameStats | null;
 }
+
+/** Story 24.1 — per-frame field render time. */
+export interface FieldFrameStats {
+  frames: number;
+  medianMs: number;
+  maxMs: number;
+  renderer: string;
+}
+
+export function fieldFrameStats(
+  samples: { duration: number; renderer?: string | null }[]
+): FieldFrameStats | null;
 
 export function isSatelliteTileRequest(url: string): boolean;
 export function fpsStats(
