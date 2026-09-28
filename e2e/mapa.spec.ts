@@ -819,6 +819,179 @@ test.describe('mapa page', () => {
     await expect(page.locator('#tl-time')).toHaveText('—');
   });
 
+  for (const motion of ['no-preference', 'reduce'] as const) {
+    test(`a #layer=wind link draws ${motion === 'reduce' ? 'static arrows under reduced motion' : 'particle trails'} after one grid request (Story 24.4)`, async ({
+      page,
+    }) => {
+      await page.emulateMedia({ reducedMotion: motion });
+      const png = (route: import('@playwright/test').Route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          body: TRANSPARENT_PNG,
+        });
+      await page.route('**/*.arcgisonline.com/**', png);
+      await page.route('**/gibs.earthdata.nasa.gov/**', png);
+      await page.route('**/tilecache.rainviewer.com/**', png);
+      await page.route('**/api.rainviewer.com/public/weather-maps.json', (r) =>
+        r.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: RAINVIEWER_MANIFEST,
+        })
+      );
+      const windUrls: string[] = [];
+      await page.route(
+        /api\.open-meteo\.com\/v1\/forecast.*wind_speed_10m/,
+        (route) => {
+          windUrls.push(route.request().url());
+          return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: OPEN_METEO_WIND,
+          });
+        }
+      );
+      await page.addInitScript(() => {
+        try {
+          window.localStorage.setItem('mw:welcomed', '1');
+        } catch {
+          /* private mode */
+        }
+      });
+      await page.goto('mapa/?e2e=1#view=23.6,-102.5,4.5z&layer=wind');
+      await expect(page.locator('#layerbtn-wind')).toHaveAttribute(
+        'aria-pressed',
+        'true',
+        { timeout: 20_000 }
+      );
+
+      type WindMap = {
+        getLayer(id: string): { type: string } | undefined;
+        hasImage(id: string): boolean;
+        getSource(id: string): { _data?: unknown } | undefined;
+        querySourceFeatures(id: string): {
+          properties: Record<string, unknown>;
+        }[];
+        getPaintProperty(id: string, p: string): unknown;
+        setLayoutProperty(id: string, p: string, v: unknown): void;
+        getCanvas(): HTMLCanvasElement;
+        once(e: string, f: () => void): void;
+        triggerRepaint(): void;
+      };
+      const layers = (): Promise<string[]> =>
+        page.evaluate(() => {
+          const m = (window as unknown as { __map: WindMap }).__map;
+          return ['wx-wind-layer', 'wx-wind-arrows'].filter(
+            (id) => !!m.getLayer(id)
+          );
+        });
+      const expected =
+        motion === 'reduce' ? ['wx-wind-arrows'] : ['wx-wind-layer'];
+      await expect.poll(layers).toEqual(expected);
+      // The boot's layer check finds it: no re-activation, one grid call
+      // (the check used to look for the reduced-motion circles only and
+      // re-ran the activation five times). Its retry window is ~5 s.
+      await page.waitForTimeout(6000);
+      expect(windUrls).toHaveLength(1);
+      // Speeds in m/s, the unit of the ramp, the legend and the tooltip.
+      expect(windUrls[0]).toContain('wind_speed_unit=ms');
+      expect(await layers()).toEqual(expected);
+
+      if (motion === 'reduce') {
+        const arrows = await page.evaluate(() => {
+          const m = (window as unknown as { __map: WindMap }).__map;
+          return {
+            image: m.hasImage('wx-wind-arrow'),
+            type: m.getLayer('wx-wind-arrows')?.type,
+            features: m
+              .querySourceFeatures('wx-wind-arrows-src')
+              .map((f) => f.properties),
+          };
+        });
+        expect(arrows.image).toBe(true);
+        expect(arrows.type).toBe('symbol');
+        expect(arrows.features.length).toBeGreaterThan(0);
+        for (const p of arrows.features) {
+          expect(p.color).toMatch(/^#[0-9a-f]{6}$/i);
+          expect(typeof p.bearing).toBe('number');
+          expect(p.scale).toBeGreaterThan(0);
+        }
+        // The opacity slider reaches the arrows.
+        await openLayerRail(page);
+        await page.locator('#opacity').fill('40');
+        await page.locator('#opacity').dispatchEvent('input');
+        await expect
+          .poll(() =>
+            page.evaluate(() =>
+              (window as unknown as { __map: WindMap }).__map.getPaintProperty(
+                'wx-wind-arrows',
+                'icon-opacity'
+              )
+            )
+          )
+          .toBe(0.4);
+      } else {
+        // The particles paint: coloured pixels with the layer on, which
+        // go when it is hidden (read inside `render`, before the buffer
+        // is presented).
+        const colourful = (visible: boolean): Promise<number> =>
+          page.evaluate(
+            (on) =>
+              new Promise<number>((resolve) => {
+                const m = (window as unknown as { __map: WindMap }).__map;
+                m.setLayoutProperty(
+                  'wx-wind-layer',
+                  'visibility',
+                  on ? 'visible' : 'none'
+                );
+                let frames = 0;
+                const grab = (): void => {
+                  // A few frames so trails are drawn after a toggle.
+                  if (++frames < 10) {
+                    m.once('render', grab);
+                    m.triggerRepaint();
+                    return;
+                  }
+                  const src = m.getCanvas();
+                  const c = document.createElement('canvas');
+                  c.width = src.width;
+                  c.height = src.height;
+                  const ctx = c.getContext('2d')!;
+                  ctx.drawImage(src, 0, 0);
+                  const d = ctx.getImageData(0, 0, c.width, c.height).data;
+                  let n = 0;
+                  for (let i = 0; i < d.length; i += 16) {
+                    const hi = Math.max(d[i], d[i + 1], d[i + 2]);
+                    const lo = Math.min(d[i], d[i + 1], d[i + 2]);
+                    if (d[i + 3] > 0 && hi - lo > 60) n++;
+                  }
+                  resolve(n);
+                };
+                m.once('render', grab);
+                m.triggerRepaint();
+              }),
+            visible
+          );
+        const withWind = await colourful(true);
+        const without = await colourful(false);
+        expect(withWind - without).toBeGreaterThan(500);
+        await colourful(true);
+      }
+
+      // M = Mapa base (the opacity slider would keep the key).
+      await page.evaluate(() =>
+        (document.activeElement as HTMLElement)?.blur()
+      );
+      await page.keyboard.press('m');
+      await expect(page.locator('#layerbtn-base')).toHaveAttribute(
+        'aria-pressed',
+        'true'
+      );
+      await expect.poll(layers).toEqual([]);
+    });
+  }
+
   test('tapping the map opens a 10-day / 48-h place card (Story 15.4)', async ({
     page,
   }) => {
