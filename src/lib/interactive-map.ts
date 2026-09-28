@@ -2288,23 +2288,25 @@ export async function initInteractiveMap(
    *  (not prefetchable, see above): the current frame is on screen
    *  with its tiles in (the A/B swap landed) — the loop never runs
    *  ahead of what is drawn, and each GIBS tile is downloaded once, by
-   *  MapLibre. Waits at most 3 s — a slow tile must not freeze the
-   *  loop. */
+   *  MapLibre. Story 23.2 — both also wait for the current frame's
+   *  cross-fade (`raster-fade-duration`, the "estilo" setting) to end:
+   *  a step mid-fade would snap it. Waits at most 3 s — a slow tile must
+   *  not freeze the loop. */
   function nextFrameReady(next: number): Promise<boolean> {
     if (!framePrefetcher) return Promise.resolve(true);
     const layerAtAsk = activeLayer;
+    const sameLayer = (): boolean => activeLayer === layerAtAsk;
     if (activeLayer === 'satellite') {
-      return weatherRaster
-        .swapSettled(3000)
-        .then(() => activeLayer === layerAtAsk);
+      return weatherRaster.swapSettled(3000).then(sameLayer);
     }
     if (!prefetchLayer()) return Promise.resolve(true);
     schedulePrefetch();
     const urls = frameTileUrls(next);
-    if (framePrefetcher.isCached(urls)) return Promise.resolve(true);
-    return framePrefetcher
-      .ensure(urls, 3000)
-      .then(() => activeLayer === layerAtAsk);
+    const onScreen = weatherRaster.swapSettled(3000);
+    if (framePrefetcher.isCached(urls)) return onScreen.then(sameLayer);
+    return Promise.all([onScreen, framePrefetcher.ensure(urls, 3000)]).then(
+      sameLayer
+    );
   }
 
   if (framePrefetcher) {
@@ -4530,7 +4532,9 @@ export async function initInteractiveMap(
       themeObserver?.disconnect();
       sunLayer.remove(); // also stops the internal ticker
       if (windRaf) window.cancelAnimationFrame(windRaf);
-      tlPlayer.stop(); // clears the timeline timer if running
+      // Story 23.2 — cancels the loop's pending animation frame and
+      // buffering timer; a late start() (boot autoplay) is a no-op.
+      tlPlayer.destroy();
       tlBar?.dispose(); // pointer/wheel/key listeners, observer, rAF
       tlBar = null;
       fieldAbort?.abort();

@@ -508,6 +508,36 @@ describe('A/B frame swap (Story 21.3)', () => {
     expect(m.paint.get(B)?.['raster-opacity']).toBe(0);
   });
 
+  // Story 23.2 — a fade cut short never dips to the basemap.
+  it('a new frame mid-fade snaps the incoming slot to full opacity before hiding the outgoing one', async () => {
+    const m = abMap();
+    const f = createWeatherRaster(m.map, { getFadeMs: () => 300 });
+    f.show('radar', { time: 1, path: '/a' }, ctx);
+    f.show('radar', { time: 2, path: '/b' }, ctx);
+    await m.loadSource(WEATHER_RASTER_SOURCE_B_ID);
+    expect(m.paint.get(B)?.['raster-opacity-transition']).toEqual({
+      duration: 300,
+      delay: 0,
+    });
+    vi.advanceTimersByTime(100);
+    f.show('radar', { time: 3, path: '/c' }, ctx);
+    // B (on screen) is at its opacity with no transition left to run…
+    expect(m.paint.get(B)?.['raster-opacity']).toBe(0.8);
+    expect(m.paint.get(B)?.['raster-opacity-transition']).toEqual({
+      duration: 0,
+      delay: 0,
+    });
+    // …and A, the outgoing slot, now loads frame 3 out of sight.
+    expect(m.paint.get(A)?.['raster-opacity']).toBe(0);
+    // A fade that ran its course does not touch the incoming transition.
+    await m.loadSource(WEATHER_RASTER_SOURCE_ID);
+    vi.advanceTimersByTime(300);
+    expect(m.paint.get(A)?.['raster-opacity-transition']).toEqual({
+      duration: 300,
+      delay: 0,
+    });
+  });
+
   it('fast style (fade 0) swaps instantly', async () => {
     const m = abMap();
     const f = createWeatherRaster(m.map, { getFadeMs: () => 0 });
@@ -683,6 +713,45 @@ describe('A/B frame swap (Story 21.3)', () => {
       f.show('radar', { time: 1, path: '/a' }, ctx);
       await flush();
       expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    // Story 23.2 — the loop never cuts a cross-fade short.
+    it('with a smooth style, waits for the cross-fade to finish after the tiles land', async () => {
+      const m = abMap();
+      const f = createWeatherRaster(m.map, { getFadeMs: () => 300 });
+      f.show('radar', { time: 1, path: '/a' }, ctx);
+      await m.loadSource(WEATHER_RASTER_SOURCE_ID);
+      f.show('radar', { time: 2, path: '/b' }, ctx);
+      const spy = vi.fn();
+      void f.swapSettled(3000).then(spy);
+      await m.loadSource(WEATHER_RASTER_SOURCE_B_ID);
+      await flush();
+      // B is fading in over A: on screen, loaded, not settled yet.
+      expect(m.paint.get(B)?.['raster-opacity']).toBe(0.8);
+      expect(m.paint.get(A)?.['raster-opacity']).toBe(0.8);
+      expect(spy).not.toHaveBeenCalled();
+      vi.advanceTimersByTime(299);
+      await flush();
+      expect(spy).not.toHaveBeenCalled();
+      vi.advanceTimersByTime(1);
+      await flush();
+      expect(m.paint.get(A)?.['raster-opacity']).toBe(0);
+      expect(spy).toHaveBeenCalledTimes(1);
+      // Asked mid-fade after a scrub back to the frame on screen: still
+      // waits for the fade, then resolves.
+      f.show('radar', { time: 3, path: '/c' }, ctx);
+      await m.loadSource(WEATHER_RASTER_SOURCE_ID);
+      const mid = vi.fn();
+      void f.swapSettled(3000).then(mid);
+      vi.advanceTimersByTime(100);
+      f.show('radar', { time: 3, path: '/c' }, ctx);
+      await flush();
+      expect(mid).not.toHaveBeenCalled();
+      vi.advanceTimersByTime(200);
+      await flush();
+      expect(mid).toHaveBeenCalledTimes(1);
+      expect(m.listenerCount()).toBe(0);
+      expect(vi.getTimerCount()).toBe(0);
     });
 
     it('resolves after timeoutMs when nothing lands, and on remove()', async () => {

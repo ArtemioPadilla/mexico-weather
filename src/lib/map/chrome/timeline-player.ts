@@ -1,8 +1,8 @@
 /**
  * Timeline play/pause auto-advance loop.
  *
- * Owns the play state + window.setInterval that walks the active
- * frame index forward at a fixed cadence (700 ms). prefers-reduced-
+ * Owns the play state and walks the active frame index forward at the
+ * cadence of the "velocidad" setting (700 ms by default). prefers-reduced-
  * motion users get the play button disabled.
  *
  * Decoupled from the rest of the timeline: the caller passes a
@@ -18,11 +18,50 @@
  * BUFFERING_UI_DELAY_MS the play button shows a buffering state:
  * `aria-busy="true"`, `data-buffering`, and the spinning `#i-loader`
  * sprite glyph instead of pause.
+ *
+ * Story 23.2 — scheduled on `requestAnimationFrame` + timestamps instead
+ * of a re-armed `setTimeout`. A step is due `intervalMs` after the
+ * previous one (the cadence getter is read every frame, so a speed
+ * change applies to the step being waited on) and is taken in the first
+ * frame callback at or past that time, so the new frame's DOM and map
+ * mutations land right before the browser paints. The phase is kept (a
+ * step a frame late does not push every later step back: on a device
+ * that renders at 10–20 fps that lateness would otherwise add up to
+ * whole frames per step) but never caught up: after a stall — a hidden
+ * tab, where rAF stops and the loop with it, or a long task — the loop
+ * re-anchors instead of bursting through the frames it missed. While the
+ * gate is pending no frame callback is requested at all.
  */
 
 /** A gate that answers within this long never shows the spinner (a
  *  cached frame resolves in a microtask; no flicker every tick). */
 export const BUFFERING_UI_DELAY_MS = 150;
+
+/** A step at most this fraction of the cadence late keeps the loop's
+ *  phase (rAF quantises the due time to a frame boundary: ≤ 16.7 ms at
+ *  60 Hz, 50–150 ms on a device rendering the map at 7–20 fps); later
+ *  than that is a stall and the cadence re-anchors. Half a cadence keeps
+ *  two steps at least half a cadence apart — never a burst. */
+export const PHASE_TOLERANCE = 0.5;
+
+/** Frame scheduler (requestAnimationFrame / cancelAnimationFrame shape). */
+export interface FrameScheduler {
+  request: (cb: (ts: number) => void) => number;
+  cancel: (id: number) => void;
+}
+
+/** Where the cadence counts the next step from, after a step taken at
+ *  `ts` that was due at `prevDue`: `prevDue` (phase kept) when it is at
+ *  most PHASE_TOLERANCE × `intervalMs` late, else `ts` (a stall
+ *  re-anchors instead of catching up). */
+export function nextAnchor(
+  prevDue: number,
+  ts: number,
+  intervalMs: number
+): number {
+  return ts - prevDue <= intervalMs * PHASE_TOLERANCE ? prevDue : ts;
+}
+
 export interface TimelinePlayerEls {
   playBtn: HTMLButtonElement | null;
 }
@@ -38,6 +77,11 @@ export interface TimelinePlayer {
   toggle: () => void;
   isPlaying: () => boolean;
   reducedMotion: () => boolean;
+  /** Story 23.2 — stop for good: cancels the pending frame callback and
+   *  the buffering timer, voids a gate answer still in flight, and makes
+   *  any later `start()` a no-op (a boot autoplay promise resolving after
+   *  the map is gone cannot restart the loop). */
+  destroy: () => void;
 }
 
 export interface TimelinePlayerOpts {
@@ -59,6 +103,26 @@ export interface TimelinePlayerOpts {
    *  current frame and retries on the next cadence. Absent: advance
    *  unconditionally (embeds, data saver, field/wind layers). */
   canAdvance?: (nextIndex: number) => Promise<boolean>;
+  /** Story 23.2 — test seam: the frame scheduler. Default
+   *  `requestAnimationFrame` (a ~16 ms `setTimeout` where there is none). */
+  frames?: FrameScheduler;
+  /** Story 23.2 — test seam: the clock rAF timestamps are compared with.
+   *  Default `performance.now()`. */
+  now?: () => number;
+}
+
+function defaultFrames(): FrameScheduler {
+  if (typeof requestAnimationFrame === 'function') {
+    return {
+      request: (cb) => requestAnimationFrame(cb),
+      cancel: (id) => cancelAnimationFrame(id),
+    };
+  }
+  return {
+    request: (cb) =>
+      setTimeout(() => cb(performance.now()), 16) as unknown as number,
+    cancel: (id) => clearTimeout(id),
+  };
 }
 
 export function createTimelinePlayer(
@@ -70,11 +134,19 @@ export function createTimelinePlayer(
   opts: TimelinePlayerOpts = {}
 ): TimelinePlayer {
   let playing = false;
-  let timer = 0;
+  let destroyed = false;
+  /** Pending frame callback (0: none). */
+  let rafId = 0;
+  /** Timestamp the cadence counts from: the previous step (or start). */
+  let anchor = 0;
+  /** A canAdvance answer is awaited: no frame callbacks meanwhile. */
+  let gatePending = false;
   let buffering = false;
   let busyTimer = 0;
   /** Bumped by stop()/start(): a gate answer from an older run is void. */
   let run = 0;
+  const frames = opts.frames ?? defaultFrames();
+  const now = opts.now ?? ((): number => performance.now());
   const intervalMs = (): number =>
     opts.getIntervalMs?.() ?? opts.intervalMs ?? 700;
   const reduced =
@@ -118,12 +190,21 @@ export function createTimelinePlayer(
     syncBtn();
   }
 
+  function requestFrame(cb: (ts: number) => void): void {
+    if (rafId) frames.cancel(rafId);
+    rafId = frames.request((ts) => {
+      rafId = 0;
+      cb(ts);
+    });
+  }
+
   function stop(): void {
     playing = false;
     run++;
-    if (timer) {
-      window.clearTimeout(timer);
-      timer = 0;
+    gatePending = false;
+    if (rafId) {
+      frames.cancel(rafId);
+      rafId = 0;
     }
     if (busyTimer) {
       window.clearTimeout(busyTimer);
@@ -133,26 +214,46 @@ export function createTimelinePlayer(
     syncBtn();
   }
 
-  function tick(): void {
-    if (!playing) return;
+  /** Index the loop steps to from the current frame (window-aware), or
+   *  null when there is nothing to loop over. */
+  function nextIndex(): number | null {
     const n = getFrameCount();
-    if (n < 2) {
-      stop();
-      return;
-    }
+    if (n < 2) return null;
     let [lo, hi] = opts.getLoopRange?.() ?? [0, n - 1];
     lo = Math.max(0, Math.min(lo, n - 1));
     hi = Math.max(lo, Math.min(hi, n - 1));
     const cur = getCurrentIndex();
-    const next = cur < lo || cur >= hi ? lo : cur + 1;
-    timer = 0;
-    if (!opts.canAdvance) {
-      advanceTo(next);
-      timer = window.setTimeout(tick, intervalMs());
+    return cur < lo || cur >= hi ? lo : cur + 1;
+  }
+
+  /** Frame callback while playing: waits for the step to be due. */
+  function onFrame(ts: number): void {
+    if (!playing || gatePending) return;
+    const cadence = intervalMs();
+    const due = anchor + cadence;
+    if (ts < due) {
+      requestFrame(onFrame);
       return;
     }
+    const next = nextIndex();
+    if (next === null) {
+      stop();
+      return;
+    }
+    if (!opts.canAdvance) {
+      advanceTo(next);
+      anchor = nextAnchor(due, ts, cadence);
+      requestFrame(onFrame);
+      return;
+    }
+    askGate(next, due, cadence);
+  }
+
+  function askGate(next: number, due: number, cadence: number): void {
     const myRun = run;
     let answered = false;
+    gatePending = true;
+    if (busyTimer) window.clearTimeout(busyTimer);
     busyTimer = window.setTimeout(() => {
       busyTimer = 0;
       if (!answered && myRun === run) setBuffering(true);
@@ -160,17 +261,31 @@ export function createTimelinePlayer(
     const settle = (ok: boolean): void => {
       answered = true;
       if (myRun !== run || !playing) return;
-      // A "not yet" keeps the spinner up until a later tick gets a yes.
-      if (ok) {
-        setBuffering(false);
-        advanceTo(next);
+      if (!ok) {
+        // "Not yet": keep the frame (and the spinner, if it is up) and
+        // ask again one cadence from now.
+        gatePending = false;
+        anchor = now();
+        requestFrame(onFrame);
+        return;
       }
-      timer = window.setTimeout(tick, intervalMs());
+      // Applied right away: a gate that answers at once (a cached
+      // frame, a settled swap) resolves in the microtask checkpoint of
+      // the frame callback that asked, i.e. still before that frame
+      // paints. Deferring it to the next frame would add a whole frame
+      // to every step — 100–150 ms where the map renders at 7–10 fps.
+      gatePending = false;
+      setBuffering(false);
+      advanceTo(next);
+      // A quick yes keeps the phase; a long wait starts a new cadence
+      // from the moment the frame could finally be shown.
+      anchor = nextAnchor(due, now(), cadence);
+      requestFrame(onFrame);
     };
     // A throwing / rejecting gate must not freeze the loop: advance.
     let gate: Promise<boolean>;
     try {
-      gate = opts.canAdvance(next);
+      gate = opts.canAdvance!(next);
     } catch {
       gate = Promise.resolve(true);
     }
@@ -178,19 +293,19 @@ export function createTimelinePlayer(
   }
 
   function start(): void {
-    if (reduced || getFrameCount() < 2) return;
+    if (destroyed || reduced || getFrameCount() < 2) return;
     if (playing) return;
     playing = true;
     run++;
+    gatePending = false;
+    anchor = now();
     syncBtn();
-    // A re-armed timeout (not setInterval) so the cadence getter is
-    // honoured on every step.
-    timer = window.setTimeout(tick, intervalMs());
+    requestFrame(onFrame);
   }
 
   // Reduced motion: disable the play button outright + leave label
   // in its initial state. The caller may still call start()/stop()
-  // programmatically but the timer won't engage.
+  // programmatically but the loop won't engage.
   if (els.playBtn) {
     els.playBtn.disabled = reduced;
     if (reduced) els.playBtn.title = labels.play;
@@ -209,5 +324,9 @@ export function createTimelinePlayer(
     },
     isPlaying: (): boolean => playing,
     reducedMotion: (): boolean => reduced,
+    destroy: (): void => {
+      destroyed = true;
+      stop();
+    },
   };
 }

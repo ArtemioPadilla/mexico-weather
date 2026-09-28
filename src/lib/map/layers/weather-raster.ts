@@ -179,8 +179,8 @@ export interface WeatherRasterFactory {
   ) => void;
   removeRadarCompanion: () => void;
   /** Resolves once the last frame `show` asked for is on screen with its
-   *  tiles loaded (no swap in flight, visible slot's source loaded), or
-   *  after `timeoutMs`. The timeline gate for satellite: GIBS tiles are
+   *  tiles loaded (no swap in flight, visible slot's source loaded) and
+   *  its cross-fade has finished (Story 23.2), or after `timeoutMs`. The timeline gate for satellite: GIBS tiles are
    *  `no-store`, so they cannot be prefetched into the HTTP cache — the
    *  loop waits on the A/B swap itself instead of outrunning what is
    *  drawn. */
@@ -267,9 +267,12 @@ export function createWeatherRaster(
   /** The last frame `show` asked for is on screen and its tiles are in:
    *  no swap in flight, and the visible slot's source reports loaded
    *  (every in-view tile loaded or errored). A swap that cross-faded on
-   *  SWAP_TIMEOUT_MS is on screen but not settled until its tiles land. */
+   *  SWAP_TIMEOUT_MS is on screen but not settled until its tiles land.
+   *  Story 23.2 — nor while its cross-fade is still running: the next
+   *  `show` would snap it (finishFade), so a loop gated on this never
+   *  cuts a `raster-fade-duration` fade short. */
   function isSettled(): boolean {
-    if (incomingUrl !== null) return false;
+    if (incomingUrl !== null || fadeTimer !== null) return false;
     const src = SLOT_SOURCE[front];
     return !map.getSource(src) || map.isSourceLoaded(src);
   }
@@ -372,10 +375,15 @@ export function createWeatherRaster(
 
   /** Complete a running cross-fade now (the outgoing slot drops to 0). */
   function finishFade(): void {
+    const early = fadeTimer !== null;
     if (fadeTimer) clearTimeout(fadeTimer);
     fadeTimer = null;
     const done = fadeDone;
     fadeDone = null;
+    // Story 23.2 — cut short (a scrub or a new frame mid-fade): the
+    // incoming frame jumps to its full opacity first, so dropping the
+    // outgoing one under it never leaves a see-through dip.
+    if (early && done) setSlotOpacity(front, opacity, 0);
     done?.();
   }
 
@@ -395,18 +403,24 @@ export function createWeatherRaster(
     setSlotOpacity(inSlot, opacity, ms);
     front = inSlot;
     frontUrl = url;
-    // After `front` moved: waiters now check the slot just brought up.
-    flushSettled();
     const hideOut = (): void => {
       setSlotOpacity(outSlot, 0, 0);
       setSlotVisible(outSlot, false);
     };
     if (ms <= 0) {
       hideOut();
-      return;
+    } else {
+      fadeDone = hideOut;
+      fadeTimer = setTimeout(() => {
+        fadeTimer = null; // ran its course: not "cut short"
+        finishFade();
+        // Story 23.2 — the fade ran its course: the frame is settled now.
+        flushSettled();
+      }, ms);
     }
-    fadeDone = hideOut;
-    fadeTimer = setTimeout(finishFade, ms);
+    // After `front` moved (and the fade timer is armed): waiters now
+    // check the slot just brought up.
+    flushSettled();
   }
 
   /** Cross-fade once the hidden slot's source reports loaded (every
