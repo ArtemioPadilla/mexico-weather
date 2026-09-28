@@ -1722,6 +1722,11 @@ test.describe('Story 22.2 — compact rail and progressive disclosure', () => {
 });
 
 test.describe('Story 22.3 — one tools menu', () => {
+  // Each test boots the satellite loop (~7 s) and then clicks through the
+  // popover and the canvas while frames animate; ~9 interactions at 1.5–2 s
+  // each under fullyParallel sit right at the default 30 s budget.
+  test.describe.configure({ timeout: 60_000 });
+
   test('the ⋯ menu holds the tools, settings and info as tabs', async ({
     page,
   }) => {
