@@ -153,6 +153,7 @@ const ids = {
   tlNext: mapId === 'map' ? 'tl-next' : `${mapId}-tl-next`,
   tlRange: mapId === 'map' ? 'tl-range' : `${mapId}-tl-range`,
   tlTime: mapId === 'map' ? 'tl-time' : `${mapId}-tl-time`,
+  tlBar: mapId === 'map' ? 'tl-bar' : `${mapId}-tl-bar`,
 };
 
 // Serialise config for the inline bootstrap script.
@@ -417,7 +418,7 @@ const cfg = JSON.stringify({
   <p
     id={ids.msg}
     aria-live="polite"
-    class="absolute bottom-20 left-1/2 z-10 hidden -translate-x-1/2 rounded-lg bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow dark:bg-gray-900/95 dark:text-gray-300"
+    class="absolute bottom-20 left-1/2 z-10 hidden -translate-x-1/2 rounded-lg sm:bottom-32 bg-white/95 px-3 py-1.5 text-xs text-gray-700 shadow dark:bg-gray-900/95 dark:text-gray-300"
   >
   </p>
 
@@ -449,87 +450,106 @@ const cfg = JSON.stringify({
   {features.timeline && (
     <div
       id={ids.timeline}
-      class="im-timeline im-chrome dark absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 items-center gap-1 rounded-full px-3 py-1.5 text-sm shadow-lg backdrop-blur-sm sm:gap-2 sm:px-4"
+      class="im-timeline im-chrome dark absolute bottom-3 left-1/2 z-30 flex w-max max-w-[calc(100vw-1.5rem)] -translate-x-1/2 items-center gap-1 rounded-full px-3 py-1.5 text-sm shadow-lg backdrop-blur-sm sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-1 sm:gap-y-0 sm:rounded-2xl sm:px-4 sm:pt-2"
       role="group"
       aria-label={t.timeline_label}
     >
-      <button
-        id={ids.tlPlay}
-        type="button"
-        aria-label={t.timeline_play}
-        aria-pressed="false"
-        disabled
-        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/10 px-2.5 text-base leading-none hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-40"
-        ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-play"></use></svg></button
-      >
-      <button
-        id="tl-day-prev"
-        type="button"
-        aria-label="Día anterior"
-        title="Día anterior (-24 h)"
-        class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
-        >«</button
-      >
-      <button
-        id={ids.tlPrev}
-        type="button"
-        aria-label={t.timeline_prev}
-        title="Hora anterior"
-        class="tl-secondary inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-        >‹</button
-      >
-      <span
-        id={ids.tlTime}
-        aria-live="polite"
-        aria-atomic="true"
-        title="Clic: reloj · relativo · ambos"
-        class="min-w-[7rem] cursor-pointer text-center font-medium tabular-nums sm:min-w-[8rem]"
-      >—</span>
-      <button
-        id={ids.tlNext}
-        type="button"
-        aria-label={t.timeline_next}
-        title="Hora siguiente"
-        class="tl-secondary inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-        >›</button
-      >
-      <button
-        id="tl-day-next"
-        type="button"
-        aria-label="Día siguiente"
-        title="Día siguiente (+24 h)"
-        class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
-        >»</button
-      >
-      <button
-        id="tl-now"
-        type="button"
-        aria-label="Volver al frame actual"
-        title="Ahora"
-        class="tl-secondary hidden min-h-[44px] min-w-[44px] rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex sm:min-h-0 sm:min-w-0"
-        >Ahora</button
-      >
-      {/* Story 15.1 — on-demand 10-day window for field/wind layers.
-          Revealed by interactive-map.ts only while the active grid is
-          the 2-day default; hidden again once extended. */}
-      <button
-        id="tl-extend"
-        type="button"
-        hidden
-        class="tl-phone-secondary rounded-full bg-blue-600/90 px-2.5 py-1 text-[11px] font-semibold hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-60"
-        aria-label={t.timeline_extend}
-        title={t.timeline_extend}
-        >{t.timeline_extend}</button
-      >
+      {/* Story 23.1 — from `sm` the pill is two rows: the date-scale bar
+          (+ the dotted "Ver 10 días" tail) on top, the buttons and the
+          label below. Below `sm` it stays one row and the bar is not drawn
+          (Story 23.4 brings the full-width phone bar). Ids unchanged: the
+          buttons only moved into this row wrapper. */}
+      <div class="tl-controls flex items-center gap-1 sm:col-span-2 sm:row-start-2 sm:justify-center sm:gap-2">
+        <button
+          id={ids.tlPlay}
+          type="button"
+          aria-label={t.timeline_play}
+          aria-pressed="false"
+          disabled
+          class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full bg-white/10 px-2.5 text-base leading-none hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-40"
+          ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-play"></use></svg></button
+        >
+        <button
+          id="tl-day-prev"
+          type="button"
+          aria-label="Día anterior"
+          title="Día anterior (-24 h)"
+          class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+          >«</button
+        >
+        <button
+          id={ids.tlPrev}
+          type="button"
+          aria-label={t.timeline_prev}
+          title="Hora anterior"
+          class="tl-secondary inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+          >‹</button
+        >
+        <span
+          id={ids.tlTime}
+          aria-live="polite"
+          aria-atomic="true"
+          title="Clic: reloj · relativo · ambos"
+          class="min-w-[7rem] cursor-pointer text-center font-medium tabular-nums sm:min-w-[8rem]"
+        >—</span>
+        <button
+          id={ids.tlNext}
+          type="button"
+          aria-label={t.timeline_next}
+          title="Hora siguiente"
+          class="tl-secondary inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-1.5 text-base leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+          >›</button
+        >
+        <button
+          id="tl-day-next"
+          type="button"
+          aria-label="Día siguiente"
+          title="Día siguiente (+24 h)"
+          class="tl-secondary hidden px-1.5 py-1 text-xs leading-none hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex"
+          >»</button
+        >
+        <button
+          id="tl-now"
+          type="button"
+          aria-label="Volver al frame actual"
+          title="Ahora"
+          class="tl-secondary hidden min-h-[44px] min-w-[44px] rounded-full bg-white/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 sm:inline-flex sm:min-h-0 sm:min-w-0"
+          >Ahora</button
+        >
+      </div>
+      {/* Story 23.1 — `#tl-range` stays the accessible control (keyboard,
+          screen readers, e2e): visually hidden, kept in sync with the bar
+          both ways, focused when the bar is pressed; the bar draws its
+          focus ring. On a phone with the compact chrome it comes with the
+          Controles panel, like ‹ ›. */}
       <input
         id={ids.tlRange}
         type="range"
         min="0"
         max="0"
         value="0"
-        class="hidden w-40 accent-blue-500 lg:inline-block"
+        class="tl-range tl-phone-secondary sr-only"
         aria-label={t.timeline_label}
       />
+      <div
+        id={ids.tlBar}
+        class="tl-bar hidden h-9 cursor-pointer touch-none select-none rounded-md sm:col-start-1 sm:row-start-1 sm:block sm:w-[22rem] lg:w-[28rem]"
+        aria-hidden="true"
+      ></div>
+      {/* Story 15.1 — on-demand 10-day window for field/wind layers and
+          satellite. Revealed by interactive-map.ts only while the active
+          axis is the short default; hidden again once extended. Story
+          23.1: from `sm` it is drawn as the bar's dotted tail (global.css
+          `.tl-tail`); dragging the bar onto it extends too. */}
+      <button
+        id="tl-extend"
+        type="button"
+        hidden
+        class="tl-tail tl-phone-secondary rounded-full bg-blue-600/90 px-2.5 py-1 text-[11px] font-semibold hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-60 sm:col-start-2 sm:row-start-1"
+        aria-label={t.timeline_extend}
+        title={t.timeline_extend}
+        >{t.timeline_extend}</button
+      >
     </div>
   )}
 
@@ -1133,6 +1153,7 @@ const cfg = JSON.stringify({
           tlNext: document.getElementById(cfg.ids.tlNext),
           tlRange: document.getElementById(cfg.ids.tlRange) as HTMLInputElement | null,
           tlTime: document.getElementById(cfg.ids.tlTime),
+          tlBar: document.getElementById(cfg.ids.tlBar),
           msg: document.getElementById(cfg.ids.msg),
           tooltip: document.getElementById(cfg.ids.tooltip),
           coords: document.getElementById(cfg.ids.coords),

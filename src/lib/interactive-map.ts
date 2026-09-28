@@ -144,6 +144,9 @@ export interface InteractiveMapElements {
   tlNext?: HTMLElement | null;
   tlRange?: HTMLInputElement | null;
   tlTime?: HTMLElement | null;
+  /** Story 23.1 — date-scale bar drawn over/next to `tlRange` (optional:
+   *  without it the range is the only scrubber). */
+  tlBar?: HTMLElement | null;
   msg?: HTMLElement | null;
   /** Floating tooltip overlay that follows the cursor on hover for
    *  field/wind/sun layers (zoom.earth-style). Optional — when absent
@@ -323,6 +326,12 @@ import { layerPageFor } from './layer-pages';
 import { createCloudsOverlay } from './map/overlays/clouds';
 import { createCityValuesOverlay } from './map/overlays/city-values';
 import { createTimelinePlayer } from './map/chrome/timeline-player';
+import {
+  createTimelineBar,
+  formatValueText,
+  type TickFormat,
+  type TimelineBar,
+} from './map/chrome/timeline-bar';
 import { createSubOptionsGroup } from './map/chrome/sub-options';
 import {
   PINNED_OVERLAYS,
@@ -1268,6 +1277,33 @@ export async function initInteractiveMap(
   const tlEl = opts.els.timeline ?? null;
   const tlRange = opts.els.tlRange ?? null;
   const tlTime = opts.els.tlTime ?? null;
+  // Story 23.1 — the date-scale bar; created with the timeline controls
+  // further down, redrawn by applyFrame()/showTimeline().
+  let tlBar: TimelineBar | null = null;
+
+  /** Locale / zone / hour format for the bar and the range's valuetext
+   *  (read live: the ⚙ panel and ?lang=en apply without a reload). */
+  function tickFormat(): TickFormat {
+    const s = readSettings();
+    const docLangNow =
+      document.documentElement.getAttribute('data-lang') || lang;
+    return {
+      locale: docLangNow === 'en' ? 'en-US' : 'es-MX',
+      tz: s.tz === 'UTC' ? 'UTC' : 'local',
+      hour12: s.hourFormat === '12',
+    };
+  }
+
+  /** What a screen reader hears for the range: the full date and time
+   *  plus the relative offset ("miércoles, 30 de septiembre, 15:00 ·
+   *  +2 h"), not a bare frame index. */
+  function frameValueText(frame: RadarFrame): string {
+    const off = frameOffsetMinutes(frame, Math.floor(Date.now() / 1000));
+    return `${formatValueText(frame.time, tickFormat())} · ${relativeFrameLabel(
+      off,
+      { now: t.timeline_now }
+    )}`;
+  }
 
   function frameLabel(frame: RadarFrame): string {
     const off = frameOffsetMinutes(frame, Math.floor(Date.now() / 1000));
@@ -1320,8 +1356,10 @@ export async function initInteractiveMap(
     if (tlRange) {
       tlRange.max = String(tlFrames.length - 1);
       tlRange.value = String(idx);
+      tlRange.setAttribute('aria-valuetext', frameValueText(fr));
     }
     if (tlTime) tlTime.textContent = frameLabel(fr);
+    tlBar?.update();
     syncExtendButton();
     syncHash();
     // Story 18.3 — the centre readout follows the frame.
@@ -1339,7 +1377,9 @@ export async function initInteractiveMap(
     if (!show && tlRange) {
       tlRange.value = '0';
       tlRange.setAttribute('max', '0');
+      tlRange.removeAttribute('aria-valuetext');
     }
+    if (!show) tlBar?.update();
   }
 
   const FIELD_SOURCE = 'wx-field';
@@ -3188,7 +3228,13 @@ export async function initInteractiveMap(
     if (frameIndex >= 0 && tlFrames[frameIndex]) {
       const tt = opts.els.tlTime;
       if (tt) tt.textContent = frameLabel(tlFrames[frameIndex]);
+      tlRange?.setAttribute(
+        'aria-valuetext',
+        frameValueText(tlFrames[frameIndex])
+      );
     }
+    // Story 23.1 — the bar's ticks follow the zone and hour format.
+    tlBar?.update(true);
     weatherRaster.setFadeMs(RASTER_FADE_MS[readSettings().playStyle]);
     // Story 19.3 — units: legend scale + unit, city pills / tooltip
     // values, and the open place card re-render in place.
@@ -3962,6 +4008,34 @@ export async function initInteractiveMap(
       tlStop();
       void extendTimeline();
     });
+    // Story 23.1 — the date-scale bar. Every seek goes through the same
+    // path as the range (pause, applyFrame → range value, label, hash,
+    // bar redraw), so the two stay in sync both ways.
+    let barTimesSrc: RadarFrame[] | null = null;
+    let barTimes: number[] = [];
+    tlBar = createTimelineBar(
+      { bar: opts.els.tlBar ?? null, range: tlRange },
+      {
+        getTimes: () => {
+          if (barTimesSrc !== tlFrames) {
+            barTimesSrc = tlFrames;
+            barTimes = tlFrames.map((f) => f.time);
+          }
+          return barTimes;
+        },
+        getIndex: () => (tlFrames.length ? frameIndex : -1),
+        seek: (i) => {
+          tlStop();
+          applyFrame(i);
+        },
+        canExtend: canExtendTimeline,
+        extend: () => {
+          tlStop();
+          return extendTimeline();
+        },
+        format: tickFormat,
+      }
+    );
     document.getElementById('tl-now')?.addEventListener('click', () => {
       if (tlFrames.length) {
         tlStop();
@@ -4457,6 +4531,8 @@ export async function initInteractiveMap(
       sunLayer.remove(); // also stops the internal ticker
       if (windRaf) window.cancelAnimationFrame(windRaf);
       tlPlayer.stop(); // clears the timeline timer if running
+      tlBar?.dispose(); // pointer/wheel/key listeners, observer, rAF
+      tlBar = null;
       fieldAbort?.abort();
       fieldAbort = null;
       revokeFieldBlob(); // free the last field raster blob URL

@@ -170,6 +170,66 @@
 }
 
 /*
+ * Story 23.1 — the timeline's date-scale bar (timeline-bar.ts draws its
+ * SVG). `#tl-range` is the keyboard control behind it, visually hidden:
+ * its focus ring is drawn on the bar (on the whole pill below `sm`, where
+ * the bar is not shown). From `sm`, "Ver 10 días" (`.tl-tail`) stops
+ * being a blue pill and becomes the dotted continuation of the bar's
+ * track, its label in the bar's label row. Unlayered on purpose: it must
+ * beat the button's phone utilities (`[hidden]` still wins, !important).
+ */
+.im-timeline .tl-bar svg {
+  display: block;
+  overflow: visible;
+  font-variant-numeric: tabular-nums;
+}
+.im-timeline .tl-bar[data-dragging] {
+  cursor: grabbing;
+}
+.im-timeline .tl-range:focus-visible + .tl-bar {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+@media (max-width: 639.98px) {
+  .im-timeline:has(> .tl-range:focus-visible) {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+  }
+}
+@media (min-width: 640px) {
+  .im-timeline .tl-tail {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+    min-width: 4.75rem;
+    height: 36px;
+    padding: 4px 2px 0 6px;
+    border-radius: 0.375rem;
+    background: transparent;
+    color: #93c5fd;
+    font-size: 10px;
+    line-height: 12px;
+    white-space: nowrap;
+  }
+  .im-timeline .tl-tail::after {
+    content: '';
+    position: absolute;
+    top: 21px;
+    right: 4px;
+    left: 0;
+    border-top: 4px dotted rgb(96 165 250 / 0.75);
+  }
+  .im-timeline .tl-tail:hover {
+    background: rgb(255 255 255 / 0.06);
+    color: #dbeafe;
+  }
+  .im-timeline .tl-tail:hover::after {
+    border-top-color: #93c5fd;
+  }
+}
+
+/*
  * Tailwind v4 changed the default border/divide color from `gray-200` to
  * `currentColor`. The markup uses many bare `border` utilities that relied on
  * the v3 gray-200 default. This is the documented v4 compatibility shim to
