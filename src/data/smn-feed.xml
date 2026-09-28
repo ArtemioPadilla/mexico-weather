@@ -5,23 +5,42 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 28 Sep 2026 01:44:47 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2026 08:46:49 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco</title>
+      <title>📋 SMN Comunicado 28 SEP 2026: Polo mantiene su trayectoria hacia Baja California Sur y se prevé que durante este lunes intensifiquen sus lluvias, vie...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso44-26.pdf</link>
+      <description><![CDATA[Polo mantiene su trayectoria hacia Baja California Sur y se prevé que durante este lunes intensifiquen sus lluvias, vie... — Comunicado del 28 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso44-26.pdf]]></description>
+      <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso44-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 28 de septiembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 28 de septiembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-28-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Gro, Oax, Chis, Ver y Tab. Viento de 30 a 50 km/h con rachas de 60 a 70 km/h: BCS, Gro y Oax.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco]]></description>
-      <pubDate>Sun, 27 Sep 2026 19:44:40 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-27-9ebc</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Gro, Oax, Chis, Ver y Tab. Viento de 30 a 50 km/h con rachas de 60 a 70 km/h: BCS, Gro y Oax.]]></description>
+      <pubDate>Mon, 28 Sep 2026 02:46:42 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-28-7a4b</guid>
       <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 27 SEP 2026: Se prevén lluvias fuertes en regiones de Baja California Sur e intensas en zonas de Guerrero y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso41-26.pdf</link>
-      <description><![CDATA[Se prevén lluvias fuertes en regiones de Baja California Sur e intensas en zonas de Guerrero y Oaxaca — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso41-26.pdf]]></description>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso43-26.pdf</link>
+      <description><![CDATA[Se prevén lluvias fuertes en regiones de Baja California Sur e intensas en zonas de Guerrero y Oaxaca — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso43-26.pdf]]></description>
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso41-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso43-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -33,19 +52,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 27 SEP 2026: Para este domingo se prevén lluvias intensas en regiones de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_27.pdf</link>
-      <description><![CDATA[Para este domingo se prevén lluvias intensas en regiones de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_09_27.pdf]]></description>
+      <title>📋 SMN Comunicado 27 SEP 2026: El huracán Polo mantiene su desplazamiento hacia Baja California Sur y la D.T. Dieciocho-E, paralelo a las costas del P...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso41-26.pdf</link>
+      <description><![CDATA[El huracán Polo mantiene su desplazamiento hacia Baja California Sur y la D.T. Dieciocho-E, paralelo a las costas del P... — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso41-26.pdf]]></description>
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_09_27</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 27 SEP 2026: El huracán Polo y la D.T. Dieciocho-E generarán lluvias, vientos fuertes y oleaje elevado en Baja California Sur y est...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso40-26.pdf</link>
-      <description><![CDATA[El huracán Polo y la D.T. Dieciocho-E generarán lluvias, vientos fuertes y oleaje elevado en Baja California Sur y est... — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso40-26.pdf]]></description>
-      <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso40-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso41-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -66,17 +77,6 @@ Durante esta noche y la madrugada del lunes, la circulación del huracán Polo d
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-09-27-540</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 27 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-27-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
   </channel>
 </rss>
