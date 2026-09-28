@@ -5,23 +5,31 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 27 Sep 2026 22:18:34 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2026 01:44:47 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Guerrero, Oaxaca, Chiapas, Veracruz y Tabasco]]></description>
-      <pubDate>Sun, 27 Sep 2026 16:18:26 -0600</pubDate>
+      <pubDate>Sun, 27 Sep 2026 19:44:40 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-09-27-9ebc</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 27 SEP 2026: Se formó la tormenta tropical Rachel a partir de la depresión tropical Dieciocho-E</title>
+      <title>📋 SMN Comunicado 27 SEP 2026: Se prevén lluvias fuertes en regiones de Baja California Sur e intensas en zonas de Guerrero y Oaxaca</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso41-26.pdf</link>
-      <description><![CDATA[Se formó la tormenta tropical Rachel a partir de la depresión tropical Dieciocho-E — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso41-26.pdf]]></description>
+      <description><![CDATA[Se prevén lluvias fuertes en regiones de Baja California Sur e intensas en zonas de Guerrero y Oaxaca — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso41-26.pdf]]></description>
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso41-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 27 SEP 2026: Se formó la tormenta tropical Rachel a partir de la depresión tropical Dieciocho-E</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso42-26.pdf</link>
+      <description><![CDATA[Se formó la tormenta tropical Rachel a partir de la depresión tropical Dieciocho-E — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso42-26.pdf]]></description>
+      <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso42-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -41,40 +49,30 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 27 SEP 2026: La madrugada de hoy, se formó la depresión tropical Dieciocho-E frente a las costas de Oaxaca y Guerrero</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso39-26.pdf</link>
-      <description><![CDATA[La madrugada de hoy, se formó la depresión tropical Dieciocho-E frente a las costas de Oaxaca y Guerrero — Comunicado del 27 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso39-26.pdf]]></description>
-      <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso39-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 539 | 27 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 540 | 27 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA Y CHIAPAS • EL HURACÁN POLO OCASIONARÁ LLUVIAS PUNTUALES FUERTES, RACHAS DE VIENTO Y OLEAJE ELEVADO EN BAJA CALIFORNIA SUR
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO, OAXACA, CHIAPAS, TABASCO Y VERACRUZ
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 539
+No. Aviso: 540
 Ciudad de México a 27 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE OAXACA Y CHIAPAS.
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE GUERRERO, OAXACA, CHIAPAS, TABASCO Y VERACRUZ
 
-EL HURACÁN POLO OCASIONARÁ LLUVIAS PUNTUALES FUERTES, RACHAS DE VIENTO Y OLEAJE ELEVADO EN BAJA CALIFORNIA SUR.
-
-Para hoy, Polo continuará como huracán de categoría mayor en la escala Saffir-Simpson, desplazándose al oeste de Baja California Sur, donde mantendrá la probabilidad de lluvias puntuales fuertes, rachas de viento y oleaje elevado. A su vez, el monzón mexicano e inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en zonas de Sinaloa, Durango y Chihuahua; puntuales fuertes en zonas de Sonora; y chubascos en Baja California.…]]></description>
+Durante esta noche y la madrugada del lunes, la circulación del huracán Polo de categoría 3 en la escala Saffir Simpson, ocasionará lluvias fuertes en Baja california Sur (norte y centro), además de vientos con rachas de 60 a 70 km/h y oleaje de 3.0 a 5.0 metros de altura en sus costas. A su vez, la circulación de la tormenta tropical Rachel propiciará lluvias puntuales intensas en zonas de Guerrero (sur y sureste) y Oaxaca (este, sur y sureste), así como viento con rachas de 60 a 70 km/h y oleaje de 2.0 a 3.0 en sus costas. Por otra parte, el monzón mexicano e inestabilidad atmosférica sobre el noroeste del país, originarán lluvias muy fuertes en Sinaloa (norte y sur), Chihuahua (oeste, sur y suroeste) y Durango (oeste y noroeste); lluvias fuertes en Sonora (centro y sur) y Nayarit (norte); e intervalos de chubascos en Baja California.…]]></description>
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-27-539</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-27-540</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de septiembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 27 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-27-12</guid>
