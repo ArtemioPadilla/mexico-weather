@@ -64,20 +64,23 @@ const VARIANTS: Variant[] = [
     viewport: { width: 1280, height: 800 },
     mobile: false,
     budget: CHROME_BUDGET.desktop,
-    // Back link, search, locate, the rail's 2 tabs (Capas /
+    // Search, locate, the rail's 2 tabs (Capas /
     // Superposiciones — Story 22.2, in place of the overlays summary), 9
     // layer tiles, 3 satellite sub-options (GeoColor / Infrarrojo / Color
     // real) and the opacity range in the active layer's block, 8 timeline
-    // controls (the 7 of the base layer + "Ver 10 días"), 3 MapLibre nav
-    // buttons, the ⋯ tools menu, SMN pill, feedback FAB.
+    // controls (the 7 of the base layer + "Ver 10 días"), the ⋯ tools
+    // menu, SMN pill, feedback FAB.
     // 38 on the base layer (Story 22.1) → 42 since /mapa boots on
     // satellite (21.2) → 43 with the compact rail (22.2): the tab bar
     // costs one control more than the summary it replaced, while the rail
     // itself went from 15 visible rows to 7 → 32 with the one tools menu
     // (22.3): 2 snapshot + 3 measure pills, ⚙ and ℹ became one ⋯ button
     // (−4), and the 5 model segments show only with a forecast layer, not
-    // on satellite (−5). Stories 22.4–22.5 carry the count further down.
-    baseline: 32,
+    // on satellite (−5) → 28 with the back link moved into the ⋯ menu's
+    // Info tab and no MapLibre +/−/compass buttons on /mapa (zoom by
+    // scroll, pinch and keys; −4). Stories 22.4–22.5 carry the count
+    // further down.
+    baseline: 28,
   },
   {
     name: 'mobile',
@@ -90,8 +93,9 @@ const VARIANTS: Variant[] = [
     // layer (Story 22.1) → 27 since /mapa boots on satellite; unchanged by
     // the compact rail (Story 22.2) → 23 with the one tools menu (22.3):
     // the Distancia/Área/Mira pills (which leaked onto the phone map on
-    // the first `idle`), ⚙ and ℹ became one ⋯ button (−4).
-    baseline: 23,
+    // the first `idle`), ⚙ and ℹ became one ⋯ button (−4) → 19 with the
+    // back link inside the ⋯ menu and no MapLibre nav buttons (−4).
+    baseline: 19,
   },
 ];
 
@@ -141,7 +145,7 @@ async function bootMap(page: Page): Promise<void> {
   // `map.loaded()` nor `networkidle` marks the end of the boot any more
   // (tiles are in flight on every frame). The cold-load state is complete
   // once the satellite layer is pressed, its loop runs (the first frame
-  // has tiles), and the tools wrap has surfaced on the map's first idle
+  // has tiles), and the tools wrap has surfaced once the map loaded
   // (inside the closed ⋯ menu since Story 22.3, so: un-[hidden], not
   // visible).
   const boot = { timeout: 20_000 };

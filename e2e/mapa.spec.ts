@@ -1782,6 +1782,15 @@ test.describe('Story 22.3 — one tools menu', () => {
     await expect(
       page.locator('#mw-info').getByRole('link', { name: 'Open-Meteo' })
     ).toBeVisible();
+    // The back link moved here from the map's top-left corner, and the
+    // MapLibre +/− buttons are gone on /mapa (scroll/pinch/keys zoom).
+    await expect(
+      page.locator('#mw-info').getByRole('link', { name: 'Volver al inicio' })
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Volver al inicio' })
+    ).toHaveCount(1);
+    await expect(page.locator('.maplibregl-ctrl-zoom-in')).toHaveCount(0);
 
     // Escape closes and hands the focus back to ⋯.
     await page.keyboard.press('Escape');

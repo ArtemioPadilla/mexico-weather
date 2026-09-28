@@ -42,7 +42,7 @@ A walkthrough of what users can do on the site, the public URL schemas (for shar
 6. **Tap anywhere** on the map to open the **place card**: 10 daily rows (Diario) or 48 hourly rows (Horario) for that point, the active layer's reading there, a favourite star and a link to the full forecast. Bottom sheet on phones, floating panel on desktop; Escape or × closes it.
 7. **First visit**: `/mapa` and the layer pages show a one-time, non-modal welcome card offering to centre the map on you (same locate flow as the 📍 button; remembered in localStorage, nothing leaves the browser), and each weather layer shows a one-line intro the first time it is activated (Story 19.2).
 8. **Sharing / bookmarking**: the URL hash updates as you pan, zoom, change layer, and scrub. Copy-paste the URL to share the exact view + frame; reloading restores it.
-9. **Tools menu (⋯)** (Story 22.3): one round **⋯** button under the search row (every viewport, where the ℹ button used to be) opens a popover with three tabs — **Herramientas** (Distancia, Área, Mira, Capturar, Hace 24 h; Limpiar once a snapshot exists), **Ajustes** (the old ⚙ panel: time zone, hour format, loop, speed, style, time label, units) and **Info** (the old ℹ panel: data sources and the active layer's own page). ←/→ move between tabs; **Escape** closes it and puts the focus back on ⋯; a click outside closes it; picking a tool closes it so your next click lands on the map. While a tool is on — measuring, the crosshair, or a snapshot comparison — **one pill** at the top of the map (under the search row on a phone) names it ("Distancia", "Distancia · Mira", "Comparación"…), shows the running measurement, carries the comparison's **Ocultar / Mostrar** switch and a **Salir** button that turns every active tool off (Escape still ends measuring; with the menu open the first Escape only closes the menu). While measuring, a click on the map adds a point and does not open the place card. The **model toggle** (Auto / ICON / GFS / ECMWF / JMA, bottom-right) only shows while a forecast layer is on — temperature, humidity, pressure, precipitation or wind — since the model changes nothing on satellite, radar, sun or the base map; on a phone it still sits behind **Controles**, which no longer reveals the measure/snapshot tools (they are in ⋯).
+9. **Tools menu (⋯)** (Story 22.3): one round **⋯** button under the search row (every viewport, where the ℹ button used to be) opens a popover with three tabs — **Herramientas** (Distancia, Área, Mira, Capturar, Hace 24 h; Limpiar once a snapshot exists), **Ajustes** (the old ⚙ panel: time zone, hour format, loop, speed, style, time label, units) and **Info** (the old ℹ panel: data sources and the active layer's own page, headed by the **Volver al inicio** link that used to float in the map's top-left corner). ←/→ move between tabs; **Escape** closes it and puts the focus back on ⋯; a click outside closes it; picking a tool closes it so your next click lands on the map. While a tool is on — measuring, the crosshair, or a snapshot comparison — **one pill** at the top of the map (under the search row on a phone) names it ("Distancia", "Distancia · Mira", "Comparación"…), shows the running measurement, carries the comparison's **Ocultar / Mostrar** switch and a **Salir** button that turns every active tool off (Escape still ends measuring; with the menu open the first Escape only closes the menu). While measuring, a click on the map adds a point and does not open the place card. The **model toggle** (Auto / ICON / GFS / ECMWF / JMA, bottom-right) only shows while a forecast layer is on — temperature, humidity, pressure, precipitation or wind — since the model changes nothing on satellite, radar, sun or the base map; on a phone it still sits behind **Controles**, which no longer reveals the measure/snapshot tools (they are in ⋯). `/mapa` and the `/mapa/<capa>/` pages have **no +/− zoom or compass buttons** any more: zoom with the mouse wheel, a pinch, a double-click, or the keyboard (+ / − and the arrow keys with the map focused); the home and `/forecast` embeds keep the buttons.
 
 ## Public URL schemas
 
@@ -70,7 +70,7 @@ Example: `https://artemiop.com/mexico-weather/mapa#view=19.43,-99.13,6.5z&layer=
 
 - **Layer rail buttons** are real `<button aria-pressed>` elements with visible `focus-visible` rings. Keyboard users can Tab through them. Each carries the layer's full name as its accessible name even though the tile shows a short label.
 - **Capas / Superposiciones** follow the WAI-ARIA tabs pattern (Story 22.2): `role="tablist"`, `aria-selected`, one tab stop with ←/→ (wrapping), Home and End to switch. The overlay filter is a labelled search input; Escape clears it.
-- **Map** has `role="application"` + an `aria-label`; MapLibre's `NavigationControl` provides keyboard pan/zoom.
+- **Map** has `role="application"` + an `aria-label`; MapLibre's keyboard handler pans (arrow keys) and zooms (+ / −) once the map has focus. The embeds also show MapLibre's `NavigationControl` buttons; `/mapa` and its layer pages do not (Story 22.3).
 - **Status messages** (`#mapmsg`) use `aria-live="polite"` so transient errors ("Capa no disponible", "No se pudo obtener tu ubicación", etc.) are announced without interrupting reading flow.
 - **Timeline timestamp** (`#tl-time`) uses `aria-live="polite"` + `aria-atomic="true"` so scrubbing announces the new frame time.
 - **`prefers-reduced-motion: reduce`** disables timeline autoplay — the ▶ button is disabled (`data-state="paused"`) and labelled accordingly, and `/mapa` opens on a still satellite frame instead of the 3 h loop (Story 21.2); manual prev / next / range scrubbing still works. A data-saver connection (`navigator.connection.saveData`) also skips the boot loop. MapLibre's `flyTo` animations are also suppressed under reduced motion.
@@ -112,7 +112,7 @@ The site is mobile-first and tested at four representative breakpoints. There ar
 
 - **Spanish-first**: all viewports show the same Spanish strings; no locale-by-viewport switch.
 - **Dark mode**: same colour palette at every breakpoint; theme toggle visible at every breakpoint.
-- **Map controls** (zoom +/−): MapLibre's `NavigationControl` placement is fixed and never collapses, even on mobile.
+- **Map controls** (zoom +/−): on the embeds MapLibre's `NavigationControl` placement is fixed and never collapses, even on mobile; `/mapa` has no zoom buttons (pinch / wheel / keys, Story 22.3).
 
 ### Known responsive gaps (not yet bugs but worth noting)
 
@@ -199,8 +199,9 @@ attached to the HTML report). Two tests per viewport:
 - **baseline** — asserts the exact number measured when the story shipped
   (**38 desktop / 26 mobile** on the base layer, 2026-09-27; **42 / 27**
   since Story 21.2 boots on satellite, whose sub-options and "Ver 10 días"
-  are counted; **43 / 27** with the Story 22.2 rail tabs; **32 / 23** since
-  Story 22.3 moved the tools, ⚙ and ℹ into the ⋯ menu and shows the model
+  are counted; **43 / 27** with the Story 22.2 rail tabs; **28 / 19** since
+  Story 22.3 moved the tools, ⚙, ℹ and the back link into the ⋯ menu,
+  dropped the MapLibre zoom/compass buttons on `/mapa` and shows the model
   toggle only with a forecast layer). It fails when a PR adds a control
   over the map *and* when one is removed: the story that removes it records
   the new number in `VARIANTS[].baseline` and in the "Hoy" column of
@@ -214,8 +215,8 @@ already dismissed; the spec mocks GIBS too and waits for the pressed
 satellite button + the playing ▶ rather than `map.loaded()`, which never
 settles while frames animate. MapLibre markers/popups and the
 attribution link are not counted (data and legal text, not chrome); the
-MapLibre zoom/compass buttons, the feedback FAB, the back link and the SMN
-pill are. The pure decision (rects → count) is
+feedback FAB and the SMN pill are (so were the MapLibre zoom/compass
+buttons and the back link until Story 22.3 took them off the map). The pure decision (rects → count) is
 `src/lib/map/chrome/chrome-budget.ts`, unit-tested in
 `chrome-budget.test.ts`; the spec only measures. Tiles are mocked, so the
 spec runs on any machine:

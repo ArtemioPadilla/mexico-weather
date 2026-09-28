@@ -188,6 +188,11 @@ export interface InteractiveMapFeatures {
    *  the active layer's block (sub-options + opacity) show below `sm`
    *  only while the panel is open (Story 22.2). */
   mobileControls?: boolean;
+  /** Story 22.3 — no +/−/compass buttons (MapLibre NavigationControl):
+   *  zoom stays on scroll, pinch, double-click and the keyboard. /mapa and
+   *  the layer pages set it (their chrome budget, plan PARIDAD_VISUAL
+   *  §1.2); embeds leave it off and keep the buttons. */
+  gestureZoomOnly?: boolean;
 }
 
 /** Build an <svg><use href="#i-name"/></svg> element for the inline
@@ -555,7 +560,9 @@ export async function initInteractiveMap(
   });
 
   if (controls) {
-    map.addControl(new maplibre.NavigationControl({}), 'bottom-left');
+    if (features.gestureZoomOnly !== true) {
+      map.addControl(new maplibre.NavigationControl({}), 'bottom-left');
+    }
     // Scale bar in the bottom-right — zoom.earth-style, distance updates
     // with zoom (e.g. "200 km" at z=6, "10 km" at z=12).
     map.addControl(
@@ -4208,10 +4215,15 @@ export async function initInteractiveMap(
     };
     document.addEventListener('keydown', measureEscHandler);
     // The measure wrap (inside the ⋯ menu since Story 22.3) ships
-    // [hidden] and surfaces once the map can take the measure layers.
-    map.once('idle', () => {
+    // [hidden] and surfaces once the style can take the measure layers.
+    // Not on the first 'idle': while the boot satellite loop plays the map
+    // can stay busy for 2–45 s, and the menu showed the "Medir" heading
+    // over no buttons all that time.
+    const revealMeasure = (): void => {
       if (wrap) wrap.hidden = false;
-    });
+    };
+    if (map.isStyleLoaded()) revealMeasure();
+    else map.once('load', revealMeasure);
     // Story 22.3 — one pill names whatever tool is on; "Salir" turns
     // every one of them off.
     toolPill = createToolPill(

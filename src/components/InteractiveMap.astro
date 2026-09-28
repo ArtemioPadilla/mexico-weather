@@ -208,7 +208,10 @@ const cfg = JSON.stringify({
       </div>
     </div>
   )}
-  {features.backLink && (
+  {/* Story 22.3 — "Volver al inicio" lives at the top of the ⋯ menu's
+      Info tab (below) instead of floating over the map; this overlay only
+      remains for a consumer that asks for the link without the Info tab. */}
+  {features.backLink && !features.info && (
     <a
       href={base}
       class="absolute left-3 top-3 z-10 inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
@@ -673,7 +676,7 @@ const cfg = JSON.stringify({
         {/* Tools tab. [data-tools-close]: picking a tool closes the menu
             (after the tool's own click handler ran) so the next click
             lands on the map. The measure wrap stays [hidden] until the
-            map's first idle (interactive-map.ts), as before. */}
+            map's style has loaded (interactive-map.ts). */}
         {features.tools && (
           <div
             id="mw-tools-tools"
@@ -840,6 +843,13 @@ const cfg = JSON.stringify({
             hidden={features.tools || features.settings}
             class="space-y-2 pt-2"
           >
+          {features.backLink && (
+            <a
+              id="mw-back-home"
+              href={base}
+              class="inline-flex min-h-[44px] items-center gap-1.5 rounded-md bg-white/5 px-3 text-xs font-medium text-gray-100 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+            ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-arrow-left"></use></svg> <span data-i18n-en={ui.en.back_home}>{t.back_home}</span></a>
+          )}
           <p>
             <strong class="text-gray-800 dark:text-gray-100">Clima México</strong>
             — mapa interactivo del tiempo. Sin cuenta, sin cookies.
