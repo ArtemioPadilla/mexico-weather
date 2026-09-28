@@ -116,4 +116,28 @@ test.describe('a11y audit — /mapa (interactive, slower)', () => {
     }
     expect(blocking).toEqual([]);
   });
+
+  // Story 22.3 — the ⋯ menu (a dialog popover with three tabs) is closed on
+  // load, so the scan above never sees its content. Scan each tab open.
+  test('mapa with the ⋯ tools menu open has no critical or serious WCAG violations', async ({
+    page,
+  }) => {
+    await page.goto('mapa/');
+    await page.waitForLoadState('domcontentloaded');
+    await page.locator('#mw-tools-btn').click();
+    await expect(page.locator('#mw-tools-panel')).toBeVisible();
+    for (const tab of ['tools', 'settings', 'info']) {
+      await page.locator(`#mw-tools-tab-${tab}`).click();
+      const results = await new AxeBuilder({ page })
+        .withTags(TAGS)
+        .include('#mw-tools')
+        .analyze();
+      const blocking = results.violations.filter(
+        (v) => v.impact === 'critical' || v.impact === 'serious'
+      );
+      expect(
+        blocking.map((v) => `${tab}: [${v.impact}] ${v.id}: ${v.help}`)
+      ).toEqual([]);
+    }
+  });
 });

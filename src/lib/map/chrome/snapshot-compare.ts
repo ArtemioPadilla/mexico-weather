@@ -8,7 +8,7 @@
  * Factory:
  *   createSnapshotCompare({ map, captureBtn, toggleBtn, clearBtn,
  *                          imgEl })
- *   → { refresh }
+ *   → { refresh, isActive, clear }
  *
  * Wires the three buttons' click handlers internally; consumer just
  * calls refresh() once to initialise visibility.
@@ -28,12 +28,20 @@ export interface SnapshotCompareEls {
 export interface SnapshotCompare {
   /** Re-sync button + overlay visibility with internal state. */
   refresh: () => void;
+  /** Story 22.3 — true while a snapshot overlay exists (shown or not). */
+  isActive: () => boolean;
+  /** Story 22.3 — drop the snapshot (what "Limpiar" and the context
+   *  pill's "Salir" do). */
+  clear: () => void;
 }
 
 export interface SnapshotCompareDeps {
   /** Story 13.5 — move the timeline by `bySec` (negative = past);
    *  false when there is no time axis to move. */
   shiftTime?: (bySec: number) => boolean;
+  /** Story 22.3 — told after every refresh whether a snapshot exists,
+   *  so the active-tool pill can follow it. */
+  onChange?: (active: boolean) => void;
 }
 
 export function createSnapshotCompare(
@@ -61,6 +69,8 @@ export function createSnapshotCompare(
     }
   }
 
+  const isActive = (): boolean => !!els.imgEl?.getAttribute('src');
+
   function refresh(): void {
     if (!els.imgEl) return;
     const has = !!els.imgEl.src;
@@ -77,11 +87,24 @@ export function createSnapshotCompare(
       const label =
         els.toggleBtn.querySelector('[data-mw-snapshot-label]') ??
         els.toggleBtn;
-      label.textContent = visible
-        ? 'Ocultar comparación'
-        : 'Mostrar comparación';
+      // Story 22.3 — the toggle sits in the context pill next to the
+      // "Comparación" name, so the visible text is the short verb; the
+      // accessible name keeps the full phrase.
+      label.textContent = visible ? 'Ocultar' : 'Mostrar';
+      els.toggleBtn.setAttribute(
+        'aria-label',
+        visible ? 'Ocultar comparación' : 'Mostrar comparación'
+      );
       els.toggleBtn.setAttribute('aria-pressed', String(visible));
     }
+    deps.onChange?.(has);
+  }
+
+  function clear(): void {
+    if (!els.imgEl) return;
+    els.imgEl.removeAttribute('src');
+    visible = true;
+    refresh();
   }
 
   els.captureBtn?.addEventListener('click', () => {
@@ -102,12 +125,7 @@ export function createSnapshotCompare(
     visible = !visible;
     refresh();
   });
-  els.clearBtn?.addEventListener('click', () => {
-    if (!els.imgEl) return;
-    els.imgEl.removeAttribute('src');
-    visible = true;
-    refresh();
-  });
+  els.clearBtn?.addEventListener('click', clear);
 
-  return { refresh };
+  return { refresh, isActive, clear };
 }

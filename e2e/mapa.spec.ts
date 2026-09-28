@@ -940,7 +940,10 @@ test.describe('mapa page', () => {
     page,
   }) => {
     await page.goto('mapa/');
-    await page.locator('#mw-settings summary').click();
+    // Story 22.3 — ⚙ is the Ajustes tab of the ⋯ menu.
+    await page.locator('#mw-tools-btn').click();
+    await page.locator('#mw-tools-tab-settings').click();
+    await expect(page.locator('#mw-settings')).toBeVisible();
     await page.locator('[data-mw-speed] button[data-val="fast"]').click();
     await page.locator('[data-mw-loop] button[data-val="6"]').click();
     await page.locator('[data-mw-style] button[data-val="fast"]').click();
@@ -955,7 +958,8 @@ test.describe('mapa page', () => {
       loopHours: 6,
       playStyle: 'fast',
     });
-    await page.locator('#mw-settings summary').click();
+    await page.locator('#mw-tools-btn').click();
+    await expect(page.locator('#mw-settings')).toBeHidden();
     await page.locator('#tl-time').click();
     await expect
       .poll(async () =>
@@ -1528,44 +1532,45 @@ test.describe('Story 21.3 — frame prefetch and A/B swap', () => {
   });
 });
 
-test.describe('Story 22.2 — compact rail and progressive disclosure', () => {
-  const png = (route: import('@playwright/test').Route) =>
-    route.fulfill({
+const png = (route: import('@playwright/test').Route) =>
+  route.fulfill({
+    status: 200,
+    contentType: 'image/png',
+    body: TRANSPARENT_PNG,
+  });
+
+/** /mapa on its GeoColor boot (Story 21.2), tiles and manifest served
+ *  locally, welcome card pre-dismissed (a one-time dialog). Shared by the
+ *  Story 22.2 and 22.3 blocks. */
+async function openOnSatellite(
+  page: import('@playwright/test').Page
+): Promise<void> {
+  await page.route('**/*.arcgisonline.com/**', png);
+  await page.route('**/gibs.earthdata.nasa.gov/**', png);
+  await page.route('**/tilecache.rainviewer.com/**', png);
+  await page.route('**/api.rainviewer.com/public/weather-maps.json', (r) =>
+    r.fulfill({
       status: 200,
-      contentType: 'image/png',
-      body: TRANSPARENT_PNG,
-    });
+      contentType: 'application/json',
+      body: RAINVIEWER_MANIFEST,
+    })
+  );
+  await page.addInitScript(() => {
+    try {
+      localStorage.setItem('mw:welcomed', '1');
+    } catch {
+      /* private mode — the card shows */
+    }
+  });
+  await page.goto('mapa/');
+  await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+    { timeout: 20_000 }
+  );
+}
 
-  /** /mapa on its GeoColor boot (Story 21.2), tiles and manifest served
-   *  locally, welcome card pre-dismissed (a one-time dialog). */
-  async function openOnSatellite(
-    page: import('@playwright/test').Page
-  ): Promise<void> {
-    await page.route('**/*.arcgisonline.com/**', png);
-    await page.route('**/gibs.earthdata.nasa.gov/**', png);
-    await page.route('**/tilecache.rainviewer.com/**', png);
-    await page.route('**/api.rainviewer.com/public/weather-maps.json', (r) =>
-      r.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: RAINVIEWER_MANIFEST,
-      })
-    );
-    await page.addInitScript(() => {
-      try {
-        localStorage.setItem('mw:welcomed', '1');
-      } catch {
-        /* private mode — the card shows */
-      }
-    });
-    await page.goto('mapa/');
-    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
-      'aria-pressed',
-      'true',
-      { timeout: 20_000 }
-    );
-  }
-
+test.describe('Story 22.2 — compact rail and progressive disclosure', () => {
   /** Visible controls of the rail, as boxes. */
   async function railBoxes(page: import('@playwright/test').Page) {
     return page.locator('.im-rail').evaluate((rail) =>
@@ -1713,5 +1718,221 @@ test.describe('Story 22.2 — compact rail and progressive disclosure', () => {
     await expect(page.locator('#mw-layers-tab')).toBeFocused();
     await expect(page.locator('#mw-layers')).toBeVisible();
     await expect(panel).toBeHidden();
+  });
+});
+
+test.describe('Story 22.3 — one tools menu', () => {
+  test('the ⋯ menu holds the tools, settings and info as tabs', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const btn = page.locator('#mw-tools-btn');
+    const panel = page.locator('#mw-tools-panel');
+    await expect(btn).toBeVisible();
+    await expect(btn).toHaveAttribute('aria-expanded', 'false');
+    await expect(btn).toHaveAttribute('aria-controls', 'mw-tools-panel');
+    await expect(panel).toBeHidden();
+    // The old floating pills and ⚙ / ℹ panels kept their ids and moved
+    // inside the popover: nothing of them is on the map until it opens.
+    for (const id of [
+      'mw-measure-wrap',
+      'mw-snapshot-wrap',
+      'mw-crosshair-btn',
+      'mw-settings',
+      'mw-info',
+    ]) {
+      await expect(panel.locator(`#${id}`), id).toHaveCount(1);
+      await expect(page.locator(`#${id}`), id).toBeHidden();
+    }
+    await expect(page.locator('#mw-settings summary')).toHaveCount(0);
+
+    // Open: the tools tab, every tool reachable in one more click.
+    await btn.click();
+    await expect(btn).toHaveAttribute('aria-expanded', 'true');
+    await expect(panel).toBeVisible();
+    await expect(page.locator('#mw-tools-tab-tools')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+    await expect(page.locator('#mw-tools-tab-tools')).toBeFocused();
+    for (const id of [
+      'mw-measure-distance',
+      'mw-measure-area',
+      'mw-crosshair-btn',
+      'mw-snapshot-capture',
+      'mw-snapshot-24h',
+    ]) {
+      await expect(page.locator(`#${id}`), id).toBeVisible();
+    }
+
+    // Ajustes: the ⚙ groups, applied live; the menu stays open.
+    await page.locator('#mw-tools-tab-settings').click();
+    await expect(page.locator('#mw-settings')).toBeVisible();
+    await expect(page.locator('#mw-tools-tools')).toBeHidden();
+    const fahrenheit = page.locator('[data-mw-temp] button[data-val="F"]');
+    await fahrenheit.click();
+    await expect(fahrenheit).toHaveAttribute('aria-pressed', 'true');
+    await expect(panel).toBeVisible();
+
+    // → moves to Info (roving focus, like the rail tabs).
+    await page.locator('#mw-tools-tab-settings').focus();
+    await page.keyboard.press('ArrowRight');
+    await expect(page.locator('#mw-tools-tab-info')).toBeFocused();
+    await expect(page.locator('#mw-info')).toBeVisible();
+    await expect(
+      page.locator('#mw-info').getByRole('link', { name: 'Open-Meteo' })
+    ).toBeVisible();
+
+    // Escape closes and hands the focus back to ⋯.
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
+    await expect(btn).toHaveAttribute('aria-expanded', 'false');
+    await expect(btn).toBeFocused();
+
+    // It reopens on the last tab; a click on the map closes it.
+    await btn.click();
+    await expect(page.locator('#mw-info')).toBeVisible();
+    await page.locator('#map canvas').click({ position: { x: 640, y: 420 } });
+    await expect(panel).toBeHidden();
+    await expect(btn).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('an active tool shows one context pill; Salir turns it off', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const btn = page.locator('#mw-tools-btn');
+    const panel = page.locator('#mw-tools-panel');
+    const pill = page.locator('#mw-tool-pill');
+    const label = page.locator('#mw-tool-pill-label');
+    const exit = page.locator('#mw-tool-pill-exit');
+    await expect(pill).toBeHidden();
+
+    // Mira: picking it closes the menu and names it in the pill.
+    await btn.click();
+    await page.locator('#mw-crosshair-btn').click();
+    await expect(panel).toBeHidden();
+    await expect(page.locator('#mw-crosshair')).toBeVisible();
+    await expect(pill).toBeVisible();
+    await expect(label).toHaveText('Mira');
+    await expect(exit).toHaveText('Salir');
+
+    // Distancia on top: still ONE pill, naming both, with the running
+    // total; measuring clicks add points and never open the place card.
+    await btn.click();
+    await page.locator('#mw-measure-distance').click();
+    await expect(page.locator('#mw-measure-distance')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(label).toHaveText('Distancia · Mira');
+    await expect(page.locator('#mw-tool-pill:visible')).toHaveCount(1);
+    const canvas = page.locator('#map canvas');
+    await canvas.click({ position: { x: 500, y: 400 } });
+    await canvas.click({ position: { x: 700, y: 450 } });
+    await expect(page.locator('#mw-measure-result')).toBeVisible();
+    await expect(page.locator('#mw-measure-result')).toContainText(
+      '1 segmento'
+    );
+    await expect(pill.locator('#mw-measure-result')).toHaveCount(1);
+    await expect(page.locator('#mw-place-card')).toBeHidden();
+
+    // With the menu open, Escape closes the menu only; the next one
+    // exits measuring (the crosshair stays).
+    await btn.click();
+    await expect(panel).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
+    await expect(label).toHaveText('Distancia · Mira');
+    await page.keyboard.press('Escape');
+    await expect(label).toHaveText('Mira');
+    await expect(page.locator('#mw-measure-result')).toBeHidden();
+
+    // Salir turns every active tool off.
+    await btn.click();
+    await page.locator('#mw-measure-area').click();
+    await expect(label).toHaveText('Área · Mira');
+    await exit.click();
+    await expect(pill).toBeHidden();
+    await expect(page.locator('#mw-crosshair')).toHaveCount(0);
+    for (const id of [
+      'mw-measure-distance',
+      'mw-measure-area',
+      'mw-crosshair-btn',
+    ]) {
+      await expect(page.locator(`#${id}`), id).toHaveAttribute(
+        'aria-pressed',
+        'false'
+      );
+    }
+  });
+
+  test('a snapshot comparison lives in the pill: Ocultar/Mostrar and Salir', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    const btn = page.locator('#mw-tools-btn');
+    const pill = page.locator('#mw-tool-pill');
+    const img = page.locator('#mw-snapshot-img');
+    await btn.click();
+    await page.locator('#mw-snapshot-capture').click();
+    await expect(pill).toBeVisible();
+    await expect(page.locator('#mw-tool-pill-label')).toHaveText('Comparación');
+    await expect(img).toBeVisible();
+    const toggle = pill.locator('#mw-snapshot-toggle');
+    await expect(toggle).toBeVisible();
+    await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+    await expect(toggle).toHaveAttribute('aria-label', 'Mostrar comparación');
+    await expect(img).toBeHidden();
+    // In the menu the capture pills gave way to Limpiar.
+    await btn.click();
+    await expect(page.locator('#mw-snapshot-capture')).toBeHidden();
+    await expect(page.locator('#mw-snapshot-clear')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await page.locator('#mw-tool-pill-exit').click();
+    await expect(pill).toBeHidden();
+    await expect(img).toBeHidden();
+    await btn.click();
+    await expect(page.locator('#mw-snapshot-capture')).toBeVisible();
+    await expect(page.locator('#mw-snapshot-clear')).toBeHidden();
+  });
+
+  test('the model toggle shows only with a forecast layer active', async ({
+    page,
+  }) => {
+    await page.route('**/api.open-meteo.com/v1/forecast**', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: fieldResponseForUrl(route.request().url()),
+      })
+    );
+    await openOnSatellite(page);
+    const toggle = page.locator('#mw-model-toggle');
+    await expect(toggle).toBeHidden();
+
+    await page.locator('#layerbtn-temperature').click();
+    await expect(page.locator('#layerbtn-temperature')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(toggle).toBeVisible();
+    await expect(toggle.locator('.mw-model-btn')).toHaveCount(5);
+
+    await page.locator('#layerbtn-sunlight').click();
+    await expect(page.locator('#layerbtn-sunlight')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(toggle).toBeHidden();
+
+    await page.locator('#layerbtn-satellite').click();
+    await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(toggle).toBeHidden();
   });
 });

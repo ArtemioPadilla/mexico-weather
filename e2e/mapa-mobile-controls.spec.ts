@@ -8,7 +8,9 @@ import { TRANSPARENT_PNG_BASE64 } from '../scripts/visual-audit-lib.mjs';
  * all. One "Controles" trigger reveals them in place. Since Story 22.2 the
  * panel reveals the rail's Capas / Superposiciones tab bar and the active
  * layer's block (sub-options + opacity) instead of a permanent slider and
- * the overlays accordion.
+ * the overlays accordion. Since Story 22.3 the measure/snapshot tools live
+ * in the ⋯ menu on every viewport, and the model toggle shows only with a
+ * forecast layer active (panel open on a phone).
  *
  * Reveal-in-place rather than a literal bottom sheet: every one of these
  * controls is wired by id from interactive-map.ts, and three of them are
@@ -62,6 +64,17 @@ async function openMapaOnSatellite(page: Page): Promise<void> {
   );
 }
 
+/** Story 22.3 — switch to temperature (hydrates from the pre-baked
+ *  best_match field grid, no API call) so the model toggle applies. */
+async function showForecastLayer(page: Page): Promise<void> {
+  await page.locator('#layerbtn-temperature').click();
+  await expect(page.locator('#layerbtn-temperature')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+    { timeout: 20_000 }
+  );
+}
+
 test('the Controles trigger reveals the hidden map chrome', async ({
   page,
 }) => {
@@ -82,8 +95,9 @@ test('the Controles trigger reveals the hidden map chrome', async ({
   // Capas / Superposiciones tab bar come with the panel.
   await expect(page.locator('#opacitywrap')).toBeVisible();
   await expect(page.locator('#satellite-sub-options')).toBeVisible();
-  await expect(page.locator('#mw-model-toggle')).toBeVisible();
   await expect(page.locator('#mw-overlays-tab')).toBeVisible();
+  // Story 22.3 — no model to pick on satellite, panel open or not.
+  await expect(page.locator('#mw-model-toggle')).toBeHidden();
 
   // The three acceptance actions: change opacity, toggle an overlay,
   // switch the model — all without resizing to desktop.
@@ -100,6 +114,11 @@ test('the Controles trigger reveals the hidden map chrome', async ({
   await firstOverlay.check();
   await expect(firstOverlay).toBeChecked();
 
+  // The model toggle comes with a forecast layer (Story 22.3). The rail
+  // is back on its layers tab for the tap on temperature.
+  await page.locator('#mw-layers-tab').click();
+  await showForecastLayer(page);
+  await expect(page.locator('#mw-model-toggle')).toBeVisible();
   const gfs = page.locator('.mw-model-btn[data-model="gfs_seamless"]');
   await gfs.click();
   await expect(gfs).toHaveAttribute('aria-pressed', 'true');
@@ -108,18 +127,8 @@ test('the Controles trigger reveals the hidden map chrome', async ({
 test('revealed controls meet the 44px touch target rule', async ({ page }) => {
   await openMapaOnSatellite(page);
   await page.locator('#mw-controls-toggle').click();
-  // The model segments are 24px on desktop by design (a 5-segment pill);
-  // once revealed on a phone they are touch targets and must clear 44px
-  // vertically. Width stays compact. Story 22.2 adds the rail's tab bar,
-  // the active layer's sub-option chips, the overlay filter and rows.
-  const heights = await page.evaluate(() =>
-    Array.from(document.querySelectorAll<HTMLElement>('.mw-model-btn')).map(
-      (el) => Math.round(el.getBoundingClientRect().height)
-    )
-  );
-  expect(heights.length).toBeGreaterThan(0);
-  for (const h of heights) expect(h).toBeGreaterThanOrEqual(44);
-
+  // Story 22.2 adds the rail's tab bar, the active layer's sub-option
+  // chips, the overlay filter and rows.
   const railHeights = async (sel: string): Promise<number[]> =>
     page.evaluate(
       (s) =>
@@ -140,6 +149,21 @@ test('revealed controls meet the 44px touch target rule', async ({ page }) => {
   );
   expect(overlayTargets.length).toBeGreaterThan(10);
   for (const h of overlayTargets) expect(h).toBeGreaterThanOrEqual(44);
+
+  // The model segments are 24px on desktop by design (a 5-segment pill);
+  // once revealed on a phone they are touch targets and must clear 44px
+  // vertically. Width stays compact. Since Story 22.3 they exist only
+  // with a forecast layer active.
+  await page.locator('#mw-layers-tab').click();
+  await showForecastLayer(page);
+  await expect(page.locator('#mw-model-toggle')).toBeVisible();
+  const heights = await page.evaluate(() =>
+    Array.from(document.querySelectorAll<HTMLElement>('.mw-model-btn')).map(
+      (el) => Math.round(el.getBoundingClientRect().height)
+    )
+  );
+  expect(heights.length).toBe(5);
+  for (const h of heights) expect(h).toBeGreaterThanOrEqual(44);
 });
 
 test('Escape closes the controls panel', async ({ page }) => {

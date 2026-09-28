@@ -293,7 +293,11 @@ import {
 } from './units';
 import { createAutocompleteController } from './map/chrome/autocomplete';
 import { createSnapshotCompare } from './map/chrome/snapshot-compare';
-import { createModelToggle } from './map/chrome/model-toggle';
+import {
+  createModelToggle,
+  modelToggleApplies,
+} from './map/chrome/model-toggle';
+import { createToolPill, type ToolPill } from './map/chrome/tool-pill';
 import {
   WIND_PARTICLES_LAYER_ID,
   makeWindParticlesLayer,
@@ -763,8 +767,13 @@ export async function initInteractiveMap(
     });
   }
 
+  // Story 22.3 — true while the measure tool is on (set by the tools
+  // block below): a click then adds a measure point, and the place card
+  // stays shut so it never covers the active-tool pill mid-measurement.
+  let measuring = false;
   if (features.layerRail && markerPopups) {
     map.on('click', (e) => {
+      if (measuring) return;
       // Ignore clicks that landed on a layer feature (storm dots, city
       // values, isobars). Those have their own interactions or none.
       const features = map.queryRenderedFeatures(e.point, {
@@ -2335,7 +2344,17 @@ export async function initInteractiveMap(
     if (bar) bar.style.display = '';
   }
 
+  /** Story 22.3 — the model toggle only while a forecast grid (field or
+   *  wind particles) drives the map. Looked up by id on each call:
+   *  refreshLayerButtons runs during boot, before the toggle's wiring. */
+  function refreshModelToggle(): void {
+    if (!features.modelToggle) return;
+    const el = document.getElementById('mw-model-toggle');
+    if (el) el.hidden = !modelToggleApplies(getLayerDef(activeLayer)?.kind);
+  }
+
   function refreshLayerButtons(): void {
+    refreshModelToggle();
     const wrap = opts.els.layerBtns;
     if (!wrap) return;
     for (const def of LAYERS) {
@@ -4043,6 +4062,13 @@ export async function initInteractiveMap(
   // Measure-ESC keydown handler (set inside the block below), hoisted
   // so destroy() can remove the document listener.
   let measureEscHandler: ((e: KeyboardEvent) => void) | null = null;
+  // Story 22.3 — the active-tool pill (one for every tool: measure,
+  // crosshair, snapshot) and the snapshot state it reads, hoisted so the
+  // snapshot block further down can feed it and destroy() can unwire it.
+  let toolPill: ToolPill | null = null;
+  let compareActive = false;
+  let clearCompare: (() => void) | null = null;
+  let refreshToolPill = (): void => undefined;
   if (features.tools) {
     const MEASURE_SOURCE = 'mw-measure-src';
     const MEASURE_LINE_LAYER = 'mw-measure-line';
@@ -4053,12 +4079,14 @@ export async function initInteractiveMap(
     // Story 18.3 — crosshair ("mira") mode: the active layer's value at
     // the map centre, for phones where hover never happens.
     const crossBtn = document.getElementById('mw-crosshair-btn');
-    if (crossBtn) {
-      crossBtn.addEventListener('click', () => {
-        crosshair.toggle();
-        crossBtn.setAttribute('aria-pressed', String(crosshair.isEnabled()));
-      });
+    function setCrosshair(on: boolean): void {
+      crosshair.setEnabled(on);
+      crossBtn?.setAttribute('aria-pressed', String(crosshair.isEnabled()));
+      refreshToolPill();
     }
+    crossBtn?.addEventListener('click', () => {
+      setCrosshair(!crosshair.isEnabled());
+    });
     const distBtn = document.getElementById('mw-measure-distance');
     const areaBtn = document.getElementById('mw-measure-area');
     const wrap = document.getElementById('mw-measure-wrap');
@@ -4148,12 +4176,14 @@ export async function initInteractiveMap(
     }
     function setMeasureMode(next: MeasureMode): void {
       measureMode = next;
+      measuring = next !== null;
       measurePts = [];
       distBtn?.setAttribute('aria-pressed', String(next === 'distance'));
       areaBtn?.setAttribute('aria-pressed', String(next === 'area'));
       refreshMeasureGeometry();
       refreshMeasureResult();
       map.getCanvas().style.cursor = next ? 'crosshair' : '';
+      refreshToolPill();
     }
     distBtn?.addEventListener('click', () => {
       setMeasureMode(measureMode === 'distance' ? null : 'distance');
@@ -4168,16 +4198,48 @@ export async function initInteractiveMap(
       refreshMeasureResult();
     });
     measureEscHandler = (e: KeyboardEvent): void => {
+      // Story 22.3 — an Escape another control already handled (the ⋯
+      // menu closing, the search box) is not also an "exit measuring".
+      if (e.defaultPrevented) return;
       if (e.key === 'Escape' && measureMode) {
         e.preventDefault();
         setMeasureMode(null);
       }
     };
     document.addEventListener('keydown', measureEscHandler);
+    // The measure wrap (inside the ⋯ menu since Story 22.3) ships
+    // [hidden] and surfaces once the map can take the measure layers.
     map.once('idle', () => {
-      wrap?.classList.remove('hidden');
-      wrap?.classList.add('flex');
+      if (wrap) wrap.hidden = false;
     });
+    // Story 22.3 — one pill names whatever tool is on; "Salir" turns
+    // every one of them off.
+    toolPill = createToolPill(
+      {
+        pill: document.getElementById('mw-tool-pill'),
+        label: document.getElementById('mw-tool-pill-label'),
+        exit: document.getElementById('mw-tool-pill-exit'),
+      },
+      {
+        distance: t.map_tool_distance,
+        area: t.map_tool_area,
+        crosshair: t.map_tool_crosshair,
+        compare: t.map_tool_compare,
+      },
+      () => {
+        if (measureMode) setMeasureMode(null);
+        if (crosshair.isEnabled()) setCrosshair(false);
+        clearCompare?.();
+        refreshToolPill();
+      }
+    );
+    refreshToolPill = (): void => {
+      toolPill?.update({
+        measure: measureMode,
+        crosshair: crosshair.isEnabled(),
+        compare: compareActive,
+      });
+    };
   }
 
   // ----------------------------------------------------------------
@@ -4221,7 +4283,7 @@ export async function initInteractiveMap(
   // ----------------------------------------------------------------
   if (features.tools) {
     // Snapshot compare tool — extracted to chrome/snapshot-compare.ts.
-    createSnapshotCompare(
+    const snapshot = createSnapshotCompare(
       {
         map,
         captureBtn: document.getElementById('mw-snapshot-capture'),
@@ -4255,8 +4317,15 @@ export async function initInteractiveMap(
           applyFrame(best);
           return true;
         },
+        // Story 22.3 — the active-tool pill follows the snapshot.
+        onChange: (active) => {
+          compareActive = active;
+          refreshToolPill();
+        },
       }
-    ).refresh();
+    );
+    clearCompare = snapshot.clear;
+    snapshot.refresh();
   }
 
   return {
@@ -4281,6 +4350,7 @@ export async function initInteractiveMap(
         document.removeEventListener('click', acOutsideClickHandler);
       if (measureEscHandler)
         document.removeEventListener('keydown', measureEscHandler);
+      toolPill?.dispose();
       document.removeEventListener('keydown', placeCardEscHandler);
       closePlaceCard();
       overlayRegistry.dispose();

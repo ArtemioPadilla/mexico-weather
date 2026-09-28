@@ -57,3 +57,14 @@ export function createModelToggle(
   refresh();
   return { refresh };
 }
+
+/**
+ * Story 22.3 — the model only changes the Open-Meteo forecast grids, so
+ * the toggle is shown only while one of those drives the map: a `field`
+ * layer (temperature, humidity, pressure, precipitation) or the
+ * `particles` wind layer. Satellite, radar, sunlight and the base map
+ * hide it (it did nothing there).
+ */
+export function modelToggleApplies(kind: string | undefined): boolean {
+  return kind === 'field' || kind === 'particles';
+}

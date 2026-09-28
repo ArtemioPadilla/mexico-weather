@@ -49,4 +49,27 @@ describe('snapshot compare — "hace 24 h" (Story 13.5)', () => {
     expect(e.imgEl.getAttribute('src')).toBeNull();
     expect(e.compareBtn.hidden).toBe(false);
   });
+
+  it('reports its state and clears on demand (Story 22.3)', () => {
+    const e = els();
+    const onChange = vi.fn();
+    const snap = createSnapshotCompare(e, { shiftTime: () => true, onChange });
+    snap.refresh();
+    expect(onChange).toHaveBeenLastCalledWith(false);
+    expect(snap.isActive()).toBe(false);
+    e.captureBtn.click();
+    expect(snap.isActive()).toBe(true);
+    expect(onChange).toHaveBeenLastCalledWith(true);
+    // Short visible verb, full accessible name.
+    expect(e.toggleBtn.textContent).toBe('Ocultar');
+    expect(e.toggleBtn.getAttribute('aria-label')).toBe('Ocultar comparación');
+    e.toggleBtn.click();
+    expect(e.toggleBtn.getAttribute('aria-label')).toBe('Mostrar comparación');
+    snap.clear();
+    expect(snap.isActive()).toBe(false);
+    expect(onChange).toHaveBeenLastCalledWith(false);
+    expect(e.imgEl.classList.contains('hidden')).toBe(true);
+    expect(e.captureBtn.hidden).toBe(false);
+    expect(e.toggleBtn.hidden).toBe(true);
+  });
 });

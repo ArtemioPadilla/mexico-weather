@@ -104,6 +104,19 @@ export interface UiStrings {
   map_overlays_pinned: string;
   map_overlays_all: string;
   map_overlays_empty: string;
+  /** Story 22.3 — the one "⋯ Herramientas" menu and its context pill. */
+  map_tools: string;
+  map_tools_tab_tools: string;
+  map_tools_tab_settings: string;
+  map_tools_tab_info: string;
+  map_tools_measure: string;
+  map_tools_compare: string;
+  map_tool_active: string;
+  map_tool_exit: string;
+  map_tool_distance: string;
+  map_tool_area: string;
+  map_tool_crosshair: string;
+  map_tool_compare: string;
   legend_light: string;
   legend_moderate: string;
   legend_heavy: string;
@@ -232,6 +245,18 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_overlays_pinned: 'Más usadas',
     map_overlays_all: 'Todas',
     map_overlays_empty: 'Sin coincidencias',
+    map_tools: 'Herramientas',
+    map_tools_tab_tools: 'Herramientas',
+    map_tools_tab_settings: 'Ajustes',
+    map_tools_tab_info: 'Info',
+    map_tools_measure: 'Medir',
+    map_tools_compare: 'Comparar',
+    map_tool_active: 'Herramienta activa',
+    map_tool_exit: 'Salir',
+    map_tool_distance: 'Distancia',
+    map_tool_area: 'Área',
+    map_tool_crosshair: 'Mira',
+    map_tool_compare: 'Comparación',
     legend_light: 'Ligera',
     legend_moderate: 'Moderada',
     legend_heavy: 'Intensa',
@@ -357,6 +382,18 @@ export const ui: Record<'es' | 'en', UiStrings> = {
     map_overlays_pinned: 'Most used',
     map_overlays_all: 'All',
     map_overlays_empty: 'No matches',
+    map_tools: 'Tools',
+    map_tools_tab_tools: 'Tools',
+    map_tools_tab_settings: 'Settings',
+    map_tools_tab_info: 'Info',
+    map_tools_measure: 'Measure',
+    map_tools_compare: 'Compare',
+    map_tool_active: 'Active tool',
+    map_tool_exit: 'Exit',
+    map_tool_distance: 'Distance',
+    map_tool_area: 'Area',
+    map_tool_crosshair: 'Crosshair',
+    map_tool_compare: 'Comparison',
     legend_light: 'Light',
     legend_moderate: 'Moderate',
     legend_heavy: 'Heavy',

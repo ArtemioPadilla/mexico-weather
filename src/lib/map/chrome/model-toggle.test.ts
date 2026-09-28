@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { createModelToggle } from './model-toggle';
+import { createModelToggle, modelToggleApplies } from './model-toggle';
+import { LAYERS } from '../../maplayers';
 
 function mkWrap(modelIds: string[], initial: string): HTMLElement {
   const wrap = document.createElement('div');
@@ -68,5 +69,24 @@ describe('model toggle', () => {
     expect(() =>
       createModelToggle({ wrap: null }, () => 'best_match', () => undefined),
     ).not.toThrow();
+  });
+});
+
+describe('modelToggleApplies (Story 22.3)', () => {
+  it('shows the toggle only for forecast field / particles layers', () => {
+    expect(modelToggleApplies('field')).toBe(true);
+    expect(modelToggleApplies('particles')).toBe(true);
+    for (const k of ['base', 'raster-tile', 'overlay', undefined]) {
+      expect(modelToggleApplies(k)).toBe(false);
+    }
+  });
+
+  it('matches the layers whose grids the model re-fetches', () => {
+    const shown = LAYERS.filter((l) => modelToggleApplies(l.kind)).map(
+      (l) => l.id
+    );
+    expect(shown.sort()).toEqual(
+      ['humidity', 'precipitation', 'pressure', 'temperature', 'wind'].sort()
+    );
   });
 });

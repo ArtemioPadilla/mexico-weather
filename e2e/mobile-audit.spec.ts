@@ -55,8 +55,12 @@ const STRICT_SELECTORS: string[] = [
   '#tl-next',
   '#mw-search-toggle',
   '#maploc',
-  '#mw-settings summary',
-  '#mw-info summary',
+  // Story 22.3 — ⚙ and ℹ became tabs of the one ⋯ menu: the button, its
+  // tabs and the tools inside (measured with the menu open, below).
+  '#mw-tools-btn',
+  '#mw-tools-panel [role="tab"]',
+  '#mw-tools-tools button',
+  '#mw-tool-pill button',
   '#mw-controls-toggle',
 ];
 
@@ -220,8 +224,7 @@ test.describe('mobile UX — 360x640 portrait', () => {
     { page: 'mapa', selector: '#tl-next', min: 1 },
     { page: 'mapa', selector: '#mw-search-toggle', min: 1 },
     { page: 'mapa', selector: '#maploc', min: 1 },
-    { page: 'mapa', selector: '#mw-settings summary', min: 1 },
-    { page: 'mapa', selector: '#mw-info summary', min: 1 },
+    { page: 'mapa', selector: '#mw-tools-btn', min: 1 },
     { page: 'mapa', selector: '#mw-controls-toggle', min: 1 },
   ];
 
@@ -261,6 +264,47 @@ test.describe('mobile UX — 360x640 portrait', () => {
   test('mapa: mobile-visible chrome meets the strict rule', async ({ page }) => {
     await page.goto('mapa');
     await expect(page.locator('#layerbtn-base')).toBeVisible(); // rail wired up
+    expect(await strictViolations(page)).toEqual([]);
+  });
+
+  // Story 22.3 — what the ⋯ menu holds is phone chrome too: its three tabs
+  // (Herramientas / Ajustes / Info, where ⚙ and ℹ used to be two strict
+  // round buttons), the five tools, and the active-tool pill's buttons.
+  test('mapa: the ⋯ menu and the active-tool pill meet the strict rule', async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      try {
+        window.localStorage.setItem('mw:welcomed', '1');
+      } catch {
+        /* private mode: the card shows */
+      }
+    });
+    await page.goto('mapa');
+    await expect(page.locator('#layerbtn-base')).toBeVisible();
+    await page.locator('#mw-tools-btn').click();
+    await expect(page.locator('#mw-tools-panel')).toBeVisible();
+    // The measure wrap surfaces on the map's first idle.
+    await expect(page.locator('#mw-crosshair-btn')).toBeVisible({
+      timeout: 20_000,
+    });
+    const rendered = async (sel: string): Promise<number> =>
+      page.evaluate(
+        (s) =>
+          Array.from(document.querySelectorAll<HTMLElement>(s)).filter((el) => {
+            const r = el.getBoundingClientRect();
+            return r.width > 0 && r.height > 0;
+          }).length,
+        sel
+      );
+    expect(await rendered('#mw-tools-panel [role="tab"]')).toBe(3);
+    expect(await rendered('#mw-tools-tools button')).toBe(5);
+    expect(await strictViolations(page)).toEqual([]);
+
+    // A tool on: the pill's Salir (and nothing else of it) is measured.
+    await page.locator('#mw-crosshair-btn').click();
+    await expect(page.locator('#mw-tool-pill')).toBeVisible();
+    expect(await rendered('#mw-tool-pill button')).toBe(1);
     expect(await strictViolations(page)).toEqual([]);
   });
 

@@ -53,7 +53,8 @@ interface Variant {
   budget: number;
   /** Measured 2026-09-27 on this branch (Story 22.1, re-measured after the
    *  Story 21.2 satellite boot and on 2026-09-28 after the Story 22.2
-   *  compact rail); see the per-variant comment. */
+   *  compact rail and the Story 22.3 tools menu); see the per-variant
+   *  comment. */
   baseline: number;
 }
 
@@ -68,14 +69,15 @@ const VARIANTS: Variant[] = [
     // layer tiles, 3 satellite sub-options (GeoColor / Infrarrojo / Color
     // real) and the opacity range in the active layer's block, 8 timeline
     // controls (the 7 of the base layer + "Ver 10 días"), 3 MapLibre nav
-    // buttons, 5 model segments, 2 snapshot + 3 measure pills, ⚙, ℹ, SMN
-    // pill, feedback FAB.
+    // buttons, the ⋯ tools menu, SMN pill, feedback FAB.
     // 38 on the base layer (Story 22.1) → 42 since /mapa boots on
     // satellite (21.2) → 43 with the compact rail (22.2): the tab bar
     // costs one control more than the summary it replaced, while the rail
-    // itself went from 15 visible rows to 7. Stories 22.3–22.5 carry the
-    // count down.
-    baseline: 43,
+    // itself went from 15 visible rows to 7 → 32 with the one tools menu
+    // (22.3): 2 snapshot + 3 measure pills, ⚙ and ℹ became one ⋯ button
+    // (−4), and the 5 model segments show only with a forecast layer, not
+    // on satellite (−5). Stories 22.4–22.5 carry the count further down.
+    baseline: 32,
   },
   {
     name: 'mobile',
@@ -83,14 +85,13 @@ const VARIANTS: Variant[] = [
     mobile: true,
     budget: CHROME_BUDGET.mobile,
     // Same minus what `hidden sm:*` drops on a phone (the rail's tab bar
-    // and active-layer block, model toggle, snapshot, day-skip/now/range),
-    // plus the Controles trigger and "Ver 10 días" (satellite, Story 21.2).
-    // The measure/crosshair pills are still shown at 360 px: the bootstrap
-    // swaps the wrap's `hidden` for `flex` on the map's first `idle`, on
-    // every viewport (interactive-map.ts, tools wiring). 26 on the base
+    // and active-layer block, day-skip/now/range), plus the Controles
+    // trigger and "Ver 10 días" (satellite, Story 21.2). 26 on the base
     // layer (Story 22.1) → 27 since /mapa boots on satellite; unchanged by
-    // the compact rail (Story 22.2).
-    baseline: 27,
+    // the compact rail (Story 22.2) → 23 with the one tools menu (22.3):
+    // the Distancia/Área/Mira pills (which leaked onto the phone map on
+    // the first `idle`), ⚙ and ℹ became one ⋯ button (−4).
+    baseline: 23,
   },
 ];
 
@@ -140,7 +141,9 @@ async function bootMap(page: Page): Promise<void> {
   // `map.loaded()` nor `networkidle` marks the end of the boot any more
   // (tiles are in flight on every frame). The cold-load state is complete
   // once the satellite layer is pressed, its loop runs (the first frame
-  // has tiles), and the tools wrap has surfaced on the map's first idle.
+  // has tiles), and the tools wrap has surfaced on the map's first idle
+  // (inside the closed ⋯ menu since Story 22.3, so: un-[hidden], not
+  // visible).
   const boot = { timeout: 20_000 };
   await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
     'aria-pressed',
@@ -152,7 +155,10 @@ async function bootMap(page: Page): Promise<void> {
     'playing',
     boot
   );
-  await expect(page.locator('#mw-measure-wrap')).toBeVisible(boot);
+  await expect(page.locator('#mw-measure-wrap')).not.toHaveAttribute(
+    'hidden',
+    boot
+  );
   await expect(page.locator('#tl-extend')).toBeVisible();
   // One tick of the wide-control surfacing interval (1.5 s) for margin.
   await page.waitForTimeout(1600);
@@ -278,9 +284,9 @@ for (const variant of VARIANTS) {
       ).toBe(variant.baseline);
     });
 
-    // Flips to test() once Stories 22.2 (compact rail), 22.3 (one tools
-    // menu), 22.4 (SMN counter in the top bar) and 22.5 (`?` shortcuts
-    // panel) have landed — 22.5 owns the flip (plan §2 E22).
+    // Flips to test() once Stories 22.2 (compact rail, shipped), 22.3 (one
+    // tools menu, shipped), 22.4 (SMN counter in the top bar) and 22.5 (`?`
+    // shortcuts panel) have landed — 22.5 owns the flip (plan §2 E22).
     test.fixme(`/mapa ${variant.name}: interactive elements over the map fit the budget (≤ ${variant.budget})`, async ({
       page,
     }, testInfo) => {

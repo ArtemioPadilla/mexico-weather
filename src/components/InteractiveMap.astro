@@ -26,9 +26,9 @@ import type { InteractiveMapFeatures } from '../lib/interactive-map';
 interface Features extends InteractiveMapFeatures {
   backLink?: boolean;
   /** Below sm, reveal the rail's tab bar (Capas / Superposiciones) and
-   *  active-layer block (sub-options + opacity, Story 22.2), the model
-   *  toggle and the measure/snapshot tools behind one trigger
-   *  (Story 11.3). Deliberately NOT keyed off layerRail: the homepage
+   *  active-layer block (sub-options + opacity, Story 22.2) and the model
+   *  toggle behind one trigger (Story 11.3; the measure/snapshot tools
+   *  moved to the ⋯ menu in Story 22.3). Deliberately NOT keyed off layerRail: the homepage
    *  teaser sets that too, and a 400px embed has no room for the panel.
    *  Only the full-page /mapa should set this. */
   mobileControls?: boolean;
@@ -112,6 +112,8 @@ const {
 
 const t = ui[lang];
 const base = import.meta.env.BASE_URL;
+// Story 22.3 — tools, settings and info share one "⋯" menu.
+const toolsMenu = !!(features.tools || features.settings || features.info);
 
 // Derived IDs — let two instances coexist on one page.
 const ids = {
@@ -223,7 +225,7 @@ const cfg = JSON.stringify({
   />
 
   {features.search && (
-    <div id="mw-search-wrap" class="absolute right-3 top-3 z-20 flex flex-col items-end gap-2">
+    <div id="mw-search-wrap" class="absolute right-3 top-3 z-[21] flex flex-col items-end gap-2">
       <div class="flex items-center gap-2">
         {/* Search icon — click expands the input (plan P1.7). */}
         <button
@@ -382,8 +384,9 @@ const cfg = JSON.stringify({
   </p>
 
   {/* Mobile controls trigger (Story 11.3). Below sm, the rail's tab bar
-      and active-layer block (Story 22.2), model toggle and measure/snapshot tools are all
-      `hidden sm:*`, i.e. unreachable on a phone. This reveals them in
+      and active-layer block (Story 22.2) and the model toggle are all
+      `hidden sm:*`, i.e. unreachable on a phone (the measure/snapshot
+      tools it also used to reveal live in the ⋯ menu since Story 22.3). This reveals them in
       place via data-controls on the map root — no DOM moves, since every
       one of those controls is wired by id from interactive-map.ts and
       three of them are absolutely-positioned siblings of the rail.
@@ -557,11 +560,14 @@ const cfg = JSON.stringify({
     Forecast model badge bottom-right, zoom.earth-style "ICON 13 km".
     Open-Meteo's bulk endpoint uses 'best_match' which selects the
     highest-resolution model per location (ECMWF in MX = ~9 km, ICON
-    ~13 km global fallback). Static label; no JS needed.
+    ~13 km global fallback). Story 22.3 — ships [hidden]: interactive-map.ts
+    shows it only while a forecast field or the wind particles layer is
+    active (the model changes nothing on satellite, radar, sun or base).
   */}
   {features.modelToggle && (
     <div
       id="mw-model-toggle"
+      hidden
       class="absolute bottom-9 max-sm:group-data-[controls=open]/chrome:bottom-[4.5rem] right-2 z-10 hidden items-center gap-1 rounded-full bg-gray-900/80 px-1 py-0.5 text-[10px] font-mono tabular-nums text-gray-300 backdrop-blur-sm group-data-[controls=open]/chrome:inline-flex sm:inline-flex"
       aria-label="Modelo de pronóstico Open-Meteo"
     >
@@ -586,243 +592,335 @@ const cfg = JSON.stringify({
     </div>
   )}
 
-  {/* Snapshot compare tools (plan P2.4 — moved out of the layer rail).
-      Right edge column above the model toggle. */}
+  {/* Story 22.3 — the one "⋯ Herramientas" menu. Distancia, Área, Mira,
+      Capturar and Hace 24 h (two columns of pills on the right edge until
+      then) plus the ⚙ settings and ℹ info panels (two more round buttons)
+      live behind one button, as the three tabs of a popover wired by
+      src/lib/map/chrome/tools-menu.ts (aria-expanded/aria-controls, Escape
+      closes and returns focus, a press outside closes, picking a tool
+      closes). The tools keep their ids (#mw-measure-wrap, #mw-snapshot-wrap,
+      #mw-crosshair-btn, …) and interactive-map.ts wires them by id as
+      before; #mw-settings and #mw-info are now the tab panels (their
+      <details>/<summary> are gone). Same spot the ℹ button held; after the
+      search row in the DOM, which sits one z-step higher so its suggestion
+      list stays on top of the ⋯ button. Every viewport: on a phone this is
+      also how the tools are reached now (the Controles panel of Story 11.3
+      no longer reveals them). The popover scrolls inside a height that
+      clears the timeline (and, on a phone, the feedback FAB). */}
+  {toolsMenu && (
+    <div id="mw-tools" class="absolute right-3 top-16 z-20 flex flex-col items-end text-xs">
+      <button
+        id="mw-tools-btn"
+        type="button"
+        aria-haspopup="dialog"
+        aria-expanded="false"
+        aria-controls="mw-tools-panel"
+        aria-label={t.map_tools}
+        data-i18n-en-aria-label={ui.en.map_tools}
+        title={t.map_tools}
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 aria-expanded:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-ellipsis"></use></svg></button>
+      <div
+        id="mw-tools-panel"
+        role="dialog"
+        aria-label={t.map_tools}
+        hidden
+        class="im-chrome im-reveal dark mt-2 max-h-[min(34rem,calc(100dvh-16rem))] max-sm:max-h-[calc(100dvh-20rem)] w-72 max-w-[calc(100vw-1.5rem)] overflow-y-auto rounded-lg p-2 text-gray-300 shadow-lg backdrop-blur-sm"
+      >
+        <div
+          role="tablist"
+          aria-label={t.map_tools}
+          class="flex gap-1 rounded-md bg-white/5 p-0.5 text-[11px] font-semibold"
+        >
+          {features.tools && (
+            <button
+              id="mw-tools-tab-tools"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="mw-tools-tools"
+              data-rail-tab-btn="tools"
+              class="flex-1 rounded px-2 py-1 text-gray-300 hover:bg-white/10 aria-selected:bg-white/15 aria-selected:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:min-h-[44px]"
+              data-i18n-en={ui.en.map_tools_tab_tools}
+            >{t.map_tools_tab_tools}</button>
+          )}
+          {features.settings && (
+            <button
+              id="mw-tools-tab-settings"
+              type="button"
+              role="tab"
+              aria-selected={features.tools ? 'false' : 'true'}
+              aria-controls="mw-settings"
+              data-rail-tab-btn="settings"
+              class="flex-1 rounded px-2 py-1 text-gray-300 hover:bg-white/10 aria-selected:bg-white/15 aria-selected:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:min-h-[44px]"
+              data-i18n-en={ui.en.map_tools_tab_settings}
+            >{t.map_tools_tab_settings}</button>
+          )}
+          {features.info && (
+            <button
+              id="mw-tools-tab-info"
+              type="button"
+              role="tab"
+              aria-selected={features.tools || features.settings ? 'false' : 'true'}
+              aria-controls="mw-info"
+              data-rail-tab-btn="info"
+              class="flex-1 rounded px-2 py-1 text-gray-300 hover:bg-white/10 aria-selected:bg-white/15 aria-selected:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 max-sm:min-h-[44px]"
+              data-i18n-en={ui.en.map_tools_tab_info}
+            >{t.map_tools_tab_info}</button>
+          )}
+        </div>
+
+        {/* Tools tab. [data-tools-close]: picking a tool closes the menu
+            (after the tool's own click handler ran) so the next click
+            lands on the map. The measure wrap stays [hidden] until the
+            map's first idle (interactive-map.ts), as before. */}
+        {features.tools && (
+          <div
+            id="mw-tools-tools"
+            role="tabpanel"
+            aria-labelledby="mw-tools-tab-tools"
+            class="space-y-2 pt-2"
+          >
+            <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-400" data-i18n-en={ui.en.map_tools_measure}>{t.map_tools_measure}</p>
+            <div id="mw-measure-wrap" hidden class="grid grid-cols-3 gap-1">
+              <button
+                id="mw-measure-distance"
+                type="button"
+                data-tools-close
+                class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-gray-100 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
+                aria-label="Medir distancia"
+                title="Medir distancia"
+                aria-pressed="false"
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-ruler"></use></svg> Distancia</button>
+              <button
+                id="mw-measure-area"
+                type="button"
+                data-tools-close
+                class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-gray-100 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
+                aria-label="Medir área"
+                title="Medir área"
+                aria-pressed="false"
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area"></use></svg> Área</button>
+              <button
+                id="mw-crosshair-btn"
+                type="button"
+                data-tools-close
+                class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-gray-100 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
+                aria-label="Modo mira: valor en el centro del mapa"
+                title="Modo mira: valor de la capa en el centro del mapa"
+                aria-pressed="false"
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-locate"></use></svg> Mira</button>
+            </div>
+            <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-400" data-i18n-en={ui.en.map_tools_compare}>{t.map_tools_compare}</p>
+            <div id="mw-snapshot-wrap" class="grid grid-cols-2 gap-1">
+              <button
+                id="mw-snapshot-capture"
+                type="button"
+                data-tools-close
+                class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-gray-100 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
+                aria-label="Capturar vista actual"
+                title="Capturar vista actual"
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-camera"></use></svg> Capturar</button>
+              <button
+                id="mw-snapshot-24h"
+                type="button"
+                data-tools-close
+                class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-gray-100 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white"
+                aria-label="Comparar con hace 24 horas"
+                title="Congela la vista actual y mueve el timeline 24 h atrás; alterna con Mostrar/Ocultar"
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-chevron-left"></use></svg> Hace 24 h</button>
+              <button
+                id="mw-snapshot-clear"
+                type="button"
+                hidden
+                data-tools-close
+                class="inline-flex min-h-[44px] flex-col items-center justify-center gap-0.5 rounded-md bg-white/5 px-1 py-1 text-[11px] font-medium text-gray-100 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90 aria-pressed:text-white col-span-2"
+              ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-x"></use></svg> Limpiar</button>
+            </div>
+          </div>
+        )}
+
+        {/* Settings tab — the old ⚙ panel, same [data-mw-*] groups. */}
+        {features.settings && (
+          <div
+            id="mw-settings"
+            role="tabpanel"
+            aria-labelledby="mw-tools-tab-settings"
+            hidden={features.tools}
+            class="space-y-3 pt-2"
+          >
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Zona horaria</p>
+            <div class="flex gap-1" data-mw-tz>
+              <button type="button" data-val="local" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Local</button>
+              <button type="button" data-val="UTC" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">UTC</button>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Formato de hora</p>
+            <div class="flex gap-1" data-mw-hour>
+              <button type="button" data-val="12" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">12 h</button>
+              <button type="button" data-val="24" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">24 h</button>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Loop de animación</p>
+            <div class="flex gap-1" data-mw-loop title="Frames dentro de ±N h de ahora">
+              <button type="button" data-val="3" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">3 h</button>
+              <button type="button" data-val="6" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">6 h</button>
+              <button type="button" data-val="12" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">12 h</button>
+              <button type="button" data-val="24" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">24 h</button>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Velocidad</p>
+            <div class="flex gap-1" data-mw-speed>
+              <button type="button" data-val="slow" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Lenta</button>
+              <button type="button" data-val="medium" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Media</button>
+              <button type="button" data-val="fast" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Rápida</button>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Estilo</p>
+            <div class="flex gap-1" data-mw-style title="Suave funde los frames de radar y satélite">
+              <button type="button" data-val="fast" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Rápido</button>
+              <button type="button" data-val="smooth" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Suave</button>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Etiqueta del tiempo (clic en la hora)</p>
+            <div class="flex gap-1" data-mw-label>
+              <button type="button" data-val="both" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Ambas</button>
+              <button type="button" data-val="clock" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Reloj</button>
+              <button type="button" data-val="relative" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Relativa</button>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Temperatura</p>
+            <div class="flex gap-1" data-mw-temp>
+              <button type="button" data-val="C" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">°C</button>
+              <button type="button" data-val="F" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">°F</button>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Viento</p>
+            <div class="flex gap-1" data-mw-speed-unit>
+              <button type="button" data-val="kmh" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">km/h</button>
+              <button type="button" data-val="mph" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">mph</button>
+              <button type="button" data-val="kt" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">kt</button>
+              <button type="button" data-val="ms" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">m/s</button>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Presión</p>
+            <div class="flex gap-1" data-mw-pressure>
+              <button type="button" data-val="hPa" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">hPa</button>
+              <button type="button" data-val="inHg" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">inHg</button>
+            </div>
+          </div>
+          <div>
+            <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Distancia</p>
+            <div class="flex gap-1" data-mw-distance>
+              <button type="button" data-val="km" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">km</button>
+              <button type="button" data-val="mi" class="flex-1 rounded border border-gray-300 px-2 py-1 max-sm:min-h-[44px] hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">mi</button>
+            </div>
+          </div>
+          <p class="text-[10px] italic text-gray-500 dark:text-gray-400">
+            Aplica al timeline, leyenda, tooltip, tarjeta y /forecast en vivo. Persistido localmente, sin cuenta.
+          </p>
+          </div>
+        )}
+
+        {/* Info tab — the old ℹ panel (sources, layer page link). */}
+        {features.info && (
+          <div
+            id="mw-info"
+            role="tabpanel"
+            aria-labelledby="mw-tools-tab-info"
+            hidden={features.tools || features.settings}
+            class="space-y-2 pt-2"
+          >
+          <p>
+            <strong class="text-gray-800 dark:text-gray-100">Clima México</strong>
+            — mapa interactivo del tiempo. Sin cuenta, sin cookies.
+          </p>
+          <ul class="space-y-1">
+            <li>
+              <span class="font-medium text-gray-700 dark:text-gray-200">Pronóstico:</span>
+              <a class="text-blue-600 underline dark:text-blue-400" href="https://open-meteo.com/" rel="noopener" target="_blank">Open-Meteo</a>
+              (ICON/GFS/ECMWF)
+            </li>
+            <li>
+              <span class="font-medium text-gray-700 dark:text-gray-200">Radar:</span>
+              <a class="text-blue-600 underline dark:text-blue-400" href="https://www.rainviewer.com/" rel="noopener" target="_blank">RainViewer</a>
+            </li>
+            <li>
+              <span class="font-medium text-gray-700 dark:text-gray-200">Satélite:</span>
+              <a class="text-blue-600 underline dark:text-blue-400" href="https://nasa-gibs.github.io/gibs-api-docs/" rel="noopener" target="_blank">NASA GIBS</a>
+              (GOES-East, VIIRS)
+            </li>
+            <li>
+              <span class="font-medium text-gray-700 dark:text-gray-200">Ciclones:</span>
+              <a class="text-blue-600 underline dark:text-blue-400" href="https://www.nhc.noaa.gov/" rel="noopener" target="_blank">NOAA NHC</a>
+            </li>
+            <li>
+              <span class="font-medium text-gray-700 dark:text-gray-200">Mapa base:</span>
+              <a class="text-blue-600 underline dark:text-blue-400" href="https://www.esri.com/en-us/legal/terms/data-attributions" rel="noopener" target="_blank">Esri, HERE, Garmin</a>
+              / <a class="text-blue-600 underline dark:text-blue-400" href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">OSM</a>
+            </li>
+            <li>
+              <span class="font-medium text-gray-700 dark:text-gray-200">Avisos:</span>
+              <a class="text-blue-600 underline dark:text-blue-400" href="https://smn.conagua.gob.mx/" rel="noopener" target="_blank">SMN / CONAGUA</a>
+            </li>
+          </ul>
+          <p class="pt-1">
+            <a id="mw-layer-page-link" hidden href={base} class="text-blue-600 underline dark:text-blue-400" data-i18n-en={ui.en.layer_page_link}>{t.layer_page_link}</a>
+          </p>
+          <p class="pt-1 text-[10px] italic text-gray-500 dark:text-gray-400">
+            Sin garantía. Para uso informativo. Consulta avisos oficiales.
+          </p>
+          </div>
+        )}
+      </div>
+    </div>
+  )}
+
+  {/* Story 22.3 — while a tool is on (measuring, the crosshair, a
+      snapshot overlay) ONE pill names it and offers "Salir", which turns
+      every active tool off (src/lib/map/chrome/tool-pill.ts). It also
+      carries the running measurement (#mw-measure-result, moved here from
+      its own pill) and the snapshot's Mostrar/Ocultar toggle
+      (#mw-snapshot-toggle, moved from the snapshot column), so a
+      comparison can be flipped without reopening the menu. Top-centre:
+      under the search row on a phone (clear of the rail and the ⋯
+      button), in the top bar from sm. */}
   {features.tools && (
     <div
-      id="mw-snapshot-wrap"
-      class="absolute bottom-20 max-sm:group-data-[controls=open]/chrome:bottom-[8rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
+      id="mw-tool-pill"
+      role="group"
+      aria-label={t.map_tool_active}
+      data-i18n-en-aria-label={ui.en.map_tool_active}
+      hidden
+      class="im-chrome dark absolute left-1/2 top-16 z-30 flex max-w-[calc(100vw-8rem)] -translate-x-1/2 items-center gap-2 rounded-full py-0.5 pl-3 pr-0.5 text-xs shadow-lg backdrop-blur-sm sm:top-3 sm:max-w-md"
     >
-      <button
-        id="mw-snapshot-capture"
-        type="button"
-        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-        aria-label="Capturar vista actual"
-        title="Capturar vista actual"
-      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-camera"></use></svg> Capturar</button>
-      <button
-        id="mw-snapshot-24h"
-        type="button"
-        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-        aria-label="Comparar con hace 24 horas"
-        title="Congela la vista actual y mueve el timeline 24 h atrás; alterna con Mostrar/Ocultar"
-      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-chevron-left"></use></svg> Hace 24 h</button>
+      <span class="flex min-w-0 flex-col leading-tight">
+        <span id="mw-tool-pill-label" class="truncate font-semibold text-white"></span>
+        <span id="mw-measure-result" aria-live="polite" class="hidden truncate text-[11px] tabular-nums text-blue-200"></span>
+      </span>
       <button
         id="mw-snapshot-toggle"
         type="button"
         hidden
-        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
+        class="inline-flex min-h-[44px] shrink-0 items-center gap-1 rounded-full bg-white/10 px-3 font-medium text-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
         aria-pressed="true"
-      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-eye"></use></svg> <span data-mw-snapshot-label>Ocultar</span></button>
+        aria-label="Ocultar comparación"
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-eye"></use></svg> <span data-mw-snapshot-label class="max-sm:sr-only">Ocultar</span></button>
       <button
-        id="mw-snapshot-clear"
+        id="mw-tool-pill-exit"
         type="button"
-        hidden
-        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-x"></use></svg> Limpiar</button>
+        class="inline-flex min-h-[44px] shrink-0 items-center gap-1 rounded-full bg-white/10 px-3 font-medium text-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-x"></use></svg> <span data-i18n-en={ui.en.map_tool_exit}>{t.map_tool_exit}</span></button>
     </div>
-  )}
-
-  {/* Measure tools (plan P2.1). Two pills above the snapshot column —
-      click activates the mode, click acumulating points, ESC clears.
-      Read-only pill at bottom shows the running total. */}
-  {features.tools && (
-    <div
-      id="mw-measure-wrap"
-      class="absolute bottom-[11.5rem] max-sm:group-data-[controls=open]/chrome:bottom-[14.5rem] right-2 z-10 hidden flex-col items-stretch gap-1 text-xs group-data-[controls=open]/chrome:flex sm:flex"
-    >
-      <button
-        id="mw-measure-distance"
-        type="button"
-        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
-        aria-label="Medir distancia"
-        title="Medir distancia"
-        aria-pressed="false"
-      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-ruler"></use></svg> Distancia</button>
-      <button
-        id="mw-measure-area"
-        type="button"
-        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
-        aria-label="Medir área"
-        title="Medir área"
-        aria-pressed="false"
-      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-area"></use></svg> Área</button>
-      <button
-        id="mw-crosshair-btn"
-        type="button"
-        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-gray-900/80 px-3 text-xs font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 aria-pressed:bg-blue-600/90"
-        aria-label="Modo mira: valor en el centro del mapa"
-        title="Modo mira: valor de la capa en el centro del mapa"
-        aria-pressed="false"
-      ><svg class="h-4 w-4" aria-hidden="true"><use href="#i-locate"></use></svg> Mira</button>
-    </div>
-  )}
-  {features.tools && (
-    <div
-      id="mw-measure-result"
-      class="pointer-events-none absolute bottom-3 right-2 z-10 hidden rounded-full bg-blue-600/90 px-3 py-1.5 text-xs font-semibold text-white shadow sm:inline-block"
-      aria-live="polite"
-    ></div>
-  )}
-
-  {/*
-    Settings panel (zoom.earth-style ⚙️). Compact icon (plan P1.6) —
-    open/close handled by <details>; when open, the panel anchors to
-    its summary and extends to the left so it doesn't escape the
-    viewport.
-  */}
-  {features.settings && (
-    <details
-      id="mw-settings"
-      class="absolute right-3 top-[7.25rem] z-20 text-xs [&[open]>summary]:bg-blue-600/90 [&[open]>div]:block"
-    >
-      <summary
-        class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden"
-        aria-label="Configuración"
-        title="Configuración"
-      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-settings"></use></svg></summary>
-      <div class="hidden absolute right-11 top-0 w-56 max-w-[calc(100vw-3.5rem)] space-y-3 rounded-lg bg-white/95 px-3 py-2 text-gray-600 shadow dark:bg-gray-900/95 dark:text-gray-300">
-        <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Configuración</p>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Zona horaria</p>
-          <div class="flex gap-1" data-mw-tz>
-            <button data-val="local" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Local</button>
-            <button data-val="UTC" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">UTC</button>
-          </div>
-        </div>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Formato de hora</p>
-          <div class="flex gap-1" data-mw-hour>
-            <button data-val="12" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">12 h</button>
-            <button data-val="24" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">24 h</button>
-          </div>
-        </div>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Loop de animación</p>
-          <div class="flex gap-1" data-mw-loop title="Frames dentro de ±N h de ahora">
-            <button data-val="3" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">3 h</button>
-            <button data-val="6" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">6 h</button>
-            <button data-val="12" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">12 h</button>
-            <button data-val="24" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">24 h</button>
-          </div>
-        </div>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Velocidad</p>
-          <div class="flex gap-1" data-mw-speed>
-            <button data-val="slow" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Lenta</button>
-            <button data-val="medium" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Media</button>
-            <button data-val="fast" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Rápida</button>
-          </div>
-        </div>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Estilo</p>
-          <div class="flex gap-1" data-mw-style title="Suave funde los frames de radar y satélite">
-            <button data-val="fast" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Rápido</button>
-            <button data-val="smooth" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Suave</button>
-          </div>
-        </div>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Etiqueta del tiempo (clic en la hora)</p>
-          <div class="flex gap-1" data-mw-label>
-            <button data-val="both" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Ambas</button>
-            <button data-val="clock" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Reloj</button>
-            <button data-val="relative" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">Relativa</button>
-          </div>
-        </div>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Temperatura</p>
-          <div class="flex gap-1" data-mw-temp>
-            <button data-val="C" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">°C</button>
-            <button data-val="F" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">°F</button>
-          </div>
-        </div>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Viento</p>
-          <div class="flex gap-1" data-mw-speed-unit>
-            <button data-val="kmh" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">km/h</button>
-            <button data-val="mph" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">mph</button>
-            <button data-val="kt" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">kt</button>
-            <button data-val="ms" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">m/s</button>
-          </div>
-        </div>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Presión</p>
-          <div class="flex gap-1" data-mw-pressure>
-            <button data-val="hPa" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">hPa</button>
-            <button data-val="inHg" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">inHg</button>
-          </div>
-        </div>
-        <div>
-          <p class="mb-1 text-[10px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Distancia</p>
-          <div class="flex gap-1" data-mw-distance>
-            <button data-val="km" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">km</button>
-            <button data-val="mi" class="flex-1 rounded border border-gray-300 px-2 py-1 hover:bg-blue-500/10 aria-pressed:bg-blue-500/15 aria-pressed:border-blue-500 aria-pressed:font-semibold dark:border-gray-700">mi</button>
-          </div>
-        </div>
-        <p class="text-[10px] italic text-gray-500 dark:text-gray-400">
-          Aplica al timeline, leyenda, tooltip, tarjeta y /forecast en vivo. Persistido localmente, sin cuenta.
-        </p>
-      </div>
-    </details>
-  )}
-
-  {/*
-    Info panel (zoom.earth-style ℹ️). Compact icon (plan P1.6) — open
-    expands to the left as a popover.
-  */}
-  {features.info && (
-    <details
-      id="mw-info"
-      class="absolute right-3 top-16 z-20 text-xs [&[open]>summary]:bg-blue-600/90 [&[open]>div]:block"
-    >
-      <summary
-        class="flex h-11 w-11 items-center justify-center rounded-full bg-gray-900/80 text-white shadow-lg backdrop-blur-sm hover:bg-gray-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden"
-        aria-label="Información y fuentes de datos"
-        title="Información y fuentes de datos"
-      ><svg class="h-5 w-5" aria-hidden="true"><use href="#i-info"></use></svg></summary>
-      <div class="hidden absolute right-11 top-0 w-64 max-w-[calc(100vw-3.5rem)] space-y-2 rounded-lg bg-white/95 px-3 py-2 text-gray-600 shadow dark:bg-gray-900/95 dark:text-gray-300">
-        <p class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Información y fuentes</p>
-        <p>
-          <strong class="text-gray-800 dark:text-gray-100">Clima México</strong>
-          — mapa interactivo del tiempo. Sin cuenta, sin cookies.
-        </p>
-        <ul class="space-y-1">
-          <li>
-            <span class="font-medium text-gray-700 dark:text-gray-200">Pronóstico:</span>
-            <a class="text-blue-600 underline dark:text-blue-400" href="https://open-meteo.com/" rel="noopener" target="_blank">Open-Meteo</a>
-            (ICON/GFS/ECMWF)
-          </li>
-          <li>
-            <span class="font-medium text-gray-700 dark:text-gray-200">Radar:</span>
-            <a class="text-blue-600 underline dark:text-blue-400" href="https://www.rainviewer.com/" rel="noopener" target="_blank">RainViewer</a>
-          </li>
-          <li>
-            <span class="font-medium text-gray-700 dark:text-gray-200">Satélite:</span>
-            <a class="text-blue-600 underline dark:text-blue-400" href="https://nasa-gibs.github.io/gibs-api-docs/" rel="noopener" target="_blank">NASA GIBS</a>
-            (GOES-East, VIIRS)
-          </li>
-          <li>
-            <span class="font-medium text-gray-700 dark:text-gray-200">Ciclones:</span>
-            <a class="text-blue-600 underline dark:text-blue-400" href="https://www.nhc.noaa.gov/" rel="noopener" target="_blank">NOAA NHC</a>
-          </li>
-          <li>
-            <span class="font-medium text-gray-700 dark:text-gray-200">Mapa base:</span>
-            <a class="text-blue-600 underline dark:text-blue-400" href="https://www.esri.com/en-us/legal/terms/data-attributions" rel="noopener" target="_blank">Esri, HERE, Garmin</a>
-            / <a class="text-blue-600 underline dark:text-blue-400" href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">OSM</a>
-          </li>
-          <li>
-            <span class="font-medium text-gray-700 dark:text-gray-200">Avisos:</span>
-            <a class="text-blue-600 underline dark:text-blue-400" href="https://smn.conagua.gob.mx/" rel="noopener" target="_blank">SMN / CONAGUA</a>
-          </li>
-        </ul>
-        <p class="pt-1">
-          <a id="mw-layer-page-link" hidden href={base} class="text-blue-600 underline dark:text-blue-400" data-i18n-en={ui.en.layer_page_link}>{t.layer_page_link}</a>
-        </p>
-        <p class="pt-1 text-[10px] italic text-gray-500 dark:text-gray-400">
-          Sin garantía. Para uso informativo. Consulta avisos oficiales.
-        </p>
-      </div>
-    </details>
   )}
 </div>
 
@@ -885,6 +983,7 @@ const cfg = JSON.stringify({
     type InteractiveMapFeatures,
   } from '../lib/interactive-map';
   import { wireRailTabs } from '../lib/map/chrome/rail-tabs';
+  import { wireToolsMenu } from '../lib/map/chrome/tools-menu';
 
   type ImCfg = {
     mapId: string;
@@ -1052,10 +1151,24 @@ const cfg = JSON.stringify({
     });
   }
 
+  // Story 22.3 — the one "⋯ Herramientas" menu (literal ids: only the
+  // full-page map renders it). Pure DOM like the rail tabs; wired before
+  // the Controles panel so an Escape that closes the menu (and is marked
+  // handled) leaves that panel open.
+  function wireToolsPopover(): void {
+    const button = document.getElementById('mw-tools-btn');
+    const panel = document.getElementById('mw-tools-panel');
+    if (!button || !panel || button.dataset.toolsWired === '1') return;
+    button.dataset.toolsWired = '1';
+    wireToolsMenu({ button, panel });
+  }
+
   if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireToolsPopover);
     document.addEventListener('DOMContentLoaded', wireMobileControls);
     document.addEventListener('DOMContentLoaded', wireAllRailTabs);
   } else {
+    wireToolsPopover();
     wireMobileControls();
     wireAllRailTabs();
   }

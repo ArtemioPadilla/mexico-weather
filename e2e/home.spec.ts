@@ -105,6 +105,9 @@ test.describe('homepage', () => {
     '#mw-measure-wrap',
     '#mw-settings',
     '#mw-info',
+    // Story 22.3 — the ⋯ menu that holds them, and the active-tool pill.
+    '#mw-tools-btn',
+    '#mw-tool-pill',
     '#mw-model-toggle',
     '#legend-bar',
     '#home-map-coords',
