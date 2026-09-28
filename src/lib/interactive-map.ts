@@ -521,8 +521,8 @@ export async function initInteractiveMap(
   });
 
   // A11Y-3 — translate MapLibre's built-in control strings (zoom
-  // buttons, compass) when the document language is Spanish. MapLibre
-  // ships English defaults; `locale` patches the default table.
+  // buttons, compass). The table is always passed, in the page
+  // language (`t` from ui.ts); `locale` patches MapLibre's defaults.
   const mapLocale = {
     'NavigationControl.ZoomIn': t.map_zoom_in,
     'NavigationControl.ZoomOut': t.map_zoom_out,
@@ -1301,7 +1301,8 @@ export async function initInteractiveMap(
   let tlJump: TimelineJump | null = null;
 
   /** Locale / zone / hour format for the bar and the range's valuetext
-   *  (read live: the ⚙ panel and ?lang=en apply without a reload). */
+   *  (settings read live; the language is the document's, fixed at init
+   *  — the ES|EN toggle reloads). */
   function tickFormat(): TickFormat {
     const s = readSettings();
     return {
