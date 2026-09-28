@@ -649,18 +649,24 @@ const cfg = JSON.stringify({
   {/*
     Floating legend bar (plan P0.2) — zoom.earth-style horizontal
     color scale anchored to the bottom-left of the map area, above the
-    cursor coords badge. Stays visible even when the layer rail is
-    collapsed. Hidden on mobile to keep the corner uncluttered.
+    cursor coords badge (on a phone, right on top of the timeline dock).
+    Stays visible even when the layer rail is collapsed. Story 24.3 — the
+    unit, then one continuous colour bar (`.im-legend-ramp`) over its tick
+    row (`#legend`, one `<li>` per tick), in the map labels' Open Sans;
+    legend-bar.ts paints it, global.css (`.im-legend`) lays it out.
   */}
   {features.legend && (
     <div
       id="legend-bar"
-      class="im-chrome dark pointer-events-none absolute bottom-10 left-2 z-10 max-sm:bottom-[calc(var(--im-dock,0px)+0.5rem)] sm:flex items-center gap-2 rounded px-3 py-1.5 text-xs shadow backdrop-blur-sm"
+      class="im-chrome im-legend dark pointer-events-none absolute bottom-10 left-2 z-10 max-sm:bottom-[calc(var(--im-dock,0px)+0.5rem)] flex flex-col items-start gap-1 rounded px-2.5 pb-1 pt-1.5 shadow backdrop-blur-sm sm:flex-row sm:gap-2 sm:px-3"
       style="display:none"
       aria-hidden="true"
     >
-      <span id="legend-unit" class="font-semibold text-[10px] uppercase tracking-wide text-im-muted"></span>
-      <ul id={ids.legend} class="flex items-center gap-2"></ul>
+      <span id="legend-unit" class="text-[11px] leading-[11px] text-im-text"></span>
+      <div class="w-48 sm:w-64">
+        <span class="im-legend-ramp"></span>
+        <ul id={ids.legend} class="im-legend-ticks text-im-text"></ul>
+      </div>
     </div>
   )}
 

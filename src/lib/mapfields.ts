@@ -358,8 +358,14 @@ const TEMP_STOPS_CBSAFE: [number, string][] = [
   [45, '#fff5b1'],
 ];
 
+/** Story 24.3 — the temperature ramp in force (colour-blind aware), so
+ *  the legend draws the very bands `tempColor` paints. */
+export function getTempStops(): readonly (readonly [number, string])[] {
+  return colorBlindMode ? TEMP_STOPS_CBSAFE : TEMP_STOPS_DEFAULT;
+}
+
 export function tempColor(c: number): string {
-  const stops = colorBlindMode ? TEMP_STOPS_CBSAFE : TEMP_STOPS_DEFAULT;
+  const stops = getTempStops();
   if (c <= stops[0][0]) return stops[0][1];
   if (c >= stops[stops.length - 1][0]) return stops[stops.length - 1][1];
   for (let i = 0; i < stops.length - 1; i++) {
@@ -394,16 +400,19 @@ export function getTempLegend(): LegendStop[] {
 /** Exposed for backwards compat; new code should call getTempLegend(). */
 export const TEMP_LEGEND: LegendStop[] = TEMP_LEGEND_DEFAULT;
 
+/** Relative humidity ramp: `[threshold %, colour]`, clamped. */
+export const HUMIDITY_STOPS: readonly (readonly [number, string])[] = [
+  [0, '#fde725'],
+  [20, '#a8db34'],
+  [40, '#5dc863'],
+  [60, '#21908d'],
+  [80, '#3b528b'],
+  [100, '#440154'],
+];
+
 /** Relative humidity (%) → hex colour on a clamped dry→wet ramp. */
 export function humidityColor(h: number): string {
-  const stops: [number, string][] = [
-    [0, '#fde725'],
-    [20, '#a8db34'],
-    [40, '#5dc863'],
-    [60, '#21908d'],
-    [80, '#3b528b'],
-    [100, '#440154'],
-  ];
+  const stops = HUMIDITY_STOPS;
   if (h <= stops[0][0]) return stops[0][1];
   if (h >= stops[stops.length - 1][0]) return stops[stops.length - 1][1];
   for (let i = 0; i < stops.length - 1; i++) {
@@ -412,16 +421,19 @@ export function humidityColor(h: number): string {
   return stops[stops.length - 1][1];
 }
 
+/** MSL pressure ramp: `[threshold hPa, colour]`, clamped. */
+export const PRESSURE_STOPS: readonly (readonly [number, string])[] = [
+  [970, '#542788'],
+  [990, '#998ec3'],
+  [1005, '#d8daeb'],
+  [1015, '#fee0b6'],
+  [1025, '#f1a340'],
+  [1040, '#b35806'],
+];
+
 /** Pressure (hPa, MSL) → hex colour on a clamped low→high ramp. */
 export function pressureColor(p: number): string {
-  const stops: [number, string][] = [
-    [970, '#542788'],
-    [990, '#998ec3'],
-    [1005, '#d8daeb'],
-    [1015, '#fee0b6'],
-    [1025, '#f1a340'],
-    [1040, '#b35806'],
-  ];
+  const stops = PRESSURE_STOPS;
   if (p <= stops[0][0]) return stops[0][1];
   if (p >= stops[stops.length - 1][0]) return stops[stops.length - 1][1];
   for (let i = 0; i < stops.length - 1; i++) {
@@ -444,34 +456,58 @@ export const HUMIDITY_LEGEND: LegendStop[] = [
  *  nibble) so the field reads like a radar composite over the basemap:
  *  blue → purple like the RainViewer legend, magenta for downpours. */
 export const PRECIP_TRANSPARENT = '#00000000';
+
+/** Threshold ramps (Story 24.3 hoists them so the legend reads the very
+ *  bands the field paints): `[lower bound, colour]`, ascending; below
+ *  the first bound the cell is transparent, from the last one up it
+ *  keeps the last colour. */
+export const PRECIP_STEPS: readonly (readonly [number, string])[] = [
+  [0.1, '#a6d8ff'],
+  [0.5, '#5aaeff'],
+  [1, '#1f6fe6'],
+  [2.5, '#5b3fb8'],
+  [5, '#9b2fb0'],
+  [10, '#e01e9a'],
+];
+export const SNOW_STEPS: readonly (readonly [number, string])[] = [
+  [0.1, '#e6f4ff'],
+  [0.5, '#b8dcff'],
+  [1, '#8ec2ff'],
+  [2.5, '#6aa0e6'],
+  [5, '#4c6fb3'],
+];
+export const PRECIP_PROB_STEPS: readonly (readonly [number, string])[] = [
+  [10, '#cfe8ff'],
+  [30, '#8ec2ff'],
+  [50, '#4d94ff'],
+  [70, '#1f5fd6'],
+  [90, '#0b3a99'],
+];
+
+function thresholdColor(
+  v: number,
+  steps: readonly (readonly [number, string])[]
+): string {
+  if (!(v >= steps[0][0])) return PRECIP_TRANSPARENT;
+  for (let i = steps.length - 1; i > 0; i--) {
+    if (v >= steps[i][0]) return steps[i][1];
+  }
+  return steps[0][1];
+}
+
+/** Forecast precipitation (mm/h) → colour on `PRECIP_STEPS`. */
 export function precipColor(mm: number): string {
-  if (!(mm >= 0.1)) return PRECIP_TRANSPARENT;
-  if (mm < 0.5) return '#a6d8ff';
-  if (mm < 1) return '#5aaeff';
-  if (mm < 2.5) return '#1f6fe6';
-  if (mm < 5) return '#5b3fb8';
-  if (mm < 10) return '#9b2fb0';
-  return '#e01e9a';
+  return thresholdColor(mm, PRECIP_STEPS);
 }
 
 /** Snowfall (cm/h) → colour; white-blue ramp, transparent when none. */
 export function snowColor(cm: number): string {
-  if (!(cm >= 0.1)) return PRECIP_TRANSPARENT;
-  if (cm < 0.5) return '#e6f4ff';
-  if (cm < 1) return '#b8dcff';
-  if (cm < 2.5) return '#8ec2ff';
-  if (cm < 5) return '#6aa0e6';
-  return '#4c6fb3';
+  return thresholdColor(cm, SNOW_STEPS);
 }
 
 /** Precipitation probability (%) → colour; < 10 % is transparent. */
 export function precipProbColor(p: number): string {
-  if (!(p >= 10)) return PRECIP_TRANSPARENT;
-  if (p < 30) return '#cfe8ff';
-  if (p < 50) return '#8ec2ff';
-  if (p < 70) return '#4d94ff';
-  if (p < 90) return '#1f5fd6';
-  return '#0b3a99';
+  return thresholdColor(p, PRECIP_PROB_STEPS);
 }
 
 export const PRECIP_LEGEND: LegendStop[] = [
@@ -657,7 +693,13 @@ export const SPREAD_STEPS: Record<string, [number, number, number, number]> = {
   precipitation: [0.5, 1, 3, 5],
 };
 
-const SPREAD_COLORS = ['#22c55e', '#a3e635', '#facc15', '#f97316', '#7e22ce'];
+export const SPREAD_COLORS: readonly string[] = [
+  '#22c55e',
+  '#a3e635',
+  '#facc15',
+  '#f97316',
+  '#7e22ce',
+];
 
 /** Spread → colour (green = agreement … purple = strong disagreement). */
 export function spreadColorFor(layerId: string): (v: number) => string {

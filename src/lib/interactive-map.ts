@@ -20,7 +20,6 @@ import { parseMapHash, buildMapHash, type MapHashState } from './maphash';
 import {
   LAYERS,
   getLayer as getLayerDef,
-  RADAR_LEGEND,
   parseRainviewerManifest,
   rainviewerTileUrl,
   type RadarFrame,
@@ -49,16 +48,9 @@ import {
   pressureColor,
   spreadFieldGrid,
   spreadColorFor,
-  spreadLegendFor,
-  HUMIDITY_LEGEND,
-  PRESSURE_LEGEND,
   precipColor,
   snowColor,
   precipProbColor,
-  PRECIP_LEGEND,
-  SNOW_LEGEND,
-  PRECIP_PROB_LEGEND,
-  getTempLegend,
   setColorBlindMode,
   getColorBlindMode,
   mergeFieldGrids,
@@ -67,15 +59,15 @@ import {
   parseUtcMs,
   EXTENDED_FIELD_RANGE,
   type FieldGrid,
-  type LegendStop,
   type WindGrid,
 } from './mapfields';
 import { relativeFrameLabel, needsWeekday } from './map/chrome/timeline-label';
+import { legendScaleFor, type LegendKind } from './map/chrome/legend-scale';
+import { clearLegendScale, paintLegendScale } from './map/chrome/legend-bar';
 import {
   MAX_WIND_MPS,
   windSpeed,
   windSpeedColor,
-  WIND_LEGEND,
   encodeWindGrid,
   initParticlePositions,
   type WindPoint,
@@ -304,14 +296,10 @@ import {
   SETTINGS_KEY,
 } from './map/settings';
 import {
-  convertLegendStops,
   formatDistanceKm,
   formatPressure,
   formatSpeed,
   formatTemp,
-  PRESSURE_LABEL,
-  SPEED_LABEL,
-  TEMP_LABEL,
   type Units,
 } from './units';
 import { createAutocompleteController } from './map/chrome/autocomplete';
@@ -1544,11 +1532,6 @@ export async function initInteractiveMap(
     if (activeLayer === 'precipitation') return precipUnit();
     return '';
   }
-  function precipLegend(): LegendStop[] {
-    if (precipSubOption === 'nieve') return SNOW_LEGEND;
-    if (precipSubOption === 'probabilidad') return PRECIP_PROB_LEGEND;
-    return PRECIP_LEGEND;
-  }
   function formatPrecip(v: number): string {
     if (precipSubOption === 'probabilidad') return `${Math.round(v)}%`;
     const n = v < 1 ? Math.round(v * 10) / 10 : Math.round(v);
@@ -2483,15 +2466,7 @@ export async function initInteractiveMap(
   }
 
   /** Which legend the active layer needs (null hides the bar). */
-  function legendKindFor():
-    | 'radar'
-    | 'temperature'
-    | 'humidity'
-    | 'pressure'
-    | 'precipitation'
-    | 'confidence'
-    | 'wind'
-    | null {
+  function legendKindFor(): LegendKind | null {
     const akind = getLayerDef(activeLayer)?.kind;
     if (confidenceMode && spreadGrid && akind === 'field') return 'confidence';
     if (activeLayer === 'radar') return 'radar';
@@ -2504,79 +2479,49 @@ export async function initInteractiveMap(
     return null;
   }
 
-  function renderLegend(
-    kind:
-      | 'radar'
-      | 'temperature'
-      | 'humidity'
-      | 'pressure'
-      | 'precipitation'
-      | 'confidence'
-      | 'wind'
-      | null
-  ): void {
+  function renderLegend(kind: LegendKind | null): void {
     const el = opts.els.legend;
     const bar = document.getElementById('legend-bar');
-    const unitEl = document.getElementById('legend-unit');
     if (!el) return;
+    const legendEls = {
+      list: el,
+      ramp: bar?.querySelector<HTMLElement>('.im-legend-ramp') ?? null,
+      unit: document.getElementById('legend-unit'),
+    };
     if (!kind) {
-      el.innerHTML = '';
-      // Inline display:none beats the base sm:flex utility in the
-      // cascade — otherwise the legend would stay visible at sm+.
+      clearLegendScale(legendEls);
+      // Inline display:none beats the base flex utility in the cascade.
       if (bar) bar.style.display = 'none';
       // Story 23.4 — on the phone dock the Controles trigger sits right
       // above the dock unless a legend takes that spot (global.css).
       bar?.closest('.im-root')?.removeAttribute('data-legend');
-      if (unitEl) unitEl.textContent = '';
       return;
     }
-    const stops: LegendStop[] =
-      kind === 'radar'
-        ? RADAR_LEGEND.map((s) => ({
-            label: t[s.labelKey as keyof typeof t] as string,
-            color: s.color,
-          }))
-        : kind === 'temperature'
-          ? getTempLegend()
-          : kind === 'humidity'
-            ? HUMIDITY_LEGEND
-            : kind === 'pressure'
-              ? PRESSURE_LEGEND
-              : kind === 'precipitation'
-                ? precipLegend()
-                : kind === 'confidence'
-                  ? spreadLegendFor(activeLayer, fieldUnitLabel())
-                  : WIND_LEGEND.map((s) => ({
-                      label: t[s.labelKey as keyof typeof t] as string,
-                      color: s.color,
-                    }));
-    // Horizontal stop layout (plan P0.2): a 28×12 swatch with the
-    // label below, similar to zoom.earth's bottom-left scale.
-    // Story 19.3 — temperature / pressure scales read in the chosen unit.
-    const U = currentUnits();
-    el.innerHTML = convertLegendStops(stops, kind, U)
-      .map(
-        (s) =>
-          `<li class="flex flex-col items-center gap-0.5 leading-none"><span class="inline-block h-2.5 w-7" style="background:${esc(
-            s.color
-          )}"></span><span class="text-[10px] tabular-nums">${esc(s.label)}</span></li>`
-      )
-      .join('');
-    // Unit label varies per layer kind. zoom.earth shows °C for the
-    // temperature scale; we mirror that for each metric.
-    const unit: Record<typeof kind & string, string> = {
-      radar: 'mm/h',
-      temperature: TEMP_LABEL[U.temp],
-      humidity: '%',
-      pressure: PRESSURE_LABEL[U.pressure],
-      precipitation: precipUnit(),
-      confidence: `± ${fieldUnitLabel()}`,
-      wind: SPEED_LABEL[U.speed],
-    } as Record<string, string>;
-    if (unitEl) unitEl.textContent = unit[kind] ?? '';
+    // Story 24.3 — one continuous bar with ticks on the band edges and
+    // the unit, drawn from the ramp the map paints (legend-scale.ts).
+    // Story 19.3 — the ticks read in the chosen units. Shown first, so
+    // the painter can measure the bar and hide labels that would touch.
     if (bar) bar.style.display = '';
     bar?.closest('.im-root')?.setAttribute('data-legend', '');
+    paintLegendScale(
+      legendEls,
+      legendScaleFor(kind, {
+        units: currentUnits(),
+        layer: activeLayer,
+        precipSub: precipSubOption,
+        radarLabel: (key) => t[key as keyof typeof t] as string,
+      })
+    );
   }
+
+  // Story 24.3 — tick labels are fitted with real font metrics; when
+  // the legend's Open Sans lands (font-display: swap) they are fitted
+  // again. Removed in destroy().
+  const onLegendFontLoaded = (): void => {
+    const bar = document.getElementById('legend-bar');
+    if (bar && bar.style.display !== 'none') renderLegend(legendKindFor());
+  };
+  document.fonts?.addEventListener('loadingdone', onLegendFontLoaded);
 
   /** Story 22.3 — the model toggle only while a forecast grid (field or
    *  wind particles) drives the map. Looked up by id on each call:
@@ -4769,6 +4714,7 @@ export async function initInteractiveMap(
       overlayRegistry.dispose();
       shortcutsDialog?.dispose();
       railDesktopMq?.removeEventListener('change', onRailMqChange);
+      document.fonts?.removeEventListener('loadingdone', onLegendFontLoaded);
       try {
         map.remove();
       } catch {

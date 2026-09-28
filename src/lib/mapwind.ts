@@ -19,16 +19,20 @@ export interface WindLegendStop {
   color: string;
 }
 
+/** Wind speed ramp: `[threshold m/s, colour]`, clamped (Story 24.3
+ *  exports it so the legend draws these very bands). */
+export const WIND_SPEED_STOPS: readonly (readonly [number, string])[] = [
+  [0, '#2b83ba'],
+  [5, '#abdda4'],
+  [10, '#ffffbf'],
+  [15, '#fdae61'],
+  [25, '#d7191c'],
+  [MAX_WIND_MPS, '#67000d'],
+];
+
 /** Wind speed (m/s) → hex colour on a clamped calm→gale ramp. */
 export function windSpeedColor(s: number): string {
-  const stops: [number, string][] = [
-    [0, '#2b83ba'],
-    [5, '#abdda4'],
-    [10, '#ffffbf'],
-    [15, '#fdae61'],
-    [25, '#d7191c'],
-    [MAX_WIND_MPS, '#67000d'],
-  ];
+  const stops = WIND_SPEED_STOPS;
   if (s <= stops[0][0]) return stops[0][1];
   if (s >= stops[stops.length - 1][0]) return stops[stops.length - 1][1];
   for (let i = 0; i < stops.length - 1; i++) {
