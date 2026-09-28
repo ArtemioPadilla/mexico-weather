@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import {
   BOOT_AUTOPLAY_TILE_WAIT_MS,
   BOOT_LOOP_HOURS,
+  bootActivationAllowed,
   bootLoopHours,
   readSaveData,
   shouldBootAutoplay,
@@ -136,5 +137,70 @@ describe('whenSourceLoaded', () => {
     });
     fire({ sourceId: 'wx-raster', isSourceLoaded: true });
     await expect(p).resolves.toBe('loaded');
+  });
+});
+
+describe('bootActivationAllowed', () => {
+  const untouched = {
+    userPickedLayer: false,
+    activeLayer: 'base',
+    wanted: 'satellite',
+  };
+
+  it('allows the boot on an untouched map', () => {
+    expect(bootActivationAllowed(untouched)).toBe(true);
+  });
+
+  it('allows a retry when the first iteration already set the wanted layer', () => {
+    expect(
+      bootActivationAllowed({ ...untouched, activeLayer: 'satellite' })
+    ).toBe(true);
+  });
+
+  it('bails once the visitor picked a layer, whatever is active', () => {
+    // Field layers set activeLayer only after their grid lands: the flag
+    // is what protects a click whose fetch is still in flight.
+    expect(bootActivationAllowed({ ...untouched, userPickedLayer: true })).toBe(
+      false
+    );
+    expect(
+      bootActivationAllowed({
+        ...untouched,
+        userPickedLayer: true,
+        activeLayer: 'temperature',
+      })
+    ).toBe(false);
+    // A pick that failed and fell to base is still the visitor's choice.
+    expect(
+      bootActivationAllowed({
+        ...untouched,
+        userPickedLayer: true,
+        activeLayer: 'base',
+      })
+    ).toBe(false);
+    // Even when they picked exactly what the boot wanted: no boot autoplay.
+    expect(
+      bootActivationAllowed({
+        ...untouched,
+        userPickedLayer: true,
+        activeLayer: 'satellite',
+      })
+    ).toBe(false);
+  });
+
+  it('bails when another layer is active even without the flag', () => {
+    expect(
+      bootActivationAllowed({ ...untouched, activeLayer: 'temperature' })
+    ).toBe(false);
+    expect(bootActivationAllowed({ ...untouched, activeLayer: 'radar' })).toBe(
+      false
+    );
+    expect(
+      bootActivationAllowed({
+        ...untouched,
+        activeLayer: 'radar',
+        wanted: 'radar',
+      })
+    ).toBe(true);
   });
 });

@@ -144,3 +144,29 @@ export function whenSourceLoaded(
     timer = setT(() => finish('timeout'), capMs);
   });
 }
+
+export interface BootActivationEnv {
+  /** The visitor already picked a layer (rail, shortcut, sub-option,
+   *  overlay panel, model pill…) since the map mounted — whatever it
+   *  resolved to. */
+  userPickedLayer: boolean;
+  /** Layer currently active on the map. */
+  activeLayer: string;
+  /** Layer the boot wants to activate (after the GIBS fallback). */
+  wanted: string;
+}
+
+/**
+ * Pure: may the boot activation (or one of its retries) still activate
+ * `wanted`? The boot lands late — after the GIBS probe
+ * (≤ 5 s), the RainViewer manifest and the map's first idle — and its
+ * retry loop runs ~5 s more. A layer the visitor chose meanwhile wins:
+ * once they picked anything, the boot must neither activate satellite
+ * over it nor start the autoplay. As a belt for the flag, an active
+ * layer that is neither the untouched `base` nor `wanted` itself (the
+ * first retry iteration already set it) also stops the boot.
+ */
+export function bootActivationAllowed(env: BootActivationEnv): boolean {
+  if (env.userPickedLayer) return false;
+  return env.activeLayer === 'base' || env.activeLayer === env.wanted;
+}

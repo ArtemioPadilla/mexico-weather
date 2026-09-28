@@ -1042,7 +1042,14 @@ test.describe('Story 21.2 — /mapa boots on satellite', () => {
    *  the GIBS URLs requested, in order. */
   async function mockBoot(
     page: import('@playwright/test').Page,
-    opts: { gibsStatus?: number; manifestDown?: boolean } = {}
+    opts: {
+      gibsStatus?: number;
+      manifestDown?: boolean;
+      /** Holds every GIBS answer (the boot probe included) this long,
+       *  so the boot activation lands late — the window in which a
+       *  visitor's own click must win. */
+      gibsDelayMs?: number;
+    } = {}
   ): Promise<string[]> {
     await page.route('**/*.arcgisonline.com/**', png);
     await page.route('**/tilecache.rainviewer.com/**', png);
@@ -1062,8 +1069,11 @@ test.describe('Story 21.2 — /mapa boots on satellite', () => {
             })
     );
     const gibsUrls: string[] = [];
-    await page.route('**/gibs.earthdata.nasa.gov/**', (route) => {
+    await page.route('**/gibs.earthdata.nasa.gov/**', async (route) => {
       gibsUrls.push(route.request().url());
+      if (opts.gibsDelayMs) {
+        await new Promise<void>((r) => setTimeout(r, opts.gibsDelayMs));
+      }
       if ((opts.gibsStatus ?? 200) === 200) return png(route);
       return route.fulfill({ status: opts.gibsStatus!, body: '' });
     });
@@ -1229,5 +1239,135 @@ test.describe('Story 21.2 — /mapa boots on satellite', () => {
       'data-state',
       'paused'
     );
+  });
+  test('a layer picked before the boot lands wins over the satellite default', async ({
+    page,
+  }) => {
+    // The boot activation waits for the GIBS probe (≤ 5 s), the
+    // RainViewer manifest and the map's first idle, then retries for
+    // ~5 s more. Holding GIBS 2 s reproduces deterministically what a
+    // slow probe does in production: the visitor clicks a rail layer
+    // right after the manifest and the boot must yield to it (before
+    // the fix it activated satellite ~3 s later, dropping the field).
+    await mockBoot(page, { gibsDelayMs: 2000 });
+    // Live field path (the snapshot would hydrate without a request).
+    await page.route('**/data/field-grids/**', (route) =>
+      route.fulfill({ status: 404 })
+    );
+    await page.route('**/api.open-meteo.com/v1/forecast**', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: fieldResponseForUrl(route.request().url()),
+      })
+    );
+    const manifest = page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
+    await page.goto('mapa/?e2e=1');
+    await manifest;
+
+    const tempBtn = page.locator('#layerbtn-temperature');
+    await expect(tempBtn).toBeEnabled();
+    const fieldResp = page.waitForResponse(
+      '**/api.open-meteo.com/v1/forecast**'
+    );
+    await tempBtn.click();
+    await fieldResp;
+    await expect(tempBtn).toHaveAttribute('aria-pressed', 'true');
+    const range = page.locator('#tl-range');
+    // The −24 h … +48 h hourly field axis, not the 144-frame GeoColor one.
+    await expect(range).toHaveAttribute('max', '71');
+
+    // … and it stays that way for ≥ 6 s: past the held probe (2 s) and
+    // the whole boot retry backoff (0 + 250 + 600 + 1300 + 2800 ms).
+    const satBtn = page.locator('#layerbtn-satellite');
+    const play = page.locator('#tl-play');
+    const until = Date.now() + 6500;
+    while (Date.now() < until) {
+      expect(await tempBtn.getAttribute('aria-pressed')).toBe('true');
+      expect(await satBtn.getAttribute('aria-pressed')).toBe('false');
+      expect(await range.getAttribute('max')).toBe('71');
+      // No boot autoplay over the visitor's own layer.
+      expect(await play.getAttribute('data-state')).toBe('paused');
+      await page.waitForTimeout(500);
+    }
+    await expect(page).toHaveURL(/layer=temperature/);
+    expect(page.url()).not.toMatch(/layer=satellite/);
+    // No fallback toast either: the visitor never saw a boot layer.
+    await expect(page.locator('#mapmsg')).not.toContainText(
+      'Capa no disponible'
+    );
+    // The field raster is still on the map.
+    const hasField = await page.evaluate(() => {
+      const m = (
+        window as unknown as { __map?: { getLayer(id: string): unknown } }
+      ).__map;
+      return !!m?.getLayer('wx-field-layer');
+    });
+    expect(hasField).toBe(true);
+  });
+  test('a layer picked while a deep-link boot is still fetching its grid wins', async ({
+    page,
+  }) => {
+    // #layer=temperature boots a field layer: its activation awaits the
+    // Open-Meteo grid. A rail pick made while that fetch is in flight
+    // must not be overwritten when the older grid finally lands.
+    await mockBoot(page);
+    await page.route('**/data/field-grids/**', (route) =>
+      route.fulfill({ status: 404 })
+    );
+    let release!: () => void;
+    const released = new Promise<void>((r) => (release = r));
+    await page.route('**/api.open-meteo.com/v1/forecast**', async (route) => {
+      await released;
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: fieldResponseForUrl(route.request().url()),
+      });
+    });
+    const manifest = page.waitForResponse(
+      '**/api.rainviewer.com/public/weather-maps.json'
+    );
+    const bootFetch = page.waitForRequest(
+      '**/api.open-meteo.com/v1/forecast**'
+    );
+    await page.goto('mapa/?e2e=1#view=23.6,-102.5,4.5z&layer=temperature');
+    await manifest;
+    // The boot activation has started: the temperature grid is in flight.
+    await bootFetch;
+
+    const radarBtn = page.locator('#layerbtn-radar');
+    const tempBtn = page.locator('#layerbtn-temperature');
+    await expect(radarBtn).toBeEnabled();
+    await radarBtn.click();
+    await expect(radarBtn).toHaveAttribute('aria-pressed', 'true');
+    const landed = page.waitForResponse('**/api.open-meteo.com/v1/forecast**');
+    release();
+
+    // The held grid lands (and the boot's retry window elapses) without
+    // taking the map back to temperature.
+    await landed;
+    const until = Date.now() + 6500;
+    while (Date.now() < until) {
+      expect(await radarBtn.getAttribute('aria-pressed')).toBe('true');
+      expect(await tempBtn.getAttribute('aria-pressed')).toBe('false');
+      await page.waitForTimeout(500);
+    }
+    await expect(page).toHaveURL(/layer=radar/);
+    await expect(page.locator('#mapmsg')).not.toContainText(
+      'Capa no disponible'
+    );
+    const layers = await page.evaluate(() => {
+      const m = (
+        window as unknown as { __map?: { getLayer(id: string): unknown } }
+      ).__map;
+      return {
+        raster: !!m?.getLayer('wx-raster-layer'),
+        field: !!m?.getLayer('wx-field-layer'),
+      };
+    });
+    expect(layers).toEqual({ raster: true, field: false });
   });
 });

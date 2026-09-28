@@ -236,6 +236,7 @@ import { createSunLayer } from './map/layers/sun-layer';
 import { createWeatherRaster } from './map/layers/weather-raster';
 import { createSkeletonReveal, findMapRoot } from './map/chrome/map-skeleton';
 import {
+  bootActivationAllowed,
   bootLoopHours,
   readSaveData,
   shouldBootAutoplay,
@@ -973,9 +974,18 @@ export async function initInteractiveMap(
       }
       const wanted = bootLayerAfterProbe(bootWanted, await gibsProbe, !!rvData);
       const fellBack = wanted !== bootWanted;
+      // Story 21.2 — the boot lands late (probe ≤ 5 s + manifest + first
+      // idle) and its retries run ~5 s more; a layer the visitor picked
+      // meanwhile wins. Checked here and before every activation below.
+      const bootMayActivate = (): boolean =>
+        bootActivationAllowed({
+          userPickedLayer,
+          activeLayer,
+          wanted: wanted ?? 'base',
+        });
       if (fellBack) {
         precipMode = false;
-        if (wanted === 'base') {
+        if (wanted === 'base' && bootMayActivate()) {
           // Nothing to activate: toast now, and back to the theme's own
           // canvas (the dark one was chosen up-front for satellite).
           showMsg(t.map_layer_unavailable);
@@ -983,7 +993,12 @@ export async function initInteractiveMap(
         }
       }
       if (precipMode) void cloudsOverlay.setEnabled(true);
-      if (wanted && wanted !== 'base' && getLayerDef(wanted)) {
+      if (
+        wanted &&
+        wanted !== 'base' &&
+        getLayerDef(wanted) &&
+        bootMayActivate()
+      ) {
         // Cold-load bug (#124, P0.1 in PLAN_UX_PARITY.md): historically a
         // single setTimeout(..., 700) raced the style/source load and the
         // raster layer would silently fail to add ~5% of the time. The
@@ -1015,11 +1030,13 @@ export async function initInteractiveMap(
             if (delays[i] > 0) {
               await new Promise<void>((r) => window.setTimeout(r, delays[i]));
             }
+            // The visitor picked a layer while we waited: theirs stays.
+            if (!bootMayActivate()) return false;
             if (i > 0 && bootSeekIso && !pendingSeekIso) {
               pendingSeekIso = bootSeekIso;
             }
             try {
-              await setActiveLayer(wanted);
+              await applyLayer(wanted);
             } catch {
               continue;
             }
@@ -1040,6 +1057,9 @@ export async function initInteractiveMap(
         // verifiably on the map (the retry above may re-run activation).
         const bootActivate = (): void => {
           void activateWithRetry().then((ok) => {
+            // The visitor chose a layer before the boot landed: no toast
+            // about a fallback they never saw, no autoplay over their pick.
+            if (userPickedLayer) return;
             // The fallback toast goes AFTER the activation so the
             // first-time layer explainer (Story 19.2) cannot paint over
             // the one message that explains why this is not satellite.
@@ -1136,6 +1156,17 @@ export async function initInteractiveMap(
   const RV_SOURCE = 'wx-raster';
   const RV_LAYER = 'wx-raster-layer';
   let activeLayer: string = 'base';
+  // Story 21.2 — set by setActiveLayer(), whose every caller is a
+  // visitor action: rail buttons, layer shortcuts, the sub-option pills,
+  // the precipitation-mode overlay, the colour-blind palette toggle and
+  // the model pills. The boot activation goes through `applyLayer`
+  // directly and checks this flag first, so a layer picked before the
+  // boot lands is never clobbered (and no boot autoplay starts).
+  let userPickedLayer = false;
+  // Bumped by every applyLayer(); an async activation (field / wind
+  // grid fetch) that lands after a newer one bails instead of
+  // overwriting it.
+  let layerActivationGen = 0;
   // NWP model selector (plan P1.1). best_match is Open-Meteo's default;
   // others route the request to a specific national model. State is
   // sourced from the URL hash (?model=icon_seamless etc.) and synced
@@ -2542,9 +2573,24 @@ export async function initInteractiveMap(
     window.setTimeout(() => hideMsg(), 8000);
   }
 
+  /** User-driven layer change: records the visitor's intent (the boot
+   *  activation yields to it — Story 21.2) and applies the layer. */
   async function setActiveLayer(id: string): Promise<void> {
+    if (!getLayerDef(id)) return;
+    userPickedLayer = true;
+    await applyLayer(id);
+  }
+
+  /** Activates `id` without touching `userPickedLayer`; the boot path
+   *  calls this directly, everything else goes through setActiveLayer. */
+  async function applyLayer(id: string): Promise<void> {
     const def = getLayerDef(id);
     if (!def) return;
+    // Latest activation wins: field and wind layers await their grid,
+    // and a newer activation (a visitor's click while a deep-link boot
+    // is still fetching, or a quick second pick) must not be overwritten
+    // when the older fetch lands (Story 21.2).
+    const gen = ++layerActivationGen;
     maybeShowLayerExplainer(id);
     if (def.kind === 'particles') {
       rvOpacity = def.defaultOpacity;
@@ -2617,6 +2663,8 @@ export async function initInteractiveMap(
       } finally {
         if (fieldAbort === ac) fieldAbort = null;
       }
+      // A newer activation took over while the grid was in flight.
+      if (gen !== layerActivationGen) return;
       if (!windGrid || windGrid.points.length === 0) {
         showMsg(t.map_layer_unavailable);
         activeLayer = 'base';
@@ -2672,6 +2720,9 @@ export async function initInteractiveMap(
       removeSun();
       removeWeatherRaster();
       const ok = await loadFieldGrid(id);
+      // A newer activation took over while the grid was in flight: no
+      // toast, no state change — that layer owns the map now.
+      if (gen !== layerActivationGen) return;
       if (!ok || !fieldGrid) {
         showMsg(t.map_layer_unavailable);
         activeLayer = 'base';
@@ -3340,6 +3391,9 @@ export async function initInteractiveMap(
   }
   function armBootAutoplay(): void {
     if (!opts.bootAutoplay || bootAutoplayCancelled) return;
+    // A layer the visitor picked before the boot landed is theirs: no
+    // loop starts on its own (Story 21.2).
+    if (userPickedLayer) return;
     if (
       !shouldBootAutoplay({
         layerId: activeLayer,
@@ -3352,7 +3406,8 @@ export async function initInteractiveMap(
       return;
     }
     void whenSourceLoaded(map, RV_SOURCE).then(() => {
-      if (bootAutoplayCancelled || activeLayer !== 'satellite') return;
+      if (bootAutoplayCancelled || userPickedLayer) return;
+      if (activeLayer !== 'satellite') return;
       if (tlPlayer.isPlaying()) return;
       bootLoopActive = true;
       tlPlayer.start();
