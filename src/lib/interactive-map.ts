@@ -254,9 +254,12 @@ import {
 } from './map/chrome/basemap-theme';
 import { createSunLayer } from './map/layers/sun-layer';
 import {
+  WEATHER_RASTER_SOURCE_B_ID,
+  WEATHER_RASTER_SOURCE_ID,
   createWeatherRaster,
   weatherRasterTileSpec,
 } from './map/layers/weather-raster';
+import { createFirstFrameMark } from './map/chrome/first-frame-mark';
 import {
   PREFETCH_FRAMES,
   createFramePrefetcher,
@@ -1226,6 +1229,23 @@ export async function initInteractiveMap(
   // grid fetch) that lands after a newer one bails instead of
   // overwriting it.
   let layerActivationGen = 0;
+  // Story 26.2 — User Timing mark `mw:first-satellite-frame` when the
+  // first satellite frame's tiles are all on the canvas (either A/B slot),
+  // read by e2e/ux-metrics.spec.ts as "time to first satellite frame".
+  const firstFrameMark = createFirstFrameMark({
+    sourceIds: [WEATHER_RASTER_SOURCE_ID, WEATHER_RASTER_SOURCE_B_ID],
+    getActiveLayer: () => activeLayer,
+  });
+  const onFirstFrameData = (e: {
+    sourceId?: string;
+    isSourceLoaded?: boolean;
+    sourceDataType?: string;
+    tile?: unknown;
+  }): void => {
+    if (firstFrameMark.onSourceData(e) || firstFrameMark.marked)
+      map.off('sourcedata', onFirstFrameData);
+  };
+  map.on('sourcedata', onFirstFrameData);
   // NWP model selector (plan P1.1). best_match is Open-Meteo's default;
   // others route the request to a specific national model. State is
   // sourced from the URL hash (?model=icon_seamless etc.) and synced
@@ -4424,6 +4444,7 @@ export async function initInteractiveMap(
       window.clearTimeout(qTimer);
       if (repaintNudgeInterval) window.clearInterval(repaintNudgeInterval);
       skeleton.dispose();
+      map.off('sourcedata', onFirstFrameData);
       if (surfaceInterval) window.clearInterval(surfaceInterval);
       if (surfaceTimeout) window.clearTimeout(surfaceTimeout);
       if (acOutsideClickHandler)
