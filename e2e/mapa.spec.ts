@@ -1585,9 +1585,10 @@ const png = (route: import('@playwright/test').Route) =>
 
 /** /mapa on its GeoColor boot (Story 21.2), tiles and manifest served
  *  locally, welcome card pre-dismissed (a one-time dialog). Shared by the
- *  Story 22.2 and 22.3 blocks. */
+ *  Story 22.2 and 22.3 blocks; Story 25.3 opens `mapa/?lang=en`. */
 async function openOnSatellite(
-  page: import('@playwright/test').Page
+  page: import('@playwright/test').Page,
+  path = 'mapa/'
 ): Promise<void> {
   await page.route('**/*.arcgisonline.com/**', png);
   await page.route('**/gibs.earthdata.nasa.gov/**', png);
@@ -1606,7 +1607,7 @@ async function openOnSatellite(
       /* private mode — the card shows */
     }
   });
-  await page.goto('mapa/');
+  await page.goto(path);
   await expect(page.locator('#layerbtn-satellite')).toHaveAttribute(
     'aria-pressed',
     'true',
@@ -2372,5 +2373,190 @@ test.describe('Story 22.5 — `?` shortcuts panel and the chrome budget', () => 
       await expect(page.locator('.im-rail')).toBeHidden();
       await expect(page.locator('#tl-next')).toBeHidden();
     });
+  });
+});
+
+test.describe('Story 25.3 — /mapa?lang=en shows no Spanish in the chrome', () => {
+  test.describe.configure({ timeout: 60_000 });
+
+  /** Spanish the chrome used to show (or could show again): letters only
+   *  Spanish uses, and the words of its labels, as whole words. */
+  const SPANISH_CHARS = /[áéíóúüñ¿¡]/i;
+  const SPANISH_WORDS = [
+    'Capas',
+    'Superposiciones',
+    'Herramientas',
+    'Herramienta',
+    'Ajustes',
+    'Medir',
+    'Comparar',
+    'Distancia',
+    'Mira',
+    'Capturar',
+    'Hace',
+    'Limpiar',
+    'Zona',
+    'Formato',
+    'Velocidad',
+    'Lenta',
+    'Media',
+    'Estilo',
+    'Suave',
+    'Etiqueta',
+    'Ambas',
+    'Reloj',
+    'Relativa',
+    'Viento',
+    'Temperatura',
+    'Ciclones',
+    'Avisos',
+    'Salir',
+    'Ocultar',
+    'Mostrar',
+    'Opacidad',
+    'Todas',
+    'Filtrar',
+    'Infrarrojo',
+    'Atajos',
+    'Volver',
+    'Luces',
+    'Incendios',
+    'Nubes',
+    'Sismos',
+    'Volcanes',
+    'Lagos',
+    'Playas',
+    'Mapa',
+    'Toca',
+    'segmento',
+    'segmentos',
+    'Nivel',
+    'Superficie',
+    'Rachas',
+    'Lluvia',
+    'Nieve',
+    'anterior',
+    'siguiente',
+    'Ahora',
+    'Controles',
+    'de',
+    'del',
+    'con',
+    'sin',
+    'para',
+    'y',
+  ];
+  const WORD_RE = new RegExp(
+    `(^|[^\\p{L}])(${SPANISH_WORDS.join('|')})(?=[^\\p{L}]|$)`,
+    'u'
+  );
+
+  /** Spanish found in `selector`: its visible text plus every aria-label,
+   *  title and placeholder inside it (hidden ones too — a screen reader
+   *  or a later reveal reads them). The brand "Clima México" is a name. */
+  async function spanishIn(
+    page: import('@playwright/test').Page,
+    selector: string
+  ): Promise<string[]> {
+    const chunks = await page.locator(selector).evaluate((root) => {
+      const out = [(root as HTMLElement).innerText];
+      for (const el of [root, ...Array.from(root.querySelectorAll('*'))]) {
+        for (const a of ['aria-label', 'title', 'placeholder']) {
+          const v = el.getAttribute(a);
+          if (v) out.push(v);
+        }
+      }
+      return out;
+    });
+    return chunks
+      .flatMap((c) => c.split('\n'))
+      .map((l) => l.replace('Clima México', '').trim())
+      .filter((l) => SPANISH_CHARS.test(l) || WORD_RE.test(l));
+  }
+
+  test('rail, ⋯ menu (tools, settings, info), tool pill and timeline read in English', async ({
+    page,
+  }) => {
+    await openOnSatellite(page, 'mapa/?lang=en');
+    await expect(page.locator('html')).toHaveAttribute('data-lang', 'en');
+
+    // Rail — layers tab with the active layer's sub-options.
+    await openLayerRail(page);
+    const rail = page.locator('.im-rail');
+    await expect(page.locator('#mw-layers-tab')).toContainText('Layers');
+    await expect(rail).toContainText('Infrared');
+    await expect(rail).toContainText('Opacity');
+    expect(await spanishIn(page, '.im-rail')).toEqual([]);
+
+    // Rail — overlays tab (the names come from overlayDefs → ui.ts).
+    await page.locator('#mw-overlays-tab').click();
+    await expect(page.locator('#mw-overlays')).toBeVisible();
+    await expect(page.locator('#mw-overlays')).toContainText('Graticule');
+    expect(await spanishIn(page, '.im-rail')).toEqual([]);
+
+    // ⋯ menu — each tab.
+    const btn = page.locator('#mw-tools-btn');
+    await btn.click();
+    const panel = page.locator('#mw-tools-panel');
+    await expect(panel).toBeVisible();
+    await expect(page.locator('#mw-measure-wrap')).toBeVisible();
+    await expect(panel).toContainText('Distance');
+    await expect(panel).toContainText('Capture');
+    expect(await spanishIn(page, '#mw-tools')).toEqual([]);
+    await page.locator('#mw-tools-tab-settings').click();
+    await expect(page.locator('#mw-settings')).toBeVisible();
+    await expect(page.locator('#mw-settings')).toContainText('Time zone');
+    await expect(page.locator('#mw-settings')).toContainText('Animation loop');
+    expect(await spanishIn(page, '#mw-tools')).toEqual([]);
+    await page.locator('#mw-tools-tab-info').click();
+    await expect(page.locator('#mw-info')).toBeVisible();
+    await expect(page.locator('#mw-info')).toContainText('Forecast:');
+    expect(await spanishIn(page, '#mw-tools')).toEqual([]);
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
+
+    // Tool pill — measuring, then a snapshot next to it.
+    const pill = page.locator('#mw-tool-pill');
+    const result = page.locator('#mw-measure-result');
+    await btn.click();
+    // The menu reopens on the tab it was left on (Info).
+    await page.locator('#mw-tools-tab-tools').click();
+    await page.locator('#mw-measure-distance').click();
+    await expect(page.locator('#mw-tool-pill-label')).toHaveText('Distance');
+    await expect(page.locator('#mw-tool-pill-exit')).toHaveText('Exit');
+    const canvas = page.locator('#map canvas');
+    await canvas.click({ position: { x: 500, y: 400 } });
+    await expect(result).toHaveText('Tap another point to measure');
+    await canvas.click({ position: { x: 700, y: 450 } });
+    await expect(result).toContainText('1 segment');
+    expect(await spanishIn(page, '#mw-tool-pill')).toEqual([]);
+    await btn.click();
+    await page.locator('#mw-snapshot-capture').click();
+    await expect(page.locator('#mw-tool-pill-label')).toContainText(
+      'Comparison'
+    );
+    const toggle = pill.locator('#mw-snapshot-toggle');
+    await expect(toggle).toHaveAttribute('aria-label', 'Hide comparison');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-label', 'Show comparison');
+    await expect(toggle).toContainText('Show');
+    expect(await spanishIn(page, '#mw-tool-pill')).toEqual([]);
+    await page.locator('#mw-tool-pill-exit').click();
+    await expect(pill).toBeHidden();
+
+    // Timeline pill (steps, "Now", the 10-day tail).
+    expect(await spanishIn(page, '#timeline')).toEqual([]);
+  });
+
+  test('Spanish stays the default: the same chrome without ?lang reads in Spanish', async ({
+    page,
+  }) => {
+    await openOnSatellite(page);
+    await openLayerRail(page);
+    await expect(page.locator('.im-rail')).toContainText('Infrarrojo');
+    await page.locator('#mw-tools-btn').click();
+    await page.locator('#mw-tools-tab-settings').click();
+    await expect(page.locator('#mw-settings')).toContainText('Zona horaria');
+    await expect(page.locator('#mw-settings')).toContainText('Rápida');
   });
 });
