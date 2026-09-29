@@ -5,23 +5,47 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 28 Sep 2026 23:22:09 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 05:52:07 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): zonas de Baja California Sur y Sonora.</title>
+      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Baja California Sur y Sonora. Viento de 170 a 190 km/h con rachas de 220 a 240 km/h: Baja California Sur.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): zonas de Baja California Sur y Sonora.]]></description>
-      <pubDate>Mon, 28 Sep 2026 17:21:59 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-28-4c8f</guid>
+      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Baja California Sur y Sonora. Viento de 170 a 190 km/h con rachas de 220 a 240 km/h: Baja California Sur.]]></description>
+      <pubDate>Mon, 28 Sep 2026 23:51:59 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-28-50ed</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 28 SEP 2026: El huracán Polo mantiene su desplazamiento hacia Baja California Sur; se prevé que impacte durante la tarde o noche de...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso46-26.pdf</link>
-      <description><![CDATA[El huracán Polo mantiene su desplazamiento hacia Baja California Sur; se prevé que impacte durante la tarde o noche de... — Comunicado del 28 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso46-26.pdf]]></description>
+      <title>📋 SMN Reporte Vespertino 28 SEP 2026: Durante esta tarde se prevén lluvias de muy fuertes a torrenciales en regiones 14 estados de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_28.pdf</link>
+      <description><![CDATA[Durante esta tarde se prevén lluvias de muy fuertes a torrenciales en regiones 14 estados de México — Reporte Vespertino del 28 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_28.pdf]]></description>
+      <pubDate>Mon, 28 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_28</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 28 SEP 2026: El huracán Polo mantiene su desplazamiento hacia Baja California Sur; se prevé que impacte durante la noche de hoy</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso52-26.pdf</link>
+      <description><![CDATA[El huracán Polo mantiene su desplazamiento hacia Baja California Sur; se prevé que impacte durante la noche de hoy — Comunicado del 28 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso52-26.pdf]]></description>
       <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso46-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso52-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 28 SEP 2026: Debido al huracán Polo, continúa el pronóstico de lluvias torrenciales en regiones de Baja California Sur y Sonora</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso51-26.pdf</link>
+      <description><![CDATA[Debido al huracán Polo, continúa el pronóstico de lluvias torrenciales en regiones de Baja California Sur y Sonora — Comunicado del 28 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso51-26.pdf]]></description>
+      <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso51-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 28 SEP 2026: El huracán Polo mantiene su desplazamiento hacia Baja California Sur; se prevé que impacte durante la tarde o noche de...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso50-26.pdf</link>
+      <description><![CDATA[El huracán Polo mantiene su desplazamiento hacia Baja California Sur; se prevé que impacte durante la tarde o noche de... — Comunicado del 28 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso50-26.pdf]]></description>
+      <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso50-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -33,56 +57,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 28 SEP 2026: El huracán Polo se localizó a 125 km al oeste-suroeste de Cabo San Lázaro, Baja California Sur</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 49-26.pdf</link>
-      <description><![CDATA[El huracán Polo se localizó a 125 km al oeste-suroeste de Cabo San Lázaro, Baja California Sur — Comunicado del 28 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 49-26.pdf]]></description>
-      <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 49-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 28 SEP 2026: Debido al huracán Polo, se pronostican lluvias torrenciales en zonas de Baja California Sur y Sonora</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 48-26.pdf</link>
-      <description><![CDATA[Debido al huracán Polo, se pronostican lluvias torrenciales en zonas de Baja California Sur y Sonora — Comunicado del 28 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 48-26.pdf]]></description>
-      <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorológico 48-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 28 SEP 2026: Polo ocasionará lluvias torrenciales en Baja California Sur y Sonora; muy fuertes en Sinaloa y Chihuahua, y fuertes en ...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso47-26.pdf</link>
-      <description><![CDATA[Polo ocasionará lluvias torrenciales en Baja California Sur y Sonora; muy fuertes en Sinaloa y Chihuahua, y fuertes en ... — Comunicado del 28 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso47-26.pdf]]></description>
-      <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso47-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 541 | 28 de Septiembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 542 | 28 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EL HURACÁN POLO OCASIONARÁ LA PROBABILIDAD DE LLUVIAS INTENSAS A PUNTUALES TORRENCIALES EN ZONAS DE BAJA CALIFORNIA SUR Y SONORA
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES TORRENCIALES EN BAJA CALIFORNIA SUR Y SONORA, POR EL HURACÁN POLO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 541
+No. Aviso: 542
 Ciudad de México a 28 de Septiembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-EL HURACÁN POLO OCASIONARÁ LA PROBABILIDAD DE LLUVIAS INTENSAS A PUNTUALES TORRENCIALES EN ZONAS DE BAJA CALIFORNIA SUR Y SONORA
+SE PREVÉN LLUVIAS PUNTUALES TORRENCIALES EN BAJA CALIFORNIA SUR Y SONORA, POR EL HURACÁN POLO
 
-En el transcurso de este día, se prevé que el centro del huracán Polo toque tierra en la porción central de Baja California Sur, su circulación en interacción con el monzón mexicano sobre el noroeste del territorio nacional, originará lluvias puntuales torrenciales en Baja California Sur (centro) y Sonora (costa y sur); lluvias muy fuertes en Sinaloa (norte), Chihuahua (norte y oeste) y Durango (noroeste); y lluvias fuertes en Baja California (centro y sur) y Nayarit (sur); así como fuertes rachas de viento y oleaje elevado en las mencionadas entidades. Simultáneamente, la circulación de la tormenta tropical Rachel propiciará lluvias puntuales intensas en Guerrero (sureste) y Oaxaca (norte, costa y suroeste), además de vientos fuertes y oleaje elevado en sus costas.…]]></description>
+Durante esta tarde y noche, se prevé que el centro del ciclón tropical Polo ingrese en la zona central de Baja California Sur, su circulación en interacción con el monzón mexicano sobre el noroeste del país, originará lluvias puntuales torrenciales en Baja California Sur (centro) y Sonora (costa y sur), lluvias puntuales intensas en Sonora (centro); lluvias muy fuertes en Sinaloa (norte), Chihuahua (norte y oeste) y Durango (noroeste); y lluvias fuertes en Baja California (centro y sur) y Nayarit (sur), además de viento de 170 a 190 km/h con rachas de 220 a 240 km/h en Baja California Sur y viento de 40 a 60 km/h con rachas de 70 a 90 km/h en Sonora (costa y sur), incrementando durante la noche.…]]></description>
       <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-28-541</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-09-28-542</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 28 de septiembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 28 de septiembre del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 28 de septiembre del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 28 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-09-28-12</guid>
