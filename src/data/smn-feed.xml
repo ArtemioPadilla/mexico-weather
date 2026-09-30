@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 30 Sep 2026 02:11:03 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 08:41:17 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): Sonora y Michoacán.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de septiembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 30 de septiembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 30 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-30-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Sonora (centro, sur y costa) y Michoacán (costa)</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento con rachas de 130 a 150 km/h: golfo de California y Sonora (costa y sur), disminuyendo durante el día.]]></description>
-      <pubDate>Tue, 29 Sep 2026 20:10:53 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-29-639a</guid>
+      <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Sonora (centro, sur y costa) y Michoacán (costa)]]></description>
+      <pubDate>Wed, 30 Sep 2026 02:41:06 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-09-30-c5a5</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -22,6 +33,14 @@
       <description><![CDATA[Durante esta tarde se prevén lluvias torrenciales en Michoacán (costa) y Sonora (centro, sur y costa) — Reporte Vespertino del 29 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_29.pdf]]></description>
       <pubDate>Tue, 29 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_29</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 29 SEP 2026: Rachel mantiene lluvias torrenciales, vientos fuertes y oleaje elevado</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso60-26.pdf</link>
+      <description><![CDATA[Rachel mantiene lluvias torrenciales, vientos fuertes y oleaje elevado — Comunicado del 29 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso60-26.pdf]]></description>
+      <pubDate>Tue, 29 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso60-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -49,14 +68,6 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 29 SEP 2026: Polo, huracán categoría 1, se localizó a 20 km al sur de Guaymas, Sonora</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 56-26.pdf</link>
-      <description><![CDATA[Polo, huracán categoría 1, se localizó a 20 km al sur de Guaymas, Sonora — Comunicado del 29 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 56-26.pdf]]></description>
-      <pubDate>Tue, 29 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorológico 56-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 544 | 29 de Septiembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
       <description><![CDATA[SE PRONOSTICAN LLUVIAS INTENSAS A PUNTUALES TORRENCIALES EN SONORA, SINALOA, JALISCO, COLIMA, MICHOACÁN, GUERRERO, OAXACA, CAMPECHE Y YUCATÁN
@@ -74,17 +85,6 @@ Durante esta noche y la madrugada del miércoles, el ciclón tropical Polo, que 
       <pubDate>Tue, 29 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-09-29-544</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 29 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 29 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-29-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
   </channel>
 </rss>
