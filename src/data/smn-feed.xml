@@ -5,31 +5,50 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 01 Oct 2026 00:37:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 07:14:12 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Michoacán, Guerrero, Coahuila, Nuevo León, Tamaulipas y San Luis Potosí.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de octubre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 01 de octubre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-01-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Llluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Michoacán, Guerrero, Coahuila, Nuevo León, Tamaulipas y San Luis Potosí.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Tamaulipas (norte y oeste).]]></description>
-      <pubDate>Wed, 30 Sep 2026 18:36:52 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-09-30-47e6</guid>
+      <description><![CDATA[Llluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Michoacán, Guerrero, Coahuila, Nuevo León, Tamaulipas y San Luis Potosí.]]></description>
+      <pubDate>Thu, 01 Oct 2026 01:14:05 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-01-a010</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 30 SEP 2026: Rachel se mantiene como huracán de categoría 1, a 300 kilómetros al suroeste de Cabo Corrientes, Jalisco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso62-26.pdf</link>
-      <description><![CDATA[Rachel se mantiene como huracán de categoría 1, a 300 kilómetros al suroeste de Cabo Corrientes, Jalisco — Comunicado del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso62-26.pdf]]></description>
-      <pubDate>Wed, 30 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso62-26</guid>
+      <title>📋 SMN Reporte Vespertino 30 SEP 2026: Esta noche Rachel ocasiona lluvias intensas en Jalisco, Colima, Michoacán y Guerrero, y muy fuertes en Nayarit</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_30.pdf</link>
+      <description><![CDATA[Esta noche Rachel ocasiona lluvias intensas en Jalisco, Colima, Michoacán y Guerrero, y muy fuertes en Nayarit — Reporte Vespertino del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_30.pdf]]></description>
+      <pubDate>Wed, 30 Sep 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_30</guid>
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 30 SEP 2026: Rachel se intensificó a huracán categoría 1 en la escala Saffir-Simpson</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso61-26.pdf</link>
-      <description><![CDATA[Rachel se intensificó a huracán categoría 1 en la escala Saffir-Simpson — Comunicado del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso61-26.pdf]]></description>
+      <title>📋 SMN Comunicado 30 SEP 2026: Rachel se mantiene como huracán de categoría 1, a 300 kilómetros al suroeste de Cabo Corrientes, Jalisco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso63-26.pdf</link>
+      <description><![CDATA[Rachel se mantiene como huracán de categoría 1, a 300 kilómetros al suroeste de Cabo Corrientes, Jalisco — Comunicado del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso63-26.pdf]]></description>
       <pubDate>Wed, 30 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso61-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso63-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 30 SEP 2026: Rachel ocasionará lluvias intensas en regiones de Jalisco, Colima y Michoacán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso62-26.pdf</link>
+      <description><![CDATA[Rachel ocasionará lluvias intensas en regiones de Jalisco, Colima y Michoacán — Comunicado del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso62-26.pdf]]></description>
+      <pubDate>Wed, 30 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso62-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -53,30 +72,11 @@ Para esta noche y madrugada del jueves, las bandas nubosas del huracán Rachel o
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 30 de septiembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Wed, 30 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-09-30-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
       <title>📋 SMN Reporte Matutino 30 SEP 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 17 entidades del país</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_30.pdf</link>
       <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 17 entidades del país — Reporte Matutino del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_30.pdf]]></description>
       <pubDate>Wed, 30 Sep 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_30</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 29 SEP 2026: Rachel mantiene lluvias torrenciales, vientos fuertes y oleaje elevado</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso60-26.pdf</link>
-      <description><![CDATA[Rachel mantiene lluvias torrenciales, vientos fuertes y oleaje elevado — Comunicado del 29 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso60-26.pdf]]></description>
-      <pubDate>Tue, 29 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso60-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
