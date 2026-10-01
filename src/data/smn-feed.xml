@@ -5,34 +5,81 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 01 Oct 2026 07:14:12 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 14:34:55 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de octubre del 2026 | Emisión 00:00h</title>
+      <title>📋 SMN Comunicado 01 OCT 2026: Rachel se intensificó a huracán categoría 2 en la escala Saffir-Simpson en el océano Pacífico</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico 65-26.pdf</link>
+      <description><![CDATA[Rachel se intensificó a huracán categoría 2 en la escala Saffir-Simpson en el océano Pacífico — Comunicado del 01 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico 65-26.pdf]]></description>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso meteorologico 65-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 547 | 01 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN COAHUILA, NUEVO LEÓN, TAMAULIPAS, DURANGO, ZACATECAS Y SAN LUIS POTOSÍ, ASÍ COMO VIENTOS FUERTES EN EL NORTE DE MÉXICO CON POSIBLES TORBELLINOS EN EL NORTE DE COAHUILA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 547
+Ciudad de México a 01 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN COAHUILA, NUEVO LEÓN, TAMAULIPAS, DURANGO, ZACATECAS Y SAN LUIS POTOSÍ, ASÍ COMO VIENTOS FUERTES EN EL NORTE DE MÉXICO CON POSIBLES TORBELLINOS EN EL NORTE DE COAHUILA
+
+ 
+
+Para hoy, el huracán Rachel continuará intensificándose al sur de Baja California Sur. Su circulación reforzará las lluvias muy fuertes en Baja California Sur, Sinaloa, Nayarit y Jalisco, así como vientos fuertes y oleaje elevado en zonas costeras de esas entidades. Por otra parte, el sistema frontal núm. 1 se extenderá sobre el norte y noreste de México, interaccionará con inestabilidad atmosférica y una vaguada en niveles medios y altos de la atmósfera, propiciarán lluvias puntuales intensas con descargas eléctricas y posible caída de granizo en zonas de Coahuila, Nuevo León, Tamaulipas, San Luis Potosí, Durango y Zacatecas. Asimismo, se prevén vientos fuertes con posible formación de torbellinos en el norte de Coahuila.…]]></description>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-01-547</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 01 de octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 01 de octubre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 01 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-01-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Llluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Michoacán, Guerrero, Coahuila, Nuevo León, Tamaulipas y San Luis Potosí.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Coahuila, Nuevo León, Tamaulipas, Durango, Zacatecas y San Luis Potosí.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Llluvias puntuales intensas (75 a 150 mm): en zonas de Jalisco, Colima, Michoacán, Guerrero, Coahuila, Nuevo León, Tamaulipas y San Luis Potosí.]]></description>
-      <pubDate>Thu, 01 Oct 2026 01:14:05 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-01-a010</guid>
+      <description><![CDATA[Viento de 20 a 30 km/h con rachas de 40 a 60 km/h y posibles torbellinos: en el norte de Coahuila.]]></description>
+      <pubDate>Thu, 01 Oct 2026 08:34:44 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-01-0180</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Vespertino 30 SEP 2026: Esta noche Rachel ocasiona lluvias intensas en Jalisco, Colima, Michoacán y Guerrero, y muy fuertes en Nayarit</title>
+      <title>📋 SMN Reporte Matutino 01 OCT 2026: Se pronostican lluvias intensas en zonas de Coahuila, Nuevo León, Tamaulipas, Durango, Zacatecas y San Luis Potosí</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_01.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Coahuila, Nuevo León, Tamaulipas, Durango, Zacatecas y San Luis Potosí — Reporte Matutino del 01 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_01.pdf]]></description>
+      <pubDate>Thu, 01 Oct 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_01</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 30 SEP 2026: Esta noche, Rachel ocasiona lluvias intensas en Jalisco, Colima, Michoacán y Guerrero, y lluvias muy fuertes en Baja Ca...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_30.pdf</link>
-      <description><![CDATA[Esta noche Rachel ocasiona lluvias intensas en Jalisco, Colima, Michoacán y Guerrero, y muy fuertes en Nayarit — Reporte Vespertino del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_30.pdf]]></description>
+      <description><![CDATA[Esta noche, Rachel ocasiona lluvias intensas en Jalisco, Colima, Michoacán y Guerrero, y lluvias muy fuertes en Baja Ca... — Reporte Vespertino del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_09_30.pdf]]></description>
       <pubDate>Wed, 30 Sep 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_09_30</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 30 SEP 2026: Esta noche Rachel ocasiona lluvias intensas en Jalisco, Colima, Michoacán y Guerrero, y muy fuertes en Nayarit</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso64-26.pdf</link>
+      <description><![CDATA[Esta noche Rachel ocasiona lluvias intensas en Jalisco, Colima, Michoacán y Guerrero, y muy fuertes en Nayarit — Comunicado del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso64-26.pdf]]></description>
+      <pubDate>Wed, 30 Sep 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso64-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -41,42 +88,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Rachel se mantiene como huracán de categoría 1, a 300 kilómetros al suroeste de Cabo Corrientes, Jalisco — Comunicado del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso63-26.pdf]]></description>
       <pubDate>Wed, 30 Sep 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso63-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 30 SEP 2026: Rachel ocasionará lluvias intensas en regiones de Jalisco, Colima y Michoacán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso62-26.pdf</link>
-      <description><![CDATA[Rachel ocasionará lluvias intensas en regiones de Jalisco, Colima y Michoacán — Comunicado del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso62-26.pdf]]></description>
-      <pubDate>Wed, 30 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso62-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 546 | 30 de Septiembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EN PRÓXIMAS HORAS, SE PRONOSTICAN PUNTUALES INTENSAS EN JALISCO, COLIMA, MICHOACÁN, GUERRERO, COAHUILA, NUEVO LEÓN, TAMAULIPAS Y SAN LUIS POTOSÍ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 546
-Ciudad de México a 30 de Septiembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-EN PRÓXIMAS HORAS, SE PRONOSTICAN PUNTUALES INTENSAS EN JALISCO, COLIMA, MICHOACÁN, GUERRERO, COAHUILA, NUEVO LEÓN, TAMAULIPAS Y SAN LUIS POTOSÍ
-
-Para esta noche y madrugada del jueves, las bandas nubosas del huracán Rachel ocasionarán lluvias fuertes a muy fuertes en Baja California Sur (sur) y Nayarit (sur y oeste), además, mantendrá el temporal de lluvias en estados del occidente y sur de México, pronosticándose lluvias puntuales intensas en zonas de Jalisco (oeste y sur), Colima, Michoacán (costa) y Guerrero (suroeste), asimismo, se prevén fuertes rachas de viento y oleaje elevado en costas de los estados indicados, con posible formación de trombas marinas frente a las costas de Jalisco, Colima y Michoacán. A su vez, el frente frío núm.…]]></description>
-      <pubDate>Wed, 30 Sep 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-09-30-546</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 30 SEP 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 17 entidades del país</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_30.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 17 entidades del país — Reporte Matutino del 30 SEP 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_09_30.pdf]]></description>
-      <pubDate>Wed, 30 Sep 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_09_30</guid>
       <category>Comunicado</category>
     </item>
   </channel>
