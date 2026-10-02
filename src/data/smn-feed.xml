@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 02 Oct 2026 13:56:56 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2026 19:23:45 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nuevo León, Tamaulipas, Zacatecas, Coahuila, Guerrero, Oaxaca, Tabasco y Campeche.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas máximas de 40 a 45°C: zonas de Baja California, Baja California Sur, Sinaloa y Sonora.]]></description>
+      <pubDate>Fri, 02 Oct 2026 13:23:34 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-02-d3d2</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 549 | 02 de Octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -30,28 +38,20 @@ Este día, el huracán Rachel se desplazará hacia el oeste-noroeste, alejánd
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de octubre del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de octubre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 02 de octubre del 2026
-Emisión: 06:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 02 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-02-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nuevo León, Tamaulipas, Zacatecas, Coahuila, Guerrero, Oaxaca, Tabasco y Campeche.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45°C: zonas de Baja California, Baja California Sur, Sinaloa y Sonora.]]></description>
-      <pubDate>Fri, 02 Oct 2026 07:56:45 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-02-d3d2</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 02 OCT 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 22 estados del país</title>
+      <title>📋 SMN Reporte Matutino 02 OCT 2026: Rachel provocará lluvias muy fuertes en Baja California Sur</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_02.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 22 estados del país — Reporte Matutino del 02 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_02.pdf]]></description>
+      <description><![CDATA[Rachel provocará lluvias muy fuertes en Baja California Sur — Reporte Matutino del 02 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_02.pdf]]></description>
       <pubDate>Fri, 02 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_02</guid>
       <category>Comunicado</category>
@@ -78,14 +78,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Rachel, huracán categoría 3, se ubica al sur de Baja California Sur — Comunicado del 01 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso67-26.pdf]]></description>
       <pubDate>Thu, 01 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso67-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 01 OCT 2026: Se pronostican lluvias intensas en zonas de Baja California Sur y Sinaloa, debido al huracán Rachel</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 66-26.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Baja California Sur y Sinaloa, debido al huracán Rachel — Comunicado del 01 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 66-26.pdf]]></description>
-      <pubDate>Thu, 01 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 66-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
