@@ -5,15 +5,26 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 03 Oct 2026 05:26:47 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2026 11:48:40 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de octubre del 2026 | Emisión 03:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 03 de octubre del 2026
+Emisión: 03:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sat, 03 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-03-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): Baja California Sur, Sinaloa, Nayarit, Nuevo León, Tamaulipas, Zacatecas, Coahuila, Jalisco, San Luis Potosí, Veracruz, Hidalgo, Puebla, Guerrero, Oaxaca, Chiapas, Tabasco y Campeche.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): Baja California Sur, Sinaloa, Nayarit, Nuevo León, Tamaulipas, Zacatecas, Coahuila, Jalisco, San Luis Potosí, Veracruz, Hidalgo, Puebla, Guerrero, Oaxaca, Chiapas, Tabasco y Campeche.]]></description>
-      <pubDate>Fri, 02 Oct 2026 23:26:39 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-02-7238</guid>
+      <pubDate>Sat, 03 Oct 2026 05:48:30 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-03-7238</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -68,17 +79,6 @@ El huracán Rachel continuará su desplazamiento hacia el oeste-noroeste, alejá
       <pubDate>Fri, 02 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-10-02-550</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de octubre del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 02 de octubre del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Fri, 02 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-02-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 02 OCT 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 22 estados del país</title>
