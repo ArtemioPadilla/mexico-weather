@@ -5,26 +5,61 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 03 Oct 2026 11:48:40 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2026 16:29:35 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de octubre del 2026 | Emisión 03:00h</title>
+      <title>📋 SMN Reporte Vespertino 03 OCT 2026: Hoy se esperan lluvias intensas en regiones de Tamaulipas, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche y Yucatán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_03.pdf</link>
+      <description><![CDATA[Hoy se esperan lluvias intensas en regiones de Tamaulipas, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche y Yucatán — Reporte Vespertino del 03 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_03.pdf]]></description>
+      <pubDate>Sat, 03 Oct 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_03</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 03 OCT 2026: Rachel, huracán categoría 1, mantiene lluvias muy fuertes, fuertes rachas de viento y oleaje elevado en Baja Californi...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso72-26.pdf</link>
+      <description><![CDATA[Rachel, huracán categoría 1, mantiene lluvias muy fuertes, fuertes rachas de viento y oleaje elevado en Baja Californi... — Comunicado del 03 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso72-26.pdf]]></description>
+      <pubDate>Sat, 03 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso72-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 551 | 03 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES A INTENSAS EN GRAN PARTE DEL TERRITORIO MEXICANO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 551
+Ciudad de México a 03 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+LLUVIAS PUNTUALES MUY FUERTES A INTENSAS EN GRAN PARTE DEL TERRITORIO MEXICANO
+
+Para hoy, el frente frío núm. 1 se desplazará sobre el noreste del país e interaccionará con una vaguada en niveles medios y altos de la atmósfera, ocasionando lluvias puntuales muy fuertes en zonas de Coahuila, Nuevo León, Tamaulipas, Zacatecas y San Luis Potosí; y puntuales fuertes en Aguascalientes; todas las lluvias con descargas eléctricas y posible caída de granizo, además de fuertes rachas de viento.…]]></description>
+      <pubDate>Sat, 03 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-03-551</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 03 de octubre del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 03 de octubre del 2026
-Emisión: 03:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 03 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-03-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): Baja California Sur, Sinaloa, Nayarit, Nuevo León, Tamaulipas, Zacatecas, Coahuila, Jalisco, San Luis Potosí, Veracruz, Hidalgo, Puebla, Guerrero, Oaxaca, Chiapas, Tabasco y Campeche.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Tabasco, Oaxaca, Chiapas y Campeche.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): Baja California Sur, Sinaloa, Nayarit, Nuevo León, Tamaulipas, Zacatecas, Coahuila, Jalisco, San Luis Potosí, Veracruz, Hidalgo, Puebla, Guerrero, Oaxaca, Chiapas, Tabasco y Campeche.]]></description>
-      <pubDate>Sat, 03 Oct 2026 05:48:30 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-03-7238</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz, Tabasco, Oaxaca, Chiapas y Campeche.]]></description>
+      <pubDate>Sat, 03 Oct 2026 10:29:28 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-03-ac86</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -49,43 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Rachel provocará lluvias intensas, rachas de viento fuertes y oleaje elevado en Baja California Sur — Comunicado del 02 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso70-26.pdf]]></description>
       <pubDate>Fri, 02 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso70-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 02 OCT 2026: Rachel provocará lluvias muy fuertes en Baja California Sur</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 69-26.pdf</link>
-      <description><![CDATA[Rachel provocará lluvias muy fuertes en Baja California Sur — Comunicado del 02 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 69-26.pdf]]></description>
-      <pubDate>Fri, 02 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 69-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 550 | 02 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS MUY FUERTES A INTENSAS EN LA MAYOR PARTE DEL TERRITORIO MEXICANO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 550
-Ciudad de México a 02 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS MUY FUERTES A INTENSAS EN LA MAYOR PARTE DEL TERRITORIO MEXICANO
-
-El huracán Rachel continuará su desplazamiento hacia el oeste-noroeste, alejándose paulatinamente de costas nacionales, no obstante, su amplia circulación reforzará la probabilidad de lluvias puntuales intensas en Baja California Sur (sur); asimismo, mantendrá oleaje elevado y fuertes rachas de viento en las costas de Baja California Sur (sur), Nayarit, Sinaloa, Jalisco y Colima. La interacción entre el frente núm. 1 sobre el noreste del país, una vaguada en niveles altos de la atmósfera e inestabilidad atmosférica en el noroeste y norte del territorio nacional, originarán lluvias puntuales intensas, descargas eléctricas y posible caída de granizo en Nuevo León (norte, centro y noreste), Tamaulipas (noroeste, sur y oeste), Zacatecas (norte, centro y sur), Coahuila (sur y este) y San Luis Potosí (este), lluvias fuertes en Durango (sur), así como chubascos en Sonora y Chihuahua.…]]></description>
-      <pubDate>Fri, 02 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-02-550</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 02 OCT 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de 22 estados del país</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_02.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de 22 estados del país — Reporte Matutino del 02 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_02.pdf]]></description>
-      <pubDate>Fri, 02 Oct 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_02</guid>
       <category>Comunicado</category>
     </item>
   </channel>
