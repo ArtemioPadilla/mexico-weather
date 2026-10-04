@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 04 Oct 2026 15:25:15 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Oct 2026 19:42:25 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Nuevo León, Tamaulipas, San Luis Potosí, Querétaro, Hidalgo, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Nuevo León, Tamaulipas, San Luis Potosí, Querétaro, Hidalgo, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.]]></description>
+      <pubDate>Sun, 04 Oct 2026 13:42:17 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-04-10fa</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 553 | 04 de Octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -29,23 +37,15 @@ Este día, el frente núm. 1 se extenderá como estacionario frente a la costa d
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de octubre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de octubre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 04 de octubre del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 04 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-04-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Nuevo León, Tamaulipas, San Luis Potosí, Querétaro, Hidalgo, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Nuevo León, Tamaulipas, San Luis Potosí, Querétaro, Hidalgo, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco.]]></description>
-      <pubDate>Sun, 04 Oct 2026 09:25:05 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-04-10fa</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 04 OCT 2026: Hoy se esperan lluvias torrenciales en regiones de Tamaulipas, San Luis Potosí, Hidalgo, Puebla y Veracruz</title>
