@@ -5,43 +5,46 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 04 Oct 2026 23:17:05 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2026 02:07:58 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Tamaulipas, San Luis Potosí, Hidalgo, Puebla y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Tamaulipas, San Luis Potosí, Hidalgo, Puebla y Veracruz.]]></description>
-      <pubDate>Sun, 04 Oct 2026 17:16:55 -0600</pubDate>
+      <pubDate>Sun, 04 Oct 2026 20:07:50 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-04-93b2</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 553 | 04 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 554 | 04 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DEL NORESTE, ORIENTE Y SURESTE DEL PAÍS
+      <description><![CDATA[LLUVIAS INTENSAS A TORRENCIALES EN ZONAS DEL NORESTE, ORIENTE Y SURESTE DEL PAÍS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 553
+No. Aviso: 554
 Ciudad de México a 04 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
+ 
 
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DEL NORESTE, ORIENTE Y SURESTE DEL PAÍS
+LLUVIAS INTENSAS A TORRENCIALES EN ZONAS DEL NORESTE, ORIENTE Y SURESTE DEL PAÍS
 
-Este día, el frente núm. 1 se extenderá como estacionario frente a la costa de Tamaulipas, interaccionará con una circulación ciclónica en niveles medios y altos de la atmósfera sobre el oriente del país, así como con un canal de baja presión sobre el occidente del golfo de México y el ingreso de humedad de dicho golfo y mar Caribe, originando lluvias intensas en zonas de Nuevo León, Tamaulipas, San Luis Potosí, Querétaro, Hidalgo, Puebla, Veracruz, Oaxaca, Chiapas y Tabasco; lluvias muy fuertes en Coahuila y Campeche, así como lluvias fuertes en Guanajuato, Estado de México, Ciudad de México, Morelos, Tlaxcala, Yucatán y Quintana Roo; todas con descargas eléctricas.…]]></description>
+ 
+
+Durante esta tarde y noche, la interacción entre el frente núm. 1 estacionado frente a la costa de Tamaulipas e inestabilidad atmosférica superior favorecida por una circulación ciclónica sobre el oriente del territorio nacional, aunados a canales de baja presión en el interior del país; una vaguada en niveles altos de la atmósfera elongada hasta la Mesa del Norte y una zona de baja presión con probabilidad para desarrollo ciclónico en el golfo de Tehuantepec; ocasionarán lluvias torrenciales en Tamaulipas (sur), San Luis Potosí (este), Hidalgo (norte), Puebla (norte) y Veracruz (norte); lluvias intensas en Nayarit (costa y sur), Nuevo León (centro y este), Querétaro (norte), Oaxaca (este y costa), Chiapas (centro, este y sur) y Tabasco (oeste); lluvias muy fuertes en Coahuila (sureste), Sinaloa (costa), Jalisco (oeste y sur), Colima, Michoacán (costa y centro), Guerrero (este y suroeste), Cam…]]></description>
       <pubDate>Sun, 04 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-04-553</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-04-554</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 04 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 04 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-04-12</guid>
