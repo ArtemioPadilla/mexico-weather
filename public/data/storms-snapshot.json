@@ -1,1 +1,1 @@
-{"updated":"2026-10-05T00:04:56Z","source":"NOAA NHC CurrentStorms.json","storms":[{"id":"ep182026","name":"Rachel","lat":20.1,"lng":-114.3,"classification":"HU","intensityKt":90.0,"hasDetail":true},{"id":"ep152026","name":"Nolo","lat":24.2,"lng":180.0,"classification":"HU","intensityKt":100.0,"hasDetail":true}]}
+{"updated":"2026-10-05T05:32:48Z","source":"NOAA NHC CurrentStorms.json","storms":[{"id":"ep182026","name":"Rachel","lat":20.2,"lng":-114.8,"classification":"HU","intensityKt":85.0,"hasDetail":true}]}
