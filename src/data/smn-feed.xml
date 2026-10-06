@@ -5,42 +5,42 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 05 Oct 2026 18:34:20 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2026 00:52:11 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Tabasco y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Tamaulipas, Veracruz, Tabasco y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Tabasco y Chiapas.]]></description>
-      <pubDate>Mon, 05 Oct 2026 12:34:12 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-05-2c52</guid>
+      <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Tamaulipas, Veracruz, Tabasco y Chiapas.]]></description>
+      <pubDate>Mon, 05 Oct 2026 18:52:02 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-05-56d4</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 555 | 05 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 556 | 05 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS TORRENCIALES EN ZONAS DE TABASCO Y CHIAPAS, Y LLUVIAS INTENSAS EN ZONAS DE VERACRUZ, OAXACA, GUERRERO, PUEBLA, HIDALGO, QUERÉTARO Y TAMAULIPAS
+      <description><![CDATA[SE PREVÉN LLUVIAS TORRENCIALES EN ZONAS DE TAMAULIPAS, VERACRUZ, TABASCO Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 555
+No. Aviso: 556
 Ciudad de México a 05 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS TORRENCIALES EN ZONAS DE TABASCO Y CHIAPAS, Y LLUVIAS INTENSAS EN ZONAS DE VERACRUZ, OAXACA, GUERRERO, PUEBLA, HIDALGO, QUERÉTARO Y TAMAULIPAS
+SE PREVÉN LLUVIAS TORRENCIALES EN ZONAS DE TAMAULIPAS, VERACRUZ, TABASCO Y CHIAPAS
 
-Para hoy, el frente núm. 1 se extenderá frente a las costas de Tamaulipas y Veracruz, e interaccionará con una circulación ciclónica en niveles medios y altos de la atmósfera sobre el centro del país, con un canal de baja presión en el suroeste del golfo de México y con dos zonas de baja presión con probabilidad de desarrollo ciclónico, una al sur de las costas de Oaxaca y otra en el golfo de México, lo que originará lluvias puntuales torrenciales en zonas de Chiapas y Tabasco; puntuales intensas en zonas de Tamaulipas, San Luis Potosí, Querétaro, Hidalgo, Puebla, Veracruz, Guerrero y Oaxaca; puntuales muy fuertes en zonas de Nuevo León y Campeche; y puntuales fuertes en zonas de Baja California Sur, Coahuila, Sinaloa, Nayarit, Jalisco, Colima, Michoacán, Guanajuato, Morelos, Estado de México, Yucatán y Quintana Roo, tod…]]></description>
+Para esta noche y madrugada del martes, el frente núm. 1 se extenderá con características de estacionario frente a la costa de Tamaulipas y norte de Veracruz, interaccionará con una circulación ciclónica en niveles altos de la atmósfera sobre el centro del país, inestabilidad atmosférica y dos zonas de baja presión con probabilidad de desarrollo ciclónico, una en el occidente del golfo de México y la otra en las costas del Pacífico Sur Mexicano, originando lluvias puntuales torrenciales en Tamaulipas (noreste y sureste), Veracruz (norte y sur), Tabasco (norte, este y sur) y Chiapas (norte, este y sur); lluvias puntuales intensas en Nuevo León (sur), San Luis Potosí (este), Querétaro (norte), Hidalgo (norte), Puebla (norte), Oaxaca (norte, costa y oeste) y Guerrero (costa y este); lluvias muy fuertes en Campeche (suroeste); lluvias fuertes en Baja California Sur (centro y sur), Sinaloa (costa y sur…]]></description>
       <pubDate>Mon, 05 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-05-555</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-05-556</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de octubre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de octubre del 2026
-Emisión: 12:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 05 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-05-12</guid>
