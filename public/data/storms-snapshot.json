@@ -1,1 +1,1 @@
-{"updated":"2026-10-06T20:15:07Z","source":"NOAA NHC CurrentStorms.json","storms":[{"id":"ep182026","name":"Rachel","lat":20.5,"lng":-119.5,"classification":"HU","intensityKt":75.0,"hasDetail":true}]}
+{"updated":"2026-10-06T23:50:07Z","source":"NOAA NHC CurrentStorms.json","storms":[{"id":"al092026","name":"Nine","lat":22.1,"lng":-95.6,"classification":"TD","intensityKt":30.0,"hasDetail":true},{"id":"ep182026","name":"Rachel","lat":20.5,"lng":-120.1,"classification":"HU","intensityKt":70.0,"hasDetail":true}]}
