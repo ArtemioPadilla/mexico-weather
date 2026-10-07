@@ -5,58 +5,52 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 06 Oct 2026 20:24:43 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 00:47:36 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): zonas de Veracruz.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm) en zonas de Tamaulipas, Veracruz, Puebla, Guerrero, Oaxaca, Chiapas y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): zonas de Veracruz.]]></description>
-      <pubDate>Tue, 06 Oct 2026 14:24:31 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-06-db0a</guid>
+      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm) en zonas de Tamaulipas, Veracruz, Puebla, Guerrero, Oaxaca, Chiapas y Tabasco.]]></description>
+      <pubDate>Tue, 06 Oct 2026 18:47:27 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-06-56e4</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 557 | 06 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 558 | 06 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN VERACRUZ
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN TAMAULIPAS, VERACRUZ, PUEBLA, GUERRERO, OAXACA, CHIAPAS Y TABASCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 557
+No. Aviso: 558
 Ciudad de México a 06 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES TORRENCIALES EN VERACRUZ
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN TAMAULIPAS, VERACRUZ, PUEBLA, GUERRERO, OAXACA, CHIAPAS Y TABASCO.
 
-Este día, la interacción de dos zonas de baja presión con probabilidad para desarrollo ciclónico, en el golfo de México y en el Pacífico Sur Mexicano, respectivamente, una circulación ciclónica en niveles altos de la atmósfera sobre el noreste del país e inestabilidad atmosférica, originarán lluvias intensas a puntuales torrenciales en zonas de Tamaulipas, Veracruz, Tabasco, Chiapas, Oaxaca y Guerrero, así como lluvias fuertes a muy fuertes acompañadas con descargas eléctricas en zonas del noreste, oriente, centro, occidente, sur y sureste de México, incluida la península de Yucatán. Por otra parte, el frente núm. 1, dejará de afectar al territorio nacional durante la tarde y noche. Finalmente, prevalecerá el ambiente caluroso a muy caluroso sobre el noroeste de la República Mexicana.
-
-
-
-El Servicio Meteorológico Nacional vigila los efectos del frente núm. 1 y de dos zonas de baja presión con probabilidad para desarrollo ciclónico.
-
-…]]></description>
+Durante esta noche y madrugada, la interacción de una zona de baja presión con probabilidad de desarrollo ciclónico en el Pacífico Sur Mexicano y una vaguada en niveles altos de la atmósfera sobre la Mesa del Norte y la Mesa Central, originarán lluvias puntuales intensas en Guerrero (sureste), Oaxaca (norte, oeste y costa) y Chiapas (centro, este y sur); lluvias puntuales muy fuertes en Jalisco (oeste), Michoacán (centro y sureste), Estado de México (suroeste) y Morelos; lluvias puntuales fuertes en Baja California Sur (centro y sur), Sinaloa (sur), Nayarit y Colima, y chubascos en Baja California, Sonora, Chihuahua, Durango, Zacatecas, Coahuila, Nuevo León, Aguascalientes y Guanajuato.…]]></description>
       <pubDate>Tue, 06 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-06-557</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-06-558</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de octubre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 06 de octubre del 2026
-Emisión: 12:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 06 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-06-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 06 OCT 2026: Se pronostican lluvias de intensas a torrenciales en zonas de Veracruz, Tamaulipas, Guerrero, Oaxaca, Chiapas y Tabasco</title>
+      <title>📋 SMN Reporte Matutino 06 OCT 2026: Se formó la depresión tropical Nueve en el golfo de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_06.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de intensas a torrenciales en zonas de Veracruz, Tamaulipas, Guerrero, Oaxaca, Chiapas y Tabasco — Reporte Matutino del 06 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_06.pdf]]></description>
+      <description><![CDATA[Se formó la depresión tropical Nueve en el golfo de México — Reporte Matutino del 06 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_06.pdf]]></description>
       <pubDate>Tue, 06 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_06</guid>
       <category>Comunicado</category>
@@ -83,14 +77,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Hoy se esperan lluvias torrenciales en regiones de Tamaulipas, San Luis Potosí, Hidalgo, Puebla y Veracruz — Reporte Matutino del 04 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_04.pdf]]></description>
       <pubDate>Sun, 04 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_04</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 03 OCT 2026: Rachel continúa como huracán categoría 1 alejándose lentamente de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso74-26.pdf</link>
-      <description><![CDATA[Rachel continúa como huracán categoría 1 alejándose lentamente de México — Comunicado del 03 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso74-26.pdf]]></description>
-      <pubDate>Sat, 03 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso74-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
