@@ -5,34 +5,74 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 08 Oct 2026 09:07:52 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 16:36:13 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de octubre del 2026 | Emisión 03:00h</title>
+      <title>📋 SMN Comunicado 08 OCT 2026: Simon generará lluvias torrenciales en Guerrero y Michoacán; Isaias, muy fuertes en el sureste de México y la peníns...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso83-26.pdf</link>
+      <description><![CDATA[Simon generará lluvias torrenciales en Guerrero y Michoacán; Isaias, muy fuertes en el sureste de México y la peníns... — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso83-26.pdf]]></description>
+      <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso83-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 08 OCT 2026: La tormenta tropical Simon permanece frente a costas del Pacífico mexicano</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso82-26.pdf</link>
+      <description><![CDATA[La tormenta tropical Simon permanece frente a costas del Pacífico mexicano — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso82-26.pdf]]></description>
+      <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso82-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 561 | 08 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN GUERRERO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 561
+Ciudad de México a 08 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES TORRENCIALES EN GUERRERO
+
+Este día, el huracán Isaias continuará intensificándose sobre el centro y norte del golfo de México, su amplia circulación ocasionará lluvias puntuales intensas en Chiapas (oeste y costa), Campeche (oeste y costa) y Yucatán (costa, norte y oeste); lluvias puntuales muy fuertes en Veracruz (centro y sur), Tabasco (costa) y Quintana Roo (norte); así como lluvias con intervalos de chubascos en el noreste y centro del país. Por otra parte, el ingreso de humedad asociado con la circulación de la tormenta tropical Simon, y con un canal de baja presión, ocasionarán lluvias puntuales torrenciales en Guerrero; lluvias puntuales intensas en Oaxaca; lluvias puntuales muy fuertes en Michoacán, Estado de México, Ciudad de México y Puebla; así como chubascos con lluvias puntuales fuertes en el occidente, norte y centro del territorio mexicano. Un segundo canal de baja presión ocasionará chubascos en Baja California Sur.
+
+
+
+…]]></description>
+      <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-08-561</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de octubre del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de octubre del 2026
-Emisión: 03:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-08-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): zonas de Guerrero, Puebla, Veracruz, Oaxaca, Tabasco, Chiapas, Campeche y Yucatán.</title>
+      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): zonas de Guerrero.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes (50 a 75 mm): zonas de Tamaulipas, Jalisco, Colima, Michoacán, Estado de México y Morelos.]]></description>
-      <pubDate>Thu, 08 Oct 2026 03:07:44 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-08-789e</guid>
+      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): zonas de Guerrero.]]></description>
+      <pubDate>Thu, 08 Oct 2026 10:36:04 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-08-8944</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Vespertino 07 OCT 2026: Se prevén lluvias intensas en Guerrero, Puebla, Oaxaca, Veracruz, Tabasco, Campeche y Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_07.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas en Guerrero, Puebla, Oaxaca, Veracruz, Tabasco, Campeche y Yucatán — Reporte Vespertino del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_07.pdf]]></description>
-      <pubDate>Wed, 07 Oct 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_07</guid>
+      <title>📋 SMN Reporte Matutino 08 OCT 2026: Se pronostican lluvias de intensas a torrenciales en zonas de Guerrero, Oaxaca, Chiapas, Campeche y Yucatán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_08.pdf</link>
+      <description><![CDATA[Se pronostican lluvias de intensas a torrenciales en zonas de Guerrero, Oaxaca, Chiapas, Campeche y Yucatán — Reporte Matutino del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_08.pdf]]></description>
+      <pubDate>Thu, 08 Oct 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_08</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -50,41 +90,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso80-26</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 07 OCT 2026: Se formó la tormenta tropical Simon a partir de la depresión tropical Veinte-E</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso79-26.pdf</link>
-      <description><![CDATA[Se formó la tormenta tropical Simon a partir de la depresión tropical Veinte-E — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso79-26.pdf]]></description>
-      <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso79-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 07 OCT 2026: El Gobierno de México llama a extremar medidas de prevención ante los efectos de ciclones tropicales en el océano Pac...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado143-26.pdf</link>
-      <description><![CDATA[El Gobierno de México llama a extremar medidas de prevención ante los efectos de ciclones tropicales en el océano Pac... — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado143-26.pdf]]></description>
-      <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Comunicado143-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 560 | 07 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN PUEBLA, GUERRERO, OAXACA, CHIAPAS, VERACRUZ, TABASCO, CAMPECHE Y YUCATÁN
-
----
-Pronóstico Meteorológico General
-No. Aviso: 560
-Ciudad de México a 07 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN PUEBLA, GUERRERO, OAXACA, CHIAPAS, VERACRUZ, TABASCO, CAMPECHE Y YUCATÁN
-
-Para esta noche y madrugada del jueves, la circulación de la tormenta tropical Isaias en el golfo de México y la inestabilidad atmosférica ocasionarán lluvias puntuales intensas en Veracruz (sur), Tabasco (sur, occidente y norte), Campeche (suroeste y norte) y Yucatán (norte y oeste); lluvias puntuales muy fuertes en Tamaulipas (costa); lluvias puntuales fuertes en Quintana Roo (norte); intervalos de chubascos en Nuevo León, San Luis Potosí, Querétaro e Hidalgo, y lluvias aisladas en Coahuila.…]]></description>
-      <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-07-560</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
