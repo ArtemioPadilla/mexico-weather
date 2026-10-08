@@ -5,23 +5,50 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 08 Oct 2026 03:22:39 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 09:07:52 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Guerrero, Oaxaca, Chiapas, Veracruz, Tabasco, Campeche y Yucatán.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de octubre del 2026 | Emisión 03:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 08 de octubre del 2026
+Emisión: 03:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-08-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias intensas (75 a 150 mm): zonas de Guerrero, Puebla, Veracruz, Oaxaca, Tabasco, Chiapas, Campeche y Yucatán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperatura máxima de 40 a 45 °C: Baja California (noreste).]]></description>
-      <pubDate>Wed, 07 Oct 2026 21:22:32 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-07-a7ee</guid>
+      <description><![CDATA[Lluvias muy fuertes (50 a 75 mm): zonas de Tamaulipas, Jalisco, Colima, Michoacán, Estado de México y Morelos.]]></description>
+      <pubDate>Thu, 08 Oct 2026 03:07:44 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-08-789e</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 07 OCT 2026: Se prevén lluvias intensas en Guerrero, Puebla, Oaxaca, Veracruz, Tabasco, Campeche y Yucatán</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado143-26.pdf</link>
-      <description><![CDATA[Se prevén lluvias intensas en Guerrero, Puebla, Oaxaca, Veracruz, Tabasco, Campeche y Yucatán — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado143-26.pdf]]></description>
+      <title>📋 SMN Reporte Vespertino 07 OCT 2026: Se prevén lluvias intensas en Guerrero, Puebla, Oaxaca, Veracruz, Tabasco, Campeche y Yucatán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_07.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas en Guerrero, Puebla, Oaxaca, Veracruz, Tabasco, Campeche y Yucatán — Reporte Vespertino del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_07.pdf]]></description>
+      <pubDate>Wed, 07 Oct 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_07</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 07 OCT 2026: Isaias se intensificó a huracán categoría uno en la escala Saffir-Simpson</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso81-26.pdf</link>
+      <description><![CDATA[Isaias se intensificó a huracán categoría uno en la escala Saffir-Simpson — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso81-26.pdf]]></description>
       <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Comunicado143-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso81-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 07 OCT 2026: Las tormentas tropicales Simon e Isaias ocasionan lluvias intensas en zonas de Guerrero, Oaxaca, Veracruz, Tabasco, Camp...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso80-26.pdf</link>
+      <description><![CDATA[Las tormentas tropicales Simon e Isaias ocasionan lluvias intensas en zonas de Guerrero, Oaxaca, Veracruz, Tabasco, Camp... — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso80-26.pdf]]></description>
+      <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso80-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -33,19 +60,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 07 OCT 2026: Se formó la depresión tropical Veinte-E frente a costas del Pacífico mexicano</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso78-26.pdf</link>
-      <description><![CDATA[Se formó la depresión tropical Veinte-E frente a costas del Pacífico mexicano — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso78-26.pdf]]></description>
+      <title>📋 SMN Comunicado 07 OCT 2026: El Gobierno de México llama a extremar medidas de prevención ante los efectos de ciclones tropicales en el océano Pac...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado143-26.pdf</link>
+      <description><![CDATA[El Gobierno de México llama a extremar medidas de prevención ante los efectos de ciclones tropicales en el océano Pac... — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado143-26.pdf]]></description>
       <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso78-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 07 OCT 2026: La depresión tropical Nueve se intensificó a la tormenta tropical Isaias, durante la madrugada de hoy</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso77-26.pdf</link>
-      <description><![CDATA[La depresión tropical Nueve se intensificó a la tormenta tropical Isaias, durante la madrugada de hoy — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso77-26.pdf]]></description>
-      <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso77-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Comunicado143-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -66,17 +85,6 @@ Para esta noche y madrugada del jueves, la circulación de la tormenta tropical 
       <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-10-07-560</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de octubre del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 07 de octubre del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-07-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
   </channel>
 </rss>
