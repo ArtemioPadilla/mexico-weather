@@ -5,9 +5,25 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 08 Oct 2026 16:36:13 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 22:10:44 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Guerrero y Michoacán.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Guerrero y Michoacán.]]></description>
+      <pubDate>Thu, 08 Oct 2026 16:10:35 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-08-5f16</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 08 OCT 2026: Simon se localiza a 395 km al sur de Manzanillo, Colima, e Isaias, a 300 km al norte de Progreso, Yucatán</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso84-26.pdf</link>
+      <description><![CDATA[Simon se localiza a 395 km al sur de Manzanillo, Colima, e Isaias, a 300 km al norte de Progreso, Yucatán — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso84-26.pdf]]></description>
+      <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso84-26</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>📋 SMN Comunicado 08 OCT 2026: Simon generará lluvias torrenciales en Guerrero y Michoacán; Isaias, muy fuertes en el sureste de México y la peníns...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso83-26.pdf</link>
@@ -49,23 +65,15 @@ Este día, el huracán Isaias continuará intensificándose sobre el centro y no
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de octubre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de octubre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de octubre del 2026
-Emisión: 09:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-08-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): zonas de Guerrero.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): zonas de Guerrero.]]></description>
-      <pubDate>Thu, 08 Oct 2026 10:36:04 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-08-8944</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 08 OCT 2026: Se pronostican lluvias de intensas a torrenciales en zonas de Guerrero, Oaxaca, Chiapas, Campeche y Yucatán</title>
@@ -81,14 +89,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Isaias se intensificó a huracán categoría uno en la escala Saffir-Simpson — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso81-26.pdf]]></description>
       <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso81-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 07 OCT 2026: Las tormentas tropicales Simon e Isaias ocasionan lluvias intensas en zonas de Guerrero, Oaxaca, Veracruz, Tabasco, Camp...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso80-26.pdf</link>
-      <description><![CDATA[Las tormentas tropicales Simon e Isaias ocasionan lluvias intensas en zonas de Guerrero, Oaxaca, Veracruz, Tabasco, Camp... — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso80-26.pdf]]></description>
-      <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso80-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
