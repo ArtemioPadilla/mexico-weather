@@ -5,71 +5,67 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 08 Oct 2026 22:10:44 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 02:16:22 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Guerrero y Michoacán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Guerrero y Michoacán.]]></description>
-      <pubDate>Thu, 08 Oct 2026 16:10:35 -0600</pubDate>
+      <pubDate>Thu, 08 Oct 2026 20:16:12 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-08-5f16</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 08 OCT 2026: Simon se localiza a 395 km al sur de Manzanillo, Colima, e Isaias, a 300 km al norte de Progreso, Yucatán</title>
+      <title>📋 SMN Comunicado 08 OCT 2026: Simon e Isaias ocasionarán lluvias de muy fuertes a torrenciales en estados del Pacífico mexicano y la vertiente del g...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso84-26.pdf</link>
-      <description><![CDATA[Simon se localiza a 395 km al sur de Manzanillo, Colima, e Isaias, a 300 km al norte de Progreso, Yucatán — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso84-26.pdf]]></description>
+      <description><![CDATA[Simon e Isaias ocasionarán lluvias de muy fuertes a torrenciales en estados del Pacífico mexicano y la vertiente del g... — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso84-26.pdf]]></description>
       <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso84-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 08 OCT 2026: Simon generará lluvias torrenciales en Guerrero y Michoacán; Isaias, muy fuertes en el sureste de México y la peníns...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso83-26.pdf</link>
-      <description><![CDATA[Simon generará lluvias torrenciales en Guerrero y Michoacán; Isaias, muy fuertes en el sureste de México y la peníns... — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso83-26.pdf]]></description>
+      <title>📋 SMN Comunicado 08 OCT 2026: Se prevén lluvias torrenciales en regiones de Guerrero y Michoacán, e intensas en Oaxaca, debido a la tormenta tropic...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso86-26.pdf</link>
+      <description><![CDATA[Se prevén lluvias torrenciales en regiones de Guerrero y Michoacán, e intensas en Oaxaca, debido a la tormenta tropic... — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso86-26.pdf]]></description>
       <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso83-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso86-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 08 OCT 2026: La tormenta tropical Simon permanece frente a costas del Pacífico mexicano</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso82-26.pdf</link>
-      <description><![CDATA[La tormenta tropical Simon permanece frente a costas del Pacífico mexicano — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso82-26.pdf]]></description>
+      <title>📋 SMN Comunicado 08 OCT 2026: Isaias se intensificó a huracán categoría 2 en la escala Saffir-Simpson.</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso85-26.pdf</link>
+      <description><![CDATA[Isaias se intensificó a huracán categoría 2 en la escala Saffir-Simpson. — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso85-26.pdf]]></description>
       <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso82-26</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso85-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 561 | 08 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 562 | 08 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN GUERRERO
+      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN GUERRERO Y MICHOACÁN
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 561
+No. Aviso: 562
 Ciudad de México a 08 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES TORRENCIALES EN GUERRERO
+LLUVIAS PUNTUALES TORRENCIALES EN GUERRERO Y MICHOACÁN
 
-Este día, el huracán Isaias continuará intensificándose sobre el centro y norte del golfo de México, su amplia circulación ocasionará lluvias puntuales intensas en Chiapas (oeste y costa), Campeche (oeste y costa) y Yucatán (costa, norte y oeste); lluvias puntuales muy fuertes en Veracruz (centro y sur), Tabasco (costa) y Quintana Roo (norte); así como lluvias con intervalos de chubascos en el noreste y centro del país. Por otra parte, el ingreso de humedad asociado con la circulación de la tormenta tropical Simon, y con un canal de baja presión, ocasionarán lluvias puntuales torrenciales en Guerrero; lluvias puntuales intensas en Oaxaca; lluvias puntuales muy fuertes en Michoacán, Estado de México, Ciudad de México y Puebla; así como chubascos con lluvias puntuales fuertes en el occidente, norte y centro del territorio mexicano. Un segundo canal de baja presión ocasionará chubascos en Baja California Sur.
-
-
-
-…]]></description>
+Para esta noche y madrugada del viernes, el huracán Isaias de categoría 2 en la escala Saffir Simpson, continuará desplazándose sobre el centro y norte del golfo de México, su amplia circulación en interacción con inestabilidad atmosférica, ocasionarán lluvias puntuales muy fuertes en Veracruz (centro y sur), Campeche (oeste y costa), Yucatán (costa, norte y oeste), Tabasco (costa) y Quintana Roo (norte); además de fuertes rachas de viento y oleaje elevado en las costas de dichos estados. Simultáneamente, la amplia circulación de la tormenta tropical Simon frente a las costas del Pacífico sur mexicano, ocasionará lluvias puntuales torrenciales en Guerrero (costa y sur) y Michoacán (costa), lluvias muy fuertes en Jalisco (oeste y sur) y Colima; además de fuertes rachas de viento y oleaje elevado en las costas de dichos estados.…]]></description>
       <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-08-561</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-08-562</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-08-12</guid>
@@ -81,14 +77,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias de intensas a torrenciales en zonas de Guerrero, Oaxaca, Chiapas, Campeche y Yucatán — Reporte Matutino del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_08.pdf]]></description>
       <pubDate>Thu, 08 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_08</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 07 OCT 2026: Isaias se intensificó a huracán categoría uno en la escala Saffir-Simpson</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso81-26.pdf</link>
-      <description><![CDATA[Isaias se intensificó a huracán categoría uno en la escala Saffir-Simpson — Comunicado del 07 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso81-26.pdf]]></description>
-      <pubDate>Wed, 07 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso81-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
