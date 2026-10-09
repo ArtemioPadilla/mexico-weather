@@ -5,9 +5,33 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 09 Oct 2026 17:02:51 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 21:45:36 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Guerrero y Michoacán.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Guerrero y Michoacán.]]></description>
+      <pubDate>Fri, 09 Oct 2026 15:45:29 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-09-5f16</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 09 OCT 2026: El huracán Simon se localiza a 335 km al sur de Manzanillo, Colima</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 90-26.pdf</link>
+      <description><![CDATA[El huracán Simon se localiza a 335 km al sur de Manzanillo, Colima — Comunicado del 09 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 90-26.pdf]]></description>
+      <pubDate>Fri, 09 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 90-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 09 OCT 2026: Simon se intensifica a huracán categoría 2 en la escala Saffir-Simpson, en el Pacífico mexicano</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 89-26.pdf</link>
+      <description><![CDATA[Simon se intensifica a huracán categoría 2 en la escala Saffir-Simpson, en el Pacífico mexicano — Comunicado del 09 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 89-26.pdf]]></description>
+      <pubDate>Fri, 09 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 89-26</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>📋 SMN Comunicado 09 OCT 2026: Debido al huracán Simon, se pronostican lluvias torrenciales en zonas de Guerrero y Michoacán</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 88-26.pdf</link>
@@ -36,46 +60,22 @@ Para hoy, el huracán Simon continuará intensificándose frente a las costas de
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de octubre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 09 de octubre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 09 de octubre del 2026
-Emisión: 09:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 09 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-09-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Guerrero y Michoacán.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Guerrero y Michoacán.]]></description>
-      <pubDate>Fri, 09 Oct 2026 11:02:40 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-09-5f16</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 09 OCT 2026: Simon se intensifica a huracán categoría 2 en la escala Saffir-Simpson, en el Pacífico mexicano</title>
+      <title>📋 SMN Reporte Matutino 09 OCT 2026: Debido al huracán Simon, se mantiene el pronóstico de lluvias torrenciales en costas de Guerrero y Michoacán</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_09.pdf</link>
-      <description><![CDATA[Simon se intensifica a huracán categoría 2 en la escala Saffir-Simpson, en el Pacífico mexicano — Reporte Matutino del 09 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_09.pdf]]></description>
+      <description><![CDATA[Debido al huracán Simon, se mantiene el pronóstico de lluvias torrenciales en costas de Guerrero y Michoacán — Reporte Matutino del 09 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_09.pdf]]></description>
       <pubDate>Fri, 09 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_09</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 08 OCT 2026: Simon e Isaias ocasionarán lluvias de muy fuertes a torrenciales en estados del Pacífico mexicano y la vertiente del g...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_08.pdf</link>
-      <description><![CDATA[Simon e Isaias ocasionarán lluvias de muy fuertes a torrenciales en estados del Pacífico mexicano y la vertiente del g... — Reporte Vespertino del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_08.pdf]]></description>
-      <pubDate>Thu, 08 Oct 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_08</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 08 OCT 2026: Esta noche Simon se intensificó a huracán de categoría 1 en la escala Saffir-Simpson</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso87-26.pdf</link>
-      <description><![CDATA[Esta noche Simon se intensificó a huracán de categoría 1 en la escala Saffir-Simpson — Comunicado del 08 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso87-26.pdf]]></description>
-      <pubDate>Thu, 08 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso87-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
