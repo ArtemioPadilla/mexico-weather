@@ -5,21 +5,21 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 10 Oct 2026 20:09:30 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 23:39:09 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias extraordinarias (mayores a 250 mm) en Colima y Michoacán, y lluvias torrenciales en costas de Jalisco</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales extraordinarias (superiores a 250 mm): Michoacán (costa y oeste) y Colima; puntuales torrenciales (150 a 250 mm): Jalisco (costa y este).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias extraordinarias (mayores a 250 mm) en Colima y Michoacán, y lluvias torrenciales en costas de Jalisco]]></description>
-      <pubDate>Sat, 10 Oct 2026 14:09:22 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-10-1931</guid>
+      <description><![CDATA[Viento de 90 a 110 km/h con rachas de 120 a 130 km/h: costas de Jalisco y Colima; y de 60 a 80 km/h con rachas de 90 a 110 km/h: costa de Baja California y Michoac�...]]></description>
+      <pubDate>Sat, 10 Oct 2026 17:39:01 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-10-8c5f</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 10 OCT 2026: El huracán Simon se localiza a 185 km al sur-suroeste de Manzanillo, Colima</title>
+      <title>📋 SMN Comunicado 10 OCT 2026: Simon mantiene su trayectoria hacia las costas del Pacífico central mexicano, y Rachel se dirige hacia Baja California</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 97-26.pdf</link>
-      <description><![CDATA[El huracán Simon se localiza a 185 km al sur-suroeste de Manzanillo, Colima — Comunicado del 10 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 97-26.pdf]]></description>
+      <description><![CDATA[Simon mantiene su trayectoria hacia las costas del Pacífico central mexicano, y Rachel se dirige hacia Baja California — Comunicado del 10 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 97-26.pdf]]></description>
       <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 97-26</guid>
       <category>Comunicado</category>
@@ -69,23 +69,15 @@ Este día, el huracán Simon de categoría 4 en la escala Saffir-Simpson se apro
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de octubre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de octubre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 10 de octubre del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-10-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 09 OCT 2026: Simon se ha intensificado a huracán de categoría 3 en la escala Saffir-Simpson</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso93-26.pdf</link>
-      <description><![CDATA[Simon se ha intensificado a huracán de categoría 3 en la escala Saffir-Simpson — Comunicado del 09 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso93-26.pdf]]></description>
-      <pubDate>Fri, 09 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso93-26</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
