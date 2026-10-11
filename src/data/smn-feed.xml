@@ -5,21 +5,37 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 10 Oct 2026 23:39:09 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2026 05:59:03 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales extraordinarias (superiores a 250 mm): Michoacán (costa y oeste) y Colima; puntuales torrenciales (150 a 250 mm): Jalisco (costa y este).</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales extraordinarias (superiores a 250 mm): en zonas de Michoacán y Colima; y puntuales torrenciales (150 a 250 mm): en zonas de Jalisco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 90 a 110 km/h con rachas de 120 a 130 km/h: costas de Jalisco y Colima; y de 60 a 80 km/h con rachas de 90 a 110 km/h: costa de Baja California y Michoac�...]]></description>
-      <pubDate>Sat, 10 Oct 2026 17:39:01 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-10-8c5f</guid>
+      <description><![CDATA[Viento de 90 a 110 km/h con rachas de 120 a 130 km/h: costas de Jalisco y Colima; de 60 a 80 km/h con rachas de 90 a 110 km/h: costas de Baja California y Michoacá...]]></description>
+      <pubDate>Sat, 10 Oct 2026 23:58:55 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-10-0914</guid>
       <category>Alerta</category>
     </item>
     <item>
+      <title>📋 SMN Comunicado 10 OCT 2026: En las próximas horas, Rachel entrará a tierra en la costa occidental de Baja California como ciclón post-tropical</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso99-26.pdf</link>
+      <description><![CDATA[En las próximas horas, Rachel entrará a tierra en la costa occidental de Baja California como ciclón post-tropical — Comunicado del 10 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso99-26.pdf]]></description>
+      <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso99-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
       <title>📋 SMN Comunicado 10 OCT 2026: Simon mantiene su trayectoria hacia las costas del Pacífico central mexicano, y Rachel se dirige hacia Baja California</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso98-26.pdf</link>
+      <description><![CDATA[Simon mantiene su trayectoria hacia las costas del Pacífico central mexicano, y Rachel se dirige hacia Baja California — Comunicado del 10 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso98-26.pdf]]></description>
+      <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso98-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 10 OCT 2026: El huracán Simon se localiza a 185 km al sur-suroeste de Manzanillo, Colima</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 97-26.pdf</link>
-      <description><![CDATA[Simon mantiene su trayectoria hacia las costas del Pacífico central mexicano, y Rachel se dirige hacia Baja California — Comunicado del 10 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 97-26.pdf]]></description>
+      <description><![CDATA[El huracán Simon se localiza a 185 km al sur-suroeste de Manzanillo, Colima — Comunicado del 10 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 97-26.pdf]]></description>
       <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 97-26</guid>
       <category>Comunicado</category>
@@ -33,47 +49,34 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 10 OCT 2026: Debido al huracán Simon, se pronostican lluvias extraordinarias en Colima, y torrenciales en costas de Jalisco y Michoa...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 95-26.pdf</link>
-      <description><![CDATA[Debido al huracán Simon, se pronostican lluvias extraordinarias en Colima, y torrenciales en costas de Jalisco y Michoa... — Comunicado del 10 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 95-26.pdf]]></description>
-      <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 95-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 10 OCT 2026: Simon se intensificó a huracán de categoría 4 en la escala Saffir-Simpson</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 94-26.pdf</link>
-      <description><![CDATA[Simon se intensificó a huracán de categoría 4 en la escala Saffir-Simpson — Comunicado del 10 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorológico 94-26.pdf]]></description>
-      <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorológico 94-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 565 | 10 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 566 | 10 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES EXTRAORDINARIAS EN COLIMA Y LLUVIAS PUNTUALES TORRENCIALES EN JALISCO Y MICHOACÁN
+      <description><![CDATA[LLUVIAS PUNTUALES EXTRAORDINARIAS EN COLIMA Y MICHOACÁN
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 565
+No. Aviso: 566
 Ciudad de México a 10 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
+ 
 
-LLUVIAS PUNTUALES EXTRAORDINARIAS EN COLIMA Y LLUVIAS PUNTUALES TORRENCIALES EN JALISCO Y MICHOACÁN
+LLUVIAS PUNTUALES EXTRAORDINARIAS EN COLIMA Y MICHOACÁN 
 
-Este día, el huracán Simon de categoría 4 en la escala Saffir-Simpson se aproximará a las costas de Colima y Michoacán, su circulación mantendrá las condiciones para lluvias puntuales extraordinarias en Colima, torrenciales en Jalisco y Michoacán, así como muy fuertes a intensas en el occidente y sur del país. Asimismo, se pronostican vientos intensos con rachas de 120 a 130 km/h y oleaje de 6.0 a 8.0 metros de altura en las costas de Jalisco y Colima. Por otra parte, la tormenta tropical Rachel se dirigirá a la costa oeste de Baja California e interaccionará con un frente frío cercano a la frontera noroeste de México, originando lluvias puntuales fuertes en Baja California.…]]></description>
+Para esta noche y madrugada del domingo, el huracán Simon mantendrá su aproximación hacia las costas del occidente del país. Su circulación mantendrá las condiciones para lluvias puntuales extraordinarias en Michoacán (costa y oeste) y Colima; lluvias torrenciales en Jalisco (costa y este), lluvias intensas en Guerrero (suroeste) y lluvias muy fuertes en Nayarit (sur) y lluvias fuertes en Sinaloa (sur) y Durango (sur). Asimismo, se pronostican vientos intensos de 90 a 110 km/h con rachas de 120 a 130 km/h en las costas de Jalisco y Colima, incrementando por la tarde y noche, así como oleaje de 6.0 a 8.0 metros de altura.
+
+…]]></description>
       <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-10-565</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-10-566</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 10 de octubre del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 10 de octubre del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-10-12</guid>
