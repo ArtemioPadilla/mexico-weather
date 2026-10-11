@@ -5,16 +5,32 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 11 Oct 2026 18:09:54 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2026 22:06:53 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales extraordinarias (mayores a 250 mm): en zonas de Jalisco.</title>
+      <title>⚠️ Alerta SMN: Lluvias torrenciales con puntuales extraordinarias (superiores a 250 mm) en zonas de Jalisco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento (rachas 240 a 250 km/h) en costa de Jalisco y viento (rachas de 130 a 140 km/h) en costas de Nayarit y Colima, disminuyendo durante el día.]]></description>
-      <pubDate>Sun, 11 Oct 2026 12:09:47 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-11-cf7e</guid>
+      <description><![CDATA[Viento de 210 a 230 km/h con rachas de 240 a 250 km/h en la costa de Jalisco, disminuyendo durante el día.]]></description>
+      <pubDate>Sun, 11 Oct 2026 16:06:44 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-11-9721</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 11 OCT 2026: Esta tarde, Simon se localiza a 70 kilómetros al oeste de Playa Pérula, Jalisco y se mueve paralelo a las costas de di...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso106-26.pdf</link>
+      <description><![CDATA[Esta tarde, Simon se localiza a 70 kilómetros al oeste de Playa Pérula, Jalisco y se mueve paralelo a las costas de di... — Comunicado del 11 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso106-26.pdf]]></description>
+      <pubDate>Sun, 11 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso106-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 11 OCT 2026: El centro del huracán Simon se localiza a 40 km de Playa Pérula, Jalisco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 105-26.pdf</link>
+      <description><![CDATA[El centro del huracán Simon se localiza a 40 km de Playa Pérula, Jalisco — Comunicado del 11 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 105-26.pdf]]></description>
+      <pubDate>Sun, 11 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 105-26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 11 OCT 2026: El huracán Simon se localiza a 95 km al oeste de Manzanillo, Colima</title>
@@ -41,14 +57,6 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 11 OCT 2026: Rachel se localizó sobre tierra, a 40 km al sur-sureste de Ensenada, Baja California, como ciclón post-tropical</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso101-26.pdf</link>
-      <description><![CDATA[Rachel se localizó sobre tierra, a 40 km al sur-sureste de Ensenada, Baja California, como ciclón post-tropical — Comunicado del 11 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso101-26.pdf]]></description>
-      <pubDate>Sun, 11 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso101-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 567 | 11 de Octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
       <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES EXTRAORDINARIAS EN JALISCO
@@ -68,23 +76,15 @@ Para hoy, el huracán Simon se desplazará muy próximo a la costa de Jalisco. S
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de octubre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de octubre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 11 de octubre del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 11 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-11-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 10 OCT 2026: En las próximas horas, Rachel entrará a tierra en la costa occidental de Baja California como ciclón post-tropical</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso100-26.pdf</link>
-      <description><![CDATA[En las próximas horas, Rachel entrará a tierra en la costa occidental de Baja California como ciclón post-tropical — Comunicado del 10 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso100-26.pdf]]></description>
-      <pubDate>Sat, 10 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso100-26</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
