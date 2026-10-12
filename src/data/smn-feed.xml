@@ -5,21 +5,21 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 11 Oct 2026 22:06:53 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 01:24:33 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias torrenciales con puntuales extraordinarias (superiores a 250 mm) en zonas de Jalisco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 210 a 230 km/h con rachas de 240 a 250 km/h en la costa de Jalisco, disminuyendo durante el día.]]></description>
-      <pubDate>Sun, 11 Oct 2026 16:06:44 -0600</pubDate>
+      <pubDate>Sun, 11 Oct 2026 19:24:23 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-11-9721</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 11 OCT 2026: Esta tarde, Simon se localiza a 70 kilómetros al oeste de Playa Pérula, Jalisco y se mueve paralelo a las costas de di...</title>
+      <title>📋 SMN Comunicado 11 OCT 2026: Continúa el pronóstico de lluvias extraordinarias por Simon, ahora como huracán de categoría 3 en la escala Saffir-S...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso106-26.pdf</link>
-      <description><![CDATA[Esta tarde, Simon se localiza a 70 kilómetros al oeste de Playa Pérula, Jalisco y se mueve paralelo a las costas de di... — Comunicado del 11 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso106-26.pdf]]></description>
+      <description><![CDATA[Continúa el pronóstico de lluvias extraordinarias por Simon, ahora como huracán de categoría 3 en la escala Saffir-S... — Comunicado del 11 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso106-26.pdf]]></description>
       <pubDate>Sun, 11 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso106-26</guid>
       <category>Comunicado</category>
@@ -49,38 +49,33 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 11 OCT 2026: El huracán Simon mantiene el pronóstico de lluvias extraordinarias en regiones de Jalisco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso102-26.pdf</link>
-      <description><![CDATA[El huracán Simon mantiene el pronóstico de lluvias extraordinarias en regiones de Jalisco — Comunicado del 11 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso102-26.pdf]]></description>
-      <pubDate>Sun, 11 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso102-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 567 | 11 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 568 | 11 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES EXTRAORDINARIAS EN JALISCO
+      <description><![CDATA[LLUVIAS PUNTUALES EXTRAORDINARIAS EN JALISCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 567
+No. Aviso: 568
 Ciudad de México a 11 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS PUNTUALES EXTRAORDINARIAS EN JALISCO
+ 
+LLUVIAS PUNTUALES EXTRAORDINARIAS EN JALISCO
 
-Para hoy, el huracán Simon se desplazará muy próximo a la costa de Jalisco. Su circulación mantendrá las condiciones para lluvias puntuales extraordinarias en Jalisco (costa, este y oeste); puntuales torrenciales en Colima; puntuales intensas en Nayarit (sur) y puntuales muy fuertes en Sinaloa (centro y sur) y Michoacán (oeste). Asimismo, se pronostican vientos intensos con rachas de 240 a 250 km/h en la costa de Jalisco, disminuyendo durante el día; viento de 100 a 120 km/h con rachas de 130 a 140 km/h en las costas de Nayarit y Colima, disminuyendo durante el día; y viento de 50 a 70 km/h con rachas de 80 a 90 km/h en las costas de Michoacán, aumentando su intensidad durante el día en las costas de Sinaloa; además de oleaje de 8.0 a 10.0 metros de altura en las costas de Jalisco; oleaje de 6.0 a 8.0 metros de altura en la costa de Colima; y oleaje de 4.0 a 6.0 en la costa de Nayarit; así como marea de tormenta de 1.5 a 2.5…]]></description>
+
+
+Durante esta noche y madrugada del lunes, el huracán Simon se desplazará muy próximo a la costa de Jalisco, su circulación mantendrá las condiciones para lluvias extraordinarias en Jalisco (costa y oeste); lluvias puntuales torrenciales en Colima; lluvias puntuales intensas en Nayarit (sur) y Michoacán (oeste); y lluvias puntuales muy fuertes en Sinaloa (sur y centro).…]]></description>
       <pubDate>Sun, 11 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-11-567</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-11-568</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 11 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 11 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-11-12</guid>
