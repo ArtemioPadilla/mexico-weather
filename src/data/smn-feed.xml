@@ -5,9 +5,25 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 13 Oct 2026 17:39:17 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 22:54:09 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes (50 a 75 mm): zonas de Chihuahua y Durango.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes (50 a 75 mm): zonas de Chihuahua y Durango.]]></description>
+      <pubDate>Tue, 13 Oct 2026 16:54:01 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-13-a5c3</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 13 OCT 2026: Se formó la tormenta tropical Trudy a partir de la depresión tropical Veintiuno-E en el océano Pacifico</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso116-26.pdf</link>
+      <description><![CDATA[Se formó la tormenta tropical Trudy a partir de la depresión tropical Veintiuno-E en el océano Pacifico — Comunicado del 13 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso116-26.pdf]]></description>
+      <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso116-26</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>📋 SMN Comunicado 13 OCT 2026: Simon se encuentra a 155 km al oeste de Cabo Corrientes, Jalisco, como huracán categoría 1</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso115-26.pdf</link>
@@ -36,38 +52,22 @@ Para hoy, el huracán Simón se mantendrá cerca de las costas de Nayarit y Sina
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de octubre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de octubre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de octubre del 2026
-Emisión: 09:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-13-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Chihuahua, Durango y Nayarit.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento (rachas 60 a 70 km/h): Sin y Nay. Viento (rachas 40 a 60 km/h): BC, BCS, Son, Chih, Coah, NL, Dgo y Tamps. T. Máx. (35 a 40 °C): Coah, NL, Tamps, Camp, Y...]]></description>
-      <pubDate>Tue, 13 Oct 2026 11:39:10 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-13-ff60</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 13 OCT 2026: Se formó la depresión tropical Veintiuno-E en el Pacífico sur mexicano</title>
+      <title>📋 SMN Reporte Matutino 13 OCT 2026: Se pronostican lluvias muy fuertes durante este martes en regiones de Sinaloa, Chihuahua, Durango y Nayarit</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_13.pdf</link>
-      <description><![CDATA[Se formó la depresión tropical Veintiuno-E en el Pacífico sur mexicano — Reporte Matutino del 13 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_13.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias muy fuertes durante este martes en regiones de Sinaloa, Chihuahua, Durango y Nayarit — Reporte Matutino del 13 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_13.pdf]]></description>
       <pubDate>Tue, 13 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_13</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 12 OCT 2026: Se prevén lluvias muy fuertes en Sinaloa, Nayarit, Jalisco y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_12.pdf</link>
-      <description><![CDATA[Se prevén lluvias muy fuertes en Sinaloa, Nayarit, Jalisco y Chiapas — Reporte Vespertino del 12 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_12.pdf]]></description>
-      <pubDate>Mon, 12 Oct 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_12</guid>
       <category>Comunicado</category>
     </item>
     <item>
