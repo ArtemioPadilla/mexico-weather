@@ -5,80 +5,77 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 13 Oct 2026 09:32:47 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 17:39:17 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de octubre del 2026 | Emisión 03:00h</title>
+      <title>📋 SMN Comunicado 13 OCT 2026: Simon se encuentra a 155 km al oeste de Cabo Corrientes, Jalisco, como huracán categoría 1</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso115-26.pdf</link>
+      <description><![CDATA[Simon se encuentra a 155 km al oeste de Cabo Corrientes, Jalisco, como huracán categoría 1 — Comunicado del 13 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso115-26.pdf]]></description>
+      <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso115-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 571 | 13 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO Y NAYARIT
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 571
+Ciudad de México a 13 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO Y NAYARIT
+
+Para hoy, el huracán Simón se mantendrá cerca de las costas de Nayarit y Sinaloa, originará lluvias puntuales muy fuertes, vientos fuertes y oleaje elevado en ambas entidades, así como lluvias puntuales fuertes en zonas de Jalisco. Por su parte, el frente frío núm. 2 y una vaguada en altura sobre el noroeste del país, en interacción con un canal de baja presión en el norte de México, generarán lluvias puntuales muy fuertes en zonas de Chihuahua y Durango; y chubascos en Baja California, Baja California Sur, Sonora, Coahuila, Nuevo León, Zacatecas, Aguascalientes y San Luis Potosí, con vientos fuertes en dichas regiones. La masa de aire polar que impulsa al frente originará un refrescamiento de las temperaturas en la mayor parte de la península de Baja California y el noroeste de México.…]]></description>
+      <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-13-571</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de octubre del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de octubre del 2026
-Emisión: 03:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-13-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Viento de 60 a 80 km/h con rachas de 90 a 100 km/h: en costas de Jalisco.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Sinaloa, Chihuahua, Durango y Nayarit.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 60 a 80 km/h con rachas de 90 a 100 km/h: en costas de Jalisco.]]></description>
-      <pubDate>Tue, 13 Oct 2026 03:32:38 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-13-bb43</guid>
+      <description><![CDATA[Viento (rachas 60 a 70 km/h): Sin y Nay. Viento (rachas 40 a 60 km/h): BC, BCS, Son, Chih, Coah, NL, Dgo y Tamps. T. Máx. (35 a 40 °C): Coah, NL, Tamps, Camp, Y...]]></description>
+      <pubDate>Tue, 13 Oct 2026 11:39:10 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-13-ff60</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Vespertino 12 OCT 2026: Simon continúa como huracán categoría 2 en la escala Saffir-Simpson</title>
+      <title>📋 SMN Reporte Matutino 13 OCT 2026: Se formó la depresión tropical Veintiuno-E en el Pacífico sur mexicano</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_13.pdf</link>
+      <description><![CDATA[Se formó la depresión tropical Veintiuno-E en el Pacífico sur mexicano — Reporte Matutino del 13 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_13.pdf]]></description>
+      <pubDate>Tue, 13 Oct 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_13</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 12 OCT 2026: Se prevén lluvias muy fuertes en Sinaloa, Nayarit, Jalisco y Chiapas</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_12.pdf</link>
-      <description><![CDATA[Simon continúa como huracán categoría 2 en la escala Saffir-Simpson — Reporte Vespertino del 12 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_12.pdf]]></description>
+      <description><![CDATA[Se prevén lluvias muy fuertes en Sinaloa, Nayarit, Jalisco y Chiapas — Reporte Vespertino del 12 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_12.pdf]]></description>
       <pubDate>Mon, 12 Oct 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_12</guid>
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 12 OCT 2026: Se mantiene pronóstico de lluvias muy fuertes en zonas de Jalisco, Nayarit y Sinaloa por el huracán Simon</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso113-26.pdf</link>
-      <description><![CDATA[Se mantiene pronóstico de lluvias muy fuertes en zonas de Jalisco, Nayarit y Sinaloa por el huracán Simon — Comunicado del 12 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso113-26.pdf]]></description>
+      <title>📋 SMN Comunicado 12 OCT 2026: Simon continúa como huracán categoría 2 en la escala Saffir-Simpson</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso114-26.pdf</link>
+      <description><![CDATA[Simon continúa como huracán categoría 2 en la escala Saffir-Simpson — Comunicado del 12 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso114-26.pdf]]></description>
       <pubDate>Mon, 12 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso113-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 12 OCT 2026: Se mantiene pronóstico de lluvias muy fuertes en zonas de Jalisco, Nayarit y Sinaloa por el huracán Simon</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 112-26.pdf</link>
-      <description><![CDATA[Se mantiene pronóstico de lluvias muy fuertes en zonas de Jalisco, Nayarit y Sinaloa por el huracán Simon — Comunicado del 12 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 112-26.pdf]]></description>
-      <pubDate>Mon, 12 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso meteorologico No. 112-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 570 | 12 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EL MARTES, SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN SINALOA, NAYARIT, CHIHUAHUA Y DURANGO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 570
-Ciudad de México a 12 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-
-EL MARTES, SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN SINALOA, NAYARIT, CHIHUAHUA Y DURANGO
-
-Esta noche, el huracán Simon continuará desplazándose paralelo a las costas de Nayarit, ocasionará lluvias puntuales muy fuertes en Sinaloa (sur), Nayarit (costa y oeste) y Jalisco (oeste); así como vientos fuertes con rachas de 90 a 100 km/h y oleaje de 4.0 a 6.0 metros de altura en la costa de Jalisco,  disminuyendo gradualmente; y rachas de viento de 50 a 60 km/h en costas de Sinaloa (sur) y Nayarit; además de oleaje de 2.5 a 3.5 metros de altura en las costas de Sinaloa (centro y sur) y Nayarit. Por otro lado, el frente frío núm. 2 aunado a la corriente en chorro subtropical, generarán lluvias con intervalos de chubascos en la península de Baja California y Sonora; y viento con rachas de 40 a 60 km/h en Baja California y Sonora.…]]></description>
-      <pubDate>Mon, 12 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-12-570</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 12 OCT 2026: Para hoy se pronostican lluvias muy fuertes en regiones de Jalisco, Sinaloa, Nayarit y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_12_10.pdf</link>
-      <description><![CDATA[Para hoy se pronostican lluvias muy fuertes en regiones de Jalisco, Sinaloa, Nayarit y Chiapas — Reporte Matutino del 12 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_12_10.pdf]]></description>
-      <pubDate>Mon, 12 Oct 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_12_10</guid>
+      <guid isPermaLink="false">smn-comunicado-Aviso114-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
