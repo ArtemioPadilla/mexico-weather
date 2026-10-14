@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 13 Oct 2026 22:54:09 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 01:58:48 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes (50 a 75 mm): zonas de Chihuahua y Durango.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes (50 a 75 mm): zonas de Chihuahua y Durango.]]></description>
-      <pubDate>Tue, 13 Oct 2026 16:54:01 -0600</pubDate>
+      <pubDate>Tue, 13 Oct 2026 19:58:39 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-13-a5c3</guid>
       <category>Alerta</category>
     </item>
@@ -33,30 +33,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 571 | 13 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 572 | 13 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO Y NAYARIT
+      <description><![CDATA[PARA HOY SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA Y DURANGO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 571
+No. Aviso: 572
 Ciudad de México a 13 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE SINALOA, CHIHUAHUA, DURANGO Y NAYARIT
+PARA HOY SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA Y DURANGO
 
-Para hoy, el huracán Simón se mantendrá cerca de las costas de Nayarit y Sinaloa, originará lluvias puntuales muy fuertes, vientos fuertes y oleaje elevado en ambas entidades, así como lluvias puntuales fuertes en zonas de Jalisco. Por su parte, el frente frío núm. 2 y una vaguada en altura sobre el noroeste del país, en interacción con un canal de baja presión en el norte de México, generarán lluvias puntuales muy fuertes en zonas de Chihuahua y Durango; y chubascos en Baja California, Baja California Sur, Sonora, Coahuila, Nuevo León, Zacatecas, Aguascalientes y San Luis Potosí, con vientos fuertes en dichas regiones. La masa de aire polar que impulsa al frente originará un refrescamiento de las temperaturas en la mayor parte de la península de Baja California y el noroeste de México.…]]></description>
+ 
+
+Esta noche, el huracán Simon mantendrá un lento desplazamiento hacia el oeste y suroeste, cercano a las costas de Jalisco y Nayarit, por lo que el ingreso de humedad asociado a dicho sistema y la inestabilidad atmosférica propiciarán la probabilidad de lluvias puntuales fuertes en Nayarit, Jalisco, Colima y Michoacán. Asimismo, el ingreso de aire húmedo asociado a la tormenta tropical Trudy al sur del Golfo de Tehuantepec en interacción con canales de baja presión en el sureste de México y la península de Yucatán, ocasionarán lluvias puntuales fuertes sobre Guerrero, Oaxaca, Chiapas, Veracruz y Quintana Roo.…]]></description>
       <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-13-571</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-13-572</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-13-12</guid>
