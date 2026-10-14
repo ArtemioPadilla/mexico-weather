@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 14 Oct 2026 07:46:05 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 13:49:35 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -17,23 +17,51 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de octubre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 573 | 14 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, COAHUILA, DURANGO, ESTADO DE MÉXICO, GUERRERO Y OAXACA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 573
+Ciudad de México a 14 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, COAHUILA, DURANGO, ESTADO DE MÉXICO, GUERRERO Y OAXACA
+
+Este día, el huracán Simon se mantendrá cercano a las costas de Jalisco y Nayarit, lo que ocasionará lluvias puntuales fuertes sobre los estados del occidente del país; mientras que la tormenta tropical Trudy continuará fortaleciéndose al sur de las costas de Oaxaca y Guerrero, en donde originará lluvias puntuales muy fuertes sobre dichos estados. Una circulación ciclónica de niveles altos y un canal de baja presión ocasionarán lluvias puntuales fuertes sobre Veracruz, Tabasco y Chiapas, así como chubascos en la península de Yucatán. El frente frío núm. 2 sobre los estados del norte del país, en interacción con una vaguada en altura, la corriente en chorro subtropical y un canal de baja presión, ocasionarán lluvias puntuales muy fuertes en Chihuahua, Coahuila y Durango.…]]></description>
+      <pubDate>Wed, 14 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-14-573</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 14 de octubre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 14 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-14-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales fuertes (50 a 75 mm): Zonas de Chihuahua y Durango.</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Coahuila, Chihuahua, Durango, Estado de México, Guerrero y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales fuertes (50 a 75 mm): Zonas de Chihuahua y Durango.]]></description>
-      <pubDate>Wed, 14 Oct 2026 01:45:58 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-14-4fb0</guid>
+      <description><![CDATA[Temperaturas máximas de 35 a 40 °C: zonas de Coahuila, Nuevo León, Tamaulipas, Campeche y Yucatán.]]></description>
+      <pubDate>Wed, 14 Oct 2026 07:49:28 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-14-2471</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 14 OCT 2026: Se prevén para hoy lluvias muy fuertes en regiones de Coahuila, Chihuahua, Durango, Estado de México, Guerrero y Oaxac...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_14.pdf</link>
+      <description><![CDATA[Se prevén para hoy lluvias muy fuertes en regiones de Coahuila, Chihuahua, Durango, Estado de México, Guerrero y Oaxac... — Reporte Matutino del 14 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_14.pdf]]></description>
+      <pubDate>Wed, 14 Oct 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_14</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 13 OCT 2026: Se formó la tormenta tropical Trudy a partir de la depresión tropical Veintiuno-E en el océano Pacifico</title>
@@ -50,35 +78,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso116-26</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 13 OCT 2026: Simon se encuentra a 155 km al oeste de Cabo Corrientes, Jalisco, como huracán categoría 1</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso115-26.pdf</link>
-      <description><![CDATA[Simon se encuentra a 155 km al oeste de Cabo Corrientes, Jalisco, como huracán categoría 1 — Comunicado del 13 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso115-26.pdf]]></description>
-      <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso115-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 572 | 13 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[PARA HOY SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA Y DURANGO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 572
-Ciudad de México a 13 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-PARA HOY SE PREVÉN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA Y DURANGO
-
- 
-
-Esta noche, el huracán Simon mantendrá un lento desplazamiento hacia el oeste y suroeste, cercano a las costas de Jalisco y Nayarit, por lo que el ingreso de humedad asociado a dicho sistema y la inestabilidad atmosférica propiciarán la probabilidad de lluvias puntuales fuertes en Nayarit, Jalisco, Colima y Michoacán. Asimismo, el ingreso de aire húmedo asociado a la tormenta tropical Trudy al sur del Golfo de Tehuantepec en interacción con canales de baja presión en el sureste de México y la península de Yucatán, ocasionarán lluvias puntuales fuertes sobre Guerrero, Oaxaca, Chiapas, Veracruz y Quintana Roo.…]]></description>
-      <pubDate>Tue, 13 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-13-572</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 13 OCT 2026: Se pronostican lluvias muy fuertes durante este martes en regiones de Sinaloa, Chihuahua, Durango y Nayarit</title>
