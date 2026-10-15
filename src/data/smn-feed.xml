@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 14 Oct 2026 22:21:55 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 01:33:28 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Chihuahua, Coahuila y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Chihuahua, Coahuila y Chiapas.]]></description>
+      <pubDate>Wed, 14 Oct 2026 19:33:17 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-14-fb44</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>📋 SMN Reporte Vespertino 14 OCT 2026: Esta noche, prevalecerá el pronóstico de lluvias puntuales fuertes en Nayarit, Jalisco, Colima y Michoacán</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_13.pdf</link>
@@ -15,14 +23,6 @@
       <pubDate>Wed, 14 Oct 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_13</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Chihuahua, Coahuila y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Chihuahua, Coahuila y Chiapas.]]></description>
-      <pubDate>Wed, 14 Oct 2026 16:21:46 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-14-fb44</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 14 OCT 2026: Huracán Simon se mantiene semiestacionario frente a las costas de Jalisco</title>
@@ -33,31 +33,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 573 | 14 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 574 | 14 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, COAHUILA, DURANGO, ESTADO DE MÉXICO, GUERRERO Y OAXACA
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, COAHUILA Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 573
+No. Aviso: 574
 Ciudad de México a 14 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES MUY FUERTES EN CHIHUAHUA, COAHUILA, DURANGO, ESTADO DE MÉXICO, GUERRERO Y OAXACA
+LLUVIAS PUNTUALES INTENSAS EN CHIHUAHUA, COAHUILA Y CHIAPAS
 
-Este día, el huracán Simon se mantendrá cercano a las costas de Jalisco y Nayarit, lo que ocasionará lluvias puntuales fuertes sobre los estados del occidente del país; mientras que la tormenta tropical Trudy continuará fortaleciéndose al sur de las costas de Oaxaca y Guerrero, en donde originará lluvias puntuales muy fuertes sobre dichos estados. Una circulación ciclónica de niveles altos y un canal de baja presión ocasionarán lluvias puntuales fuertes sobre Veracruz, Tabasco y Chiapas, así como chubascos en la península de Yucatán. El frente frío núm. 2 sobre los estados del norte del país, en interacción con una vaguada en altura, la corriente en chorro subtropical y un canal de baja presión, ocasionarán lluvias puntuales muy fuertes en Chihuahua, Coahuila y Durango.…]]></description>
+
+Durante esta noche y madrugada del jueves, se prevé que un canal de baja presión sobre el norte del país, en interacción con una línea seca extendida al norte de Chihuahua, una vaguada en altura, una circulación ciclónica en niveles medios al sur de Estados Unidos, el frente frío núm. 2 sobre el noroeste de México, e inestabilidad atmosférica, propiciarán condiciones para lluvias puntuales intensas en Chihuahua (noreste, este y sur) y Coahuila (noroeste y norte); lluvias muy fuertes en Durango (norte y centro) y Zacatecas (sur y oeste); fuertes en Sinaloa (sur) e intervalos de chubascos en Nuevo León; además, fuertes rachas de viento de 30 a 40 km/h con rachas de 50 a 70 km/h con posible formación de torbellinos en Chihuahua (noreste y este) y Coahuila (norte y noroeste), y de 20 a 30 km/h con rachas de 40 a 60 km/h en el golfo de California, Baja California, Baja California Sur, Sonora, Nuevo León y Durango.…]]></description>
       <pubDate>Wed, 14 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-14-573</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-14-574</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 14 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 14 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-14-12</guid>
