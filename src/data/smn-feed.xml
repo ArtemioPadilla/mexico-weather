@@ -5,21 +5,21 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 15 Oct 2026 22:26:34 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 01:28:28 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Viento de 50 a 70 km/h con rachas de 80 a 100 km/h: Sonora y con posible formación de torbellinos: Chihuahua (norte y noreste) y Coahuila (noroeste y norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 50 a 70 km/h con rachas de 80 a 100 km/h: Sonora y con posible formación de torbellinos: Chihuahua (norte y noreste) y Coahuila (noroeste y norte).]]></description>
-      <pubDate>Thu, 15 Oct 2026 16:26:26 -0600</pubDate>
+      <pubDate>Thu, 15 Oct 2026 19:28:17 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-15-c80e</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 15 OCT 2026: Llama Gobierno de México a extremar medidas de prevención ante los efectos del huracán Trudy y el frente frío núm...</title>
+      <title>📋 SMN Comunicado 15 OCT 2026: Trudy continúa como huracán categoría 1 en la escala Saffir-Simpson, pero sigue intensificándose</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado147-26.pdf</link>
-      <description><![CDATA[Llama Gobierno de México a extremar medidas de prevención ante los efectos del huracán Trudy y el frente frío núm... — Comunicado del 15 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado147-26.pdf]]></description>
+      <description><![CDATA[Trudy continúa como huracán categoría 1 en la escala Saffir-Simpson, pero sigue intensificándose — Comunicado del 15 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado147-26.pdf]]></description>
       <pubDate>Thu, 15 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Comunicado147-26</guid>
       <category>Comunicado</category>
@@ -33,32 +33,31 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 575 | 15 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 576 | 15 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, COAHUILA, DURANGO Y OAXACA
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS INTENSAS EN ESTADOS DEL NORTE, NORESTE, SUR Y SURESTE DEL PAÍS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 575
+No. Aviso: 576
 Ciudad de México a 15 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, COAHUILA, DURANGO Y OAXACA
 
- 
+SE PRONOSTICAN LLUVIAS INTENSAS EN ESTADOS DEL NORTE, NORESTE, SUR Y SURESTE DEL PAÍS 
 
-Para hoy, el frente frío núm. 2 recorrerá el norte del país, e interaccionará con una vaguada en altura y con una circulación ciclónica en niveles medios de la atmósfera; lo que originará lluvias puntuales intensas en zonas de Chihuahua y Coahuila; puntuales fuertes en zonas de Tamaulipas; chubascos en Nuevo León; y lluvias aisladas en Sonora; además de fuertes rachas de viento en el noroeste y norte del país, con probabilidad de torbellinos en el norte y noreste de Chihuahua y norte de Coahuila. Asimismo, se prevé que una masa de aire polar refuerce al frente frío, generando un descenso en las temperaturas y viento con rachas de hasta 100 km/h en zonas de Sonora, Chihuahua y Coahuila.…]]></description>
+Durante esta noche y madrugada del viernes, el desplazamiento del frente frío núm. 2 sobre el norte y paulatinamente el noreste del país, una circulación ciclónica y vaguada en niveles altos de la atmósfera sobre el noroeste de México e inestabilidad atmosférica, originarán chubascos y lluvias puntuales fuertes en dichas regiones, pronosticándose lluvias muy fuertes con puntales intensas en Chihuahua (noreste, este y sur), Durango (norte) y Coahuila (noroeste y oeste). Además, se prevén fuertes rachas de viento con probabilidad de torbellinos en el norte y noreste de Chihuahua y norte de Coahuila; finalmente, se pronostica que una masa de aire polar refuerce al frente frío, ocasionando descenso en las temperaturas.…]]></description>
       <pubDate>Thu, 15 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-15-575</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-15-576</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 15 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 15 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-15-12</guid>
@@ -70,14 +69,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas para este jueves en regiones de Chihuahua, Coahuila, Durango y Oaxaca — Reporte Matutino del 15 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_15.pdf]]></description>
       <pubDate>Thu, 15 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_15</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 14 OCT 2026: Se pronostican lluvias intensas en regiones de Chihuahua, Coahuila y Chiapas, y muy fuertes en Durango, Zacatecas y Mich...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_14.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en regiones de Chihuahua, Coahuila y Chiapas, y muy fuertes en Durango, Zacatecas y Mich... — Reporte Vespertino del 14 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_14.pdf]]></description>
-      <pubDate>Wed, 14 Oct 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_14</guid>
       <category>Comunicado</category>
     </item>
     <item>
