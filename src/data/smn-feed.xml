@@ -5,16 +5,32 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 16 Oct 2026 18:09:07 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 21:20:36 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): zonas de San Luis Potosí, Querétaro, Veracruz, Hidalgo y Puebla.</title>
+      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de San Luis Potosí, Querétaro, Veracruz, Hidalgo y Puebla.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 60 a 70 km/h con rachas de 80 a 100 km/h: zonas de Baja California, Sonora y Chihuahua.]]></description>
-      <pubDate>Fri, 16 Oct 2026 12:08:56 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-16-5909</guid>
+      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de San Luis Potosí, Querétaro, Veracruz, Hidalgo y Puebla.]]></description>
+      <pubDate>Fri, 16 Oct 2026 15:20:26 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-16-8b71</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 16 OCT 2026: Trudy, ahora categoría 1 en la escala Saffir-Simpson, se encuentra a 370 km al suroeste de Acapulco, Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Alcance aviso 125.pdf</link>
+      <description><![CDATA[Trudy, ahora categoría 1 en la escala Saffir-Simpson, se encuentra a 370 km al suroeste de Acapulco, Guerrero — Comunicado del 16 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Alcance aviso 125.pdf]]></description>
+      <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Alcance aviso 125</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 16 OCT 2026: Debido al huracán Trudy se pronostican lluvias intensas en Guerrero y Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 124-26.pdf</link>
+      <description><![CDATA[Debido al huracán Trudy se pronostican lluvias intensas en Guerrero y Oaxaca — Comunicado del 16 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 124-26.pdf]]></description>
+      <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso meteorologico No. 124-26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 16 OCT 2026: Trudy se intensifica a huracán categoría 3 en la escala Saffir-Simpson en el océano Pacífico</title>
@@ -47,38 +63,22 @@ Este día, el frente frío núm. 2 y la masa de aire polar que lo impulsa, recor
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de octubre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de octubre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de octubre del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-16-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 16 OCT 2026: Debido al huracán Trudy se pronostican lluvias intensas en Guerrero y Oaxaca</title>
+      <title>📋 SMN Reporte Matutino 16 OCT 2026: Se pronostican lluvias torrenciales para este viernes en regiones de San Luis Potosí, Querétaro, Veracruz, Hidalgo y P...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_16.pdf</link>
-      <description><![CDATA[Debido al huracán Trudy se pronostican lluvias intensas en Guerrero y Oaxaca — Reporte Matutino del 16 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_16.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias torrenciales para este viernes en regiones de San Luis Potosí, Querétaro, Veracruz, Hidalgo y P... — Reporte Matutino del 16 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_16.pdf]]></description>
       <pubDate>Fri, 16 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_16</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 15 OCT 2026: Esta noche se prevén lluvias intensas en regiones de Chihuahua, Durango, Coahuila, Guerrero, Oaxaca y Quintana Roo</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_15.pdf</link>
-      <description><![CDATA[Esta noche se prevén lluvias intensas en regiones de Chihuahua, Durango, Coahuila, Guerrero, Oaxaca y Quintana Roo — Reporte Vespertino del 15 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_15.pdf]]></description>
-      <pubDate>Thu, 15 Oct 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_15</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 15 OCT 2026: Trudy se intensificó a huracán categoría 2 en la escala Saffir-Simpson y seguirá intensificándose rápidamente</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso122-26.pdf</link>
-      <description><![CDATA[Trudy se intensificó a huracán categoría 2 en la escala Saffir-Simpson y seguirá intensificándose rápidamente — Comunicado del 15 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso122-26.pdf]]></description>
-      <pubDate>Thu, 15 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso122-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
