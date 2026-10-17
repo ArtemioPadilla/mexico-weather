@@ -5,23 +5,31 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 16 Oct 2026 21:20:36 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 00:34:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de San Luis Potosí, Querétaro, Veracruz, Hidalgo y Puebla.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de San Luis Potosí, Querétaro, Veracruz, Hidalgo y Puebla.]]></description>
-      <pubDate>Fri, 16 Oct 2026 15:20:26 -0600</pubDate>
+      <pubDate>Fri, 16 Oct 2026 18:34:21 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-16-8b71</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 16 OCT 2026: Trudy, ahora categoría 1 en la escala Saffir-Simpson, se encuentra a 370 km al suroeste de Acapulco, Guerrero</title>
+      <title>📋 SMN Comunicado 16 OCT 2026: Trudy se localiza a 365 kilómetros al suroeste de Acapulco, Guerrero, y a 505 kilómetros al sur-suroeste de Manzanillo...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Alcance aviso 125.pdf</link>
-      <description><![CDATA[Trudy, ahora categoría 1 en la escala Saffir-Simpson, se encuentra a 370 km al suroeste de Acapulco, Guerrero — Comunicado del 16 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Alcance aviso 125.pdf]]></description>
+      <description><![CDATA[Trudy se localiza a 365 kilómetros al suroeste de Acapulco, Guerrero, y a 505 kilómetros al sur-suroeste de Manzanillo... — Comunicado del 16 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Alcance aviso 125.pdf]]></description>
       <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Alcance aviso 125</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 16 OCT 2026: Trudy, ahora categoría 1 en la escala Saffir-Simpson, se encuentra a 370 km al suroeste de Acapulco, Guerrero</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/AlcanceAviso125-26.pdf</link>
+      <description><![CDATA[Trudy, ahora categoría 1 en la escala Saffir-Simpson, se encuentra a 370 km al suroeste de Acapulco, Guerrero — Comunicado del 16 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/AlcanceAviso125-26.pdf]]></description>
+      <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-AlcanceAviso125-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -33,41 +41,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 16 OCT 2026: Trudy se intensifica a huracán categoría 3 en la escala Saffir-Simpson en el océano Pacífico</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 123-26.pdf</link>
-      <description><![CDATA[Trudy se intensifica a huracán categoría 3 en la escala Saffir-Simpson en el océano Pacífico — Comunicado del 16 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 123-26.pdf]]></description>
-      <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso meteorologico No. 123-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 577 | 16 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 578 | 16 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS TORRENCIALES EN SAN LUIS POTOSÍ, QUERÉTARO, VERACRUZ, HIDALGO Y PUEBLA
+      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE SAN LUIS POTOSÍ, QUERÉTARO, VERACRUZ, HIDALGO Y PUEBLA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 577
+No. Aviso: 578
 Ciudad de México a 16 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-LLUVIAS TORRENCIALES EN SAN LUIS POTOSÍ, QUERÉTARO, VERACRUZ, HIDALGO Y PUEBLA
 
  
 
-Este día, el frente frío núm. 2 y la masa de aire polar que lo impulsa, recorrerán el noreste y oriente del país, originando lluvias intensas a puntuales torrenciales en San Luis Potosí (este y sureste), Querétaro (norte), Veracruz (norte), Hidalgo (norte) y Puebla (norte); así como lluvias fuertes a muy fuertes en las regiones mencionadas; además de originar evento de “Norte” con rachas de 60 a 80 km/h en las costas de Tamaulipas y Veracruz. Una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera sobre el noroeste del territorio nacional, ocasionarán lluvias fuertes a muy fuertes, así como viento con rachas de 80 a 100 km/h en los estados del noroeste y norte de México.…]]></description>
+LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE SAN LUIS POTOSÍ, QUERÉTARO, VERACRUZ, HIDALGO Y PUEBLA 
+
+Esta noche y madrugada del sábado, el frente frío núm. 2 y un canal de baja presión sobre el oriente del territorio nacional; ocasionarán lluvias fuertes a muy fuertes en el norte, noreste y oriente del país, con lluvias puntuales torrenciales en San Luis Potosí (este y sureste), Querétaro (norte), Veracruz (norte y centro), Hidalgo (norte y este) y Puebla (norte). La masa de aire polar asociada al frente, originará marcado descenso de temperatura y vientos muy fuertes en el norte de México, así como evento de “Norte” con rachas de 70 a 90 km/h y oleaje de 2.5 a 3.5 metros de altura en las costas las costas de Tamaulipas y Veracruz.…]]></description>
       <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-16-577</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-16-578</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-16-12</guid>
