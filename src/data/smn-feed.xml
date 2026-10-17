@@ -5,26 +5,53 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 17 Oct 2026 10:55:06 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 14:15:51 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de octubre del 2026 | Emisión 03:00h</title>
+      <title>📋 SMN Comunicado 17 OCT 2026: Trudy, huracán categoría 1 en la escala Saffir-Simpson, se localiza a 305 km al sur-sureste de Manzanillo, Colima</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso128-26.pdf</link>
+      <description><![CDATA[Trudy, huracán categoría 1 en la escala Saffir-Simpson, se localiza a 305 km al sur-sureste de Manzanillo, Colima — Comunicado del 17 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso128-26.pdf]]></description>
+      <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso128-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 579 | 17 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, VERACRUZ, TABASCO, OAXACA Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 579
+Ciudad de México a 17 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, VERACRUZ, TABASCO, OAXACA Y CHIAPAS
+
+Para hoy, el frente frío núm. 2 recorrerá el litoral del golfo de México, interaccionará con un canal de baja presión sobre el sureste mexicano, y con una vaguada en altura sobre la península de Yucatán, por lo que se pronostican lluvias puntuales torrenciales en Veracruz (sur), Tabasco (oeste, centro y sur), Oaxaca (norte y este) y Chiapas (norte); puntuales intensas en Puebla (norte y sureste); puntuales muy fuertes en Hidalgo (norte y este), Campeche (suroeste), Yucatán (sur) y Quintana Roo (norte y centro); y puntuales fuertes en Querétaro (norte). La masa de aire polar asociada al frente, originará marcado descenso de temperatura en la mayor parte de México, además de evento de “Norte” intenso con rachas de 110 a 120 km/h y oleaje elevado en las costas de Tamaulipas y Veracruz, así como en el istmo y golfo de Tehuantepec.…]]></description>
+      <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-17-579</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 17 de octubre del 2026
-Emisión: 03:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-17-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de San Luis Potosí, Querétaro, Veracruz, Hidalgo y Puebla.</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): en zonas de Jalisco, Colima, Michoacán, Veracruz, Tabasco, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 60 a 70 km/h con rachas de 80 a 100 km/h: Chihuahua.]]></description>
-      <pubDate>Sat, 17 Oct 2026 04:54:56 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-17-6dd0</guid>
+      <description><![CDATA[Evento “Norte” de 75 a 85 km/h con rachas de 110 a 120 km/h: en costas de Tamaulipas y Veracruz; y en Oaxaca (istmo/golfo de Tehuantepec).]]></description>
+      <pubDate>Sat, 17 Oct 2026 08:15:42 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-17-b3c1</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -58,35 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-AlcanceAviso125-26</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 16 OCT 2026: Trudy, ahora es huracán categoría 1</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Alcance aviso 125.pdf</link>
-      <description><![CDATA[Trudy, ahora es huracán categoría 1 — Comunicado del 16 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Alcance aviso 125.pdf]]></description>
-      <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Alcance aviso 125</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 578 | 16 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE SAN LUIS POTOSÍ, QUERÉTARO, VERACRUZ, HIDALGO Y PUEBLA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 578
-Ciudad de México a 16 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE SAN LUIS POTOSÍ, QUERÉTARO, VERACRUZ, HIDALGO Y PUEBLA 
-
-Esta noche y madrugada del sábado, el frente frío núm. 2 y un canal de baja presión sobre el oriente del territorio nacional; ocasionarán lluvias fuertes a muy fuertes en el norte, noreste y oriente del país, con lluvias puntuales torrenciales en San Luis Potosí (este y sureste), Querétaro (norte), Veracruz (norte y centro), Hidalgo (norte y este) y Puebla (norte). La masa de aire polar asociada al frente, originará marcado descenso de temperatura y vientos muy fuertes en el norte de México, así como evento de “Norte” con rachas de 70 a 90 km/h y oleaje de 2.5 a 3.5 metros de altura en las costas las costas de Tamaulipas y Veracruz.…]]></description>
-      <pubDate>Fri, 16 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-16-578</guid>
-      <category>Pronóstico General</category>
     </item>
   </channel>
 </rss>
