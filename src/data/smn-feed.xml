@@ -5,23 +5,31 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 17 Oct 2026 23:12:11 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Oct 2026 01:10:39 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz, Tabasco, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Evento de “Norte” con rachas de 110 a 120 km/h: costas de Tamaulipas, Veracruz y Oaxaca (istmo y golfo de Tehuantepec). Viento con rachas de 100 a 120 km/h: co...]]></description>
-      <pubDate>Sat, 17 Oct 2026 17:12:02 -0600</pubDate>
+      <pubDate>Sat, 17 Oct 2026 19:10:30 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-17-525b</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 17 OCT 2026: Trudy se intensifica nuevamente a huracán de categoría 2 en la escala Saffir-Simpson</title>
+      <title>📋 SMN Comunicado 17 OCT 2026: Debido a Trudy, huracán de categoría 2 en la escala Saffir-Simpson, se esperan lluvias intensas en Colima y Michoacán</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso130-26.pdf</link>
-      <description><![CDATA[Trudy se intensifica nuevamente a huracán de categoría 2 en la escala Saffir-Simpson — Comunicado del 17 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso130-26.pdf]]></description>
+      <description><![CDATA[Debido a Trudy, huracán de categoría 2 en la escala Saffir-Simpson, se esperan lluvias intensas en Colima y Michoacán — Comunicado del 17 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso130-26.pdf]]></description>
       <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso130-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 17 OCT 2026: Trudy se intensifica nuevamente a huracán de categoría 2 en la escala Saffir-Simpson</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso131-26.pdf</link>
+      <description><![CDATA[Trudy se intensifica nuevamente a huracán de categoría 2 en la escala Saffir-Simpson — Comunicado del 17 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso131-26.pdf]]></description>
+      <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso131-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -33,38 +41,33 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 17 OCT 2026: Trudy, huracán categoría 1 en la escala Saffir-Simpson, se localiza a 305 km al sur-sureste de Manzanillo, Colima</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso128-26.pdf</link>
-      <description><![CDATA[Trudy, huracán categoría 1 en la escala Saffir-Simpson, se localiza a 305 km al sur-sureste de Manzanillo, Colima — Comunicado del 17 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso128-26.pdf]]></description>
-      <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso128-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 579 | 17 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 580 | 17 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, VERACRUZ, TABASCO, OAXACA Y CHIAPAS
+      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN VERACRUZ, TABASCO, OAXACA Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 579
+No. Aviso: 580
 Ciudad de México a 17 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA, MICHOACÁN, VERACRUZ, TABASCO, OAXACA Y CHIAPAS
 
-Para hoy, el frente frío núm. 2 recorrerá el litoral del golfo de México, interaccionará con un canal de baja presión sobre el sureste mexicano, y con una vaguada en altura sobre la península de Yucatán, por lo que se pronostican lluvias puntuales torrenciales en Veracruz (sur), Tabasco (oeste, centro y sur), Oaxaca (norte y este) y Chiapas (norte); puntuales intensas en Puebla (norte y sureste); puntuales muy fuertes en Hidalgo (norte y este), Campeche (suroeste), Yucatán (sur) y Quintana Roo (norte y centro); y puntuales fuertes en Querétaro (norte). La masa de aire polar asociada al frente, originará marcado descenso de temperatura en la mayor parte de México, además de evento de “Norte” intenso con rachas de 110 a 120 km/h y oleaje elevado en las costas de Tamaulipas y Veracruz, así como en el istmo y golfo de Tehuantepec.…]]></description>
+LLUVIAS PUNTUALES TORRENCIALES EN VERACRUZ, TABASCO, OAXACA Y CHIAPAS
+
+
+
+Durante esta noche y madrugada del domingo, el frente frío núm. 2 recorrerá el litoral del golfo de México, interaccionará con un canal de baja presión sobre el sureste mexicano y con una vaguada en altura sobre la península de Yucatán; generando lluvias puntuales torrenciales en Veracruz (sur), Tabasco (oeste, centro y sur), Oaxaca (norte y este) y Chiapas (norte); lluvias intensas en Puebla (norte y sureste), lluvias muy fuertes en Hidalgo (norte y este), Campeche (suroeste), Yucatán (sur) y Quintana Roo (norte y centro); lluvias fuertes en San Luis Potosí (sureste). La masa de aire polar asociada al frente originará marcado descenso de la temperatura en la mayor parte de México, además de evento de “Norte” intenso con rachas de 110 a 120 km/h y oleaje elevado en las costas de Tamaulipas y Veracruz, así como en el istmo y golfo de Tehuantepec.…]]></description>
       <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-17-579</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-17-580</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 17 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-17-12</guid>
