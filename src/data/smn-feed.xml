@@ -5,7 +5,7 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 18 Oct 2026 06:01:37 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Oct 2026 11:20:44 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
@@ -17,11 +17,27 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de octubre del 2026 | Emisión 00:00h</title>
+      <title>📋 SMN Comunicado 18 OCT 2026: Debido al huracán Trudy se pronostican lluvias muy fuertes en zonas de Jalisco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 135-26.pdf</link>
+      <description><![CDATA[Debido al huracán Trudy se pronostican lluvias muy fuertes en zonas de Jalisco — Comunicado del 18 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 135-26.pdf]]></description>
+      <pubDate>Sun, 18 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 135-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 18 OCT 2026: El huracán Trudy se localiza a 185 km al oeste-suroeste de Manzanillo, Colima</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 134-26.pdf</link>
+      <description><![CDATA[El huracán Trudy se localiza a 185 km al oeste-suroeste de Manzanillo, Colima — Comunicado del 18 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 134-26.pdf]]></description>
+      <pubDate>Sun, 18 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 134-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de octubre del 2026 | Emisión 03:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de octubre del 2026
-Emisión: 00:00
+Emisión: 03:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 18 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-18-12</guid>
@@ -31,7 +47,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz, Tabasco, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Evento de “Norte” con rachas de 110 a 120 km/h: costas de Tamaulipas, Veracruz y Oaxaca (istmo y golfo de Tehuantepec). Viento con rachas de 100 a 120 km/h: co...]]></description>
-      <pubDate>Sun, 18 Oct 2026 00:01:28 -0600</pubDate>
+      <pubDate>Sun, 18 Oct 2026 05:20:36 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-18-525b</guid>
       <category>Alerta</category>
     </item>
@@ -41,14 +57,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Trudy se intensifica nuevamente a huracán de categoría 2 en la escala Saffir-Simpson — Comunicado del 17 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso131-26.pdf]]></description>
       <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso131-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 17 OCT 2026: Trudy se localiza a 220 km al sur de Manzanillo, Colima, como huracán categoría 1 en la escala Saffir-Simpson</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso130-26.pdf</link>
-      <description><![CDATA[Trudy se localiza a 220 km al sur de Manzanillo, Colima, como huracán categoría 1 en la escala Saffir-Simpson — Comunicado del 17 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso130-26.pdf]]></description>
-      <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso130-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -72,14 +80,6 @@ Durante esta noche y madrugada del domingo, el frente frío núm. 2 recorrerá e
       <pubDate>Sat, 17 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-10-17-580</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 17 OCT 2026: Se prevén lluvias torrenciales para este sábado en regiones de Veracruz, Tabasco, Oaxaca y Chiapas</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_17_10_2026.pdf</link>
-      <description><![CDATA[Se prevén lluvias torrenciales para este sábado en regiones de Veracruz, Tabasco, Oaxaca y Chiapas — Reporte Matutino del 17 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_17_10_2026.pdf]]></description>
-      <pubDate>Sat, 17 Oct 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_17_10_2026</guid>
-      <category>Comunicado</category>
     </item>
   </channel>
 </rss>
