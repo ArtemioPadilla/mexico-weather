@@ -5,16 +5,24 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 18 Oct 2026 21:34:32 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 00:14:54 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias torrenciales con puntuales extraordinarias (mayores a 250 mm): zonas de Veracruz, Tabasco, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Evento de “Norte” con rachas de 90 a 110 km/h: En costa centro y sur de Veracruz, así como el istmo y golfo de Tehuantepec, Oaxaca.]]></description>
-      <pubDate>Sun, 18 Oct 2026 15:34:24 -0600</pubDate>
+      <pubDate>Sun, 18 Oct 2026 18:14:44 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-18-78b5</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 18 OCT 2026: Debido a Trudy, huracán categoría 2, se prevén lluvias de fuertes a muy fuertes en regiones de Jalisco, Colima y Naya...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso139-26 .pdf</link>
+      <description><![CDATA[Debido a Trudy, huracán categoría 2, se prevén lluvias de fuertes a muy fuertes en regiones de Jalisco, Colima y Naya... — Comunicado del 18 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso139-26 .pdf]]></description>
+      <pubDate>Sun, 18 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso139-26 </guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 18 OCT 2026: Trudy continúa como huracán categoría 2 al oeste de la costa de Jalisco</title>
@@ -49,40 +57,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 18 OCT 2026: Debido al huracán Trudy se pronostican lluvias muy fuertes en zonas de Jalisco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 135-26.pdf</link>
-      <description><![CDATA[Debido al huracán Trudy se pronostican lluvias muy fuertes en zonas de Jalisco — Comunicado del 18 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso Meteorologico 135-26.pdf]]></description>
-      <pubDate>Sun, 18 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso Meteorologico 135-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 581 | 18 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 582 | 18 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES EXTRAODINARIAS EN VERACRUZ, TABASCO Y OAXACA
+      <description><![CDATA[LLUVIAS PUNTUALES EXTRAORDINARIAS EN VERACRUZ, TABASCO, OAXACA Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 581
+No. Aviso: 582
 Ciudad de México a 18 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-LLUVIAS PUNTUALES EXTRAODINARIAS EN VERACRUZ, TABASCO Y OAXACA
+LLUVIAS PUNTUALES EXTRAORDINARIAS EN VERACRUZ, TABASCO, OAXACA Y CHIAPAS
 
-Este día, el frente frío núm. 2 se localizará sobre el suroeste del golfo de México, generando lluvias extraordinarias en Veracruz (sur), Tabasco (oeste) y Oaxaca (noreste); lluvias puntuales torrenciales en Chiapas (noroeste) y lluvias puntuales fuertes en Puebla (sureste), Querétaro (sur), Hidalgo (este), San Luis Potosí (este), Campeche, Yucatán y Quintana Roo. La masa de aire polar asociada al frente, continuará propiciando un marcado descenso de la temperatura en la mayor parte de México, además de evento de “Norte” intenso con rachas de 90 a 110 km/h y oleaje elevado en las costas de Veracruz (centro y sur) y golfo de Tehuantepec; así como rachas de 50 a 70 km/h en Tamaulipas, disminuyendo durante el día, y Tabasco.…]]></description>
+Durante esta noche y madrugada del lunes, el frente núm. 2, se localizará en el suroeste del golfo de México con características de estacionario, generando lluvias extraordinarias en zonas de Veracruz (sur), Tabasco (oeste), Oaxaca (noreste) y Chiapas (noroeste), lluvias puntuales muy fuertes en zonas de Puebla (sureste) y lluvias fuertes en Querétaro (sur), Hidalgo (este), San Luis Potosí (este), Campeche, Yucatán y Quintana Roo, adicionalmente lluvias aisladas en Tamaulipas.…]]></description>
       <pubDate>Sun, 18 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-18-581</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-18-582</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 18 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-18-12</guid>
