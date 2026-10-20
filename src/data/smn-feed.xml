@@ -5,27 +5,64 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 20 Oct 2026 07:43:01 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 13:39:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de octubre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 585 | 20 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[Pronóstico Meteorológico General
+No. Aviso: 585
+Ciudad de México a 20 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN VERACRUZ
+
+Este día, el frente núm. 2 se extenderá con caracterí
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 585
+Ciudad de México a 20 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES INTENSAS EN VERACRUZ
+
+Este día, el frente núm. 2 se extenderá con características de estacionario sobre el noreste de la península de Yucatán, en interacción con un canal de baja presión sobre el occidente del golfo de México, generará lluvias puntuales intensas en Veracruz (sur); lluvias puntuales muy fuertes en Tabasco (oeste), Oaxaca (noreste) y Chiapas (norte); y chubascos en Puebla (norte), Campeche (suroeste), Yucatán (noreste) y Quintana Roo (sur). La masa de aire polar asociada al frente, mantendrá viento de componente norte y oleaje elevado en la costa sur de Veracruz y en el istmo y golfo de Tehuantepec, así como ambiente frío a muy frío durante la mañana y noche en estados de la Mesa del Norte y la Mesa Central.…]]></description>
+      <pubDate>Tue, 20 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-20-585</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 20 de octubre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 20 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-20-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz y Tabasco.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz y Tabasco.]]></description>
-      <pubDate>Tue, 20 Oct 2026 01:42:51 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-20-d1f5</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Veracruz.]]></description>
+      <pubDate>Tue, 20 Oct 2026 07:39:02 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-20-5247</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 20 OCT 2026: Hoy, el frente número 2 y un canal de baja presión generarán lluvias intensas en el sur de Veracruz</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_20_2026.pdf</link>
+      <description><![CDATA[Hoy, el frente número 2 y un canal de baja presión generarán lluvias intensas en el sur de Veracruz — Reporte Matutino del 20 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_20_2026.pdf]]></description>
+      <pubDate>Tue, 20 Oct 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_20_2026</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 19 OCT 2026: Se prevén lluvias de intensas a torrenciales en Chiapas (noroeste), Oaxaca (noreste), Veracruz (sur) y Tabasco (oeste)</title>
@@ -57,33 +94,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Debido a la tormenta tropical Trudy, se pronostican lluvias fuertes en la costa de Jalisco — Comunicado del 19 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 141-26.pdf]]></description>
       <pubDate>Mon, 19 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso meteorologico No. 141-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 584 | 19 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[MAÑANA MARTES, SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN VERACRUZ Y MUY FUERTES EN OAXACA, CHIAPAS Y TABASCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 584
-Ciudad de México a 19 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-MAÑANA MARTES, SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN VERACRUZ Y MUY FUERTES EN OAXACA, CHIAPAS Y TABASCO.
-
-Esta noche y durante la madrugada del martes, el frente núm. 2, se mantendrá con características de estacionario sobre el este y sureste del golfo de México, originando lluvias puntuales torrenciales en Veracruz (sur) y Tabasco (oeste), lluvias puntuales intensas en Chiapas (noroeste) y Oaxaca (noreste); puntuales muy fuertes en Yucatán (norte) y Quintana Roo (norte); y fuertes en Campeche (suroeste). La masa de aire polar asociada al frente, mantendrá descenso de la temperatura en gran parte del territorio nacional, además de evento de “Norte” con rachas de 60 a 80 km/h en Veracruz (centro y sur) y Oaxaca (istmo y golfo de Tehuantepec); y con  rachas de 40 a 60 km/h en Tabasco, las cuales disminuirán su intensidad durante la noche.…]]></description>
-      <pubDate>Mon, 19 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-19-584</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 19 OCT 2026: Por el frente número 2, se pronostican lluvias torrenciales en zonas de Veracruz, Tabasco, Chiapas y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_19.pdf</link>
-      <description><![CDATA[Por el frente número 2, se pronostican lluvias torrenciales en zonas de Veracruz, Tabasco, Chiapas y Oaxaca — Reporte Matutino del 19 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_19.pdf]]></description>
-      <pubDate>Mon, 19 Oct 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_19</guid>
       <category>Comunicado</category>
     </item>
   </channel>
