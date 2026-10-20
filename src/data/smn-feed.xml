@@ -5,23 +5,34 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 20 Oct 2026 01:54:26 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 07:43:01 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz y Tabasco,</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de octubre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 20 de octubre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Tue, 20 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-20-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz y Tabasco,]]></description>
-      <pubDate>Mon, 19 Oct 2026 19:54:16 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-19-ba20</guid>
+      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Veracruz y Tabasco.]]></description>
+      <pubDate>Tue, 20 Oct 2026 01:42:51 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-20-d1f5</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 19 OCT 2026: Se prevén lluvias de intensas a torrenciales en Chiapas (noroeste), Oaxaca (noreste), Veracruz (sur) y Tabasco (oeste)</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 142-26.pdf</link>
-      <description><![CDATA[Se prevén lluvias de intensas a torrenciales en Chiapas (noroeste), Oaxaca (noreste), Veracruz (sur) y Tabasco (oeste) — Comunicado del 19 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 142-26.pdf]]></description>
-      <pubDate>Mon, 19 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso meteorologico No. 142-26</guid>
+      <title>📋 SMN Reporte Vespertino 19 OCT 2026: Se prevén lluvias de intensas a torrenciales en Chiapas (noroeste), Oaxaca (noreste), Veracruz (sur) y Tabasco (oeste)</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_19.pdf</link>
+      <description><![CDATA[Se prevén lluvias de intensas a torrenciales en Chiapas (noroeste), Oaxaca (noreste), Veracruz (sur) y Tabasco (oeste) — Reporte Vespertino del 19 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_19.pdf]]></description>
+      <pubDate>Mon, 19 Oct 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_19</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -30,6 +41,14 @@
       <description><![CDATA[La tormenta tropical Trudy se localiza a 260 km al oeste suroeste de Cabo Corrientes, Jalisco — Comunicado del 19 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso143-26.pdf]]></description>
       <pubDate>Mon, 19 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso143-26</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 19 OCT 2026: La tormenta tropical Trudy se localiza a 310 km al oeste suroeste de Cabo Corrientes, Jalisco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 142-26.pdf</link>
+      <description><![CDATA[La tormenta tropical Trudy se localiza a 310 km al oeste suroeste de Cabo Corrientes, Jalisco — Comunicado del 19 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 142-26.pdf]]></description>
+      <pubDate>Mon, 19 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso meteorologico No. 142-26</guid>
       <category>Comunicado</category>
     </item>
     <item>
@@ -58,17 +77,6 @@ Esta noche y durante la madrugada del martes, el frente núm. 2, se mantendrá c
       <pubDate>Mon, 19 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-10-19-584</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 19 de octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 19 de octubre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Mon, 19 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-19-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 19 OCT 2026: Por el frente número 2, se pronostican lluvias torrenciales en zonas de Veracruz, Tabasco, Chiapas y Oaxaca</title>
