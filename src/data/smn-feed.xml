@@ -5,61 +5,52 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 20 Oct 2026 22:23:12 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 01:41:14 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Veracruz y Oaxaca.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Veracruz y Oaxaca.]]></description>
-      <pubDate>Tue, 20 Oct 2026 16:22:59 -0600</pubDate>
+      <pubDate>Tue, 20 Oct 2026 19:41:03 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-20-d507</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 585 | 20 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 586 | 20 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[Pronóstico Meteorológico General
-No. Aviso: 585
-Ciudad de México a 20 de Octubre del 2026.
-Emisión: 06:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-LLUVIAS PUNTUALES INTENSAS EN VERACRUZ
-
-Este día, el frente núm. 2 se extenderá con caracterí
+      <description><![CDATA[EN LAS SIGUIENTES HORAS, SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN VERACRUZ Y OAXACA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 585
+No. Aviso: 586
 Ciudad de México a 20 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
 
-LLUVIAS PUNTUALES INTENSAS EN VERACRUZ
+EN LAS SIGUIENTES HORAS, SE PREVÉN LLUVIAS PUNTUALES INTENSAS EN VERACRUZ Y OAXACA
 
-Este día, el frente núm. 2 se extenderá con características de estacionario sobre el noreste de la península de Yucatán, en interacción con un canal de baja presión sobre el occidente del golfo de México, generará lluvias puntuales intensas en Veracruz (sur); lluvias puntuales muy fuertes en Tabasco (oeste), Oaxaca (noreste) y Chiapas (norte); y chubascos en Puebla (norte), Campeche (suroeste), Yucatán (noreste) y Quintana Roo (sur). La masa de aire polar asociada al frente, mantendrá viento de componente norte y oleaje elevado en la costa sur de Veracruz y en el istmo y golfo de Tehuantepec, así como ambiente frío a muy frío durante la mañana y noche en estados de la Mesa del Norte y la Mesa Central.…]]></description>
+En el transcurso de esta noche y madrugada del miércoles, el sistema frontal núm. 2 se extenderá con características de estacionario al noreste de la península de Yucatán, interaccionará con un canal de baja presión en el occidente del golfo de México y otro en la península de Yucatán, aunado a inestabilidad atmosférica, propiciarán lluvias puntuales intensas en Veracruz (sur) y Oaxaca (norte); lluvias muy fuertes en Veracruz (norte), Tabasco (oeste), Chiapas (norte), Puebla (norte y sureste) y Quintana Roo (norte, centro y sur); lluvias fuertes en Campeche (suroeste), además de chubascos en Yucatán.…]]></description>
       <pubDate>Tue, 20 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-20-585</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-20-586</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 20 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 20 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-20-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 20 OCT 2026: Hoy, el frente número 2 y un canal de baja presión generarán lluvias intensas en el sur de Veracruz</title>
+      <title>📋 SMN Reporte Matutino 20 OCT 2026: Durante esta noche y mañana, se pronostican lluvias intensas en regiones de Veracruz y Oaxaca</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_20_2026.pdf</link>
-      <description><![CDATA[Hoy, el frente número 2 y un canal de baja presión generarán lluvias intensas en el sur de Veracruz — Reporte Matutino del 20 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_20_2026.pdf]]></description>
+      <description><![CDATA[Durante esta noche y mañana, se pronostican lluvias intensas en regiones de Veracruz y Oaxaca — Reporte Matutino del 20 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_20_2026.pdf]]></description>
       <pubDate>Tue, 20 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_20_2026</guid>
       <category>Comunicado</category>
@@ -86,14 +77,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[La tormenta tropical Trudy se localiza a 310 km al oeste suroeste de Cabo Corrientes, Jalisco — Comunicado del 19 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 142-26.pdf]]></description>
       <pubDate>Mon, 19 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso meteorologico No. 142-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 19 OCT 2026: Debido a la tormenta tropical Trudy, se pronostican lluvias fuertes en la costa de Jalisco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 141-26.pdf</link>
-      <description><![CDATA[Debido a la tormenta tropical Trudy, se pronostican lluvias fuertes en la costa de Jalisco — Comunicado del 19 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso meteorologico No. 141-26.pdf]]></description>
-      <pubDate>Mon, 19 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso meteorologico No. 141-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
