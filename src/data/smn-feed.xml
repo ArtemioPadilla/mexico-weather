@@ -5,15 +5,15 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 21 Oct 2026 18:44:40 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 22:27:04 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz y Oaxaca.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Veracruz (centro y sur) y Oaxaca (norte y noreste).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Veracruz y Oaxaca.]]></description>
-      <pubDate>Wed, 21 Oct 2026 12:44:32 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-21-8cc5</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Veracruz (centro y sur) y Oaxaca (norte y noreste).]]></description>
+      <pubDate>Wed, 21 Oct 2026 16:26:50 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-21-76b4</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -36,11 +36,11 @@ Para hoy, la masa de aire polar que impulsó al frente núm. 2 mantendrá viento
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de octubre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de octubre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 21 de octubre del 2026
-Emisión: 12:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 21 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-21-12</guid>
