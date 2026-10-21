@@ -1,1 +1,1 @@
-{"updated":"2026-10-21T18:01:15Z","source":"NOAA NHC CurrentStorms.json","storms":[{"id":"ep222026","name":"Twenty-Two-E","lat":9.5,"lng":-99.3,"classification":"TD","intensityKt":30.0,"hasDetail":true}]}
+{"updated":"2026-10-21T21:37:18Z","source":"NOAA NHC CurrentStorms.json","storms":[{"id":"al102026","name":"Josephine","lat":37.4,"lng":-69.5,"classification":"STS","intensityKt":55.0,"hasDetail":true},{"id":"ep222026","name":"Vance","lat":9.4,"lng":-99.8,"classification":"TS","intensityKt":35.0,"hasDetail":true}]}
