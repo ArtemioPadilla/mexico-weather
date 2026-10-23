@@ -1,1 +1,1 @@
-{"updated":"2026-10-23T05:11:19Z","source":"NOAA NHC CurrentStorms.json","storms":[{"id":"ep222026","name":"Vance","lat":10.5,"lng":-101.9,"classification":"TS","intensityKt":60.0,"hasDetail":true}]}
+{"updated":"2026-10-23T10:01:27Z","source":"NOAA NHC CurrentStorms.json","storms":[{"id":"ep222026","name":"Vance","lat":10.9,"lng":-102.1,"classification":"HU","intensityKt":75.0,"hasDetail":true}]}
