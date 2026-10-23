@@ -5,16 +5,35 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 23 Oct 2026 01:37:39 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Oct 2026 07:40:38 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: Baja California y Coahuila; y con posible formación de torbellinos: Sonora (norte) y Chihuahua (norte).</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de octubre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 23 de octubre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 23 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-23-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: Baja California y Coahuila; y con posible formación de torbellinos: Chihuahua (norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 40 a 45 °C: Sonora (sur) y Sinaloa (norte).]]></description>
-      <pubDate>Thu, 22 Oct 2026 19:37:29 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-22-4320</guid>
+      <description><![CDATA[Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: Baja California y Coahuila; y con posible formación de torbellinos: Chihuahua (norte).]]></description>
+      <pubDate>Fri, 23 Oct 2026 01:40:29 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-23-4703</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 22 OCT 2026: Se prevén lluvias muy fuertes en zonas de Sonora, Chihuahua, Veracruz, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_22.pdf</link>
+      <description><![CDATA[Se prevén lluvias muy fuertes en zonas de Sonora, Chihuahua, Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 22 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_22.pdf]]></description>
+      <pubDate>Thu, 22 Oct 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_22</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 590 | 22 de Octubre del 2026 | Emisión 18:00h</title>
@@ -38,20 +57,9 @@ Durante esta noche y madrugada del viernes, el frente frío núm. 3, una circula
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 22 de octubre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Thu, 22 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-22-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 22 OCT 2026: Se prevén lluvias muy fuertes en zonas de Sonora, Chihuahua, Veracruz, Oaxaca y Chiapas</title>
+      <title>📋 SMN Reporte Matutino 22 OCT 2026: Se prevén lluvias muy fuertes para regiones de Veracruz, Oaxaca y Chiapas</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_22_10.pdf</link>
-      <description><![CDATA[Se prevén lluvias muy fuertes en zonas de Sonora, Chihuahua, Veracruz, Oaxaca y Chiapas — Reporte Matutino del 22 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_22_10.pdf]]></description>
+      <description><![CDATA[Se prevén lluvias muy fuertes para regiones de Veracruz, Oaxaca y Chiapas — Reporte Matutino del 22 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_22_10.pdf]]></description>
       <pubDate>Thu, 22 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_22_10</guid>
       <category>Comunicado</category>
