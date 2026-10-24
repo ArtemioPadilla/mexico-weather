@@ -5,51 +5,51 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 23 Oct 2026 22:19:16 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 01:40:56 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Vientos de 20 a 30 km/h con rachas de 40 a 60 km/h y posible formación de torbellinos: norte de Chihuahua.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[.]]></description>
-      <pubDate>Fri, 23 Oct 2026 16:19:04 -0600</pubDate>
+      <pubDate>Fri, 23 Oct 2026 19:40:47 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-23-5058</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 591 | 23 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 592 | 23 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, Y PUNTUALES FUERTES EN ZONAS DE SONORA, SINALOA, DURANGO, TAMAULIPAS, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
+      <description><![CDATA[OCASIONARÁ LLUVIAS FUERTES A MUY FUERTES EN ESTADOS DEL NOROESTE Y NORTE DE MÉXICO • ADEMÁS DE POSIBLE CAÍDA DE AGUANIEVE EN SIERRAS DE BAJA CALIFORNIA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 591
+No. Aviso: 592
 Ciudad de México a 23 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE CHIHUAHUA, Y PUNTUALES FUERTES EN ZONAS DE SONORA, SINALOA, DURANGO, TAMAULIPAS, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
+EL FRENTE FRÍO NÚM. 3 OCASIONARÁ LLUVIAS FUERTES A MUY FUERTES EN ESTADOS DEL NOROESTE Y NORTE DE MÉXICO; ADEMÁS DE POSIBLE CAÍDA DE AGUANIEVE EN SIERRAS DE BAJA CALIFORNIA.
 
-Para hoy, el frente frío núm. 3 sobre Sonora, una vaguada en niveles medios y altos de la atmósfera y las corrientes en chorro polar y subtropical, ocasionarán lluvias puntuales muy fuertes en zonas de Chihuahua; puntuales fuertes en zonas de Sinaloa y Durango; y chubascos en Baja California, Baja California Sur, Sonora y Nayarit. Además, existe la probabilidad de caída de aguanieve durante la noche y madrugada del sábado en la Sierra de San Pedro Mártir, B.C.…]]></description>
+Esta noche y madrugada del sábado, el frente frío núm. 3 se extenderá sobre Sonora y Chihuahua, en interacción con una vaguada en niveles medios y altos de la atmósfera, una circulación ciclónica en niveles medios, además de las corrientes en chorro polar y subtropical, ocasionarán lluvias puntuales muy fuertes en Chihuahua (norte, centro y sur); fuertes en Sonora (sureste), Durango (norte y oeste) y Sinaloa (norte y centro); así como lluvias y chubascos en la península de Baja California. A su vez, existe la probabilidad para la caída de aguanieve en las sierras de Baja California. La circulación del huracán Vance, que se localiza al suroeste de las costas de Guerrero, originará lluvias puntuales fuertes en Guerrero (costa) y en Michoacán (centro, oeste y suroeste); así como oleaje de 2.0 a 3.0 metros de al…]]></description>
       <pubDate>Fri, 23 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-23-591</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-23-592</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 23 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 23 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-23-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 23 OCT 2026: Se pronostican lluvias muy fuertes en zonas de Chihuahua</title>
+      <title>📋 SMN Reporte Matutino 23 OCT 2026: Debido al frente frio número 3 se prevén lluvias de fuertes a muy fuertes en zonas del noroeste y norte de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_23.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de Chihuahua — Reporte Matutino del 23 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_23.pdf]]></description>
+      <description><![CDATA[Debido al frente frio número 3 se prevén lluvias de fuertes a muy fuertes en zonas del noroeste y norte de México — Reporte Matutino del 23 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_23.pdf]]></description>
       <pubDate>Fri, 23 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_23</guid>
       <category>Comunicado</category>
@@ -76,14 +76,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Esta noche se pronostican lluvias intensas para regiones de Veracruz y Oaxaca, y muy fuertes en Tabasco y Chiapas — Reporte Vespertino del 21 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_21.pdf]]></description>
       <pubDate>Wed, 21 Oct 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_21</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 21 OCT 2026: Se pronostican lluvias intensas en zonas de Veracruz y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_21.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Veracruz y Oaxaca — Reporte Matutino del 21 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_21.pdf]]></description>
-      <pubDate>Wed, 21 Oct 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_21</guid>
       <category>Comunicado</category>
     </item>
   </channel>
