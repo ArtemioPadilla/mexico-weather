@@ -5,16 +5,35 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 24 Oct 2026 01:40:56 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 07:24:28 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Vientos de 20 a 30 km/h con rachas de 40 a 60 km/h y posible formación de torbellinos: norte de Chihuahua.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 24 de octubre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 24 de octubre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sat, 24 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-24-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Viento de 20 a 30 km/h con rachas de 40 a 60 km/h y formación de torbellinos: Chihuahua (norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[.]]></description>
-      <pubDate>Fri, 23 Oct 2026 19:40:47 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-23-5058</guid>
+      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C durante la madrugada del sábado: zonas serranas del norte de Baja California.]]></description>
+      <pubDate>Sat, 24 Oct 2026 01:24:19 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-24-a16b</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 23 OCT 2026: Debido al frente frio número 3 se prevén lluvias de fuertes a muy fuertes en zonas del noroeste y norte de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_23.pdf</link>
+      <description><![CDATA[Debido al frente frio número 3 se prevén lluvias de fuertes a muy fuertes en zonas del noroeste y norte de México — Reporte Vespertino del 23 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_23.pdf]]></description>
+      <pubDate>Fri, 23 Oct 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_23</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 592 | 23 de Octubre del 2026 | Emisión 18:00h</title>
@@ -36,20 +55,9 @@ Esta noche y madrugada del sábado, el frente frío núm. 3 se extenderá sobre 
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 23 de octubre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Fri, 23 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-23-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 23 OCT 2026: Debido al frente frio número 3 se prevén lluvias de fuertes a muy fuertes en zonas del noroeste y norte de México</title>
+      <title>📋 SMN Reporte Matutino 23 OCT 2026: Se pronostican lluvias muy fuertes en zonas de Chihuahua</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_23.pdf</link>
-      <description><![CDATA[Debido al frente frio número 3 se prevén lluvias de fuertes a muy fuertes en zonas del noroeste y norte de México — Reporte Matutino del 23 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_23.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de Chihuahua — Reporte Matutino del 23 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_23.pdf]]></description>
       <pubDate>Fri, 23 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_23</guid>
       <category>Comunicado</category>
