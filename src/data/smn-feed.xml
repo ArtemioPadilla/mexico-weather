@@ -5,15 +5,37 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 25 Oct 2026 06:18:25 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 12:37:36 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de octubre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 595 | 25 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA Y DURANGO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 595
+Ciudad de México a 25 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+SE PREVÉN LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA Y DURANGO 
+
+ 
+
+Para hoy, la interacción entre una vaguada en niveles medios y altos de la atmósfera en el noroeste del país, un canal de baja presión sobre la Mesa del Norte y el paso de la corriente en chorro subtropical, propiciarán lluvias muy fuertes en zonas de Chihuahua y Durango, y lluvias fuertes en Coahuila, además de viento con rachas de 40 a 60 km/h y posible formación de torbellinos en el norte de Chihuahua. Por su parte, canales de baja presión en el interior del territorio nacional e inestabilidad atmosférica, ocasionarán la probabilidad de chubascos y lluvias puntuales fuertes en el noreste, centro, oriente y sureste del país.…]]></description>
+      <pubDate>Sun, 25 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-25-595</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 25 de octubre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 25 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-25-12</guid>
@@ -23,7 +45,7 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <title>⚠️ Alerta SMN: Viento de componente norte de 30 a 40 km/h con rachas de 50 a 70 km/h y con posible formación de torbellinos o tornados: Chihuahua (norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de componente norte de 30 a 40 km/h con rachas de 50 a 70 km/h y con posible formación de torbellinos o tornados: Chihuahua (norte).]]></description>
-      <pubDate>Sun, 25 Oct 2026 00:18:15 -0600</pubDate>
+      <pubDate>Sun, 25 Oct 2026 06:37:28 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-25-318d</guid>
       <category>Alerta</category>
     </item>
@@ -34,31 +56,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Sat, 24 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_10_24</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 594 | 24 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS MUY FUERTES EN CHIHUAHUA
-
-PROBABILIDAD DE TORBELLINOS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 594
-Ciudad de México a 24 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS MUY FUERTES EN CHIHUAHUA
-
-PROBABILIDAD DE TORBELLINOS/TORNADOS EN EL NORTE DE CHIHUAHUA
-
-La interacción entre una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera en el noroeste del país, con un canal de baja presión sobre el norte de México y con la corriente en chorro subtropical, ocasionarán rachas fuertes de viento, chubascos y lluvias fuertes en las regiones mencionadas, con lluvias muy fuertes en Chihuahua (noreste, este, sur y suroeste), además de viento con rachas de 50 a 70 km/h y posible formación de torbellinos y/o tornados en el norte de dicho estado. Canales de baja presión e inestabilidad atmosférica, ocasionarán la probabilidad de chubascos y lluvias puntuales fuertes en el noreste, centro, oriente y sureste de la República Mexicana.…]]></description>
-      <pubDate>Sat, 24 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-24-594</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 23 OCT 2026: Debido al frente frio número 3 se prevén lluvias de fuertes a muy fuertes en zonas del noroeste y norte de México</title>
