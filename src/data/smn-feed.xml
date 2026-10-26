@@ -5,9 +5,25 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 26 Oct 2026 15:16:51 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 20:37:37 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Viento de componente norte de 30 a 40 km/h con rachas de 50 a 70 km/h: Oaxaca (istmo y golfo de Tehuantepec). Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: costas de Colima y Michoacán.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas máximas de 35 a 40 °C: Sonora (sur) y Sinaloa (norte).]]></description>
+      <pubDate>Mon, 26 Oct 2026 14:37:28 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-26-eb67</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 26 OCT 2026: Vance generará lluvias fuertes en el occidente y sur de México</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso146-26.pdf</link>
+      <description><![CDATA[Vance generará lluvias fuertes en el occidente y sur de México — Comunicado del 26 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso146-26.pdf]]></description>
+      <pubDate>Mon, 26 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso146-26</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 597 | 26 de Octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -39,23 +55,15 @@ Para mayor información consultar:
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de octubre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de octubre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de octubre del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 26 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-26-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Nayarit y Jalisco.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Nayarit y Jalisco.]]></description>
-      <pubDate>Mon, 26 Oct 2026 09:16:38 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-26-2ece</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 26 OCT 2026: Debido a la tormenta tropical Vance, se prevén lluvias muy fuertes en el sur de Nayarit y el oeste de Jalisco</title>
@@ -87,14 +95,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Chihuahua, Durango, Jalisco, Colima, Michoacán y Guerrero — Comunicado del 25 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_10_25.pdf]]></description>
       <pubDate>Sun, 25 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_10_25</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 24 OCT 2026: Se pronostican lluvias muy fuertes en zonas de Chihuahua</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_10_24.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de Chihuahua — Comunicado del 24 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_10_24.pdf]]></description>
-      <pubDate>Sat, 24 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_10_24</guid>
       <category>Comunicado</category>
     </item>
   </channel>
