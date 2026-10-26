@@ -5,27 +5,65 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 26 Oct 2026 07:54:10 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 15:16:51 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de octubre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 597 | 26 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT Y JALISCO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 597
+Ciudad de México a 26 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT Y JALISCO
+
+Este día, una línea seca sobre el norte mexicano, originará lluvias puntuales fuertes en el norte de Chihuahua y Coahuila e intervalos de chubascos y vientos fuertes en el norte y noreste de México. Canales de baja presión e inestabilidad atmosférica en el interior del territorio mexicano, originarán chubascos y lluvias fuertes en el centro, oriente y sureste del país. Mientras que el aporte de humedad generado por la tormenta tropical Vance, reforzará la ocurrencia de lluvias puntuales muy fuertes en Nayarit (sur) y Jalisco (oeste), así como chubascos y lluvias fuertes en el occidente y sur del territorio nacional, además de rachas de viento de hasta 60 km/h y oleaje elevado en sus costas.
+
+ 
+ 
+El Servicio Meteorológico Nacional vigila la evolución y trayectoria de la tormenta tropical Vance del océano Pacífico.
+
+
+Para mayor información consultar:
+
+…]]></description>
+      <pubDate>Mon, 26 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-26-597</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de octubre del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de octubre del 2026
-Emisión: 00:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 26 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-26-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Viento con rachas de 40 a 60 km/h y posible formación de torbellinos: Chih (norte).</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Nayarit y Jalisco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento con rachas de 40 a 60 km/h y posible formación de torbellinos: Chih (norte).]]></description>
-      <pubDate>Mon, 26 Oct 2026 01:54:02 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-26-14ae</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Nayarit y Jalisco.]]></description>
+      <pubDate>Mon, 26 Oct 2026 09:16:38 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-26-2ece</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 26 OCT 2026: Debido a la tormenta tropical Vance, se prevén lluvias muy fuertes en el sur de Nayarit y el oeste de Jalisco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_26.pdf</link>
+      <description><![CDATA[Debido a la tormenta tropical Vance, se prevén lluvias muy fuertes en el sur de Nayarit y el oeste de Jalisco — Reporte Matutino del 26 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_26.pdf]]></description>
+      <pubDate>Mon, 26 Oct 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 25 OCT 2026: La tormenta tropical Vance se localiza a 390 km al sur-suroeste de Punta San Telmo, Michoacán</title>
@@ -52,40 +90,11 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 596 | 25 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 596
-Ciudad de México a 25 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
-
-Durante esta tarde-noche, la interacción entre una vaguada en niveles medios y altos de la atmósfera en el noroeste de México, el flujo de la corriente en chorro subtropical y un canal de baja presión sobre la Mesa del Norte, propiciarán rachas de viento de hasta 60 km/h y posible formación de torbellinos en el norte de Chihuahua, así como lluvias fuertes en el noroeste y norte del país, con lluvias muy fuertes en zonas de Chihuahua (centro, este y sur) y Durango (norte y oeste). Canales de baja presión e inestabilidad atmosférica al interior de México, ocasionarán la probabilidad de lluvias y chubascos en el noreste, centro, oriente y sureste del país, con lluvias puntuales fuertes en zonas de Tamaulipas, San Luis Potosí, Veracruz y Puebla.…]]></description>
-      <pubDate>Sun, 25 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-25-596</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
       <title>📋 SMN Comunicado 24 OCT 2026: Se pronostican lluvias muy fuertes en zonas de Chihuahua</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_10_24.pdf</link>
       <description><![CDATA[Se pronostican lluvias muy fuertes en zonas de Chihuahua — Comunicado del 24 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_10_24.pdf]]></description>
       <pubDate>Sat, 24 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_10_24</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 23 OCT 2026: Debido al frente frio número 3 se prevén lluvias de fuertes a muy fuertes en zonas del noroeste y norte de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_23.pdf</link>
-      <description><![CDATA[Debido al frente frio número 3 se prevén lluvias de fuertes a muy fuertes en zonas del noroeste y norte de México — Reporte Vespertino del 23 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_23.pdf]]></description>
-      <pubDate>Fri, 23 Oct 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_23</guid>
       <category>Comunicado</category>
     </item>
   </channel>
