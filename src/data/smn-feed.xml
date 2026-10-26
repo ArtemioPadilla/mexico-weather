@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 25 Oct 2026 22:47:06 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 01:18:15 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Viento de 20 a 30 km/h con rachas de 40 a 60 km/h y posible formación de torbellinos: Chihuahua (norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 20 a 30 km/h con rachas de 40 a 60 km/h y posible formación de torbellinos: Chihuahua (norte).]]></description>
-      <pubDate>Sun, 25 Oct 2026 16:46:58 -0600</pubDate>
+      <pubDate>Sun, 25 Oct 2026 19:18:05 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-25-5027</guid>
       <category>Alerta</category>
     </item>
@@ -33,33 +33,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 595 | 25 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 596 | 25 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA Y DURANGO
+      <description><![CDATA[LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 595
+No. Aviso: 596
 Ciudad de México a 25 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PREVÉN LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA Y DURANGO 
 
  
 
-Para hoy, la interacción entre una vaguada en niveles medios y altos de la atmósfera en el noroeste del país, un canal de baja presión sobre la Mesa del Norte y el paso de la corriente en chorro subtropical, propiciarán lluvias muy fuertes en zonas de Chihuahua y Durango, y lluvias fuertes en Coahuila, además de viento con rachas de 40 a 60 km/h y posible formación de torbellinos en el norte de Chihuahua. Por su parte, canales de baja presión en el interior del territorio nacional e inestabilidad atmosférica, ocasionarán la probabilidad de chubascos y lluvias puntuales fuertes en el noreste, centro, oriente y sureste del país.…]]></description>
+LLUVIAS MUY FUERTES EN ZONAS DE CHIHUAHUA, DURANGO, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
+
+Durante esta tarde-noche, la interacción entre una vaguada en niveles medios y altos de la atmósfera en el noroeste de México, el flujo de la corriente en chorro subtropical y un canal de baja presión sobre la Mesa del Norte, propiciarán rachas de viento de hasta 60 km/h y posible formación de torbellinos en el norte de Chihuahua, así como lluvias fuertes en el noroeste y norte del país, con lluvias muy fuertes en zonas de Chihuahua (centro, este y sur) y Durango (norte y oeste). Canales de baja presión e inestabilidad atmosférica al interior de México, ocasionarán la probabilidad de lluvias y chubascos en el noreste, centro, oriente y sureste del país, con lluvias puntuales fuertes en zonas de Tamaulipas, San Luis Potosí, Veracruz y Puebla.…]]></description>
       <pubDate>Sun, 25 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-25-595</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-25-596</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 25 de octubre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 25 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-25-12</guid>
