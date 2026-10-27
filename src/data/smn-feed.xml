@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 26 Oct 2026 20:37:37 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 00:33:34 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Viento de componente norte de 30 a 40 km/h con rachas de 50 a 70 km/h: Oaxaca (istmo y golfo de Tehuantepec). Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: costas de Colima y Michoacán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 35 a 40 °C: Sonora (sur) y Sinaloa (norte).]]></description>
-      <pubDate>Mon, 26 Oct 2026 14:37:28 -0600</pubDate>
+      <pubDate>Mon, 26 Oct 2026 18:33:25 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-10-26-eb67</guid>
       <category>Alerta</category>
     </item>
@@ -25,41 +25,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 597 | 26 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 598 | 26 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT Y JALISCO
+      <description><![CDATA[LLUVIAS PUNTUALES FUERTES EN ZONAS DE CHIHUAHUA, COAHUILA, ZACATECAS, DURANGO, SINALOA, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 597
+No. Aviso: 598
 Ciudad de México a 26 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-LLUVIAS PUNTUALES MUY FUERTES EN NAYARIT Y JALISCO
+LLUVIAS PUNTUALES FUERTES EN ZONAS DE CHIHUAHUA, COAHUILA, ZACATECAS, DURANGO, SINALOA, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUERRERO
 
-Este día, una línea seca sobre el norte mexicano, originará lluvias puntuales fuertes en el norte de Chihuahua y Coahuila e intervalos de chubascos y vientos fuertes en el norte y noreste de México. Canales de baja presión e inestabilidad atmosférica en el interior del territorio mexicano, originarán chubascos y lluvias fuertes en el centro, oriente y sureste del país. Mientras que el aporte de humedad generado por la tormenta tropical Vance, reforzará la ocurrencia de lluvias puntuales muy fuertes en Nayarit (sur) y Jalisco (oeste), así como chubascos y lluvias fuertes en el occidente y sur del territorio nacional, además de rachas de viento de hasta 60 km/h y oleaje elevado en sus costas.
-
- 
- 
-El Servicio Meteorológico Nacional vigila la evolución y trayectoria de la tormenta tropical Vance del océano Pacífico.
-
-
-Para mayor información consultar:
-
-…]]></description>
+Durante esta noche y madrugada del martes, una vaguada en niveles medios y altos de la atmósfera sobre el noroeste y norte de México, en interacción con una línea seca que se establecerá sobre Chihuahua, además de inestabilidad atmosférica, originarán lluvias y chubascos en Sonora, Baja California Sur, Nuevo León, Tamaulipas y San Luis Potosí, así como lluvias puntuales fuertes en Chihuahua (este y sur), Coahuila (oeste y sur), Zacatecas (norte y oeste), Durango (norte, centro y sur) y Sinaloa (sur). Por otra parte, la tormenta tropical Vance se localiza al sur de las costas de Jalisco y Colima; su circulación reforzará la probabilidad de lluvias puntuales fuertes en zonas de Guerrero, Michoacán, Colima, Jalisco y Nayarit; además de rachas de viento y oleaje elevado en sus costas.…]]></description>
       <pubDate>Mon, 26 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-26-597</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-26-598</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de octubre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 26 de octubre del 2026
-Emisión: 12:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 26 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-26-12</guid>
