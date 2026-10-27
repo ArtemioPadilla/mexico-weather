@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 27 Oct 2026 13:21:07 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 19:29:02 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Jalisco y Colima.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Jalisco y Colima.]]></description>
+      <pubDate>Tue, 27 Oct 2026 13:28:52 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-27-ebcd</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 599 | 27 de Octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -28,28 +36,20 @@ Para hoy, la tormenta tropical Vance se localizará al suroeste de las costas de
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de octubre del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de octubre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 27 de octubre del 2026
-Emisión: 06:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 27 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-27-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Jalisco y Colima.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales muy fuertes (50 a 75 mm): en zonas de Jalisco y Colima.]]></description>
-      <pubDate>Tue, 27 Oct 2026 07:21:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-27-ebcd</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 27 OCT 2026: Se mantiene el pronóstico de lluvias muy fuertes para Colima y Jalisco debido a Vance</title>
+      <title>📋 SMN Reporte Matutino 27 OCT 2026: Vance permanece como tormenta tropical, a 470 km al suroeste de Manzanillo, Colima</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_27.pdf</link>
-      <description><![CDATA[Se mantiene el pronóstico de lluvias muy fuertes para Colima y Jalisco debido a Vance — Reporte Matutino del 27 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_27.pdf]]></description>
+      <description><![CDATA[Vance permanece como tormenta tropical, a 470 km al suroeste de Manzanillo, Colima — Reporte Matutino del 27 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_27.pdf]]></description>
       <pubDate>Tue, 27 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_27</guid>
       <category>Comunicado</category>
@@ -76,14 +76,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Vance generará lluvias fuertes en el occidente y sur de México — Comunicado del 26 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso146-26.pdf]]></description>
       <pubDate>Mon, 26 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso146-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 26 OCT 2026: Debido a la tormenta tropical Vance, se prevén lluvias muy fuertes en el sur de Nayarit y el oeste de Jalisco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_26.pdf</link>
-      <description><![CDATA[Debido a la tormenta tropical Vance, se prevén lluvias muy fuertes en el sur de Nayarit y el oeste de Jalisco — Reporte Matutino del 26 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_26.pdf]]></description>
-      <pubDate>Mon, 26 Oct 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
