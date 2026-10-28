@@ -5,16 +5,64 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 28 Oct 2026 05:54:15 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Oct 2026 13:11:26 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Temperaturas mínimas de -5 a 0 °C durante la madrugada del miércoles: zonas serranas de Baja California, Chihuahua y Durango.</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 601 | 28 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN SINALOA, NAYARIT Y DURANGO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 601
+Ciudad de México a 28 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES INTENSAS EN SINALOA, NAYARIT Y DURANGO
+
+ 
+
+Este día, la tormenta tropical Vance se localizará al oeste de las costas de Jalisco y Nayarit. Su circulación, en interacción con inestabilidad atmosférica, generará lluvias fuertes a puntuales intensas en zonas del occidente del territorio nacional, además de Baja California Sur y Durango; así como rachas de viento y oleaje elevado en costas de Baja California Sur, Sinaloa, Nayarit y Colima. Así mismo, canales de baja presión en el interior del país, aunados a inestabilidad atmosférica y al ingreso de humedad del océano Pacífico, golfo de México y mar Caribe, ocasionarán lluvias puntuales muy fuertes en Zacatecas; lluvias fuertes en Chihuahua y Coahuila; además de lluvias y chubascos en zonas del noreste, oriente, centro, sur y sureste del país, incluida la península de Yucatán.
+
+ 
+
+El Servicio Meteorológico Nacional vigila la evolución y trayectoria de la tormenta tropical Vance del océano Pacífico.
+
+…]]></description>
+      <pubDate>Wed, 28 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-28-601</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 28 de octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 28 de octubre del 2026
+Emisión: 06:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 28 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-28-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nayarit y Durango.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C durante la madrugada del miércoles: zonas serranas de Baja California, Chihuahua y Durango.]]></description>
-      <pubDate>Tue, 27 Oct 2026 23:54:05 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-27-2f53</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Sinaloa, Nayarit y Durango.]]></description>
+      <pubDate>Wed, 28 Oct 2026 07:11:17 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-28-ff85</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 28 OCT 2026: Se pronostican lluvias intensas en zonas de Sinaloa, Nayarit y Durango</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_28.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Sinaloa, Nayarit y Durango — Reporte Matutino del 28 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_28.pdf]]></description>
+      <pubDate>Wed, 28 Oct 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_28</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 27 OCT 2026: Se prevén lluvias de fuertes a muy fuertes en el noroeste, norte, occidente y sur de México</title>
@@ -41,50 +89,11 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 600 | 27 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS FUERTES A PUNTUALES MUY FUERTES EN EL NOROESTE, NORTE, OCCIDENTE Y SUR DEL TERRITORIO NACIONAL
-
----
-Pronóstico Meteorológico General
-No. Aviso: 600
-Ciudad de México a 27 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-LLUVIAS FUERTES A PUNTUALES MUY FUERTES EN EL NOROESTE, NORTE, OCCIDENTE Y SUR DEL TERRITORIO NACIONAL
-
-Durante esta noche y madrugada del miércoles, la tormenta tropical Vance se ubicará al suroeste de las costas de Colima y Jalisco; su circulación reforzará la probabilidad de lluvias fuertes a puntuales muy fuertes en zonas de Michoacán, Colima y Jalisco; además de rachas de viento y oleaje elevado en sus costas.…]]></description>
-      <pubDate>Tue, 27 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-27-600</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de octubre del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 27 de octubre del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 27 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-27-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
       <title>📋 SMN Reporte Matutino 27 OCT 2026: Se mantiene el pronóstico de lluvias muy fuertes para Colima y Jalisco debido a Vance</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_27.pdf</link>
       <description><![CDATA[Se mantiene el pronóstico de lluvias muy fuertes para Colima y Jalisco debido a Vance — Reporte Matutino del 27 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_27.pdf]]></description>
       <pubDate>Tue, 27 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_27</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 26 OCT 2026: Vance se mantiene como tormenta tropical y se desplaza frente a costas de Jalisco y Colima</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso147-26.pdf</link>
-      <description><![CDATA[Vance se mantiene como tormenta tropical y se desplaza frente a costas de Jalisco y Colima — Comunicado del 26 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso147-26.pdf]]></description>
-      <pubDate>Mon, 26 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso147-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
