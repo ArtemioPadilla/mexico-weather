@@ -5,16 +5,32 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 29 Oct 2026 23:22:18 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 05:59:40 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Sinaloa y Coahuila.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Sinaloa y Coahuila.]]></description>
-      <pubDate>Thu, 29 Oct 2026 17:22:08 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-29-2b51</guid>
+      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C durante la madrugada del viernes: zonas serranas de Chihuahua y Durango.]]></description>
+      <pubDate>Thu, 29 Oct 2026 23:59:33 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-29-7570</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 29 OCT 2026: Se prevén lluvias intensas en zonas de Chihuahua, Sinaloa y Coahuila</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_29.pdf</link>
+      <description><![CDATA[Se prevén lluvias intensas en zonas de Chihuahua, Sinaloa y Coahuila — Reporte Vespertino del 29 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_10_29.pdf]]></description>
+      <pubDate>Thu, 29 Oct 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_29</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 29 OCT 2026: Vance se localiza frente a las costas de Nayarit</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso156-26.pdf</link>
+      <description><![CDATA[Vance se localiza frente a las costas de Nayarit — Comunicado del 29 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso156-26.pdf]]></description>
+      <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-Aviso156-26</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 29 OCT 2026: Vance se localiza aproximadamente a 150 km al este-sureste de Cabo San Lucas, Baja California Sur</title>
@@ -33,38 +49,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>📋 SMN Comunicado 29 OCT 2026: Nuevamente, Vance se intensificó a tormenta tropical; se ubica frente a las costas de Jalisco y Nayarit</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso153-26.pdf</link>
-      <description><![CDATA[Nuevamente, Vance se intensificó a tormenta tropical; se ubica frente a las costas de Jalisco y Nayarit — Comunicado del 29 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso153-26.pdf]]></description>
-      <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso153-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 603 | 29 de Octubre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 604 | 29 de Octubre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA, Y PUNTUALES MUY FUERTES EN ZONAS DE BAJA CALIFORNIA SUR, CHIHUAHUA, COAHUILA, DURANGO Y NAYARIT
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, SINALOA Y COAHUILA
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 603
+No. Aviso: 604
 Ciudad de México a 29 de Octubre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA, Y PUNTUALES MUY FUERTES EN ZONAS DE BAJA CALIFORNIA SUR, CHIHUAHUA, COAHUILA, DURANGO Y NAYARIT
+LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, SINALOA Y COAHUILA
 
-Para hoy, la interacción del ciclón tropical Vance, una vaguada en niveles medios y altos de la atmósfera e inestabilidad atmosférica, mantendrán la probabilidad de lluvias puntuales intensas en zonas de Sinaloa; puntuales muy fuertes en Nayarit, Durango y Baja California Sur, así como rachas de viento y oleaje elevado en costas de Baja California Sur, Sinaloa, Nayarit y Jalisco.…]]></description>
+
+Durante esta tarde y madrugada del viernes, la depresión tropical Vance, ocasionará la probabilidad de lluvias puntuales intensas en Sinaloa (centro y sur), muy fuertes en Baja California Sur (sur), Durango (oeste) y Nayarit (norte), así como puntuales fuertes en Jalisco (oeste); además, se pronostican rachas de viento y oleaje de 2.0 a 3.0 metros de altura en costas de Baja California Sur, Sinaloa y Nayarit, y de 1.0 a 2.0 metros de altura en la costa de Jalisco; condiciones que disminuirán paulatinamente.…]]></description>
       <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-29-603</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-29-604</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de octubre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de octubre del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
+En espera de nueva información
 Ciudad de México, 29 de octubre del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-29-12</guid>
@@ -76,14 +86,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de Sinaloa, Baja California Sur, Chihuahua, Coahuila, Durango ... — Reporte Matutino del 29 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_29.pdf]]></description>
       <pubDate>Thu, 29 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_29</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 28 OCT 2026: Vance se ubica a 260 km al oeste-noroeste de Cabo Corrientes, Jalisco, y a 270 km al oeste de Punta Mita, Nayarit</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso152-26.pdf</link>
-      <description><![CDATA[Vance se ubica a 260 km al oeste-noroeste de Cabo Corrientes, Jalisco, y a 270 km al oeste de Punta Mita, Nayarit — Comunicado del 28 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso152-26.pdf]]></description>
-      <pubDate>Wed, 28 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso152-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
