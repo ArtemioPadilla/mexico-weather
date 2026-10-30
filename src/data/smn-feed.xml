@@ -5,16 +5,66 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 30 Oct 2026 05:59:40 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2026 13:09:04 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chihuahua, Sinaloa y Coahuila.</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 605 | 30 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN SONORA Y COAHUILA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 605
+Ciudad de México a 30 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES MUY FUERTES EN SONORA Y COAHUILA
+
+Este día, un canal de baja presión sobre el noroeste de México e inestabilidad atmosférica, originarán lluvias fuertes a puntuales muy fuertes sobre entidades del noroeste y norte de México. Por su parte, canales de baja presión al interior de la República Mexicana y el ingreso de humedad del océano Pacífico, golfo de México y mar Caribe, ocasionarán lluvias y chubascos en el occidente, oriente, centro, sur y sureste mexicano, incluidos el Valle de México y la península de Yucatán.
+
+ 
+
+El Servicio Meteorológico Nacional vigila el desplazamiento de un nuevo frente frío (núm. 4), que ingresará sobre el noroeste de México.
+
+Para mayor información consultar:
+https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-extendido-a-96-horas
+
+
+Las lluvias fuertes a muy fuertes podrían acompañarse con descargas eléctricas, además de generar encharcamientos e inundaciones.
+…]]></description>
+      <pubDate>Fri, 30 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-30-605</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 30 de octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 30 de octubre del 2026
+Emisión: 06:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 30 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-30-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Sonora y Coahuila.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C durante la madrugada del viernes: zonas serranas de Chihuahua y Durango.]]></description>
-      <pubDate>Thu, 29 Oct 2026 23:59:33 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-29-7570</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Sonora y Coahuila.]]></description>
+      <pubDate>Fri, 30 Oct 2026 07:08:54 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-30-7c52</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 30 OCT 2026: Se pronostican para este viernes lluvias muy fuertes en regiones de Sonora y Coahuila</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_30_2026.pdf</link>
+      <description><![CDATA[Se pronostican para este viernes lluvias muy fuertes en regiones de Sonora y Coahuila — Reporte Matutino del 30 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_30_2026.pdf]]></description>
+      <pubDate>Fri, 30 Oct 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_30_2026</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 29 OCT 2026: Se prevén lluvias intensas en zonas de Chihuahua, Sinaloa y Coahuila</title>
@@ -46,46 +96,6 @@
       <description><![CDATA[Debido a Vance, se pronostican lluvias intensas en zonas de Sinaloa — Comunicado del 29 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso154-26.pdf]]></description>
       <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso154-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 604 | 29 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, SINALOA Y COAHUILA
-
----
-Pronóstico Meteorológico General
-No. Aviso: 604
-Ciudad de México a 29 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE CHIHUAHUA, SINALOA Y COAHUILA
-
-
-Durante esta tarde y madrugada del viernes, la depresión tropical Vance, ocasionará la probabilidad de lluvias puntuales intensas en Sinaloa (centro y sur), muy fuertes en Baja California Sur (sur), Durango (oeste) y Nayarit (norte), así como puntuales fuertes en Jalisco (oeste); además, se pronostican rachas de viento y oleaje de 2.0 a 3.0 metros de altura en costas de Baja California Sur, Sinaloa y Nayarit, y de 1.0 a 2.0 metros de altura en la costa de Jalisco; condiciones que disminuirán paulatinamente.…]]></description>
-      <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-29-604</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 29 de octubre del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-En espera de nueva información
-Ciudad de México, 29 de octubre del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-10-29-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 29 OCT 2026: Se pronostican lluvias de muy fuertes a intensas en zonas de Sinaloa, Baja California Sur, Chihuahua, Coahuila, Durango ...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_29.pdf</link>
-      <description><![CDATA[Se pronostican lluvias de muy fuertes a intensas en zonas de Sinaloa, Baja California Sur, Chihuahua, Coahuila, Durango ... — Reporte Matutino del 29 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_29.pdf]]></description>
-      <pubDate>Thu, 29 Oct 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_29</guid>
       <category>Comunicado</category>
     </item>
   </channel>
