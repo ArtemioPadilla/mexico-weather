@@ -5,26 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 31 Oct 2026 09:47:22 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 15:46:52 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de octubre del 2026 | Emisión 03:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 607 | 31 de Octubre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES FUERTES EN ZONAS DE BAJA CALIFORNIA Y SONORA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 607
+Ciudad de México a 31 de Octubre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES FUERTES EN ZONAS DE BAJA CALIFORNIA Y SONORA
+
+Para hoy, un canal de baja presión sobre el noroeste del país, en interacción con la corriente en chorro subtropical y con el aporte de humedad generado por un río atmosférico, ocasionarán lluvias puntuales fuertes en zonas de Baja California y Sonora. En horas de la noche y durante la madrugada del domingo, se prevé la aproximación de un nuevo frente frío (núm. 4) al noroeste del territorio nacional, reforzando la probabilidad de lluvias en dicha región.…]]></description>
+      <pubDate>Sat, 31 Oct 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-10-31-607</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de octubre del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 31 de octubre del 2026
-Emisión: 03:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 31 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-31-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Baja California Sur y Sonora.</title>
+      <title>⚠️ Alerta SMN: Viento (rachas de 40 a 60 km/h): en zonas de BC y Son; y de componente norte en Oax (istmo/golfo Tehuantepec).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C durante la madrugada del sábado: zonas serranas de Baja California, Chihuahua y Durango.]]></description>
-      <pubDate>Sat, 31 Oct 2026 03:47:14 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-31-2138</guid>
+      <description><![CDATA[Viento (rachas de 40 a 60 km/h): en zonas de BC y Son; y de componente norte en Oax (istmo/golfo Tehuantepec).]]></description>
+      <pubDate>Sat, 31 Oct 2026 09:46:44 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-31-1f3d</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -34,25 +53,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 30 Oct 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_10_30</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 606 | 30 de Octubre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EN LAS SIGUIENTES HORAS, CONTINUARÁN CONDICIONES PARA LLUVIAS MUY FUERTES A PUNTUALES INTENSAS EN EL NOROESTE DEL PAÍS
-
----
-Pronóstico Meteorológico General
-No. Aviso: 606
-Ciudad de México a 30 de Octubre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-EN LAS SIGUIENTES HORAS, CONTINUARÁN CONDICIONES PARA LLUVIAS MUY FUERTES A PUNTUALES INTENSAS EN EL NOROESTE DEL PAÍS 
-
-En el transcurso de esta noche y madrugada del sábado, un canal de baja presión sobre el noroeste del país, la corriente en chorro subtropical e inestabilidad en niveles altos de la atmósfera, mantendrán condiciones para lluvias puntuales intensas en Baja California Sur (centro y sur) y Sonora, lluvias muy fuertes en Chihuahua (oeste y norte), Sinaloa (norte) y Coahuila (norte); lluvias fuertes en Baja California Sur (este y sur) y Nuevo León (norte y centro), además de chubascos en  Baja California,   Durango y Tamaulipas.…]]></description>
-      <pubDate>Fri, 30 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-10-30-606</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 30 OCT 2026: Se pronostican para este viernes lluvias muy fuertes en regiones de Sonora y Coahuila</title>
