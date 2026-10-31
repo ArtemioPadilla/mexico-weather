@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 31 Oct 2026 15:46:52 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 20:03:39 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias fuertes a puntuales muy fuertes (50 a 75 mm): en zonas de Baja California y Sonora.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: Baja California y Sonora; y de componente norte: Oaxaca (istmo y golfo de Tehuantepec).]]></description>
+      <pubDate>Sat, 31 Oct 2026 14:03:31 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-10-31-ba6e</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 607 | 31 de Octubre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -28,23 +36,23 @@ Para hoy, un canal de baja presión sobre el noroeste del país, en interacción
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de octubre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 31 de octubre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 31 de octubre del 2026
-Emisión: 09:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 31 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-10-31-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Viento (rachas de 40 a 60 km/h): en zonas de BC y Son; y de componente norte en Oax (istmo/golfo Tehuantepec).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento (rachas de 40 a 60 km/h): en zonas de BC y Son; y de componente norte en Oax (istmo/golfo Tehuantepec).]]></description>
-      <pubDate>Sat, 31 Oct 2026 09:46:44 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-10-31-1f3d</guid>
-      <category>Alerta</category>
+      <title>📋 SMN Reporte Matutino 31 OCT 2026: Se pronostican lluvias muy fuertes en regiones de Baja California y Sonora, y fuertes en el norte de Baja California Sur</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_31.pdf</link>
+      <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Baja California y Sonora, y fuertes en el norte de Baja California Sur — Reporte Matutino del 31 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_31.pdf]]></description>
+      <pubDate>Sat, 31 Oct 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_31</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 30 OCT 2026: Esta noche se prevén lluvias intensas en Baja California Sur y Sonora, y muy fuertes en Chihuahua, Sinaloa y Coahuila</title>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Vance se localiza frente a las costas de Nayarit — Comunicado del 29 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso156-26.pdf]]></description>
       <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-Aviso156-26</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 29 OCT 2026: Vance se localiza aproximadamente a 150 km al este-sureste de Cabo San Lucas, Baja California Sur</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso155-25.pdf</link>
-      <description><![CDATA[Vance se localiza aproximadamente a 150 km al este-sureste de Cabo San Lucas, Baja California Sur — Comunicado del 29 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso155-25.pdf]]></description>
-      <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso155-25</guid>
       <category>Comunicado</category>
     </item>
   </channel>
