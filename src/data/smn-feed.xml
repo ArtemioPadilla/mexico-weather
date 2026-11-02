@@ -5,46 +5,58 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 02 Nov 2026 17:12:10 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Nov 2026 23:55:26 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 611 | 02 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>⚠️ Alerta SMN: Viento con rachas de 50 a 70 km/h: Sonora y Chihuahua; y de componente norte: Oaxaca (istmo y golfo de Tehuantepec).</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Viento de componente sur con rachas de 40 a 60 km/h: Coahuila, Nuevo León y Tamaulipas]]></description>
+      <pubDate>Mon, 02 Nov 2026 17:55:17 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-02-89bb</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 02 NOV 2026: Se pronostican chubascos en zonas de 14 entidades del país</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_11_02.pdf</link>
+      <description><![CDATA[Se pronostican chubascos en zonas de 14 entidades del país — Comunicado del 02 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_11_02.pdf]]></description>
+      <pubDate>Mon, 02 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_11_02</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 612 | 02 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS CON INTERVALOS DE CHUBASCOS EN ESTADOS DEL NOROESTE, NORTE, OCCIDENTE, SUR Y SURESTE DE MÉXICO, INCLUIDA LA PENÍNSULA DE YUCATÁN
+      <description><![CDATA[LLUVIAS FUERTES EN ZONAS DE CAMPECHE Y CHIAPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 611
+No. Aviso: 612
 Ciudad de México a 02 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS CON INTERVALOS DE CHUBASCOS EN ESTADOS DEL NOROESTE, NORTE, OCCIDENTE, SUR Y SURESTE DE MÉXICO, INCLUIDA LA PENÍNSULA DE YUCATÁN
+LLUVIAS FUERTES EN ZONAS DE CAMPECHE Y CHIAPAS
 
-Para hoy, el frente frío núm. 4 se extenderá sobre el norte del territorio mexicano, asociado con una vaguada en niveles medios y altos de la atmósfera, y en interacción con la corriente en chorro subtropical, originarán chubascos en Sonora, Chihuahua, Coahuila, Jalisco, Colima y Michoacán; y lluvias aisladas en Baja California Sur, Nuevo León y Nayarit, así como fuertes rachas de viento en zonas del noroeste y norte de México. Canales de baja presión que se extenderán en el interior del territorio nacional en interacción con el ingreso de aire húmedo proveniente del océano Pacífico, golfo de México y mar Caribe, generarán intervalos de chubascos en Guerrero, Oaxaca, Chiapas, Veracruz, Tabasco, Campeche, Yucatán y Quintana Roo.…]]></description>
+ 
+
+Durante esta noche y madrugada del martes, el frente frío núm. 4 sobre el norte del territorio mexicano, una vaguada en niveles medios y altos de la atmósfera y el flujo de la corriente en chorro subtropical, originarán rachas fuertes de viento en la región, así como la probabilidad de lluvias e intervalos de chubascos en zonas de Baja California Sur, Sonora, Chihuahua, Coahuila y Nuevo León. Por su parte, canales de baja presión al interior del territorio nacional, mantendrán la probabilidad de lluvias e intervalos de chubascos en zonas de Nayarit, Jalisco, Colima, Michoacán, Guerrero, Puebla, Estado de México, Oaxaca, Veracruz, Tabasco, Yucatán y Quintana Roo; con lluvias puntuales fuertes en Campeche (oeste) y Chiapas (norte).
+
+…]]></description>
       <pubDate>Mon, 02 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-02-611</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-02-612</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de noviembre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 02 de noviembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 02 de noviembre del 2026
-Emisión: 09:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 02 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-02-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Viento con rachas de 50 a 70 km/h: en zonas de Son y Chih. Viento con rachas de 40 a 60 km/h: en zonas de Coah y NL; y de componente norte: en Oax (istmo/golfo Tehuantepec).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas (35 a 40 °C): en zonas de Sin, Coah, NL, Mich, Gro, Oax, Chis y Tamps.]]></description>
-      <pubDate>Mon, 02 Nov 2026 11:12:02 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-02-742c</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 01 NOV 2026: Se pronostican lluvias intensas en regiones de Baja California, y muy fuertes en Sonora y el norte de Baja California Su...</title>
@@ -76,14 +88,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican para este viernes lluvias muy fuertes en regiones de Sonora y Coahuila — Reporte Matutino del 30 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_30_2026.pdf]]></description>
       <pubDate>Fri, 30 Oct 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_30_2026</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 29 OCT 2026: Vance se localiza frente a las costas de Nayarit</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso156-26.pdf</link>
-      <description><![CDATA[Vance se localiza frente a las costas de Nayarit — Comunicado del 29 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Aviso156-26.pdf]]></description>
-      <pubDate>Thu, 29 Oct 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Aviso156-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
