@@ -5,27 +5,54 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 04 Nov 2026 11:09:10 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 18:44:14 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de noviembre del 2026 | Emisión 03:00h</title>
+      <title>⚠️ Alerta SMN: Temperaturas máximas de 35 a 40 °C: en zonas de Michoacán, Guerrero, Oaxaca y Chiapas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas máximas de 35 a 40 °C: en zonas de Michoacán, Guerrero, Oaxaca y Chiapas.]]></description>
+      <pubDate>Wed, 04 Nov 2026 12:44:05 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-04-5dc9</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 615 | 04 de Noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES FUERTES EN ZONAS DE MICHOACÁN, GUERRERO Y OAXACA
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 615
+Ciudad de México a 04 de Noviembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PREVÉN LLUVIAS PUNTUALES FUERTES EN ZONAS DE MICHOACÁN, GUERRERO Y OAXACA
+
+Para hoy, una vaguada en niveles altos de la atmósfera sobre el sur y sureste del territorio nacional, originará lluvias puntuales fuertes acompañadas con descargas eléctricas en Michoacán (centro y sur), Guerrero (costa) y Oaxaca (suroeste); intervalos de chubascos en Jalisco, Colima, Puebla, Veracruz, Tabasco, Chiapas, Campeche y Quintana Roo; y lluvias aisladas en Yucatán. Canales de baja presión en el interior del país e ingreso de aire húmedo del océano Pacífico, golfo de México y mar Caribe, generarán intervalos de chubascos en San Luis Potosí y Estado de México; y lluvias aisladas en Baja California Sur, Querétaro, Hidalgo y Morelos. Por otro lado, el frente núm.…]]></description>
+      <pubDate>Wed, 04 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-04-615</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de noviembre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 04 de noviembre del 2026
-Emisión: 03:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 04 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-04-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Temperaturas mínimas de -5 a 0 °C: zonas serranas de Baja California, Chihuahua y Durango.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C: zonas serranas de Baja California, Chihuahua y Durango.]]></description>
-      <pubDate>Wed, 04 Nov 2026 05:08:59 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-04-5f0a</guid>
-      <category>Alerta</category>
+      <title>📋 SMN Reporte Matutino 04 NOV 2026: Hoy se esperan lluvias fuertes en zonas de Michoacán, Guerrero y Oaxaca</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_04.pdf</link>
+      <description><![CDATA[Hoy se esperan lluvias fuertes en zonas de Michoacán, Guerrero y Oaxaca — Reporte Matutino del 04 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_04.pdf]]></description>
+      <pubDate>Wed, 04 Nov 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_04</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 03 NOV 2026: En las próximas horas el frente frío número 4 generará chubascos en Nuevo León, Tamaulipas y San Luis Potosí</title>
@@ -34,29 +61,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 03 Nov 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_03</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 614 | 03 de Noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[TIEMPO ESTABLE CON ESCASA PROBABILIDAD DE LLUVIA EN EL NORTE, CENTRO Y ORIENTE DEL TERRITORIO NACIONAL
-
----
-Pronóstico Meteorológico General
-No. Aviso: 614
-Ciudad de México a 03 de Noviembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-TIEMPO ESTABLE CON ESCASA PROBABILIDAD DE LLUVIA EN EL NORTE, CENTRO Y ORIENTE DEL TERRITORIO NACIONAL
-
- 
-
-Esta noche y madrugada del miércoles, el frente frío núm. 4 en interacción con una vaguada en niveles medios y altos de la atmósfera, generará intervalos de chubascos en Nuevo León, Tamaulipas y San Luis Potosí, y lluvias aisladas en Coahuila; Mientras que, canales de baja presión en el interior del territorio nacional aunados al ingreso de humedad de ambos litorales, ocasionarán intervalos de chubascos en Jalisco, Colima, Michoacán, Guerrero, Oaxaca, Chiapas, Veracruz, Tabasco, Campeche, Yucatán y Quintana Roo; además de lluvias aisladas en Zacatecas, Nayarit, Querétaro, Hidalgo, Puebla, Estado de México y Morelos. Por otro lado, un anticiclón en niveles medios de la atmósfera mantendrá tiempo estable con escasa probabilidad de lluvias sobre el norte, centro y oriente de la República Mexicana.…]]></description>
-      <pubDate>Tue, 03 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-03-614</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 03 NOV 2026: Hoy se esperan lluvias y chubascos en 21 estados de México</title>
@@ -80,14 +84,6 @@ Esta noche y madrugada del miércoles, el frente frío núm. 4 en interacción c
       <description><![CDATA[Se pronostican lluvias intensas en regiones de Baja California, y muy fuertes en Sonora y el norte de Baja California Su... — Reporte Matutino del 01 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_01.pdf]]></description>
       <pubDate>Sun, 01 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_01</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 31 OCT 2026: Se pronostican lluvias muy fuertes en regiones de Baja California y Sonora, y fuertes en el norte de Baja California Sur</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_31.pdf</link>
-      <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Baja California y Sonora, y fuertes en el norte de Baja California Sur — Reporte Matutino del 31 OCT 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_10_31.pdf]]></description>
-      <pubDate>Sat, 31 Oct 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_10_31</guid>
       <category>Comunicado</category>
     </item>
   </channel>
