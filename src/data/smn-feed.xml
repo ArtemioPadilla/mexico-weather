@@ -5,51 +5,51 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 04 Nov 2026 18:44:14 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 00:25:20 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Temperaturas máximas de 35 a 40 °C: en zonas de Michoacán, Guerrero, Oaxaca y Chiapas.</title>
+      <title>⚠️ Alerta SMN: Temperaturas máximas de 35 a 40 °C: en zonas de Michoacán, Oaxaca y Chiapas</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 35 a 40 °C: en zonas de Michoacán, Guerrero, Oaxaca y Chiapas.]]></description>
-      <pubDate>Wed, 04 Nov 2026 12:44:05 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-04-5dc9</guid>
+      <description><![CDATA[Viento de 10 a 20 km/h con rachas de 30 a 50 km/h: BC, BCS, Son, Chih, Dgo, Zac, Ags, SLP, Coah, NL, Tamps, Pue, Oax y Chis]]></description>
+      <pubDate>Wed, 04 Nov 2026 18:25:08 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-04-d966</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 615 | 04 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 616 | 04 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PREVÉN LLUVIAS PUNTUALES FUERTES EN ZONAS DE MICHOACÁN, GUERRERO Y OAXACA
+      <description><![CDATA[LLUVIAS PUNTUALES FUERTES EN ESTADOS DEL SUR Y SURESTE DEL PAÍS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 615
+No. Aviso: 616
 Ciudad de México a 04 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-SE PREVÉN LLUVIAS PUNTUALES FUERTES EN ZONAS DE MICHOACÁN, GUERRERO Y OAXACA
+LLUVIAS PUNTUALES FUERTES EN ESTADOS DEL SUR Y SURESTE DEL PAÍS
 
-Para hoy, una vaguada en niveles altos de la atmósfera sobre el sur y sureste del territorio nacional, originará lluvias puntuales fuertes acompañadas con descargas eléctricas en Michoacán (centro y sur), Guerrero (costa) y Oaxaca (suroeste); intervalos de chubascos en Jalisco, Colima, Puebla, Veracruz, Tabasco, Chiapas, Campeche y Quintana Roo; y lluvias aisladas en Yucatán. Canales de baja presión en el interior del país e ingreso de aire húmedo del océano Pacífico, golfo de México y mar Caribe, generarán intervalos de chubascos en San Luis Potosí y Estado de México; y lluvias aisladas en Baja California Sur, Querétaro, Hidalgo y Morelos. Por otro lado, el frente núm.…]]></description>
+Esta noche y la madrugada del jueves, una vaguada en niveles altos de la atmósfera en el sur y sureste del país, originará lluvias puntuales fuertes acompañadas con descargas eléctricas en Guerrero (costa), Oaxaca (suroeste y este), Chiapas (noroeste y sur), Tabasco (oeste) y Veracruz (sur) e intervalos de chubascos en Campeche, Yucatán y Quintana Roo. Por otro lado, el sistema frontal núm. 4 se extenderá como estacionario sobre el noreste del territorio nacional, ocasionará intervalos de chubascos en Tamaulipas y San Luis Potosí; así como lluvias aisladas en Nuevo León. Mientras que, canales de baja presión en el interior del país aunados al ingreso de humedad de ambos litorales, generarán lluvias puntuales fuertes en Michoacán (centro y sur), chubascos dispersos en Jalisco, Colima, Estado de México y Puebla; y lluvias aisladas en Baja California Sur, Querétaro, Hidalgo y Morelos.…]]></description>
       <pubDate>Wed, 04 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-04-615</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-04-616</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de noviembre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 04 de noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 04 de noviembre del 2026
-Emisión: 12:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 04 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-04-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 04 NOV 2026: Hoy se esperan lluvias fuertes en zonas de Michoacán, Guerrero y Oaxaca</title>
+      <title>📋 SMN Reporte Matutino 04 NOV 2026: Se pronostican lluvias fuertes en estados del sur y sureste de México</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_04.pdf</link>
-      <description><![CDATA[Hoy se esperan lluvias fuertes en zonas de Michoacán, Guerrero y Oaxaca — Reporte Matutino del 04 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_04.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias fuertes en estados del sur y sureste de México — Reporte Matutino del 04 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_04.pdf]]></description>
       <pubDate>Wed, 04 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_04</guid>
       <category>Comunicado</category>
@@ -76,14 +76,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican chubascos en zonas de 14 entidades del país — Comunicado del 02 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_11_02.pdf]]></description>
       <pubDate>Mon, 02 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_11_02</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 01 NOV 2026: Se pronostican lluvias intensas en regiones de Baja California, y muy fuertes en Sonora y el norte de Baja California Su...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_01.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en regiones de Baja California, y muy fuertes en Sonora y el norte de Baja California Su... — Reporte Matutino del 01 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_01.pdf]]></description>
-      <pubDate>Sun, 01 Nov 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_01</guid>
       <category>Comunicado</category>
     </item>
   </channel>
