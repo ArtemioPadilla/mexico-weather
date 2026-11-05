@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 05 Nov 2026 16:32:43 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 22:42:11 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Tamaulipas (norte).</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Viento de 10 a 20 km/h con rachas de 30 a 50 km/h: Chihuahua, Durango, Coahuila, Nuevo León, Tamaulipas, San Luis Potosí y Oaxaca.]]></description>
+      <pubDate>Thu, 05 Nov 2026 16:42:04 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-05-ab7d</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 617 | 05 de Noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -29,23 +37,15 @@ Este día, una vaguada en niveles altos de la atmósfera sobre el occidente y su
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de noviembre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de noviembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de noviembre del 2026
-Emisión: 09:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 05 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-05-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Temperaturas máximas de 35 a 40 °C: zonas de Michoacán, Oaxaca, Chiapas y Tamaulipas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 10 a 20 km/h con rachas de 30 a 50 km/h: zonas de Chihuahua, Durango, Coahuila, Nuevo León, Tamaulipas y Oaxaca.]]></description>
-      <pubDate>Thu, 05 Nov 2026 10:32:33 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-05-ee5d</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 05 NOV 2026: Hoy se esperan lluvias fuertes en zonas de Guerrero, Oaxaca, Chiapas, Tamaulipas y Veracruz</title>
