@@ -5,15 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 06 Nov 2026 03:29:12 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 12:13:08 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Tamaulipas (norte).</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 619 | 06 de Noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, NUEVO LEÓN, SAN LUIS POTOSÍ, HIDALGO, PUEBLA, TAMAULIPAS Y VERACRUZ
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 619
+Ciudad de México a 06 de Noviembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+LLUVIAS MUY FUERTES EN ZONAS DE SONORA, CHIHUAHUA, NUEVO LEÓN, SAN LUIS POTOSÍ, HIDALGO, PUEBLA, TAMAULIPAS Y VERACRUZ
+
+Este día, el sistema frontal núm. 4 será reforzado por una masa de aire frío sobre el noreste de México, en interacción con un canal de baja presión sobre el oriente y sureste del territorio nacional, además de una vaguada en altura en el oriente sur y sureste del país, lo que originará lluvias puntuales muy fuertes en zonas de Nuevo León, Tamaulipas, San Luis Potosí, Hidalgo, Puebla y Veracruz; puntuales fuertes en zonas de Querétaro, Guerrero y Oaxaca y Chiapas; intervalos de chubascos en Coahuila, Michoacán, Guanajuato, Tlaxcala, Morelos, Estado de México y Ciudad de México; y lluvias aisladas en Jalisco y Colima. Asimismo, se prevé descenso de temperatura en el norte y noreste del país.…]]></description>
+      <pubDate>Fri, 06 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-06-619</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 06 de noviembre del 2026
+Emisión: 06:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Fri, 06 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-06-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Temperaturas mínimas de -5 a 0 °C durante la madrugada del viernes: zonas serranas de Chihuahua y Durango.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de 10 a 20 km/h con rachas de 30 a 50 km/h: Chihuahua, Durango, Coahuila, Nuevo León, Tamaulipas, San Luis Potosí y Oaxaca.]]></description>
-      <pubDate>Thu, 05 Nov 2026 21:29:02 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-05-ab7d</guid>
+      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C durante la madrugada del viernes: zonas serranas de Chihuahua y Durango.]]></description>
+      <pubDate>Fri, 06 Nov 2026 06:12:59 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-06-7570</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -23,40 +53,6 @@
       <pubDate>Thu, 05 Nov 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_05</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 618 | 05 de Noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS FUERTES EN ZONAS DE NUEVO LEÓN, ESTADO DE MÉXICO, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS Y VERACRUZ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 618
-Ciudad de México a 05 de Noviembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS FUERTES EN ZONAS DE NUEVO LEÓN, ESTADO DE MÉXICO, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS Y VERACRUZ; Y MUY FUERTES EN TAMAULIPAS
-
- 
-
-Esta noche y la madrugada del viernes, una vaguada en altura sobre el occidente y sur del territorio nacional aunada a un canal de baja presión en el interior del país y el ingreso de humedad del océano Pacífico, originarán lluvias puntuales fuertes en el Estado de México (centro y suroeste), Michoacán (sur), Guerrero (costa y sureste) y Oaxaca (suroeste); intervalos de chubascos en Jalisco, Colima, Hidalgo, Puebla, Tlaxcala, Ciudad de México y Morelos; las cuales podrán estar acompañadas con descargas eléctricas. A su vez, se prevén lluvias aisladas en Baja California Sur, Sonora, Sinaloa, Coahuila, Guanajuato y Querétaro. Por otro lado, el sistema frontal núm.…]]></description>
-      <pubDate>Thu, 05 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-05-618</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de noviembre del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 05 de noviembre del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Thu, 05 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-05-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 05 NOV 2026: Hoy se esperan lluvias fuertes en zonas de Guerrero, Oaxaca, Chiapas, Tamaulipas y Veracruz</title>
