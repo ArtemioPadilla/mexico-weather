@@ -5,43 +5,54 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 05 Nov 2026 22:42:11 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 03:29:12 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Tamaulipas (norte).</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 10 a 20 km/h con rachas de 30 a 50 km/h: Chihuahua, Durango, Coahuila, Nuevo León, Tamaulipas, San Luis Potosí y Oaxaca.]]></description>
-      <pubDate>Thu, 05 Nov 2026 16:42:04 -0600</pubDate>
+      <pubDate>Thu, 05 Nov 2026 21:29:02 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-11-05-ab7d</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 617 | 05 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 05 NOV 2026: Se prevén lluvias muy fuertes durante esta noche en el norte de Tamaulipas, y fuertes en zonas de Nuevo León, Veracruz...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_05.pdf</link>
+      <description><![CDATA[Se prevén lluvias muy fuertes durante esta noche en el norte de Tamaulipas, y fuertes en zonas de Nuevo León, Veracruz... — Reporte Vespertino del 05 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_05.pdf]]></description>
+      <pubDate>Thu, 05 Nov 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_05</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 618 | 05 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES FUERTES EN GUERRERO, OAXACA, CHIAPAS, TAMAULIPAS Y VERACRUZ
+      <description><![CDATA[LLUVIAS FUERTES EN ZONAS DE NUEVO LEÓN, ESTADO DE MÉXICO, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS Y VERACRUZ
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 617
+No. Aviso: 618
 Ciudad de México a 05 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
+ 
 
-LLUVIAS PUNTUALES FUERTES EN GUERRERO, OAXACA, CHIAPAS, TAMAULIPAS Y VERACRUZ
+LLUVIAS FUERTES EN ZONAS DE NUEVO LEÓN, ESTADO DE MÉXICO, MICHOACÁN, GUERRERO, OAXACA, CHIAPAS Y VERACRUZ; Y MUY FUERTES EN TAMAULIPAS
 
-Este día, una vaguada en niveles altos de la atmósfera sobre el occidente y sur del territorio nacional, en combinación con el ingreso de humedad de ambos litorales, originarán lluvias puntuales fuertes en Guerrero (sureste) y Oaxaca (suroeste); intervalos de chubascos en Jalisco, Colima, Michoacán, Estado de México y Morelos; además de lluvias aisladas en Baja California Sur, Guanajuato, Querétaro, Hidalgo, Tlaxcala y Ciudad de México. Por otra parte, el frente núm. 4 se extenderá sobre el noreste de México, en interacción con un canal de baja presión sobre el oriente y sureste del país, además de una vaguada en altura, ocasionarán lluvias puntuales fuertes en Tamaulipas (norte), Veracruz (sur) y Chiapas (sur); chubascos en Nuevo León, San Luis Potosí y Puebla; así como lluvias aisladas en Tabasco y la península de Yucatán.…]]></description>
+ 
+
+Esta noche y la madrugada del viernes, una vaguada en altura sobre el occidente y sur del territorio nacional aunada a un canal de baja presión en el interior del país y el ingreso de humedad del océano Pacífico, originarán lluvias puntuales fuertes en el Estado de México (centro y suroeste), Michoacán (sur), Guerrero (costa y sureste) y Oaxaca (suroeste); intervalos de chubascos en Jalisco, Colima, Hidalgo, Puebla, Tlaxcala, Ciudad de México y Morelos; las cuales podrán estar acompañadas con descargas eléctricas. A su vez, se prevén lluvias aisladas en Baja California Sur, Sonora, Sinaloa, Coahuila, Guanajuato y Querétaro. Por otro lado, el sistema frontal núm.…]]></description>
       <pubDate>Thu, 05 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-05-617</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-05-618</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de noviembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 05 de noviembre del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 05 de noviembre del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 05 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-05-12</guid>
@@ -77,14 +88,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[En las próximas horas el frente frío número 4 generará chubascos en Nuevo León, Tamaulipas y San Luis Potosí — Reporte Vespertino del 03 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_03.pdf]]></description>
       <pubDate>Tue, 03 Nov 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_03</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 03 NOV 2026: Hoy se esperan lluvias y chubascos en 21 estados de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_03.pdf</link>
-      <description><![CDATA[Hoy se esperan lluvias y chubascos en 21 estados de México — Reporte Matutino del 03 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_03.pdf]]></description>
-      <pubDate>Tue, 03 Nov 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_03</guid>
       <category>Comunicado</category>
     </item>
   </channel>
