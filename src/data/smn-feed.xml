@@ -5,9 +5,25 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 07 Nov 2026 13:16:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 18:06:06 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Coahuila, Nuevo León y Tamaulipas.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Coahuila, Nuevo León y Tamaulipas.]]></description>
+      <pubDate>Sat, 07 Nov 2026 12:05:57 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-07-337b</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Comunicado 07 NOV 2026: Para este sábado se pronostican lluvias intensas en zonas de Coahuila, Nuevo León y Tamaulipas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_11_07.pdf</link>
+      <description><![CDATA[Para este sábado se pronostican lluvias intensas en zonas de Coahuila, Nuevo León y Tamaulipas — Comunicado del 07 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_11_07.pdf]]></description>
+      <pubDate>Sat, 07 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_11_07</guid>
+      <category>Comunicado</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 621 | 07 de Noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -36,23 +52,15 @@ Este día, el frente frío núm. 4, reforzado, se extenderá sobre el norte, nor
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de noviembre del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de noviembre del 2026 | Emisión 12:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 07 de noviembre del 2026
-Emisión: 06:00
+Emisión: 12:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 07 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-07-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Coahuila, Nuevo León y Tamaulipas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Coahuila, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Sat, 07 Nov 2026 07:15:51 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-07-337b</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 06 NOV 2026: Se prevén para las próximas horas lluvias muy fuertes en Sonora, Chihuahua, Tamaulipas, San Luis Potosí, Hidalgo, Pue...</title>
@@ -84,14 +92,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Hoy se esperan lluvias fuertes en zonas de Guerrero, Oaxaca, Chiapas, Tamaulipas y Veracruz — Reporte Matutino del 05 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_05.pdf]]></description>
       <pubDate>Thu, 05 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_05</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 04 NOV 2026: Se pronostican lluvias fuertes en estados del sur y sureste de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_04.pdf</link>
-      <description><![CDATA[Se pronostican lluvias fuertes en estados del sur y sureste de México — Reporte Vespertino del 04 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_04.pdf]]></description>
-      <pubDate>Wed, 04 Nov 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_04</guid>
       <category>Comunicado</category>
     </item>
   </channel>
