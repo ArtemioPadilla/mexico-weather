@@ -5,16 +5,35 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 07 Nov 2026 00:08:49 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 06:11:50 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): en zonas de Sonora, Chihuahua, Tamaulipas, San Luis Potosí, Hidalgo, Puebla y Veracruz</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de noviembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 07 de noviembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sat, 07 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-07-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Temperaturas mínimas de -5 a 0 °C: zonas serranas de Baja California, Chihuahua y Durango.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de componente norte de 20 a 30 km/h con rachas de 40 a 60 km/h: istmo y golfo de Tehuantepec (Oaxaca y Chiapas).]]></description>
-      <pubDate>Fri, 06 Nov 2026 18:08:40 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-06-30bd</guid>
+      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C: zonas serranas de Baja California, Chihuahua y Durango.]]></description>
+      <pubDate>Sat, 07 Nov 2026 00:11:41 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-07-5f0a</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 06 NOV 2026: Se prevén para las próximas horas lluvias muy fuertes en Sonora, Chihuahua, Tamaulipas, San Luis Potosí, Hidalgo, Pue...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_06.pdf</link>
+      <description><![CDATA[Se prevén para las próximas horas lluvias muy fuertes en Sonora, Chihuahua, Tamaulipas, San Luis Potosí, Hidalgo, Pue... — Reporte Vespertino del 06 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_06.pdf]]></description>
+      <pubDate>Fri, 06 Nov 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_06</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 620 | 06 de Noviembre del 2026 | Emisión 18:00h</title>
@@ -35,17 +54,6 @@ Esta noche y la madrugada del sábado, el sistema frontal núm. 4 será reforzad
       <pubDate>Fri, 06 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-pronostico-general-2026-11-06-620</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 06 de noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 06 de noviembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Fri, 06 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-06-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 06 NOV 2026: Se esperan lluvias muy fuertes en zonas de Sonora, Chihuahua, Nuevo León, San Luis Potosí, Hidalgo, Puebla, Tamaulipas...</title>
@@ -77,14 +85,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias fuertes en estados del sur y sureste de México — Reporte Vespertino del 04 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_04.pdf]]></description>
       <pubDate>Wed, 04 Nov 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_04</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 04 NOV 2026: Hoy se esperan lluvias fuertes en zonas de Michoacán, Guerrero y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_04.pdf</link>
-      <description><![CDATA[Hoy se esperan lluvias fuertes en zonas de Michoacán, Guerrero y Oaxaca — Reporte Matutino del 04 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_04.pdf]]></description>
-      <pubDate>Wed, 04 Nov 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_04</guid>
       <category>Comunicado</category>
     </item>
   </channel>
