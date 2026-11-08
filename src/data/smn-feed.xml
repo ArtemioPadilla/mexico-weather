@@ -5,14 +5,14 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 07 Nov 2026 21:58:51 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 01:30:01 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Coahuila, Nuevo León y Tamaulipas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Coahuila, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Sat, 07 Nov 2026 15:58:42 -0600</pubDate>
+      <pubDate>Sat, 07 Nov 2026 19:29:46 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-11-07-9d7e</guid>
       <category>Alerta</category>
     </item>
@@ -25,38 +25,34 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 621 | 07 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 622 | 07 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN COAHUILA, NUEVO LEÓN Y TAMAULIPAS
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE COAHUILA, NUEVO LEÓN Y TAMAULIPAS
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 621
+No. Aviso: 622
 Ciudad de México a 07 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-LLUVIAS PUNTUALES INTENSAS EN COAHUILA, NUEVO LEÓN Y TAMAULIPAS
+LLUVIAS PUNTUALES INTENSAS EN ZONAS DE COAHUILA, NUEVO LEÓN Y TAMAULIPAS
 
  
 
-Este día, el frente frío núm. 4, reforzado, se extenderá sobre el norte, noreste y oriente de la República Mexicana, en interacción con un canal de baja presión en el sureste del país, vaguadas en altura y la corriente en chorro subtropical, generará lluvias puntuales intensas en Coahuila (noreste), Nuevo León (norte) y Tamaulipas (noroeste); muy fuertes en Chihuahua (centro y noreste) y Chiapas (este); así como chubascos y lluvias fuertes en estados del norte, centro, oriente y sureste del territorio nacional. La masa de aire frío asociada al frente, mantendrá el refrescamiento de las temperaturas en el norte y noreste de México. Por otra parte, el ingreso de humedad del océano Pacífico, generará lluvias puntuales fuertes en Guerrero (costa y este), además de lluvias y chubascos en el occidente y sur del país, así como en la península de Yucatán.
-
- 
-
-…]]></description>
+Para esta noche y madrugada del domingo, el sistema frontal núm. 4, sobre el noreste de México, interaccionará con un canal de baja presión, generando lluvias puntuales intensas en Coahuila (noreste), Nuevo León (norte) y Tamaulipas (noroeste), así como lluvias fuertes en San Luis Potosí (este) y Veracruz (norte). La masa de aire frío asociada, mantendrá el refrescamiento de las temperaturas en el norte y noreste del territorio nacional. Por otra parte, una circulación ciclónica y una vaguada en niveles medios y altos de la atmósfera sobre el noroeste del país, en combinación con la corriente en chorro subtropical, ocasionarán lluvias muy fuertes en Sonora (este) y Chihuahua (centro y noreste), lluvias fuertes en Sinaloa (norte) e intervalos de chubascos en Baja California Sur.…]]></description>
       <pubDate>Sat, 07 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-07-621</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-07-622</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de noviembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 07 de noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 07 de noviembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 07 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-07-12</guid>
