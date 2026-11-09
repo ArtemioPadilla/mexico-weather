@@ -5,15 +5,15 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 08 Nov 2026 20:34:58 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 01:01:06 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias puntuales intensas (75 a 150 mm): en zonas de Coahuila, Nuevo León y Tamaulipas.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Coahuila, Nuevo León, Tamaulipas, Chiapas y Tabasco.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias puntuales intensas (75 a 150 mm): en zonas de Coahuila, Nuevo León y Tamaulipas.]]></description>
-      <pubDate>Sun, 08 Nov 2026 14:34:48 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-08-02e6</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Coahuila, Nuevo León, Tamaulipas, Chiapas y Tabasco.]]></description>
+      <pubDate>Sun, 08 Nov 2026 19:00:29 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-08-f7ef</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -25,30 +25,32 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 623 | 08 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 624 | 08 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE COAHUILA, NUEVO LEÓN Y TAMAULIPAS
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE COAHUILA, NUEVO LEÓN, TAMAULIPAS, CHIAPAS Y TABASCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 623
+No. Aviso: 624
 Ciudad de México a 08 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-LLUVIAS PUNTUALES INTENSAS EN ZONAS DE COAHUILA, NUEVO LEÓN Y TAMAULIPAS
 
-Para hoy, el sistema frontal núm. 4 se estacionará sobre el golfo de México, e interaccionará con un canal de baja presión que se ubicará sobre el oriente del territorio nacional, lo que originará lluvias puntuales intensas en zonas de Coahuila, Nuevo León y Tamaulipas, así como chubascos en San Luis Potosí. La masa de aire frío asociada al frente, mantendrá el refrescamiento de las temperaturas en el norte y noreste del país. Por otro lado, una circulación ciclónica en niveles medios de la atmósfera y una vaguada en altura sobre el noroeste de México, así como la corriente en chorro subtropical, generarán lluvias puntuales fuertes en zonas de Chihuahua; e intervalos de chubascos en Baja California Sur, Sinaloa, Durango y Zacatecas, y lluvias aisladas en Sonora.…]]></description>
+LLUVIAS PUNTUALES INTENSAS EN ZONAS DE COAHUILA, NUEVO LEÓN, TAMAULIPAS, CHIAPAS Y TABASCO
+
+
+Para esta noche y madrugada del lunes, el sistema frontal núm. 4 con características de estacionario sobre el golfo de México, interaccionará con un canal de baja presión sobre el noreste y oriente del territorio nacional, situación que propiciará lluvias puntuales intensas en Coahuila (norte, noreste y este), Nuevo León (norte) y Tamaulipas (norte y noroeste), así como chubascos en San Luis Potosí. La masa de aire frío asociada, mantendrá el refrescamiento de las temperaturas en el norte y noreste de México.  Por otra parte, una circulación ciclónica en niveles medios de la atmósfera y una vaguada en altura sobre el noroeste de México y la corriente en chorro subtropical, ocasionarán lluvias puntuales fuertes en Chihuahua (centro y noreste); intervalos de chubascos en Sinaloa, Durango, Zacatecas y Baja California Sur, y lluvias aisladas en Sonora y Aguascalientes.…]]></description>
       <pubDate>Sun, 08 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-08-623</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-08-624</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de noviembre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 08 de noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 08 de noviembre del 2026
-Emisión: 12:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 08 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-08-12</guid>
