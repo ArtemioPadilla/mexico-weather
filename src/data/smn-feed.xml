@@ -5,27 +5,58 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 11 Nov 2026 06:42:31 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 11 Nov 2026 22:46:41 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de noviembre del 2026 | Emisión 00:00h</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): zonas de Nuevo León, Tamaulipas, San Luis Potosí, Hidalgo, Puebla, Veracruz, Chiapas y Quintana Roo.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Viento de componente norte con rachas de 40 a 60 km/h en istmo y golfo de Tehuantepec (Oaxaca y Chiapas).]]></description>
+      <pubDate>Wed, 11 Nov 2026 16:46:33 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-11-cf39</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 629 | 11 de Noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN TAMAULIPAS, SAN LUIS POTOSÍ, HIDALGO, PUEBLA, VERACRUZ Y CHIAPAS
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 629
+Ciudad de México a 11 de Noviembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+LLUVIAS PUNTUALES MUY FUERTES EN TAMAULIPAS, SAN LUIS POTOSÍ, HIDALGO, PUEBLA, VERACRUZ Y CHIAPAS
+
+Este día, un nuevo frente frío se aproximará al noreste del país, en interacción con una vaguada en altura sobre norte de México y la corriente en chorro subtropical, favorecerán lluvias fuertes con puntuales muy fuertes en entidades del noreste y oriente del territorio mexicano. Se prevé que en horas de la noche la masa de aire frío asociada al frente origine viento de componente norte en el litoral de Tamaulipas. Por otra parte, un canal de baja presión sobre el sureste de México, y la inestabilidad atmosférica generarán chubascos y lluvias puntuales fuertes en dicha región, incluida la península de Yucatán. Un segundo canal de baja presión y la entrada de humedad de ambos litorales, ocasionarán lluvias e intervalos de chubascos en el norte, centro, occidente y sur de México.
+
+
+…]]></description>
+      <pubDate>Wed, 11 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-11-629</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 11 de noviembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 11 de noviembre del 2026
-Emisión: 00:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 11 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-11-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Temperaturas de -5 a 0 °C: zonas serranas de Chihuahua y Durango.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas de -5 a 0 °C: zonas serranas de Chihuahua y Durango.]]></description>
-      <pubDate>Wed, 11 Nov 2026 00:42:21 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-11-e8b7</guid>
-      <category>Alerta</category>
+      <title>📋 SMN Reporte Matutino 11 NOV 2026: Se pronostican lluvias puntuales muy fuertes en zonas de Tamaulipas, San Luis Potosí, Hidalgo, Puebla, Veracruz y Chiap...</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_11.pdf</link>
+      <description><![CDATA[Se pronostican lluvias puntuales muy fuertes en zonas de Tamaulipas, San Luis Potosí, Hidalgo, Puebla, Veracruz y Chiap... — Reporte Matutino del 11 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_11.pdf]]></description>
+      <pubDate>Wed, 11 Nov 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_11</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Vespertino 10 NOV 2026: Para esta noche se prevén lluvias muy fuertes en Quintana Roo</title>
@@ -34,30 +65,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Tue, 10 Nov 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_10</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 628 | 10 de Noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN QUINTANA ROO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 628
-Ciudad de México a 10 de Noviembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-LLUVIAS PUNTUALES MUY FUERTES EN QUINTANA ROO 
-
- 
-
-Para el resto de este día y la madrugada del miércoles, una vaguada de niveles medios de la atmósfera en el norte del país y un canal de baja presión sobre el occidente del golfo de México, favorecerán lluvias puntuales fuertes en Tamaulipas (norte y sur), Veracruz (norte, centro y sur) y Puebla (norte y sureste), así como chubascos en Nuevo León y San Luis Potosí. Por otro lado, una vaguada de niveles altos al oriente de la península de Yucatán y canales de baja presión sobre el sureste de México mantendrán condiciones para lluvias puntuales muy fuertes en Quintana Roo (centro y sur), y lluvias fuertes en Chiapas (sur), Oaxaca (norte y este), Campeche (sureste) y Yucatán (este). Otro canal de baja presión propiciará lluvias e intervalos de chubascos sobre el norte, centro occidente y sur de la República Mexicana.
- 
-
-…]]></description>
-      <pubDate>Tue, 10 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-10-628</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 10 NOV 2026: Este martes se pronostican lluvias puntuales fuertes en San Luis Potosí, Tamaulipas, Veracruz, Chiapas y Quintana Roo</title>
@@ -81,14 +88,6 @@ Para el resto de este día y la madrugada del miércoles, una vaguada de niveles
       <description><![CDATA[Se pronostican lluvias muy fuertes en regiones de Tamaulipas — Reporte Matutino del 09 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_09.pdf]]></description>
       <pubDate>Mon, 09 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_09</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 08 NOV 2026: Se pronostican lluvias intensas en zonas de Coahuila, Nuevo León, Tamaulipas, Chiapas y Tabasco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_11_08.pdf</link>
-      <description><![CDATA[Se pronostican lluvias intensas en zonas de Coahuila, Nuevo León, Tamaulipas, Chiapas y Tabasco — Comunicado del 08 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_11_08.pdf]]></description>
-      <pubDate>Sun, 08 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_11_08</guid>
       <category>Comunicado</category>
     </item>
   </channel>
