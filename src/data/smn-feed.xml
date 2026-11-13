@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 13 Nov 2026 17:51:19 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 23:40:27 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Posible caída de aguanieve: Sierras de Baja California.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Posible caída de aguanieve: Sierras de Baja California.]]></description>
+      <pubDate>Fri, 13 Nov 2026 17:40:19 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-13-4624</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 633 | 13 de Noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -30,23 +38,15 @@ Este día, el frente frío núm. 5 se desplazará sobre el litoral del golfo d
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de noviembre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 13 de noviembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 13 de noviembre del 2026
-Emisión: 09:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Fri, 13 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-13-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Posible caída de aguanieve: Sierras de Baja California.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Posible caída de aguanieve: Sierras de Baja California.]]></description>
-      <pubDate>Fri, 13 Nov 2026 11:51:10 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-13-4624</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 13 NOV 2026: Se pronostican lluvias puntuales muy fuertes en zonas de Sonora, Chihuahua, Coahuila, Puebla, Veracruz, Oaxaca, Chiapas ...</title>
