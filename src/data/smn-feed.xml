@@ -5,26 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 14 Nov 2026 06:41:09 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 14:16:15 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de noviembre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 635 | 14 de Noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE BAJA CALIFORNIA, CAMPECHE, YUCATÁN Y QUINTANA ROO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 635
+Ciudad de México a 14 de Noviembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE BAJA CALIFORNIA, CAMPECHE, YUCATÁN Y QUINTANA ROO
+
+Para hoy, el frente núm. 5 que se desplazará sobre el sur y oriente del golfo de México hacia el Mar Caribe, ocasionará lluvias puntuales fuertes en Campeche, Yucatán y Quintana Roo; y chubascos en Coahuila, Nuevo León, Puebla, Tamaulipas, Veracruz y Tabasco. Simultáneamente, su masa de aire frío, que cubre el golfo de México modificará sus características térmicas, favoreciendo un ascenso gradual de las temperaturas vespertinas. El ingreso de aire húmedo proveniente del océano Pacífico originará intervalos de chubascos en Oaxaca y Chiapas; y lluvias aisladas en Michoacán, Guerrero, Estado de México y Tlaxcala. Finalmente, el nuevo frente frío núm.…]]></description>
+      <pubDate>Sat, 14 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-14-635</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 14 de noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 14 de noviembre del 2026
-Emisión: 00:00
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 14 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-14-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Temperaturas de -5 a 0 °C: zonas serranas de Baja California, Chihuahua y Durango.</title>
+      <title>⚠️ Alerta SMN: Viento (rachas de 40 a 60 km/h): en el golfo de California (norte) y zonas de BC, Son, Chih y Dgo.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas de -5 a 0 °C: zonas serranas de Baja California, Chihuahua y Durango.]]></description>
-      <pubDate>Sat, 14 Nov 2026 00:41:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-14-43dd</guid>
+      <description><![CDATA[Posible caída de aguanieve: en zonas serranas de BC.]]></description>
+      <pubDate>Sat, 14 Nov 2026 08:16:05 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-14-b027</guid>
       <category>Alerta</category>
     </item>
     <item>
@@ -34,26 +53,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <pubDate>Fri, 13 Nov 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_13</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 634 | 13 de Noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 634
-Ciudad de México a 13 de Noviembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
-Durante esta noche y madrugada del sábado, el frente frío núm. 5 se extenderá sobre el litoral del golfo de México y la península de Yucatán, interaccionará con un canal de baja presión sobre el oriente y sureste del territorio nacional, propiciando lluvias muy fuertes en Puebla (este y sureste), Veracruz (centro y sur), Oaxaca (norte y sur), Chiapas (norte) y Tabasco, así como lluvias fuertes en Campeche (costa y suroeste), Yucatán (norte y oeste) y Quintana Roo (norte). La masa de aire frío asociada al frente generará viento de componente norte con rachas de 50 a 70 km/h en la costa de Veracruz, istmo y golfo de Tehuantepec (Oaxaca y Chiapas), además de un descenso de la temperatura en estados del norte, noreste, oriente y centro de México.…]]></description>
-      <pubDate>Fri, 13 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-13-634</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 13 NOV 2026: Se pronostican lluvias puntuales muy fuertes en zonas de Sonora, Chihuahua, Coahuila, Puebla, Veracruz, Oaxaca, Chiapas ...</title>
