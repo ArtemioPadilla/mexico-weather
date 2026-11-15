@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 15 Nov 2026 17:50:04 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2026 22:57:10 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: Golfo de California, Baja California, Sonora, Chihuahua y Durango.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas máximas de 35 a 40 °C: Michoacán, Guerrero, Oaxaca y Chiapas.]]></description>
+      <pubDate>Sun, 15 Nov 2026 16:57:02 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-15-f26f</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 637 | 15 de Noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -39,23 +47,15 @@ Para mayor información consultar:
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de noviembre del 2026 | Emisión 09:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de noviembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 15 de noviembre del 2026
-Emisión: 09:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 15 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-15-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Temperaturas máximas de 35 a 40 °C: zonas de Michoacán, Guerrero, Oaxaca y Chiapas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas máximas de 35 a 40 °C: zonas de Michoacán, Guerrero, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 15 Nov 2026 11:49:56 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-15-5fa5</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 15 NOV 2026: Se pronostican lluvias y chubascos en 23 estados de México</title>
