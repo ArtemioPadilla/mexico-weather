@@ -5,53 +5,48 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 15 Nov 2026 22:57:10 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 02:50:20 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: Golfo de California, Baja California, Sonora, Chihuahua y Durango.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Temperaturas máximas de 35 a 40 °C: Michoacán, Guerrero, Oaxaca y Chiapas.]]></description>
-      <pubDate>Sun, 15 Nov 2026 16:57:02 -0600</pubDate>
+      <pubDate>Sun, 15 Nov 2026 20:50:12 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-11-15-f26f</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 637 | 15 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 638 | 15 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[INTERVALOS DE CHUBASCOS SOBRE EL NOROESTE, NORTE, ORIENTE Y SURESTE DEL TERRITORIO NACIONAL
+      <description><![CDATA[LLUVIAS CON CHUBASCOS EN ZONAS DEL NOROESTE, NORESTE Y SURESTE DE MÉXICO, ADEMÁS DE LA PENÍNSULA DE YUCATÁN
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 637
+No. Aviso: 638
 Ciudad de México a 15 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-INTERVALOS DE CHUBASCOS SOBRE EL NOROESTE, NORTE, ORIENTE Y SURESTE DEL TERRITORIO NACIONAL
+LLUVIAS CON CHUBASCOS EN ZONAS DEL NOROESTE, NORESTE Y SURESTE DE MÉXICO, ADEMÁS DE LA PENÍNSULA DE YUCATÁN 
 
- 
-
-Este día, el frente núm. 6 se extenderá con características de estacionario sobre el noroeste de la República Mexicana, originando chubascos en Baja California y Baja California Sur, así como viento con rachas de 30 a 50 km/h en el noroeste y norte del país. Por otra parte, canales de baja presión en el interior de México, en interacción con la corriente en chorro subtropical y el ingreso de humedad proveniente del océano Pacífico, golfo de México y mar Caribe, ocasionarán lluvias y chubascos en el noreste, occidente, centro, sur y sureste del país, incluida la península de Yucatán. Finalmente, el frente núm. 5 dejará de afectar al territorio nacional.
+Para esta noche y madrugada del lunes, el frente frío núm. 6 se extenderá sobre el noroeste de México, ocasionando chubascos en Baja California y Baja California Sur, así como lluvias aisladas en Sonora, y viento de 10 a 20 km/h con rachas de 30 a 50 km/h en el norte y noroeste del país. Canales de baja presión en el interior del territorio mexicano, en interacción con la corriente en chorro subtropical y el ingreso de humedad proveniente del océano Pacífico, golfo de México y mar Caribe, ocasionarán lluvias con chubascos en Coahuila, Nuevo León, Tamaulipas, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo, así como lluvias aisladas en Jalisco, Colima, Michoacán, San Luis Potosí, Guanajuato, Querétaro, Hidalgo, Puebla, Tlaxcala y Guerrero. El sistema frontal núm. 5 ha dejado de afectar al territorio nacional.
 
 
 
-El Servicio Meteorológico Nacional vigila los efectos del frente frío núm. 6, sobre el noroeste del territorio nacional.
-
-Para mayor información consultar:
 …]]></description>
       <pubDate>Sun, 15 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-15-637</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-15-638</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de noviembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 15 de noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 15 de noviembre del 2026
-Emisión: 15:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 15 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-15-12</guid>
