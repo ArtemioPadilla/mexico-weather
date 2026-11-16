@@ -5,52 +5,56 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 16 Nov 2026 11:41:38 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 22:17:49 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de noviembre del 2026 | Emisión 03:00h</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Pue, Ver y Oax. Evento de “Norte” de 40 a 50 km/h con rachas de 60 a 80 km/h: costas de Tamps y Ver.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): Pue, Ver y Oax. Evento de “Norte” de 40 a 50 km/h con rachas de 60 a 80 km/h: costas de Tamps y Ver.]]></description>
+      <pubDate>Mon, 16 Nov 2026 16:17:41 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-16-abb0</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 639 | 16 de Noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN PUEBLA, OAXACA Y VERACRUZ Y EVENTO DE NORTE CON RACHAS MUY FUERTES EN COSTAS DE TAMAULIPAS Y VERACRUZ
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 639
+Ciudad de México a 16 de Noviembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS PUNTUALES INTENSAS EN PUEBLA, OAXACA Y VERACRUZ Y EVENTO DE NORTE CON RACHAS MUY FUERTES EN COSTAS DE TAMAULIPAS Y VERACRUZ
+
+Para hoy, el frente frío núm. 6 se extenderá sobre el norte y noreste de México, en interacción con un canal de baja presión sobre el occidente del golfo de México, ocasionarán lluvias puntuales intensas en zonas de Puebla, Veracruz y Oaxaca, lluvias puntuales muy fuertes en zonas de San Luis Potosí, Hidalgo y Chiapas, lluvias puntuales fuertes en zonas de Querétaro y Tabasco, e intervalos de chubascos en Nuevo León y Tamaulipas. La masa de aire polar que impulsa al frente frío, originará marcado descenso de temperaturas en el norte, noreste y oriente del país, así como evento de “Norte” fuerte a muy fuerte con rachas de viento de 60 a 80 km/h en las costas de Tamaulipas y Veracruz.…]]></description>
+      <pubDate>Mon, 16 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-16-639</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 16 de noviembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 16 de noviembre del 2026
-Emisión: 03:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Mon, 16 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-16-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Temperaturas mínimas de -5 a 0 °C: Zonas serranas de Baja California, Chihuahua, Durango y Zacatecas.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C: Zonas serranas de Baja California, Chihuahua, Durango y Zacatecas.]]></description>
-      <pubDate>Mon, 16 Nov 2026 05:41:29 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-16-587f</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 638 | 15 de Noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS CON CHUBASCOS EN ZONAS DEL NOROESTE, NORESTE Y SURESTE DE MÉXICO, ADEMÁS DE LA PENÍNSULA DE YUCATÁN
-
----
-Pronóstico Meteorológico General
-No. Aviso: 638
-Ciudad de México a 15 de Noviembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-LLUVIAS CON CHUBASCOS EN ZONAS DEL NOROESTE, NORESTE Y SURESTE DE MÉXICO, ADEMÁS DE LA PENÍNSULA DE YUCATÁN 
-
-Para esta noche y madrugada del lunes, el frente frío núm. 6 se extenderá sobre el noroeste de México, ocasionando chubascos en Baja California y Baja California Sur, así como lluvias aisladas en Sonora, y viento de 10 a 20 km/h con rachas de 30 a 50 km/h en el norte y noroeste del país. Canales de baja presión en el interior del territorio mexicano, en interacción con la corriente en chorro subtropical y el ingreso de humedad proveniente del océano Pacífico, golfo de México y mar Caribe, ocasionarán lluvias con chubascos en Coahuila, Nuevo León, Tamaulipas, Veracruz, Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo, así como lluvias aisladas en Jalisco, Colima, Michoacán, San Luis Potosí, Guanajuato, Querétaro, Hidalgo, Puebla, Tlaxcala y Guerrero. El sistema frontal núm. 5 ha dejado de afectar al territorio nacional.
-
-
-
-…]]></description>
-      <pubDate>Sun, 15 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-15-638</guid>
-      <category>Pronóstico General</category>
+      <title>📋 SMN Reporte Matutino 16 NOV 2026: Se pronostican lluvias intensas en zonas de Puebla, Oaxaca y Veracruz</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_16.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla, Oaxaca y Veracruz — Reporte Matutino del 16 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_16.pdf]]></description>
+      <pubDate>Mon, 16 Nov 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_16</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 15 NOV 2026: Se pronostican lluvias y chubascos en 23 estados de México</title>
@@ -82,14 +86,6 @@ Para esta noche y madrugada del lunes, el frente frío núm. 6 se extenderá sob
       <description><![CDATA[Se pronostican lluvias puntuales muy fuertes en zonas de Sonora, Chihuahua, Coahuila, Puebla, Veracruz, Oaxaca, Chiapas ... — Reporte Matutino del 13 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_13.pdf]]></description>
       <pubDate>Fri, 13 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_13</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 12 NOV 2026: La noche de hoy, el frente frío 5 generará lluvias intensas en regiones de Puebla, Veracruz y Oaxaca</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_12.pdf</link>
-      <description><![CDATA[La noche de hoy, el frente frío 5 generará lluvias intensas en regiones de Puebla, Veracruz y Oaxaca — Reporte Vespertino del 12 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_12.pdf]]></description>
-      <pubDate>Thu, 12 Nov 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_12</guid>
       <category>Comunicado</category>
     </item>
   </channel>
