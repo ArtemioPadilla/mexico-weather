@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 17 Nov 2026 14:37:28 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 22:58:33 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm) en Veracruz (sur), Oaxaca (norte y este), Chiapas (noroeste) y Tabasco (oeste).</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm) en Veracruz (sur), Oaxaca (norte y este), Chiapas (noroeste) y Tabasco (oeste).]]></description>
+      <pubDate>Tue, 17 Nov 2026 16:58:26 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-17-cc91</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 641 | 17 de Noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -35,23 +43,15 @@ Este día, el frente núm. 6 con características de estacionario se extenderá 
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de noviembre del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de noviembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 17 de noviembre del 2026
-Emisión: 06:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 17 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-17-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm) en Veracruz (sur), Oaxaca (norte y este), Chiapas (noroeste) y Tabasco (oeste).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm) en Veracruz (sur), Oaxaca (norte y este), Chiapas (noroeste) y Tabasco (oeste).]]></description>
-      <pubDate>Tue, 17 Nov 2026 08:37:18 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-17-cc91</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 17 NOV 2026: Se pronostican lluvias puntuales muy fuertes en regiones de Veracruz, Oaxaca, Chiapas y Tabasco</title>
