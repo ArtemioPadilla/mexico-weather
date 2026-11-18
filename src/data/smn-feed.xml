@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 18 Nov 2026 14:14:10 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2026 22:07:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en: zonas de Chiapas y Tabasco.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en: zonas de Chiapas y Tabasco.]]></description>
+      <pubDate>Wed, 18 Nov 2026 16:07:21 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-18-4190</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 643 | 18 de Noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -28,23 +36,15 @@ Hoy, el frente núm. 6 prevalecerá con características de estacionario sobre e
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de noviembre del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de noviembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de noviembre del 2026
-Emisión: 06:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 18 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-18-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Evento de “Norte” de 50 a 60 km/h con rachas de 70 a 90 km/h: istmo y golfo de Tehuantepec (Oaxaca y Chiapas).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Evento de “Norte” de 50 a 60 km/h con rachas de 70 a 90 km/h: istmo y golfo de Tehuantepec (Oaxaca y Chiapas).]]></description>
-      <pubDate>Wed, 18 Nov 2026 08:14:03 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-18-3a55</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 18 NOV 2026: Hoy, se mantiene el pronóstico de lluvias puntuales muy fuertes en regiones de Veracruz, Oaxaca, Chiapas y Tabasco</title>
