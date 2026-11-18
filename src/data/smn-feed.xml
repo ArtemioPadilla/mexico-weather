@@ -5,49 +5,53 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 17 Nov 2026 22:58:33 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2026 04:31:24 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm) en Veracruz (sur), Oaxaca (norte y este), Chiapas (noroeste) y Tabasco (oeste).</title>
+      <title>⚠️ Alerta SMN: Lluvias puntuales torrenciales (150 a 250 mm): Ver, Oax, Chis y Tab.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias intensas con puntuales torrenciales (150 a 250 mm) en Veracruz (sur), Oaxaca (norte y este), Chiapas (noroeste) y Tabasco (oeste).]]></description>
-      <pubDate>Tue, 17 Nov 2026 16:58:26 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-17-cc91</guid>
+      <description><![CDATA[Lluvias puntuales torrenciales (150 a 250 mm): Ver, Oax, Chis y Tab.]]></description>
+      <pubDate>Tue, 17 Nov 2026 22:31:15 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-17-46a5</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 641 | 17 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 17 NOV 2026: Para esta noche se prevén lluvias torrenciales en regiones de Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_17.pdf</link>
+      <description><![CDATA[Para esta noche se prevén lluvias torrenciales en regiones de Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Vespertino del 17 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_17.pdf]]></description>
+      <pubDate>Tue, 17 Nov 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_17</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 642 | 17 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS MUY FUERTES SOBRE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+      <description><![CDATA[EN LAS PRÓXIMAS HORAS SE PRONOSTICAN LLUVIAS PUNTUALES TORRENCIALES EN VERACRUZ, OAXACA, CHIAPAS Y TABASCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 641
+No. Aviso: 642
 Ciudad de México a 17 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+
+EN LAS PRÓXIMAS HORAS SE PRONOSTICAN LLUVIAS PUNTUALES TORRENCIALES EN VERACRUZ, OAXACA, CHIAPAS Y TABASCO
 
  
 
-
-LLUVIAS MUY FUERTES SOBRE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
-
-
-
-
-Este día, el frente núm. 6 con características de estacionario se extenderá sobre el golfo de México y el sureste del territorio nacional; en interacción con una vaguada en niveles altos de la atmósfera, originará lluvias puntuales muy fuertes en zonas de Veracruz, Oaxaca, Chiapas y Tabasco, así como lluvias puntuales fuertes en zonas de Puebla y la península de Yucatán. La masa de aire polar que lo impulsa, propiciará descenso de temperaturas en el norte, noreste, oriente y centro del país; además de evento de “Norte” fuerte a muy fuerte con rachas de viento de 70 a 90 km/h en Veracruz (centro y sur) e istmo y golfo de Tehuantepec y rachas de viento de 50 a 70 km/h en la costa de Tamaulipas. Así mismo, el nuevo frente frío núm.…]]></description>
+Durante esta noche y madrugada del miércoles, el frente núm. 6 permanecerá extendido con características de estacionario sobre el golfo de México, oriente y sureste del territorio nacional, en interacción con una vaguada en niveles altos de la atmósfera, originarán lluvias puntuales torrenciales en Veracruz (sur), Oaxaca (norte y este), Chiapas (noroeste) y Tabasco (oeste); lluvias muy fuertes en Quintana Roo (norte, centro y sur); lluvias fuertes en Puebla (sureste), Campeche (suroeste) y Yucatán (este y norte); así como lluvias y chubascos en Coahuila, Nuevo León y Tamaulipas.…]]></description>
       <pubDate>Tue, 17 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-17-641</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-17-642</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de noviembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 17 de noviembre del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 17 de noviembre del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Tue, 17 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-17-12</guid>
@@ -83,14 +87,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias fuertes en regiones de Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo — Reporte Matutino del 14 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_14.pdf]]></description>
       <pubDate>Sat, 14 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_14</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 13 NOV 2026: Para esta noche se prevén lluvias muy fuertes en regiones de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_13.pdf</link>
-      <description><![CDATA[Para esta noche se prevén lluvias muy fuertes en regiones de Puebla, Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Vespertino del 13 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_13.pdf]]></description>
-      <pubDate>Fri, 13 Nov 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_13</guid>
       <category>Comunicado</category>
     </item>
   </channel>
