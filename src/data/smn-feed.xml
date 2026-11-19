@@ -5,42 +5,50 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Wed, 18 Nov 2026 22:07:30 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 03:39:01 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en: zonas de Chiapas y Tabasco.</title>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): en zonas de Chiapas y Tabasco. Evento de “Norte” con rachas de 60 a 80 km/h: istmo y golfo de Tehuantepec.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en: zonas de Chiapas y Tabasco.]]></description>
-      <pubDate>Wed, 18 Nov 2026 16:07:21 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-18-4190</guid>
+      <description><![CDATA[Temperaturas mínimas de -5 a 0 °C: zonas serranas de Baja California, Chihuahua y Durango.]]></description>
+      <pubDate>Wed, 18 Nov 2026 21:38:51 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-18-5f0a</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 643 | 18 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 18 NOV 2026: El frente número 6 originará lluvias intensas durante esta noche en regiones de Chiapas y Tabasco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_18.pdf</link>
+      <description><![CDATA[El frente número 6 originará lluvias intensas durante esta noche en regiones de Chiapas y Tabasco — Reporte Vespertino del 18 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_18.pdf]]></description>
+      <pubDate>Wed, 18 Nov 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_18</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 644 | 18 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS PUNTUALES MUY FUERTES EN VERACRUZ, OAXACA, CHIAPAS Y TABASCO Y EVENTO DE • FUERTE A MUY FUERTE EN VERACRUZ, ISTMO Y GOLFO DE TEHUANTEPEC
+      <description><![CDATA[EN LAS PRÓXIMAS HORAS SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN CHIAPAS Y TABASCO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 643
+No. Aviso: 644
 Ciudad de México a 18 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
-LLUVIAS PUNTUALES MUY FUERTES EN VERACRUZ, OAXACA, CHIAPAS Y TABASCO Y EVENTO DE “NORTE” FUERTE A MUY FUERTE EN VERACRUZ, ISTMO Y GOLFO DE TEHUANTEPEC
+EN LAS PRÓXIMAS HORAS SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN CHIAPAS Y TABASCO
 
-Hoy, el frente núm. 6 prevalecerá con características de estacionario sobre el golfo de México, en interacción con un canal de baja presión sobre el sureste mexicano y una vaguada en altura, generará lluvias puntuales muy fuertes en zonas de Veracruz, Oaxaca, Chiapas y Tabasco; lluvias fuertes en Campeche y Quintana Roo, así como chubascos en San Luis Potosí, Puebla y Yucatán. La masa de aire polar asociada al frente mantendrá el ambiente frío a fresco por la mañana, sobre el norte, noreste, oriente y centro del territorio nacional; asimismo, se mantendrá el evento de “Norte” con rachas de viento de 70 a 90 km/h en el istmo y golfo de Tehuantepec; rachas de 50 a 70 km/h en la costa de Veracruz (centro y sur); y rachas de 30 a 50 km/h en la costa de Tamaulipas. Por otra parte, el frente frío núm.…]]></description>
+Durante esta noche y la madrugada del jueves, el frente núm. 6 se extenderá como estacionario sobre el golfo de México, en interacción con un canal de baja presión sobre el sureste del territorio nacional y con una vaguada en altura al oriente de la península de Yucatán, generarán lluvias puntuales intensas en Chiapas (noroeste) y Tabasco (oeste y sur); muy fuertes en Veracruz (sur) y Oaxaca (este); fuertes en Campeche (suroeste) y Quintana Roo (sur); e intervalos de chubascos en Puebla y Yucatán.…]]></description>
       <pubDate>Wed, 18 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-18-643</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-18-644</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de noviembre del 2026 | Emisión 15:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 18 de noviembre del 2026 | Emisión 21:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 18 de noviembre del 2026
-Emisión: 15:00
+Emisión: 21:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Wed, 18 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-18-12</guid>
@@ -76,14 +84,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla, Oaxaca y Veracruz — Reporte Matutino del 16 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_16.pdf]]></description>
       <pubDate>Mon, 16 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_16</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 15 NOV 2026: Se pronostican lluvias y chubascos en 23 estados de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_15.pdf</link>
-      <description><![CDATA[Se pronostican lluvias y chubascos en 23 estados de México — Reporte Matutino del 15 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_15.pdf]]></description>
-      <pubDate>Sun, 15 Nov 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_15</guid>
       <category>Comunicado</category>
     </item>
   </channel>
