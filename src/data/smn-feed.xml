@@ -5,9 +5,17 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 19 Nov 2026 13:27:51 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 22:15:51 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
+    <item>
+      <title>⚠️ Alerta SMN: Viento de componente norte con rachas de 60 a 80 km/h: istmo y golfo de Tehuantepec (Oaxaca y Chiapas); y hasta de 60 km/h en la costa de Veracruz.</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Viento de componente norte con rachas de 60 a 80 km/h: istmo y golfo de Tehuantepec (Oaxaca y Chiapas); y hasta de 60 km/h en la costa de Veracruz.]]></description>
+      <pubDate>Thu, 19 Nov 2026 16:15:42 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-19-cb0b</guid>
+      <category>Alerta</category>
+    </item>
     <item>
       <title>🌩️ Pronóstico Meteorológico General — SMN | No. 645 | 19 de Noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
@@ -29,23 +37,15 @@ Este día, el frente núm. 6 se extenderá como estacionario en el suroeste del 
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 19 de noviembre del 2026 | Emisión 06:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 19 de noviembre del 2026 | Emisión 15:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 19 de noviembre del 2026
-Emisión: 06:00
+Emisión: 15:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Thu, 19 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-19-12</guid>
       <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>⚠️ Alerta SMN: Viento de componente norte de 40 a 50 km/h con rachas de 60 a 80 km/h: istmo y golfo de Tehuantepec (Oaxaca y Chiapas).</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de componente norte de 40 a 50 km/h con rachas de 60 a 80 km/h: istmo y golfo de Tehuantepec (Oaxaca y Chiapas).]]></description>
-      <pubDate>Thu, 19 Nov 2026 07:27:39 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-19-6484</guid>
-      <category>Alerta</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 19 NOV 2026: Se pronostican lluvias puntuales fuertes en regiones de Veracruz, Tabasco, Oaxaca y Chiapas</title>
