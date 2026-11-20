@@ -5,55 +5,61 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 20 Nov 2026 03:32:48 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 13:07:55 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Viento de componente norte con rachas de 60 a 80 km/h: istmo y golfo de Tehuantepec (Oaxaca y Chiapas); y hasta de 60 km/h en la costa de Veracruz.</title>
-      <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Viento de componente norte con rachas de 60 a 80 km/h: istmo y golfo de Tehuantepec (Oaxaca y Chiapas); y hasta de 60 km/h en la costa de Veracruz.]]></description>
-      <pubDate>Thu, 19 Nov 2026 21:32:41 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-19-cb0b</guid>
-      <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 646 | 19 de Noviembre del 2026 | Emisión 18:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 647 | 20 de Noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EN LAS PRÓXIMAS HORAS SE PRONOSTICAN LLUVIAS PUNTUALES FUERTES EN VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES FUERTES EN VERACRUZ Y GUERRERO, Y VIENTOS FUERTES EN EL ISTMO Y GOLFO DE TEHUANTEPEC
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 646
-Ciudad de México a 19 de Noviembre del 2026.
-Emisión: 18:00h
+No. Aviso: 647
+Ciudad de México a 20 de Noviembre del 2026.
+Emisión: 06:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-EN LAS PRÓXIMAS HORAS SE PRONOSTICAN LLUVIAS PUNTUALES FUERTES EN VERACRUZ, OAXACA, CHIAPAS Y TABASCO
+SE PRONOSTICAN LLUVIAS PUNTUALES FUERTES EN VERACRUZ Y GUERRERO, Y VIENTOS FUERTES EN EL ISTMO Y GOLFO DE TEHUANTEPEC
 
- 
-
-Durante esta noche y la madrugada del viernes, el frente núm. 6 se extenderá como estacionario sobre el oriente del golfo de México, en interacción con un canal de baja presión extendido sobre la península de Yucatán, generará lluvias fuertes en Veracruz (sur), Oaxaca (norte y este), Chiapas (norte y sur) y Tabasco (oeste); así como intervalos de chubascos en Campeche, Yucatán y Quintana Roo. La masa de aire polar asociada al frente, modificará gradualmente sus características térmicas, permitiendo un gradual ascenso de las temperaturas en el norte, noreste, centro y oriente del territorio nacional; sin embargo, se mantendrá el viento de componente norte con rachas de 60 a 80 km/h en el istmo y golfo de Tehuantepec (Oaxaca y Chiapas); con rachas de 40 a 60 km/h en Veracruz, y con rachas de 30 a 50 km/h en Tabasco.  Por otro lado, el nuevo frente frío núm.…]]></description>
-      <pubDate>Thu, 19 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-19-646</guid>
+Hoy, el frente núm. 6 se extenderá como estacionario sobre el oriente del golfo de México, mantendrá interacción con un canal de baja presión sobre la península de Yucatán y el sureste mexicano, por lo que se prevén lluvias puntuales fuertes en zonas de Veracruz e intervalos de chubascos en Oaxaca, Chiapas, Tabasco, Campeche, Yucatán y Quintana Roo; además se pronostica viento de componente norte con rachas de 50 a 70 km/h en el istmo y golfo de Tehuantepec (Oaxaca y Chiapas); y rachas de 30 a 50 km/h en Veracruz.  Por otra parte, el frente frío núm. 8 se desplazará sobre el noroeste de la República Mexicana, en interacción con una vaguada en niveles medios y altos de la atmósfera y con las corrientes en chorro polar y subtropical, generarán vientos fuertes en dicha región.…]]></description>
+      <pubDate>Fri, 20 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-20-647</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 19 de noviembre del 2026 | Emisión 21:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 20 de noviembre del 2026 | Emisión 06:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 19 de noviembre del 2026
-Emisión: 21:00
+Ciudad de México, 20 de noviembre del 2026
+Emisión: 06:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Thu, 19 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-19-12</guid>
+      <pubDate>Fri, 20 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-20-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>📋 SMN Reporte Matutino 19 NOV 2026: El frente número 6 originará lluvias fuertes esta noche en regiones de Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <title>⚠️ Alerta SMN: Rachas de 60 a 80 km/h: istmo y golfo de Tehuantepec</title>
+      <link>https://smn.conagua.gob.mx/es/</link>
+      <description><![CDATA[Temperaturas de -5 a 0 °C: zonas serranas de Baja California, Chihuahua y Durango]]></description>
+      <pubDate>Fri, 20 Nov 2026 07:07:46 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-20-2834</guid>
+      <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 19 NOV 2026: El frente número 6 originará lluvias fuertes esta noche en regiones de Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_19.pdf</link>
+      <description><![CDATA[El frente número 6 originará lluvias fuertes esta noche en regiones de Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Vespertino del 19 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_19.pdf]]></description>
+      <pubDate>Thu, 19 Nov 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_19</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 19 NOV 2026: Se pronostican lluvias puntuales fuertes en regiones de Veracruz, Tabasco, Oaxaca y Chiapas</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_19.pdf</link>
-      <description><![CDATA[El frente número 6 originará lluvias fuertes esta noche en regiones de Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Matutino del 19 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_19.pdf]]></description>
+      <description><![CDATA[Se pronostican lluvias puntuales fuertes en regiones de Veracruz, Tabasco, Oaxaca y Chiapas — Reporte Matutino del 19 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_19.pdf]]></description>
       <pubDate>Thu, 19 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_19</guid>
       <category>Comunicado</category>
