@@ -5,51 +5,45 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sat, 21 Nov 2026 19:27:37 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 00:25:37 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
       <title>⚠️ Alerta SMN: Temperaturas máximas de 35 a 40 °C: zonas de Sinaloa, Michoacán, Guerrero, Oaxaca y Chiapas.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
       <description><![CDATA[Viento de 30 a 40 km/h con rachas de 50 a 70 km/h: zonas de Chihuahua y Durango.]]></description>
-      <pubDate>Sat, 21 Nov 2026 13:27:26 -0600</pubDate>
+      <pubDate>Sat, 21 Nov 2026 18:25:28 -0600</pubDate>
       <guid isPermaLink="false">smn-alert-2026-11-21-7346</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 649 | 21 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 650 | 21 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LLUVIAS Y CHUBASCOS A LO LARGO DEL TERRITORIO NACIONAL
+      <description><![CDATA[EN PRÓXIMAS HORAS SE PRONOSRTICAN LLUVIAS Y CHUBASCOS EN EL TERRITORIO NACIONAL
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 649
+No. Aviso: 650
 Ciudad de México a 21 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
- 
 
-LLUVIAS Y CHUBASCOS A LO LARGO DEL TERRITORIO NACIONAL
+EN PRÓXIMAS HORAS SE PRONOSRTICAN LLUVIAS Y CHUBASCOS EN EL TERRITORIO NACIONAL
 
-Este día, el frente frío núm. 8 continuará desplazándose sobre el noroeste y norte de México, en interacción con una vaguada en niveles medios y altos de la atmósfera, una línea seca y las corrientes en chorro polar y subtropical, lo cual originará vientos fuertes, lluvias y chubascos en las regiones mencionadas. Por otra parte, canales de baja presión en el interior del territorio nacional y el ingreso de humedad proveniente del océano Pacífico y golfo de México, ocasionarán lluvias e intervalos de chubascos en el noreste, oriente, occidente, centro, sureste y sur de la República Mexicana. Finalmente, un canal de baja presión en el sureste del país, ocasionará lluvias y chubascos sobre Campeche, Yucatán y Quintana Roo.
+Para esta noche y madrugada del domingo, el frente frío núm. 8 se desplazará sobre el noroeste y norte de México, en interacción con una vaguada en niveles medios y altos de la atmósfera y la corriente en chorro subtropical, originarán intervalos de chubascos en Baja California Sur, Chihuahua, Sinaloa, Durango y Coahuila, y lluvias aisladas en Sonora, Zacatecas y Aguascalientes, además de rachas de viento de 50 a 70km/h en Chihuahua y Durango. Por otro lado, canales de baja presión en el interior del territorio nacional y el ingreso de humedad proveniente del océano Pacífico, mar Caribe y golfo de México, ocasionarán intervalos de chubascos en Nayarit, Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Chiapas, y lluvias aisladas en Nuevo León, Tamaulipas, San Luis Potosí, Guanajuato, Querétaro, Hidalgo, Estado de México, Ciudad de México, Puebla, Veracruz, Tabasco, Campeche, Yucatán y Quintana Roo.
 
-
-
-El Servicio Meteorológico Nacional vigila los efectos del frente frío núm. 8.
-
-Para mayor información consultar:
 …]]></description>
       <pubDate>Sat, 21 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-21-649</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-21-650</guid>
       <category>Pronóstico General</category>
     </item>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de noviembre del 2026 | Emisión 12:00h</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 21 de noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 21 de noviembre del 2026
-Emisión: 12:00
+Emisión: 18:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sat, 21 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-21-12</guid>
