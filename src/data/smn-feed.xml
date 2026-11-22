@@ -5,49 +5,48 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Sun, 22 Nov 2026 08:07:12 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 16:23:20 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de noviembre del 2026 | Emisión 00:00h</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 651 | 22 de Noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN TAMAULIPAS Y LLUVIAS FUERTES EN NUEVO LEÓN, SAN LUIS POTOSÍ Y VERACRUZ
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 651
+Ciudad de México a 22 de Noviembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN TAMAULIPAS Y LLUVIAS FUERTES EN NUEVO LEÓN, SAN LUIS POTOSÍ Y VERACRUZ
+
+Para hoy, el frente frío núm. 8 se desplazará sobre el norte y noreste del país, interaccionará con un canal de baja presión extendido sobre el oriente del territorio nacional y con la corriente en chorro subtropical, propiciarán lluvias puntuales muy fuertes en Tamaulipas y lluvias puntuales fuertes en Nuevo León, San Luis Potosí y Veracruz, así como intervalos de chubascos en Coahuila, además de rachas de viento de 40 a 60 km/h en Coahuila y Tamaulipas. La masa de aire ártico asociada al frente, ocasionará un descenso en la temperatura en los estados del norte del país.…]]></description>
+      <pubDate>Sun, 22 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-22-651</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de noviembre del 2026 | Emisión 09:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
       <description><![CDATA[Aviso de Potencial de Tormentas
 Ciudad de México, 22 de noviembre del 2026
-Emisión: 00:00
+Emisión: 09:00
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
       <pubDate>Sun, 22 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-potencial-tormentas-2026-11-22-12</guid>
       <category>Aviso Tormentas</category>
     </item>
     <item>
-      <title>⚠️ Alerta SMN: Temperaturas de -10 a -5 °C: zonas serranas de Baja California y Durango</title>
+      <title>⚠️ Alerta SMN: Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Tamps. Temperaturas máximas de 35 a 40 °C: Mich, Gro, Oax y Chis. Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: Coah y Tamps.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas de -10 a -5 °C: zonas serranas de Baja California y Durango]]></description>
-      <pubDate>Sun, 22 Nov 2026 02:07:01 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-22-d7fb</guid>
+      <description><![CDATA[Lluvias fuertes con puntuales muy fuertes (50 a 75 mm): Tamps. Temperaturas máximas de 35 a 40 °C: Mich, Gro, Oax y Chis. Viento de 20 a 30 km/h con rachas de 40 a 60 km/h: Coah y Tamps.]]></description>
+      <pubDate>Sun, 22 Nov 2026 10:23:12 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-22-d409</guid>
       <category>Alerta</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 650 | 21 de Noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EN PRÓXIMAS HORAS SE PRONOSRTICAN LLUVIAS Y CHUBASCOS EN EL TERRITORIO NACIONAL
-
----
-Pronóstico Meteorológico General
-No. Aviso: 650
-Ciudad de México a 21 de Noviembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-EN PRÓXIMAS HORAS SE PRONOSRTICAN LLUVIAS Y CHUBASCOS EN EL TERRITORIO NACIONAL
-
-Para esta noche y madrugada del domingo, el frente frío núm. 8 se desplazará sobre el noroeste y norte de México, en interacción con una vaguada en niveles medios y altos de la atmósfera y la corriente en chorro subtropical, originarán intervalos de chubascos en Baja California Sur, Chihuahua, Sinaloa, Durango y Coahuila, y lluvias aisladas en Sonora, Zacatecas y Aguascalientes, además de rachas de viento de 50 a 70km/h en Chihuahua y Durango. Por otro lado, canales de baja presión en el interior del territorio nacional y el ingreso de humedad proveniente del océano Pacífico, mar Caribe y golfo de México, ocasionarán intervalos de chubascos en Nayarit, Jalisco, Colima, Michoacán, Guerrero, Oaxaca y Chiapas, y lluvias aisladas en Nuevo León, Tamaulipas, San Luis Potosí, Guanajuato, Querétaro, Hidalgo, Estado de México, Ciudad de México, Puebla, Veracruz, Tabasco, Campeche, Yucatán y Quintana Roo.
-
-…]]></description>
-      <pubDate>Sat, 21 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-21-650</guid>
-      <category>Pronóstico General</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 21 NOV 2026: Se pronostican para este sábado chubascos en zonas de Baja California Sur y en el norte, occidente y sur de México</title>
