@@ -5,16 +5,66 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Mon, 23 Nov 2026 03:46:33 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Nov 2026 14:53:27 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Temperaturas de -10 a -5: zonas serranas de Chihuahua y Durango</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 653 | 23 de Noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[LLUVIAS INTENSAS EN TAMAULIPAS Y VERACRUZ
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 653
+Ciudad de México a 23 de Noviembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+LLUVIAS INTENSAS EN TAMAULIPAS Y VERACRUZ
+
+ 
+
+Este día, el frente frío núm. 8 se desplazará sobre el golfo de México, noreste y oriente del territorio nacional, interaccionará con un canal de baja presión en el sureste del país y con la corriente en chorro subtropical, originando lluvias puntuales intensas en zonas de Tamaulipas y Veracruz; así como lluvias fuertes a muy fuertes en las regiones mencionadas. Por otra parte, la masa de aire ártico que impulsa al frente, generará descenso de temperaturas en el norte, noreste, oriente y centro de la República Mexicana; además de evento de “Norte” con rachas de 50 a 70 km/h en Tamaulipas y Veracruz, extendiéndose durante la noche hacia el istmo y golfo de Tehuantepec. El ingreso de humedad proveniente del océano Pacífico, ocasionará lluvias e intervalos de chubascos en el occidente, centro y sur de México.
+
+ 
+
+El Servicio Meteorológico Nacional vigila los efectos del frente frío núm. 8.
+
+
+Para mayor información consultar:
+…]]></description>
+      <pubDate>Mon, 23 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-23-653</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 23 de noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 23 de noviembre del 2026
+Emisión: 06:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Mon, 23 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-23-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Tamaulipas y Veracruz.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Temperaturas de -10 a -5: zonas serranas de Chihuahua y Durango]]></description>
-      <pubDate>Sun, 22 Nov 2026 21:46:22 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-22-6c2c</guid>
+      <description><![CDATA[Lluvias muy fuertes con puntuales intensas (75 a 150 mm): zonas de Tamaulipas y Veracruz.]]></description>
+      <pubDate>Mon, 23 Nov 2026 08:53:18 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-23-9a23</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Matutino 23 NOV 2026: Se pronostican lluvias intensas en zonas de Tamaulipas y Veracruz</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_23.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Tamaulipas y Veracruz — Reporte Matutino del 23 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_23.pdf]]></description>
+      <pubDate>Mon, 23 Nov 2026 07:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_23</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 22 NOV 2026: Lluvias muy fuertes se pronostican para este domingo en regiones de Tamaulipas y Veracruz</title>
@@ -23,37 +73,6 @@
       <pubDate>Sun, 22 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_11_22</guid>
       <category>Comunicado</category>
-    </item>
-    <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 652 | 22 de Noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[EN LAS PRÓXIMAS HORAS SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN TAMAULIPAS Y VERACRUZ
-
----
-Pronóstico Meteorológico General
-No. Aviso: 652
-Ciudad de México a 22 de Noviembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
-
-EN LAS PRÓXIMAS HORAS SE PRONOSTICAN LLUVIAS PUNTUALES MUY FUERTES EN TAMAULIPAS Y VERACRUZ
-
-Para esta noche y madrugada del lunes, el frente frío núm. 8 se extenderá sobre el noreste de México, interaccionará con un canal de baja presión en el oriente del territorio nacional y con la corriente en chorro subtropical, propiciando lluvias muy fuertes en Tamaulipas (noreste y costa) y Veracruz (norte); lluvias fuertes en Nuevo León (este), San Luis Potosí (este), Querétaro (norte), Hidalgo (norte), y Puebla (norte), y chubascos en Coahuila y Zacatecas. Por su parte, la masa de aire ártico asociada al frente, ocasionará viento de componente norte de 20 a 30 km/h con rachas de 40 a 60 km/h en Coahuila, Nuevo León y Tamaulipas, así como descenso en la temperatura durante esta noche sobre los estados del norte del país.…]]></description>
-      <pubDate>Sun, 22 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-22-652</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 22 de noviembre del 2026 | Emisión 21:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 22 de noviembre del 2026
-Emisión: 21:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Sun, 22 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-22-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 21 NOV 2026: Se pronostican para este sábado chubascos en zonas de Baja California Sur y en el norte, occidente y sur de México</title>
@@ -77,14 +96,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Se pronostican lluvias puntuales fuertes en regiones de Guerrero y Veracruz — Reporte Matutino del 20 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_20.pdf]]></description>
       <pubDate>Fri, 20 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_20</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Vespertino 19 NOV 2026: El frente número 6 originará lluvias fuertes esta noche en regiones de Veracruz, Oaxaca, Chiapas y Tabasco</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_19.pdf</link>
-      <description><![CDATA[El frente número 6 originará lluvias fuertes esta noche en regiones de Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Vespertino del 19 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_19.pdf]]></description>
-      <pubDate>Thu, 19 Nov 2026 17:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_19</guid>
       <category>Comunicado</category>
     </item>
   </channel>
