@@ -5,48 +5,56 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Tue, 24 Nov 2026 23:31:11 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 08:49:17 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias muy fuertes con puntuales intensas (75 a 150 mm) en zonas de Puebla, Veracruz, Oaxaca, Chiapas, Tabasco, Yucatán y Quintana Roo.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de noviembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 25 de noviembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Wed, 25 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-25-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Temperaturas mínimas de -10 a -5 °C en zonas serranas de Durango y Chihuahua.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Evento de “Norte” de 60 a 70 km/h con rachas de 80 a 100 km/h: Tamaulipas y Veracruz.]]></description>
-      <pubDate>Tue, 24 Nov 2026 17:31:03 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-24-7875</guid>
+      <description><![CDATA[Evento de “Norte” de 60 a 70 km/h con rachas de 80 a 100 km/h en Tamaulipas y Veracruz.]]></description>
+      <pubDate>Wed, 25 Nov 2026 02:49:07 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-25-7324</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 655 | 24 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 24 NOV 2026: Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca y Chiapas</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_24.pdf</link>
+      <description><![CDATA[Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca y Chiapas — Reporte Vespertino del 24 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_24.pdf]]></description>
+      <pubDate>Tue, 24 Nov 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_24</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 656 | 24 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTÍCAN LLUVIAS PUNTUALES INTENSAS EN PUEBLA, VERACRUZ, OAXACA, YUCATÁN Y QUINTANA ROO, ADEMÁS DE EVENTO DE NORTE FUERTE A MUY FUERTE EN COSTAS DE TAMAULIPAS, VERACRUZ, ISTMO Y GOLFO DE TEHUANTEPEC
+      <description><![CDATA[LLUVIAS PUNTUALES INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS, TABASCO, YUCATÁN Y QUINTANA ROO
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 655
+No. Aviso: 656
 Ciudad de México a 24 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-SE PRONOSTÍCAN LLUVIAS PUNTUALES INTENSAS EN PUEBLA, VERACRUZ, OAXACA, YUCATÁN Y QUINTANA ROO, ADEMÁS DE EVENTO DE NORTE FUERTE A MUY FUERTE EN COSTAS DE TAMAULIPAS, VERACRUZ, ISTMO Y GOLFO DE TEHUANTEPEC
+LLUVIAS PUNTUALES INTENSAS EN ZONAS DE PUEBLA, VERACRUZ, OAXACA, CHIAPAS, TABASCO, YUCATÁN Y QUINTANA ROO
 
-Para hoy martes, el frente núm. 8 se extenderá con características de estacionario sobre el golfo de México, en interacción con un canal de baja presión en el sureste del país y con la corriente en chorro subtropical, originarán lluvias puntuales intensas en zonas de Puebla, Veracruz, Oaxaca, Yucatán y Quintana Roo; lluvias puntuales muy fuertes en Chiapas, Tabasco y Campeche, y puntuales fuertes en Tamaulipas; así como chubascos en Nuevo León y San Luis Potosí, y lluvias aisladas en Coahuila.…]]></description>
+Para esta noche y la madrugada del miércoles, el frente núm. 8 se extenderá con características de estacionario sobre el golfo de México, interaccionará con un canal de baja presión en el sureste del país, una baja presión en el noroeste del mar Caribe y con la corriente en chorro subtropical, pronosticándose lluvias puntuales intensas en Puebla (sureste), Veracruz (centro y sur), Oaxaca (norte), Chiapas (norte y este); con posible caída de granizo en Yucatán (este) y Quintana Roo (norte), además de lluvias fuertes a muy fuertes en Tamaulipas (costa) y Campeche (norte), intervalos de chubascos en Nuevo León y San Luis Potosí, y lluvias aisladas en Coahuila.…]]></description>
       <pubDate>Tue, 24 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-24-655</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-24-656</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 24 de noviembre del 2026 | Emisión 15:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 24 de noviembre del 2026
-Emisión: 15:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Tue, 24 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-24-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 24 NOV 2026: Se pronostican lluvias intensas en zonas de Puebla, Veracruz, Oaxaca, Yucatán y Quintana Roo</title>
@@ -78,14 +86,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[Lluvias muy fuertes se pronostican para este domingo en regiones de Tamaulipas y Veracruz — Comunicado del 22 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMeteorologico2026_11_22.pdf]]></description>
       <pubDate>Sun, 22 Nov 2026 12:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMeteorologico2026_11_22</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 21 NOV 2026: Se pronostican para este sábado chubascos en zonas de Baja California Sur y en el norte, occidente y sur de México</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_21_2026.pdf</link>
-      <description><![CDATA[Se pronostican para este sábado chubascos en zonas de Baja California Sur y en el norte, occidente y sur de México — Reporte Matutino del 21 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_21_2026.pdf]]></description>
-      <pubDate>Sat, 21 Nov 2026 07:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_21_2026</guid>
       <category>Comunicado</category>
     </item>
   </channel>
