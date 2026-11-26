@@ -5,16 +5,56 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Thu, 26 Nov 2026 02:54:33 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2026 12:51:05 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Evento de “Norte” de 60 a 70 km/h con rachas de 80 a 100 km/h: Veracruz (centro y sur), istmo y golfo de Tehuantepec (Oaxaca y Chiapas);</title>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 659 | 26 de Noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
+      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUANAJUATO
+
+---
+Pronóstico Meteorológico General
+No. Aviso: 659
+Ciudad de México a 26 de Noviembre del 2026.
+Emisión: 06:00h
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
+
+ 
+
+SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE SINALOA, NAYARIT, JALISCO, COLIMA, MICHOACÁN Y GUANAJUATO
+
+Para hoy, en el occidente del territorio nacional se encuentra una vaguada polar y la corriente en chorro polar y subtropical, dando origen a la primera tormenta invernal de la temporada, pronosticándose lluvias puntuales intensas en zonas de Sinaloa, Nayarit, Jalisco, Colima, Michoacán y Guanajuato y muy fuertes en Durango, Zacatecas, Aguascalientes y Querétaro; además de posible caída de nieve o aguanieve durante la noche en zonas montañosas de Jalisco, Colima y Michoacán. Por otra parte, el frente núm.…]]></description>
+      <pubDate>Thu, 26 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-26-659</guid>
+      <category>Pronóstico General</category>
+    </item>
+    <item>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 26 de noviembre del 2026 | Emisión 06:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 26 de noviembre del 2026
+Emisión: 06:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Thu, 26 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-26-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Temperaturas mínimas de -10 a -5 °C: En zonas serranas de Durango y Chihuahua.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[de 30 a 40 km/h con rachas de 50 a 70 km/h: Tabasco, Campeche, Yucatán y Quintana Roo.]]></description>
-      <pubDate>Wed, 25 Nov 2026 20:54:24 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-25-c718</guid>
+      <description><![CDATA[Temperaturas mínimas de -10 a -5 °C: En zonas serranas de Durango y Chihuahua.]]></description>
+      <pubDate>Thu, 26 Nov 2026 06:50:57 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-26-12ac</guid>
       <category>Alerta</category>
+    </item>
+    <item>
+      <title>📋 SMN Reporte Vespertino 25 NOV 2026: El frente número 8 generará esta noche lluvias intensas en regiones de Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_25.pdf</link>
+      <description><![CDATA[El frente número 8 generará esta noche lluvias intensas en regiones de Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Vespertino del 25 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_25.pdf]]></description>
+      <pubDate>Wed, 25 Nov 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_25</guid>
+      <category>Comunicado</category>
     </item>
     <item>
       <title>📋 SMN Comunicado 25 NOV 2026: A partir de hoy y hasta el fin de semana, se pronostican condiciones meteorológicas adversas en el occidente, centro y ...</title>
@@ -25,41 +65,9 @@
       <category>Comunicado</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 658 | 25 de Noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
----
-Pronóstico Meteorológico General
-No. Aviso: 658
-Ciudad de México a 25 de Noviembre del 2026.
-Emisión: 18:00h
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
-
- 
-
-SE PRONOSTICAN LLUVIAS PUNTUALES INTENSAS EN ZONAS DE VERACRUZ, OAXACA, CHIAPAS Y TABASCO
-
-Durante esta noche y madrugada del jueves, el sistema frontal núm. 8 se desplazará sobre el golfo de México y la península de Yucatán, pronosticándose lluvias puntuales intensas en Veracruz (sur), Oaxaca (noreste), Chiapas (norte) y Tabasco (sur); lluvias puntuales muy fuertes en Campeche (suroeste); lluvias puntuales fuertes en Puebla (sureste); intervalos de chubascos en Yucatán y Quintana Roo, así como lluvias aisladas en Nuevo León, Tamaulipas y San Luis Potosí. La masa de aire ártico que impulsa al citado frente mantendrá ambiente frío en el norte, noreste, oriente, centro y sureste de la República Mexicana; además de evento de “Norte” con rachas de viento de 80 a 100 km/h en Veracruz, istmo y golfo de Tehuantepec (Oaxaca y Chiapas); de 70 a 90 km/h en Tamaulipas, y de 50 a 70 km/h en Tabasco, Campeche, Yucatán y Quintana Roo, con oleaje elevado en costas de dichos estados.…]]></description>
-      <pubDate>Wed, 25 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-25-658</guid>
-      <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 25 de noviembre del 2026 | Emisión 18:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 25 de noviembre del 2026
-Emisión: 18:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Wed, 25 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-25-12</guid>
-      <category>Aviso Tormentas</category>
-    </item>
-    <item>
-      <title>📋 SMN Reporte Matutino 25 NOV 2026: El frente número 8 generará esta noche lluvias intensas en regiones de Veracruz, Oaxaca, Chiapas y Tabasco</title>
+      <title>📋 SMN Reporte Matutino 25 NOV 2026: Hoy, el sistema frontal número 8 ocasionará lluvias puntuales intensas en regiones de Veracruz, Oaxaca, Chiapas y Taba...</title>
       <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_25.pdf</link>
-      <description><![CDATA[El frente número 8 generará esta noche lluvias intensas en regiones de Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Matutino del 25 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_25.pdf]]></description>
+      <description><![CDATA[Hoy, el sistema frontal número 8 ocasionará lluvias puntuales intensas en regiones de Veracruz, Oaxaca, Chiapas y Taba... — Reporte Matutino del 25 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteMatutino2026_11_25.pdf]]></description>
       <pubDate>Wed, 25 Nov 2026 07:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteMatutino2026_11_25</guid>
       <category>Comunicado</category>
