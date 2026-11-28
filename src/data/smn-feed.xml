@@ -5,48 +5,56 @@
     <link>https://smn.conagua.gob.mx/es/</link>
     <description>Alertas meteorológicas, comunicados de prensa y pronósticos del Servicio Meteorológico Nacional (SMN / Conagua), México.</description>
     <language>es-mx</language>
-    <lastBuildDate>Fri, 27 Nov 2026 23:33:44 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 08:01:30 +0000</lastBuildDate>
     <ttl>60</ttl>
     <generator>smn_rss.py / ArtemIO</generator>
     <item>
-      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm) en zonas de Jalisco, Colima y Michoacán.</title>
+      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 28 de noviembre del 2026 | Emisión 00:00h</title>
+      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
+      <description><![CDATA[Aviso de Potencial de Tormentas
+Ciudad de México, 28 de noviembre del 2026
+Emisión: 00:00
+Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
+      <pubDate>Sat, 28 Nov 2026 12:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-28-12</guid>
+      <category>Aviso Tormentas</category>
+    </item>
+    <item>
+      <title>⚠️ Alerta SMN: Lluvias intensas con puntuales torrenciales (150 a 250 mm): en zonas de Jalisco, Colima y Michoacán.</title>
       <link>https://smn.conagua.gob.mx/es/</link>
-      <description><![CDATA[Posible caída de nieve o aguanieve en zonas montañosas de Jalisco, Colima, Michoacán, Zacatecas, Coahuila, Aguascalientes, San Luis Potosí y Nuevo León.]]></description>
-      <pubDate>Fri, 27 Nov 2026 17:33:36 -0600</pubDate>
-      <guid isPermaLink="false">smn-alert-2026-11-27-3e51</guid>
+      <description><![CDATA[Temperaturas mínimas de -10 a -5 °C con heladas durante la madrugada del sábado: zonas serranas de Durango y Chihuahua.]]></description>
+      <pubDate>Sat, 28 Nov 2026 02:01:21 -0600</pubDate>
+      <guid isPermaLink="false">smn-alert-2026-11-28-fa17</guid>
       <category>Alerta</category>
     </item>
     <item>
-      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 661 | 27 de Noviembre del 2026 | Emisión 06:00h</title>
+      <title>📋 SMN Reporte Vespertino 27 NOV 2026: Se pronostican lluvias torrenciales en zonas de Jalisco, Colima y Michoacán por la primera tormenta invernal</title>
+      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_27.pdf</link>
+      <description><![CDATA[Se pronostican lluvias torrenciales en zonas de Jalisco, Colima y Michoacán por la primera tormenta invernal — Reporte Vespertino del 27 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_27.pdf]]></description>
+      <pubDate>Fri, 27 Nov 2026 17:00:00 -0600</pubDate>
+      <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_27</guid>
+      <category>Comunicado</category>
+    </item>
+    <item>
+      <title>🌩️ Pronóstico Meteorológico General — SMN | No. 662 | 27 de Noviembre del 2026 | Emisión 18:00h</title>
       <link>https://smn.conagua.gob.mx/es/pronosticos/pronosticossubmenu/pronostico-meteorologico-general</link>
-      <description><![CDATA[LA PRIMERA TORMENTA INVERNAL DE LA TEMPORADA ORIGINARA, LLUVIAS TORRENCIALES Y CAÍDA DE NIEVE O AGUANIEVE EN ZONAS DE JALISCO, COLIMA Y MICHOACÁN
+      <description><![CDATA[LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA Y MICHOACÁN
 
 ---
 Pronóstico Meteorológico General
-No. Aviso: 661
+No. Aviso: 662
 Ciudad de México a 27 de Noviembre del 2026.
-Emisión: 06:00h
+Emisión: 18:00h
 Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:
 
  
 
-LA PRIMERA TORMENTA INVERNAL DE LA TEMPORADA ORIGINARA, LLUVIAS TORRENCIALES Y CAÍDA DE NIEVE O AGUANIEVE EN ZONAS DE JALISCO, COLIMA Y MICHOACÁN
+LLUVIAS PUNTUALES TORRENCIALES EN ZONAS DE JALISCO, COLIMA Y MICHOACÁN
 
-Este día, la primera tormenta invernal de la temporada se desplazará sobre el occidente de México, propiciando lluvias puntuales torrenciales en zonas de Jalisco, Colima y Michoacán; intensas en Guanajuato, Estado de México y Guerrero; así como chubascos y lluvias fuertes a muy fuertes en zonas del norte, noreste, centro, sur y sureste del país; además de un marcado descenso de temperatura sobre entidades del occidente, norte y centro del país; así como la posible caída de nieve o aguanieve en zonas montañosas de Jalisco, Colima y Michoacán, condiciones que se extenderán durante la noche hacia zonas superiores a los 2,800 msnm del centro de la República Mexicana (Guanajuato, Querétaro, Hidalgo, Veracruz, Estado de México, Tlaxcala, Puebla, Morelos y Ciudad de México). Finalmente, la masa de aire ártico que impulsó al frente núm.…]]></description>
+Para esta noche y la madrugada del sábado, la primera tormenta invernal de la temporada se desplazará sobre el occidente de México, ocasionando lluvias puntuales torrenciales en Jalisco (sur), Colima y Michoacán (oeste, norte y sur); lluvias intensas en Estado de México (oeste y suroeste), Guanajuato (oeste y sureste) y Guerrero (oeste y suroeste); lluvias muy fuertes en Querétaro (centro y sur), Hidalgo (sur y suroeste), Puebla (centro y suroeste), Tlaxcala, Ciudad de México y Morelos; lluvias fuertes en Zacatecas (sur), Nayarit (sur), Aguascalientes y San Luis Potosí (sur); intervalos de chubascos en Sinaloa, Durango, Nuevo León y Tamaulipas, y lluvias aisladas en Baja California Sur y Coahuila. Pronosticándose también un marcado descenso de temperatura sobre entidades del occidente de México, la Mesa del Norte y la Mesa Central.…]]></description>
       <pubDate>Fri, 27 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-pronostico-general-2026-11-27-661</guid>
+      <guid isPermaLink="false">smn-pronostico-general-2026-11-27-662</guid>
       <category>Pronóstico General</category>
-    </item>
-    <item>
-      <title>⛈️ Aviso de Potencial de Tormentas — SMN | 27 de noviembre del 2026 | Emisión 15:00h</title>
-      <link>https://smn.conagua.gob.mx/es/pronosticos/avisos/aviso-de-potencial-de-tormentas</link>
-      <description><![CDATA[Aviso de Potencial de Tormentas
-Ciudad de México, 27 de noviembre del 2026
-Emisión: 15:00
-Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite el siguiente aviso:]]></description>
-      <pubDate>Fri, 27 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-potencial-tormentas-2026-11-27-12</guid>
-      <category>Aviso Tormentas</category>
     </item>
     <item>
       <title>📋 SMN Reporte Matutino 27 NOV 2026: Debido a la primera tormenta invernal se prevén lluvias torrenciales y caída de nieve o aguanieve en zonas de Jalisco,...</title>
@@ -78,14 +86,6 @@ Servicio Meteorológico Nacional, fuente oficial del Gobierno de México, emite 
       <description><![CDATA[El frente número 8 generará esta noche lluvias intensas en regiones de Veracruz, Oaxaca, Chiapas y Tabasco — Reporte Vespertino del 25 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/ReporteVespertino2026_11_25.pdf]]></description>
       <pubDate>Wed, 25 Nov 2026 17:00:00 -0600</pubDate>
       <guid isPermaLink="false">smn-comunicado-ReporteVespertino2026_11_25</guid>
-      <category>Comunicado</category>
-    </item>
-    <item>
-      <title>📋 SMN Comunicado 25 NOV 2026: A partir de hoy y hasta el fin de semana, se pronostican condiciones meteorológicas adversas en el occidente, centro y ...</title>
-      <link>https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado162-26.pdf</link>
-      <description><![CDATA[A partir de hoy y hasta el fin de semana, se pronostican condiciones meteorológicas adversas en el occidente, centro y ... — Comunicado del 25 NOV 2026. Descarga el PDF: https://smn.conagua.gob.mx/files/pdfs/comunicados-de-prensa/Comunicado162-26.pdf]]></description>
-      <pubDate>Wed, 25 Nov 2026 12:00:00 -0600</pubDate>
-      <guid isPermaLink="false">smn-comunicado-Comunicado162-26</guid>
       <category>Comunicado</category>
     </item>
   </channel>
